@@ -1,8 +1,7 @@
 # Pickup-Pup
 Casual mobile game with dogs.
 
-## Creator
-[Sam Luangkhot](http://www.samluangkhot.com/)
+## Creator: [Sam Luangkhot](http://www.samluangkhot.com/)
 
 ## Engineers
 - [Isaiah Mann](http://isaiahmann.com/)
