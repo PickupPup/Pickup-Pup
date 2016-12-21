@@ -5,9 +5,9 @@ Casual mobile game with dogs.
 [Sam Luangkhot](http://www.samluangkhot.com/)
 
 ## Engineers
-[Isaiah Mann](http://isaiahmann.com/)
-James
+- [Isaiah Mann](http://isaiahmann.com/)
+- James
 
 ## Specs
-Unity: **v5.5.0f3**
-Language: **C#**
+- Unity: **v5.5.0f3**
+- Language: **C#**
