@@ -29,4 +29,15 @@ public class DogDescriptor : PPDescriptor {
 	}
 
 	public DogDescriptor (DogDatabase data) : base(data) {}
+
+	public static DogDescriptor Default () {
+		DogDescriptor descriptor = new DogDescriptor(DogDatabase.Instance);
+		descriptor.Name = string.Empty;
+		descriptor.Age = 0;
+		descriptor.Breed = string.Empty;
+		descriptor.Color = BLACK_HEX;
+		descriptor.TimeToCollect = 0;
+		descriptor.IsOutCollecting = false;
+		return descriptor;
+	}
 }
