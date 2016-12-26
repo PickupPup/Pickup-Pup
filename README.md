@@ -5,6 +5,7 @@ Casual mobile game with dogs.
 
 ## Engineers
 - [Isaiah Mann](http://isaiahmann.com/)
+- [Grace Barrett-Snyder](http://gracebarsny.com/)
 - James
 
 ## Specs
