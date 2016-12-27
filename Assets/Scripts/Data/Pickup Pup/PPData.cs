@@ -9,7 +9,7 @@ using UnityEngine;
 
 [Serializable]
 public abstract class PPData {
-	protected delegate void DataAction();
+	public delegate void DataAction();
 	protected const string BLACK_HEX = "#000000";
 
 	protected DogDatabase data;
@@ -42,5 +42,4 @@ public abstract class PPData {
 		byte b = byte.Parse(hexstring.Substring(4, 2), NumberStyles.HexNumber);
 		return new Color32(r, g, b, 1);
 	}
-
 }

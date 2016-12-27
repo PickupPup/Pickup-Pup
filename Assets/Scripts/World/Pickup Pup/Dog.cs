@@ -4,6 +4,8 @@
  */
 
 public class Dog : MobileObjectBehaviour {
+	// Tracks how long the dog has away
+	protected Timer awayTimer;
 	DogDescriptor descriptor;
 	public string Name {
 		get {
