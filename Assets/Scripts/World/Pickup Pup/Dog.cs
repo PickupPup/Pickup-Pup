@@ -3,10 +3,15 @@
  * Description: Controls a dog in the game world
  */
 
+using UnityEngine;
+
 public class Dog : MobileObjectBehaviour {
-	// Tracks how long the dog has away
-	protected Timer awayTimer;
+
+	[SerializeField]
+	// Tracks how long the dog will be away from the house
+	protected PPTimer awayFromHomeTimer;
 	DogDescriptor descriptor;
+
 	public string Name {
 		get {
 			return descriptor.Name;
@@ -15,5 +20,10 @@ public class Dog : MobileObjectBehaviour {
 
 	public void Set (DogDescriptor descriptor) {
 		this.descriptor = descriptor;
+	}
+
+	protected override void SetReferences () {
+		base.SetReferences ();
+		awayFromHomeTimer.Init();
 	}
 }
