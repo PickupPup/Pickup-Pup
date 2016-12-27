@@ -11,9 +11,14 @@ public class PPTimer : PPData {
 	// All time values measured in seconds
 	public float TimeStep;
 	public float MaxTime;
+	[System.NonSerialized]
 	// A MonoBehaviour to attach the coroutine to
 	IGameTimer timer;
-	bool isTimerSetup = false;
+	public bool IsTimerSetup {
+		get {
+			return timer != null;
+		}
+	}
 	public float TimeRemaining {
 		get {
 			return timer.TimeRemaining;
@@ -37,7 +42,7 @@ public class PPTimer : PPData {
 	}
 
 	public void Init () {
-		if (!isTimerSetup) {
+		if (IsTimerSetup) {
 			setupTimer(this.MaxTime, this.TimeStep);
 		}
 	}
@@ -47,7 +52,6 @@ public class PPTimer : PPData {
 	}
 
 	IGameTimer setupTimer (float maxTime, float timeStep) {
-		isTimerSetup = true;
 		GameObject timerObject = new GameObject();
 		timer = timerObject.AddComponent<MonoTimer>();
 		return timer.Setup(maxTime, timeStep);
