@@ -9,9 +9,14 @@ using UnityEngine;
 
 [Serializable]
 public abstract class PPData {
+	protected delegate void DataAction();
 	protected const string BLACK_HEX = "#000000";
 
 	protected DogDatabase data;
+
+	public PPData () {
+		this.data = null;
+	}
 
 	public PPData (DogDatabase data) {
 		Initialize(data);
