@@ -9,54 +9,126 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public static class EventController {
-	#region Static Initialization
-	static bool _debug = false;
-
-	static EventController () {
-		Init();
-	}
-
-	static void Init() {
-		if (_debug) {
-			Debug.Log("Initializing Event Controller");
-		}
-	}
-	#endregion
-
-	public delegate void Action();
-
+public class EventController : SingletonController<EventController> {
+	
 	#region Event Types
+
 	public delegate void NamedEventAction (string nameOfEvent);
-	public static event NamedEventAction OnNamedEvent;
+	public event NamedEventAction OnNamedEvent;
 
 	public delegate void NamedFloatAction (string valueKey, float key);
-	public static event NamedFloatAction OnNamedFloatEvent;
+	public event NamedFloatAction OnNamedFloatEvent;
 
     public delegate void AudioEventAction(AudioActionType actionType, AudioType audioType);
-    public static event AudioEventAction OnAudioEvent;
+    public event AudioEventAction OnAudioEvent;
+
+	public delegate void PPEventAction(PPEvent gameEvent);
+	public event PPEventAction OnPPEvent;
+
+	#endregion
+
+	#region MonoBehaviourExtended Protocol
+
+	protected override void SetReferences () {
+		if (SingletonUtil.TryInit(ref Instance, this, gameObject, dontDestroyOnLoad:true)) {
+			base.SetReferences ();
+		}
+	}
+
+	protected override void CleanupReferences () {
+		base.CleanupReferences ();
+		if (isSingleton) {
+			SingletonUtil.TryCleanupSingleton(ref Instance, this);
+		}
+	}
+
+	#endregion
+
+	#region Event Subscription
+
+	public static void Subscribe (NamedEventAction eventAction) {
+		if (hasInstance) {
+			Instance.OnNamedEvent += eventAction;
+		}
+	}
+
+	public static void Subscribe (NamedFloatAction eventAction) {
+		if (hasInstance) {
+			Instance.OnNamedFloatEvent += eventAction;
+		}
+	}
+
+	public static void Subscribe (AudioEventAction eventAction) {
+		if (hasInstance) {
+			Instance.OnAudioEvent += eventAction;
+		}
+	}
+
+	public static void Subscribe (PPEventAction eventAction) {
+		if (hasInstance) {
+			Instance.OnPPEvent += eventAction;
+		}
+	}
+
+	public static void Unsubscribe (NamedEventAction eventAction) {
+		if (hasInstance) {
+			Instance.OnNamedEvent -= eventAction;
+		}
+	}
+
+	public static void Unsubscribe (NamedFloatAction eventAction) {
+		if (hasInstance) {
+			Instance.OnNamedFloatEvent -= eventAction;
+		}
+	}
+
+	public static void Unsubscribe (AudioEventAction eventAction) {
+		if (hasInstance) {
+			Instance.OnAudioEvent -= eventAction;
+		}
+	}
+
+	public static void Unsubscribe (PPEventAction eventAction) {
+		if (hasInstance) {
+			Instance.OnPPEvent -= eventAction;
+		}
+	}
 
 	#endregion
 
 	#region Event Calls
+
 	public static void Event (string eventName) {
-		if (OnNamedEvent != null) {
-			OnNamedEvent(eventName);
+		if (hasInstance && Instance.OnNamedEvent != null) {
+			Instance.OnNamedEvent(eventName);
 		}
 	}
 		
 
 	public static void Event (string valueKey, float value) {
-		if (OnNamedFloatEvent != null) {
-			OnNamedFloatEvent(valueKey, value);
+		if (hasInstance && Instance.OnNamedFloatEvent != null) {
+			Instance.OnNamedFloatEvent(valueKey, value);
 		}
 	}
 
     public static void Event(AudioActionType actionType, AudioType audioType) {
-        if (OnAudioEvent != null) {
-            OnAudioEvent(actionType, audioType);
+		if (hasInstance && Instance.OnAudioEvent != null) {
+			Instance.OnAudioEvent(actionType, audioType);
         }
     }
 
+	public static void Event(PPEvent gameEvent) {
+		if (hasInstance && Instance.OnPPEvent != null) {	
+			Instance.OnPPEvent(gameEvent);
+		}
+	}
+
 	#endregion
+}
+
+// Unique Pickup Pup Event Enum
+public enum PPEvent {
+	Play,
+	Pause,
+	Quit,
 }

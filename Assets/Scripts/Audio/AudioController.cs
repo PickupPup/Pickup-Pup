@@ -231,12 +231,12 @@ public class AudioController : Controller, IAudioController {
 	// Uses C#'s delegate system
 	protected override void SubscribeEvents () {
 		base.SubscribeEvents();
-		EventController.OnAudioEvent += HandleAudioEvent;
+		EventController.Subscribe(HandleAudioEvent);
 	}
 
 	protected void UnsubscribeEvents () {
 		base.UnusbscribeEvents();
-		EventController.OnAudioEvent -= HandleAudioEvent;
+		EventController.Unsubscribe(HandleAudioEvent);
 	}
 
 	void playMainMusic () {
