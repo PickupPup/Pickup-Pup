@@ -10,6 +10,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	IEnumerator moveCoroutine;
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float mannFloat);
+	bool destroyOnNextLoad = false;
 
 	void Awake () {
 		SetReferences();
@@ -24,6 +25,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		CleanupReferences();
 		UnusbscribeEvents();
 		StopAllCoroutines();
+	}
+
+	void OnLevelWasLoaded (int level) {
+
 	}
 
 	// Value should only be null if you're setting a trigger
@@ -73,13 +78,31 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		EventController.OnNamedEvent -= HandleNamedEvent;
 	}
 
-	protected abstract void SetReferences ();
+	protected virtual void SetReferences () {
+		// NOTHING
+	}
 
-	protected abstract void FetchReferences ();
+	protected virtual void FetchReferences () {
+		// NOTHING
+	}
 
-	protected abstract void CleanupReferences ();
+	protected virtual void CleanupReferences () {
+		// NOTHING
+	}
 
-	protected abstract void HandleNamedEvent (string eventName);
+	protected virtual void HandleNamedEvent (string eventName) {
+		// NOTHING
+	}
+
+	protected virtual void HandleSceneLoaded (int sceneIndex) {
+		if (destroyOnNextLoad) {
+			Destroy(gameObject);
+		}
+	}
+
+	protected virtual void MarkForDestroyOnLoad () {
+		destroyOnNextLoad = true;
+	}
 
 	public int CompareTo (object other) {
 		if (other is MonoBehaviourExtended) {
@@ -88,7 +111,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 			return -1;
 		}
 	}
-
+		
 	protected void moveTo (Vector3 targetPosition, float time, MonoAction callBack = null) {
 		haltMoveTo();
 		moveCoroutine = linearLerp(transform, targetPosition, time, callBack);
