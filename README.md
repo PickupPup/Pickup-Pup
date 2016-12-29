@@ -6,7 +6,7 @@ Casual mobile game with dogs.
 ## Engineers
 - [Isaiah Mann](http://isaiahmann.com/)
 - [Grace Barrett-Snyder](http://gracebarsny.com/)
-- James
+- James Hostetler
 
 ## Specs
 - Unity: **v5.5.0f3**
