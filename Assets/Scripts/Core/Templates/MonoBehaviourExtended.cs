@@ -71,11 +71,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	}
 
 	protected virtual void SubscribeEvents () {
-		EventController.OnNamedEvent += HandleNamedEvent;
+		EventController.Subscribe(HandleNamedEvent);
 	}
 
 	protected virtual void UnusbscribeEvents () {
-		EventController.OnNamedEvent -= HandleNamedEvent;
+		EventController.Unsubscribe(HandleNamedEvent);
 	}
 
 	protected virtual void SetReferences () {
