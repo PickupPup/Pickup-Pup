@@ -6,11 +6,16 @@
  */
 
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class EventController : SingletonController<EventController> {
-	
+	[SerializeField]
+	bool alsoCallPPEventsAsStrings;
+	[SerializeField]
+	bool tryAlsoCallStringsAsPPEvents;
+
 	#region Event Types
 
 	public delegate void NamedEventAction (string nameOfEvent);
@@ -24,23 +29,6 @@ public class EventController : SingletonController<EventController> {
 
 	public delegate void PPEventAction(PPEvent gameEvent);
 	public event PPEventAction OnPPEvent;
-
-	#endregion
-
-	#region MonoBehaviourExtended Protocol
-
-	protected override void SetReferences () {
-		if (SingletonUtil.TryInit(ref Instance, this, gameObject, dontDestroyOnLoad:true)) {
-			base.SetReferences ();
-		}
-	}
-
-	protected override void CleanupReferences () {
-		base.CleanupReferences ();
-		if (isSingleton) {
-			SingletonUtil.TryCleanupSingleton(ref Instance, this);
-		}
-	}
 
 	#endregion
 
@@ -99,8 +87,13 @@ public class EventController : SingletonController<EventController> {
 	#region Event Calls
 
 	public static void Event (string eventName) {
-		if (hasInstance && Instance.OnNamedEvent != null) {
-			Instance.OnNamedEvent(eventName);
+		if (hasInstance) {
+			if (Instance.OnNamedEvent != null) {
+				Instance.OnNamedEvent(eventName);
+			}
+			if (Instance.tryAlsoCallStringsAsPPEvents) {
+				tryCallStringAsPPEvent(eventName);
+			}
 		}
 	}
 		
@@ -118,8 +111,27 @@ public class EventController : SingletonController<EventController> {
     }
 
 	public static void Event(PPEvent gameEvent) {
-		if (hasInstance && Instance.OnPPEvent != null) {	
-			Instance.OnPPEvent(gameEvent);
+		if (hasInstance) {
+			if (Instance.OnPPEvent != null) {	
+				Instance.OnPPEvent(gameEvent);
+			}
+			if (Instance.alsoCallPPEventsAsStrings) {
+				callPPEventAsString(gameEvent);
+			}
+		}
+	}
+
+	static void callPPEventAsString (PPEvent gameEvent) {
+		Event(gameEvent.ToString());
+	}
+
+	static bool tryCallStringAsPPEvent (string eventName) {
+		try {
+			Event((PPEvent)Enum.Parse(typeof(PPEvent), eventName));
+			return true;
+		} catch {
+			// Cannot parse enum:
+			return false;
 		}
 	}
 
@@ -131,4 +143,6 @@ public enum PPEvent {
 	Play,
 	Pause,
 	Quit,
+	LoadStart,
+	LoadHome,
 }
