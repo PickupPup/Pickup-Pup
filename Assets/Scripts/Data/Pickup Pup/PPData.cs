@@ -9,9 +9,16 @@ using UnityEngine;
 
 [Serializable]
 public abstract class PPData {
+	public delegate void DataAction();
+	public delegate void DataActionf(float value);
+
 	protected const string BLACK_HEX = "#000000";
 
 	protected DogDatabase data;
+
+	public PPData () {
+		this.data = null;
+	}
 
 	public PPData (DogDatabase data) {
 		Initialize(data);
@@ -37,5 +44,14 @@ public abstract class PPData {
 		byte b = byte.Parse(hexstring.Substring(4, 2), NumberStyles.HexNumber);
 		return new Color32(r, g, b, 1);
 	}
-
+		
+	protected string padWithZeroes (int number, int desiredLength) {
+		string numberAsString = number.ToString();
+		int numberLength = numberAsString.Length;
+		if (numberLength < desiredLength) {
+			return numberAsString.PadLeft(desiredLength, '0');
+		} else {
+			return numberAsString;
+		}
+	}
 }

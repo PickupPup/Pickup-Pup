@@ -4,6 +4,16 @@ using System.Reflection;
 
 public class SingletonController<T> : Controller where T : class {
 	public static T Instance;
+	protected static bool hasInstance {
+		get {
+			return Instance != null;
+		}
+	}
+	protected bool isSingleton {
+		get {
+			return Instance == this;
+		}
+	}
 	protected bool dontDestroyOnLoad = false;
 	protected override void SetReferences () {
 		if (tryInit(ref Instance, this as T, gameObject, dontDestroyOnLoad)) {
