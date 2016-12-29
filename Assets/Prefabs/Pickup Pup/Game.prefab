@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4732372126446992}
   - component: {fileID: 114966013612004634}
   - component: {fileID: 114426272054950630}
+  - component: {fileID: 114567133989285116}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -50,6 +51,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f1e45d12d45e46539f39fc7d269914b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alsoCallPPEventsAsStrings: 1
+  tryAlsoCallStringsAsPPEvents: 0
+--- !u!114 &114567133989285116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613778948780182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12aadcd26a63a4c5aba6db251a62d613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114966013612004634
