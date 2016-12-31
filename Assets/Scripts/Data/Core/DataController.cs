@@ -53,5 +53,10 @@ public abstract class DataController : SingletonController<DataController> {
 		}
 	}
 
+	public void Reset () {
+		Buffer(getDefaultFile());
+		Save();
+	}
+
 	protected abstract SerializableData getDefaultFile();
 }
