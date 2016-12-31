@@ -23,7 +23,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 	void OnDestroy () {
 		CleanupReferences();
-		UnusbscribeEvents();
+		UnsubscribeEvents();
 		StopAllCoroutines();
 	}
 
@@ -74,7 +74,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		EventController.Subscribe(HandleNamedEvent);
 	}
 
-	protected virtual void UnusbscribeEvents () {
+	protected virtual void UnsubscribeEvents () {
 		EventController.Unsubscribe(HandleNamedEvent);
 	}
 

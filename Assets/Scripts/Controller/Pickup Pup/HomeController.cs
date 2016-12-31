@@ -22,13 +22,13 @@ public class HomeController : SingletonController<HomeController> {
         dogs = dogData.Dogs;
     }
 
-    public void addSlot()
+    public void AddSlot()
     {
         numOfSlots++;
         numOfAvailableSlots++;
     }
 
-    public void removeSlot()
+    public void RemoveSlot()
     {
         numOfSlots--;
         if (numOfAvailableSlots > 0)
@@ -37,13 +37,13 @@ public class HomeController : SingletonController<HomeController> {
         }
     }
 
-	public void addDog()
+	public void AddDog()
     {
         numOfAvailableSlots--;
         numOfDogsHome++;
     }
 
-    public void removeDog()
+    public void RemoveDog()
     {
         numOfAvailableSlots++;
         numOfDogsHome--;

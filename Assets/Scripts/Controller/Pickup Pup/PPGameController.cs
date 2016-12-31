@@ -17,15 +17,30 @@ public class PPGameController : GameController {
 	}
 
 	DogDatabase data;
+    Currency coins;
+    Currency dogFood;
 
 	protected override void SetReferences () {
 		base.SetReferences ();
 		data = JsonUtility.FromJson<DogDatabase>(Resources.Load<TextAsset>(GAME_DATA_FILE_PATH).text);
 		data.Initialize();
+
+        coins = new Currency(CurrencyType.Coins, 100);
+        dogFood = new Currency(CurrencyType.DogFood, 50);
 	}
 
     public DogDatabase Data
     {
         get { return data; }
+    }
+
+    public Currency Coins
+    {
+        get { return coins; }
+    }
+
+    public Currency DogFood
+    {
+        get { return dogFood; }
     }
 }

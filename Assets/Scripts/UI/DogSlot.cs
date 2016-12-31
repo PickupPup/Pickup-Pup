@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DogSlot : MonoBehaviour {
+public class DogSlot : MonoBehaviourExtended {
 
     Image backgroundImage;
     Image dogImage;

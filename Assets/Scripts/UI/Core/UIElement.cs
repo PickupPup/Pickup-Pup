@@ -25,12 +25,12 @@ public class UIElement : MonoBehaviourExtended {
 	}
 
 	[SerializeField]
-	Sprite[] alternateSprites;
+	protected Sprite[] alternateSprites;
 
-	Image image;
-	Text text;
-	CanvasGroup canvas;
-	IEnumerator opacityCoroutine;
+    protected Image image;
+    protected Text text;
+    protected CanvasGroup canvas;
+    protected IEnumerator opacityCoroutine;
 
 	protected override void SetReferences () {
 		base.SetReferences ();

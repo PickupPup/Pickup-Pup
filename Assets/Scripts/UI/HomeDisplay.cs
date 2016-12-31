@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeDisplay : MonoBehaviour {
+public class HomeDisplay : MonoBehaviourExtended {
 
     const int NUM_OF_SHOWN_SLOTS = 10; // # of slots shown on main screen
 
