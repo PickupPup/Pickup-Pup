@@ -6,6 +6,13 @@
 using System.Collections.Generic;
 
 public class PPDataController : DataController {
+	// Casts the singleton from the superclass:
+	public static PPDataController GetInstance {
+		get {
+			return Instance as PPDataController;
+		}
+	}
+
 	public List<DogDescriptor> AdoptedDogs {
 		get {
 			return currenGame.AdoptedDogs;
@@ -17,21 +24,21 @@ public class PPDataController : DataController {
 			return AdoptedDogs.Count;
 		}
 	}
-
-	public int Money {
+		
+	public Currency Coins {
 		get {
-			return currenGame.Money;
+			return currenGame.Coins;
 		}
 	}
 
-	public int Food {
+	public Currency DogFood {
 		get {
 			return currenGame.Food;
 		}
 	}
 
 	PPGameSave currenGame;
-	MonoActionInt onMoneyChange;
+	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
 
 	public bool SaveGame () {
@@ -39,12 +46,12 @@ public class PPDataController : DataController {
 		return Save();
 	}
 
-	public void SubscribeToMoneyChange (MonoActionInt moneyAction) {
-		onMoneyChange += moneyAction;
+	public void SubscribeToCoinsChange (MonoActionInt coinsAction) {
+		onCoinsChange += coinsAction;
 	}
 		
-	public void UnsubscribeFromMoneyChange (MonoActionInt moneyAction) {
-		onMoneyChange -= moneyAction;
+	public void UnsubscribeFromCoinsChange (MonoActionInt coinsAction) {
+		onCoinsChange -= coinsAction;
 	}
 
 	public void SubscribeToFoodChange (MonoActionInt foodAction) {
@@ -60,9 +67,16 @@ public class PPDataController : DataController {
 		return currenGame;
 	}
 
-	protected void callOnMoneyChange (int money) { 
-		if (onMoneyChange != null) {
-			onMoneyChange(money);
+	public override void Reset () {
+		base.Reset ();
+		LoadGame();
+		callOnCoinsChange(currenGame.Coins.Amount);
+		callOnFoodChange(currenGame.Food.Amount);
+	}
+
+	protected void callOnCoinsChange (int coins) { 
+		if (onCoinsChange != null) {
+			onCoinsChange(coins);
 		}
 	}
 
@@ -76,15 +90,19 @@ public class PPDataController : DataController {
 		return currenGame;
 	}
 		
-	public void ChangeMoney (int deltaMoney) {
-		this.currenGame.Money += deltaMoney;
-		callOnMoneyChange(Money);
+	public bool HasCurrency (CurrencyType type) {
+		return currenGame.HasCurrency(type);
+	}
+
+	public void ChangeCoins (int deltaCoins) {
+		this.currenGame.ChangeCoins(deltaCoins);
+		callOnCoinsChange(Coins.Amount);
 		SaveGame();
 	}
 
 	public void ChangeFood (int deltaFood) {
-		this.currenGame.Food += deltaFood;
-		callOnFoodChange(Food);
+		this.currenGame.ChangeFood(deltaFood);
+		callOnFoodChange(DogFood.Amount);
 		SaveGame();
 	}
 
@@ -94,6 +112,6 @@ public class PPDataController : DataController {
 	}
 
 	protected override SerializableData getDefaultFile () {
-		return new PPGameSave(new DogDescriptor[0], money:0, food:0);
+		return new PPGameSave(new DogDescriptor[0], Currency.Defaults);
 	}		
 }

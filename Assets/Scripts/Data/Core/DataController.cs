@@ -53,7 +53,7 @@ public abstract class DataController : SingletonController<DataController> {
 		}
 	}
 
-	public void Reset () {
+	public virtual void Reset () {
 		Buffer(getDefaultFile());
 		Save();
 	}

@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 240592516}
   - component: {fileID: 240592515}
   m_Layer: 5
-  m_Name: Money
+  m_Name: Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,18 +234,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: aabc1469cc2f3451d8f6ac19ed8cd72a, type: 3}
-    m_FontSize: 30
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 202
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Money: 0'
+  m_Text: 'Coins: 0'
 --- !u!222 &240592516
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 489151818}
   - component: {fileID: 489151817}
   m_Layer: 5
-  m_Name: Stop
+  m_Name: -10Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,12 +391,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2085572565}
-        m_MethodName: StopTimer
-        m_Mode: 1
+        m_MethodName: ChangeFood
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 788446176}
   - component: {fileID: 788446175}
   m_Layer: 5
-  m_Name: Begin
+  m_Name: +10Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,12 +513,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2085572565}
-        m_MethodName: BeginTimer
-        m_Mode: 1
+        m_MethodName: ChangeCoins
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 1156910769}
   - component: {fileID: 1156910768}
   m_Layer: 5
-  m_Name: Pause
+  m_Name: -10Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,12 +854,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2085572565}
-        m_MethodName: PauseTimer
-        m_Mode: 1
+        m_MethodName: ChangeCoins
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: -10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1103,11 +1103,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: aabc1469cc2f3451d8f6ac19ed8cd72a, type: 3}
-    m_FontSize: 30
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 202
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1346,7 +1346,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2085572565}
-        m_MethodName: ResetTimer
+        m_MethodName: ResetData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1403,7 +1403,7 @@ GameObject:
   - component: {fileID: 2009394484}
   - component: {fileID: 2009394483}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: +10Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1468,12 +1468,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2085572565}
-        m_MethodName: ResumeTimer
-        m_Mode: 1
+        m_MethodName: ChangeFood
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1521,10 +1521,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2085572564}
-  - component: {fileID: 2085572565}
   - component: {fileID: 2085572563}
   - component: {fileID: 2085572562}
   - component: {fileID: 2085572561}
+  - component: {fileID: 2085572566}
+  - component: {fileID: 2085572565}
   m_Layer: 5
   m_Name: Saving
   m_TagString: Untagged
@@ -1619,10 +1620,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2085572560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52cd196f91d3e439d9b3d2c248481d9d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cfe8167177d649a6a9c570a10b73ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer:
-    TimeStep: 1
-    MaxTime: 216000
-  TimeRemaining: {fileID: 1631516081}
+  coinText: {fileID: 240592515}
+  foodText: {fileID: 1631516081}
+--- !u!114 &2085572566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085572560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5880f4730969f425b83699e01b2a0e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
