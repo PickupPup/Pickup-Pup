@@ -16,6 +16,7 @@ public class DogDescriptor : PPDescriptor {
 	public bool IsOutCollecting = false;
 	public float RemainingTimeCollecting = 0;
 	public string Breed;
+    public int SpriteID;
 
 	public DogBreed IBreed {
 		get {
@@ -36,6 +37,7 @@ public class DogDescriptor : PPDescriptor {
 		descriptor.Age = 0;
 		descriptor.Breed = string.Empty;
 		descriptor.Color = BLACK_HEX;
+        descriptor.SpriteID = 0;
 		descriptor.TimeToCollect = 0;
 		descriptor.IsOutCollecting = false;
 		return descriptor;

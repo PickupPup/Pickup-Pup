@@ -235,7 +235,7 @@ public class AudioController : Controller, IAudioController {
 	}
 
 	protected void UnsubscribeEvents () {
-		base.UnusbscribeEvents();
+		base.UnsubscribeEvents();
 		EventController.Unsubscribe(HandleAudioEvent);
 	}
 
