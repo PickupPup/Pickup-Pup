@@ -9,9 +9,11 @@ using System;
 public class DogBreed : DogTrait {
 	public string Name;
 	public string Specialization;
-	public CollectibleType ISpecialization {
+	public float TimeToReturn;
+
+	public CurrencyType ISpecialization {
 		get {
-			return (CollectibleType) Enum.Parse(typeof(CollectibleType), Specialization); 
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), Specialization); 
 		}
 	}
 

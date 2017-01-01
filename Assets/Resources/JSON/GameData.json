@@ -1,8 +1,44 @@
 {
   "Breeds" : [
     {
-      "Name" : "Labrador",
-      "Specialization" : "Coins"
+      "Breed" : "Labrador Retriever",
+      "Specialization" : "DogFood",
+      "TimeToReturn" : 1800
+    },
+    {
+      "Breed" : "Golden Retriever",
+      "Specialization" : "DogFood",
+      "TimeToReturn" : 1800
+    },
+    {
+      "Breed" : "Yorkshire Terrier",
+      "Specialization" : "Toys",
+      "TimeToReturn" : 1200
+    },
+    {
+      "Breed" : "Sharpei",
+      "Specialization" : "Food",
+      "TimeToReturn" : 3000
+    },
+    {
+      "Breed" : "Dachsund",
+      "Specialization" : "Toys",
+      "TimeToReturn" : 3000
+    },
+    {
+      "Breed" : "Shih Tzu",
+      "Specialization" : "Toys",
+      "TimeToReturn" : 1200
+    },
+    {
+      "Breed" : "Maltese",
+      "Specialization" : "Coins",
+      "TimeToReturn" : 1200
+    },
+    {
+      "Breed" : "Chihuahua",
+      "Specialization" : "Coins",
+      "TimeToReturn" : 1200
     }
   ],
   "Dogs" : [
@@ -10,8 +46,307 @@
       "Name" : "Spot",
       "Age" : 2,
       "Color" : "#8e5309",
-      "TimeToCollect" : 5,
-      "Breed" : "Labrador"
+      "Breed" : "Labrador Retriever"
+    },
+    {
+      "Name" : "Bailey",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Max",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Charlie",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Buddy",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Rocky",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Jake",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Jack",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Toby",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Cody",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Buster",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei"
+    },
+    {
+      "Name" : "Duke",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Cooper",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Riley",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Harley",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Bear",
+      "Age" : 11,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Tucker",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Murphy",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Lucky",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei"
+    },
+    {
+      "Name" : "Oliver",
+      "Age" : 9,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Sam",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Oscar",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Teddy",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Winston",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu"
+    },
+    {
+      "Name" : "Sammy",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Bella",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei"
+    },
+    {
+      "Name" : "Lucy",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Molly",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu"
+    },
+    {
+      "Name" : "Daisy",
+      "Age" : 6,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Maggie",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua"
+    },
+    {
+      "Name" : "Sophie",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Sadie",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
+    },
+    {
+      "Name" : "Chloe",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Bailey",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu"
+    },
+    {
+      "Name" : "Lola",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Zoe",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
+    },
+    {
+      "Name" : "Abby",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Ginger",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Roxy",
+      "Age" : 6,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
+    },
+    {
+      "Name" : "Gracie",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund"
+    },
+    {
+      "Name" : "Coco",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Sasha",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
+    },
+    {
+      "Name" : "Lily",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu"
+    },
+    {
+      "Name" : "Angel",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever"
+    },
+    {
+      "Name" : "Princess",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
+    },
+    {
+      "Name" : "Emma",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier"
+    },
+    {
+      "Name" : "Annie",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu"
+    },
+    {
+      "Name" : "Rosie",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
+    },
+    {
+      "Name" : "Ruby",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu"
+    },
+    {
+      "Name" : "Grace",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei"
+    },
+    {
+      "Name" : "Manny",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese"
     }
   ]
 }

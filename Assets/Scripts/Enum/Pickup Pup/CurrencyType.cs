@@ -6,5 +6,7 @@
 public enum CurrencyType {
     DogFood,
     Coins,
+	Toys,
+	Time,
     None
 }
