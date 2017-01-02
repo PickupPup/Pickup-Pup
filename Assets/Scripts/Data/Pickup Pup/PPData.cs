@@ -54,4 +54,8 @@ public abstract class PPData {
 			return numberAsString;
 		}
 	}
+
+	protected string formatCost (int cost) {
+		return string.Format("${0}", cost);	
+	}
 }
