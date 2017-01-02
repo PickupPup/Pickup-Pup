@@ -13,7 +13,7 @@ public class DogBreed : DogTrait {
 	public int CostToAdopt;
 	public string CostToAdoptStr { 
 		get {
-			return string.Format("${0}", CostToAdopt);	
+			return formatCost(CostToAdopt);
 		}
 	}
 
