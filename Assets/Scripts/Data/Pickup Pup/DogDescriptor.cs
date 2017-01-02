@@ -12,12 +12,22 @@ public class DogDescriptor : PPDescriptor {
 	public string Name;
 	public int Age;
 	public string Color;
-	public float TimeToCollect = DEFAULT_TIME_TO_COLLECT;
 	public bool IsOutCollecting = false;
 	public float RemainingTimeCollecting = 0;
 	public string Breed;
     public int SpriteID;
+	public int CostToAdopt {
+		get {
+			return IBreed.CostToAdopt;
+		}
+	}
+	public string CostToAdoptStr {
+		get {
+			return IBreed.CostToAdoptStr;
+		}
+	}
 
+	DogBreed _iBreed;
 	public DogBreed IBreed {
 		get {
 			return data.GetBreed(Breed);
@@ -38,7 +48,6 @@ public class DogDescriptor : PPDescriptor {
 		descriptor.Breed = string.Empty;
 		descriptor.Color = BLACK_HEX;
         descriptor.SpriteID = 0;
-		descriptor.TimeToCollect = 0;
 		descriptor.IsOutCollecting = false;
 		return descriptor;
 	}

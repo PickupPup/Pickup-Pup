@@ -52,7 +52,7 @@ public class HomeDisplay : MonoBehaviourExtended {
                 // If so, it shouldn't appear at home
 
                 //Sprite dogSprite = SpriteUtil.getDogSprite(dogs[i].SpriteID);
-                dogSlots[i].Init(dogSprite);
+				dogSlots[i].Init(DogDescriptor.Default(), dogSprite);
             }
         }
     }

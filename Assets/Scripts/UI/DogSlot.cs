@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder 
+ * Author(s): Grace Barrett-Snyder, Isaiah Mann
  * Description: Displays a Dog's thumbnail (applies to both Outside and Home slots).
  */
 
@@ -9,7 +9,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DogSlot : MonoBehaviourExtended {
+	[SerializeField]
+	bool setBackground = true;
+	[SerializeField]
+	Text price;
 
+	DogDescriptor dog;
     Image backgroundImage;
     Image dogImage;
 
@@ -19,10 +24,18 @@ public class DogSlot : MonoBehaviourExtended {
     /// <summary>
     /// Initializes this Dog Slot by setting component references and displaying its sprites.
     /// </summary>
-	public void Init(Sprite dogSprite, Sprite backgroundSprite = null) {
-        Image[] images = GetComponentsInChildren<Image>();
-        backgroundImage = images[0];
-        dogImage = images[1];
+	public void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null) {
+		this.dog = dog;
+		Image[] images = GetComponentsInChildren<Image>();
+		if (images.Length == 2 && setBackground) 
+		{
+			backgroundImage = images[0];
+	        dogImage = images[1];
+		} 
+		else if (images.Length == 1 || !setBackground) 
+		{
+			dogImage = images[0];
+		}
 
         // Home slots don't have text components
         Text[] text = GetComponentsInChildren<Text>();
@@ -30,17 +43,30 @@ public class DogSlot : MonoBehaviourExtended {
         {
             nameText = text[0];
             timerText = text[1];
-        }
+		} 
+		else if (text.Length == 1) 
+		{
+			nameText = text[0];
+		}
 
-        setSlot(dogSprite, backgroundSprite);
+		setSlot(this.dog, dogSprite, backgroundSprite);
     }
 	
     /// <summary>
     /// Sets the dog and background sprites of this Dog Slot.
     /// </summary>
-	void setSlot(Sprite dogSprite, Sprite backgroundSprite = null)
+	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
+		if (nameText) {
+			nameText.text = dog.Name;
+		}
         dogImage.sprite = dogSprite;
-        backgroundImage.sprite = backgroundSprite;
+		if (backgroundImage) {
+        	backgroundImage.sprite = backgroundSprite;
+		}
+		if (price) 
+		{
+			price.text = dog.CostToAdoptStr;
+		}
     }
 }
