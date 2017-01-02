@@ -18,16 +18,26 @@ public class DogDescriptor : PPDescriptor {
     public int SpriteID;
 	public int CostToAdopt {
 		get {
-			return IBreed.CostToAdopt + ModCost;
+			if (hasSpecialCost) {
+				return ModCost;
+			} else {
+				return IBreed.CostToAdopt;
+			}
 		}
 	}
 	public string CostToAdoptStr {
 		get {
-			if (ModCost == 0) {
-				return IBreed.CostToAdoptStr;
+			if (hasSpecialCost) {
+				return formatCost(ModCost);
 			} else {
-				return formatCost(CostToAdopt);
+				return IBreed.CostToAdoptStr;
 			}
+		}
+	}
+
+	bool hasSpecialCost {
+		get {
+			return ModCost != 0;
 		}
 	}
 	public int ModCost;

@@ -14,7 +14,7 @@
     },
     {
       "Breed" : "Yorkshire Terrier",
-      "Specialization" : "Toys",
+      "Specialization" : "Coins",
       "TimeToReturn" : 1200,
       "CostToAdopt" : 700
     },
@@ -26,13 +26,13 @@
     },
     {
       "Breed" : "Dachsund",
-      "Specialization" : "Toys",
+      "Specialization" : "Coins",
       "TimeToReturn" : 3000,
       "CostToAdopt" : 1200
     },
     {
       "Breed" : "Shih Tzu",
-      "Specialization" : "Toys",
+      "Specialization" : "DogFood",
       "TimeToReturn" : 1200,
       "CostToAdopt" : 1500
     },
@@ -59,12 +59,18 @@
       "Specialization" : "DogFood",
       "TimeToReturn" : 1400,
       "CostToAdopt" : 1500
+    },
+    {
+      "Breed" : "Beagle",
+      "Specialization" : "DogFood",
+      "TimeToReturn" : 2400,
+      "CostToAdopt" : 1500
     }
   ],
   "Dogs" : [
     {
       "Name" : "Spot",
-      "Age" : 2,
+      "Age" : 4,
       "Color" : "#8e5309",
       "Breed" : "Labrador Retriever",
       "ModCost" : 0
@@ -119,14 +125,14 @@
       "ModCost" : 0
     },
     {
-      "Name" : "Toby",
+      "Name" : "Pebbles",
       "Age" : 1,
       "Color" : "#8e5309",
       "Breed" : "Yorkshire Terrier",
       "ModCost" : 0
     },
     {
-      "Name" : "Cody",
+      "Name" : "Peekaboo",
       "Age" : 4,
       "Color" : "#8e5309",
       "Breed" : "Golden Retriever",
@@ -171,7 +177,7 @@
       "Name" : "Bear",
       "Age" : 11,
       "Color" : "#8e5309",
-      "Breed" : "Dachsund",
+      "Breed" : "Labrador Retriever",
       "ModCost" : 0
     },
     {
@@ -210,10 +216,10 @@
       "ModCost" : 0
     },
     {
-      "Name" : "Oscar",
+      "Name" : "Mookie",
       "Age" : 2,
       "Color" : "#8e5309",
-      "Breed" : "Chihuahua",
+      "Breed" : "Labrador Retriever",
       "ModCost" : 0
     },
     {
@@ -231,10 +237,10 @@
       "ModCost" : 0
     },
     {
-      "Name" : "Sammy",
+      "Name" : "Cooper",
       "Age" : 4,
       "Color" : "#8e5309",
-      "Breed" : "Chihuahua",
+      "Breed" : "Mutt",
       "ModCost" : 0
     },
     {
@@ -336,36 +342,36 @@
       "ModCost" : 0
     },
     {
-      "Name" : "Gracie",
-      "Age" : 1,
+      "Name" : "Delilah",
+      "Age" : 3,
       "Color" : "#8e5309",
-      "Breed" : "Dachsund",
+      "Breed" : "Mutt",
       "ModCost" : 0
     },
     {
       "Name" : "Coco",
-      "Age" : 3,
+      "Age" : 10,
       "Color" : "#8e5309",
       "Breed" : "Golden Retriever",
       "ModCost" : 0
     },
     {
-      "Name" : "Sasha",
-      "Age" : 5,
+      "Name" : "Suki",
+      "Age" : 8,
       "Color" : "#8e5309",
       "Breed" : "Maltese",
       "ModCost" : 0
     },
     {
-      "Name" : "Lily",
-      "Age" : 2,
+      "Name" : "Tobi",
+      "Age" : 9,
       "Color" : "#8e5309",
       "Breed" : "Shih Tzu",
       "ModCost" : 0
     },
     {
       "Name" : "Angel",
-      "Age" : 1,
+      "Age" : 6,
       "Color" : "#8e5309",
       "Breed" : "Golden Retriever",
       "ModCost" : 0
@@ -386,7 +392,7 @@
     },
     {
       "Name" : "Annie",
-      "Age" : 2,
+      "Age" : 8,
       "Color" : "#8e5309",
       "Breed" : "Shih Tzu",
       "ModCost" : 0
@@ -431,6 +437,27 @@
       "Age" : 3,
       "Color" : "#8e5309",
       "Breed" : "Poodle",
+      "ModCost" : 0
+    },
+    {
+      "Name" : "Henry",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Beagle",
+      "ModCost" : 0
+    },
+    {
+      "Name" : "Arthur",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Beagle",
+      "ModCost" : 0
+    },
+    {
+      "Name" : "Colby",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
       "ModCost" : 0
     }
   ]
