@@ -1,13 +1,18 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder
+ * Author(s): Grace Barrett-Snyder, Isaiah Mann
  * Description: Defines a type of currency (ex: dog food or coins)
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+[System.Serializable]
 public class Currency {
+	public static Currency[] Defaults {
+		get {
+			return new Currency[]{
+				new Currency(CurrencyType.Coins, 0),
+				new Currency(CurrencyType.DogFood, 0)
+			};
+		}
+	}
 
     protected CurrencyType type;
     protected int amount = 0;
@@ -52,4 +57,9 @@ public class Currency {
     {
         get { return amount; }
     }
+
+	public CurrencyType Type 
+	{
+		get { return type; }
+	}
 }

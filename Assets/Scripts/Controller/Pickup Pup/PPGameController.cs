@@ -15,18 +15,26 @@ public class PPGameController : GameController {
 			return Path.Combine(JSON_DIR, "GameData");
 		}
 	}
+	static string SAVE_FILE_PATH {
+		get {
+			return Path.Combine(Application.persistentDataPath, "PickupPupSave.dat");
+		}
+	}
 
 	DogDatabase data;
-    Currency coins;
-    Currency dogFood;
+	PPDataController save;
 
 	protected override void SetReferences () {
 		base.SetReferences ();
 		data = JsonUtility.FromJson<DogDatabase>(Resources.Load<TextAsset>(GAME_DATA_FILE_PATH).text);
 		data.Initialize();
+	}
 
-        coins = new Currency(CurrencyType.Coins, 100);
-        dogFood = new Currency(CurrencyType.DogFood, 50);
+	protected override void FetchReferences () {
+		base.FetchReferences ();
+		save = PPDataController.GetInstance;
+		save.SetFilePath(SAVE_FILE_PATH);
+		save.LoadGame();
 	}
 
     public DogDatabase Data
@@ -36,11 +44,19 @@ public class PPGameController : GameController {
 
     public Currency Coins
     {
-        get { return coins; }
+		get { return save.Coins; }
     }
 
     public Currency DogFood
     {
-        get { return dogFood; }
+		get { return save.DogFood; }
     }
+
+	public void ChangeCoins (int deltaCoins) {
+		save.ChangeCoins(deltaCoins);
+	}
+
+	public void ChangeFood (int deltaFood) {
+		save.ChangeFood(deltaFood);
+	}
 }

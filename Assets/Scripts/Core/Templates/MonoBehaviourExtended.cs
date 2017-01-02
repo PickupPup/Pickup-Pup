@@ -8,8 +8,11 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable {
 	IEnumerator moveCoroutine;
+
 	public delegate void MonoAction();
-	public delegate void MonoActionf(float mannFloat);
+	public delegate void MonoActionf(float monoFloat);
+	public delegate void MonoActionInt(int monoInt);
+
 	bool destroyOnNextLoad = false;
 
 	void Awake () {
