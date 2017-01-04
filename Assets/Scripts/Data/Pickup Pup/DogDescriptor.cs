@@ -9,11 +9,26 @@ using UnityEngine;
 public class DogDescriptor : PPDescriptor {
 	const float DEFAULT_TIME_TO_COLLECT = 10f;
 
+	public bool IsLinkedToDog {
+		get {
+			return linkedDog != null;
+		}
+	}
+
+	Dog linkedDog;
 	public string Name;
 	public int Age;
 	public string Color;
 	public bool IsOutCollecting = false;
-	public float RemainingTimeCollecting = 0;
+	public float RemainingTimeScouting {
+		get {
+			if (IsLinkedToDog) {
+				return linkedDog.RemainingTimeScouting;
+			} else {
+				return default(float);
+			}
+		}
+	}
 	public string Breed;
     public int SpriteID;
 	public int CostToAdopt {
@@ -65,5 +80,13 @@ public class DogDescriptor : PPDescriptor {
         descriptor.SpriteID = 0;
 		descriptor.IsOutCollecting = false;
 		return descriptor;
+	}
+
+	public void LinkToDog (Dog dog) {
+		this.linkedDog = dog;
+	}
+
+	public void UnlinkFromDog () {
+		this.linkedDog = null;
 	}
 }

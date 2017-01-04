@@ -12,6 +12,9 @@ public abstract class PPData {
 	public delegate void DataAction();
 	public delegate void DataActionf(float value);
 
+	public delegate void DogAction(Dog dog);
+	public delegate void DogActionf(Dog dog, float dogFloat);
+
 	protected const string BLACK_HEX = "#000000";
 
 	protected DogDatabase data;
