@@ -5,11 +5,25 @@
 
 using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PPGameController : GameController {
 
-	const string JSON_DIR = "JSON";
+	// Returns the Instance cast to the sublcass
+	public static PPGameController GetInstance {
+		get {
+			return Instance as PPGameController;
+		}
+	}
 
+	List<Dog> dogsOutScouting = new List<Dog>();
+	PPTuning tuning;
+	const string JSON_DIR = "JSON";
+	static string TUNING_FILE_PATH {
+		get {
+			return Path.Combine(JSON_DIR, "Tuning");
+		}
+	}
 	static string GAME_DATA_FILE_PATH {
 		get {
 			return Path.Combine(JSON_DIR, "GameData");
@@ -26,7 +40,8 @@ public class PPGameController : GameController {
 
 	protected override void SetReferences () {
 		base.SetReferences ();
-		data = JsonUtility.FromJson<DogDatabase>(Resources.Load<TextAsset>(GAME_DATA_FILE_PATH).text);
+		data = parseDatabase();
+		tuning = parseTuning();
 		data.Initialize();
 	}
 
@@ -36,7 +51,7 @@ public class PPGameController : GameController {
 		save.SetFilePath(SAVE_FILE_PATH);
 		save.LoadGame();
 	}
-
+		
     public DogDatabase Data
     {
         get { return data; }
@@ -51,6 +66,11 @@ public class PPGameController : GameController {
     {
 		get { return save.DogFood; }
     }
+	public bool DogsScoutingAtCapacity {
+		get {
+			return dogsOutScouting.Count >= tuning.MaxDogsScouting;
+		}
+	}
 
 	public void ChangeCoins (int deltaCoins) {
 		save.ChangeCoins(deltaCoins);
@@ -58,5 +78,35 @@ public class PPGameController : GameController {
 
 	public void ChangeFood (int deltaFood) {
 		save.ChangeFood(deltaFood);
+	}
+		
+	public bool TrySendDogToScout (Dog dog) {
+		// Can only send a certain nubmer of dogs out to scout
+		if (DogsScoutingAtCapacity || dogsOutScouting.Contains(dog)) {
+			return false;
+		} else {
+			sendDogToScout(dog);
+			return true;
+		}
+	}
+
+	void sendDogToScout (Dog dog) {
+		dogsOutScouting.Add(dog);
+		dog.SubscribeToScoutingTimerEnd(handleDogDoneScouting);
+	}
+
+	void handleDogDoneScouting (Dog dog) {
+		dogsOutScouting.Remove(dog);
+		// Need to unsubscribe to prevent stacking even subscriptions if dog is sent to scout again:
+		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
+	}
+
+	DogDatabase parseDatabase () {
+		return JsonUtility.FromJson<DogDatabase>(Resources.Load<TextAsset>(GAME_DATA_FILE_PATH).text);
+	}
+
+	PPTuning parseTuning () {
+		TextAsset json = Resources.Load<TextAsset>(TUNING_FILE_PATH);
+		return JsonUtility.FromJson<PPTuning>(json.text);
 	}
 }
