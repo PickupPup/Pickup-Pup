@@ -36,4 +36,6 @@ public class PPTuning : PPData {
 	public int CostOfFiveDogFoodCans;
 	public int CostOfTenDogFoodCans;
 	public int CostOfTwentyDogFoodCans;
+    public int StartingCoins;
+    public int StartingDogFood;
 }

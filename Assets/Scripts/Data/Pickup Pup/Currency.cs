@@ -8,8 +8,8 @@ public class Currency {
 	public static Currency[] Defaults {
 		get {
 			return new Currency[]{
-				new Currency(CurrencyType.Coins, 0),
-				new Currency(CurrencyType.DogFood, 0)
+				new Currency(CurrencyType.Coins, 1000),
+				new Currency(CurrencyType.DogFood, 200)
 			};
 		}
 	}
@@ -58,6 +58,9 @@ public class Currency {
         get { return amount; }
     }
 
+    /// <summary>
+    /// Returns this currency's type.
+    /// </summary>
 	public CurrencyType Type 
 	{
 		get { return type; }

@@ -13,7 +13,7 @@ public class HomeDisplay : MonoBehaviourExtended {
 
     HomeController homeController;
     DogSlot[] dogSlots;
-    DogDescriptor[] dogs; // Contains dogs both inside and outside
+    List<DogDescriptor> dogs; // Contains dogs both inside and outside
 
     void Start()
     {
@@ -37,8 +37,8 @@ public class HomeDisplay : MonoBehaviourExtended {
     /// </summary>
     void displayThumbnails()
     {
-        //int numOfDogs = dogs.Length;
-        int numOfDogs = 12;
+        //int numOfDogs = dogs.Count;
+        int numOfDogs = 5;
 
         for(int i = 0; i < NUM_OF_SHOWN_SLOTS; i++)
         {

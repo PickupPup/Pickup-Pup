@@ -10,7 +10,7 @@ using UnityEngine;
 public class HomeController : SingletonController<HomeController> {
 
     DogDatabase dogData;
-    DogDescriptor[] dogs;
+    List<DogDescriptor> dogs;
 
     int numOfSlots = 10;
     int numOfAvailableSlots = 0;
@@ -19,38 +19,43 @@ public class HomeController : SingletonController<HomeController> {
     public void Init()
     {
         dogData = ((PPGameController) PPGameController.Instance).Data;
-        dogs = dogData.Dogs;
+        dogs = new List<DogDescriptor>(dogData.Dogs);
     }
 
     public void AddSlot()
     {
         numOfSlots++;
-        numOfAvailableSlots++;
     }
 
     public void RemoveSlot()
     {
         numOfSlots--;
-        if (numOfAvailableSlots > 0)
-        {
-            numOfAvailableSlots--;
-        }
     }
 
-	public void AddDog()
+	public void AddDog(DogDescriptor dog)
     {
-        numOfAvailableSlots--;
+        dogs.Add(dog);
         numOfDogsHome++;
     }
 
-    public void RemoveDog()
+    public void RemoveDog(DogDescriptor dog)
     {
-        numOfAvailableSlots++;
+        dogs.Remove(dog);
         numOfDogsHome--;
     }
 
-    public DogDescriptor[] Dogs
+    public List<DogDescriptor> Dogs
     {
         get { return dogs; }
+    }
+
+    public int DogCount
+    {
+        get { return dogs.Count; }
+    }
+
+    public int AvailableSlots
+    {
+        get { return numOfSlots - dogs.Count; }
     }
 }

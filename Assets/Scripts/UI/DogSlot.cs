@@ -9,10 +9,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DogSlot : MonoBehaviourExtended {
+
+    Currency coins;
+
 	[SerializeField]
 	bool setBackground = true;
 	[SerializeField]
-	Text price;
+	Text priceText;
 
 	DogDescriptor dog;
     Image backgroundImage;
@@ -20,6 +23,12 @@ public class DogSlot : MonoBehaviourExtended {
 
     Text nameText;
     Text timerText;
+
+    protected override void FetchReferences()
+    {
+        base.FetchReferences();
+        //coins = ((PPGameController) PPGameController.Instance).Coins;
+    }
 
     /// <summary>
     /// Initializes this Dog Slot by setting component references and displaying its sprites.
@@ -64,9 +73,15 @@ public class DogSlot : MonoBehaviourExtended {
 		if (backgroundImage) {
         	backgroundImage.sprite = backgroundSprite;
 		}
-		if (price) 
+		if (priceText) 
 		{
-			price.text = dog.CostToAdoptStr;
+            priceText.text = dog.CostToAdoptStr;
+            //priceText.color = (dog.CostToAdopt > coins.Amount) ? Color.red : Color.black;
 		}
+    }
+
+    public DogDescriptor Dog
+    {
+        get { return dog; }
     }
 }
