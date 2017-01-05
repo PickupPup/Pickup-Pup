@@ -1,34 +1,41 @@
-﻿using UnityEngine;
+﻿/*
+ * Author: Isaiah Mann
+ * Desc: Utility scripts for audio
+ */
+
+using UnityEngine;
 using System.Collections;
 
-public static class AudioUtil {
+public static class AudioUtil 
+{
 
-	public static AudioActionType MuteActionFromBool (bool muted) {
+	public static AudioActionType MuteActionFromBool(bool muted) 
+	{
 		return muted ? AudioActionType.Mute : AudioActionType.Unmute;
 	}
 
-	public static bool MutedBoolFromAudioAction (AudioActionType actionType) {
-		switch (actionType) {
-
+	public static bool MutedBoolFromAudioAction(AudioActionType actionType) 
+	{
+		switch(actionType) 
+		{
 		case AudioActionType.Mute:
 			return true;
-
 		case AudioActionType.Unmute:
 			return false;
-
 		default:
 			throw new System.Collections.Generic.KeyNotFoundException();
-
 		}
 	}
 
-	public static bool IsMuteAction (AudioActionType actionType) {
+	public static bool IsMuteAction(AudioActionType actionType) 
+	{
 		return actionType == AudioActionType.Mute || actionType == AudioActionType.Unmute;
 	}
 
-	public static AudioType AudioTypeFromString (string audioType) {
-		switch (audioType) {
-
+	public static AudioType AudioTypeFromString(string audioType) 
+	{
+		switch(audioType) 
+		{
 		case "SFX":
 			return AudioType.FX;
 		case "Music":
@@ -41,8 +48,10 @@ public static class AudioUtil {
 		}
 	}
 
-	public static bool IsMuted (AudioType audioType) {
-		switch (audioType) {
+	public static bool IsMuted(AudioType audioType) 
+	{
+		switch (audioType) 
+		{
 		case AudioType.FX:
 			return SettingsUtil.SFXMuted;
 		case AudioType.Music:
@@ -51,4 +60,5 @@ public static class AudioUtil {
 			throw new System.Collections.Generic.KeyNotFoundException();
 		}
 	}
+
 }

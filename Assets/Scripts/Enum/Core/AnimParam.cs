@@ -3,9 +3,10 @@
  * Description: Descriptor for type of parameter passed to an animation
  */
 
-public enum AnimParam {
+public enum AnimParam 
+{
     Trigger,
     Bool,
     Int,
-    Float
+    Float,
 }

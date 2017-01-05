@@ -154,4 +154,12 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		return Resources.Load<TextAsset>(pathInResources);
 	}
 
+	// Starts an arbitrary amount of coroutines
+	protected void startCoroutines(params IEnumerator[] coroutines) 
+	{
+		for (int i = 0; i < coroutines.Length; i++) {
+			StartCoroutine(coroutines[i]);
+		}
+	}
+
 }

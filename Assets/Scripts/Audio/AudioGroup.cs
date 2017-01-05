@@ -4,46 +4,64 @@
  */
 
 [System.Serializable]
-public class AudioGroup : AudioData {
+public class AudioGroup : AudioData
+{
 	RandomizedQueue<AudioFile> fileQueue;
 	AudioFile currentFile;
 
-	public AudioGroup (params AudioFile[] files) {
+	public AudioGroup(params AudioFile[] files) 
+	{
 		checkFileQueue();
-		foreach (AudioFile file in files) {
+		foreach(AudioFile file in files) 
+		{
 			fileQueue.Enqueue(file);
 		}
 	}
 
-	public void AddFile (AudioFile file) {
+	public void AddFile(AudioFile file) 
+	{
 		checkFileQueue();
 		fileQueue.Enqueue(file);
 	}
 
-	void checkFileQueue () {
-		if (fileQueue == null) {
+	void checkFileQueue()
+	{
+		if(fileQueue == null) 
+		{
 			fileQueue = new RandomizedQueue<AudioFile>();
 		}
 	}
 
-	public AudioFile GetRandomFile () {
+	public AudioFile GetRandomFile() 
+	{
 		checkFileQueue();
 		return (currentFile = fileQueue.Cycle());
 	}
 
-	public override AudioFile GetCurrentFile () {
+	#region AudioData Overrides 
+
+	public override AudioFile GetCurrentFile() 
+	{
 		return currentFile;
 	}
 
-	public override AudioFile GetNextFile () {
+	public override AudioFile GetNextFile() 
+	{
 		return GetRandomFile();
 	}
 
-	public override bool HasCurrentFile () {
-		if (currentFile == null) {
+	public override bool HasCurrentFile() 
+	{
+		if(currentFile == null) 
+		{
 			return false;
-		} else {
-			return base.HasCurrentFile ();
+		} 
+		else 
+		{
+			return base.HasCurrentFile();
 		}
 	}
+
+	#endregion
+
 }
