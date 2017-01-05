@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Random buffer with a list backing structure instead of an array
+ * Description: Random buffer with a list backing structure instead of an array
  */
 
 using System.Collections.Generic;
