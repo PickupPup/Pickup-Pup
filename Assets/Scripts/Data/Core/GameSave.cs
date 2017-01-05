@@ -4,6 +4,7 @@
  */
 
 [System.Serializable]
-public abstract class GameSave : SerializableData {
+public abstract class GameSave : SerializableData 
+{
 	
 }

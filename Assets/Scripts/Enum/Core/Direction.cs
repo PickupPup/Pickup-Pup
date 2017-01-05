@@ -3,9 +3,10 @@
  * Description: Template actions for a class that can be initialized from JSON
  */
 
-public enum Direction {
+public enum Direction 
+{
      North,
      East,
 	South,
-     West
+     West,
 }

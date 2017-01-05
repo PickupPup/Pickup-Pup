@@ -5,20 +5,27 @@
 
 using UnityEngine;
 
-public abstract class Controller : MonoBehaviourExtended {
-	protected override void SetReferences () {
+public abstract class Controller : MonoBehaviourExtended 
+{
+
+	protected override void SetReferences() 
+	{
 		// Nothing
 	}
 
-	protected override void FetchReferences () {
+	protected override void FetchReferences() 
+	{
 		// Nothing
 	}
 
-	protected override void HandleNamedEvent (string eventName) {
+	protected override void HandleNamedEvent(string eventName) 
+	{
 		// Nothing
 	}
 
-	protected override void CleanupReferences () {
+	protected override void CleanupReferences() 
+	{
 		// Nothing
 	}
+
 }

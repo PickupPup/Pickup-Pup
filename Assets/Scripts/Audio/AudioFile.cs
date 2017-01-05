@@ -14,6 +14,8 @@ public class AudioFile : AudioData, IAudioFile
 
 	#region Instance Accessors
 
+	#region IAudioFile Interface 
+
 	public AudioClip Clip 
 	{
 		get 
@@ -44,6 +46,8 @@ public class AudioFile : AudioData, IAudioFile
 			return GetVolume();
 		}
 	}
+
+	#endregion
 
 	#endregion
 

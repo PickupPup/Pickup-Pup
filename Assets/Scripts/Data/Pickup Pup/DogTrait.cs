@@ -4,6 +4,12 @@
  */
 
 [System.Serializable]
-public abstract class DogTrait : PPData {
-	public DogTrait (DogDatabase data) : base(data) {}
+public abstract class DogTrait : PPData 
+{
+
+	public DogTrait(DogDatabase data) : base(data) 
+	{
+		
+	}
+
 }

@@ -5,22 +5,32 @@
 
 using UnityEngine;
 
-public interface IAudioFile {
-	AudioClip Clip {
+public interface IAudioFile 
+{
+
+	#region Instance Accessors
+
+	AudioClip Clip 
+	{
 		get;
 	}
-	float ClipLength {
+	float ClipLength 
+	{
 		get;
 	}
 	// Volume for the AudioSource class uses 0-1.0f scale while our class uses 0-100 (integer) scale
-	float Volumef {
+	float Volumef 
+	{
 		get;
 	}
-	AudioType TypeAsEnum {
+	AudioType TypeAsEnum 
+	{
 		get;
 	}
 		
-	bool HasEvent (string eventName);
-	bool HasEndEvent (string eventName);
-	float GetVolume ();
+	#endregion
+
+	bool HasEvent(string eventName);
+	bool HasEndEvent(string eventName);
+	float GetVolume();
 }

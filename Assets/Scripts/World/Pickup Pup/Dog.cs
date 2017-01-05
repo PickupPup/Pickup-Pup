@@ -154,23 +154,30 @@ public class Dog : MobileObjectBehaviour
 		scoutingTimer.Init();
 	}
 
-	protected override void FetchReferences () {
-		base.FetchReferences ();
+	protected override void FetchReferences() 
+	{
+		base.FetchReferences();
 		game = PPGameController.GetInstance;
 	}
 
-	protected override void CleanupReferences () {
-		base.CleanupReferences ();
-		if (hasDescriptor) {
+	protected override void CleanupReferences()
+	{
+		base.CleanupReferences();
+		if (hasDescriptor) 
+		{
 			this.descriptor.UnlinkFromDog();
 		}
 	}
 
-	public bool TrySendToScout () {
-		if (!IsScouting && HasScoutingTimer) {
+	public bool TrySendToScout()
+	{
+		if(!IsScouting && HasScoutingTimer) 
+		{
 			scoutingTimer.Begin();
 			return game.TrySendDogToScout(this);
-		} else {
+		} 
+		else 
+		{
 			return false;
 		}
 	}

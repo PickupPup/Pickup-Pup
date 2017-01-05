@@ -1,8 +1,15 @@
-﻿using UnityEngine;
+﻿/*
+ * Author: Isaiah Mann
+ * Desc: Used to convert screen to world coordinates accurately
+ */
 
-public static class CameraUtil {
+using UnityEngine;
 
-	public static Vector3 ScreenToWorldPosition (Vector3 screenPosition, float zOffset = 0) {
+public static class CameraUtil 
+{
+
+	public static Vector3 ScreenToWorldPosition(Vector3 screenPosition, float zOffset = 0) 
+	{
 		screenPosition.z = screenPosition.z - Camera.main.transform.position.z + zOffset;
 		screenPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 		return screenPosition;
