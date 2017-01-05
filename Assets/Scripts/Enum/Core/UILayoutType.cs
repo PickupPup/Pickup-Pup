@@ -3,9 +3,10 @@
  * Description: Descriptor for type of layout for a User Interface or User Interface element
  */
 
-public enum UILayoutType {
+public enum UILayoutType 
+{
 	Horizontal,
 	Vertical,
 	Grid,
-	Unrestricted
+	Unrestricted,
 }

@@ -3,7 +3,8 @@
  * Description: Descriptor for how to sort objects in list or collection
  */
 
-public enum SortRule {
+public enum SortRule 
+{
 	ByID,
-	ByObjName
+	ByObjName,
 }
