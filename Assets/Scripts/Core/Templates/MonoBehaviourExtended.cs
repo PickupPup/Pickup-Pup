@@ -148,4 +148,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected void scale (float scaleFactor) {
 		scale(transform, scaleFactor);
 	}
+
+	protected TextAsset loadTextAssetInResources(string pathInResources) 
+	{
+		return Resources.Load<TextAsset>(pathInResources);
+	}
+
 }
