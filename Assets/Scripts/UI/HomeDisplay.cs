@@ -7,8 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeDisplay : MonoBehaviourExtended {
-
+public class HomeDisplay : MonoBehaviourExtended
+{
     const int NUM_OF_SHOWN_SLOTS = 10; // # of slots shown on main screen
 
     HomeController homeController;
@@ -46,7 +46,7 @@ public class HomeDisplay : MonoBehaviourExtended {
             {
                 // TEMP USE FOR TESTING
                 // 12 total stock photos
-                Sprite dogSprite = SpriteUtil.getDogSprite(Random.Range(1, 12));
+                Sprite dogSprite = SpriteUtil.GetDogSprite(Random.Range(1, 12));
 
                 // TODO: Add condition to check if the dog is outside
                 // If so, it shouldn't appear at home

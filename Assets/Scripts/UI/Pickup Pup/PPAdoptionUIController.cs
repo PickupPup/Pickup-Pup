@@ -5,7 +5,8 @@
 
 using UnityEngine;
 
-public class PPAdoptionUIController : PPUIController {
+public class PPAdoptionUIController : PPUIController
+{
 	DogSlot[] availableDogPortraits;
 	DogDatabase data;
 

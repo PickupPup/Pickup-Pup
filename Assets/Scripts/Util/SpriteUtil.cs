@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public static class SpriteUtil {
-
+public static class SpriteUtil
+{
     const string FILE_PATH = "Sprites/"; // Path within Resources Folder
     const string BASE_FILENAME = "sample-dog-"; // Filename format before the ID
 
@@ -18,7 +18,7 @@ public static class SpriteUtil {
     /// <summary>
     /// Gets the Dog Sprite associated with the specified ID.
     /// </summary>
-    public static Sprite getDogSprite(int spriteID)
+    public static Sprite GetDogSprite(int spriteID)
     {
         // If the sprite ID isn't listed in the dog sprite dictionary
         // (meaning it hasn't been loaded before)
