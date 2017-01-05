@@ -7,8 +7,8 @@ public class TimerTest : MonoBehaviourExtended {
 	public PPTimer Timer;
 	public Text TimeRemaining;
 
-	protected override void SetReferences () {
-		base.SetReferences ();
+	protected override void setReferences () {
+		base.setReferences ();
 		Timer.Init();
 		Timer.SubscribeToTimeChange(updateVisualTimer);
 	}

@@ -11,16 +11,16 @@ public class UIEventListener : MonoBehaviourExtended {
 	UIEventHandler[] handlers;
 	UIElement element;
 
-	protected override void SetReferences () {
-		base.SetReferences ();
+	protected override void setReferences () {
+		base.setReferences ();
 		element = GetComponent<UIElement>();
 		if (!element) {
 			element = gameObject.AddComponent<UIElement>();
 		}
 	}
 
-	protected override void HandleNamedEvent (string eventName) {
-		base.HandleNamedEvent(eventName);
+	protected override void handleNamedEvent (string eventName) {
+		base.handleNamedEvent(eventName);
 		foreach (UIEventHandler handler in handlers) {
 			if (handler.RespondsToTrigger(eventName)) {
 				handler.Execute(element);

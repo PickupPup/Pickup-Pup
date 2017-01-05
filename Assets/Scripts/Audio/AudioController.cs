@@ -70,19 +70,19 @@ public class AudioController : Controller, IAudioController
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void SetReferences() 
+	protected override void setReferences() 
 	{
-		base.SetReferences();
+		base.setReferences();
 		init();
 	}
 
-	protected override void CleanupReferences()
+	protected override void cleanupReferences()
 	{
-		base.CleanupReferences();
-		UnsubscribeEvents();
+		base.cleanupReferences();
+		unsubscribeEvents();
 	}
 
-	protected override void HandleNamedEvent(string eventName)
+	protected override void handleNamedEvent(string eventName)
 	{
 		if(playEvents.ContainsKey(eventName)) 
 		{
@@ -95,13 +95,13 @@ public class AudioController : Controller, IAudioController
 	}
 
 	// Uses C#'s delegate system
-	protected override void SubscribeEvents () {
-		base.SubscribeEvents();
+	protected override void subscribeEvents () {
+		base.subscribeEvents();
 		EventController.Subscribe(handleAudioEvent);
 	}
 
-	protected override void UnsubscribeEvents () {
-		base.UnsubscribeEvents();
+	protected override void unsubscribeEvents () {
+		base.unsubscribeEvents();
 		EventController.Unsubscribe(handleAudioEvent);
 	}
 
@@ -208,7 +208,7 @@ public class AudioController : Controller, IAudioController
 			fileList.PopulateGroups();
 			initFileDictionary(fileList);
 			addAudioEvents();
-			SubscribeEvents();
+			subscribeEvents();
 			if(isAudioListener) 
 			{
 				addAudioListener();

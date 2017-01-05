@@ -21,22 +21,22 @@ public class Ignore : MonoBehaviourExtended
 	[UnityEngine.SerializeField]
 	bool colorChange;
 
-	protected override void CleanupReferences() 
+	protected override void cleanupReferences() 
 	{
 		// Nothing
 	}
 
-	protected override void FetchReferences() 
+	protected override void fetchReferences() 
 	{
 		// Nothing
 	}
 
-	protected override void HandleNamedEvent(string eventName) 
+	protected override void handleNamedEvent(string eventName) 
 	{
 		// Nothing
 	}
 
-	protected override void SetReferences()
+	protected override void setReferences()
 	{
 		// Nothing
 	}

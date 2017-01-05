@@ -4,6 +4,7 @@
  */
 
 [System.Serializable]
-public abstract class SerializableData {
+public abstract class SerializableData 
+{
 	
 }

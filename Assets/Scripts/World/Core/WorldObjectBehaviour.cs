@@ -8,19 +8,19 @@ public class WorldObjectBehaviour : MonoBehaviourExtended {
 	public Color Colour {get; private set;}
 	IEnumerator colorCoroutine;
 
-	protected override void CleanupReferences () {
+	protected override void cleanupReferences () {
 		// Nothing
 	}
 
-	protected override void FetchReferences () {
+	protected override void fetchReferences () {
 		// Nothing
 	}
 
-	protected override void HandleNamedEvent (string eventName) {
+	protected override void handleNamedEvent (string eventName) {
 		// Nothing
 	}
 
-	protected override void SetReferences () {
+	protected override void setReferences () {
 		setRenderers();
 		Colour = sampleColour();
 	}

@@ -44,17 +44,17 @@ public class SingletonController<T> : Controller where T : class
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void SetReferences() 
+	protected override void setReferences() 
 	{
 		if(tryInit(ref _instance, this as T, gameObject, dontDestroyOnLoad)) 
 		{
-			base.SetReferences();
+			base.setReferences();
 		}
 	}
 
-	protected override void CleanupReferences() 
+	protected override void cleanupReferences() 
 	{
-		base.CleanupReferences();
+		base.cleanupReferences();
 		tryCleanupSingleton(ref _instance, this as T);
 	}
 
@@ -90,4 +90,5 @@ public class SingletonController<T> : Controller where T : class
 			return false;
 		}
 	}
+
 }

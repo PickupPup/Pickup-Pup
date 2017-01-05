@@ -86,17 +86,17 @@ using System.Collections.Generic;
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void SetReferences() 
+	protected override void setReferences() 
 	{
-		base.SetReferences();
+		base.setReferences();
 		data = parseDatabase();
 		tuning = parseTuning();
 		data.Initialize();
 	}
 
-	protected override void FetchReferences() 
+	protected override void fetchReferences() 
 	{
-		base.FetchReferences();
+		base.fetchReferences();
 		save = PPDataController.GetInstance;
 		save.SetFilePath(SAVE_FILE_PATH);
 		save.LoadGame();

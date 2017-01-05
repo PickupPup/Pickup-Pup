@@ -148,21 +148,21 @@ public class Dog : MobileObjectBehaviour
 		this.descriptor.LinkToDog(this);
 	}
 
-	protected override void SetReferences()
+	protected override void setReferences()
 	{
-		base.SetReferences();
+		base.setReferences();
 		scoutingTimer.Init();
 	}
 
-	protected override void FetchReferences() 
+	protected override void fetchReferences() 
 	{
-		base.FetchReferences();
+		base.fetchReferences();
 		game = PPGameController.GetInstance;
 	}
 
-	protected override void CleanupReferences()
+	protected override void cleanupReferences()
 	{
-		base.CleanupReferences();
+		base.cleanupReferences();
 		if (hasDescriptor) 
 		{
 			this.descriptor.UnlinkFromDog();

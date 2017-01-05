@@ -17,9 +17,9 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	[SerializeField]
 	Text foodText;
 
-	protected override void FetchReferences() 
+	protected override void fetchReferences() 
 	{
-		base.FetchReferences ();
+		base.fetchReferences ();
 		save = PPDataController.GetInstance;
 		save.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
 		save.SubscribeToCoinsChange(updateCoinsText);

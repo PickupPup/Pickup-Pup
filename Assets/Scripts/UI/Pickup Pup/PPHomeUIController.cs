@@ -1,19 +1,30 @@
 ﻿/*
+ * 
  * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Controls the home screen
  */
 
-public class PPHomeUIController : PPUIController {
+using UnityEngine;
 
-    public CurrencyDisplay dogFoodDisplay;
-    public CurrencyDisplay coinDisplay;
+public class PPHomeUIController : PPUIController 
+{
 
-    protected override void FetchReferences () {
-		base.FetchReferences ();
+	[SerializeField]
+    CurrencyDisplay dogFoodDisplay;
+	[SerializeField]
+    CurrencyDisplay coinDisplay;
+
+	#region MonoBehaviourExtended Overrides
+
+    protected override void fetchReferences() 
+	{
+		base.fetchReferences();
 		EventController.Event(PPEvent.LoadHome);
-
         // Set Currency Displays
         dogFoodDisplay.SetCurrency(ppGameController.DogFood);
         coinDisplay.SetCurrency(ppGameController.Coins);
     }
+
+	#endregion
+
 }

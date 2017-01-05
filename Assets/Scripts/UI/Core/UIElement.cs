@@ -51,9 +51,9 @@ public class UIElement : MonoBehaviourExtended
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void SetReferences() 
+	protected override void setReferences() 
 	{
-		base.SetReferences();
+		base.setReferences();
 		image = GetComponentInChildren<Image>();
 		text = GetComponentInChildren<Text>();
 		canvas = GetComponentInChildren<CanvasGroup>();

@@ -8,22 +8,22 @@ using UnityEngine;
 public abstract class Controller : MonoBehaviourExtended 
 {
 
-	protected override void SetReferences() 
+	protected override void setReferences() 
 	{
 		// Nothing
 	}
 
-	protected override void FetchReferences() 
+	protected override void fetchReferences() 
 	{
 		// Nothing
 	}
 
-	protected override void HandleNamedEvent(string eventName) 
+	protected override void handleNamedEvent(string eventName) 
 	{
 		// Nothing
 	}
 
-	protected override void CleanupReferences() 
+	protected override void cleanupReferences() 
 	{
 		// Nothing
 	}

@@ -4,7 +4,9 @@
  */
 
 [System.Serializable]
-public class PPTuning : PPData {
+public class PPTuning : PPData 
+{
+	
 	public int MaxDogsScouting;
 	public int MaxDogsInHouse;
 	public int DailyCoinBonus;
@@ -36,4 +38,5 @@ public class PPTuning : PPData {
 	public int CostOfFiveDogFoodCans;
 	public int CostOfTenDogFoodCans;
 	public int CostOfTwentyDogFoodCans;
+
 }
