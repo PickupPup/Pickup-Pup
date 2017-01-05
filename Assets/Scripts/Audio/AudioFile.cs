@@ -11,7 +11,6 @@ using System.Collections;
 [System.Serializable]
 public class AudioFile : AudioData, IAudioFile 
 {
-
 	#region Instance Accessors
 
 	#region IAudioFile Interface 
@@ -27,6 +26,7 @@ public class AudioFile : AudioData, IAudioFile
 			return _clip;
 		}
 	}
+
 	public AudioType TypeAsEnum 
 	{
 		get 
@@ -34,15 +34,20 @@ public class AudioFile : AudioData, IAudioFile
 			return AudioUtil.AudioTypeFromString(Type);
 		}
 	}
+
 	public float ClipLength 
 	{
-		get {
+		get 
+		{
 			return Clip.length;
 		}
 	}
+
 	// Volume for the AudioSource class uses 0-1.0f scale while our class uses 0-100 (integer) scale
-	public float Volumef {
-		get {
+	public float Volumef 
+	{
+		get
+		{
 			return GetVolume();
 		}
 	}
@@ -78,7 +83,7 @@ public class AudioFile : AudioData, IAudioFile
 
 	public override string ToString() 
 	{
-		return string.Format (
+		return string.Format(
 			"[AudioFile:\n"+
 			"FileName={0}\n" +
 			"EventNames={1}\n" +
@@ -101,17 +106,17 @@ public class AudioFile : AudioData, IAudioFile
 
 	public bool HasEvent(string eventName) 
 	{
-		return ArrayUtil.Contains (Events, eventName);
+		return ArrayUtil.Contains(Events, eventName);
 	}
 
 	public bool HasEndEvent(string eventName) 
 	{
-		return ArrayUtil.Contains (StopEvents, eventName);
+		return ArrayUtil.Contains(StopEvents, eventName);
 	}
 		
 	public float GetVolume() 
 	{
-		return getVolume(Volume);
+		return percentToDecimal(Volume);
 	}
 
 	#endregion
@@ -123,13 +128,7 @@ public class AudioFile : AudioData, IAudioFile
 			OnClipRequest(this);
 		}
 	}
-
-	float getVolume(int volume) 
-	{
-		return (float) volume / 100f;
-	}
-
-
+		
 	public void SetClip(AudioClip clip) 
 	{
 		this._clip = clip;

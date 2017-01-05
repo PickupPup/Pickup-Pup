@@ -7,7 +7,7 @@ using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
 
- public class PPGameController : GameController 
+public class PPGameController : GameController 
 {
 	const string JSON_DIR = "JSON";
 
@@ -31,6 +31,7 @@ using System.Collections.Generic;
 			return Path.Combine(JSON_DIR, "Tuning");
 		}
 	}
+
 	static string GAME_DATA_FILE_PATH 
 	{
 		get 
@@ -38,6 +39,7 @@ using System.Collections.Generic;
 			return Path.Combine(JSON_DIR, "GameData");
 		}
 	}
+
 	static string SAVE_FILE_PATH 
 	{
 		get 
@@ -62,6 +64,7 @@ using System.Collections.Generic;
 			return save.Coins; 
 		}
 	}
+
 	public Currency DogFood
 	{
 		get 
@@ -69,6 +72,7 @@ using System.Collections.Generic;
 			return save.DogFood; 
 		}
 	}
+
 	public bool DogsScoutingAtCapacity 
 	{
 		get 

@@ -1,15 +1,14 @@
 ﻿/*
  * Author: Isaiah Mann
  * Description: Class to load in the audio from a JSON file
- * Dependencies: None
  */
+
 using UnityEngine;
 using System.Collections;
 
 public class AudioLoader 
 {
-
-	const string DIRECTORY = "Audio/";
+	const string DIR = "Audio/";
 
 	// The path within the directory where the JSON file is saved
 	string path;
@@ -30,12 +29,12 @@ public class AudioLoader
 	// Fetches a particular clip from the resources folder
 	public static AudioClip GetClip(string fileName) 
 	{
-		return Resources.Load<AudioClip>(DIRECTORY + fileName);
+		return Resources.Load<AudioClip>(DIR + fileName);
 	}
 
 	public static ResourceRequest GetClipAsync(string fileName) 
 	{
-		return Resources.LoadAsync<AudioClip>(DIRECTORY + fileName);
+		return Resources.LoadAsync<AudioClip>(DIR + fileName);
 	}
 
 	public static AudioClip GetClip(AudioFile file) 

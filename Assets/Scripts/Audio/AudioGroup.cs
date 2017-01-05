@@ -35,7 +35,7 @@ public class AudioGroup : AudioData
 	public AudioFile GetRandomFile() 
 	{
 		checkFileQueue();
-		return (currentFile = fileQueue.Cycle());
+		return currentFile = fileQueue.Cycle();
 	}
 
 	#region AudioData Overrides 

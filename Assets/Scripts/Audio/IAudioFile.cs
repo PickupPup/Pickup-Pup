@@ -7,22 +7,24 @@ using UnityEngine;
 
 public interface IAudioFile 
 {
-
 	#region Instance Accessors
 
 	AudioClip Clip 
 	{
 		get;
 	}
+
 	float ClipLength 
 	{
 		get;
 	}
+
 	// Volume for the AudioSource class uses 0-1.0f scale while our class uses 0-100 (integer) scale
 	float Volumef 
 	{
 		get;
 	}
+
 	AudioType TypeAsEnum 
 	{
 		get;
