@@ -1,13 +1,17 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder, Isaiah Mann
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Defines a type of currency (ex: dog food or coins)
  */
 
 [System.Serializable]
-public class Currency {
-	public static Currency[] Defaults {
-		get {
-			return new Currency[]{
+public class Currency
+{
+	public static Currency[] Defaults
+    {
+		get
+        {
+			return new Currency[]
+            {
 				new Currency(CurrencyType.Coins, 0),
 				new Currency(CurrencyType.DogFood, 0)
 			};
@@ -55,11 +59,17 @@ public class Currency {
     /// </summary>
     public int Amount
     {
-        get { return amount; }
+        get
+        {
+            return amount;
+        }
     }
 
 	public CurrencyType Type 
 	{
-		get { return type; }
+		get
+        {
+            return type;
+        }
 	}
 }

@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224530541670847282}
-  - component: {fileID: 114447103441908870}
+  - component: {fileID: 114847852454886664}
   m_Layer: 5
   m_Name: DogHomeSlot
   m_TagString: Untagged
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114447103441908870
+--- !u!114 &114847852454886664
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -111,9 +111,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1344543363782472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ed2f7b271a90f4589aef88886c2970, type: 3}
+  m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setBackground: 1
 --- !u!114 &114986156677311746
 MonoBehaviour:
   m_ObjectHideFlags: 1
