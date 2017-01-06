@@ -4,15 +4,23 @@
  */
 
 [System.Serializable]
-public class Currency {
-	public static Currency[] Defaults {
-		get {
-			return new Currency[]{
+public class Currency 
+{
+	#region Static Accessors
+
+	public static Currency[] Defaults 
+	{
+		get
+		{
+			return new Currency[]
+			{
 				new Currency(CurrencyType.Coins, 0),
 				new Currency(CurrencyType.DogFood, 0)
 			};
 		}
 	}
+
+	#endregion
 
     protected CurrencyType type;
     protected int amount = 0;
@@ -55,11 +63,17 @@ public class Currency {
     /// </summary>
     public int Amount
     {
-        get { return amount; }
+        get 
+		{ 
+			return amount; 
+		}
     }
 
 	public CurrencyType Type 
 	{
-		get { return type; }
+		get 
+		{ 
+			return type; 
+		}
 	}
 }

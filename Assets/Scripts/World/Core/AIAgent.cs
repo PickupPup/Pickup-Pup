@@ -7,6 +7,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class AIAgent : Agent {
+public class AIAgent : Agent
+{
 
 }

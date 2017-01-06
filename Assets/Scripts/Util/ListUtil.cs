@@ -8,37 +8,42 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public static class ListUtil {
-
+public static class ListUtil 
+{
 	// Checks list for elements
-	public static bool IsNullOrEmpty<T> (List<T> list) {
+	public static bool IsNullOrEmpty<T>(List<T> list) 
+	{
 		return list == null || list.Count == 0;
 	}
 
-	public static string ToString<T> (List<T> list) {
-		if (list == null) {
-
+	public static string ToString<T>(List<T> list) 
+	{
+		if(list == null)
+		{
 			return null;
-
-		} else {
-
-			string listAsString = "";
-
-			for (int i = 0; i < list.Count; i++) {
+		}
+		else 
+		{
+			string listAsString = string.Empty;
+			for(int i = 0; i < list.Count; i++) 
+			{
 				listAsString += list[i].ToString() + '\n';
 			}
-
 			return listAsString;
-
 		}
 	}
 
 	// Checks whether an index is in range
-	public static bool InRange<T> (List<T> list, int index) {
-		if (IsNullOrEmpty(list)) {
+	public static bool InRange<T>(List<T> list, int index) 
+	{
+		if(IsNullOrEmpty(list)) 
+		{
 			return false;
-		} else {
+		}
+		else 
+		{
 			return index >= 0 && index < list.Count;
 		}
 	}
+
 }

@@ -7,8 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeController : SingletonController<HomeController> {
-
+public class HomeController : SingletonController<HomeController> 
+{
     DogDatabase dogData;
     DogDescriptor[] dogs;
 
@@ -19,7 +19,7 @@ public class HomeController : SingletonController<HomeController> {
     public void Init()
     {
         dogData = ((PPGameController) PPGameController.Instance).Data;
-        dogs = dogData.Dogs;
+		dogs = dogData.Dogs;
     }
 
     public void AddSlot()
@@ -31,7 +31,7 @@ public class HomeController : SingletonController<HomeController> {
     public void RemoveSlot()
     {
         numOfSlots--;
-        if (numOfAvailableSlots > 0)
+        if(numOfAvailableSlots > 0)
         {
             numOfAvailableSlots--;
         }
@@ -51,6 +51,10 @@ public class HomeController : SingletonController<HomeController> {
 
     public DogDescriptor[] Dogs
     {
-        get { return dogs; }
+        get 
+		{ 
+			return dogs; 
+		}
     }
+
 }

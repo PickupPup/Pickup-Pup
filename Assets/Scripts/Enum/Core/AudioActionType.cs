@@ -3,7 +3,9 @@
  * Description: Enum for Audio Actions
  */
 
-public enum AudioActionType {
+public enum AudioActionType 
+{
 	Mute,
-	Unmute
+	Unmute,
+
 }

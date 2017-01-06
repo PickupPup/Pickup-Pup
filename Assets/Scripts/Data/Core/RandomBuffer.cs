@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Continues to fetch random elements from the array
+ * Description: Continues to fetch random elements from the array
  */
 
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 public class RandomBuffer<T> 
 {	
-	
+	// Using IList Interface allows for any data structure w/ a count and indexed accessor
 	protected virtual IList<T> source 
 	{
 		get 

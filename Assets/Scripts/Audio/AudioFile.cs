@@ -9,56 +9,110 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class AudioFile : AudioData, IAudioFile {
-	public delegate void ClipRequestAction (AudioFile file);
-	public event ClipRequestAction OnClipRequest;
-	public string[] Groups;
-	AudioClip _clip;
-	public AudioClip Clip {
-		get {
-			if (_clip == null) {
-				_clip = AudioLoader.GetClip(Name);
-				CallOnClipRequest();
-			}
+public class AudioFile : AudioData, IAudioFile 
+{
+	#region Instance Accessors
 
+	#region IAudioFile Interface 
+
+	public bool Loop 
+	{
+		get 
+		{
+			return this.loop;
+		}
+	}
+		
+	public string[] Groups
+	{
+		get
+		{
+			return this.groups;
+		}
+	}
+
+	public int Channel
+	{
+		get 
+		{
+			return this.channel;
+		}
+	}
+
+	public AudioClip Clip 
+	{
+		get 
+		{
+			if(_clip == null) {
+				_clip = loader.GetClip(Name);
+				callOnClipRequest();
+			}
 			return _clip;
 		}
 	}
 
-	public override AudioFile GetNextFile () {
-		return this;
+	public AudioType Type 
+	{
+		get 
+		{
+			return AudioUtil.AudioTypeFromString(type);
+		}
 	}
 
-	public override AudioFile GetCurrentFile () {
-		return this;
-	}
-
-	public float ClipLength {
-		get {
+	public float ClipLength 
+	{
+		get 
+		{
 			return Clip.length;
 		}
 	}
-		
-	public bool Loop;
-	public int Volume;
 
 	// Volume for the AudioSource class uses 0-1.0f scale while our class uses 0-100 (integer) scale
-	public float Volumef {
-		get {
+	public float Volumef 
+	{
+		get
+		{
 			return GetVolume();
 		}
 	}
 
-	public AudioType TypeAsEnum {
-		get {
-			return AudioUtil.AudioTypeFromString(Type);
-		}
+	#endregion
+
+	#endregion
+
+	public delegate void ClipRequestAction(AudioFile file);
+	public event ClipRequestAction OnClipRequest;
+
+	[SerializeField]
+	bool loop;
+	[SerializeField]
+	int volume;
+	[SerializeField]
+	int channel;
+	[SerializeField]
+	string[] groups;
+
+	AudioClip _clip;
+
+	#region AudioData Override
+
+	public override AudioFile GetNextFile() 
+	{
+		return this;
 	}
 
-	public int Channel;
+	public override AudioFile GetCurrentFile() 
+	{
+		return this;
+	}
 
-	public override string ToString () {
-		return string.Format (
+	#endregion
+
+	#region System.Object Overrides
+
+	public override string ToString() 
+	{
+		return string.Format(
 			"[AudioFile:\n"+
 			"FileName={0}\n" +
 			"EventNames={1}\n" +
@@ -70,57 +124,49 @@ public class AudioFile : AudioData, IAudioFile {
 			Name, 
 			ArrayUtil.ToString(Events),
 			ArrayUtil.ToString(StopEvents),
-			Loop, 
-			Type, 
-			Channel);
-	}
-
-	public bool HasEvent (string eventName) {
-		return ArrayUtil.Contains (
-			Events,
-			eventName
-		);
-	}
-
-	public bool HasEndEvent (string eventName) {
-		return ArrayUtil.Contains (
-			StopEvents,
-			eventName
-		);
-	}
-
-	void CallOnClipRequest () {
-		if (OnClipRequest != null) { 
-			OnClipRequest(this);
-		}
-	}
-
-	float GetVolume (int volume) {
-		return (float)volume/100f;
-	}
-
-	public float GetVolume () {
-		return GetVolume(Volume);
-	}
-
-	public void SetClip (AudioClip clip) {
-		this._clip = clip;
-		CallOnClipRequest();
-	}
-		
-	public bool ClipIsSet () {
-		return _clip != null;
-	}
-
-	#region JSON Deserialization
-
-	public void DeserializeFromJSON (string jsonText) {
-		throw new System.NotImplementedException();
-	}
-
-	public void DeserializeFromJSONAtPath (string jsonPath) {
-		throw new System.NotImplementedException();
+			loop, 
+			type, 
+			channel);
 	}
 
 	#endregion
+
+	#region IAudioFile Interface
+
+	public bool HasEvent(string eventName) 
+	{
+		return ArrayUtil.Contains(Events, eventName);
+	}
+
+	public bool HasEndEvent(string eventName) 
+	{
+		return ArrayUtil.Contains(StopEvents, eventName);
+	}
+		
+	public float GetVolume() 
+	{
+		return percentToDecimal(volume);
+	}
+
+	#endregion
+
+	void callOnClipRequest() 
+	{
+		if(OnClipRequest != null) 
+		{ 
+			OnClipRequest(this);
+		}
+	}
+		
+	public void SetClip(AudioClip clip) 
+	{
+		this._clip = clip;
+		callOnClipRequest();
+	}
+		
+	public bool ClipIsSet()
+	{
+		return _clip != null;
+	}
+
 }

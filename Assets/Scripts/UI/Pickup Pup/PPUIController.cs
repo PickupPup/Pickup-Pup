@@ -3,22 +3,30 @@
  * Description: Controls a UI
  */
 
-public class PPUIController : MonoBehaviourExtended {
+public class PPUIController : MonoBehaviourExtended 
+{
+	protected PPSceneController sceneController;
+    protected PPGameController gameController;
 
-	protected PPSceneController scene;
-    protected PPGameController ppGameController;
+	#region MonoBehaviourExtended Overrides
 
-    protected override void FetchReferences () {
-		base.FetchReferences ();
-		scene = PPSceneController.Instance;
-        ppGameController = (PPGameController) PPGameController.Instance;
+    protected override void fetchReferences() 
+	{
+		base.fetchReferences();
+		sceneController = PPSceneController.Instance;
+		gameController = PPGameController.GetInstance;
     }
 
-    public void LoadStart () {
-		scene.LoadStart();
+	#endregion
+
+    public void LoadStart() 
+	{
+		sceneController.LoadStart();
 	}
 
-	public void LoadHome () {
-		scene.LoadHome();
+	public void LoadHome()
+	{
+		sceneController.LoadHome();
 	}
+
 }

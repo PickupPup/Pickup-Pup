@@ -4,21 +4,34 @@
  */
 
 [System.Serializable]
-public class SerializableDataCollection<T> {
+public class SerializableDataCollection<T> 
+{
+	#region Instance Accessors
 
-	public T[] Elements;
-	public int Count {
-		get {
+	public int Count 
+	{
+		get 
+		{
 			return Elements.Length;
 		}
 	}
-	public T this[int index] {
-		get {
-			if (index >= 0 && index < Count) {
+	public T this[int index] 
+	{
+		get
+		{
+			if(index >= 0 && index < Count) 
+			{
 				return Elements[index];
-			} else {
+			}
+			else 
+			{
 				return default(T);
 			}
 		}
 	}
+
+	#endregion
+
+	public T[] Elements;
+
 }

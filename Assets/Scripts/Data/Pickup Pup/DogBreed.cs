@@ -4,41 +4,99 @@
  */
 
 using System;
+using UnityEngine;
 
 [Serializable]
-public class DogBreed : DogTrait {
-	public string Breed;
-	public string Specialization;
-	public float TimeToReturn;
-	public int CostToAdopt;
-	public string CostToAdoptStr { 
-		get {
-			return formatCost(CostToAdopt);
+public class DogBreed : DogTrait 
+{
+	#region Static Accessors
+
+	public static DogBreed Default 
+	{
+		get 
+		{
+			DogBreed breed = new DogBreed(DogDatabase.Instance);
+			breed.breed = string.Empty;
+			return breed;
 		}
 	}
 
-	public CurrencyType ISpecialization {
-		get {
-			return (CurrencyType) Enum.Parse(typeof(CurrencyType), Specialization); 
+	#endregion
+
+	#region Instance Accessors
+
+	public string Breed 
+	{
+		get 
+		{
+			return this.breed;
+		}
+	}
+		
+	public string CostToAdoptStr 
+	{ 
+		get 
+		{
+			return formatCost(costToAdopt);
 		}
 	}
 
-	public DogBreed (DogDatabase data) : base(data) {}
-
-	public override string ToString () {
-		return string.Format ("[DogBreed:{0} Specialization:{1}]", Breed, ISpecialization);
-	}
-
-	public override bool Equals (object obj) {
-		if (obj is DogBreed) {
-			return (obj as DogBreed).Breed.Equals(Breed);
-		} else {
-			return base.Equals (obj);
+	public int CostToAdopt 
+	{
+		get 
+		{
+			return costToAdopt;
 		}
 	}
 
-	public override int GetHashCode () {
-		return Breed.GetHashCode();
+	public CurrencyType ISpecialization 
+	{
+		get 
+		{
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), specialization); 
+		}
 	}
+
+	#endregion
+
+	[SerializeField]
+	string breed;
+	[SerializeField]
+	string specialization;
+	[SerializeField]
+	float timeToReturn;
+	[SerializeField]
+	int costToAdopt;
+
+	public DogBreed(DogDatabase data) : base(data)
+	{
+		// NOTHING
+	}
+
+	#region System.Object Overrides
+
+	public override string ToString() 
+	{
+		return string.Format("[DogBreed:{0} Specialization:{1}]", breed, ISpecialization);
+	}
+
+	public override bool Equals(object obj) 
+	{
+		if(obj is DogBreed) 
+		{
+			return (obj as DogBreed).breed.Equals(breed);
+		} 
+		else
+		{
+			return base.Equals(obj);
+		}
+	}
+
+	public override int GetHashCode() 
+	{
+		return breed.GetHashCode();
+	}
+
+	#endregion
 
 }
