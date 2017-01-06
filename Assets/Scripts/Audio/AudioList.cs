@@ -10,78 +10,155 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AudioList {
-	Dictionary<AudioClip, AudioFile> clipToFileDictionary = new Dictionary<AudioClip, AudioFile>();
-	public bool AreEventsSubscribed = false;
-	public AudioList (AudioFile[] files) {
-		Files = files;
-		SubscribeEvents();
-	}
+public class AudioList 
+{
+	#region Instance Accessors
 
-	// Destructor for Garbage Collection:
-	~AudioList () {
-		UnsubscribeEvents();
-	}
-
-	public AudioList(){}
-
-	public AudioFile[] Files;
-	public AudioGroup[] Groups;
-
-	public AudioFile this[int index] {
-		get {
-			return Files[index];
+	public AudioFile this[int index] 
+	{
+		get
+		{
+			return files[index];
 		}
 	}
 
-	public int Length {
-		get {
-			if (Files == null) { 
+	public AudioFile[] Files 
+	{
+		get 
+		{
+			return this.files;
+		}
+	}
+		
+	public AudioGroup[] Groups
+	{
+		get 
+		{
+			return this.groups;
+		}
+	}
+
+	public int Length 
+	{
+		get 
+		{
+			if(files == null) 
+			{ 
 				return 0;
-			} else {
-				return Files.Length;
+			} 
+			else 
+			{
+				return files.Length;
 			}
 		}
 	}
 
-	public void PopulateGroups () {
-		foreach (AudioFile file in Files) {
-			foreach (AudioGroup group in Groups) {
-				if (ArrayUtil.Contains(file.Groups, group.Name)) {
+	public bool AreEventsSubscribed 
+	{
+		get;
+		private set;
+	}
+
+	#endregion
+
+	AudioData[] allData
+	{
+		get 
+		{
+			if (this._allData == null)
+			{
+				this._allData = ArrayUtil.Concat<AudioData>(files, groups);
+			}
+			return this._allData;
+		}
+	}
+
+	AudioData[] _allData;
+
+	[SerializeField]
+	AudioFile[] files;
+	[SerializeField]
+	AudioGroup[] groups;
+
+	Dictionary<AudioClip, AudioFile> clipToFileDictionary = new Dictionary<AudioClip, AudioFile>();
+
+	public AudioList(AudioFile[] files) 
+	{
+		this.files = files;
+		SubscribeEvents();
+	}
+
+	public AudioList()
+	{
+		// NOTHING
+	}
+		
+	// Destructor for Garbage Collection:
+	~AudioList()
+	{
+		unsubscribeEvents();
+	}
+
+	public void SetLoader(AudioLoader loader)
+	{
+		foreach(AudioData audio in allData) 
+		{
+			audio.SetLoader(loader);
+		}
+	}
+
+	public void PopulateGroups() 
+	{
+		foreach(AudioFile file in files) 
+		{
+			foreach(AudioGroup group in groups) 
+			{
+				if(ArrayUtil.Contains(file.Groups, group.Name)) 
+				{
 					group.AddFile(file);
 				}
 			}
 		}
 	}
 
-	public AudioType GetAudioType (AudioClip clip) {
-		return AudioUtil.AudioTypeFromString(clipToFileDictionary[clip].Type);
+	public AudioType GetAudioType(AudioClip clip) 
+	{
+		return clipToFileDictionary[clip].Type;
 	}
 
-	void ProcessAudioFileAccess (AudioFile file) {
-		AddToClipDictionary(file);
+	void processAudioFileAccess(AudioFile file) 
+	{
+		addToClipDictionary(file);
 	}
 
-	void AddToClipDictionary (AudioFile file) {
-		if (!clipToFileDictionary.ContainsKey(file.Clip)) {
+	void addToClipDictionary(AudioFile file) 
+	{
+		if(!clipToFileDictionary.ContainsKey(file.Clip)) 
+		{
 			clipToFileDictionary.Add(file.Clip, file);
 		}
 	}
 
-	public void SubscribeEvents () {
-		for (int i = 0; i < Files.Length; i++) {
-			Files[i].OnClipRequest += ProcessAudioFileAccess;
+	public void SubscribeEvents() 
+	{
+		for(int i = 0; i < files.Length; i++) 
+		{
+			files[i].OnClipRequest += processAudioFileAccess;
 		}
 		AreEventsSubscribed = true;
 	}
 
-	void UnsubscribeEvents () {
-		for (int i = 0; i < Files.Length; i++) {
-			Files[i].OnClipRequest -= ProcessAudioFileAccess;
+	void unsubscribeEvents() 
+	{
+		for(int i = 0; i < files.Length; i++) 
+		{
+			files[i].OnClipRequest -= processAudioFileAccess;
 		}
 	}
 
-	void HandleClipRequest (AudioFile file) {
-		ProcessAudioFileAccess(file);
+	void handleClipRequest(AudioFile file) 
+	{
+		processAudioFileAccess(file);
 	}		
+
 }

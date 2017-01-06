@@ -7,8 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeDisplay : MonoBehaviourExtended {
-
+public class HomeDisplay : MonoBehaviourExtended
+{
     const int NUM_OF_SHOWN_SLOTS = 10; // # of slots shown on main screen
 
     HomeController homeController;
@@ -42,7 +42,7 @@ public class HomeDisplay : MonoBehaviourExtended {
 
         for(int i = 0; i < NUM_OF_SHOWN_SLOTS; i++)
         {
-            if (i < numOfDogs)
+            if(i < numOfDogs)
             {
                 // TEMP USE FOR TESTING
                 // 12 total stock photos
@@ -56,4 +56,5 @@ public class HomeDisplay : MonoBehaviourExtended {
             }
         }
     }
+
 }

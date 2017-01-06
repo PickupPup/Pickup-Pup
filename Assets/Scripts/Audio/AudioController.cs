@@ -11,19 +11,40 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AudioController : Controller, IAudioController {
-	public bool isAudioListener = true;
+public class AudioController : Controller, IAudioController
+{
+	#region Static Accessors
 
-	// For controlling music
+	// Singleton implementation
+	public static AudioController Instance
+	{
+		get 
+		{
+			return _instance;
+		}
+	}
+
+	#endregion
+
+	private static AudioController _instance;
+
+	[SerializeField]
+	bool isAudioListener = false;
+	// Set to false to halt active coroutines
 	[SerializeField]
 	bool playMusicOnInit;
 	[SerializeField]
+	bool useCustomPaths = false;
+
+	[SerializeField]
 	string mainMusicEventName;
+	[SerializeField]
+	string customJSONPath;
+	[SerializeField]
+	string customAudioPath;
 
-	// Singleton implementation
-	public static AudioController Instance;
+	bool coroutinesActive = true;
 
-	const string path = "Audio/AudioList";
 	AudioList fileList;
 	AudioLoader loader;
 
@@ -36,58 +57,79 @@ public class AudioController : Controller, IAudioController {
 	Dictionary<string, List<AudioData>> stopEvents = new Dictionary<string, List<AudioData>>();
 
 	// Audio Control Patterns
-	RandomizedQueue<AudioFile> _swells;
-	RandomizedQueue<AudioFile> _sweeteners;
-	IEnumerator _swellCoroutine;
-	IEnumerator _sweetenerCoroutine;
+	RandomizedQueue<AudioFile> swells;
+	RandomizedQueue<AudioFile> sweeteners;
+	IEnumerator swellCoroutine;
+	IEnumerator sweetenerCoroutine;
 
 	// Backup channels that are dynamically created to allow SFX to finish without being cut off (empty when no SFX are playing)
 	List<AudioSource> tempSFXChannels = new List<AudioSource>();
 
-	// Set to false to halt active coroutines
-	bool _coroutinesActive = true;
 	[Header("Sweeteners")]
-	public float ShortestSweetenerPlayFrequenecy = 10;
-	public float LongestSweetenerPlayFrequenecy = 25;
+	[SerializeField]
+	float shortestSweetenerPlayFrequenecy = 10;
+	[SerializeField]
+	float longestSweetenerPlayFrequenecy = 25;
 
-	protected override void SetReferences () {
-		Init();
+	#region MonoBehaviourExtended Overrides
+
+	protected override void setReferences() 
+	{
+		base.setReferences();
+		init();
 	}
 
-	protected override void FetchReferences () {
-
+	protected override void cleanupReferences()
+	{
+		base.cleanupReferences();
+		unsubscribeEvents();
 	}
 
-	protected override void CleanupReferences () {
-		UnsubscribeEvents();
-	}
-
-	protected override void HandleNamedEvent (string eventName) {
-		if (playEvents.ContainsKey(eventName)) {
-			PlayAudioList(
-				playEvents[eventName]
-			);
+	protected override void handleNamedEvent(string eventName)
+	{
+		if(playEvents.ContainsKey(eventName)) 
+		{
+			playAudioList(playEvents[eventName]);
 		}
-		if (stopEvents.ContainsKey(eventName)) {
-			StopAudioList(
-				stopEvents[eventName]
-			);
+		if(stopEvents.ContainsKey(eventName)) 
+		{
+			stopAudioList(stopEvents[eventName]);
 		}
 	}
 
-	public void Play (AudioFile file) {
-		AudioSource source = GetChannel(file.Channel);
-		CheckMute(file, source);
+	// Uses C#'s delegate system
+	protected override void subscribeEvents() {
+		base.subscribeEvents();
+		EventController.Subscribe(handleAudioEvent);
+	}
+
+	protected override void unsubscribeEvents() {
+		base.unsubscribeEvents();
+		EventController.Unsubscribe(handleAudioEvent);
+	}
+
+	#endregion
+
+	public void Play(AudioFile file) 
+	{
+		AudioSource source = getChannel(file.Channel);
+		checkMute(file, source);
 		bool shouldResumeClip = false;
 		float clipTime = 0;
-		if (file.TypeAsEnum == AudioType.FX) {
-			if (source.clip != null && source.isPlaying) { 
-				if (!AudioUtil.IsMuted(AudioType.FX)) {
-					StartCoroutine(CompleteOnTempChannel(source.clip, source.time, source.volume));
+		if(file.Type == AudioType.FX) 
+		{
+			if(source.clip != null && source.isPlaying) 
+			{ 
+				if(!AudioUtil.IsMuted(AudioType.FX)) 
+				{
+					StartCoroutine(completeOnTempChannel(source.clip, source.time, source.volume));
 				}
 			}
-		} else if (file.TypeAsEnum == AudioType.Music) {
-			if (source.clip == file.Clip) {
+		}
+		else if(file.Type == AudioType.Music) 
+		{
+			if(source.clip == file.Clip) 
+			{
 				shouldResumeClip = true;
 				clipTime = source.time;
 			}
@@ -95,50 +137,59 @@ public class AudioController : Controller, IAudioController {
 		source.clip = file.Clip;
 		source.loop = file.Loop;
 		source.volume = file.Volumef;
-		if (shouldResumeClip) {
+		if(shouldResumeClip) 
+		{
 			source.time = clipTime;
 		}
 		source.Play();
 	}
 
-	public void Stop (AudioFile file) {
-		if (ChannelExists(file.Channel)) {
-			AudioSource source = GetChannel(file.Channel);
-			if (source.clip == file.Clip) {
+	public void Stop(AudioFile file) 
+	{
+		if(channelExists(file.Channel)) 
+		{
+			AudioSource source = getChannel(file.Channel);
+			if(source.clip == file.Clip) 
+			{
 				source.Stop();
 			}
 		}
 	}
 
-	public void ToggleFXMute () {
-		SettingsUtil.ToggleSFXMuted (
-			!SettingsUtil.SFXMuted
-		);
-		if (SettingsUtil.SFXMuted) {
+	public void ToggleFXMute() 
+	{
+		SettingsUtil.ToggleSFXMuted(!SettingsUtil.SFXMuted);
+		if(SettingsUtil.SFXMuted) 
+		{
 			StopAllCoroutines();
-			TeardownTempSFXChannels();
+			teardownTempSFXChannels();
 		}
 	}
 
-	public void ToggleMusicMute () {
-		SettingsUtil.ToggleMusicMuted (
-			!SettingsUtil.MusicMuted
-		);
+	public void ToggleMusicMute()
+	{
+		SettingsUtil.ToggleMusicMuted(!SettingsUtil.MusicMuted);
 	}
 
-	void CheckMute (AudioFile file, AudioSource source) {
-		source.mute = AudioUtil.IsMuted(file.TypeAsEnum);
+	void checkMute(AudioFile file, AudioSource source) 
+	{
+		source.mute = AudioUtil.IsMuted(file.Type);
 	}
 
 	// Checks if the AudioSource corresponding to the channel integer has been initialized
-	bool ChannelExists (int channelNumber) {
+	bool channelExists(int channelNumber) 
+	{
 		return channels.ContainsKey(channelNumber);
 	}
 
-	AudioSource GetChannel (int channelNumber) {
-		if (channels.ContainsKey(channelNumber)) {
+	AudioSource getChannel(int channelNumber) 
+	{
+		if(channels.ContainsKey(channelNumber)) 
+		{
 			return channels[channelNumber];
-		} else {
+		}
+		else
+		{
 			// Adds a new audiosource if channel is not present in dictionary
 			AudioSource newSource = gameObject.AddComponent<AudioSource>();
 			channels.Add(channelNumber, newSource);
@@ -146,163 +197,176 @@ public class AudioController : Controller, IAudioController {
 		}
 	}
 
-
 	// Must be colled to setup the class's functionality
-	void Init () {
+	void init() {
 		// Singleton method returns a bool depending on whether this object is the instance of the class
-		if (SingletonUtil.TryInit(ref Instance, this, gameObject, true)) {
-			loader = new AudioLoader(path);
+		if(SingletonUtil.TryInit(ref _instance, this, gameObject, true)) 
+		{
+			if(useCustomPaths)
+			{
+				loader = new AudioLoader(customJSONPath, customAudioPath);
+			}
+			else
+			{
+				loader = AudioLoader.Default;
+			}
 			fileList = loader.Load();
-			if (!fileList.AreEventsSubscribed) {
+			if(!fileList.AreEventsSubscribed) 
+			{
 				fileList.SubscribeEvents();
 			}
 			fileList.PopulateGroups();
-			InitFileDictionary(fileList);
-			AddAudioEvents();
-			SubscribeEvents();
-			if (isAudioListener) {
-				AddAudioListener();
+			initFileDictionary(fileList);
+			addAudioEvents();
+			subscribeEvents();
+			if(isAudioListener) 
+			{
+				addAudioListener();
 			}
-			PreloadFiles(fileList.Files);
-			// TODO: Enable after tracks have been delivered
-			// initCyclingAudio();
-			if (playMusicOnInit) {
+			preloadFiles(fileList.Files);
+			if(playMusicOnInit) 
+			{
 				playMainMusic();
 			}
 		}
 	}
 
-	void InitFileDictionary (AudioList audioFiles) {
-		for (int i = 0; i < audioFiles.Length; i++) {
-			data.Add (
-				audioFiles[i].Name,
-				audioFiles[i]
-			);
+	void initFileDictionary(AudioList audioFiles)
+	{
+		for(int i = 0; i < audioFiles.Length; i++) 
+		{
+			data.Add(audioFiles[i].Name, audioFiles[i]);
 		}
 	}
 
-	void AddAudioEvents () {
-		for (int i = 0; i < fileList.Length; i++) {
-			AddPlayEvents(fileList[i]);
-			AddStopEvents(fileList[i]);
+	void addAudioEvents() 
+	{
+		for(int i = 0; i < fileList.Length; i++) 
+		{
+			addPlayEvents(fileList[i]);
+			addStopEvents(fileList[i]);
 		}
-		AddGroupEvents(fileList);
+		addGroupEvents(fileList);
 	}
 
-	void AddGroupEvents (AudioList list) {
+	void addGroupEvents(AudioList list) 
+	{
 		AudioGroup[] groups = list.Groups;
-		for (int i = 0; i < groups.Length; i++) {
-			AddPlayEvents(groups[i]);
-			AddStopEvents(groups[i]);
+		for(int i = 0; i < groups.Length; i++) 
+		{
+			addPlayEvents(groups[i]);
+			addStopEvents(groups[i]);
 		}
 			
 	}
 
-	void AddPlayEvents (AudioData file) {
-		for (int j = 0; j < file.Events.Length; j++) {
-			if (playEvents.ContainsKey(file.Events[j])) {
+	void addPlayEvents(AudioData file) 
+	{
+		for(int j = 0; j < file.Events.Length; j++) 
+		{
+			if(playEvents.ContainsKey(file.Events[j])) 
+			{
 				playEvents[file.Events[j]].Add(file);
-			} else {
+			} 
+			else 
+			{
 				List<AudioData> files = new List<AudioData>();
 				files.Add(file);
-				playEvents.Add (
-					file.Events[j],
-					files
-				);
+				playEvents.Add(file.Events[j], files);
 			}
 		}
 	}
 
-	void AddStopEvents (AudioData file) {
-		for (int j = 0; j < file.StopEvents.Length; j++) {
-			if (stopEvents.ContainsKey(file.StopEvents[j])) {
+	void addStopEvents(AudioData file) 
+	{
+		for(int j = 0; j < file.StopEvents.Length; j++) 
+		{
+			if(stopEvents.ContainsKey(file.StopEvents[j])) 
+			{
 				stopEvents[file.StopEvents[j]].Add(file);
-			} else {
+			} 
+			else 
+			{
 				List<AudioData> files = new List<AudioData>();
 				files.Add(file);
-				stopEvents.Add (
-					file.StopEvents[j],
-					files
-				);
+				stopEvents.Add(file.StopEvents[j], files);
 			}
 		}
 	}
-
-	// Uses C#'s delegate system
-	protected override void SubscribeEvents () {
-		base.SubscribeEvents();
-		EventController.Subscribe(HandleAudioEvent);
-	}
-
-	protected void UnsubscribeEvents () {
-		base.UnsubscribeEvents();
-		EventController.Unsubscribe(HandleAudioEvent);
-	}
-
-	void playMainMusic () {
+		
+	void playMainMusic() {
 		EventController.Event(mainMusicEventName);
 	}
 
-	void HandleAudioEvent (AudioActionType actionType, AudioType audioType) {
-		if (AudioUtil.IsMuteAction(actionType)) {
-			HandleMuteAction (actionType, audioType);
+	void handleAudioEvent(AudioActionType actionType, AudioType audioType) 
+	{
+		if(AudioUtil.IsMuteAction(actionType)) 
+		{
+			handleMuteAction(actionType, audioType);
 		}
 	}
 
-	void HandleMuteAction (AudioActionType actionType, AudioType audioType) {
-		foreach (AudioSource source in channels.Values) {
-			if (fileList.GetAudioType(source.clip) == audioType) {
+	void handleMuteAction(AudioActionType actionType, AudioType audioType) 
+	{
+		foreach(AudioSource source in channels.Values) 
+		{
+			if(fileList.GetAudioType(source.clip) == audioType) 
+			{
 				source.mute = AudioUtil.MutedBoolFromAudioAction(actionType);
 			}
 		}
 	}
 
-	void PlayAudioList (List<AudioData> data) {
-		for (int i = 0; i < data.Count; i++) {
+	void playAudioList(List<AudioData> data) 
+	{
+		for(int i = 0; i < data.Count; i++) 
+		{
 			Play(data[i].GetNextFile());
 		}
 	}
 
-	void StopAudioList (List<AudioData> data) {
-		for (int i = 0; i < data.Count; i++) {
-			if (data[i].HasCurrentFile()) {
+	void stopAudioList(List<AudioData> data) 
+	{
+		for(int i = 0; i < data.Count; i++) 
+		{
+			if(data[i].HasCurrentFile()) 
+			{
 				Stop(data[i].GetCurrentFile());
 			}
 		}
 	}
 
-	void AddAudioListener () {
+	void addAudioListener() 
+	{
 		gameObject.AddComponent<AudioListener>();
 	}
 
 	// Used to loop through lists of tracks in pseudo-random order
-	void startTrackCycling () {
-		_sweetenerCoroutine = cycleTracksFrequenecyRange(
-			_sweeteners,
-			ShortestSweetenerPlayFrequenecy,
-			LongestSweetenerPlayFrequenecy
+	void startTrackCycling()
+	{
+		sweetenerCoroutine = cycleTracksFrequenecyRange
+		(
+			sweeteners,
+			shortestSweetenerPlayFrequenecy,
+			longestSweetenerPlayFrequenecy
 		);
 
-		_swellCoroutine = cycleTracksContinuous (
-			_swells
-		);
-
-		startCoroutines(
-			_sweetenerCoroutine,
-			_swellCoroutine
-		);
+		swellCoroutine = cycleTracksContinuous(swells);
+		startCoroutines(sweetenerCoroutine, swellCoroutine);
 	}
 
-	void initCyclingAudio () {
-		//TODO: Init Queue's with sound files once they're delivered
-		_sweeteners = new RandomizedQueue<AudioFile>();
-		_swells = new RandomizedQueue<AudioFile>();
+	void initCyclingAudio()
+	{
+		sweeteners = new RandomizedQueue<AudioFile>();
+		swells = new RandomizedQueue<AudioFile>();
 		startTrackCycling();
 	}
 
 	// Plays audio files back to back
-	IEnumerator cycleTracksContinuous (RandomizedQueue<AudioFile> files) {
-		while (_coroutinesActive) {
+	IEnumerator cycleTracksContinuous(RandomizedQueue<AudioFile> files) 
+	{
+		while(coroutinesActive) 
+		{
 			AudioFile nextTrack = files.Cycle();
 			Play(nextTrack);
 			yield return new WaitForSeconds(nextTrack.Clip.length);
@@ -310,43 +374,37 @@ public class AudioController : Controller, IAudioController {
 	}
 
 	// Plays audio files on a set frequenecy
-	IEnumerator cycleTracksFrequenecy (RandomizedQueue<AudioFile> files, float frequenecy) {
-		while (_coroutinesActive) {
+	IEnumerator cycleTracksFrequenecy(RandomizedQueue<AudioFile> files, float frequenecy) 
+	{
+		while(coroutinesActive) 
+		{
 			Play(files.Cycle());
 			yield return new WaitForSeconds(frequenecy);
 		}
 	}
 
 	// Coroutine that varies the frequency with which it plays audio files
-	IEnumerator cycleTracksFrequenecyRange (RandomizedQueue<AudioFile> files, float minFrequency, float maxFrequency) {
-		while (_coroutinesActive) {
+	IEnumerator cycleTracksFrequenecyRange(RandomizedQueue<AudioFile> files, float minFrequency, float maxFrequency) 
+	{
+		while(coroutinesActive) 
+		{
 			Play(files.Cycle());
-
-			yield return new WaitForSeconds(
-				UnityEngine.Random.Range(
-					minFrequency,
-					maxFrequency
-				)
-			);
+			yield return new WaitForSeconds(UnityEngine.Random.Range(minFrequency, maxFrequency));
 		}
 	}
-
-
-	// Starts an arbitrary amount of coroutines
-	void startCoroutines (params IEnumerator[] coroutines) {
-		for (int i = 0; i < coroutines.Length; i++) {
-			StartCoroutine(coroutines[i]);
-		}
-	}
-
-	IEnumerator CompleteOnTempChannel (AudioClip clip, float timeStamp, float volume) {
+		
+	IEnumerator completeOnTempChannel(AudioClip clip, float timeStamp, float volume) 
+	{
 		AudioSource tempChannel = null;
 		AudioType clipType = fileList.GetAudioType(clip);
 		float remainingTime = clip.length - timeStamp;
-		try {
-			if (remainingTime > 0) {
+		try 
+		{
+			if(remainingTime > 0) 
+			{
 				tempChannel = gameObject.AddComponent<AudioSource>();
-				if (clipType == AudioType.FX) {
+				if(clipType == AudioType.FX) 
+				{
 					tempSFXChannels.Add(tempChannel);
 				}
 				tempChannel.clip = clip;
@@ -354,12 +412,16 @@ public class AudioController : Controller, IAudioController {
 				tempChannel.volume = volume;
 				tempChannel.Play();
 			}
-		} catch {
+		} 
+		catch 
+		{
 			Debug.LogFormat("Seek time is this: {0} and the clip length is this: {1}", timeStamp, clip.length);
 		}
 		yield return new WaitForSeconds(remainingTime);
-		if (tempChannel != null) {
-			if (clipType == AudioType.FX) {
+		if(tempChannel != null) 
+		{
+			if(clipType == AudioType.FX) 
+			{
 				tempSFXChannels.Remove(tempChannel);
 			}
 			Destroy(tempChannel);
@@ -367,15 +429,19 @@ public class AudioController : Controller, IAudioController {
 	}
 
 	// Preloads certain audio files 
-	void PreloadFiles (params AudioFile[] audioFiles) {
-		for (int i = 0; i < audioFiles.Length; i++) {
-			StartCoroutine(PreloadAudioClip(audioFiles[i]));
+	void preloadFiles(params AudioFile[] audioFiles) 
+	{
+		for(int i = 0; i < audioFiles.Length; i++) 
+		{
+			StartCoroutine(preloadAudioClip(audioFiles[i]));
 		}
 	}
 
 	// Instantly kills temp channels (standard use is for mute toggled on)
-	void TeardownTempSFXChannels () {
-		for (int i = 0; i < tempSFXChannels.Count; i++) {
+	void teardownTempSFXChannels() 
+	{
+		for(int i = 0; i < tempSFXChannels.Count; i++) 
+		{
 			tempSFXChannels[i].Stop();
 			Destroy(tempSFXChannels[i]);
 		}
@@ -383,32 +449,28 @@ public class AudioController : Controller, IAudioController {
 	}
 
 	// Asynchronous loading to improve game load times
-	IEnumerator PreloadAudioClip (AudioFile audioFile) {
-		ResourceRequest request = AudioLoader.GetClipAsync(audioFile.Name);
-		while (!request.isDone) {
-			if (audioFile.ClipIsSet()) {
+	IEnumerator preloadAudioClip(AudioFile audioFile) 
+	{
+		ResourceRequest request = loader.GetClipAsync(audioFile.Name);
+		while(!request.isDone) 
+		{
+			if(audioFile.ClipIsSet()) 
+			{
 				yield break;
 			}
 			yield return new WaitForEndOfFrame();
 		}
-		if (!audioFile.ClipIsSet()) {
-			try {
+		if(!audioFile.ClipIsSet()) 
+		{
+			try 
+			{
 				audioFile.SetClip((AudioClip) request.asset);
-			} catch (Exception e) {
-				Debug.LogError(e + ": " + request.asset + " is not a valid AudioClip");
+			} 
+			catch(Exception e) 
+			{
+				Debug.LogError(e + ": " + audioFile.Name + " is not a valid AudioClip");
 			}
 		}
 	}
 
-	#region JSON Deserialization
-
-	public void DeserializeFromJSON (string jsonText) {
-		throw new System.NotImplementedException();
-	}
-
-	public void DeserializeFromJSONAtPath (string jsonPath) {
-		throw new System.NotImplementedException();
-	}
-
-	#endregion
 }

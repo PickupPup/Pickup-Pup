@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 public class RandomListBuffer<T> : RandomBuffer<T>
 {
-
 	protected override IList<T> source
 	{
 		get

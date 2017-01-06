@@ -6,87 +6,145 @@
 using UnityEngine;
 
 [System.Serializable]
-public class DogDescriptor : PPDescriptor {
+public class DogDescriptor : PPDescriptor 
+{
 	const float DEFAULT_TIME_TO_COLLECT = 10f;
 
-	public bool IsLinkedToDog {
-		get {
+	#region Instance Accessors
+
+	public bool IsLinkedToDog 
+	{
+		get 
+		{
 			return linkedDog != null;
 		}
 	}
+		
+	public string Name 
+	{
+		get 
+		{
+			return name;
+		}
+	}
 
-	Dog linkedDog;
-	public string Name;
-	public int Age;
-	public string Color;
-	public bool IsOutCollecting = false;
-	public float RemainingTimeScouting {
-		get {
-			if (IsLinkedToDog) {
+	public string CostToAdoptStr 
+	{
+		get 
+		{
+			if(hasSpecialCost) 
+			{
+				return formatCost(modCost);
+			} 
+			else 
+			{
+				return Breed.CostToAdoptStr;
+			}
+		}
+	}
+
+	public int Age 
+	{
+		get 
+		{
+			return age;
+		}
+	}
+
+	public int CostToAdopt 
+	{
+		get 
+		{
+			if(hasSpecialCost) 
+			{
+				return modCost;
+			} 
+			else 
+			{
+				return Breed.CostToAdopt;
+			}
+		}
+	}
+
+	public float RemainingTimeScouting
+	{
+		get 
+		{
+			if(IsLinkedToDog) 
+			{
 				return linkedDog.RemainingTimeScouting;
-			} else {
+			}
+			else 
+			{
 				return default(float);
 			}
 		}
 	}
-	public string Breed;
-    public int SpriteID;
-	public int CostToAdopt {
-		get {
-			if (hasSpecialCost) {
-				return ModCost;
-			} else {
-				return IBreed.CostToAdopt;
-			}
-		}
-	}
-	public string CostToAdoptStr {
-		get {
-			if (hasSpecialCost) {
-				return formatCost(ModCost);
-			} else {
-				return IBreed.CostToAdoptStr;
-			}
+
+	public DogBreed Breed 
+	{
+		get 
+		{
+			return data.GetBreed(breed);
 		}
 	}
 
-	bool hasSpecialCost {
-		get {
-			return ModCost != 0;
+	public Color Color 
+	{
+		get 
+		{
+			return parseHexColor(this.color);
 		}
 	}
-	public int ModCost;
 
+	#endregion
+
+
+	bool hasSpecialCost 
+	{
+		get 
+		{
+			return modCost != 0;
+		}
+	}
+
+	[SerializeField]
+	string name;
+	[SerializeField]
+	string color;
+	[SerializeField]
+	string breed;
+	[SerializeField]
+	int modCost;
+	[SerializeField]
+	int age;
+
+	Dog linkedDog;
 	DogBreed _iBreed;
-	public DogBreed IBreed {
-		get {
-			return data.GetBreed(Breed);
-		}
-	}
-	public Color IColor {
-		get {
-			return parseHexColor(Color);
-		}
-	}
 
-	public DogDescriptor (DogDatabase data) : base(data) {}
-
-	public static DogDescriptor Default () {
+	public static DogDescriptor Default() 
+	{
 		DogDescriptor descriptor = new DogDescriptor(DogDatabase.Instance);
-		descriptor.Name = string.Empty;
-		descriptor.Age = 0;
-		descriptor.Breed = string.Empty;
-		descriptor.Color = BLACK_HEX;
-        descriptor.SpriteID = 0;
-		descriptor.IsOutCollecting = false;
+		descriptor.name = string.Empty;
+		descriptor.age = 0;
+		descriptor.breed = string.Empty;
+		descriptor.color = BLACK_HEX;
 		return descriptor;
 	}
 
-	public void LinkToDog (Dog dog) {
+	public DogDescriptor(DogDatabase data) : base(data) 
+	{
+		// NOTHING
+	}
+
+	public void LinkToDog(Dog dog) 
+	{
 		this.linkedDog = dog;
 	}
 
-	public void UnlinkFromDog () {
+	public void UnlinkFromDog() 
+	{
 		this.linkedDog = null;
 	}
+
 }

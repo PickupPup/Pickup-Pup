@@ -4,24 +4,36 @@
  */
 
 [System.Serializable]
-public class Database<T> where T : class, new() {
-	static T _instance;
-	public static T Instance {	
-		get {
-			if (_instance == null) {
+public abstract class Database<T> : ResourceLoader where T : class, new()
+{
+	#region Static Accessors
+
+	public static T Instance 
+	{	
+		get 
+		{
+			if(_instance == null) 
+			{
 				_instance = new T();
 			}
 			return _instance;
 		}
 	}
 
-	public Database() {}
+	#endregion
 
-	public virtual void Initialize() {
-		// NOTHING
+	static T _instance;
+
+	protected Database() 
+	{
+		// NOTHING	
 	}
 
-	public static void AssignInstance (T instance) {
+	public abstract void Initialize();
+
+	public static void AssignInstance(T instance)
+	{
 		_instance = instance;
 	}
+
 }

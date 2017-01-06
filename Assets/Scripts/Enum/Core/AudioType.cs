@@ -3,8 +3,9 @@
  * Description: Enum for types of AudioFiles
  */
 
-public enum AudioType {
+public enum AudioType 
+{
 	Music,
 	FX,
-	VO
+	VO,
 }

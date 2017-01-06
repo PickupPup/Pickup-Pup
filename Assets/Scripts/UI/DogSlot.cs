@@ -12,7 +12,6 @@ public class DogSlot : MonoBehaviourExtended
 {
     protected DogDescriptor dog;
 
-    [SerializeField]
 	bool setBackground = true;
 
     Image backgroundImage;
