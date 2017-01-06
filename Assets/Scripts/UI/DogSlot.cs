@@ -23,14 +23,17 @@ public class DogSlot : MonoBehaviourExtended
 		this.dog = dog;
 
 		Image[] images = GetComponentsInChildren<Image>();
-		if(images.Length == 2 && setBackground) 
+		if(images.Length >= 2) 
 		{
-			backgroundImage = images[0];
-	        dogImage = images[1];
-		} 
-		else if(images.Length == 1 || !setBackground) 
-		{
-			dogImage = images[0];
+            if (setBackground)
+            {
+                backgroundImage = images[0];
+                dogImage = images[1];
+            }
+	        else
+            {
+                dogImage = images[0];
+            }
 		}
 
 		setSlot(this.dog, dogSprite, backgroundSprite);
