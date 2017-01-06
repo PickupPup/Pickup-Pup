@@ -9,4 +9,5 @@ public enum CurrencyType
     Coins,
 	Time,
     None,
+
 }

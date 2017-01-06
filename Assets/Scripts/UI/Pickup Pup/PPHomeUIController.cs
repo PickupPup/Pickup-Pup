@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class PPHomeUIController : PPUIController 
 {
-
 	[SerializeField]
     CurrencyDisplay dogFoodDisplay;
 	[SerializeField]
@@ -21,8 +20,8 @@ public class PPHomeUIController : PPUIController
 		base.fetchReferences();
 		EventController.Event(PPEvent.LoadHome);
         // Set Currency Displays
-        dogFoodDisplay.SetCurrency(ppGameController.DogFood);
-        coinDisplay.SetCurrency(ppGameController.Coins);
+        dogFoodDisplay.SetCurrency(gameController.DogFood);
+        coinDisplay.SetCurrency(gameController.Coins);
     }
 
 	#endregion

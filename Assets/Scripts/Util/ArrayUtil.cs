@@ -10,7 +10,6 @@ using System.Collections.Generic;
 
 public static class ArrayUtil 
 {
-
 	// Removes empty strings from an Array of strings
 	// Useful for text reading
 	public static string [] RemoveEmptyElements(string [] original) 
@@ -67,7 +66,7 @@ public static class ArrayUtil
 	public static string ToString<T>(T[] source) 
 	{
 		string arrayAsString = string.Empty;
-		for (int i = 0; i < source.Length; i++)
+		for(int i = 0; i < source.Length; i++)
 		{
 			arrayAsString += source[i] + ",\n";
 		}
@@ -88,12 +87,12 @@ public static class ArrayUtil
 	}
 
 	// Returns an array with the designated element removed
-	public static T Remove<T> (ref T[]source, T element) where T : IComparable 
+	public static T Remove<T>(ref T[]source, T element) where T : IComparable
 	{
 		int index = IndexOf(source, element);
 		T[] modified = new T[source.Length-1];
-		Array.ConstrainedCopy (source, 0, modified, 0, index-1);
-		Array.ConstrainedCopy (source, index + 1, modified, index, source.Length - index - 1);
+		Array.ConstrainedCopy(source, 0, modified, 0, index-1);
+		Array.ConstrainedCopy(source, index + 1, modified, index, source.Length - index - 1);
 		return element;
 	}
 

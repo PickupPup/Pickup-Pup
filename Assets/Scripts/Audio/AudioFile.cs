@@ -15,23 +15,47 @@ public class AudioFile : AudioData, IAudioFile
 
 	#region IAudioFile Interface 
 
+	public bool Loop 
+	{
+		get 
+		{
+			return this.loop;
+		}
+	}
+		
+	public string[] Groups
+	{
+		get
+		{
+			return this.groups;
+		}
+	}
+
+	public int Channel
+	{
+		get 
+		{
+			return this.channel;
+		}
+	}
+
 	public AudioClip Clip 
 	{
 		get 
 		{
 			if(_clip == null) {
-				_clip = AudioLoader.GetClip(Name);
+				_clip = loader.GetClip(Name);
 				callOnClipRequest();
 			}
 			return _clip;
 		}
 	}
 
-	public AudioType TypeAsEnum 
+	public AudioType Type 
 	{
 		get 
 		{
-			return AudioUtil.AudioTypeFromString(Type);
+			return AudioUtil.AudioTypeFromString(type);
 		}
 	}
 
@@ -56,12 +80,17 @@ public class AudioFile : AudioData, IAudioFile
 
 	#endregion
 
-	public bool Loop;
-	public int Volume;
-	public int Channel;
-	public string[] Groups;
 	public delegate void ClipRequestAction(AudioFile file);
 	public event ClipRequestAction OnClipRequest;
+
+	[SerializeField]
+	bool loop;
+	[SerializeField]
+	int volume;
+	[SerializeField]
+	int channel;
+	[SerializeField]
+	string[] groups;
 
 	AudioClip _clip;
 
@@ -95,9 +124,9 @@ public class AudioFile : AudioData, IAudioFile
 			Name, 
 			ArrayUtil.ToString(Events),
 			ArrayUtil.ToString(StopEvents),
-			Loop, 
-			Type, 
-			Channel);
+			loop, 
+			type, 
+			channel);
 	}
 
 	#endregion
@@ -116,7 +145,7 @@ public class AudioFile : AudioData, IAudioFile
 		
 	public float GetVolume() 
 	{
-		return percentToDecimal(Volume);
+		return percentToDecimal(volume);
 	}
 
 	#endregion

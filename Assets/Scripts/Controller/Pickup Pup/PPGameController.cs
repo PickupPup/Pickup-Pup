@@ -53,7 +53,7 @@ public class PPGameController : GameController
 	public DogDatabase Data
 	{
 		get {
-			return data; 
+			return database; 
 		}
 	}
 
@@ -61,7 +61,7 @@ public class PPGameController : GameController
 	{
 		get 
 		{ 
-			return save.Coins; 
+			return dataController.Coins; 
 		}
 	}
 
@@ -69,7 +69,7 @@ public class PPGameController : GameController
 	{
 		get 
 		{ 
-			return save.DogFood; 
+			return dataController.DogFood; 
 		}
 	}
 
@@ -85,37 +85,37 @@ public class PPGameController : GameController
 
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
-	DogDatabase data;
-	PPDataController save;
+	DogDatabase database;
+	PPDataController dataController;
 
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences() 
 	{
 		base.setReferences();
-		data = parseDatabase();
+		database = parseDatabase();
 		tuning = parseTuning();
-		data.Initialize();
+		database.Initialize();
 	}
 
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		save = PPDataController.GetInstance;
-		save.SetFilePath(SAVE_FILE_PATH);
-		save.LoadGame();
+		dataController = PPDataController.GetInstance;
+		dataController.SetFilePath(SAVE_FILE_PATH);
+		dataController.LoadGame();
 	}
 		
 	#endregion
 
 	public void ChangeCoins(int deltaCoins) 
 	{
-		save.ChangeCoins(deltaCoins);
+		dataController.ChangeCoins(deltaCoins);
 	}
 
 	public void ChangeFood(int deltaFood) 
 	{
-		save.ChangeFood(deltaFood);
+		dataController.ChangeFood(deltaFood);
 	}
 		
 	public bool TrySendDogToScout(Dog dog) 

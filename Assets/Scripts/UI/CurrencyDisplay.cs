@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CurrencyDisplay : UIElement {
-
     Currency currency;
 
     /// <summary>
@@ -27,4 +26,5 @@ public class CurrencyDisplay : UIElement {
     {
         text.text = currency.Amount.ToString();
     }    
+
 }

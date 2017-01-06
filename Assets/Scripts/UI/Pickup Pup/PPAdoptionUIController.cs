@@ -6,10 +6,9 @@
 using UnityEngine;
 
 public class PPAdoptionUIController : PPUIController 
-{
-	
+{	
 	DogSlot[] availableDogPortraits;
-	DogDatabase data;
+	DogDatabase database;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -22,9 +21,9 @@ public class PPAdoptionUIController : PPUIController
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		data = DogDatabase.Instance;
-		data.Initialize();
-		populateAvailableDogs(data);
+		database = DogDatabase.Instance;
+		database.Initialize();
+		populateAvailableDogs(database);
 	}
 
 	#endregion
@@ -34,7 +33,7 @@ public class PPAdoptionUIController : PPUIController
 		DogDescriptor[] dogs = data.RandomDogList(availableDogPortraits.Length);
 		for(int i = 0; i < dogs.Length; i++) 
 		{
-			availableDogPortraits[i].Init(dogs[i], data.GetDogBreedSprite(dogs[i].IBreed));
+			availableDogPortraits[i].Init(dogs[i], data.GetDogBreedSprite(dogs[i].Breed));
 		}
 	}
 

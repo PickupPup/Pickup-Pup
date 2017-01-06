@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Sets UI element's sprite to a new one from the sampling
+ * Description: Sets UI element's sprite to a new one from the sampling
  */
 
 using UnityEngine;
@@ -8,10 +8,9 @@ using UnityEngine;
 [CreateAssetMenuAttribute(fileName = "RandomSprite", menuName = "UIEvent/RandomSprite", order = 2)]
 public class UIRandomSpriteAction : UIAction 
 {
-
 	#region UIAction Overrides
 
-	public override void Execute (UIElement target)
+	public override void Execute(UIElement target)
 	{
 		target.RandomSprite();
 	}

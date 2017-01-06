@@ -6,7 +6,6 @@
 [System.Serializable]
 public class SerializableDataCollection<T> 
 {
-
 	#region Instance Accessors
 
 	public int Count 

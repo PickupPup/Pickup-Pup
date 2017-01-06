@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Testubg data serialization
+ * Description: Testing data serialization
  */
 
 using UnityEngine;
@@ -9,8 +9,7 @@ using System.IO;
 
 public class DataPersistenceTest : MonoBehaviourExtended 
 {
-
-	PPDataController save;
+	PPDataController dataController;
 
 	[SerializeField]
 	Text coinText;
@@ -20,26 +19,26 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences ();
-		save = PPDataController.GetInstance;
-		save.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
-		save.SubscribeToCoinsChange(updateCoinsText);
-		save.SubscribeToFoodChange(updateFoodText);
-		save.LoadGame();
+		dataController = PPDataController.GetInstance;
+		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
+		dataController.SubscribeToCoinsChange(updateCoinsText);
+		dataController.SubscribeToFoodChange(updateFoodText);
+		dataController.LoadGame();
 	}
 
 	public void ChangeCoins(int deltaCoins) 
 	{
-		save.ChangeCoins(deltaCoins);
+		dataController.ChangeCoins(deltaCoins);
 	}
 		
 	public void ChangeFood(int deltaFood) 
 	{
-		save.ChangeFood(deltaFood);
+		dataController.ChangeFood(deltaFood);
 	}
 		
 	public void ResetData() 
 	{
-		save.Reset();
+		dataController.Reset();
 	}
 
 	void updateCoinsText(int coins) 

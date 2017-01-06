@@ -4,33 +4,69 @@
  */
 
 using System;
+using UnityEngine;
 
 [Serializable]
 public class DogBreed : DogTrait 
 {
+	#region Static Accessors
 
-	#region Instance Accessors
-
-	public string CostToAdoptStr { 
-		get 
-		{
-			return formatCost(CostToAdopt);
-		}
-	}
-	public CurrencyType ISpecialization 
+	public static DogBreed Default 
 	{
 		get 
 		{
-			return (CurrencyType) Enum.Parse(typeof(CurrencyType), Specialization); 
+			DogBreed breed = new DogBreed(DogDatabase.Instance);
+			breed.breed = string.Empty;
+			return breed;
 		}
 	}
 
 	#endregion
 
-	public string Breed;
-	public string Specialization;
-	public float TimeToReturn;
-	public int CostToAdopt;
+	#region Instance Accessors
+
+	public string Breed 
+	{
+		get 
+		{
+			return this.breed;
+		}
+	}
+		
+	public string CostToAdoptStr 
+	{ 
+		get 
+		{
+			return formatCost(costToAdopt);
+		}
+	}
+
+	public int CostToAdopt 
+	{
+		get 
+		{
+			return costToAdopt;
+		}
+	}
+
+	public CurrencyType ISpecialization 
+	{
+		get 
+		{
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), specialization); 
+		}
+	}
+
+	#endregion
+
+	[SerializeField]
+	string breed;
+	[SerializeField]
+	string specialization;
+	[SerializeField]
+	float timeToReturn;
+	[SerializeField]
+	int costToAdopt;
 
 	public DogBreed(DogDatabase data) : base(data)
 	{
@@ -41,14 +77,14 @@ public class DogBreed : DogTrait
 
 	public override string ToString() 
 	{
-		return string.Format ("[DogBreed:{0} Specialization:{1}]", Breed, ISpecialization);
+		return string.Format ("[DogBreed:{0} Specialization:{1}]", breed, ISpecialization);
 	}
 
 	public override bool Equals(object obj) 
 	{
 		if(obj is DogBreed) 
 		{
-			return (obj as DogBreed).Breed.Equals(Breed);
+			return (obj as DogBreed).breed.Equals(breed);
 		} 
 		else
 		{
@@ -58,7 +94,7 @@ public class DogBreed : DogTrait
 
 	public override int GetHashCode() 
 	{
-		return Breed.GetHashCode();
+		return breed.GetHashCode();
 	}
 
 	#endregion

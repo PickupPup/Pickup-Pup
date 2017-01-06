@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class PPSceneController : SingletonController<PPSceneController> 
 {
-
 	#region Instance Accessors
 
 	public PPScene CurrentScene 
@@ -41,4 +40,5 @@ public enum PPScene
 {
 	Start,
 	Home,
+
 }

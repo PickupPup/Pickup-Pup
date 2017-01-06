@@ -8,7 +8,6 @@ using System.Collections;
 
 public class UIEventListener : MonoBehaviourExtended 
 {
-
 	[SerializeField]
 	UIEventHandler[] handlers;
 	UIElement element;

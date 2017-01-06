@@ -1,9 +1,8 @@
-﻿// from: http://www.robertpenner.com/easing/
-
-// Removed animation stuff - not needed for Unity.
-// Fixed documentation erroneously calling param "c" Final value. If c == 0 then fuck all happens. Therefore:
-// c is not the final value and the person who wrote that it is, happens to be an asshole that wasted me an hour
-// figuring out why.
+﻿/*
+ * Author: EXTERNAL
+ * Description: Easing math that can be used for varied lerp effects (apply to time param)
+ * Source: http://www.robertpenner.com/easing/
+ */
 
 using System;
 
@@ -12,8 +11,7 @@ using System;
 /// Robert Penner's easing equations for interpolation over a specified duration.
 /// </summary>
 public class Easing
-{
-	
+{	
 	/// <summary>
 	/// Linear change in value.
 	/// Useful when assigning delegates to control animation. 

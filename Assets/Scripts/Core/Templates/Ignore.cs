@@ -5,7 +5,6 @@
 
 public class Ignore : MonoBehaviourExtended 
 {
-
 	#region Instance Accessors
 
 	public bool ColorChange 

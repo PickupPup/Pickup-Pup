@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Game save
+ * Description: Game save
  */
 
 [System.Serializable]

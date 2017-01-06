@@ -1,6 +1,6 @@
 /*
  * Author: Isaiah Mann
- * Description: Provides generic behaviour for a singleton MonoBehaviour class
+ * Description: Provides generic behaviour for a singleton MonoBehaviourExtended class
  */
 
 using UnityEngine;
@@ -9,7 +9,6 @@ using System.Reflection;
 
 public class SingletonController<T> : Controller where T : class 
 {
-
 	#region Static Accessors
 
 	public static T Instance 

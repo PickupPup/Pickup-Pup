@@ -5,29 +5,28 @@
 
 public class PPUIController : MonoBehaviourExtended 
 {
-
-	protected PPSceneController scene;
-    protected PPGameController ppGameController;
+	protected PPSceneController sceneController;
+    protected PPGameController gameController;
 
 	#region MonoBehaviourExtended Overrides
 
     protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		scene = PPSceneController.Instance;
-        ppGameController = (PPGameController) PPGameController.Instance;
+		sceneController = PPSceneController.Instance;
+		gameController = PPGameController.GetInstance;
     }
 
 	#endregion
 
     public void LoadStart() 
 	{
-		scene.LoadStart();
+		sceneController.LoadStart();
 	}
 
 	public void LoadHome()
 	{
-		scene.LoadHome();
+		sceneController.LoadHome();
 	}
 
 }

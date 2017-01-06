@@ -8,17 +8,20 @@ using UnityEngine;
 [CreateAssetMenuAttribute(fileName = "OpacityLerp", menuName = "UIEvent/OpacityLerp", order = 3)]
 public class UIOpacityLerpAction : UIAction 
 {
-	
-	public float StartOpacity;
-	public float EndOpacity;
-	public float Time;
-	public bool Loop;
+	[SerializeField]
+	float startOpacity;
+	[SerializeField]
+	float endOpacity;
+	[SerializeField]
+	float time;
+	[SerializeField]
+	bool loop;
 
 	#region UIAction Overrides
 
 	public override void Execute(UIElement target) 
 	{
-		target.StartOpacityLerp(StartOpacity, EndOpacity, Time, Loop);
+		target.StartOpacityLerp(startOpacity, endOpacity, time, loop);
 	}
 
 	#endregion

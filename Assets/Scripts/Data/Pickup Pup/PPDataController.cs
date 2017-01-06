@@ -7,11 +7,10 @@ using System.Collections.Generic;
 
 public class PPDataController : DataController 
 {
-
 	#region Static Accessors
 
 	// Casts the singleton from the superclass:
-	public static PPDataController GetInstance 
+	public static PPDataController GetInstance
 	{
 		get 
 		{
@@ -27,7 +26,7 @@ public class PPDataController : DataController
 	{
 		get 
 		{
-			return currenGame.AdoptedDogs;
+			return currentGame.AdoptedDogs;
 		}
 	}
 
@@ -43,7 +42,7 @@ public class PPDataController : DataController
 	{
 		get 
 		{
-			return currenGame.Coins;
+			return currentGame.Coins;
 		}
 	}
 
@@ -51,13 +50,13 @@ public class PPDataController : DataController
 	{
 		get 
 		{
-			return currenGame.Food;
+			return currentGame.Food;
 		}
 	}
 
 	#endregion
 
-	PPGameSave currenGame;
+	PPGameSave currentGame;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
 
@@ -89,11 +88,10 @@ public class PPDataController : DataController
 		
 	public PPGameSave LoadGame()
 	{
-		currenGame = Load() as PPGameSave;
-		return currenGame;
+		currentGame = Load() as PPGameSave;
+		return currentGame;
 	}
-
-
+		
 	#region DataController Overrides
 
 	protected override SerializableData getDefaultFile() 
@@ -105,8 +103,8 @@ public class PPDataController : DataController
 	{
 		base.Reset();
 		LoadGame();
-		callOnCoinsChange(currenGame.Coins.Amount);
-		callOnFoodChange(currenGame.Food.Amount);
+		callOnCoinsChange(currentGame.Coins.Amount);
+		callOnFoodChange(currentGame.Food.Amount);
 	}
 
 	#endregion
@@ -121,7 +119,7 @@ public class PPDataController : DataController
 
 	protected void callOnFoodChange(int food)
 	{
-		if (onFoodChange != null) 
+		if(onFoodChange != null) 
 		{
 			onFoodChange(food);
 		}
@@ -129,31 +127,31 @@ public class PPDataController : DataController
 
 	protected PPGameSave getCurrentGame() 
 	{
-		return currenGame;
+		return currentGame;
 	}
 		
 	public bool HasCurrency(CurrencyType type) 
 	{
-		return currenGame.HasCurrency(type);
+		return currentGame.HasCurrency(type);
 	}
 
 	public void ChangeCoins(int deltaCoins) 
 	{
-		this.currenGame.ChangeCoins(deltaCoins);
+		this.currentGame.ChangeCoins(deltaCoins);
 		callOnCoinsChange(Coins.Amount);
 		SaveGame();
 	}
 
 	public void ChangeFood(int deltaFood) 
 	{
-		this.currenGame.ChangeFood(deltaFood);
+		this.currentGame.ChangeFood(deltaFood);
 		callOnFoodChange(DogFood.Amount);
 		SaveGame();
 	}
 
 	public void Adopt(DogDescriptor dog) 
 	{
-		this.currenGame.Adopt(dog);
+		this.currentGame.Adopt(dog);
 		SaveGame();
 	}
 

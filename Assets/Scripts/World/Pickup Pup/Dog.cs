@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Dog : MobileObjectBehaviour 
 {
-
 	#region Instance Accessors
 
 	public bool IsScouting 
@@ -17,6 +16,7 @@ public class Dog : MobileObjectBehaviour
 			return RemainingTimeScouting > 0;
 		}
 	}
+
 	public float RemainingTimeScouting 
 	{
 		get 
@@ -181,4 +181,5 @@ public class Dog : MobileObjectBehaviour
 			return false;
 		}
 	}
+
 }

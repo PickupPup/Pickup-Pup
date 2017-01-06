@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 public class RandomBuffer<T> 
 {	
-	
 	T[] source;
 	Random random;
 	// Using a hash set for fast lookup

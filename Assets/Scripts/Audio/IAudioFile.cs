@@ -25,7 +25,7 @@ public interface IAudioFile
 		get;
 	}
 
-	AudioType TypeAsEnum 
+	AudioType Type 
 	{
 		get;
 	}
@@ -34,5 +34,7 @@ public interface IAudioFile
 
 	bool HasEvent(string eventName);
 	bool HasEndEvent(string eventName);
+
 	float GetVolume();
+
 }

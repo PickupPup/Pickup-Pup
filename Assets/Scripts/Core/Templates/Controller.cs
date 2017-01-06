@@ -7,7 +7,6 @@ using UnityEngine;
 
 public abstract class Controller : MonoBehaviourExtended 
 {
-
 	protected override void setReferences() 
 	{
 		// Nothing

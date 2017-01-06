@@ -8,7 +8,6 @@ using System.Collections;
 
 public class WorldObjectBehaviour : MonoBehaviourExtended 
 {
-
 	#region Instance Accessors
 
 	public Color Colour 

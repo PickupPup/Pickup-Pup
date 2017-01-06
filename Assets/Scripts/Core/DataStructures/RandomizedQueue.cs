@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 public class RandomizedQueue<T> 
 {
-
 	#region Instance Accessors
 
 	public int Count 
@@ -64,10 +63,9 @@ public class RandomizedQueue<T>
 	// Removes an element and re-adds it to the queue (will not return the same element twice in a row, if there is > 1 elements in the queue)
 	public T Cycle() 
 	{
-		T elementToReturn = Dequeue(true);
+		T elementToReturn = Dequeue(dontReturnMostRecent:true);
 		Enqueue(elementToReturn);
 		return elementToReturn;
-
 	}
 
 	// Returns default value if there are no elements in the queue

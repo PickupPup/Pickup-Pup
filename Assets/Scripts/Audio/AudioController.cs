@@ -13,9 +13,6 @@ using System.Collections.Generic;
 
 public class AudioController : Controller, IAudioController
 {
-
-	const string path = "Audio/AudioList";
-
 	#region Static Accessors
 
 	// Singleton implementation
@@ -34,13 +31,19 @@ public class AudioController : Controller, IAudioController
 	[SerializeField]
 	bool isAudioListener = false;
 	// Set to false to halt active coroutines
-	bool coroutinesActive = true;
-	// For controlling music
 	[SerializeField]
 	bool playMusicOnInit;
+	[SerializeField]
+	bool useCustomPaths = false;
 
 	[SerializeField]
 	string mainMusicEventName;
+	[SerializeField]
+	string customJSONPath;
+	[SerializeField]
+	string customAudioPath;
+
+	bool coroutinesActive = true;
 
 	AudioList fileList;
 	AudioLoader loader;
@@ -95,12 +98,12 @@ public class AudioController : Controller, IAudioController
 	}
 
 	// Uses C#'s delegate system
-	protected override void subscribeEvents () {
+	protected override void subscribeEvents() {
 		base.subscribeEvents();
 		EventController.Subscribe(handleAudioEvent);
 	}
 
-	protected override void unsubscribeEvents () {
+	protected override void unsubscribeEvents() {
 		base.unsubscribeEvents();
 		EventController.Unsubscribe(handleAudioEvent);
 	}
@@ -113,7 +116,7 @@ public class AudioController : Controller, IAudioController
 		checkMute(file, source);
 		bool shouldResumeClip = false;
 		float clipTime = 0;
-		if(file.TypeAsEnum == AudioType.FX) 
+		if(file.Type == AudioType.FX) 
 		{
 			if(source.clip != null && source.isPlaying) 
 			{ 
@@ -123,7 +126,7 @@ public class AudioController : Controller, IAudioController
 				}
 			}
 		}
-		else if(file.TypeAsEnum == AudioType.Music) 
+		else if(file.Type == AudioType.Music) 
 		{
 			if(source.clip == file.Clip) 
 			{
@@ -170,7 +173,7 @@ public class AudioController : Controller, IAudioController
 
 	void checkMute(AudioFile file, AudioSource source) 
 	{
-		source.mute = AudioUtil.IsMuted(file.TypeAsEnum);
+		source.mute = AudioUtil.IsMuted(file.Type);
 	}
 
 	// Checks if the AudioSource corresponding to the channel integer has been initialized
@@ -195,11 +198,18 @@ public class AudioController : Controller, IAudioController
 	}
 
 	// Must be colled to setup the class's functionality
-	void init () {
+	void init() {
 		// Singleton method returns a bool depending on whether this object is the instance of the class
 		if(SingletonUtil.TryInit(ref _instance, this, gameObject, true)) 
 		{
-			loader = new AudioLoader(path);
+			if(useCustomPaths)
+			{
+				loader = new AudioLoader(customJSONPath, customAudioPath);
+			}
+			else
+			{
+				loader = AudioLoader.Default;
+			}
 			fileList = loader.Load();
 			if(!fileList.AreEventsSubscribed) 
 			{
@@ -284,7 +294,7 @@ public class AudioController : Controller, IAudioController
 		}
 	}
 		
-	void playMainMusic () {
+	void playMainMusic() {
 		EventController.Event(mainMusicEventName);
 	}
 
@@ -439,9 +449,9 @@ public class AudioController : Controller, IAudioController
 	}
 
 	// Asynchronous loading to improve game load times
-	IEnumerator preloadAudioClip (AudioFile audioFile) 
+	IEnumerator preloadAudioClip(AudioFile audioFile) 
 	{
-		ResourceRequest request = AudioLoader.GetClipAsync(audioFile.Name);
+		ResourceRequest request = loader.GetClipAsync(audioFile.Name);
 		while(!request.isDone) 
 		{
 			if(audioFile.ClipIsSet()) 
@@ -456,9 +466,9 @@ public class AudioController : Controller, IAudioController
 			{
 				audioFile.SetClip((AudioClip) request.asset);
 			} 
-			catch (Exception e) 
+			catch(Exception e) 
 			{
-				Debug.LogError(e + ": " + request.asset + " is not a valid AudioClip");
+				Debug.LogError(e + ": " + audioFile.Name + " is not a valid AudioClip");
 			}
 		}
 	}

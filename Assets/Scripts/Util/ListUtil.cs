@@ -10,7 +10,6 @@ using System.Collections.Generic;
 
 public static class ListUtil 
 {
-
 	// Checks list for elements
 	public static bool IsNullOrEmpty<T>(List<T> list) 
 	{

@@ -12,7 +12,6 @@ using System.Collections.Generic;
 
 public class EventController : SingletonController<EventController> 
 {
-
 	#region Event Types
 
 	public delegate void NamedEventAction(string nameOfEvent);
@@ -182,4 +181,5 @@ public enum PPEvent
 	Quit,
 	LoadStart,
 	LoadHome,
+
 }

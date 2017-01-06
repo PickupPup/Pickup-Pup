@@ -18,6 +18,7 @@ public class UIElement : MonoBehaviourExtended
 			return image != null;
 		}
 	}
+
 	public bool hasText 
 	{
 		get 
@@ -25,6 +26,7 @@ public class UIElement : MonoBehaviourExtended
 			return text != null;
 		}
 	}
+
 	public bool hasCanvasGroup 
 	{
 		get 
@@ -32,6 +34,7 @@ public class UIElement : MonoBehaviourExtended
 			return canvas != null;
 		}
 	}
+
 	public bool hasAlternateSprites 
 	{
 		get 
@@ -61,11 +64,13 @@ public class UIElement : MonoBehaviourExtended
 
 	#endregion
 
-	public void Show() {
+	public void Show() 
+	{
 		gameObject.SetActive(true);
 	}
 
-	public void Hide() {
+	public void Hide() 
+	{
 		gameObject.SetActive(false);
 	}
 
@@ -79,7 +84,7 @@ public class UIElement : MonoBehaviourExtended
 
 	public void SetText(string text) 
 	{
-		if (hasText) 
+		if(hasText) 
 		{
 			this.text.text = text;
 		}
@@ -87,7 +92,7 @@ public class UIElement : MonoBehaviourExtended
 
 	public void StartOpacityLerp(float startOpacity, float endOpacity, float time, bool loop) 
 	{
-		if (hasCanvasGroup) 
+		if(hasCanvasGroup) 
 		{
 			startOpacityCoroutine(startOpacity, endOpacity, time, loop);
 		}
@@ -95,7 +100,7 @@ public class UIElement : MonoBehaviourExtended
 
 	public void StopOpacityLerp() 
 	{
-		if (hasCanvasGroup) 
+		if(hasCanvasGroup) 
 		{
 			stopOpacityCoroutine();
 		}
@@ -110,7 +115,7 @@ public class UIElement : MonoBehaviourExtended
 
 	void stopOpacityCoroutine () 
 	{
-		if (opacityCoroutine != null) 
+		if(opacityCoroutine != null) 
 		{
 			StopCoroutine(opacityCoroutine);
 		}
@@ -142,4 +147,5 @@ public class UIElement : MonoBehaviourExtended
 			}
 		}
 	}
+
 }

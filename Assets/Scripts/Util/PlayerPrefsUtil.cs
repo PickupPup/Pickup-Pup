@@ -7,7 +7,6 @@ using UnityEngine;
 
 public static class PlayerPrefsUtil 
 {
-
 	/*
 	 * PlayerPrefs has no bool class
 	 * This wrapped provides that functionality

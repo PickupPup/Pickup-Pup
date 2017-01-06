@@ -1,21 +1,22 @@
 ﻿/*
  * Author: Isaiah Mann
- * Description: Unity Independent setup for a timer
+ * Description: Unity independent setup for a timer
  */
 
 public interface IGameTimer 
 {
-
 	#region Instance Accessors 
 
 	bool TimeIsUp 
 	{
 		get;
 	}
+
 	bool IsRunning 
 	{
 		get;
 	}
+
 	float TimeRemaining 
 	{
 		get;
@@ -24,12 +25,15 @@ public interface IGameTimer
 	#endregion
 
 	IGameTimer Setup(float timeStep, float maxTime);
+
 	void Teardown();
 	void Reset();
 	void Begin(bool resetOnStart);
 	void Resume();
+
 	float Pause();
 	float Stop(bool resetOnStop);
+
 	void SubscribeToTimeChange(PPData.DataActionf action);
 	void UnsubscribeFromTimeChange(PPData.DataActionf action);
 	void SubscribeToTimeUp(PPData.DataAction action);

@@ -20,6 +20,52 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 		
+	public string Name 
+	{
+		get 
+		{
+			return name;
+		}
+	}
+
+	public string CostToAdoptStr 
+	{
+		get 
+		{
+			if(hasSpecialCost) 
+			{
+				return formatCost(modCost);
+			} 
+			else 
+			{
+				return Breed.CostToAdoptStr;
+			}
+		}
+	}
+
+	public int Age 
+	{
+		get 
+		{
+			return age;
+		}
+	}
+
+	public int CostToAdopt 
+	{
+		get 
+		{
+			if(hasSpecialCost) 
+			{
+				return modCost;
+			} 
+			else 
+			{
+				return Breed.CostToAdopt;
+			}
+		}
+	}
+
 	public float RemainingTimeScouting
 	{
 		get 
@@ -35,47 +81,19 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
-	public int CostToAdopt 
+	public DogBreed Breed 
 	{
 		get 
 		{
-			if(hasSpecialCost) 
-			{
-				return ModCost;
-			} 
-			else 
-			{
-				return IBreed.CostToAdopt;
-			}
-		}
-	}
-	public string CostToAdoptStr 
-	{
-		get 
-		{
-			if(hasSpecialCost) 
-			{
-				return formatCost(ModCost);
-			} 
-			else 
-			{
-				return IBreed.CostToAdoptStr;
-			}
+			return data.GetBreed(breed);
 		}
 	}
 
-	public DogBreed IBreed 
+	public Color Color 
 	{
 		get 
 		{
-			return data.GetBreed(Breed);
-		}
-	}
-	public Color IColor 
-	{
-		get 
-		{
-			return parseHexColor(Color);
+			return parseHexColor(this.color);
 		}
 	}
 
@@ -86,33 +104,34 @@ public class DogDescriptor : PPDescriptor
 	{
 		get 
 		{
-			return ModCost != 0;
+			return modCost != 0;
 		}
 	}
 
-	public string Name;
-	public string Color;
-	public string Breed;
-	public int ModCost;
-	public int Age;
-	public int SpriteID;
-	public bool IsOutCollecting = false;
+	[SerializeField]
+	string name;
+	[SerializeField]
+	string color;
+	[SerializeField]
+	string breed;
+	[SerializeField]
+	int modCost;
+	[SerializeField]
+	int age;
 
 	Dog linkedDog;
 	DogBreed _iBreed;
 
-
 	public static DogDescriptor Default() 
 	{
 		DogDescriptor descriptor = new DogDescriptor(DogDatabase.Instance);
-		descriptor.Name = string.Empty;
-		descriptor.Age = 0;
-		descriptor.Breed = string.Empty;
-		descriptor.Color = BLACK_HEX;
-		descriptor.SpriteID = 0;
-		descriptor.IsOutCollecting = false;
+		descriptor.name = string.Empty;
+		descriptor.age = 0;
+		descriptor.breed = string.Empty;
+		descriptor.color = BLACK_HEX;
 		return descriptor;
 	}
+
 	public DogDescriptor(DogDatabase data) : base(data) 
 	{
 		// NOTHING

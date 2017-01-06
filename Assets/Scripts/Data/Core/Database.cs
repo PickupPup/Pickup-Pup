@@ -4,9 +4,8 @@
  */
 
 [System.Serializable]
-public abstract class Database<T> where T : class, new() 
+public abstract class Database<T> : ResourceLoader where T : class, new()
 {
-
 	#region Static Accessors
 
 	public static T Instance 
@@ -25,9 +24,9 @@ public abstract class Database<T> where T : class, new()
 
 	static T _instance;
 
-	public Database() 
+	protected Database() 
 	{
-		
+		// NOTHING	
 	}
 
 	public abstract void Initialize();

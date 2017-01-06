@@ -42,7 +42,7 @@ public class HomeDisplay : MonoBehaviourExtended {
 
         for(int i = 0; i < NUM_OF_SHOWN_SLOTS; i++)
         {
-            if (i < numOfDogs)
+            if(i < numOfDogs)
             {
                 // TEMP USE FOR TESTING
                 // 12 total stock photos
@@ -56,4 +56,5 @@ public class HomeDisplay : MonoBehaviourExtended {
             }
         }
     }
+
 }

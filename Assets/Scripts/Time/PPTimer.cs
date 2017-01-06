@@ -9,7 +9,6 @@ using System.Collections;
 [System.Serializable]
 public class PPTimer : PPData 
 {
-
 	#region Instance Accessors
 
 	public bool IsTimerSetup 
@@ -19,6 +18,7 @@ public class PPTimer : PPData
 			return timer != null;
 		}
 	}
+
 	public float TimeRemaining 
 	{
 		get 
@@ -26,6 +26,7 @@ public class PPTimer : PPData
 			return timer.TimeRemaining;
 		}
 	}
+
 	public bool TimeIsUp 
 	{
 		get 
@@ -33,6 +34,7 @@ public class PPTimer : PPData
 			return timer.TimeIsUp;
 		}
 	}
+
 	public bool IsRunning 
 	{
 		get 

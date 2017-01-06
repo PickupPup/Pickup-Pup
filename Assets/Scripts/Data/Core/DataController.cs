@@ -8,7 +8,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public abstract class DataController : SingletonController<DataController> 
 {
-
 	protected bool hasSaveBuffer 
 	{
 		get 

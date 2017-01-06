@@ -12,27 +12,43 @@ using System.Collections.Generic;
 [System.Serializable]
 public class AudioList 
 {
-
 	#region Instance Accessors
 
 	public AudioFile this[int index] 
 	{
 		get
 		{
-			return Files[index];
+			return files[index];
 		}
 	}
+
+	public AudioFile[] Files 
+	{
+		get 
+		{
+			return this.files;
+		}
+	}
+		
+	public AudioGroup[] Groups
+	{
+		get 
+		{
+			return this.groups;
+		}
+	}
+
 	public int Length 
 	{
 		get 
 		{
-			if(Files == null) 
+			if(files == null) 
 			{ 
 				return 0;
 			} 
 			else 
 			{
-				return Files.Length;
+				return files.Length;
 			}
 		}
 	}
@@ -45,14 +61,30 @@ public class AudioList
 
 	#endregion
 
-	public AudioFile[] Files;
-	public AudioGroup[] Groups;
+	AudioData[] allData
+	{
+		get 
+		{
+			if (this._allData == null)
+			{
+				this._allData = ArrayUtil.Concat<AudioData>(files, groups);
+			}
+			return this._allData;
+		}
+	}
+
+	AudioData[] _allData;
+
+	[SerializeField]
+	AudioFile[] files;
+	[SerializeField]
+	AudioGroup[] groups;
 
 	Dictionary<AudioClip, AudioFile> clipToFileDictionary = new Dictionary<AudioClip, AudioFile>();
 
 	public AudioList(AudioFile[] files) 
 	{
-		Files = files;
+		this.files = files;
 		SubscribeEvents();
 	}
 
@@ -66,13 +98,20 @@ public class AudioList
 	{
 		unsubscribeEvents();
 	}
-		
+
+	public void SetLoader(AudioLoader loader)
+	{
+		foreach(AudioData audio in allData) 
+		{
+			audio.SetLoader(loader);
+		}
+	}
 
 	public void PopulateGroups() 
 	{
-		foreach(AudioFile file in Files) 
+		foreach(AudioFile file in files) 
 		{
-			foreach(AudioGroup group in Groups) 
+			foreach(AudioGroup group in groups) 
 			{
 				if(ArrayUtil.Contains(file.Groups, group.Name)) 
 				{
@@ -84,7 +123,7 @@ public class AudioList
 
 	public AudioType GetAudioType(AudioClip clip) 
 	{
-		return AudioUtil.AudioTypeFromString(clipToFileDictionary[clip].Type);
+		return clipToFileDictionary[clip].Type;
 	}
 
 	void processAudioFileAccess(AudioFile file) 
@@ -102,18 +141,18 @@ public class AudioList
 
 	public void SubscribeEvents() 
 	{
-		for (int i = 0; i < Files.Length; i++) 
+		for (int i = 0; i < files.Length; i++) 
 		{
-			Files[i].OnClipRequest += processAudioFileAccess;
+			files[i].OnClipRequest += processAudioFileAccess;
 		}
 		AreEventsSubscribed = true;
 	}
 
 	void unsubscribeEvents() 
 	{
-		for(int i = 0; i < Files.Length; i++) 
+		for(int i = 0; i < files.Length; i++) 
 		{
-			Files[i].OnClipRequest -= processAudioFileAccess;
+			files[i].OnClipRequest -= processAudioFileAccess;
 		}
 	}
 

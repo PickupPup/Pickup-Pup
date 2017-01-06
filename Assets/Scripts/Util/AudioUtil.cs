@@ -8,7 +8,6 @@ using System.Collections;
 
 public static class AudioUtil 
 {
-
 	public static AudioActionType MuteActionFromBool(bool muted) 
 	{
 		return muted ? AudioActionType.Mute : AudioActionType.Unmute;

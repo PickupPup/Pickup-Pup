@@ -8,7 +8,6 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
-
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float monoFloat);
 	public delegate void MonoActionInt(int monoInt);
@@ -24,7 +23,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		subscribeEvents();
 	}
 
-	void Start() 
+	void Start()
 	{
 		fetchReferences();
 	}
@@ -58,13 +57,13 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 				switch(param) 
 				{
 				case AnimParam.Bool:
-					animator.SetBool(key, (bool)value);
+					animator.SetBool(key, (bool) value);
 					return true;
 				case AnimParam.Float:
-					animator.SetFloat(key, (float)value);
+					animator.SetFloat(key, (float) value);
 					return true;
 				case AnimParam.Int:
-					animator.SetInteger(key, (int)value);
+					animator.SetInteger(key, (int) value);
 					return true;
 				case AnimParam.Trigger:
 					animator.SetTrigger(key);

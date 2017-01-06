@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Stores data about the dogs in the game
+ * Description: Stores data about the dogs in the game
  */
 
 using System.Collections;
@@ -10,12 +10,42 @@ using System.IO;
 
 [System.Serializable]
 public class DogDatabase : Database<DogDatabase> 
-{
-	
-	const string SPRITES_DIR = "Sprites";
+{	
+	static Sprite defaultSprite
+	{
+		get 
+		{
+			if (_defaultSprite)
+			{
+				return _defaultSprite;
+			} 
+			else 
+			{
+				// Memoization for effeciency :
+				_defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
+				return _defaultSprite;
+			}
+		}
+	}
 
-	public DogBreed[] Breeds;
-	public DogDescriptor[] Dogs;
+	static Sprite _defaultSprite;
+
+	#region Instance Accessors
+
+	public DogDescriptor[] Dogs
+	{
+		get
+		{
+			return this.dogs;
+		}
+	}
+
+	#endregion
+
+	[SerializeField]
+	DogBreed[] breeds;
+	[SerializeField]
+	DogDescriptor[] dogs;
 
 	RandomBuffer<DogDescriptor> randomizer;
 	Dictionary<string, DogBreed> breedsByName;
@@ -27,11 +57,17 @@ public class DogDatabase : Database<DogDatabase>
 		AssignInstance(this);
 		populateDogBreedLookup();
 		setDogDataReferences();
-		randomizer = new RandomBuffer<DogDescriptor>(Dogs);
+		randomizer = new RandomBuffer<DogDescriptor>(dogs);
 	}	
 
 	public DogBreed GetBreed(string breedName) 
 	{
+		// Error checking
+		if(string.IsNullOrEmpty(breedName))
+		{
+			return DogBreed.Default;
+		}
+
 		DogBreed breed;
 		if(breedsByName.TryGetValue(breedName, out breed)) 
 		{
@@ -55,6 +91,12 @@ public class DogDatabase : Database<DogDatabase>
 
 	public Sprite GetDogBreedSprite(DogBreed breed) 
 	{
+		// Error checking
+		if (breed == null || string.IsNullOrEmpty(breed.Breed))
+		{
+			return defaultSprite;
+		}
+
 		Sprite match;
 		if(dogSpriteLookup.TryGetValue(breed, out match)) 
 		{
@@ -78,7 +120,7 @@ public class DogDatabase : Database<DogDatabase>
 	void populateDogBreedLookup() 
 	{
 		breedsByName = new Dictionary<string, DogBreed>();
-		foreach(DogBreed breed in Breeds) 
+		foreach(DogBreed breed in breeds) 
 		{
 			breed.Initialize(this);
 			if(breed.Breed != null) 
@@ -98,7 +140,7 @@ public class DogDatabase : Database<DogDatabase>
 
 	void setDogDataReferences() 
 	{
-		foreach(DogDescriptor dog in Dogs) 
+		foreach(DogDescriptor dog in dogs) 
 		{
 			dog.Initialize(this);
 		}

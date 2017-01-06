@@ -3,12 +3,10 @@
  * Description: Helper class to assist with Singleton implementation
  */
 
-
 using UnityEngine;
 
 public static class SingletonUtil 
 {
-
 	public static bool TryInit<T>(ref T singleton, T instance, GameObject gameObject, bool dontDestroyOnLoad = false) 
 	{
 		if(singleton == null) 

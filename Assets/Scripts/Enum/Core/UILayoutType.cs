@@ -9,4 +9,5 @@ public enum UILayoutType
 	Vertical,
 	Grid,
 	Unrestricted,
+
 }

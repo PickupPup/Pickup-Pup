@@ -8,7 +8,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PPGameSave : GameSave 
 {
-
 	#region Instance Accessors
 
 	public Currency Coins {

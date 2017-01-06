@@ -10,8 +10,7 @@ using System.Text.RegularExpressions;
 
 public static class StringUtil 
 {
-
-	public static string RepeatString (string stringToRepeat, int repeatCount) 
+	public static string RepeatString(string stringToRepeat, int repeatCount) 
 	{
 		string finalString = stringToRepeat;
 		for(int i = 1; i < repeatCount; i++) 
@@ -49,7 +48,7 @@ public static class StringUtil
 	public static bool ContainsPartialSubstring(string text, string stringToFind, out string subStringFound) 
 	{
 		subStringFound = null;
-		if (!text.Contains(stringToFind)) 
+		if(!text.Contains(stringToFind)) 
 		{
 			for(int i = stringToFind.Length - 1; i > 0; i--) 
 			{

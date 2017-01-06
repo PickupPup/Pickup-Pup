@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Testing timer scripts
+ * Description: Testing timer scripts
  */
 
 using System.Collections;
@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class TimerTest : MonoBehaviourExtended 
 {
-
 	[SerializeField]
 	PPTimer timer;
 	[SerializeField]

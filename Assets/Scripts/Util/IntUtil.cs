@@ -1,9 +1,10 @@
-﻿// Author: Isaiah Mann
-// Description: Static helper class used to speed to speedup simple integer operations
+﻿/*
+ * Author: Isaiah Mann
+ * Description: Static helper class used to speed to speedup simple integer operations
+ */
 
 public static class IntUtil 
 {
-
 	// Min is inclusive, max is exclusive
 	public static bool InRange(int target, int max, int min = 0) 
 	{
@@ -14,4 +15,5 @@ public static class IntUtil
 	{
 		return int.Parse(obj.ToString());
 	}
+
 }

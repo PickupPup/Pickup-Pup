@@ -8,7 +8,6 @@ using UnityEngine;
 [System.Serializable]
 public class UIEventHandler 
 {
-	
 	[SerializeField]
 	UIAction action;
 

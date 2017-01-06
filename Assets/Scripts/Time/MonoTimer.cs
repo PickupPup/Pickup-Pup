@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class MonoTimer : MonoBehaviourExtended, IGameTimer 
 {
-
 	#region Instance Accessors
 
 	public float TimeRemaining
@@ -16,6 +15,7 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 		get;
 		private set;
 	}
+
 	public bool TimeIsUp 
 	{
 		get 
@@ -23,6 +23,7 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 			return TimeRemaining <= 0;
 		}
 	}
+
 	public bool IsRunning 
 	{
 		get 

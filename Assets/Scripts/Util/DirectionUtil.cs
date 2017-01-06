@@ -7,7 +7,6 @@ using UnityEngine;
 
 public static class DirectionUtil 
 {
-
 	public static Vector2 VectorFromDirection (Direction direction) 
 	{
 		switch(direction) 

@@ -7,14 +7,15 @@ using UnityEngine;
 
 public static class TextAssetUtil 
 {
-
-	static char CorrectQuoatationMark {
-		get {
+	static char CorrectQuoatationMark 
+	{
+		get
+		{
 			return '"';
 		}
 	}
 		
-	public static string FileText (string path) 
+	public static string FileText(string path) 
 	{
 		return convertQuotationMarks(Resources.Load<TextAsset>(path).text);
 	}

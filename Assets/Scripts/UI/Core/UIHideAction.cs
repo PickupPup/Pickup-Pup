@@ -1,16 +1,17 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Hides element on event
+ * Description: Hides element on event
  */
 
 using UnityEngine;
 
 [CreateAssetMenuAttribute(fileName = "Hide", menuName = "UIEvent/Hide", order = 1)]
-public class UIHideAction : UIAction {
-
+public class UIHideAction : UIAction 
+{
 	#region UIAction Overrides
 
-	public override void Execute (UIElement target){
+	public override void Execute(UIElement target)
+	{
 		target.Hide();	
 	}
 

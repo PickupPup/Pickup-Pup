@@ -10,7 +10,6 @@ using UnityEngine;
 
 public static class SpriteUtil 
 {
-
     const string FILE_PATH = "Sprites/"; // Path within Resources Folder
     const string BASE_FILENAME = "sample-dog-"; // Filename format before the ID
 
@@ -23,7 +22,7 @@ public static class SpriteUtil
     {
         // If the sprite ID isn't listed in the dog sprite dictionary
         // (meaning it hasn't been loaded before)
-        if (! dogSprites.ContainsKey(spriteID))
+        if(! dogSprites.ContainsKey(spriteID))
         {
             // Load the sprite from file
             // Filename doesn't include extension 
