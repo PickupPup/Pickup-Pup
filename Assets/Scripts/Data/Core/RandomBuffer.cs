@@ -1,21 +1,41 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Continues to fetch random elements from the array
+ * Description: Continues to fetch random elements from the array
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public class RandomBuffer<T> 
 {	
-	T[] source;
+	// Using IList Interface allows for any data structure w/ a count and indexed accessor
+	protected virtual IList<T> source 
+	{
+		get 
+		{
+			return backingSource;
+		}
+	}
+
+	T[] backingSource;
 	Random random;
 	// Using a hash set for fast lookup
 	HashSet<int> usedIndices;
 
 	public RandomBuffer(T[] source) 
 	{
-		this.source = source;
+		this.backingSource = source;
+		setup();
+	}
+
+	protected RandomBuffer()
+	{
+		setup();
+	}
+
+	void setup()
+	{
 		random = new Random();
 		usedIndices = new HashSet<int>();
 	}
@@ -31,7 +51,7 @@ public class RandomBuffer<T>
 		int index;
 		do 
 		{
-			index = random.Next(source.Length);
+			index = random.Next(source.Count);
 		}
 		while(usedIndices.Contains(index));
 		usedIndices.Add(index);
@@ -55,7 +75,7 @@ public class RandomBuffer<T>
 
 	bool needsRefresh() 
 	{
-		return usedIndices.Count >= source.Length;
+		return usedIndices.Count >= source.Count;
 	}
 			
 	void refresh() 
