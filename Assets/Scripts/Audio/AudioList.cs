@@ -65,7 +65,7 @@ public class AudioList
 	{
 		get 
 		{
-			i (this._allData == null)
+			if (this._allData == null)
 			{
 				this._allData = ArrayUtil.Concat<AudioData>(files, groups);
 			}
