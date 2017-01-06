@@ -68,7 +68,6 @@ public class Dog : MobileObjectBehaviour
 	PPData.DogAction onScoutingTimerEnd;
 	PPData.DogActionf onScoutingTimerChange;
 
-
 	#region Event Subscription
 
 	public void SubscribeToScoutingTimerEnd(PPData.DogAction dogAction) 
@@ -163,7 +162,7 @@ public class Dog : MobileObjectBehaviour
 	protected override void cleanupReferences()
 	{
 		base.cleanupReferences();
-		if (hasDescriptor) 
+		if(hasDescriptor) 
 		{
 			this.descriptor.UnlinkFromDog();
 		}

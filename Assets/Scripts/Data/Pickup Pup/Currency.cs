@@ -6,7 +6,6 @@
 [System.Serializable]
 public class Currency 
 {
-
 	#region Static Accessors
 
 	public static Currency[] Defaults 
@@ -64,11 +63,17 @@ public class Currency
     /// </summary>
     public int Amount
     {
-        get { return amount; }
+        get 
+		{ 
+			return amount; 
+		}
     }
 
 	public CurrencyType Type 
 	{
-		get { return type; }
+		get 
+		{ 
+			return type; 
+		}
 	}
 }

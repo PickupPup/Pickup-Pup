@@ -22,8 +22,10 @@ public static class SettingsUtil
 		}
 	}
 
-	public static bool SFXMuted {
-		get {
+	public static bool SFXMuted 
+	{
+		get 
+		{
 			return IsMuted(fxMuteSettingsKey);
 		}
 	}

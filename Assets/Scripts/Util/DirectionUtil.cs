@@ -7,20 +7,20 @@ using UnityEngine;
 
 public static class DirectionUtil 
 {
-	public static Vector2 VectorFromDirection (Direction direction) 
+	public static Vector2 VectorFromDirection(Direction direction) 
 	{
 		switch(direction) 
 		{
-		case Direction.West:
-			return Vector2.left;
-		case Direction.East:
-			return Vector2.right;
-		case Direction.North:
-			return Vector2.up;
-		case Direction.South:
-			return Vector2.down;
-		default:
-			return Vector2.zero;
+			case Direction.West:
+				return Vector2.left;
+			case Direction.East:
+				return Vector2.right;
+			case Direction.North:
+				return Vector2.up;
+			case Direction.South:
+				return Vector2.down;
+			default:
+				return Vector2.zero;
 		}
 	}
 
@@ -28,16 +28,16 @@ public static class DirectionUtil
 	{
 		switch(direction) 
 		{
-		case Direction.West:
-			return Direction.North;
-		case Direction.East:
-			return Direction.South;
-		case Direction.North:
-			return Direction.East;
-		case Direction.South:
-			return Direction.West;
-		default:
-			return default(Direction);
+			case Direction.West:
+				return Direction.North;
+			case Direction.East:
+				return Direction.South;
+			case Direction.North:
+				return Direction.East;
+			case Direction.South:
+				return Direction.West;
+			default:
+				return default(Direction);
 		}
 	}
 

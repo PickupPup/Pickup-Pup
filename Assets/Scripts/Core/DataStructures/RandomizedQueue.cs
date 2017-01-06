@@ -26,7 +26,7 @@ public class RandomizedQueue<T>
 	// Tracks the most recent element removed from the queue
 	T _mostRecentRemoved;
 
-	public RandomizedQueue () 
+	public RandomizedQueue() 
 	{
 		// NOTHING
 	}

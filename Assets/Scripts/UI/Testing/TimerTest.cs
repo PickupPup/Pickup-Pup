@@ -56,7 +56,7 @@ public class TimerTest : MonoBehaviourExtended
 		timer.Reset();
 	}
 
-	public void AddMinute () 
+	public void AddMinute() 
 	{
 		timer.ModifyTimeRemaining(60, checkForEvents:true);
 	}

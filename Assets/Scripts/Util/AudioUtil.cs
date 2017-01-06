@@ -17,12 +17,12 @@ public static class AudioUtil
 	{
 		switch(actionType) 
 		{
-		case AudioActionType.Mute:
-			return true;
-		case AudioActionType.Unmute:
-			return false;
-		default:
-			throw new System.Collections.Generic.KeyNotFoundException();
+			case AudioActionType.Mute:
+				return true;
+			case AudioActionType.Unmute:
+				return false;
+			default:
+				throw new System.Collections.Generic.KeyNotFoundException();
 		}
 	}
 
@@ -35,29 +35,29 @@ public static class AudioUtil
 	{
 		switch(audioType) 
 		{
-		case "SFX":
-			return AudioType.FX;
-		case "Music":
-			return AudioType.Music;
-		case "VO":
-			return AudioType.VO;
-		default:
-			Debug.LogError(audioType + " DNE");
-			throw new System.Collections.Generic.KeyNotFoundException();
+			case "SFX":
+				return AudioType.FX;
+			case "Music":
+				return AudioType.Music;
+			case "VO":
+				return AudioType.VO;
+			default:
+				Debug.LogError(audioType + " DNE");
+				throw new System.Collections.Generic.KeyNotFoundException();
 		}
 	}
 
 	public static bool IsMuted(AudioType audioType) 
 	{
-		switch (audioType) 
+		switch(audioType) 
 		{
-		case AudioType.FX:
-			return SettingsUtil.SFXMuted;
-		case AudioType.Music:
-			return SettingsUtil.MusicMuted;
-		default:
-			throw new System.Collections.Generic.KeyNotFoundException();
-		}
+			case AudioType.FX:
+				return SettingsUtil.SFXMuted;
+			case AudioType.Music:
+				return SettingsUtil.MusicMuted;
+			default:
+				throw new System.Collections.Generic.KeyNotFoundException();
+			}
 	}
 
 }

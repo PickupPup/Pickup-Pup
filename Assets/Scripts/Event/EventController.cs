@@ -159,7 +159,7 @@ public class EventController : SingletonController<EventController>
 	{
 		try
 		{
-			Event( (PPEvent) Enum.Parse(typeof(PPEvent), eventName));
+			Event((PPEvent) Enum.Parse(typeof(PPEvent), eventName));
 			return true;
 		}
 		catch 

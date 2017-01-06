@@ -31,7 +31,7 @@ public class HomeController : SingletonController<HomeController>
     public void RemoveSlot()
     {
         numOfSlots--;
-        if (numOfAvailableSlots > 0)
+        if(numOfAvailableSlots > 0)
         {
             numOfAvailableSlots--;
         }
@@ -51,6 +51,10 @@ public class HomeController : SingletonController<HomeController>
 
     public DogDescriptor[] Dogs
     {
-        get { return dogs; }
+        get 
+		{ 
+			return dogs; 
+		}
     }
+
 }

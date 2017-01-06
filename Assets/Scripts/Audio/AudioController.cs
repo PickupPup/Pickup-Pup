@@ -168,7 +168,7 @@ public class AudioController : Controller, IAudioController
 
 	public void ToggleMusicMute()
 	{
-		SettingsUtil.ToggleMusicMuted (!SettingsUtil.MusicMuted);
+		SettingsUtil.ToggleMusicMuted(!SettingsUtil.MusicMuted);
 	}
 
 	void checkMute(AudioFile file, AudioSource source) 
@@ -235,7 +235,7 @@ public class AudioController : Controller, IAudioController
 	{
 		for(int i = 0; i < audioFiles.Length; i++) 
 		{
-			data.Add (audioFiles[i].Name, audioFiles[i]);
+			data.Add(audioFiles[i].Name, audioFiles[i]);
 		}
 	}
 
@@ -272,7 +272,7 @@ public class AudioController : Controller, IAudioController
 			{
 				List<AudioData> files = new List<AudioData>();
 				files.Add(file);
-				playEvents.Add (file.Events[j], files);
+				playEvents.Add(file.Events[j], files);
 			}
 		}
 	}
@@ -289,7 +289,7 @@ public class AudioController : Controller, IAudioController
 			{
 				List<AudioData> files = new List<AudioData>();
 				files.Add(file);
-				stopEvents.Add (file.StopEvents[j], files);
+				stopEvents.Add(file.StopEvents[j], files);
 			}
 		}
 	}
@@ -302,7 +302,7 @@ public class AudioController : Controller, IAudioController
 	{
 		if(AudioUtil.IsMuteAction(actionType)) 
 		{
-			handleMuteAction (actionType, audioType);
+			handleMuteAction(actionType, audioType);
 		}
 	}
 
@@ -420,7 +420,7 @@ public class AudioController : Controller, IAudioController
 		yield return new WaitForSeconds(remainingTime);
 		if(tempChannel != null) 
 		{
-			if (clipType == AudioType.FX) 
+			if(clipType == AudioType.FX) 
 			{
 				tempSFXChannels.Remove(tempChannel);
 			}

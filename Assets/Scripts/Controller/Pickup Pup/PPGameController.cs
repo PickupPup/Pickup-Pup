@@ -52,7 +52,8 @@ public class PPGameController : GameController
 
 	public DogDatabase Data
 	{
-		get {
+		get 
+		{
 			return database; 
 		}
 	}

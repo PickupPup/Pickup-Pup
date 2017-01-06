@@ -65,7 +65,7 @@ public class AudioList
 	{
 		get 
 		{
-			if (this._allData == null)
+			i (this._allData == null)
 			{
 				this._allData = ArrayUtil.Concat<AudioData>(files, groups);
 			}
@@ -141,7 +141,7 @@ public class AudioList
 
 	public void SubscribeEvents() 
 	{
-		for (int i = 0; i < files.Length; i++) 
+		for(int i = 0; i < files.Length; i++) 
 		{
 			files[i].OnClipRequest += processAudioFileAccess;
 		}

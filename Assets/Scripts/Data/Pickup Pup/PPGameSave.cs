@@ -10,16 +10,22 @@ public class PPGameSave : GameSave
 {
 	#region Instance Accessors
 
-	public Currency Coins {
-		get {
+	public Currency Coins 
+	{
+		get 
+		{
 			return currencies[CurrencyType.Coins];
 		}
 	}
-	public Currency Food {
-		get {
+
+	public Currency Food 
+	{
+		get 
+		{
 			return currencies[CurrencyType.DogFood];
 		}
 	}
+
 	public List<DogDescriptor> AdoptedDogs
 	{
 		get;

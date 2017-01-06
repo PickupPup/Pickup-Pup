@@ -76,7 +76,7 @@ public class UIElement : MonoBehaviourExtended
 
 	public void RandomSprite() 
 	{
-		if (hasImage && hasAlternateSprites) 
+		if(hasImage && hasAlternateSprites) 
 		{
 			this.image.sprite = alternateSprites[Random.Range(0, alternateSprites.Length)];
 		}
@@ -113,7 +113,7 @@ public class UIElement : MonoBehaviourExtended
 		StartCoroutine(opacityCoroutine);
 	}
 
-	void stopOpacityCoroutine () 
+	void stopOpacityCoroutine() 
 	{
 		if(opacityCoroutine != null) 
 		{

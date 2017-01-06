@@ -7,7 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrencyDisplay : UIElement {
+public class CurrencyDisplay : UIElement 
+{
     Currency currency;
 
     /// <summary>

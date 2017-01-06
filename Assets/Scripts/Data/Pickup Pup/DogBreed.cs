@@ -77,7 +77,7 @@ public class DogBreed : DogTrait
 
 	public override string ToString() 
 	{
-		return string.Format ("[DogBreed:{0} Specialization:{1}]", breed, ISpecialization);
+		return string.Format("[DogBreed:{0} Specialization:{1}]", breed, ISpecialization);
 	}
 
 	public override bool Equals(object obj) 

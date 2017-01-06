@@ -56,20 +56,20 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 			{
 				switch(param) 
 				{
-				case AnimParam.Bool:
-					animator.SetBool(key, (bool) value);
-					return true;
-				case AnimParam.Float:
-					animator.SetFloat(key, (float) value);
-					return true;
-				case AnimParam.Int:
-					animator.SetInteger(key, (int) value);
-					return true;
-				case AnimParam.Trigger:
-					animator.SetTrigger(key);
-					return true;
-				default:
-					return false;
+					case AnimParam.Bool:
+						animator.SetBool(key, (bool) value);
+						return true;
+					case AnimParam.Float:
+						animator.SetFloat(key, (float) value);
+						return true;
+					case AnimParam.Int:
+						animator.SetInteger(key, (int) value);
+						return true;
+					case AnimParam.Trigger:
+						animator.SetTrigger(key);
+						return true;
+					default:
+						return false;
 				}
 			} 
 			catch 
@@ -174,7 +174,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 			yield return new WaitForEndOfFrame();
 		}
 		transform.position = targetPosition;
-		if (callBack != null)
+		if(callBack != null)
 		{
 			callBack();
 		}

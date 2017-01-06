@@ -8,7 +8,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DogSlot : MonoBehaviourExtended {
+public class DogSlot : MonoBehaviourExtended 
+{
 	[SerializeField]
 	bool setBackground = true;
 	[SerializeField]
@@ -27,24 +28,24 @@ public class DogSlot : MonoBehaviourExtended {
 	public void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null) {
 		this.dog = dog;
 		Image[] images = GetComponentsInChildren<Image>();
-		if (images.Length == 2 && setBackground) 
+		if(images.Length == 2 && setBackground) 
 		{
 			backgroundImage = images[0];
 	        dogImage = images[1];
 		} 
-		else if (images.Length == 1 || !setBackground) 
+		else if(images.Length == 1 || !setBackground) 
 		{
 			dogImage = images[0];
 		}
 
         // Home slots don't have text components
         Text[] text = GetComponentsInChildren<Text>();
-        if (text.Length == 2)
+        if(text.Length == 2)
         {
             nameText = text[0];
             timerText = text[1];
 		} 
-		else if (text.Length == 1) 
+		else if(text.Length == 1) 
 		{
 			nameText = text[0];
 		}

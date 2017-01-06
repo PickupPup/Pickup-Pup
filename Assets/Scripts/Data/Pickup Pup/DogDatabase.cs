@@ -15,7 +15,7 @@ public class DogDatabase : Database<DogDatabase>
 	{
 		get 
 		{
-			if (_defaultSprite)
+			if(_defaultSprite)
 			{
 				return _defaultSprite;
 			} 
@@ -92,7 +92,7 @@ public class DogDatabase : Database<DogDatabase>
 	public Sprite GetDogBreedSprite(DogBreed breed) 
 	{
 		// Error checking
-		if (breed == null || string.IsNullOrEmpty(breed.Breed))
+		if(breed == null || string.IsNullOrEmpty(breed.Breed))
 		{
 			return defaultSprite;
 		}
