@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DogSlot : MonoBehaviourExtended
+public class DogSlot : PPUIElement
 {
     protected DogDescriptor dog;
 
