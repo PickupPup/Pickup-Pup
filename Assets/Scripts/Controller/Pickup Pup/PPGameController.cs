@@ -84,6 +84,8 @@ public class PPGameController : GameController
 
 	#endregion
 
+	// The dog the player currently has selected
+	Dog selectedDog;
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase database;
@@ -131,6 +133,21 @@ public class PPGameController : GameController
 			sendDogToScout(dog);
 			return true;
 		}
+	}
+
+	public void SelectDog(Dog dog)
+	{
+		this.selectedDog = dog;
+	}
+		
+	public void SendDogToSlot(Dog dog, DogSlot slot)
+	{
+		slot.Init(dog);
+	}
+
+	public void SendSelectedDogToSlot(DogSlot slot)
+	{
+		SendDogToSlot(this.selectedDog, slot);
 	}
 
 	void sendDogToScout(Dog dog) 

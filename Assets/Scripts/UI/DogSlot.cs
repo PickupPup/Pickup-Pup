@@ -36,7 +36,12 @@ public class DogSlot : MonoBehaviourExtended
 
 		setSlot(this.dog, dogSprite, backgroundSprite);
     }
-	
+
+	public virtual void Init(Dog dog)
+	{
+		Init(dog.Info, dog.Portrait);
+	}
+
     // Sets the dog and background sprites of this Dog Slot.
 	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
