@@ -28,6 +28,11 @@ public class PPSceneController : SingletonController<PPSceneController>
 	{
 		LoadScene(PPScene.Home);
 	}
+
+    public void LoadShelter()
+    {
+        LoadScene(PPScene.Shelter);
+    }
 		
 	public void LoadScene(PPScene scene) 
 	{
@@ -40,5 +45,5 @@ public enum PPScene
 {
 	Start,
 	Home,
-
+    Shelter,
 }

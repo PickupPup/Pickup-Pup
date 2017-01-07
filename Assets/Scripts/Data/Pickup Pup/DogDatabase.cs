@@ -10,7 +10,7 @@ using System.IO;
 
 [System.Serializable]
 public class DogDatabase : Database<DogDatabase> 
-{	
+{
 	static Sprite defaultSprite
 	{
 		get 
@@ -21,7 +21,7 @@ public class DogDatabase : Database<DogDatabase>
 			} 
 			else 
 			{
-				// Memoization for effeciency :
+                // Memoization for efficiency
 				_defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
 				return _defaultSprite;
 			}
