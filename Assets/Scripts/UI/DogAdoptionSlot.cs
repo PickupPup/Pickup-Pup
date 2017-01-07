@@ -33,6 +33,7 @@ public class DogAdoptionSlot : DogSlot
         {
             dataController.ChangeCoins(-dog.CostToAdopt);
             dataController.ChangeOpenHomeSlots(-1);
+            dataController.Adopt(dog);
             priceOrAdoptionStatus.text = "Adopted";
             priceBackgroundImage.color = Color.red;
         }
