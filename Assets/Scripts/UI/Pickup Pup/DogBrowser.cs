@@ -8,10 +8,20 @@ using UnityEngine;
 
 public class DogBrowser : PPUIElement 
 {	
+	bool hasSelectedPage
+	{
+		get
+		{
+			return selectedPageButton != null;
+		}
+	}
+
 	[SerializeField]
 	int defaultStartPage;
+
 	DogSlot[] elements;
 	ToggleableColorUIButton[] pageButtons;
+	ToggleableColorUIButton selectedPageButton;
 
 	#region MonoBehaviourExtended 
 
@@ -19,8 +29,12 @@ public class DogBrowser : PPUIElement
 	{
 		base.setReferences();
 		elements = GetComponentsInChildren<DogSlot>();
-		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
-		pageButtons[defaultStartPage].Toggle();
+	}
+
+	protected override void fetchReferences()
+	{
+		base.fetchReferences();
+		setupPageButtons();
 	}
 
 	#endregion
@@ -33,14 +47,37 @@ public class DogBrowser : PPUIElement
 		}
 	}
 
-	public void SwitchToPage(int pageIndex)
+	public void SwitchToPage(int pageIndex, bool onClick)
 	{
-		throw new System.NotImplementedException();
+		if (hasSelectedPage)
+		{
+			// Turn off the last page bittpm 
+			selectedPageButton.Toggle();
+		}
+		selectedPageButton = pageButtons[pageIndex];
+		if (!onClick)
+		{
+			selectedPageButton.Toggle();
+		}
 	}
 
 	protected Dog[] getDogsForPage(int pageIndex)
 	{
 		throw new System.NotImplementedException();
+	}
+
+	protected void setupPageButtons()
+	{
+		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
+		SwitchToPage(defaultStartPage, onClick:false);
+		for(int i = 0; i < pageButtons.Length; i++)
+		{
+			int pageIndex = i;
+			pageButtons[i].SubscribeToClick(delegate() 
+				{
+					SwitchToPage(pageIndex, onClick:true);
+				});
+		}
 	}
 
 }
