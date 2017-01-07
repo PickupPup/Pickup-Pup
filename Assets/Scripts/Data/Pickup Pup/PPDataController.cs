@@ -1,6 +1,6 @@
 ﻿/*
- * Author: Isaiah Mann
- * Desc: Handles save for Pickup Pup
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Description: Handles save for Pickup Pup
  */
 
 using System.Collections.Generic;
@@ -54,11 +54,20 @@ public class PPDataController : DataController
 		}
 	}
 
+    public Currency OpenHomeSlots
+    {
+        get
+        {
+            return currentGame.OpenHomeSlots;
+        }
+    }
+
 	#endregion
 
 	PPGameSave currentGame;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
+    MonoActionInt onOpenHomeSlotsChange;
 
 	public bool SaveGame()
 	{
@@ -85,6 +94,16 @@ public class PPDataController : DataController
 	{
 		onFoodChange -= foodAction;
 	}
+
+    public void SubscribeToOpenHomeSlotsChange(MonoActionInt openHomeSlotsAction)
+    {
+        onOpenHomeSlotsChange += openHomeSlotsAction;
+    }
+
+    public void UnsubscribeToOpenHomeSlotsChange(MonoActionInt openHomeSlotsAction)
+    {
+        onOpenHomeSlotsChange -= openHomeSlotsAction;
+    }
 		
 	public PPGameSave LoadGame()
 	{
@@ -105,6 +124,7 @@ public class PPDataController : DataController
 		LoadGame();
 		callOnCoinsChange(currentGame.Coins.Amount);
 		callOnFoodChange(currentGame.Food.Amount);
+        callOnOpenHomeSlotsChange(currentGame.OpenHomeSlots.Amount);
 	}
 
 	#endregion
@@ -125,7 +145,15 @@ public class PPDataController : DataController
 		}
 	}
 
-	protected PPGameSave getCurrentGame() 
+    protected void callOnOpenHomeSlotsChange(int openHomeSlots)
+    {
+        if(onOpenHomeSlotsChange != null)
+        {
+            onOpenHomeSlotsChange(openHomeSlots);
+        }
+    }
+
+    protected PPGameSave getCurrentGame() 
 	{
 		return currentGame;
 	}
@@ -148,6 +176,13 @@ public class PPDataController : DataController
 		callOnFoodChange(DogFood.Amount);
 		SaveGame();
 	}
+
+    public void ChangeOpenHomeSlots(int deltaOpenHomeSlots)
+    {
+        this.currentGame.ChangeOpenHomeSlots(deltaOpenHomeSlots);
+        callOnOpenHomeSlotsChange(OpenHomeSlots.Amount);
+        SaveGame();
+    }
 
 	public void Adopt(DogDescriptor dog) 
 	{

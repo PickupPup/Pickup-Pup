@@ -1,6 +1,6 @@
 ﻿/*
- * Author: Isaiah Mann
- * Desc: Serializable data for Pickup Pup
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Description: Serializable data for Pickup Pup
  */
 
 using System.Collections.Generic;
@@ -25,6 +25,14 @@ public class PPGameSave : GameSave
 			return currencies[CurrencyType.DogFood];
 		}
 	}
+
+    public Currency OpenHomeSlots
+    {
+        get
+        {
+            return currencies[CurrencyType.OpenHomeSlots];
+        }
+    }
 
 	public List<DogDescriptor> AdoptedDogs
 	{
@@ -61,8 +69,13 @@ public class PPGameSave : GameSave
 	{
 		ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
 	}
-		
-	public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 
+
+    public void ChangeOpenHomeSlots(int deltaOpenHomeSlots)
+    {
+        ChangeCurrencyAmount(CurrencyType.OpenHomeSlots, deltaOpenHomeSlots);
+    }
+
+    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 
 	{
 		currencies[type].IncreaseBy(deltaAmount);
 	}

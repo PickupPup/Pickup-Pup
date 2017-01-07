@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class DogAdoptionSlot : DogSlot
 {
     Text priceOrAdoptionStatus;
+    Image priceBackgroundImage;
+
+    Color adoptedColor = Color.red;
 
     #region DogSlot Overrides
 
@@ -18,13 +21,32 @@ public class DogAdoptionSlot : DogSlot
 
         priceOrAdoptionStatus = GetComponentInChildren<Text>();
         priceOrAdoptionStatus.text = dog.CostToAdoptStr;
+
+        priceBackgroundImage = images[2];
     }
 
     #endregion
 
     public void Adopt()
     {
-        priceOrAdoptionStatus.text = "Adopted";
+        if (checkAdoption())
+        {
+            dataController.ChangeCoins(-dog.CostToAdopt);
+            dataController.ChangeOpenHomeSlots(-1);
+            priceOrAdoptionStatus.text = "Adopted";
+            priceBackgroundImage.color = Color.red;
+        }
+    }
+
+    bool checkAdoption()
+    {
+        Debug.Log(dataController.Coins.Amount);
+        Debug.Log(dataController.OpenHomeSlots.Amount);
+        if (dataController.Coins.Amount < dog.CostToAdopt || dataController.OpenHomeSlots.Amount <= 0)
+        {
+            return false;
+        }
+        return true;
     }
 
 }
