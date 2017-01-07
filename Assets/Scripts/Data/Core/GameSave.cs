@@ -1,9 +1,10 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Game save
+ * Description: Game save
  */
 
 [System.Serializable]
-public abstract class GameSave : SerializableData {
+public abstract class GameSave : SerializableData 
+{
 	
 }

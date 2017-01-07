@@ -3,6 +3,7 @@
  * Description: Describes the intended behaviour of an audio list
  */
 
-public interface IAudioList {
+public interface IAudioList 
+{
 
 }

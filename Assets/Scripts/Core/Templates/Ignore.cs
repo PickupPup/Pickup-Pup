@@ -1,22 +1,43 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+ * Author: Isaiah Mann
+ * Description: Used to skip over operations in the MonoBehaviourExtended system
+ */
 
-public class Ignore : MonoBehaviourExtended {
-	public bool ColorChange;
+public class Ignore : MonoBehaviourExtended 
+{
+	#region Instance Accessors
 
-	protected override void CleanupReferences () {
+	public bool ColorChange 
+	{
+		get 
+		{
+			return colorChange;
+		}
+	}
+
+	#endregion
+
+	[UnityEngine.SerializeField]
+	bool colorChange;
+
+	protected override void cleanupReferences() 
+	{
 		// Nothing
 	}
 
-	protected override void FetchReferences () {
+	protected override void fetchReferences() 
+	{
 		// Nothing
 	}
 
-	protected override void HandleNamedEvent (string eventName) {
+	protected override void handleNamedEvent(string eventName) 
+	{
 		// Nothing
 	}
 
-	protected override void SetReferences () {
+	protected override void setReferences()
+	{
 		// Nothing
 	}
+
 }

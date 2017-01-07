@@ -4,6 +4,10 @@
  */
 
 [System.Serializable]
-public abstract class PPDescriptor : PPData {
-	public PPDescriptor (DogDatabase data) : base(data) {}
+public abstract class PPDescriptor : PPData 
+{
+	public PPDescriptor(DogDatabase data) : base(data)
+	{
+		// NOTHING
+	}
 }
