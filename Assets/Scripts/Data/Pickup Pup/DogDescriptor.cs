@@ -127,6 +127,7 @@ public class DogDescriptor : PPDescriptor
 	[SerializeField]
 	int age;
 
+	[System.NonSerialized]
 	Dog linkedDog;
 	DogBreed _iBreed;
 

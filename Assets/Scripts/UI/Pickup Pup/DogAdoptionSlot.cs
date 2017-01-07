@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class DogAdoptionSlot : DogSlot
 {
     Text priceOrAdoptionStatus;
+    Image priceBackgroundImage;
+
+    Color adoptedColor = Color.red;
 
     #region DogSlot Overrides
 
@@ -18,13 +21,19 @@ public class DogAdoptionSlot : DogSlot
 
         priceOrAdoptionStatus = GetComponentInChildren<Text>();
         priceOrAdoptionStatus.text = dog.CostToAdoptStr;
+
+        priceBackgroundImage = images[2];
     }
 
     #endregion
 
     public void Adopt()
     {
-        priceOrAdoptionStatus.text = "Adopted";
+        if (game.TryAdoptDog(dog))
+        {
+            priceOrAdoptionStatus.text = "Adopted";
+            priceBackgroundImage.color = Color.red;
+        }
     }
 
 }
