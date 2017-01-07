@@ -8,19 +8,31 @@ using UnityEngine.UI;
 
 public class DogSlot : MonoBehaviourExtended
 {
+    protected PPGameController game;
     protected DogDescriptor dog;
-
-	bool setBackground = true;
+    protected Image[] images;
 
     Image backgroundImage;
     Image dogImage;
 
+    bool setBackground = true;
+
+    #region MonoBehaviourExtended Overrides
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        game = PPGameController.GetInstance;
+    }
+
+    #endregion
+
     // Initializes this Dog Slot by setting component references and displaying its sprites.
-	public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+    public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
 		this.dog = dog;
 
-		Image[] images = GetComponentsInChildren<Image>();
+		images = GetComponentsInChildren<Image>();
 		if(images.Length >= 2) 
 		{
             if (setBackground)

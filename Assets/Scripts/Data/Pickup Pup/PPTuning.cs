@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Desc: Used to store tuning variables
+ * Description: Used to store tuning variables
  */
 
 using UnityEngine;

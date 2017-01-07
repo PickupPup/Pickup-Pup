@@ -1,6 +1,6 @@
 ﻿/*
- * Author: Isaiah Mann
- * Desc: Handles save for Pickup Pup
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Description: Handles save for Pickup Pup
  */
 
 using System.Collections.Generic;
@@ -54,11 +54,20 @@ public class PPDataController : DataController
 		}
 	}
 
+    public Currency VacantHomeSlots
+    {
+        get
+        {
+            return currentGame.VacantHomeSlots;
+        }
+    }
+
 	#endregion
 
 	PPGameSave currentGame;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
+    MonoActionInt onVacantHomeSlotsChange;
 
 	public bool SaveGame()
 	{
@@ -85,6 +94,16 @@ public class PPDataController : DataController
 	{
 		onFoodChange -= foodAction;
 	}
+
+    public void SubscribeToVacantHomeSlotsChange(MonoActionInt VacantHomeSlotsAction)
+    {
+        onVacantHomeSlotsChange += VacantHomeSlotsAction;
+    }
+
+    public void UnsubscribeToVacantHomeSlotsChange(MonoActionInt VacantHomeSlotsAction)
+    {
+        onVacantHomeSlotsChange -= VacantHomeSlotsAction;
+    }
 		
 	public PPGameSave LoadGame()
 	{
@@ -105,6 +124,7 @@ public class PPDataController : DataController
 		LoadGame();
 		callOnCoinsChange(currentGame.Coins.Amount);
 		callOnFoodChange(currentGame.Food.Amount);
+        callOnVacantHomeSlotsChange(currentGame.VacantHomeSlots.Amount);
 	}
 
 	#endregion
@@ -125,7 +145,15 @@ public class PPDataController : DataController
 		}
 	}
 
-	protected PPGameSave getCurrentGame() 
+    protected void callOnVacantHomeSlotsChange(int VacantHomeSlots)
+    {
+        if(onVacantHomeSlotsChange != null)
+        {
+            onVacantHomeSlotsChange(VacantHomeSlots);
+        }
+    }
+
+    protected PPGameSave getCurrentGame() 
 	{
 		return currentGame;
 	}
@@ -148,6 +176,13 @@ public class PPDataController : DataController
 		callOnFoodChange(DogFood.Amount);
 		SaveGame();
 	}
+
+    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
+    {
+        this.currentGame.ChangeVacantHomeSlots(deltaVacantHomeSlots);
+        callOnVacantHomeSlotsChange(VacantHomeSlots.Amount);
+        SaveGame();
+    }
 
 	public void Adopt(DogDescriptor dog) 
 	{

@@ -14,8 +14,9 @@ public class Currency
 		{
 			return new Currency[]
 			{
-				new Currency(CurrencyType.Coins, 0),
-				new Currency(CurrencyType.DogFood, 0)
+				new Currency(CurrencyType.Coins, 2000),
+				new Currency(CurrencyType.DogFood, 0),
+                new Currency(CurrencyType.VacantHomeSlots, 10)
 			};
 		}
 	}
