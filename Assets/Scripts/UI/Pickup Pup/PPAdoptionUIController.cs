@@ -19,17 +19,6 @@ public class PPAdoptionUIController : PPUIController
 		availableDogPortraits = GetComponentsInChildren<DogSlot>();
 	}
 
-<<<<<<< HEAD
-	protected override void FetchReferences () {
-		base.FetchReferences ();
-		data = DogDatabase.Instance;
-		data.Initialize();
-		populateAvailableDogs(data);
-        coins = ppGameController.Coins;
-        coinDisplay.SetCurrency(coins);
-        homeController = HomeController.Instance;
-    }
-=======
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
@@ -37,7 +26,6 @@ public class PPAdoptionUIController : PPUIController
 		database.Initialize();
 		populateAvailableDogs(database);
 	}
->>>>>>> origin/master
 
 	#endregion
 

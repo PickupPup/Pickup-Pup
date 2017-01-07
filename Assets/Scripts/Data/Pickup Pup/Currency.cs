@@ -16,7 +16,6 @@ public class Currency
 			{
 				new Currency(CurrencyType.Coins, 0),
 				new Currency(CurrencyType.DogFood, 0)
->>>>>>> origin/master
 			};
 		}
 	}

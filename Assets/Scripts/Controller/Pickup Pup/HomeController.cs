@@ -19,7 +19,7 @@ public class HomeController : SingletonController<HomeController>
     public void Init()
     {
         dogData = ((PPGameController) PPGameController.Instance).Data;
-		dogs = dogData.Dogs;
+		dogs = new List<DogDescriptor>(dogData.Dogs);
     }
 
     public void AddSlot()
