@@ -16,7 +16,7 @@ public class Currency
 			{
 				new Currency(CurrencyType.Coins, 2000),
 				new Currency(CurrencyType.DogFood, 0),
-                new Currency(CurrencyType.OpenHomeSlots, 10)
+                new Currency(CurrencyType.VacantHomeSlots, 10)
 			};
 		}
 	}

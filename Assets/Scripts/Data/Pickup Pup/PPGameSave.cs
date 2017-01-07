@@ -26,11 +26,11 @@ public class PPGameSave : GameSave
 		}
 	}
 
-    public Currency OpenHomeSlots
+    public Currency VacantHomeSlots
     {
         get
         {
-            return currencies[CurrencyType.OpenHomeSlots];
+            return currencies[CurrencyType.VacantHomeSlots];
         }
     }
 
@@ -70,9 +70,9 @@ public class PPGameSave : GameSave
 		ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
 	}
 
-    public void ChangeOpenHomeSlots(int deltaOpenHomeSlots)
+    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
     {
-        ChangeCurrencyAmount(CurrencyType.OpenHomeSlots, deltaOpenHomeSlots);
+        ChangeCurrencyAmount(CurrencyType.VacantHomeSlots, deltaVacantHomeSlots);
     }
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 

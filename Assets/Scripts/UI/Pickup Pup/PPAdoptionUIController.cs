@@ -3,9 +3,6 @@
  * Description: Controls the adoption UI
  */
 
-using UnityEngine;
-using UnityEngine.UI;
-
 public class PPAdoptionUIController : PPUIController 
 {	
 	DogSlot[] availableDogPortraits;

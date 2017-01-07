@@ -29,23 +29,11 @@ public class DogAdoptionSlot : DogSlot
 
     public void Adopt()
     {
-        if (checkAdoption())
+        if (game.TryAdoptDog(dog))
         {
-            dataController.ChangeCoins(-dog.CostToAdopt);
-            dataController.ChangeOpenHomeSlots(-1);
-            dataController.Adopt(dog);
             priceOrAdoptionStatus.text = "Adopted";
             priceBackgroundImage.color = Color.red;
         }
-    }
-
-    bool checkAdoption()
-    {
-        if (dataController.Coins.Amount < dog.CostToAdopt || dataController.OpenHomeSlots.Amount <= 0)
-        {
-            return false;
-        }
-        return true;
     }
 
 }

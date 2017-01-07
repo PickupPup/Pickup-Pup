@@ -54,11 +54,11 @@ public class PPDataController : DataController
 		}
 	}
 
-    public Currency OpenHomeSlots
+    public Currency VacantHomeSlots
     {
         get
         {
-            return currentGame.OpenHomeSlots;
+            return currentGame.VacantHomeSlots;
         }
     }
 
@@ -67,7 +67,7 @@ public class PPDataController : DataController
 	PPGameSave currentGame;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
-    MonoActionInt onOpenHomeSlotsChange;
+    MonoActionInt onVacantHomeSlotsChange;
 
 	public bool SaveGame()
 	{
@@ -95,14 +95,14 @@ public class PPDataController : DataController
 		onFoodChange -= foodAction;
 	}
 
-    public void SubscribeToOpenHomeSlotsChange(MonoActionInt openHomeSlotsAction)
+    public void SubscribeToVacantHomeSlotsChange(MonoActionInt VacantHomeSlotsAction)
     {
-        onOpenHomeSlotsChange += openHomeSlotsAction;
+        onVacantHomeSlotsChange += VacantHomeSlotsAction;
     }
 
-    public void UnsubscribeToOpenHomeSlotsChange(MonoActionInt openHomeSlotsAction)
+    public void UnsubscribeToVacantHomeSlotsChange(MonoActionInt VacantHomeSlotsAction)
     {
-        onOpenHomeSlotsChange -= openHomeSlotsAction;
+        onVacantHomeSlotsChange -= VacantHomeSlotsAction;
     }
 		
 	public PPGameSave LoadGame()
@@ -124,7 +124,7 @@ public class PPDataController : DataController
 		LoadGame();
 		callOnCoinsChange(currentGame.Coins.Amount);
 		callOnFoodChange(currentGame.Food.Amount);
-        callOnOpenHomeSlotsChange(currentGame.OpenHomeSlots.Amount);
+        callOnVacantHomeSlotsChange(currentGame.VacantHomeSlots.Amount);
 	}
 
 	#endregion
@@ -145,11 +145,11 @@ public class PPDataController : DataController
 		}
 	}
 
-    protected void callOnOpenHomeSlotsChange(int openHomeSlots)
+    protected void callOnVacantHomeSlotsChange(int VacantHomeSlots)
     {
-        if(onOpenHomeSlotsChange != null)
+        if(onVacantHomeSlotsChange != null)
         {
-            onOpenHomeSlotsChange(openHomeSlots);
+            onVacantHomeSlotsChange(VacantHomeSlots);
         }
     }
 
@@ -177,10 +177,10 @@ public class PPDataController : DataController
 		SaveGame();
 	}
 
-    public void ChangeOpenHomeSlots(int deltaOpenHomeSlots)
+    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
     {
-        this.currentGame.ChangeOpenHomeSlots(deltaOpenHomeSlots);
-        callOnOpenHomeSlotsChange(OpenHomeSlots.Amount);
+        this.currentGame.ChangeVacantHomeSlots(deltaVacantHomeSlots);
+        callOnVacantHomeSlotsChange(VacantHomeSlots.Amount);
         SaveGame();
     }
 

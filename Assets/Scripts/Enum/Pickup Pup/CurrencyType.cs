@@ -7,7 +7,7 @@ public enum CurrencyType
 {
     DogFood,
     Coins,
-    OpenHomeSlots,
+    VacantHomeSlots,
     Time,
     None,
 

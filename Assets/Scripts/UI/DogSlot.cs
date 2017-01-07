@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class DogSlot : MonoBehaviourExtended
 {
-    protected PPDataController dataController;
+    protected PPGameController game;
     protected DogDescriptor dog;
     protected Image[] images;
 
@@ -22,7 +22,7 @@ public class DogSlot : MonoBehaviourExtended
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        dataController = (PPDataController) PPDataController.Instance;
+        game = PPGameController.GetInstance;
     }
 
     #endregion

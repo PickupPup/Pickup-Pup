@@ -74,6 +74,14 @@ public class PPGameController : GameController
 		}
 	}
 
+    public Currency VacantHomeSlots
+    {
+        get
+        {
+            return dataController.VacantHomeSlots;
+        }
+    }
+
 	public bool DogsScoutingAtCapacity 
 	{
 		get 
@@ -118,10 +126,31 @@ public class PPGameController : GameController
 	{
 		dataController.ChangeFood(deltaFood);
 	}
-		
+
+    public void ChangeVacantHomeSlots( int deltaVacantHomeSlots)
+    {
+        dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
+    }
+	
+    public bool TryAdoptDog(DogDescriptor dog)
+    {
+        if (Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
+        {
+            return false;
+        }
+        AdoptDog(dog);
+        return true;
+    }
+
+    void AdoptDog(DogDescriptor dog)
+    {
+        ChangeCoins(-dog.CostToAdopt);
+        ChangeVacantHomeSlots(-1);
+    }
+
 	public bool TrySendDogToScout(Dog dog) 
 	{
-		// Can only send a certain nubmer of dogs out to scout
+		// Can only send a certain number of dogs out to scout
 		if(DogsScoutingAtCapacity || dogsOutScouting.Contains(dog)) 
 		{
 			return false;
