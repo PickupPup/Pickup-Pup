@@ -40,8 +40,6 @@ public class DogAdoptionSlot : DogSlot
 
     bool checkAdoption()
     {
-        Debug.Log(dataController.Coins.Amount);
-        Debug.Log(dataController.OpenHomeSlots.Amount);
         if (dataController.Coins.Amount < dog.CostToAdopt || dataController.OpenHomeSlots.Amount <= 0)
         {
             return false;
