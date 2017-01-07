@@ -9,6 +9,26 @@ using System.Collections;
 [System.Serializable]
 public class PPTimer : PPData 
 {
+	#region
+
+	public static PPTimer DefaultTimer
+	{
+		get 
+		{
+			return new PPTimer(DEFAULT_INT, DEFAULT_INT);
+		}
+	}
+
+	public static string DefaultTimeRemainingStr
+	{
+		get 
+		{
+			return DefaultTimer.TimeRemainingStr;
+		}
+	}
+
+	#endregion
+
 	#region Instance Accessors
 
 	public bool IsTimerSetup 
@@ -24,6 +44,14 @@ public class PPTimer : PPData
 		get 
 		{
 			return timer.TimeRemaining;
+		}
+	}
+
+	public string TimeRemainingStr
+	{
+		get 
+		{
+			return this.ToString();
 		}
 	}
 
@@ -167,14 +195,7 @@ public class PPTimer : PPData
 	// Returns time in HH:MM:SS format
 	public override string ToString() 
 	{
-		int hours = (int) TimeRemaining / 3600;
-		int minutes = ((int) TimeRemaining / 60) % 60;
-		int seconds = (int) TimeRemaining % 60;
-		return string.Format("{0}:{1}:{2}", 
-			padWithZeroes(hours, 2), 
-			padWithZeroes(minutes, 2),
-			padWithZeroes(seconds, 2)
-		);
+		return formatTime(TimeRemaining);
 	}
 
 	#endregion

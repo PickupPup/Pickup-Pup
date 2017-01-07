@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class DogOutsideSlot : DogSlot
 {
+	Dog outdoorDog;
     Text nameText;
     Text timerText;
 
@@ -26,4 +27,27 @@ public class DogOutsideSlot : DogSlot
 
     #endregion
 
+	public void SendDogOutside(Dog dog)
+	{
+		Init(dog.Info, dog.Portrait);
+
+	}
+
+	public Dog BringDogIndoors()
+	{
+		Dog returningDog = this.outdoorDog;
+		this.outdoorDog = null;
+		return returningDog;
+	}
+
+	void subscribeToTimer(Dog dog)
+	{
+		this.outdoorDog = dog;
+	}
+
+	void handleDogTimerChange(Dog dog, float timeRemaining)
+	{
+		
+	}
+		
 }

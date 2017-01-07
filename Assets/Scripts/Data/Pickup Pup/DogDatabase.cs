@@ -11,7 +11,9 @@ using System.IO;
 [System.Serializable]
 public class DogDatabase : Database<DogDatabase> 
 {
-	static Sprite defaultSprite
+	#region Static Accessors
+
+	public static Sprite DefaultSprite
 	{
 		get 
 		{
@@ -27,6 +29,8 @@ public class DogDatabase : Database<DogDatabase>
 			}
 		}
 	}
+
+	#endregion
 
 	static Sprite _defaultSprite;
 
@@ -94,7 +98,7 @@ public class DogDatabase : Database<DogDatabase>
 		// Error checking
 		if(breed == null || string.IsNullOrEmpty(breed.Breed))
 		{
-			return defaultSprite;
+			return DefaultSprite;
 		}
 
 		Sprite match;
