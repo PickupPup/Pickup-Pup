@@ -3,8 +3,6 @@
  * Description: Parent class for a Dog's thumbnail.
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

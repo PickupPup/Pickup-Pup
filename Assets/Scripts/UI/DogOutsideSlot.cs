@@ -1,5 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Author: Grace Barrett-Snyder 
+ * Description: Controls a DogSlot for a Dog that's outside (has name and timer).
+ */
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +10,8 @@ public class DogOutsideSlot : DogSlot
 {
     Text nameText;
     Text timerText;
+
+    #region DogSlot Overrides
 
     public override void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
@@ -18,5 +23,7 @@ public class DogOutsideSlot : DogSlot
 
         nameText.text = dog.Name;
     }
+
+    #endregion
 
 }
