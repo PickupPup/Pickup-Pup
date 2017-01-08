@@ -52,7 +52,7 @@ public class ShopDatabase : Database<ShopDatabase>
 
     void populateShopItems()
     {
-        // TODO: Read this info from a JSON file.
+        // TODO: Read this info from a JSON file in PPGameController.
         items = new ShopItem[4];
         items[0] = new ShopItem("One Dog Food Can", 1, CurrencyType.DogFood, 10, CurrencyType.Coins);
         items[1] = new ShopItem("Five Dog Food Cans", 5, CurrencyType.DogFood, 40, CurrencyType.Coins);

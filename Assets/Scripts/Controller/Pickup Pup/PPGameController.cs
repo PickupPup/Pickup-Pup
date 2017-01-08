@@ -120,6 +120,7 @@ public class PPGameController : GameController
 	{
 		base.setReferences();
 		database = parseDatabase();
+        shop = parseShopDatabase();
 		tuning = parseTuning();
 		database.Initialize();
         shop.Initialize();
@@ -198,6 +199,12 @@ public class PPGameController : GameController
 		TextAsset json = loadTextAssetInResources(GAME_DATA_FILE_PATH);
 		return JsonUtility.FromJson<DogDatabase>(json.text);
 	}
+
+    ShopDatabase parseShopDatabase()
+    {
+        // TODO: Parse from JSON
+        return new ShopDatabase();
+    }
 
 	PPTuning parseTuning() 
 	{

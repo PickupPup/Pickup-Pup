@@ -14,17 +14,27 @@ public class PPShopUIController : PPUIController
     [SerializeField]
     CurrencyDisplay coinDisplay;
 
+    ShopDatabase shop;
+
     #region MonoBehaviourExtended Overrides
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        EventController.Event(PPEvent.LoadHome);
+        //EventController.Event(PPEvent.LoadHome); // TODO: Change this
+        shop = ShopDatabase.Instance;
+        shop.Initialize();
+
         // Set Currency Displays
         dogFoodDisplay.SetCurrency(gameController.DogFood);
         coinDisplay.SetCurrency(gameController.Coins);
     }
 
     #endregion
+
+    void populateShop(ShopDatabase shop)
+    {
+        // TODO
+    }
 
 }
