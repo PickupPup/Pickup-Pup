@@ -5,7 +5,7 @@
 
 using UnityEngine.UI;
 
-public class UILabledButton : UIButton 
+public class UILabeledButton : UIButton 
 {
 	public void Set(string text, MonoAction clickAction, bool clearPreviousClickActions = true) 
 	{

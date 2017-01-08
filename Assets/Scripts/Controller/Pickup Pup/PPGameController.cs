@@ -169,14 +169,14 @@ public class PPGameController : GameController
 		this.selectedDog = dog;
 	}
 		
-	public void SendDogToSlot(Dog dog, DogSlot slot)
-	{
-		slot.Init(dog);
-	}
-
 	public void SendSelectedDogToSlot(DogSlot slot)
 	{
-		SendDogToSlot(this.selectedDog, slot);
+		sendDogToSlot(this.selectedDog, slot);
+	}
+
+	void sendDogToSlot(Dog dog, DogSlot slot)
+	{
+		slot.Init(dog);
 	}
 
 	void sendDogToScout(Dog dog) 

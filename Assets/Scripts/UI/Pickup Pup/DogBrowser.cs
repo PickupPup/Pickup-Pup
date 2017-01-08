@@ -118,23 +118,37 @@ public class DogBrowser : PPUIElement
 			selectedPageButton.Toggle();
 		}
 		Set(getDogsForPage(pageIndex));
-		checkDirectionalButtons();
 	}
 
 	public void PageForward()
 	{
-		if(canPageForward())	
-		{
-			SwitchToPage(currentlySelectedPageIndex + 1, onClickPageButton:false);
-		}
+		SwitchToPage(getPageForwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
+	}
+
+	int getPageForwardIndex(int currentPage)
+	{
+		return getPageIndexFromOffset(currentPage, 1);
 	}
 
 	public void PageBackward()
 	{
-		if(canPageBackward())
-		{
-			SwitchToPage(currentlySelectedPageIndex - 1, onClickPageButton:false);
-		}
+		SwitchToPage(getPageBackwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
+	}
+
+	int getPageBackwardIndex(int currentPage)
+	{
+		return getPageIndexFromOffset(currentPage, -1);
+	}
+
+	int getPageIndexFromOffset(int currentPage, int offset)
+	{
+		currentPage += offset;
+		return getPageWrapIndex(currentPage);
+	}
+
+	int getPageWrapIndex(int rawIndex)
+	{
+		return mod(rawIndex, getNumPages(this.database));
 	}
 
 	int getNumPages(DogDatabase database)
@@ -142,26 +156,10 @@ public class DogBrowser : PPUIElement
 		return Mathf.CeilToInt((float) database.Dogs.Length / (float) dogsPerPage);
 	}
 
-	bool canPageForward()
-	{
-		return this.currentlySelectedPageIndex < this.pageButtons.Length - 1;
-	}
-
-	bool canPageBackward()
-	{
-		return this.currentlySelectedPageIndex > 0;
-	}
-
 	// TODO:
 	void openRehomeScreen()
 	{
 		Debug.Log("REHOME Screen has yet to be implemented");
-	}
-
-	void checkDirectionalButtons()
-	{
-		pageForwardButton.ToggleInteractable(canPageForward());
-		pageBackwardButton.ToggleInteractable(canPageBackward());
 	}
 
 	Dog[] getDogsForPage(int pageIndex)

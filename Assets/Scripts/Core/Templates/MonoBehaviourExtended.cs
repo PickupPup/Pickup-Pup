@@ -207,4 +207,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		}
 	}
 
+	// Source: http://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
+	protected int mod(int rawValue, int modulus) 
+	{
+		return (rawValue % modulus + modulus) % modulus;
+	}
+
 }

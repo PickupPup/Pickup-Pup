@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleableUIButton : UILabledButton 
+public class ToggleableUIButton : UILabeledButton 
 {
 	#region Instance Acccessors
 
