@@ -29,7 +29,7 @@ public class DogAdoptionSlot : DogSlot
 
     public void Adopt()
     {
-        if (game.TryAdoptDog(dog))
+        if (game.TryAdoptDog(dogInfo))
         {
             priceOrAdoptionStatus.text = "Adopted";
             priceBackgroundImage.color = Color.red;

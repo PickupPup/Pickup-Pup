@@ -22,8 +22,13 @@ public class DogBrowser : PPUIElement
 	UIButton pageBackwardButton;
 	[SerializeField]
 	UIButton pageForwardButton;
+	[SerializeField]
+	UIButton closeWindowHitArea;
+	[SerializeField]
+	UIButton rehomeButton;
 
-	DogSlot[] elements;
+	PPData.DogAction onDogClick;
+	DogSlot[] dogSlots;
 	ToggleableColorUIButton[] pageButtons;
 	ToggleableColorUIButton selectedPageButton;
 	int currentlySelectedPageIndex = INVALID_VALUE;
@@ -33,25 +38,41 @@ public class DogBrowser : PPUIElement
 	protected override void setReferences()
 	{
 		base.setReferences();
-		elements = GetComponentsInChildren<DogSlot>();
 	}
 
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
-		setupPageButtons();
+		setupDogSlots();
+		setupButtons();
 	}
 
 	#endregion
 
+	public void Open(int pageIndex = NONE_VALUE)
+	{
+		Show();
+		SwitchToPage(pageIndex, onClickPageButton:false);
+	}
+
+	public void Close()
+	{
+		Hide();
+	}
+
 	public void Set(Dog[] dogs) 
 	{
-		for(int i = 0; i < elements.Length; i++)
+		for(int i = 0; i < dogSlots.Length; i++)
 		{
-			elements[i].Init(dogs[i]);
+			dogSlots[i].Init(dogs[i]);
 		}
 	}
 		
+	public void SubscribeToDogClick (PPData.DogAction dogClickAction)
+	{
+		onDogClick += dogClickAction;
+	}
+
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
 		this.currentlySelectedPageIndex = pageIndex;
@@ -94,6 +115,12 @@ public class DogBrowser : PPUIElement
 		return this.currentlySelectedPageIndex > 0;
 	}
 
+	// TODO:
+	void openRehomeScreen()
+	{
+		Debug.Log("REHOME Screen has yet to be implemented");
+	}
+
 	void checkDirectionalButtons()
 	{
 		pageForwardButton.ToggleInteractable(canPageForward());
@@ -105,8 +132,27 @@ public class DogBrowser : PPUIElement
 		throw new System.NotImplementedException();
 	}
 
-	void setupPageButtons()
+	void setupDogSlots()
 	{
+		dogSlots = GetComponentsInChildren<DogSlot>();
+		foreach(DogSlot slot in this.dogSlots)
+		{
+			slot.SubscribeToClick(handleDogSlotClick);
+		}
+	}
+
+	void handleDogSlotClick(Dog dog)
+	{
+		if(onDogClick != null)
+		{
+			onDogClick(dog);
+		}
+	}
+
+	void setupButtons()
+	{
+		closeWindowHitArea.SubscribeToClick(Close);
+		rehomeButton.SubscribeToClick(openRehomeScreen);
 		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
 		SwitchToPage(defaultStartPage, onClickPageButton:false);
 		for(int i = 0; i < pageButtons.Length; i++)

@@ -8,9 +8,28 @@ using UnityEngine.UI;
 
 public class DogSlot : PPUIElement
 {
+	protected bool hasDogInfo
+	{
+		get
+		{
+			return dogInfo != null;
+		}
+	}
+
+	protected bool hasDog
+	{
+		get
+		{
+			return dog != null;
+		}
+	}
+
     protected PPGameController game;
-    protected DogDescriptor dog;
+    protected DogDescriptor dogInfo;
+	protected Dog dog;
     protected Image[] images;
+
+	PPData.DogAction onSlotClick;
 
     Image backgroundImage;
     Image dogImage;
@@ -30,7 +49,7 @@ public class DogSlot : PPUIElement
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
-		this.dog = dog;
+		this.dogInfo = dog;
 
 		images = GetComponentsInChildren<Image>();
 		if(images.Length >= 2) 
@@ -46,12 +65,39 @@ public class DogSlot : PPUIElement
             }
 		}
 
-		setSlot(this.dog, dogSprite, backgroundSprite);
+		setSlot(this.dogInfo, dogSprite, backgroundSprite);
     }
 
 	public virtual void Init(Dog dog)
 	{
+		this.dog = dog;
 		Init(dog.Info, dog.Portrait);
+	}
+
+	public void ExecuteClick()
+	{
+		if(hasDog)
+		{
+			callOnSlotClick(this.dog);
+		}
+	}
+
+	public void SubscribeToClick(PPData.DogAction clickAction)
+	{
+		onSlotClick += clickAction;
+	}
+
+	public void UnsubscribeFromClick(PPData.DogAction clickAction)
+	{
+		onSlotClick -= clickAction;
+	}
+
+	void callOnSlotClick(Dog dog)
+	{
+		if(onSlotClick != null)
+		{
+			onSlotClick(dog);
+		}
 	}
 
     // Sets the dog and background sprites of this Dog Slot.
