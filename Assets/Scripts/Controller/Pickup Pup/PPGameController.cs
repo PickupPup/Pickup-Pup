@@ -48,6 +48,14 @@ public class PPGameController : GameController
 		}
 	}
 
+    public PPTuning Tuning
+    {
+        get
+        {
+            return tuning;
+        }
+    }
+
 	#region Instance Accesors
 
 	public DogDatabase Data
@@ -57,6 +65,14 @@ public class PPGameController : GameController
 			return database; 
 		}
 	}
+
+    public ShopDatabase Shop
+    {
+        get
+        {
+            return shop;
+        }
+    }
 
 	public Currency Coins
 	{
@@ -95,6 +111,7 @@ public class PPGameController : GameController
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase database;
+    ShopDatabase shop;
 	PPDataController dataController;
 
 	#region MonoBehaviourExtended Overrides
@@ -105,6 +122,7 @@ public class PPGameController : GameController
 		database = parseDatabase();
 		tuning = parseTuning();
 		database.Initialize();
+        shop.Initialize();
 	}
 
 	protected override void fetchReferences() 
