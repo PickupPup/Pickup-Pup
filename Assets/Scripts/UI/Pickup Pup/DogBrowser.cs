@@ -283,7 +283,7 @@ public class DogBrowser : PPUIElement
 		{
 			padPageButtons(pages, onInit);
 		}
-		else if (pages < pageButtons.Length)
+		else if(pages < pageButtons.Length)
 		{
 			trimPageButtons(pages);
 		}

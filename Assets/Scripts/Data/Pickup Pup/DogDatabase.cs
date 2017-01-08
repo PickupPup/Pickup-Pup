@@ -142,11 +142,11 @@ public class DogDatabase : Database<DogDatabase>
 		}
 	}
 		
-	public override bool TryInit ()
+	public override bool TryInit()
 	{
 		if(tryInitData())
 		{
-			return base.TryInit ();
+			return base.TryInit();
 		}
 		else
 		{

@@ -19,6 +19,7 @@ public class HomeDisplay : PPUIElement
 
     protected override void fetchReferences()
 	{
+		base.fetchReferences();
         Init();
     }
 

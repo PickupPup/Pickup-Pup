@@ -9,7 +9,7 @@ using System.Collections;
 [System.Serializable]
 public class PPTimer : PPData 
 {
-	#region
+	#region Static Accessors
 
 	public static PPTimer DefaultTimer
 	{
