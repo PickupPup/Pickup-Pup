@@ -4,15 +4,27 @@
  * Usage: Should be attached to the parent element in the UI that holds the child elements
  */
 
-using UnityEngine;
+ using UnityEngine;
 
 public class DogBrowser : PPUIElement 
 {	
+	#region Instance Accessors
+
+	public int CurrentPageIndex
+	{
+		get
+		{
+			return this.currentlySelectedPageIndex;
+		}
+	}
+		
+	#endregion
+
 	bool hasSelectedPage
 	{
 		get
 		{
-			return selectedPageButton != null;
+			return buttonControler.hasSelectedPage;
 		}
 	}
 
@@ -24,25 +36,12 @@ public class DogBrowser : PPUIElement
 		}
 	}
 
-	[SerializeField]
-	GameObject pageButtonRef;
-	[SerializeField]
-	Transform pageButtonParent;
+
 	[SerializeField]
 	int defaultStartPage;
-	[SerializeField]
-	UIButton pageBackwardButton;
-	[SerializeField]
-	UIButton pageForwardButton;
-	[SerializeField]
-	UIButton closeWindowHitArea;
-	[SerializeField]
-	UIButton rehomeButton;
 
-	PPData.DogAction onDogClick;
+	DogBrowserButtonController buttonControler;
 	DogSlot[] dogSlots;
-	ToggleableColorUIButton[] pageButtons;
-	ToggleableColorUIButton selectedPageButton;
 	int currentlySelectedPageIndex = INVALID_VALUE;
 	DogDatabase database;
 	Dog[] dogCollection;
@@ -53,6 +52,8 @@ public class DogBrowser : PPUIElement
 	protected override void setReferences()
 	{
 		base.setReferences();
+		// Also checks the current GameObject (as per the current prefab setup)
+		buttonControler = GetComponentInChildren<DogBrowserButtonController>();
 		dogSlots = GetComponentsInChildren<DogSlot>();
 		database = DogDatabase.GetInstance;
 		dogCollection = new Dog[database.Dogs.Length];
@@ -62,7 +63,6 @@ public class DogBrowser : PPUIElement
 	{
 		base.fetchReferences();
 		setupDogSlots();
-		setupButtons();
 	}
 
 	#endregion
@@ -96,30 +96,55 @@ public class DogBrowser : PPUIElement
 		
 	public void SubscribeToDogClick(PPData.DogAction dogClickAction)
 	{
-		onDogClick += dogClickAction;
+		buttonControler.SubscribeToDogClick(dogClickAction);
 	}
 
 	public void UnsubscribeFromDogClick(PPData.DogAction dogClickAction)
 	{
-		onDogClick -= dogClickAction;
+		buttonControler.UnsubscribeFromDogClick(dogClickAction);
+	}
+
+	public void SwitchToDefaultPage(bool onClickPageButton)
+	{
+		this.SwitchToPage(defaultStartPage, onClickPageButton);
 	}
 
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
 		this.currentlySelectedPageIndex = pageIndex;
-		if (hasSelectedPage)
-		{
-			// Turn off the last page button 
-			selectedPageButton.Toggle();
-		}
-		selectedPageButton = pageButtons[pageIndex];
-		if (!onClickPageButton)
-		{
-			selectedPageButton.Toggle();
-		}
+		buttonControler.SwitchToPage(pageIndex, onClickPageButton);
 		Set(getDogsForPage(pageIndex));
 	}
 
+	public void RefreshPageInitChecks(int newPageButtonCount)
+	{
+		bool needToCopyOldChecks = pagesInitializedCheck != null;
+		bool[] oldChecks = pagesInitializedCheck;
+		// Assume all bools in array default to false
+		pagesInitializedCheck = new bool[newPageButtonCount];
+		if(needToCopyOldChecks)
+		{
+			ArrayUtil.CopyRange(oldChecks, pagesInitializedCheck, 0, 0, oldChecks.Length);
+		}
+
+	}
+
+	public int GetNumPages()
+	{
+		return getNumPages(this.database);
+	}
+
+	int getNumPages(DogDatabase database)
+	{
+		return Mathf.CeilToInt((float) database.Dogs.Length / (float) dogsPerPage);
+	}
+
+	// TODO:
+	public void OpenRehomeScreen()
+	{
+		Debug.Log("REHOME Screen has yet to be implemented");
+	}
+		
 	public void PageForward()
 	{
 		SwitchToPage(getPageForwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
@@ -149,17 +174,6 @@ public class DogBrowser : PPUIElement
 	int getPageWrapIndex(int rawIndex)
 	{
 		return mod(rawIndex, getNumPages(this.database));
-	}
-
-	int getNumPages(DogDatabase database)
-	{
-		return Mathf.CeilToInt((float) database.Dogs.Length / (float) dogsPerPage);
-	}
-
-	// TODO:
-	void openRehomeScreen()
-	{
-		Debug.Log("REHOME Screen has yet to be implemented");
 	}
 
 	Dog[] getDogsForPage(int pageIndex)
@@ -229,102 +243,13 @@ public class DogBrowser : PPUIElement
 		{
 			// Links together DogSlot and UIButton scripts
 			slot.GetComponent<UIButton>().SubscribeToClick(slot.ExecuteClick);
-			slot.SubscribeToClick(handleDogSlotClick);
-		}
-	}
-
-	void handleDogSlotClick(Dog dog)
-	{
-		if(onDogClick != null)
-		{
-			onDogClick(dog);
+			slot.SubscribeToClick(buttonControler.HandleDogSlotClick);
 		}
 	}
 
 	bool onPage(int pageIndex)
 	{
 		return currentlySelectedPageIndex == pageIndex;
-	}
-
-	void setupButtons()
-	{
-		closeWindowHitArea.SubscribeToClick(Close);
-		rehomeButton.SubscribeToClick(openRehomeScreen);
-		refreshPageButtonReferences();
-		maintainCorrectPageButtonCount(onInit:true);
-		SwitchToPage(defaultStartPage, onClickPageButton:false);
-		for(int i = 0; i < pageButtons.Length; i++)
-		{
-			setupPageButton(pageButtons[i], i);
-		}
-		pageBackwardButton.SubscribeToClick(PageBackward);
-		pageForwardButton.SubscribeToClick(PageForward);
-	}
-
-	// There are extra steps that do not need to be performed on init
-	ToggleableColorUIButton addPageButton(int pageIndex, bool addingOnInit)
-	{
-		GameObject buttonobject = Instantiate(pageButtonRef, pageButtonParent);
-		ToggleableColorUIButton pageButton = buttonobject.GetComponent<ToggleableColorUIButton>();
-		if(!addingOnInit)
-		{
-			setupPageButton(pageButton, pageIndex);
-			refreshPageButtonReferences();
-		}
-		return pageButton;
-	}
-
-	void maintainCorrectPageButtonCount(bool onInit)
-	{
-		int pages = getNumPages(this.database);
-		if(pages > pageButtons.Length)
-		{
-			padPageButtons(pages, onInit);
-		}
-		else if(pages < pageButtons.Length)
-		{
-			trimPageButtons(pages);
-		}
-		refreshPageButtonReferences();
-	}
-
-	void trimPageButtons(int desiredLength)
-	{
-		for(int i = desiredLength; i < pageButtons.Length; i++)
-		{
-			Destroy(pageButtons[i].gameObject);
-		}
-	}
-
-	void padPageButtons(int desiredLength, bool onInit)
-	{
-		int currentButtonCount = pageButtons.Length;
-		for(int i = currentButtonCount; i < desiredLength; i++)
-		{
-			addPageButton(i, onInit);
-		}
-	}
-
-	void setupPageButton(ToggleableColorUIButton pageButton, int pageIndex)
-	{
-		pageButton.SubscribeToClick(delegate() 
-			{
-				SwitchToPage(pageIndex, onClickPageButton:true);
-			});
-		pageButton.SetToggleOnClickEnabled(isEnabled:false);
-	}
-
-	void refreshPageButtonReferences()
-	{
-		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
-		bool needToCopyOldChecks = pagesInitializedCheck != null;
-		bool[] oldChecks = pagesInitializedCheck;
-		// Assume all bools in array default to false
-		pagesInitializedCheck = new bool[pageButtons.Length];
-		if(needToCopyOldChecks)
-		{
-			ArrayUtil.CopyRange(oldChecks, pagesInitializedCheck, 0, 0, oldChecks.Length);
-		}
 	}
 
 }
