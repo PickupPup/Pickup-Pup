@@ -8,6 +8,9 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
+	protected const int NONE_VALUE = 0;
+	protected const int INVALID_VALUE = -1;
+
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float monoFloat);
 	public delegate void MonoActionInt(int monoInt);

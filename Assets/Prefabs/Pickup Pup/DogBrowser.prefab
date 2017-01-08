@@ -136,10 +136,10 @@ GameObject:
   - component: {fileID: 224647681505527958}
   - component: {fileID: 222936541882181540}
   - component: {fileID: 114882671093710774}
-  - component: {fileID: 114671711251843218}
   - component: {fileID: 114901903489885614}
   - component: {fileID: 114024203768481726}
   - component: {fileID: 114891501885036514}
+  - component: {fileID: 114112114804278772}
   m_Layer: 5
   m_Name: LeftButton
   m_TagString: Untagged
@@ -793,10 +793,10 @@ GameObject:
   - component: {fileID: 224630619938631978}
   - component: {fileID: 222160867098926524}
   - component: {fileID: 114137376379790390}
-  - component: {fileID: 114397537760723816}
   - component: {fileID: 114521649414947006}
   - component: {fileID: 114064753657917612}
   - component: {fileID: 114856702403648264}
+  - component: {fileID: 114164380738010282}
   m_Layer: 5
   m_Name: RightButton
   m_TagString: Untagged
@@ -1042,6 +1042,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &114112114804278772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1169832307982830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
 --- !u!114 &114113618324446816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1175,6 +1187,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114164380738010282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983034254814862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
 --- !u!114 &114165749212004550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1592,18 +1616,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114397537760723816
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983034254814862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 791d65e69e5754dd69d828b80bcb26d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alternateSprites: []
 --- !u!114 &114407330797507886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2193,18 +2205,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -2, y: -2}
   m_UseGraphicAlpha: 1
---- !u!114 &114671711251843218
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1169832307982830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 791d65e69e5754dd69d828b80bcb26d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alternateSprites: []
 --- !u!114 &114678125862193672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2769,6 +2769,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alternateSprites: []
   defaultStartPage: 0
+  pageBackwardButton: {fileID: 114112114804278772}
+  pageForwardButton: {fileID: 114164380738010282}
 --- !u!114 &114837713938564970
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -18,10 +18,15 @@ public class DogBrowser : PPUIElement
 
 	[SerializeField]
 	int defaultStartPage;
+	[SerializeField]
+	UIButton pageBackwardButton;
+	[SerializeField]
+	UIButton pageForwardButton;
 
 	DogSlot[] elements;
 	ToggleableColorUIButton[] pageButtons;
 	ToggleableColorUIButton selectedPageButton;
+	int currentlySelectedPageIndex = INVALID_VALUE;
 
 	#region MonoBehaviourExtended 
 
@@ -46,38 +51,74 @@ public class DogBrowser : PPUIElement
 			elements[i].Init(dogs[i]);
 		}
 	}
-
-	public void SwitchToPage(int pageIndex, bool onClick)
+		
+	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
+		this.currentlySelectedPageIndex = pageIndex;
 		if (hasSelectedPage)
 		{
 			// Turn off the last page bittpm 
 			selectedPageButton.Toggle();
 		}
 		selectedPageButton = pageButtons[pageIndex];
-		if (!onClick)
+		if (!onClickPageButton)
 		{
 			selectedPageButton.Toggle();
 		}
+		checkDirectionalButtons();
 	}
 
-	protected Dog[] getDogsForPage(int pageIndex)
+	public void PageForward()
+	{
+		if(canPageForward())	
+		{
+			SwitchToPage(currentlySelectedPageIndex + 1, onClickPageButton:false);
+		}
+	}
+
+	public void PageBackward()
+	{
+		if(canPageBackward())
+		{
+			SwitchToPage(currentlySelectedPageIndex - 1, onClickPageButton:false);
+		}
+	}
+		
+	bool canPageForward()
+	{
+		return this.currentlySelectedPageIndex < this.pageButtons.Length - 1;
+	}
+
+	bool canPageBackward()
+	{
+		return this.currentlySelectedPageIndex > 0;
+	}
+
+	void checkDirectionalButtons()
+	{
+		pageForwardButton.ToggleInteractable(canPageForward());
+		pageBackwardButton.ToggleInteractable(canPageBackward());
+	}
+
+	Dog[] getDogsForPage(int pageIndex)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	protected void setupPageButtons()
+	void setupPageButtons()
 	{
 		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
-		SwitchToPage(defaultStartPage, onClick:false);
+		SwitchToPage(defaultStartPage, onClickPageButton:false);
 		for(int i = 0; i < pageButtons.Length; i++)
 		{
 			int pageIndex = i;
 			pageButtons[i].SubscribeToClick(delegate() 
 				{
-					SwitchToPage(pageIndex, onClick:true);
+					SwitchToPage(pageIndex, onClickPageButton:true);
 				});
 		}
+		pageBackwardButton.SubscribeToClick(PageBackward);
+		pageForwardButton.SubscribeToClick(PageForward);
 	}
 
 }
