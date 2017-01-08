@@ -1,9 +1,12 @@
 fileFormatVersion: 2
-guid: e4ec85f5b702941e68b0a31688dfb9aa
-timeCreated: 1483816778
+guid: d902ccff62c985b48ab0ff2151432dd5
+timeCreated: 1483833344
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: OutlineMediumRadius
+    21300002: OutlineHighRadius
+    21300004: OutlineLowRadius
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -34,13 +37,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 128
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -68,7 +71,46 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: OutlineMediumRadius
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 25, z: 25, w: 25}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OutlineHighRadius
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 769
+        width: 255
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 48, y: 48, z: 48, w: 48}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OutlineLowRadius
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 14, y: 14, z: 14, w: 14}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
