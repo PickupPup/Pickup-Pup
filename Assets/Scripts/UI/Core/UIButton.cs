@@ -9,6 +9,14 @@ using UnityEngine.UI;
 
 public class UIButton : UIElement
 {
+	protected bool hasButtonGraphic
+	{
+		get
+		{
+			return buttonGraphic != null;
+		}
+	}
+
 	protected Button button;
 	protected Image buttonGraphic;
 	protected MonoAction clickAction;
@@ -59,7 +67,10 @@ public class UIButton : UIElement
 		button = GetComponent<Button>();
 		buttonGraphic = GetComponent<Image>();
 		button.onClick.AddListener(executeClick);
-		setButtonColors();
+		if(hasButtonGraphic)
+		{
+			setButtonColors();
+		}
 	}
 
 	#endregion

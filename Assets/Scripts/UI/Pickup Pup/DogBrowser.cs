@@ -68,9 +68,14 @@ public class DogBrowser : PPUIElement
 		}
 	}
 		
-	public void SubscribeToDogClick (PPData.DogAction dogClickAction)
+	public void SubscribeToDogClick(PPData.DogAction dogClickAction)
 	{
 		onDogClick += dogClickAction;
+	}
+
+	public void UnsubscribeFromDogClick(PPData.DogAction dogClickAction)
+	{
+		onDogClick -= dogClickAction;
 	}
 
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
@@ -78,7 +83,7 @@ public class DogBrowser : PPUIElement
 		this.currentlySelectedPageIndex = pageIndex;
 		if (hasSelectedPage)
 		{
-			// Turn off the last page bittpm 
+			// Turn off the last page button 
 			selectedPageButton.Toggle();
 		}
 		selectedPageButton = pageButtons[pageIndex];
@@ -121,6 +126,11 @@ public class DogBrowser : PPUIElement
 		Debug.Log("REHOME Screen has yet to be implemented");
 	}
 
+	void handleDogClicked(Dog dog)
+	{
+		Debug.LogFormat("Just clicked on {0}", dog);
+	}
+
 	void checkDirectionalButtons()
 	{
 		pageForwardButton.ToggleInteractable(canPageForward());
@@ -137,8 +147,11 @@ public class DogBrowser : PPUIElement
 		dogSlots = GetComponentsInChildren<DogSlot>();
 		foreach(DogSlot slot in this.dogSlots)
 		{
+			// Links together DogSlot and UIButton scripts
+			slot.GetComponent<UIButton>().SubscribeToClick(slot.ExecuteClick);
 			slot.SubscribeToClick(handleDogSlotClick);
 		}
+		SubscribeToDogClick(handleDogClicked);
 	}
 
 	void handleDogSlotClick(Dog dog)
