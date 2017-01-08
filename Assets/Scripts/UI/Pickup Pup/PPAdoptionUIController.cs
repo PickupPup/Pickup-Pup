@@ -19,8 +19,7 @@ public class PPAdoptionUIController : PPUIController
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		database = DogDatabase.Instance;
-		database.Initialize();
+		database = DogDatabase.GetInstance;
 		populateAvailableDogs(database);
 	}
 

@@ -35,8 +35,14 @@ public class ToggleableUIButton : UILabledButton
 	[SerializeField]
 	bool shouldShowToggle;
 	bool toggled = false;
+	bool toggleOffOnClickEnabled = true;
 	MonoAction toggleOffAction;
 	Image buttonImage;
+
+	public void SetToggleOnClickEnabled(bool isEnabled)
+	{
+		this.toggleOffOnClickEnabled = isEnabled;
+	}
 
 	public void SubscribeToggleOffAction(MonoAction toggleAction) 
 	{
@@ -84,15 +90,20 @@ public class ToggleableUIButton : UILabledButton
 
 	protected override void executeClick() 
 	{
-		Toggle();
-		if(toggled)
-		{
-			base.executeClick();
-		} 
-		else 
+		if(toggled && toggleOffOnClickEnabled)
 		{
 			executeToggleOff();
+		} 
+		else if(!toggled)
+		{
+			base.executeClick();
 		}
+		else 
+		{
+			// End control early so button doesn't toggle off
+			return;
+		}
+		Toggle();
 	}
 
 	protected virtual void executeToggleOff()

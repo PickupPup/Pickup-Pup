@@ -188,7 +188,10 @@ public class Dog : MobileObjectBehaviour
 	protected override void setReferences()
 	{
 		base.setReferences();
-		scoutingTimer.Init();
+		if(HasScoutingTimer)
+		{
+			scoutingTimer.Init();
+		}
 	}
 
 	protected override void fetchReferences() 

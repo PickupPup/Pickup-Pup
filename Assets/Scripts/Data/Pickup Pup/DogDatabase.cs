@@ -13,6 +13,17 @@ public class DogDatabase : Database<DogDatabase>
 {
 	#region Static Accessors
 
+	public static DogDatabase GetInstance
+	{
+		get
+		{
+			DogDatabase database = Instance;
+			// Initializes the database if it's not already setup
+			database.TryInit();
+			return database;
+		}
+	}
+
 	public static Sprite DefaultSprite
 	{
 		get 
@@ -31,6 +42,15 @@ public class DogDatabase : Database<DogDatabase>
 	}
 
 	#endregion
+
+	static string defaultJSONData
+	{
+		get
+		{
+			TextAsset json = Resources.Load<TextAsset>(Path.Combine(JSON_DIR, GAME_DATA));
+			return json.text;
+		}
+	}
 
 	static Sprite _defaultSprite;
 
@@ -58,6 +78,7 @@ public class DogDatabase : Database<DogDatabase>
 
 	public override void Initialize() 
 	{
+		base.Initialize();
 		AssignInstance(this);
 		populateDogBreedLookup();
 		setDogDataReferences();
@@ -121,10 +142,40 @@ public class DogDatabase : Database<DogDatabase>
 		}
 	}
 		
+	public override bool TryInit ()
+	{
+		if(tryInitData())
+		{
+			return base.TryInit ();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	// Bounds must be in range
+	public DogDescriptor[] GetDogRange(int start, int length)
+	{
+		if(inRangeOfDogsArr(start, length))
+		{
+			return ArrayUtil.GetRange(this.dogs, start, length);	
+		}
+		else
+		{
+			return new DogDescriptor[0];
+		}
+	}
+
+	bool inRangeOfDogsArr(int start, int length)
+	{
+		return ArrayUtil.InRange(this.dogs, start, length);	
+	}
+
 	void populateDogBreedLookup() 
 	{
 		breedsByName = new Dictionary<string, DogBreed>();
-		foreach(DogBreed breed in breeds) 
+		foreach(DogBreed breed in breeds)
 		{
 			breed.Initialize(this);
 			if(breed.Breed != null) 
@@ -153,6 +204,25 @@ public class DogDatabase : Database<DogDatabase>
 	Sprite loadDogBreedSpriteFromSources(DogBreed breed) 
 	{
 		return Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, breed.Breed));
+	}
+
+	// Returns false if data is already initialized
+	bool tryInitData()
+	{
+		if(dataIsInitialized())
+		{
+			return false;
+		}
+		else
+		{
+			JsonUtility.FromJsonOverwrite(defaultJSONData, this);
+			return true;
+		}
+	}
+
+	bool dataIsInitialized()
+	{
+		return this.dogs != null && this.breeds != null;
 	}
 
 }

@@ -133,7 +133,7 @@ public class DogDescriptor : PPDescriptor
 
 	public static DogDescriptor Default() 
 	{
-		DogDescriptor descriptor = new DogDescriptor(DogDatabase.Instance);
+		DogDescriptor descriptor = new DogDescriptor(DogDatabase.GetInstance);
 		descriptor.name = string.Empty;
 		descriptor.age = 0;
 		descriptor.breed = string.Empty;
