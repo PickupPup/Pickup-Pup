@@ -1,13 +1,9 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder
+ * Author(s): Grace Barrett-Snyder, Isaiah Mann
  * Description: Controls UI of Currency
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CurrencyDisplay : UIElement 
+public class CurrencyDisplay : PPUIElement 
 {
     Currency currency;
 

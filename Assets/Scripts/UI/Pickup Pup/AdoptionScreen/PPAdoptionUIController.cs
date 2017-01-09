@@ -19,19 +19,18 @@ public class PPAdoptionUIController : PPUIController
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		database = DogDatabase.Instance;
-		database.Initialize();
+		database = DogDatabase.GetInstance;
 		populateAvailableDogs(database);
 	}
 
 	#endregion
 
-	void populateAvailableDogs(DogDatabase data) 
+	void populateAvailableDogs(DogDatabase database) 
 	{
-		DogDescriptor[] dogs = data.RandomDogList(availableDogPortraits.Length);
+		DogDescriptor[] dogs = database.RandomDogList(availableDogPortraits.Length);
 		for(int i = 0; i < dogs.Length; i++) 
 		{
-			availableDogPortraits[i].Init(dogs[i], data.GetDogBreedSprite(dogs[i].Breed));
+			availableDogPortraits[i].Init(dogs[i], database.GetDogBreedSprite(dogs[i].Breed));
 		}
 	}
 

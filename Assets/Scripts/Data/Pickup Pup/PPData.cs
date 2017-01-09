@@ -11,6 +11,8 @@ using UnityEngine;
 public abstract class PPData 
 {
 	protected const string BLACK_HEX = "#000000";
+	protected const int DEFAULT_INT = 0;
+	protected const int NOT_FOUND_INT = -1;
 
 	const string HEX_HASH_PREFIX = "#";
 	const string HEX_NUM_PREFIX = "0x";
@@ -22,11 +24,11 @@ public abstract class PPData
 	public delegate void DogAction(Dog dog);
 	public delegate void DogActionf(Dog dog, float dogFloat);
 
-	protected DogDatabase data;
+	protected DogDatabase database;
 
 	public PPData() 
 	{
-		this.data = null;
+		this.database = null;
 	}
 
 	public PPData(DogDatabase data) 
@@ -36,7 +38,7 @@ public abstract class PPData
 
 	public virtual void Initialize(DogDatabase data) 
 	{
-		this.data = data;
+		this.database = data;
 	}
 
 	// Adapated from http://www.bugstacker.com/15/how-to-parse-a-hex-color-string-in-unity-c%23
@@ -82,6 +84,19 @@ public abstract class PPData
 	{
 		// String formatter to concat integer with dollar sign:
 		return string.Format("${0}", cost);	
+	}
+
+	protected string formatTime(float time)
+	{
+		int hours = (int) time / 3600;
+		int minutes = ((int) time / 60) % 60;
+		int seconds = (int) time % 60;
+		return string.Format("{0}:{1}:{2}", 
+			padWithZeroes(hours, 2), 
+			padWithZeroes(minutes, 2),
+			padWithZeroes(seconds, 2)
+		);
+
 	}
 
 }
