@@ -85,7 +85,7 @@ public class DogDescriptor : PPDescriptor
 	{
 		get 
 		{
-			return data.GetBreed(breed);
+			return database.GetBreed(breed);
 		}
 	}
 
@@ -94,6 +94,14 @@ public class DogDescriptor : PPDescriptor
 		get 
 		{
 			return parseHexColor(this.color);
+		}
+	}
+
+	public Sprite Portrait
+	{
+		get
+		{
+			return database.GetDogBreedSprite(this.Breed);
 		}
 	}
 
@@ -125,7 +133,7 @@ public class DogDescriptor : PPDescriptor
 
 	public static DogDescriptor Default() 
 	{
-		DogDescriptor descriptor = new DogDescriptor(DogDatabase.Instance);
+		DogDescriptor descriptor = new DogDescriptor(DogDatabase.GetInstance);
 		descriptor.name = string.Empty;
 		descriptor.age = 0;
 		descriptor.breed = string.Empty;

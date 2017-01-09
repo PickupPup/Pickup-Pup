@@ -16,7 +16,6 @@ public class DogOutsideSlot : DogSlot
     public override void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
         base.Init(dog, dogSprite, backgroundSprite);
-
         Text[] text = GetComponentsInChildren<Text>();
         nameText = text[0];
         timerText = text[1];
@@ -24,6 +23,30 @@ public class DogOutsideSlot : DogSlot
         nameText.text = dog.Name;
     }
 
+	public override void Init(Dog dog)
+	{
+		base.Init(dog);
+		initDogScouting(dog);
+	}
+
     #endregion
 
+	public Dog BringDogIndoors()
+	{
+		Dog returningDog = this.dog;
+		ClearSlot();
+		return returningDog;
+	}
+
+	void initDogScouting(Dog dog)
+	{
+		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
+		dog.TrySendToScout();
+	}
+
+	void handleDogTimerChange(Dog dog, float timeRemaining)
+	{
+		timerText.text = dog.RemainingTimeScoutingStr;	
+	}
+		
 }

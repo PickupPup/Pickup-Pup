@@ -137,4 +137,34 @@ public static class ArrayUtil
 		return sum;
 	}
 
+	public static bool InRange<T>(T[] source, int index)
+	{
+		return index >= 0 && index < source.Length;
+	}
+
+	public static bool InRange<T>(T[] source, int startIndex, int length)
+	{
+		return InRange(source, startIndex) && InRange(source, startIndex + length - 1);
+	}
+
+	public static T[] GetRange<T>(T[] source, int startIndex, int length)
+	{
+		T[] result = new T[length];
+		Array.Copy(source, startIndex, result, 0, length);
+		return result;
+	}
+
+	public static T[] CopyRange<T>(T[] source, T[] target, int sourceIndex, int targetIndex, int length)
+	{
+		if(InRange(source, sourceIndex, length) && InRange(target, targetIndex, length))
+		{
+			Array.Copy(source, sourceIndex, target, targetIndex, length);
+			return target;
+		}
+		else
+		{
+			// Returns empty array if there was an error
+			return new T[0];
+		}
+	}
 }

@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeDisplay : MonoBehaviourExtended
+public class HomeDisplay : PPUIElement
 {
     const int NUM_OF_SHOWN_SLOTS = 10; // # of slots shown on main screen
 
@@ -15,10 +15,15 @@ public class HomeDisplay : MonoBehaviourExtended
     DogSlot[] dogSlots;
     List<DogDescriptor> dogs; // Contains dogs both inside and outside
 
-    void Start()
-    {
+	#region MonoBehaviourExtended Overrides 
+
+    protected override void fetchReferences()
+	{
+		base.fetchReferences();
         Init();
     }
+
+	#endregion
 
     /// <summary>
     /// Initializes the Home Display by setting up references and displaying dog thumbnails.

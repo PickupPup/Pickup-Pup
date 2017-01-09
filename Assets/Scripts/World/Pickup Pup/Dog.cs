@@ -32,6 +32,21 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public string RemainingTimeScoutingStr
+	{
+		get 
+		{
+			if(HasScoutingTimer)
+			{
+				return scoutingTimer.TimeRemainingStr;
+			}
+			else 
+			{
+				return PPTimer.DefaultTimeRemainingStr;	
+			}
+		}
+	}
+
 	public bool HasScoutingTimer 
 	{
 		get 
@@ -46,6 +61,29 @@ public class Dog : MobileObjectBehaviour
 		get 
 		{
 			return descriptor.Name;
+		}
+	}
+
+	public DogDescriptor Info
+	{
+		get
+		{
+			return this.descriptor;
+		}
+	}
+
+	public Sprite Portrait
+	{
+		get
+		{
+			if(hasDescriptor)
+			{
+				return descriptor.Portrait;
+			}
+			else 
+			{
+				return DogDatabase.DefaultSprite;
+			}
 		}
 	}
 
@@ -150,7 +188,10 @@ public class Dog : MobileObjectBehaviour
 	protected override void setReferences()
 	{
 		base.setReferences();
-		scoutingTimer.Init();
+		if(HasScoutingTimer)
+		{
+			scoutingTimer.Init();
+		}
 	}
 
 	protected override void fetchReferences() 

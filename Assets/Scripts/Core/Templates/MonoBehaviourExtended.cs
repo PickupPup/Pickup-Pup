@@ -8,6 +8,9 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
+	protected const int NONE_VALUE = 0;
+	protected const int INVALID_VALUE = -1;
+
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float monoFloat);
 	public delegate void MonoActionInt(int monoInt);
@@ -202,6 +205,12 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		{
 			StartCoroutine(coroutines[i]);
 		}
+	}
+
+	// Source: http://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
+	protected int mod(int rawValue, int modulus) 
+	{
+		return (rawValue % modulus + modulus) % modulus;
 	}
 
 }

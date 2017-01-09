@@ -15,7 +15,7 @@ public class DogBreed : DogTrait
 	{
 		get 
 		{
-			DogBreed breed = new DogBreed(DogDatabase.Instance);
+			DogBreed breed = new DogBreed(DogDatabase.GetInstance);
 			breed.breed = string.Empty;
 			return breed;
 		}

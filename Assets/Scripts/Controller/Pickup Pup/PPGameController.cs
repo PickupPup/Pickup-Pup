@@ -92,6 +92,8 @@ public class PPGameController : GameController
 
 	#endregion
 
+	// The dog the player currently has selected
+	Dog selectedDog;
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase database;
@@ -134,7 +136,7 @@ public class PPGameController : GameController
 	
     public bool TryAdoptDog(DogDescriptor dog)
     {
-        if (Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
+        if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
         {
             return false;
         }
@@ -160,6 +162,21 @@ public class PPGameController : GameController
 			sendDogToScout(dog);
 			return true;
 		}
+	}
+
+	public void SelectDog(Dog dog)
+	{
+		this.selectedDog = dog;
+	}
+		
+	public void SendSelectedDogToSlot(DogSlot slot)
+	{
+		sendDogToSlot(this.selectedDog, slot);
+	}
+
+	void sendDogToSlot(Dog dog, DogSlot slot)
+	{
+		slot.Init(dog);
 	}
 
 	void sendDogToScout(Dog dog) 

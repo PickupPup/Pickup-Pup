@@ -18,7 +18,7 @@ public class DataPersistenceTest : MonoBehaviourExtended
 
 	protected override void fetchReferences() 
 	{
-		base.fetchReferences ();
+		base.fetchReferences();
 		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
 		dataController.SubscribeToCoinsChange(updateCoinsText);
