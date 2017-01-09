@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Isaiah Mann
- * Description: Controls the adoption UI
+ * Description: Controls the shelter screen
  */
 
 public class PPAdoptionUIController : PPUIController 

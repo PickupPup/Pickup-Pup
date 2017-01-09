@@ -108,6 +108,10 @@ public class PPDataController : DataController
 	public PPGameSave LoadGame()
 	{
 		currentGame = Load() as PPGameSave;
+        if (currentGame.Coins.Amount == 0)
+        {
+            currentGame.ChangeCoins(2000); // Used for Debugging only
+        }
 		return currentGame;
 	}
 		
@@ -162,6 +166,22 @@ public class PPDataController : DataController
 	{
 		return currentGame.HasCurrency(type);
 	}
+
+    public void ChangeCurrencyByType(int deltaCurrency, CurrencyType currencyType)
+    {
+        switch(currencyType)
+        {
+            case CurrencyType.Coins:
+                ChangeCoins(deltaCurrency);
+                break;
+            case CurrencyType.DogFood:
+                ChangeFood(deltaCurrency);
+                break;
+            case CurrencyType.VacantHomeSlots:
+                ChangeVacantHomeSlots(deltaCurrency);
+                break;
+        }
+    }
 
 	public void ChangeCoins(int deltaCoins) 
 	{

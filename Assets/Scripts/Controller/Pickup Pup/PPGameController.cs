@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Game controller for Pickup Pup
  */
 
@@ -40,13 +40,29 @@ public class PPGameController : GameController
 		}
 	}
 
-	static string SAVE_FILE_PATH 
+    static string SHOP_FILE_PATH
+    {
+        get
+        {
+            return Path.Combine(JSON_DIR, "ShopItems");
+        }
+    }
+
+    static string SAVE_FILE_PATH 
 	{
 		get 
 		{
 			return Path.Combine(Application.persistentDataPath, "PickupPupSave.dat");
 		}
 	}
+
+    public PPTuning Tuning
+    {
+        get
+        {
+            return tuning;
+        }
+    }
 
 	#region Instance Accesors
 
@@ -57,6 +73,14 @@ public class PPGameController : GameController
 			return database; 
 		}
 	}
+
+    public ShopDatabase Shop
+    {
+        get
+        {
+            return shop;
+        }
+    }
 
 	public Currency Coins
 	{
@@ -97,6 +121,7 @@ public class PPGameController : GameController
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase database;
+    ShopDatabase shop;
 	PPDataController dataController;
 
 	#region MonoBehaviourExtended Overrides
@@ -105,8 +130,10 @@ public class PPGameController : GameController
 	{
 		base.setReferences();
 		database = parseDatabase();
+        shop = parseShopDatabase();
 		tuning = parseTuning();
 		database.Initialize();
+        shop.Initialize();
 	}
 
 	protected override void fetchReferences() 
@@ -134,6 +161,30 @@ public class PPGameController : GameController
         dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
     }
 	
+    public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
+        int cost, CurrencyType costCurrencyType)
+    {
+        if (Coins.Amount < cost)
+        {
+            return false;
+        }
+        buyItem(value, valueCurrencyType, cost, costCurrencyType);
+        return true;
+    }
+
+    public bool TryBuyItem(ShopItem item)
+    {
+        return TryBuyItem(item.Value, item.ValueCurrencyType, 
+            item.Cost, item.CostCurrencyType);
+    }
+
+    void buyItem(int value, CurrencyType valueCurrencyType,
+        int cost, CurrencyType costCurrencyType)
+    {
+        dataController.ChangeCurrencyByType(value, valueCurrencyType);
+        dataController.ChangeCurrencyByType(-cost, costCurrencyType);
+    }
+
     public bool TryAdoptDog(DogDescriptor dog)
     {
         if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
@@ -197,6 +248,12 @@ public class PPGameController : GameController
 		TextAsset json = loadTextAssetInResources(GAME_DATA_FILE_PATH);
 		return JsonUtility.FromJson<DogDatabase>(json.text);
 	}
+
+    ShopDatabase parseShopDatabase()
+    {
+        TextAsset json = loadTextAssetInResources(SHOP_FILE_PATH);
+        return JsonUtility.FromJson<ShopDatabase>(json.text);
+    }
 
 	PPTuning parseTuning() 
 	{
