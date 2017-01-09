@@ -38,7 +38,7 @@ public class PPDataController : DataController
 		}
 	}
 		
-	public Currency Coins 
+	public CurrencyData Coins 
 	{
 		get 
 		{
@@ -46,7 +46,7 @@ public class PPDataController : DataController
 		}
 	}
 
-	public Currency DogFood 
+	public CurrencyData DogFood 
 	{
 		get 
 		{
@@ -54,7 +54,7 @@ public class PPDataController : DataController
 		}
 	}
 
-    public Currency VacantHomeSlots
+    public CurrencyData VacantHomeSlots
     {
         get
         {
@@ -65,6 +65,7 @@ public class PPDataController : DataController
 	#endregion
 
 	PPGameSave currentGame;
+    CurrencySystem currencySystem;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
     MonoActionInt onVacantHomeSlotsChange;
@@ -177,7 +178,7 @@ public class PPDataController : DataController
             case CurrencyType.DogFood:
                 ChangeFood(deltaCurrency);
                 break;
-            case CurrencyType.VacantHomeSlots:
+            case CurrencyType.HomeSlots:
                 ChangeVacantHomeSlots(deltaCurrency);
                 break;
         }

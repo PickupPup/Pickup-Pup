@@ -10,7 +10,7 @@ public class PPGameSave : GameSave
 {
 	#region Instance Accessors
 
-	public Currency Coins 
+	public CurrencyData Coins 
 	{
 		get 
 		{
@@ -18,7 +18,7 @@ public class PPGameSave : GameSave
 		}
 	}
 
-	public Currency Food 
+	public CurrencyData Food 
 	{
 		get 
 		{
@@ -26,7 +26,7 @@ public class PPGameSave : GameSave
 		}
 	}
 
-    public Currency VacantHomeSlots
+    public CurrencyData VacantHomeSlots
     {
         get
         {
@@ -42,9 +42,9 @@ public class PPGameSave : GameSave
 
 	#endregion
 
-	Dictionary<CurrencyType, Currency> currencies;
+	Dictionary<CurrencyType, CurrencyData> currencies;
 
-	public PPGameSave(DogDescriptor[] dogs, params Currency[] currencies) 
+	public PPGameSave(DogDescriptor[] dogs, params CurrencyData[] currencies) 
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(dogs);
 		this.currencies = generateCurrencyLookup(currencies);
@@ -80,10 +80,10 @@ public class PPGameSave : GameSave
 		currencies[type].IncreaseBy(deltaAmount);
 	}
 
-	Dictionary<CurrencyType, Currency> generateCurrencyLookup(Currency[] currencies) 
+	Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies) 
 	{
-		Dictionary<CurrencyType, Currency> lookup = new Dictionary<CurrencyType, Currency>();
-		foreach(Currency currency in currencies) 
+		Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
+		foreach(CurrencyData currency in currencies) 
 		{
 			lookup.Add(currency.Type, currency);
 		}
