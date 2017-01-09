@@ -8,6 +8,9 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
+	protected bool referencesSet = false;
+	protected bool referencesFetched = false;
+
 	protected const int NONE_VALUE = 0;
 	protected const int INVALID_VALUE = -1;
 
@@ -22,13 +25,19 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 
 	void Awake() 
 	{
-		setReferences();
+		if(!referencesSet)
+		{
+			setReferences();
+		}
 		subscribeEvents();
 	}
 
 	void Start()
 	{
-		fetchReferences();
+		if(!referencesFetched)
+		{
+			fetchReferences();
+		}
 	}
 
 	void OnDestroy() 
@@ -42,7 +51,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 	{
 		handleSceneLoaded(level);
 	}
-
+		
 	#endregion
 
 	// Value should only be null if you're setting a trigger
@@ -108,12 +117,24 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 
 	protected virtual void setReferences() 
 	{
-		// NOTHING
+		this.referencesSet = true;
 	}
 
 	protected virtual void fetchReferences() 
 	{
-		// NOTHING
+		this.referencesFetched = true;
+	}
+		
+	protected virtual void checkReferences()
+	{
+		if(!this.referencesSet)
+		{
+			this.setReferences();
+		}
+		if(!this.referencesFetched)
+		{
+			this.fetchReferences();
+		}
 	}
 
 	protected virtual void cleanupReferences() 

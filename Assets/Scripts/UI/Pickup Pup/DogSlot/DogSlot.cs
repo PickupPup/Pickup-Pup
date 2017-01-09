@@ -24,16 +24,34 @@ public class DogSlot : PPUIElement
 		}
 	}
 
+	bool hasButton {
+		get {
+			return button != null;
+		}
+	}
+		
     protected DogDescriptor dogInfo;
 	protected Dog dog;
     protected Image[] images;
 
-	PPData.DogAction onSlotClick;
+	UIButton button;
+	MonoAction onFreeSlotClick;
+	PPData.DogAction onOccupiedSlotClick;
 
     Image backgroundImage;
     Image dogImage;
 
     bool setBackground = true;
+
+	#region MonoBehaviourExtended Overrides
+
+	protected override void setReferences()
+	{
+		base.setReferences();
+		button = GetComponentInChildren<UIButton>();
+	}
+
+	#endregion
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
@@ -73,25 +91,73 @@ public class DogSlot : PPUIElement
 	{
 		if(hasDog)
 		{
-			callOnSlotClick(this.dog);
+			callOnOccupiedSlotClick(this.dog);
+		}
+		else 
+		{
+			callOnFreeSlotClick();
 		}
 	}
 
-	public void SubscribeToClick(PPData.DogAction clickAction)
+	public bool SubscribeToUIButton()
 	{
-		onSlotClick += clickAction;
-	}
-
-	public void UnsubscribeFromClick(PPData.DogAction clickAction)
-	{
-		onSlotClick -= clickAction;
-	}
-
-	void callOnSlotClick(Dog dog)
-	{
-		if(onSlotClick != null)
+		if(hasButton)	
 		{
-			onSlotClick(dog);
+			button.SubscribeToClick(ExecuteClick);
+			return true;
+		} 
+		else 
+		{
+			return false;
+		}
+	}
+
+	public bool UnsubscribeFromUIButton()
+	{
+		if(hasButton)
+		{
+			button.UnsubscribeFromClick(ExecuteClick);
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+
+	public void SubscribeToClickWhenOccupied(PPData.DogAction clickAction)
+	{
+		onOccupiedSlotClick += clickAction;
+	}
+
+	public void UnsubscribeFromClickWhenOccupied(PPData.DogAction clickAction)
+	{
+		onOccupiedSlotClick -= clickAction;
+	}
+
+	public void SubscribeToClickWhenFree(MonoAction clickAction)
+	{
+		onFreeSlotClick += clickAction;
+	}
+
+	public void UnsubscribeFromClickWhenFree(MonoAction clickAction)
+	{
+		onFreeSlotClick -= clickAction;
+	}
+
+	void callOnOccupiedSlotClick(Dog dog)
+	{
+		if(onOccupiedSlotClick != null)
+		{
+			onOccupiedSlotClick(dog);
+		}
+	}
+
+	void callOnFreeSlotClick()
+	{
+		if(onFreeSlotClick != null)
+		{
+			onFreeSlotClick();
 		}
 	}
 

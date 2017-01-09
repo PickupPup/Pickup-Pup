@@ -164,7 +164,7 @@ public class PPGameController : GameController
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if (Coins.Amount < cost)
+        if(Coins.Amount < cost)
         {
             return false;
         }
