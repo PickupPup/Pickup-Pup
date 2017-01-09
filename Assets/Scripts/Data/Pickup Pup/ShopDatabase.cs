@@ -44,20 +44,13 @@ public class ShopDatabase : Database<ShopDatabase>
     [SerializeField]
     ShopItem[] items;
 
+    #region Database Overrides
+
     public override void Initialize()
     {
         AssignInstance(this);
-        populateShopItems();
     }
 
-    void populateShopItems()
-    {
-        // TODO: Read this info from a JSON file in PPGameController.
-        items = new ShopItem[4];
-        items[0] = new ShopItem("One Dog Food Can", 1, CurrencyType.DogFood, 10, CurrencyType.Coins);
-        items[1] = new ShopItem("Five Dog Food Cans", 5, CurrencyType.DogFood, 40, CurrencyType.Coins);
-        items[2] = new ShopItem("Ten Dog Food Cans", 10, CurrencyType.DogFood, 70, CurrencyType.Coins);
-        items[3] = new ShopItem("Twenty Dog Food Cans", 20, CurrencyType.DogFood, 100, CurrencyType.Coins);
-    }
+    #endregion
 
 }

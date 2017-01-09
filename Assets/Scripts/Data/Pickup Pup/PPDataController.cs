@@ -163,6 +163,22 @@ public class PPDataController : DataController
 		return currentGame.HasCurrency(type);
 	}
 
+    public void ChangeCurrencyByType(int deltaCurrency, CurrencyType currencyType)
+    {
+        switch(currencyType)
+        {
+            case CurrencyType.Coins:
+                ChangeCoins(deltaCurrency);
+                break;
+            case CurrencyType.DogFood:
+                ChangeFood(deltaCurrency);
+                break;
+            case CurrencyType.VacantHomeSlots:
+                ChangeVacantHomeSlots(deltaCurrency);
+                break;
+        }
+    }
+
 	public void ChangeCoins(int deltaCoins) 
 	{
 		this.currentGame.ChangeCoins(deltaCoins);

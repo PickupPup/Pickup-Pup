@@ -932,7 +932,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 796300425}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 233590544}
+        m_MethodName: OnAdoptClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &796300425
@@ -1261,7 +1272,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 971866726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 233590544}
+        m_MethodName: OnMenuClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &971866726
@@ -1944,22 +1966,22 @@ Prefab:
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 195.83212
       objectReference: {fileID: 0}
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -271.13773
       objectReference: {fileID: 0}
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
@@ -1969,7 +1991,7 @@ Prefab:
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
@@ -1979,7 +2001,7 @@ Prefab:
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224831590840688780, guid: 55be0de3b763ffd4abcec231f42ef0fa,
         type: 2}

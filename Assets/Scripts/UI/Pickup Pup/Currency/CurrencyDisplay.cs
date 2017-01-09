@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder, Isaiah Mann
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Controls UI of Currency
  */
 
@@ -7,18 +7,14 @@ public class CurrencyDisplay : PPUIElement
 {
     Currency currency;
 
-    /// <summary>
-    /// Sets the Currency to display
-    /// </summary>
+    // Sets the Currency to display
     public void SetCurrency(Currency currency)
     {
         this.currency = currency;
         OnUpdate();
     }
 
-    /// <summary>
-    /// Updates text to show the new amount of Currency
-    /// </summary>
+    // Updates text to show the new amount of Currency
     public void OnUpdate()
     {
         text.text = currency.Amount.ToString();

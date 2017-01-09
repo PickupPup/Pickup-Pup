@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah
+ * Author: Isaiah Mann, Grace Barrett-Snyder
  * Description: Handles scene loading and management
  */
 
@@ -33,8 +33,13 @@ public class PPSceneController : SingletonController<PPSceneController>
     {
         LoadScene(PPScene.Shelter);
     }
-		
-	public void LoadScene(PPScene scene) 
+
+    public void LoadShop()
+    {
+        LoadScene(PPScene.Shop);
+    }
+
+    public void LoadScene(PPScene scene) 
 	{
 		SceneManager.LoadScene((int) scene);
 	}
@@ -46,4 +51,5 @@ public enum PPScene
 	Start,
 	Home,
     Shelter,
+    Shop,
 }

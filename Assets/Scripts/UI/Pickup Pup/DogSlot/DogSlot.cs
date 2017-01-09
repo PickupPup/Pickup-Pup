@@ -24,7 +24,6 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-    protected PPGameController game;
     protected DogDescriptor dogInfo;
 	protected Dog dog;
     protected Image[] images;
@@ -35,16 +34,6 @@ public class DogSlot : PPUIElement
     Image dogImage;
 
     bool setBackground = true;
-
-    #region MonoBehaviourExtended Overrides
-
-    protected override void fetchReferences()
-    {
-        base.fetchReferences();
-        game = PPGameController.GetInstance;
-    }
-
-    #endregion
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)

@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Game controller for Pickup Pup
  */
 
@@ -40,7 +40,15 @@ public class PPGameController : GameController
 		}
 	}
 
-	static string SAVE_FILE_PATH 
+    static string SHOP_FILE_PATH
+    {
+        get
+        {
+            return Path.Combine(JSON_DIR, "ShopItems");
+        }
+    }
+
+    static string SAVE_FILE_PATH 
 	{
 		get 
 		{
@@ -134,6 +142,9 @@ public class PPGameController : GameController
 		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
+
+        // Defaults not working for some reason. Help me fix!
+        dataController.ChangeCoins(200);
 	}
 		
 	#endregion
@@ -153,6 +164,30 @@ public class PPGameController : GameController
         dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
     }
 	
+    public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
+        int cost, CurrencyType costCurrencyType)
+    {
+        if (Coins.Amount < cost)
+        {
+            return false;
+        }
+        BuyItem(value, valueCurrencyType, cost, costCurrencyType);
+        return true;
+    }
+
+    public bool TryBuyItem(ShopItem item)
+    {
+        return TryBuyItem(item.Value, item.ValueCurrencyType, 
+            item.Cost, item.CostCurrencyType);
+    }
+
+    void BuyItem(int value, CurrencyType valueCurrencyType,
+        int cost, CurrencyType costCurrencyType)
+    {
+        dataController.ChangeCurrencyByType(value, valueCurrencyType);
+        dataController.ChangeCurrencyByType(-cost, costCurrencyType);
+    }
+
     public bool TryAdoptDog(DogDescriptor dog)
     {
         if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
@@ -219,8 +254,8 @@ public class PPGameController : GameController
 
     ShopDatabase parseShopDatabase()
     {
-        // TODO: Parse from JSON
-        return new ShopDatabase();
+        TextAsset json = loadTextAssetInResources(SHOP_FILE_PATH);
+        return JsonUtility.FromJson<ShopDatabase>(json.text);
     }
 
 	PPTuning parseTuning() 
