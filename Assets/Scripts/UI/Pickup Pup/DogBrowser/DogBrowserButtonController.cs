@@ -1,7 +1,7 @@
 ﻿/*
  * Author(s): Isaiah Mann
  * Description: Handles the buttons for the DogBrowser
- * Usage: Should be a one to one relationship between each DogBrowser and its respective ButtonCtroller
+ * Usage: Should be a one to one relationship between each DogBrowser and its respective ButtonController
  */
 
 using UnityEngine;
@@ -91,7 +91,7 @@ public class DogBrowserButtonController : PPUIButtonController
 			selectedPageButton.Toggle();
 		}
 		selectedPageButton = pageButtons[pageIndex];
-		if (!onClickPageButton)
+		if(!onClickPageButton)
 		{
 			selectedPageButton.Toggle();
 		}

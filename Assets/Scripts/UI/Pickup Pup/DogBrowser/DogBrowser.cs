@@ -24,7 +24,7 @@ public class DogBrowser : PPUIElement
 	{
 		get
 		{
-			return buttonControler.hasSelectedPage;
+			return buttonController.hasSelectedPage;
 		}
 	}
 
@@ -40,7 +40,7 @@ public class DogBrowser : PPUIElement
 	[SerializeField]
 	int defaultStartPage;
 
-	DogBrowserButtonController buttonControler;
+	DogBrowserButtonController buttonController;
 	DogSlot[] dogSlots;
 	int currentlySelectedPageIndex = INVALID_VALUE;
 	DogDatabase database;
@@ -53,7 +53,7 @@ public class DogBrowser : PPUIElement
 	{
 		base.setReferences();
 		// Also checks the current GameObject (as per the current prefab setup)
-		buttonControler = GetComponentInChildren<DogBrowserButtonController>();
+		buttonController = GetComponentInChildren<DogBrowserButtonController>();
 		dogSlots = GetComponentsInChildren<DogSlot>();
 		database = DogDatabase.GetInstance;
 		dogCollection = new Dog[database.Dogs.Length];
@@ -96,12 +96,12 @@ public class DogBrowser : PPUIElement
 		
 	public void SubscribeToDogClick(PPData.DogAction dogClickAction)
 	{
-		buttonControler.SubscribeToDogClick(dogClickAction);
+		buttonController.SubscribeToDogClick(dogClickAction);
 	}
 
 	public void UnsubscribeFromDogClick(PPData.DogAction dogClickAction)
 	{
-		buttonControler.UnsubscribeFromDogClick(dogClickAction);
+		buttonController.UnsubscribeFromDogClick(dogClickAction);
 	}
 
 	public void SwitchToDefaultPage(bool onClickPageButton)
@@ -112,7 +112,7 @@ public class DogBrowser : PPUIElement
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
 		this.currentlySelectedPageIndex = pageIndex;
-		buttonControler.SwitchToPage(pageIndex, onClickPageButton);
+		buttonController.SwitchToPage(pageIndex, onClickPageButton);
 		Set(getDogsForPage(pageIndex));
 	}
 
@@ -243,7 +243,7 @@ public class DogBrowser : PPUIElement
 		{
 			// Links together DogSlot and UIButton scripts
 			slot.GetComponent<UIButton>().SubscribeToClick(slot.ExecuteClick);
-			slot.SubscribeToClick(buttonControler.HandleDogSlotClick);
+			slot.SubscribeToClick(buttonController.HandleDogSlotClick);
 		}
 	}
 

@@ -54,7 +54,7 @@ public class DogSlot : PPUIElement
 		images = GetComponentsInChildren<Image>();
 		if(images.Length >= 2) 
 		{
-            if (setBackground)
+            if(setBackground)
             {
                 backgroundImage = images[0];
                 dogImage = images[1];

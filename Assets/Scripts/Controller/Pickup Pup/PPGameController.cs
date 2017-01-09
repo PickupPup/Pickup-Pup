@@ -136,7 +136,7 @@ public class PPGameController : GameController
 	
     public bool TryAdoptDog(DogDescriptor dog)
     {
-        if (Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
+        if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
         {
             return false;
         }

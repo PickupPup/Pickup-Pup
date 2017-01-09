@@ -83,7 +83,7 @@ public class UIButton : UIElement
 
 	protected virtual void executeClick() 
 	{
-		if (clickAction != null) 
+		if(clickAction != null) 
 		{
 			clickAction();
 		}
