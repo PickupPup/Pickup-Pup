@@ -23,6 +23,7 @@ public class ScoutingDisplay : PPUIElement
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
+		game = PPGameController.GetInstance;
 		setupScoutingSlots(scoutingSlots);
 	}
 
@@ -32,7 +33,12 @@ public class ScoutingDisplay : PPUIElement
 	{
 		foreach(DogOutsideSlot slot in slots) 
 		{
-			slot.SubscribeToClickWhenFree(handleClickFreeSlot);
+			slot.SubscribeToClickWhenFree(
+				delegate() {
+					game.SetTargetSlot(slot);
+					handleClickFreeSlot();		
+				}
+			);
 			slot.SubscribeToUIButton();
 		}
 	}
@@ -40,6 +46,14 @@ public class ScoutingDisplay : PPUIElement
 	void handleClickFreeSlot() 
 	{
 		dogBrowser.Open();
+		dogBrowser.SubscribeToDogClick(handleDogSelected);
+	}
+
+	void handleDogSelected(Dog dog)
+	{
+		game.SendToTargetSlot(dog);
+		dogBrowser.UnsubscribeFromDogClick(handleDogSelected);
+		dogBrowser.Close();
 	}
 
 }

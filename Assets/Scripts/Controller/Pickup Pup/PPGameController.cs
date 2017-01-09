@@ -114,6 +114,14 @@ public class PPGameController : GameController
 		}
 	}
 
+	public bool HasTargetSlot
+	{
+		get
+		{
+			return targetSlot != null;
+		}
+	}
+
 	#endregion
 
 	// The dog the player currently has selected
@@ -123,6 +131,7 @@ public class PPGameController : GameController
 	DogDatabase database;
     ShopDatabase shop;
 	PPDataController dataController;
+	DogSlot targetSlot;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -160,7 +169,12 @@ public class PPGameController : GameController
     {
         dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
     }
-	
+
+	public void SetTargetSlot(DogSlot slot)
+	{
+		this.targetSlot = slot;
+	}
+		
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
@@ -219,7 +233,21 @@ public class PPGameController : GameController
 	{
 		this.selectedDog = dog;
 	}
-		
+
+	public void SendToTargetSlot(Dog dog)
+	{
+		if(HasTargetSlot)
+		{
+			targetSlot.Init(dog);
+			ClearTargetSlot();
+		}
+	}
+
+	public void ClearTargetSlot()
+	{
+		this.targetSlot = null;
+	}
+
 	public void SendSelectedDogToSlot(DogSlot slot)
 	{
 		sendDogToSlot(this.selectedDog, slot);
