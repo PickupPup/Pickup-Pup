@@ -3,9 +3,10 @@
  * Description: Handles save for Pickup Pup
  */
 
+using System;
 using System.Collections.Generic;
 
-public class PPDataController : DataController 
+public class PPDataController : DataController, ICurrencySystem 
 {
 	#region Static Accessors
 
@@ -37,35 +38,39 @@ public class PPDataController : DataController
 			return AdoptedDogs.Count;
 		}
 	}
-		
-	public CurrencyData Coins 
-	{
-		get 
-		{
-			return currentGame.Coins;
-		}
-	}
 
-	public CurrencyData DogFood 
-	{
-		get 
-		{
-			return currentGame.Food;
-		}
-	}
+    #endregion
 
-    public CurrencyData VacantHomeSlots
+    #region ICurrencySystem Accessors
+
+    public CoinsData Coins
     {
         get
         {
-            return currentGame.VacantHomeSlots;
+            return currencies.Coins;
         }
     }
 
-	#endregion
+    public DogFoodData DogFood
+    {
+        get
+        {
+            return currencies.DogFood;
+        }
+    }
 
-	PPGameSave currentGame;
-    CurrencySystem currencySystem;
+    public HomeSlotsData HomeSlots
+    {
+        get
+        {
+            return currencies.HomeSlots;
+        }
+    }
+
+    #endregion
+
+    PPGameSave currentGame;
+    CurrencySystem currencies;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
     MonoActionInt onVacantHomeSlotsChange;
@@ -75,6 +80,12 @@ public class PPDataController : DataController
 		Buffer(getCurrentGame());
 		return Save();
 	}
+
+    public void SaveCurrencies(CurrencySystem currencies)
+    {
+        currentGame.SaveCurrencies(currencies);
+        SaveGame();
+    }
 
 	public void SubscribeToCoinsChange(MonoActionInt coinsAction) 
 	{
@@ -109,9 +120,10 @@ public class PPDataController : DataController
 	public PPGameSave LoadGame()
 	{
 		currentGame = Load() as PPGameSave;
-        if (currentGame.Coins.Amount == 0)
+        currencies = currentGame.Currencies;
+        if (currencies.Coins.Amount == 0)
         {
-            currentGame.ChangeCoins(2000); // Used for Debugging only
+            ChangeCoins(2000); // Used for Debugging only
         }
 		return currentGame;
 	}
@@ -120,16 +132,16 @@ public class PPDataController : DataController
 
 	protected override SerializableData getDefaultFile() 
 	{
-		return new PPGameSave(new DogDescriptor[0], Currency.Defaults);
+		return new PPGameSave(new DogDescriptor[0], CurrencySystem.Default);
 	}		
 		
 	public override void Reset() 
 	{
 		base.Reset();
 		LoadGame();
-		callOnCoinsChange(currentGame.Coins.Amount);
-		callOnFoodChange(currentGame.Food.Amount);
-        callOnVacantHomeSlotsChange(currentGame.VacantHomeSlots.Amount);
+		callOnCoinsChange(Coins.Amount);
+		callOnFoodChange(DogFood.Amount);
+        callOnVacantHomeSlotsChange(HomeSlots.Amount);
 	}
 
 	#endregion
@@ -162,53 +174,56 @@ public class PPDataController : DataController
 	{
 		return currentGame;
 	}
-		
-	public bool HasCurrency(CurrencyType type) 
-	{
-		return currentGame.HasCurrency(type);
-	}
 
-    public void ChangeCurrencyByType(int deltaCurrency, CurrencyType currencyType)
+    public void Adopt(DogDescriptor dog)
     {
-        switch(currencyType)
-        {
-            case CurrencyType.Coins:
-                ChangeCoins(deltaCurrency);
-                break;
-            case CurrencyType.DogFood:
-                ChangeFood(deltaCurrency);
-                break;
-            case CurrencyType.HomeSlots:
-                ChangeVacantHomeSlots(deltaCurrency);
-                break;
-        }
+        Adopt(dog);
+        SaveGame();
     }
+
+    #region ICurrencySystem Methods
 
 	public void ChangeCoins(int deltaCoins) 
 	{
-		this.currentGame.ChangeCoins(deltaCoins);
+		currencies.ChangeCoins(deltaCoins);
 		callOnCoinsChange(Coins.Amount);
 		SaveGame();
 	}
 
 	public void ChangeFood(int deltaFood) 
 	{
-		this.currentGame.ChangeFood(deltaFood);
+        currencies.ChangeFood(deltaFood);
 		callOnFoodChange(DogFood.Amount);
 		SaveGame();
 	}
 
-    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
+    public void ChangeHomeSlots(int deltaHomeSlots)
     {
-        this.currentGame.ChangeVacantHomeSlots(deltaVacantHomeSlots);
-        callOnVacantHomeSlotsChange(VacantHomeSlots.Amount);
+        currencies.ChangeHomeSlots(deltaHomeSlots);
+        callOnVacantHomeSlotsChange(HomeSlots.Amount);
         SaveGame();
     }
 
-	public void Adopt(DogDescriptor dog) 
-	{
-		this.currentGame.Adopt(dog);
-		SaveGame();
-	}
+    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+    {
+        currencies.ChangeCurrencyAmount(type, deltaAmount);
+    }
+
+    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+    {
+        currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+    }
+
+    public bool CanAfford(CurrencyType type, int amount)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool HasCurrency(CurrencyType type)
+    {
+        return HasCurrency(type);
+    }
+
+    #endregion
 
 }

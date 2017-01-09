@@ -21,6 +21,11 @@ public class HomeSlotsData : CurrencyData
 
     // Only the vacant slots are exchanged as currency
     // Ex: you need a vacant slot to adopt a dog
+    public override bool CanAfford(int cost)
+    {
+        return HasVacantSlot;
+    }
+  
     public int VacantSlots
     {
         get

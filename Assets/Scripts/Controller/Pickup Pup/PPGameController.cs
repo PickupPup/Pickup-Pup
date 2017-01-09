@@ -6,8 +6,9 @@
 using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
-public class PPGameController : GameController 
+public class PPGameController : GameController, ICurrencySystem 
 {
 	const string JSON_DIR = "JSON";
 
@@ -82,7 +83,9 @@ public class PPGameController : GameController
         }
     }
 
-	public Currency Coins
+    #region ICurrencySystem Accessors
+
+    public CoinsData Coins
 	{
 		get 
 		{ 
@@ -90,7 +93,7 @@ public class PPGameController : GameController
 		}
 	}
 
-	public Currency DogFood
+	public DogFoodData DogFood
 	{
 		get 
 		{ 
@@ -98,15 +101,17 @@ public class PPGameController : GameController
 		}
 	}
 
-    public Currency VacantHomeSlots
+    public HomeSlotsData HomeSlots
     {
         get
         {
-            return dataController.VacantHomeSlots;
+            return dataController.HomeSlots;
         }
     }
 
-	public bool DogsScoutingAtCapacity 
+    #endregion
+
+    public bool DogsScoutingAtCapacity 
 	{
 		get 
 		{
@@ -156,15 +161,36 @@ public class PPGameController : GameController
 		dataController.ChangeFood(deltaFood);
 	}
 
-    public void ChangeVacantHomeSlots( int deltaVacantHomeSlots)
+    public void ChangeHomeSlots(int deltaHomeSlots)
     {
-        dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
+        dataController.ChangeHomeSlots(deltaHomeSlots);
     }
-	
+
+    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+    {
+        // TODO
+        //dataController.ConvertCurrency
+    }
+
+    public bool CanAfford(CurrencyType type, int amount)
+    {
+        return dataController.CanAfford(type, amount);
+    }
+
+    public bool HasCurrency(CurrencyType type)
+    {
+        return dataController.HasCurrency(type);
+    }
+
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if (Coins.Amount < cost)
+        if (dataController.CanAfford(costCurrencyType, cost))
         {
             return false;
         }
@@ -181,24 +207,23 @@ public class PPGameController : GameController
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        dataController.ChangeCurrencyByType(value, valueCurrencyType);
-        dataController.ChangeCurrencyByType(-cost, costCurrencyType);
+        dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
     {
-        if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
+        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
         {
-            return false;
-        }
-        AdoptDog(dog);
-        return true;
+            AdoptDog(dog);
+            return true;
+        }        
+        return false;       
     }
 
     void AdoptDog(DogDescriptor dog)
     {
-        ChangeCoins(-dog.CostToAdopt);
-        ChangeVacantHomeSlots(-1);
+        dataController.ChangeCoins(-dog.CostToAdopt);
+        dataController.ChangeHomeSlots(-1);
     }
 
 	public bool TrySendDogToScout(Dog dog) 

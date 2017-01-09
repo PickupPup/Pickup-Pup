@@ -20,9 +20,14 @@ public class CurrencyData : PPData
         // NOTHING
     }
 
-    public void IncreaseBy(int deltaAmount)
+    public virtual void IncreaseBy(int deltaAmount)
     {
         amount += deltaAmount;
+    }
+
+    public virtual bool CanAfford(int cost)
+    {
+        return amount >= cost;
     }
 
     public int Amount
@@ -39,6 +44,6 @@ public class CurrencyData : PPData
         {
             return type;
         }
-    }
+    }   
 
 }

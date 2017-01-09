@@ -5,10 +5,10 @@
 
 public class CurrencyDisplay : PPUIElement 
 {
-    Currency currency;
+    CurrencyData currency;
 
     // Sets the Currency to display
-    public void SetCurrency(Currency currency)
+    public void SetCurrency(CurrencyData currency)
     {
         this.currency = currency;
         OnUpdate();

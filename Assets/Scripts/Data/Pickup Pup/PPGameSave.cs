@@ -10,46 +10,37 @@ public class PPGameSave : GameSave
 {
 	#region Instance Accessors
 
-	public CurrencyData Coins 
-	{
-		get 
-		{
-			return currencies[CurrencyType.Coins];
-		}
-	}
-
-	public CurrencyData Food 
-	{
-		get 
-		{
-			return currencies[CurrencyType.DogFood];
-		}
-	}
-
-    public CurrencyData VacantHomeSlots
-    {
-        get
-        {
-            return currencies[CurrencyType.VacantHomeSlots];
-        }
-    }
-
 	public List<DogDescriptor> AdoptedDogs
 	{
 		get;
 		private set;
 	}
 
+    public CurrencySystem Currencies
+    {
+        get
+        {
+            return currencies;
+        }
+    }
+
 	#endregion
 
-	Dictionary<CurrencyType, CurrencyData> currencies;
+	//Dictionary<CurrencyType, CurrencyData> currencies;
+    CurrencySystem currencies;
 
-	public PPGameSave(DogDescriptor[] dogs, params CurrencyData[] currencies) 
+	public PPGameSave(DogDescriptor[] dogs, CurrencySystem currencies) 
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(dogs);
-		this.currencies = generateCurrencyLookup(currencies);
+        SaveCurrencies(currencies);
 	}
 
+    public void SaveCurrencies(CurrencySystem currencies)
+    {
+        this.currencies = currencies;
+    }
+
+    /*
 	public bool HasCurrency(CurrencyType type) 
 	{
 		return currencies.ContainsKey(type);
@@ -72,7 +63,7 @@ public class PPGameSave : GameSave
 
     public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
     {
-        ChangeCurrencyAmount(CurrencyType.VacantHomeSlots, deltaVacantHomeSlots);
+        ChangeCurrencyAmount(CurrencyType.HomeSlots, deltaVacantHomeSlots);
     }
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 
@@ -88,6 +79,6 @@ public class PPGameSave : GameSave
 			lookup.Add(currency.Type, currency);
 		}
 		return lookup;
-	}
+	}*/
 
 }

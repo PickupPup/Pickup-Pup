@@ -2,17 +2,18 @@
  * Author: Grace Barrett-Snyder 
  * Description: Controls all forms of currency
  */
- 
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CurrencySystem : PPData
+public class CurrencySystem : PPData, ICurrencySystem
 {
     #region Static Accessors
 
-    public static CurrencySystem Defaults
+    public static CurrencySystem Default
     {
         get
         {
@@ -27,29 +28,29 @@ public class CurrencySystem : PPData
 
     #endregion
 
-    #region Instance Accessors
+    #region ICurrencySystem Accessors
 
-    public CurrencyData Coins
+    public CoinsData Coins
     {
         get
         {
-            return dataController.Coins;
+            return coins;
         }
     }
 
-    public CurrencyData DogFood
+    public DogFoodData DogFood
     {
         get
         {
-            return dataController.DogFood;
+            return dogFood;
         }
     }
 
-    public CurrencyData HomeSlots
+    public HomeSlotsData HomeSlots
     {
         get
         {
-            return dataController.VacantHomeSlots;
+            return homeSlots;
         }
     }
 
@@ -58,9 +59,9 @@ public class CurrencySystem : PPData
     PPDataController dataController;
 
     Dictionary<CurrencyType, CurrencyData> currencies;
-    CurrencyData coins;
-    CurrencyData dogFood;
-    CurrencyData homeSlots;
+    CoinsData coins;
+    DogFoodData dogFood;
+    HomeSlotsData homeSlots;
 
     public CurrencySystem(CurrencyData[] currencies)
     {
@@ -71,6 +72,13 @@ public class CurrencySystem : PPData
             this.currencies.Add(currency.Type, currency);
         }
     }
+
+    void Save()
+    {
+        dataController.SaveCurrencies(this);
+    }
+
+    #region ICurrencySystem Methods
 
     public void ChangeCoins(int deltaCoins)
     {
@@ -90,6 +98,34 @@ public class CurrencySystem : PPData
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
         currencies[type].IncreaseBy(deltaAmount);
+        Save();
     }
+
+    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, bool? canAfford = null)
+    {
+        // If this function hasn't been prechecked to see if the player can afford it
+        if (!canAfford.HasValue)
+        {
+            canAfford = CanAfford(costCurrencyType, cost);
+        }
+        if (canAfford.Value)
+        {
+            ChangeCurrencyAmount(valueCurrencyType, value);
+            ChangeCurrencyAmount(costCurrencyType, -cost);
+        }
+        // Otherwise do nothing
+    }
+
+    public bool CanAfford(CurrencyType type, int cost)
+    {
+        return currencies[type].CanAfford(cost);
+    }
+
+    public bool HasCurrency(CurrencyType type)
+    {
+        return currencies.ContainsKey(type);
+    }
+
+    #endregion
 
 }
