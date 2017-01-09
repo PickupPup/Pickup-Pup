@@ -109,7 +109,7 @@ public class ShopItem : PPData
         this.costCurrencyType = costCurrencyType;       
     }
 
-    public ShopItem()
+    protected ShopItem()
     {
         // NOTHING
     }

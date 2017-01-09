@@ -142,9 +142,6 @@ public class PPGameController : GameController
 		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
-
-        // Defaults not working for some reason. Help me fix!
-        dataController.ChangeCoins(200);
 	}
 		
 	#endregion
@@ -171,7 +168,7 @@ public class PPGameController : GameController
         {
             return false;
         }
-        BuyItem(value, valueCurrencyType, cost, costCurrencyType);
+        buyItem(value, valueCurrencyType, cost, costCurrencyType);
         return true;
     }
 
@@ -181,7 +178,7 @@ public class PPGameController : GameController
             item.Cost, item.CostCurrencyType);
     }
 
-    void BuyItem(int value, CurrencyType valueCurrencyType,
+    void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
         dataController.ChangeCurrencyByType(value, valueCurrencyType);

@@ -108,6 +108,10 @@ public class PPDataController : DataController
 	public PPGameSave LoadGame()
 	{
 		currentGame = Load() as PPGameSave;
+        if (currentGame.Coins.Amount == 0)
+        {
+            currentGame.ChangeCoins(2000); // Used for Debugging only
+        }
 		return currentGame;
 	}
 		
