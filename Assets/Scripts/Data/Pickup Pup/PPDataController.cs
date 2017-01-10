@@ -77,6 +77,7 @@ public class PPDataController : DataController, ICurrencySystem
 	public bool SaveGame()
 	{
 		Buffer(getCurrentGame());
+        SaveCurrencies();
 		return Save();
 	}
 
@@ -90,6 +91,11 @@ public class PPDataController : DataController, ICurrencySystem
     protected PPGameSave getCurrentGame()
     {
         return currentGame;
+    }
+
+    public void SaveCurrencies()
+    {
+        currentGame.SaveCurrencies(currencies);
     }
 
     #region DataController Overrides

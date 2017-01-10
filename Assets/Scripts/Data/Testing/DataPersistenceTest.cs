@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Author: Isaiah Mann, Grace Barrett-Snyder
  * Description: Testing data serialization
  */
 
@@ -15,6 +15,8 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	Text coinText;
 	[SerializeField]
 	Text foodText;
+    [SerializeField]
+    Text homeSlotsText;
 
 	protected override void fetchReferences() 
 	{
@@ -23,6 +25,7 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
 		dataController.SubscribeToCoinsChange(updateCoinsText);
 		dataController.SubscribeToFoodChange(updateFoodText);
+        dataController.SubscribeToHomeSlotsChange(updateHomeSlotsText);
 		dataController.LoadGame();
 	}
 
@@ -35,6 +38,11 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	{
 		dataController.ChangeFood(deltaFood);
 	}
+
+    public void ChangeHomeSlots(int deltaHomeSlots)
+    {
+        dataController.ChangeHomeSlots(deltaHomeSlots);
+    }
 		
 	public void ResetData() 
 	{
@@ -50,5 +58,12 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	{
 		foodText.text = string.Format("{0}: {1}", "Food", food);
 	}
+
+    void updateHomeSlotsText(int homeSlots)
+    {
+        HomeSlotsData homeSlotsData = dataController.HomeSlots;
+        homeSlotsText.text = "HomeSlots (O/V): " + 
+            homeSlotsData.OccupiedSlots + "/" + homeSlotsData.VacantSlots;
+    }
 		
 }

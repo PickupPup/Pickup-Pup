@@ -32,6 +32,11 @@ public class PPGameSave : GameSave
         this.Currencies = currencies;
 	}
 
+    public void SaveCurrencies(CurrencySystem currencies)
+    {
+        this.Currencies = currencies;
+    }
+
     public void Adopt(DogDescriptor dog)
     {
         AdoptedDogs.Add(dog);

@@ -8,6 +8,42 @@ public class HomeSlotsData : CurrencyData
 {
     HomeSlot[] slots;
 
+    #region Instance Accessors
+
+    public int VacantSlots
+    {
+        get
+        {
+            return countSlotsWithStatus(HomeSlotStatus.Vacant);
+        }
+    }
+
+    public bool HasVacantSlot
+    {
+        get
+        {
+            return hasSlotWithStatus(HomeSlotStatus.Vacant);
+        }
+    }
+
+    public int OccupiedSlots
+    {
+        get
+        {
+            return countSlotsWithStatus(HomeSlotStatus.Occupied);
+        }
+    }
+
+    public bool HasOccupiedSlot
+    {
+        get
+        {
+            return hasSlotWithStatus(HomeSlotStatus.Occupied);
+        }
+    }
+
+    #endregion
+
     public HomeSlotsData(int initialAmount) : base(initialAmount)
     {
         type = CurrencyType.HomeSlots;
@@ -62,35 +98,29 @@ public class HomeSlotsData : CurrencyData
         }
     }
 
-    public int VacantSlots
+    bool hasSlotWithStatus(HomeSlotStatus status)
     {
-        get
+        foreach (HomeSlot slot in slots)
         {
-            int vacantSlots = 0;
-            foreach(HomeSlot slot in slots)
+            if (slot.Status == status)
             {
-                if (slot.Status == HomeSlotStatus.Vacant)
-                {
-                    vacantSlots++;
-                }
+                return true;
             }
-            return vacantSlots;
         }
+        return false;
     }
 
-    public bool HasVacantSlot
+    int countSlotsWithStatus(HomeSlotStatus status)
     {
-        get
+        int slotsWithStatus = 0;
+        foreach(HomeSlot slot in slots)
         {
-            foreach (HomeSlot slot in slots)
+            if(slot.Status == status)
             {
-                if (slot.Status == HomeSlotStatus.Vacant)
-                {
-                    return true;
-                }
+                slotsWithStatus++;
             }
-            return false;
         }
+        return slotsWithStatus;
     }
 
 }
