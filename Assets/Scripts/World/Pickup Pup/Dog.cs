@@ -113,6 +113,16 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public void SetTimer(float newTime)
+	{
+		scoutingTimer.SetTimeRemaining(newTime, checkForEvents:true);
+	}
+
+	public void ResumeTimer()
+	{
+		scoutingTimer.Resume();
+	}
+
 	// Tracks how long the dog will be away from the house
 	[SerializeField]
 	protected PPTimer scoutingTimer;
@@ -261,6 +271,19 @@ public class Dog : MobileObjectBehaviour
 	{
 		timer.SubscribeToTimeChange(callOnScoutingTimerChange);
 		timer.SubscribeToTimeUp(callOnScountingTimerEnd);
+	}
+
+	public override bool Equals(object obj)
+	{
+		if(obj is Dog)
+		{
+			Dog other = obj as Dog;
+			return this.Info.Equals(other.Info);
+		}
+		else
+		{
+			return base.Equals(obj);
+		}
 	}
 
 }

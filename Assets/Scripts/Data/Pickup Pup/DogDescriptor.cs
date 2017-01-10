@@ -65,22 +65,7 @@ public class DogDescriptor : PPDescriptor
 			}
 		}
 	}
-
-	public float RemainingTimeScouting
-	{
-		get 
-		{
-			if(IsLinkedToDog) 
-			{
-				return linkedDog.RemainingTimeScouting;
-			}
-			else 
-			{
-				return default(float);
-			}
-		}
-	}
-
+		
 	public float TotalTimeToReturn
 	{
 		get
@@ -172,6 +157,24 @@ public class DogDescriptor : PPDescriptor
 		// NOTHING
 	}
 
+	public override bool Equals(object obj)
+	{
+		if(obj is DogDescriptor)
+		{
+			DogDescriptor other = obj as DogDescriptor;
+			return this.name == other.name && this.breed == other.breed && this.age == other.age;
+		}
+		else
+		{
+			return base.Equals(obj);
+		}
+	}
+
+	public override int GetHashCode ()
+	{
+		return this.name.GetHashCode() + this.breed.GetHashCode() + this.age.GetHashCode();
+	}
+
 	public void HandleScoutingBegun(int slotIndex)
 	{
 		if(this.IsLinkedToDog)
@@ -183,6 +186,7 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
+		Debug.Log("WHAT");
 		if(this.IsLinkedToDog)
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
@@ -192,6 +196,7 @@ public class DogDescriptor : PPDescriptor
 
 	void updateTimeRemainingScouting(float timeRemainingScouting)
 	{
+		Debug.Log(timeRemainingScouting);
 		_timeRemainingScouting = timeRemainingScouting;
 	}
 

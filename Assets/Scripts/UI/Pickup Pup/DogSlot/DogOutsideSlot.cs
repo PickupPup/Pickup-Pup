@@ -41,6 +41,16 @@ public class DogOutsideSlot : DogSlot
 
     #endregion
 
+	public void ResumeScouting(Dog dog)
+	{
+		this.dog = dog;
+		this.dogInfo = dog.Info;
+		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
+		nameText.text = dog.name;
+		dog.SetTimer(dogInfo.TimeRemainingScouting);
+		dog.ResumeTimer();
+	}
+
 	public Dog BringDogIndoors()
 	{
 		Dog returningDog = this.dog;

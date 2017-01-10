@@ -19,7 +19,7 @@ public class ScoutingDisplay : PPUIElement
 		DogOutsideSlot slot;
 		if(slotsByIndex.TryGetValue(slotIndex, out slot))
 		{
-			slot.Init(dog);
+			slot.ResumeScouting(dog);
 		}
 	}
 

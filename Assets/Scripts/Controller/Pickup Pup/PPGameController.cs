@@ -172,6 +172,7 @@ public class PPGameController : GameController
 		foreach(Dog dog in dogs)
 		{
 			dog.SetGame(this);
+			dog.SetTimer(dog.Info.TimeRemainingScouting);
 			EventController.Event(PPEvent.ScoutingDogLoaded, dog);
 		}
 	}

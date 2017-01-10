@@ -59,8 +59,11 @@ public class PPGameSave : GameSave
 		
 	public void SendDogToScout(Dog dog)
 	{
-		ScoutingDogs.Add(dog.Info);
-		dog.SubscribeToScoutingTimerEnd(handleDogFinishdScouting);
+		if(!ScoutingDogs.Contains(dog.Info)) 
+		{
+			ScoutingDogs.Add(dog.Info);
+			dog.SubscribeToScoutingTimerEnd(handleDogFinishdScouting);
+		}
 	}
 
 	void handleDogFinishdScouting(Dog dog)
