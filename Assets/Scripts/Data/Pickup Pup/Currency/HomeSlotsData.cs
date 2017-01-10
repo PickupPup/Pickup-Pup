@@ -30,15 +30,16 @@ public class HomeSlotsData : CurrencyData
 
     public override void IncreaseBy(int deltaAmount)
     {
+        int slotsToChange = UnityEngine.Mathf.Abs(deltaAmount);
         if (deltaAmount > 0)
         {
-            // Change an occupied slot to vacant
-            changeSlots(HomeSlotStatus.Vacant, 1);
+            // Change occupied slot(s) to vacant
+            changeSlots(HomeSlotStatus.Vacant, slotsToChange);
         }
         else if (deltaAmount < 0)
         {
-            // Change a vacant slot to occupied
-            changeSlots(HomeSlotStatus.Occupied, 1);
+            // Change vacant slot(s) to occupied
+            changeSlots(HomeSlotStatus.Occupied, slotsToChange);
         }
     }
 

@@ -18,67 +18,23 @@ public class PPGameSave : GameSave
 
     public CurrencySystem Currencies
     {
-        get
-        {
-            return currencies;
-        }
+        get;
+        private set;
     }
 
 	#endregion
 
-	//Dictionary<CurrencyType, CurrencyData> currencies;
     CurrencySystem currencies;
 
 	public PPGameSave(DogDescriptor[] dogs, CurrencySystem currencies) 
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(dogs);
-        SaveCurrencies(currencies);
+        this.Currencies = currencies;
 	}
 
-    public void SaveCurrencies(CurrencySystem currencies)
+    public void Adopt(DogDescriptor dog)
     {
-        this.currencies = currencies;
+        AdoptedDogs.Add(dog);
     }
-
-    /*
-	public bool HasCurrency(CurrencyType type) 
-	{
-		return currencies.ContainsKey(type);
-	}
-
-	public void Adopt(DogDescriptor dog) 
-	{
-		AdoptedDogs.Add(dog);
-	}
-
-	public void ChangeCoins(int deltaCoins) 
-	{
-		ChangeCurrencyAmount(CurrencyType.Coins, deltaCoins);
-	}
-
-	public void ChangeFood(int deltaFood) 
-	{
-		ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
-	}
-
-    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
-    {
-        ChangeCurrencyAmount(CurrencyType.HomeSlots, deltaVacantHomeSlots);
-    }
-
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 
-	{
-		currencies[type].IncreaseBy(deltaAmount);
-	}
-
-	Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies) 
-	{
-		Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
-		foreach(CurrencyData currency in currencies) 
-		{
-			lookup.Add(currency.Type, currency);
-		}
-		return lookup;
-	}*/
 
 }

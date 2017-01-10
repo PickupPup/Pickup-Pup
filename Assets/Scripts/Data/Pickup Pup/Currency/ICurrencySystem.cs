@@ -1,6 +1,6 @@
 ﻿/*
  * Author: Grace Barrett-Snyder 
- * Description: An interface for every class that manages currency changes
+ * Description: An interface to facilitate data flow of currency changes
  */
 
 public interface ICurrencySystem

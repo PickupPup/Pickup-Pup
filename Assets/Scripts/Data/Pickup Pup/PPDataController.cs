@@ -3,7 +3,6 @@
  * Description: Handles save for Pickup Pup
  */
 
-using System;
 using System.Collections.Generic;
 
 public class PPDataController : DataController, ICurrencySystem 
@@ -81,60 +80,21 @@ public class PPDataController : DataController, ICurrencySystem
 		return Save();
 	}
 
-    public void SaveCurrencies(CurrencySystem currencies)
-    {
-        currentGame.SaveCurrencies(currencies);
-        SaveGame();
-    }
-
     public PPGameSave LoadGame()
     {
         currentGame = Load() as PPGameSave;
         currencies = currentGame.Currencies;
-        if (currencies.Coins.Amount == 0)
-        {
-            ChangeCoins(2000); // Used for Debugging only
-        }
         return currentGame;
     }
 
-    #region Event Subscription
-
-    public void SubscribeToCoinsChange(MonoActionInt coinsAction) 
-	{
-		onCoinsChange += coinsAction;
-	}
-		
-	public void UnsubscribeFromCoinsChange(MonoActionInt coinsAction)
-	{
-		onCoinsChange -= coinsAction;
-	}
-
-	public void SubscribeToFoodChange(MonoActionInt foodAction) 
-	{
-		onFoodChange += foodAction;
-	}
-
-	public void UnsubscribeToFoodChange(MonoActionInt foodAction)
-	{
-		onFoodChange -= foodAction;
-	}
-
-    public void SubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
+    protected PPGameSave getCurrentGame()
     {
-        onHomeSlotsChange += HomeSlotsAction;
+        return currentGame;
     }
 
-    public void UnsubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
-    {
-        onHomeSlotsChange -= HomeSlotsAction;
-    }
+    #region DataController Overrides
 
-    #endregion
-		
-	#region DataController Overrides
-
-	protected override SerializableData getDefaultFile() 
+    protected override SerializableData getDefaultFile() 
 	{
 		return new PPGameSave(new DogDescriptor[0], CurrencySystem.Default);
 	}		
@@ -148,9 +108,45 @@ public class PPDataController : DataController, ICurrencySystem
         callOnHomeSlotsChange(HomeSlots.Amount);
 	}
 
-	#endregion
+    #endregion
 
-	protected void callOnCoinsChange(int coins) 
+    #region Event Subscription
+
+    public void SubscribeToCoinsChange(MonoActionInt coinsAction)
+    {
+        onCoinsChange += coinsAction;
+    }
+
+    public void UnsubscribeFromCoinsChange(MonoActionInt coinsAction)
+    {
+        onCoinsChange -= coinsAction;
+    }
+
+    public void SubscribeToFoodChange(MonoActionInt foodAction)
+    {
+        onFoodChange += foodAction;
+    }
+
+    public void UnsubscribeToFoodChange(MonoActionInt foodAction)
+    {
+        onFoodChange -= foodAction;
+    }
+
+    public void SubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
+    {
+        onHomeSlotsChange += HomeSlotsAction;
+    }
+
+    public void UnsubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
+    {
+        onHomeSlotsChange -= HomeSlotsAction;
+    }
+
+    #endregion
+
+    #region Event Calls
+
+    protected void callOnCoinsChange(int coins) 
 	{ 
 		if(onCoinsChange != null)
 		{
@@ -174,14 +170,11 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
-    protected PPGameSave getCurrentGame() 
-	{
-		return currentGame;
-	}
+    #endregion
 
     public void Adopt(DogDescriptor dog)
     {
-        Adopt(dog);
+        currentGame.Adopt(dog);
         SaveGame();
     }
 
@@ -220,7 +213,7 @@ public class PPDataController : DataController, ICurrencySystem
 
     public bool CanAfford(CurrencyType type, int amount)
     {
-        throw new NotImplementedException();
+        return currencies.CanAfford(type, amount);
     }
 
     public bool HasCurrency(CurrencyType type)

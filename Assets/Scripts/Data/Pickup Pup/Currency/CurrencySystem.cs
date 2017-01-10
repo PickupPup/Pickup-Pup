@@ -1,12 +1,9 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann 
  * Description: Controls all forms of currency
  */
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class CurrencySystem : PPData, ICurrencySystem
@@ -33,7 +30,7 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
-            return coins;
+            return currencies[CurrencyType.Coins] as CoinsData;
         }
     }
 
@@ -41,7 +38,7 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
-            return dogFood;
+            return currencies[CurrencyType.DogFood] as DogFoodData;
         }
     }
 
@@ -49,53 +46,17 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
-            return homeSlots;
+            return currencies[CurrencyType.HomeSlots] as HomeSlotsData;
         }
     }
 
     #endregion
 
-    [NonSerialized]
-    PPDataController dataController;
-
     Dictionary<CurrencyType, CurrencyData> currencies;
-    CoinsData coins;
-    DogFoodData dogFood;
-    HomeSlotsData homeSlots;
 
-    public CurrencySystem(CurrencyData[] currencies)
+    public CurrencySystem(params CurrencyData[] currencies)
     {
-        dataController = PPDataController.GetInstance;
-        this.currencies = new Dictionary<CurrencyType, CurrencyData>();
-        foreach(CurrencyData currency in currencies)
-        {
-            this.currencies.Add(currency.Type, currency);
-        }
-        // Set individual currencies
-    }
-
-    public CurrencySystem(CoinsData coins, DogFoodData dogFood, HomeSlotsData homeSlots)
-    {
-        dataController = PPDataController.GetInstance;
-        this.coins = coins;
-        this.dogFood = dogFood;
-        this.homeSlots = homeSlots;
-
-        generateCurrencyDictionary(new CurrencyData[3] { coins, dogFood, homeSlots });
-    }
-
-    void generateCurrencyDictionary(CurrencyData[] currencies)
-    {
-        this.currencies = new Dictionary<CurrencyType, CurrencyData>();
-        foreach (CurrencyData currency in currencies)
-        {
-            this.currencies.Add(currency.Type, currency);
-        }
-    }
-
-    void Save()
-    {
-        dataController.SaveCurrencies(this);
+        this.currencies = generateCurrencyLookup(currencies);
     }
 
     #region ICurrencySystem Methods
@@ -118,7 +79,6 @@ public class CurrencySystem : PPData, ICurrencySystem
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
         currencies[type].IncreaseBy(deltaAmount);
-        Save();
     }
 
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
@@ -142,5 +102,15 @@ public class CurrencySystem : PPData, ICurrencySystem
     }
 
     #endregion
+
+    Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies)
+    {
+        Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
+        foreach (CurrencyData currency in currencies)
+        {
+            lookup.Add(currency.Type, currency);
+        }
+        return lookup;
+    }
 
 }
