@@ -6,6 +6,13 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+#if UNITY_EDITOR
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+#endif
+
 public abstract class DataController : SingletonController<DataController> 
 {
 	protected bool hasSaveBuffer 
@@ -15,7 +22,15 @@ public abstract class DataController : SingletonController<DataController>
 			return saveBuffer != null;
 		}
 	}
-		
+
+	#if UNITY_EDITOR
+
+	[Header("(Reset can only be called in-Editor)")]
+	[SerializeField]
+	KeyCode resetDataKey;
+
+	#endif
+
 	string filePath;
 	SerializableData saveBuffer;
 
@@ -75,5 +90,23 @@ public abstract class DataController : SingletonController<DataController>
 	}
 
 	protected abstract SerializableData getDefaultFile();
+
+	#region Editor Debugging 
+
+	#if UNITY_EDITOR
+
+	void Update()
+	{
+		if(Input.GetKeyDown(resetDataKey))
+		{
+			Reset();
+			// Reloads the scene to ensure data resets
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
+	}
+
+	#endif
+
+	#endregion
 
 }
