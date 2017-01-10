@@ -159,12 +159,35 @@ public class PPGameController : GameController
 	void handleLoadGame(PPDataController dataController)
 	{
 		List<DogDescriptor> dogs = dataController.ScoutingDogs;
-		if(dogs != null && dogs.Count > 0) {
+		if(dogs != null && dogs.Count > 0)
+		{
 			Dog[] dogObjs = new DogFactory(hideGameObjects:true).CreateGroup(dogs.ToArray());
 			dogsOutScouting = new List<Dog>(dogObjs);
+			callScoutingDogsLoaded(dogObjs);
 		}
 	}
 
+	void callScoutingDogsLoaded(Dog[] dogs)
+	{
+		foreach(Dog dog in dogs)
+		{
+			dog.SetGame(this);
+			EventController.Event(PPEvent.ScoutingDogLoaded, dog);
+		}
+	}
+
+	public int GetCurrentSlotIndex()
+	{
+		if(HasTargetSlot)
+		{
+			return targetSlot.GetIndex();	
+		}
+		else
+		{
+			return INVALID_VALUE;
+		}
+	}
+		
 	public void ChangeCoins(int deltaCoins) 
 	{
 		dataController.ChangeCoins(deltaCoins);
@@ -225,15 +248,17 @@ public class PPGameController : GameController
         ChangeVacantHomeSlots(-1);
     }
 
-	public bool TrySendDogToScout(Dog dog) 
+	public bool TrySendDogToScout(Dog dog, out int slotIndex)
 	{
 		// Can only send a certain number of dogs out to scout
 		if(DogsScoutingAtCapacity || dogsOutScouting.Contains(dog)) 
 		{
+			slotIndex = INVALID_VALUE;
 			return false;
 		} 
 		else 
 		{
+			slotIndex = targetSlot.transform.GetSiblingIndex();
 			sendDogToScout(dog);
 			dataController.SendDogToScout(dog);
 			return true;

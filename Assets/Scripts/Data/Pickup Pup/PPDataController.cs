@@ -178,6 +178,8 @@ public class PPDataController : DataController
 	public void SendDogToScout(Dog dog)
 	{
 		currentGame.SendDogToScout(dog);
+		UnityEngine.Debug.Log("SAVING");
+		SaveGame();
 	}
 
     public void ChangeCurrencyByType(int deltaCurrency, CurrencyType currencyType)

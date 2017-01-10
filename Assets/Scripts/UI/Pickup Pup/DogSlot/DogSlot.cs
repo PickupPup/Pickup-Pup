@@ -53,6 +53,11 @@ public class DogSlot : PPUIElement
 
 	#endregion
 
+	public int GetIndex()
+	{
+		return transform.GetSiblingIndex();
+	}
+
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {

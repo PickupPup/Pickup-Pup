@@ -71,6 +71,7 @@ public class DogDatabase : Database<DogDatabase>
 	[SerializeField]
 	DogDescriptor[] dogs;
 
+	[System.NonSerialized]
 	RandomBuffer<DogDescriptor> randomizer;
 	Dictionary<string, DogBreed> breedsByName;
 	[System.NonSerialized]
@@ -116,6 +117,7 @@ public class DogDatabase : Database<DogDatabase>
 
 	public Sprite GetDogBreedSprite(DogBreed breed) 
 	{
+		checkLookup();
 		// Error checking
 		if(breed == null || string.IsNullOrEmpty(breed.Breed))
 		{
@@ -142,6 +144,14 @@ public class DogDatabase : Database<DogDatabase>
 		}
 	}
 		
+	void checkLookup()
+	{
+		if(dogSpriteLookup == null)
+		{
+			dogSpriteLookup = new Dictionary<DogBreed, Sprite>();
+		}
+	}
+
 	public override bool TryInit()
 	{
 		if(tryInitData())

@@ -95,6 +95,14 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public int ScoutingIndex
+	{
+		get
+		{
+			return descriptor.ScoutingSlotIndex;
+		}
+	}
+
 	#endregion
 
 	bool hasDescriptor 
@@ -218,12 +226,24 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public void SetGame(PPGameController game)
+	{
+		this.game = game;
+	}
+
 	public bool TrySendToScout()
 	{
 		if(!IsScouting && HasScoutingTimer) 
 		{
+			descriptor.HandleScoutingBegun(game.GetCurrentSlotIndex());
 			scoutingTimer.Begin();
-			return game.TrySendDogToScout(this);
+			int slotIndex;
+			bool wasSuccess = game.TrySendDogToScout(this, out slotIndex);
+			if(!wasSuccess)
+			{
+				descriptor.HandleScoutingEnded();
+			}
+			return wasSuccess;
 		} 
 		else 
 		{

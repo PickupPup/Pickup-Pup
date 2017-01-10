@@ -113,6 +113,22 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+	public float TimeRemainingScouting
+	{
+		get
+		{
+			return _timeRemainingScouting;
+		}
+	}
+
+	public int ScoutingSlotIndex
+	{
+		get 
+		{
+			return _scoutingSlotIndex;
+		}
+	}
+
 	#endregion
 
 
@@ -135,6 +151,8 @@ public class DogDescriptor : PPDescriptor
 	[SerializeField]
 	int age;
 
+	float _timeRemainingScouting;
+	int _scoutingSlotIndex;
 	[System.NonSerialized]
 	Dog linkedDog;
 	DogBreed _iBreed;
@@ -152,6 +170,29 @@ public class DogDescriptor : PPDescriptor
 	public DogDescriptor(DogDatabase data) : base(data) 
 	{
 		// NOTHING
+	}
+
+	public void HandleScoutingBegun(int slotIndex)
+	{
+		if(this.IsLinkedToDog)
+		{
+			linkedDog.SubscribeToScoutingTimerChange(updateTimeRemainingScouting);
+		}
+		this._scoutingSlotIndex = slotIndex;
+	}
+
+	public void HandleScoutingEnded()
+	{
+		if(this.IsLinkedToDog)
+		{
+			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
+		}
+		this._scoutingSlotIndex = NOT_FOUND_INT;
+	}
+
+	void updateTimeRemainingScouting(float timeRemainingScouting)
+	{
+		_timeRemainingScouting = timeRemainingScouting;
 	}
 
 	public void LinkToDog(Dog dog) 

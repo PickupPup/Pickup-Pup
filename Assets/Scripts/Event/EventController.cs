@@ -266,5 +266,6 @@ public enum PPEvent
 	LoadStart,
 	LoadHome,
     LoadShop,
+	ScoutingDogLoaded,
 
 }

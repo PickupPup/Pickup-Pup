@@ -3,6 +3,7 @@
  * Description: Generic superclass to handle loading from resources
  */
 
+[System.Serializable]
 public class ResourceLoader 
 {
 	protected const string AUDIO_DIR = "Audio";
