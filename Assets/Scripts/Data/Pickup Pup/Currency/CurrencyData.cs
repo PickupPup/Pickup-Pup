@@ -3,9 +3,40 @@
  * Description: Holds the data for a specific form of currency (ex: coins)
  */
 
+using System.IO;
+using UnityEngine;
+
 [System.Serializable]
-public class CurrencyData : PPData
+public class CurrencyData
 {
+    #region Instance Accessors
+
+    public int Amount
+    {
+        get
+        {
+            return amount;
+        }
+    }
+
+    public CurrencyType Type
+    {
+        get
+        {
+            return type;
+        }
+    }
+
+    public virtual Sprite Icon
+    {
+        get
+        {
+            return Resources.Load<Sprite>(Path.Combine("Sprites", "Default"));
+        }
+    }
+
+    #endregion
+
     protected CurrencyType type;
     protected int amount = 0;
 
@@ -29,21 +60,5 @@ public class CurrencyData : PPData
     {
         return amount >= cost;
     }
-
-    public int Amount
-    {
-        get
-        {
-            return amount;
-        }
-    }
-
-    public CurrencyType Type
-    {
-        get
-        {
-            return type;
-        }
-    }   
 
 }

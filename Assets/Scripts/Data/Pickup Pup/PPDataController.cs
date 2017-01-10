@@ -73,7 +73,7 @@ public class PPDataController : DataController, ICurrencySystem
     CurrencySystem currencies;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
-    MonoActionInt onVacantHomeSlotsChange;
+    MonoActionInt onHomeSlotsChange;
 
 	public bool SaveGame()
 	{
@@ -87,7 +87,22 @@ public class PPDataController : DataController, ICurrencySystem
         SaveGame();
     }
 
-	public void SubscribeToCoinsChange(MonoActionInt coinsAction) 
+    public PPGameSave LoadGame()
+    {
+        currentGame = Load() as PPGameSave;
+        currencies = currentGame.Currencies;
+        UnityEngine.Debug.Log(currencies == null);
+        UnityEngine.Debug.Log(currencies.Coins == null);
+        if (currencies.Coins.Amount == 0)
+        {
+            ChangeCoins(2000); // Used for Debugging only
+        }
+        return currentGame;
+    }
+
+    #region Event Subscription
+
+    public void SubscribeToCoinsChange(MonoActionInt coinsAction) 
 	{
 		onCoinsChange += coinsAction;
 	}
@@ -107,31 +122,23 @@ public class PPDataController : DataController, ICurrencySystem
 		onFoodChange -= foodAction;
 	}
 
-    public void SubscribeToVacantHomeSlotsChange(MonoActionInt VacantHomeSlotsAction)
+    public void SubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
     {
-        onVacantHomeSlotsChange += VacantHomeSlotsAction;
+        onHomeSlotsChange += HomeSlotsAction;
     }
 
-    public void UnsubscribeToVacantHomeSlotsChange(MonoActionInt VacantHomeSlotsAction)
+    public void UnsubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
     {
-        onVacantHomeSlotsChange -= VacantHomeSlotsAction;
+        onHomeSlotsChange -= HomeSlotsAction;
     }
-		
-	public PPGameSave LoadGame()
-	{
-		currentGame = Load() as PPGameSave;
-        currencies = currentGame.Currencies;
-        if (currencies.Coins.Amount == 0)
-        {
-            ChangeCoins(2000); // Used for Debugging only
-        }
-		return currentGame;
-	}
+
+    #endregion
 		
 	#region DataController Overrides
 
 	protected override SerializableData getDefaultFile() 
 	{
+        UnityEngine.Debug.Log("getting default file");
 		return new PPGameSave(new DogDescriptor[0], CurrencySystem.Default);
 	}		
 		
@@ -141,7 +148,7 @@ public class PPDataController : DataController, ICurrencySystem
 		LoadGame();
 		callOnCoinsChange(Coins.Amount);
 		callOnFoodChange(DogFood.Amount);
-        callOnVacantHomeSlotsChange(HomeSlots.Amount);
+        callOnHomeSlotsChange(HomeSlots.Amount);
 	}
 
 	#endregion
@@ -162,11 +169,11 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
-    protected void callOnVacantHomeSlotsChange(int VacantHomeSlots)
+    protected void callOnHomeSlotsChange(int homeSlots)
     {
-        if(onVacantHomeSlotsChange != null)
+        if(onHomeSlotsChange != null)
         {
-            onVacantHomeSlotsChange(VacantHomeSlots);
+            onHomeSlotsChange(homeSlots);
         }
     }
 
@@ -200,7 +207,7 @@ public class PPDataController : DataController, ICurrencySystem
     public void ChangeHomeSlots(int deltaHomeSlots)
     {
         currencies.ChangeHomeSlots(deltaHomeSlots);
-        callOnVacantHomeSlotsChange(HomeSlots.Amount);
+        callOnHomeSlotsChange(HomeSlots.Amount);
         SaveGame();
     }
 

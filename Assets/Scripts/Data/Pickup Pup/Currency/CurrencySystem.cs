@@ -17,12 +17,11 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
-            return new CurrencySystem(new CurrencyData[3]
-            {
+            return new CurrencySystem(
                 new CoinsData(2000),
                 new DogFoodData(0),
                 new HomeSlotsData(10)
-            });
+            );
         }
     }
 
@@ -56,6 +55,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     #endregion
 
+    [NonSerialized]
     PPDataController dataController;
 
     Dictionary<CurrencyType, CurrencyData> currencies;
@@ -66,6 +66,26 @@ public class CurrencySystem : PPData, ICurrencySystem
     public CurrencySystem(CurrencyData[] currencies)
     {
         dataController = PPDataController.GetInstance;
+        this.currencies = new Dictionary<CurrencyType, CurrencyData>();
+        foreach(CurrencyData currency in currencies)
+        {
+            this.currencies.Add(currency.Type, currency);
+        }
+        // Set individual currencies
+    }
+
+    public CurrencySystem(CoinsData coins, DogFoodData dogFood, HomeSlotsData homeSlots)
+    {
+        dataController = PPDataController.GetInstance;
+        this.coins = coins;
+        this.dogFood = dogFood;
+        this.homeSlots = homeSlots;
+
+        generateCurrencyDictionary(new CurrencyData[3] { coins, dogFood, homeSlots });
+    }
+
+    void generateCurrencyDictionary(CurrencyData[] currencies)
+    {
         this.currencies = new Dictionary<CurrencyType, CurrencyData>();
         foreach (CurrencyData currency in currencies)
         {
@@ -101,14 +121,9 @@ public class CurrencySystem : PPData, ICurrencySystem
         Save();
     }
 
-    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, bool? canAfford = null)
+    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
-        // If this function hasn't been prechecked to see if the player can afford it
-        if (!canAfford.HasValue)
-        {
-            canAfford = CanAfford(costCurrencyType, cost);
-        }
-        if (canAfford.Value)
+        if (CanAfford(costCurrencyType, cost))
         {
             ChangeCurrencyAmount(valueCurrencyType, value);
             ChangeCurrencyAmount(costCurrencyType, -cost);

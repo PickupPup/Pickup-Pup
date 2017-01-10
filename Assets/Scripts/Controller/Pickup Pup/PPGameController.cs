@@ -65,7 +65,7 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-	#region Instance Accesors
+	#region Instance Accessors
 
 	public DogDatabase Data
 	{
@@ -83,23 +83,33 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+    public bool DogsScoutingAtCapacity
+    {
+        get
+        {
+            return dogsOutScouting.Count >= tuning.MaxDogsScouting;
+        }
+    }
+
+    #endregion
+
     #region ICurrencySystem Accessors
 
     public CoinsData Coins
-	{
-		get 
-		{ 
-			return dataController.Coins; 
-		}
-	}
+    {
+        get
+        {
+            return dataController.Coins;
+        }
+    }
 
-	public DogFoodData DogFood
-	{
-		get 
-		{ 
-			return dataController.DogFood; 
-		}
-	}
+    public DogFoodData DogFood
+    {
+        get
+        {
+            return dataController.DogFood;
+        }
+    }
 
     public HomeSlotsData HomeSlots
     {
@@ -110,16 +120,6 @@ public class PPGameController : GameController, ICurrencySystem
     }
 
     #endregion
-
-    public bool DogsScoutingAtCapacity 
-	{
-		get 
-		{
-			return dogsOutScouting.Count >= tuning.MaxDogsScouting;
-		}
-	}
-
-	#endregion
 
 	// The dog the player currently has selected
 	Dog selectedDog;
@@ -148,10 +148,12 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
 	}
-		
-	#endregion
 
-	public void ChangeCoins(int deltaCoins) 
+    #endregion
+
+    #region ICurrencySystem Methods
+
+    public void ChangeCoins(int deltaCoins) 
 	{
 		dataController.ChangeCoins(deltaCoins);
 	}
@@ -168,13 +170,12 @@ public class PPGameController : GameController, ICurrencySystem
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
-        throw new NotImplementedException();
+        dataController.ChangeCurrencyAmount(type, deltaAmount);
     }
 
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
-        // TODO
-        //dataController.ConvertCurrency
+        dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
     public bool CanAfford(CurrencyType type, int amount)
@@ -187,10 +188,12 @@ public class PPGameController : GameController, ICurrencySystem
         return dataController.HasCurrency(type);
     }
 
+    #endregion
+
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if (dataController.CanAfford(costCurrencyType, cost))
+        if (CanAfford(costCurrencyType, cost))
         {
             return false;
         }
@@ -207,7 +210,7 @@ public class PPGameController : GameController, ICurrencySystem
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+        ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
