@@ -151,9 +151,19 @@ public class PPGameController : GameController
 		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
+		handleLoadGame(dataController);
 	}
 		
 	#endregion
+
+	void handleLoadGame(PPDataController dataController)
+	{
+		List<DogDescriptor> dogs = dataController.ScoutingDogs;
+		if(dogs != null && dogs.Count > 0) {
+			Dog[] dogObjs = new DogFactory(hideGameObjects:true).CreateGroup(dogs.ToArray());
+			dogsOutScouting = new List<Dog>(dogObjs);
+		}
+	}
 
 	public void ChangeCoins(int deltaCoins) 
 	{
@@ -225,6 +235,7 @@ public class PPGameController : GameController
 		else 
 		{
 			sendDogToScout(dog);
+			dataController.SendDogToScout(dog);
 			return true;
 		}
 	}

@@ -26,6 +26,9 @@ public class EventController : SingletonController<EventController>
 	public delegate void PPEventAction(PPEvent gameEvent);
 	public event PPEventAction OnPPEvent;
 
+	public event PPData.DogActionStr OnNamedDogEvent;
+	public event PPData.PPDogAction OnPPDogEvent;
+
 	#endregion
 
 	[SerializeField]
@@ -67,6 +70,22 @@ public class EventController : SingletonController<EventController>
 		}
 	}
 
+	public static void Subscribe(PPData.DogActionStr eventAction)
+	{
+		if(hasInstance)
+		{
+			Instance.OnNamedDogEvent += eventAction;
+		}
+	}
+
+	public static void Subscribe(PPData.PPDogAction eventAction)
+	{
+		if(hasInstance)
+		{
+			Instance.OnPPDogEvent += eventAction;
+		}
+	}
+
 	public static void Unsubscribe(NamedEventAction eventAction) 
 	{
 		if(hasInstance) 
@@ -93,9 +112,25 @@ public class EventController : SingletonController<EventController>
 
 	public static void Unsubscribe(PPEventAction eventAction) 
 	{
-		if(hasInstance) 
+		if(hasInstance)
 		{
 			Instance.OnPPEvent -= eventAction;
+		}
+	}
+
+	public static void Unsubscribe(PPData.DogActionStr eventAction)
+	{
+		if(hasInstance)
+		{
+			Instance.OnNamedDogEvent -= eventAction;
+		}
+	}
+
+	public static void Unsubscribe(PPData.PPDogAction eventAction)
+	{
+		if(hasInstance)
+		{
+			Instance.OnPPDogEvent -= eventAction;
 		}
 	}
 
@@ -103,7 +138,7 @@ public class EventController : SingletonController<EventController>
 
 	#region Event Calls
 
-	public static void Event(string eventName) 
+	public static void Event(string eventName, bool isCallback = false) 
 	{
 		if(hasInstance) 
 		{
@@ -111,7 +146,7 @@ public class EventController : SingletonController<EventController>
 			{
 				Instance.OnNamedEvent(eventName);
 			}
-			if(Instance.tryAlsoCallStringsAsPPEvents) 
+			if(Instance.tryAlsoCallStringsAsPPEvents && !isCallback) 
 			{
 				tryCallStringAsPPEvent(eventName);
 			}
@@ -135,7 +170,7 @@ public class EventController : SingletonController<EventController>
         }
     }
 
-	public static void Event(PPEvent gameEvent) 
+	public static void Event(PPEvent gameEvent, bool isCallback = false) 
 	{
 		if(hasInstance) 
 		{
@@ -143,23 +178,72 @@ public class EventController : SingletonController<EventController>
 			{	
 				Instance.OnPPEvent(gameEvent);
 			}
-			if(Instance.alsoCallPPEventsAsStrings) 
+			if(Instance.alsoCallPPEventsAsStrings && !isCallback) 
 			{
 				callPPEventAsString(gameEvent);
 			}
 		}
 	}
 
+	public static void Event(string eventName, Dog dog, bool isCallback = false)
+	{
+		if(hasInstance)
+		{
+			if(Instance.OnNamedDogEvent != null)
+			{
+				Instance.OnNamedDogEvent(eventName, dog);
+			}
+			if(Instance.tryAlsoCallStringsAsPPEvents && !isCallback)
+			{
+				tryCallNamedDogEventAsPPDogEvent(eventName, dog);
+			}
+		}
+	}
+
+	public static void Event(PPEvent gameEvent, Dog dog, bool isCallback = false)
+	{
+		if(hasInstance)
+		{
+			if(Instance.OnPPDogEvent != null)
+			{
+				Instance.OnPPDogEvent(gameEvent, dog);
+			}
+			if(Instance.alsoCallPPEventsAsStrings && !isCallback)
+			{
+				callPPDogEventAsString(gameEvent, dog);
+			}
+		}
+	}
+
 	static void callPPEventAsString(PPEvent gameEvent) 
 	{
-		Event(gameEvent.ToString());
+		Event(gameEvent.ToString(), isCallback:true);
+	}
+
+	static void callPPDogEventAsString(PPEvent gameEvent, Dog dog)
+	{
+		Event(gameEvent.ToString(), dog, isCallback:true);
 	}
 
 	static bool tryCallStringAsPPEvent(string eventName) 
 	{
 		try
 		{
-			Event((PPEvent) Enum.Parse(typeof(PPEvent), eventName));
+			Event((PPEvent) Enum.Parse(typeof(PPEvent), eventName), isCallback:true);
+			return true;
+		}
+		catch 
+		{
+			// Cannot parse enum:
+			return false;
+		}
+	}
+
+	static bool tryCallNamedDogEventAsPPDogEvent(string eventName, Dog dog) 
+	{
+		try
+		{
+			Event((PPEvent) Enum.Parse(typeof(PPEvent), eventName), dog, isCallback:true);
 			return true;
 		}
 		catch 

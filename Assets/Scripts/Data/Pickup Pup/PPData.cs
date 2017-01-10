@@ -23,6 +23,8 @@ public abstract class PPData
 
 	public delegate void DogAction(Dog dog);
 	public delegate void DogActionf(Dog dog, float dogFloat);
+	public delegate void DogActionStr(string eventName, Dog dog);
+	public delegate void PPDogAction(PPEvent ppEvent, Dog Dog);
 
 	protected DogDatabase database;
 

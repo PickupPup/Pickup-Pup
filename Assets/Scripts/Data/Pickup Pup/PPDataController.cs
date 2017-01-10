@@ -30,6 +30,14 @@ public class PPDataController : DataController
 		}
 	}
 
+	public List<DogDescriptor> ScoutingDogs
+	{
+		get
+		{
+			return currentGame.ScoutingDogs;
+		}
+	}
+
 	public int DogCount 
 	{
 		get 
@@ -119,7 +127,7 @@ public class PPDataController : DataController
 
 	protected override SerializableData getDefaultFile() 
 	{
-		return new PPGameSave(new DogDescriptor[0], Currency.Defaults);
+		return new PPGameSave(new DogDescriptor[0], new DogDescriptor[0], Currency.Defaults);
 	}		
 		
 	public override void Reset() 
@@ -165,6 +173,11 @@ public class PPDataController : DataController
 	public bool HasCurrency(CurrencyType type) 
 	{
 		return currentGame.HasCurrency(type);
+	}
+
+	public void SendDogToScout(Dog dog)
+	{
+		currentGame.SendDogToScout(dog);
 	}
 
     public void ChangeCurrencyByType(int deltaCurrency, CurrencyType currencyType)

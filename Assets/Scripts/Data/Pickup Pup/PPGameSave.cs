@@ -40,14 +40,32 @@ public class PPGameSave : GameSave
 		private set;
 	}
 
+	public List<DogDescriptor> ScoutingDogs
+	{
+		get;
+		private set;
+	}
+
 	#endregion
 
 	Dictionary<CurrencyType, Currency> currencies;
 
-	public PPGameSave(DogDescriptor[] dogs, params Currency[] currencies) 
+	public PPGameSave(DogDescriptor[] dogs, DogDescriptor[] scoutingDogs, params Currency[] currencies) 
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(dogs);
+		this.ScoutingDogs = new List<DogDescriptor>(scoutingDogs);
 		this.currencies = generateCurrencyLookup(currencies);
+	}
+		
+	public void SendDogToScout(Dog dog)
+	{
+		ScoutingDogs.Add(dog.Info);
+		dog.SubscribeToScoutingTimerEnd(handleDogFinishdScouting);
+	}
+
+	void handleDogFinishdScouting(Dog dog)
+	{
+		ScoutingDogs.Remove(dog.Info);
 	}
 
 	public bool HasCurrency(CurrencyType type) 
