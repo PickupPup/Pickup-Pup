@@ -91,8 +91,6 @@ public class PPDataController : DataController, ICurrencySystem
     {
         currentGame = Load() as PPGameSave;
         currencies = currentGame.Currencies;
-        UnityEngine.Debug.Log(currencies == null);
-        UnityEngine.Debug.Log(currencies.Coins == null);
         if (currencies.Coins.Amount == 0)
         {
             ChangeCoins(2000); // Used for Debugging only
@@ -138,7 +136,6 @@ public class PPDataController : DataController, ICurrencySystem
 
 	protected override SerializableData getDefaultFile() 
 	{
-        UnityEngine.Debug.Log("getting default file");
 		return new PPGameSave(new DogDescriptor[0], CurrencySystem.Default);
 	}		
 		
