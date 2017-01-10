@@ -54,6 +54,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5880f4730969f425b83699e01b2a0e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetDataKey: 113
+  saveOnApplicationPause: 0
+  saveOnApplicationQuit: 1
 --- !u!114 &114426272054950630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alsoCallPPEventsAsStrings: 1
-  tryAlsoCallStringsAsPPEvents: 0
+  tryAlsoCallStringsAsPPEvents: 1
 --- !u!114 &114567133989285116
 MonoBehaviour:
   m_ObjectHideFlags: 1

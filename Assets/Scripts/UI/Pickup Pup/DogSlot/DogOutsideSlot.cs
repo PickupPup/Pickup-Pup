@@ -10,6 +10,8 @@ public class DogOutsideSlot : DogSlot
 {
     Text nameText;
     Text timerText;
+	[SerializeField]
+	Image dogImageOverride;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -21,6 +23,15 @@ public class DogOutsideSlot : DogSlot
 		timerText = text[1];
 		nameText.text = string.Empty;
 		timerText.text = string.Empty;
+	}
+
+	protected override void checkReferences()
+	{
+		base.checkReferences();
+		if(dogImageOverride)
+		{
+			dogImage = dogImageOverride;
+		}
 	}
 
 	#endregion
@@ -43,14 +54,16 @@ public class DogOutsideSlot : DogSlot
 
 	public void ResumeScouting(Dog dog)
 	{
+		checkReferences();
 		this.dog = dog;
 		this.dogInfo = dog.Info;
 		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
-		nameText.text = dog.name;
+		nameText.text = dog.Name;
+		dogImage.sprite = dog.Portrait;
 		dog.SetTimer(dogInfo.TimeRemainingScouting);
 		dog.ResumeTimer();
 	}
-
+		
 	public Dog BringDogIndoors()
 	{
 		Dog returningDog = this.dog;

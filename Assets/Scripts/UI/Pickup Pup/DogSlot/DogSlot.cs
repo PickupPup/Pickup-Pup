@@ -39,7 +39,7 @@ public class DogSlot : PPUIElement
 	PPData.DogAction onOccupiedSlotClick;
 
     Image backgroundImage;
-    Image dogImage;
+    protected Image dogImage;
 
     bool setBackground = true;
 

@@ -51,7 +51,21 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 	{
 		handleSceneLoaded(level);
 	}
-		
+
+	void OnApplicationQuit()
+	{
+		handleGameQuit();
+	}
+
+	void OnApplicationPause(bool isPaused)
+	{
+		handleGameTogglePause(isPaused);
+		// iOS Does not produce calls to OnApplicationQuit, so treat all pauses as quit events
+		#if UNITY_IOS
+		handleGameQuit();
+		#endif
+	}
+
 	#endregion
 
 	// Value should only be null if you're setting a trigger
@@ -153,6 +167,16 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	protected virtual void handleGameTogglePause(bool isPaused)
+	{
+		// NOTHING
+	}
+
+	protected virtual void handleGameQuit()
+	{
+		// NOTHING
 	}
 
 	protected virtual void markForDestroyOnLoad() 

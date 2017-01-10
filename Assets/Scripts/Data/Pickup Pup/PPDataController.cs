@@ -3,6 +3,7 @@
  * Description: Handles save for Pickup Pup
  */
 
+using UnityEngine;
 using System.Collections.Generic;
 
 public class PPDataController : DataController 
@@ -72,6 +73,11 @@ public class PPDataController : DataController
 
 	#endregion
 
+	[SerializeField]
+	bool saveOnApplicationPause;
+	[SerializeField]
+	bool saveOnApplicationQuit;
+
 	PPGameSave currentGame;
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
@@ -123,6 +129,34 @@ public class PPDataController : DataController
 		return currentGame;
 	}
 		
+	#region MonoBehaviourExtended Overrides
+
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		// Avoids saving twice in the same call on iOS: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationPause.html
+		#if UNITY_IOS
+		if(saveOnApplicationPause && !saveOnApplicationQuit)
+		{
+			SaveGame();
+		}
+		#else
+		if(saveOnApplicationPause)
+		{
+			SaveGame();
+		}
+		#endif
+	}
+
+	protected override void handleGameQuit()
+	{
+		if(saveOnApplicationQuit)
+		{
+			SaveGame();
+		}
+	}
+		
+	#endregion
+
 	#region DataController Overrides
 
 	protected override SerializableData getDefaultFile() 
