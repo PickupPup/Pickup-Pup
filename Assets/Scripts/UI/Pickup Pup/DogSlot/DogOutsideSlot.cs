@@ -11,18 +11,28 @@ public class DogOutsideSlot : DogSlot
     Text nameText;
     Text timerText;
 
+	#region MonoBehaviourExtended Overrides
+
+	protected override void setReferences ()
+	{
+		base.setReferences ();
+		Text[] text = GetComponentsInChildren<Text>();
+		nameText = text[0];
+		timerText = text[1];
+		nameText.text = string.Empty;
+		timerText.text = string.Empty;
+	}
+
+	#endregion
+
     #region DogSlot Overrides
 
     public override void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
         base.Init(dog, dogSprite, backgroundSprite);
-        Text[] text = GetComponentsInChildren<Text>();
-        nameText = text[0];
-        timerText = text[1];
-
         nameText.text = dog.Name;
     }
-
+		
 	public override void Init(Dog dog)
 	{
 		base.Init(dog);

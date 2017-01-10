@@ -57,6 +57,14 @@ public class DogBreed : DogTrait
 		}
 	}
 
+	public float TimeToReturn
+	{
+		get
+		{
+			return timeToReturn;
+		}
+	}
+
 	#endregion
 
 	[SerializeField]

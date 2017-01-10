@@ -13,7 +13,7 @@ public class Dog : MobileObjectBehaviour
 	{
 		get 
 		{
-			return RemainingTimeScouting > 0;
+			return RemainingTimeScouting > 0 && scoutingTimer.IsRunning;
 		}
 	}
 
@@ -29,6 +29,14 @@ public class Dog : MobileObjectBehaviour
 			{
 				return default(float);
 			}
+		}
+	}
+
+	public float TotalTimeToReturn
+	{
+		get
+		{
+			return Info.TotalTimeToReturn;
 		}
 	}
 
@@ -191,6 +199,7 @@ public class Dog : MobileObjectBehaviour
 		if(HasScoutingTimer)
 		{
 			scoutingTimer.Init();
+			setupTimer(scoutingTimer);
 		}
 	}
 
@@ -220,6 +229,18 @@ public class Dog : MobileObjectBehaviour
 		{
 			return false;
 		}
+	}
+
+	public void GiveTimer(PPTimer timer)
+	{
+		this.scoutingTimer = timer;
+		setupTimer(timer);
+	}
+
+	void setupTimer(PPTimer timer)
+	{
+		timer.SubscribeToTimeChange(callOnScoutingTimerChange);
+		timer.SubscribeToTimeUp(callOnScountingTimerEnd);
 	}
 
 }

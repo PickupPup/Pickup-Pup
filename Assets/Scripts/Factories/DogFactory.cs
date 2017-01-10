@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class DogFactory : ObjectFactory<Dog>
 {
+	const float STANDARD_TIME_STEP_SEC = 1f;
+
 	bool hideGameObjects = true;
 
 	public DogFactory(bool hideGameObjects)
@@ -25,6 +27,8 @@ public class DogFactory : ObjectFactory<Dog>
 		}
 		Dog dog = dogObject.AddComponent<Dog>();
 		dog.Set(info);
+		PPTimer scoutingTimer = new PPTimer(dog.TotalTimeToReturn, STANDARD_TIME_STEP_SEC);
+		dog.GiveTimer(scoutingTimer);
 		return dog;
 	}	
 

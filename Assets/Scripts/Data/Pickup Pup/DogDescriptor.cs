@@ -81,6 +81,14 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+	public float TotalTimeToReturn
+	{
+		get
+		{
+			return Breed.TimeToReturn;
+		}
+	}
+
 	public DogBreed Breed 
 	{
 		get 
