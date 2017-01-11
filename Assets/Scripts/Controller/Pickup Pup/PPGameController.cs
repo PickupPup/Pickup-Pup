@@ -175,6 +175,7 @@ public class PPGameController : GameController, ICurrencySystem
 		{
 			dog.SetGame(this);
 			dog.SetTimer(dog.Info.TimeRemainingScouting);
+			dog.Info.HandleScoutingBegun(dog.Info.ScoutingSlotIndex);
 			EventController.Event(PPEvent.ScoutingDogLoaded, dog);
 		}
 	}
@@ -219,7 +220,6 @@ public class PPGameController : GameController, ICurrencySystem
     {
         dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
-
 
 	public void SetTargetSlot(DogSlot slot)
 	{

@@ -74,6 +74,7 @@ public class DogDatabase : Database<DogDatabase>
 	[System.NonSerialized]
 	RandomBuffer<DogDescriptor> randomizer;
 	// This buffer is used to generate same sequence of dogs based off day
+	[System.NonSerialized]
 	RandomBuffer<DogDescriptor> dailyRandomizer;
 
 	Dictionary<string, DogBreed> breedsByName;

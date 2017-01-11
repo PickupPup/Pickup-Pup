@@ -224,7 +224,6 @@ public class PPDataController : DataController, ICurrencySystem
 	public void SendDogToScout(Dog dog)
 	{
 		currentGame.SendDogToScout(dog);
-		UnityEngine.Debug.Log("SAVING");
 		SaveGame();
 	}
 

@@ -182,7 +182,7 @@ public class PPTimer : PPData
 
 	public void SetTimeRemaining(float newTime, bool checkForEvents) 
 	{
-		timer.ModifyTimeRemaining(newTime, checkForEvents);
+		timer.SetTimeRemaining(newTime, checkForEvents);
 	}
 
 	public void ZeroOutTimeRemaining(bool shouldCallTimeUpEvent) 

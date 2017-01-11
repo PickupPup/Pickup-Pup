@@ -186,7 +186,6 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
-		Debug.Log("WHAT");
 		if(this.IsLinkedToDog)
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
@@ -196,7 +195,6 @@ public class DogDescriptor : PPDescriptor
 
 	void updateTimeRemainingScouting(float timeRemainingScouting)
 	{
-		Debug.Log(timeRemainingScouting);
 		_timeRemainingScouting = timeRemainingScouting;
 	}
 
