@@ -6,39 +6,58 @@
 using System.Collections;
 using UnityEngine;
 
-public class MonoTimer : MonoBehaviourExtended, IGameTimer {
-	PPData.DataActionf onTimeChange;
-	PPData.DataAction onTimeUp;
-	IEnumerator timerCoroutine;
+public class MonoTimer : MonoBehaviourExtended, IGameTimer 
+{
+	#region Instance Accessors
 
-	float timeAtLastChangeEvent = float.MinValue;
-	public float TimeRemaining {get; private set;}
-	public bool TimeIsUp {
-		get {	
+	public float TimeRemaining
+	{
+		get;
+		private set;
+	}
+
+	public bool TimeIsUp 
+	{
+		get 
+		{	
 			return TimeRemaining <= 0;
 		}
 	}
-	public bool IsRunning {
-		get {
+
+	public bool IsRunning 
+	{
+		get 
+		{
 			return timerIsRunning;
 		}
 	}
-	bool timeChangedSinceLastChangeEvent {
-		get {
+
+	#endregion
+
+	bool timeChangedSinceLastChangeEvent 
+	{
+		get 
+		{
 			return timeAtLastChangeEvent != TimeRemaining;
 		}
 	}
 
+	PPData.DataActionf onTimeChange;
+	PPData.DataAction onTimeUp;
+	IEnumerator timerCoroutine;
+	float timeAtLastChangeEvent = float.MinValue;
 	float timeStep;
 	float maxTime;
 	bool timerIsRunning = false;
 
-	public void Reset() {
+	public void Reset() 
+	{
 		TimeRemaining = maxTime;
 		checkForTimeEvents();
 	}
 
-	public IGameTimer Setup (float maxTime, float timeStep) {
+	public IGameTimer Setup(float maxTime, float timeStep) 
+	{
 		this.timeStep = timeStep;
 		this.maxTime = maxTime;
 		this.TimeRemaining = maxTime;
@@ -48,131 +67,166 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer {
 		return this;
 	}
 
-	public void Teardown () {
-		MarkForDestroyOnLoad();	
+	public void Teardown() 
+	{
+		markForDestroyOnLoad();	
 	}
 
-	public void Begin (bool resetOnStart) {
-		if (resetOnStart) {
+	public void Begin(bool resetOnStart) 
+	{
+		if(resetOnStart) 
+		{
 			Reset();
 		}
 		startCoroutine();
 	}
 		
-	public void Resume () {
-		if (!timerIsRunning) {
+	public void Resume() 
+	{
+		if(!timerIsRunning) 
+		{
 			startCoroutine();
 		}
 	}
 		
-	public float Pause () {
-		if (timerIsRunning) {
+	public float Pause() 
+	{
+		if(timerIsRunning) 
+		{
 			stopCoroutine();
 		}
 		return TimeRemaining;
 	}
 
-	public float Stop (bool resetOnStop) {
+	public float Stop(bool resetOnStop) 
+	{
 		float timeRemaining = TimeRemaining;
 		stopCoroutine();
-		if (resetOnStop) {
+		if(resetOnStop) 
+		{
 			Reset();
 		}
 		return timeRemaining;
 	}
 
-	public void SubscribeToTimeChange (PPData.DataActionf action) {
+	public void SubscribeToTimeChange(PPData.DataActionf action) 
+	{
 		onTimeChange += action;
 	}
 
-	public void UnsubscribeFromTimeChange (PPData.DataActionf action) {
+	public void UnsubscribeFromTimeChange(PPData.DataActionf action) 
+	{
 		onTimeChange -= action;
 	}
 
-	public void SubscribeToTimeUp (PPData.DataAction action) {
+	public void SubscribeToTimeUp(PPData.DataAction action) 
+	{
 		onTimeUp += action;
 	}
 
-	public void UnsubscribeFromTimeUp (PPData.DataAction action) {
+	public void UnsubscribeFromTimeUp(PPData.DataAction action) 
+	{
 		onTimeUp -= action;
 	}
 
-	public void ClearEventsOnTimeUp () {
+	public void ClearEventsOnTimeUp() 
+	{
 		onTimeChange = null;
 		onTimeUp = null;
 	}
 
-	public void ModifyTimeRemaining (float deltaTime, bool checkForEvents) {
+	public void ModifyTimeRemaining(float deltaTime, bool checkForEvents) 
+	{
 		this.TimeRemaining += deltaTime;
-		if (checkForEvents) {
+		if(checkForEvents) 
+		{
 			this.checkForTimeEvents();
 		}
 	}
 
-	public void SetTimeRemaining (float newTime, bool checkForEvents) {
+	public void SetTimeRemaining(float newTime, bool checkForEvents) 
+	{
 		this.TimeRemaining = newTime;
-		if (checkForEvents) {
+		if(checkForEvents) 
+		{
 			this.checkForTimeEvents();
 		}
 	}
 
-	public void ZeroOutTimeRemaining (bool shouldCallTimeUpEvent) {
+	public void ZeroOutTimeRemaining(bool shouldCallTimeUpEvent) 
+	{
 		TimeRemaining = 0;
-		if (shouldCallTimeUpEvent) {
+		if(shouldCallTimeUpEvent) 
+		{
 			handleTimeUp();
 		}
 	}
 
 
-	void startCoroutine () {
+	void startCoroutine() 
+	{
 		stopCoroutine();
 		timerIsRunning = true;
 		timerCoroutine = countdown();
 		StartCoroutine(timerCoroutine);
 	}
 
-	void stopCoroutine () {
-		if (timerCoroutine != null) {
+	void stopCoroutine() 
+	{
+		if(timerCoroutine != null) 
+		{
 			StopCoroutine(timerCoroutine);
 		}
 		timerIsRunning = false;
 	}
 
-	IEnumerator countdown () {
-		while (timerIsRunning) {
+	IEnumerator countdown() 
+	{
+		while(timerIsRunning) 
+		{
 			yield return new WaitForSecondsRealtime(timeStep);
 			TimeRemaining -= timeStep;
 			checkForTimeEvents();
 		}
 	}
 
-	protected void callOnTimeUp () {
-		if (onTimeUp != null) {
+	protected void callOnTimeUp() 
+	{
+		if(onTimeUp != null) 
+		{
 			onTimeUp();
 		}
 	}
 
-	protected void callOnTimeChange (float newTime) {
-		if (onTimeChange != null) {
+	protected void callOnTimeChange(float newTime) 
+	{
+		if(onTimeChange != null) 
+		{
 			onTimeChange(newTime);
 			timeAtLastChangeEvent = newTime;
 		}
 	}
 
-	protected void handleTimeChange (float newTime) {
+	protected void handleTimeChange(float newTime) 
+	{
 		callOnTimeChange(newTime);
 	}
 
-	protected void handleTimeUp () {
+	protected void handleTimeUp() 
+	{
 		callOnTimeUp();
 	}
 
-	protected void checkForTimeEvents () {
-		if (TimeIsUp) {
+	protected void checkForTimeEvents() 
+	{
+		if(TimeIsUp) 
+		{
 			handleTimeUp();
 		}
-		if (timeChangedSinceLastChangeEvent) {
+		if(timeChangedSinceLastChangeEvent) 
+		{
 			handleTimeChange(TimeRemaining);
 		}
 	}
+
 }

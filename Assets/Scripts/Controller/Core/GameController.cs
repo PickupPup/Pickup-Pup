@@ -3,6 +3,7 @@
  * Description: Game Controller class
  */
 
-public class GameController : SingletonController<GameController> {
+public class GameController : SingletonController<GameController> 
+{
 	
 }

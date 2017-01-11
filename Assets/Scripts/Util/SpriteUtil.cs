@@ -22,14 +22,14 @@ public static class SpriteUtil
     {
         // If the sprite ID isn't listed in the dog sprite dictionary
         // (meaning it hasn't been loaded before)
-        if (! dogSprites.ContainsKey(spriteID))
+        if(! dogSprites.ContainsKey(spriteID))
         {
             // Load the sprite from file
             // Filename doesn't include extension 
             Sprite dogSprite = Resources.Load<Sprite>(FILE_PATH + BASE_FILENAME + spriteID);
             dogSprites.Add(spriteID, dogSprite); // Add it to sprite dictionary
         }
-
-        return dogSprites[spriteID];
+       return dogSprites[spriteID];
     }
+
 }

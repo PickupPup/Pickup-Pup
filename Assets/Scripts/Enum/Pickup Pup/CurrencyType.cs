@@ -1,11 +1,14 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Details a type of currency
  */
 
-public enum CurrencyType {
-    DogFood,
+public enum CurrencyType 
+{
     Coins,
-	Time,
-    None
+    DogFood,
+    HomeSlots,
+    Time,
+    None,
+
 }

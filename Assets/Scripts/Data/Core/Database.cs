@@ -4,24 +4,62 @@
  */
 
 [System.Serializable]
-public class Database<T> where T : class, new() {
-	static T _instance;
-	public static T Instance {	
-		get {
-			if (_instance == null) {
+public abstract class Database<T> : ResourceLoader where T : class, new()
+{
+	#region Static Accessors
+
+	public static T Instance 
+	{	
+		get 
+		{
+			if(_instance == null) 
+			{
 				_instance = new T();
 			}
 			return _instance;
 		}
 	}
 
-	public Database() {}
+	#endregion
 
-	public virtual void Initialize() {
+	public bool IsInitialized
+	{
+		get
+		{
+			return this.isInitialized;
+		}
+	}
+
+	static T _instance;
+
+	bool isInitialized;
+
+	protected Database() 
+	{
 		// NOTHING
 	}
 
-	public static void AssignInstance (T instance) {
+	public virtual void Initialize()
+	{
+		isInitialized = true;
+	}
+
+	public static void AssignInstance(T instance)
+	{
 		_instance = instance;
+	}
+
+	// Returns false if the datbase has already been initialized
+	public virtual bool TryInit()
+	{
+		if(isInitialized)
+		{
+			return false;
+		}
+		else
+		{
+			Initialize();
+			return true;
+		}
 	}
 }
