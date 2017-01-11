@@ -27,6 +27,11 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.SubscribeToFoodChange(updateFoodText);
         dataController.SubscribeToHomeSlotsChange(updateHomeSlotsText);
 		dataController.LoadGame();
+
+        // Display at start
+        updateCoinsText(dataController.Coins.Amount);
+        updateFoodText(dataController.DogFood.Amount);
+        updateHomeSlotsText(dataController.HomeSlots.Amount);
 	}
 
 	public void ChangeCoins(int deltaCoins) 
