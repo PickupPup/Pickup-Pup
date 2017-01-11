@@ -48,6 +48,14 @@ public class PPGameController : GameController
         }
     }
 
+	static string GIFT_FILE_PATH
+    {
+        get
+        {
+            return Path.Combine(JSON_DIR, "GiftItems");
+        }
+    }
+
     static string SAVE_FILE_PATH 
 	{
 		get 
@@ -81,6 +89,15 @@ public class PPGameController : GameController
             return shop;
         }
     }
+
+	public GiftDatabase Gifts
+    {
+        get
+        {
+            return gifts;
+        }
+    }
+
 
 	public Currency Coins
 	{
@@ -122,6 +139,7 @@ public class PPGameController : GameController
 	PPTuning tuning;
 	DogDatabase database;
     ShopDatabase shop;
+	GiftDatabase gifts;
 	PPDataController dataController;
 
 	#region MonoBehaviourExtended Overrides
@@ -131,9 +149,11 @@ public class PPGameController : GameController
 		base.setReferences();
 		database = parseDatabase();
         shop = parseShopDatabase();
+		gifts = parseGiftDatabase();
 		tuning = parseTuning();
 		database.Initialize();
         shop.Initialize();
+		gifts.Initialize();
 	}
 
 	protected override void fetchReferences() 
@@ -161,6 +181,8 @@ public class PPGameController : GameController
         dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
     }
 	
+	// Shop Items
+
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
@@ -185,6 +207,8 @@ public class PPGameController : GameController
         dataController.ChangeCurrencyByType(-cost, costCurrencyType);
     }
 
+	// Adopt Dogs
+
     public bool TryAdoptDog(DogDescriptor dog)
     {
         if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
@@ -200,6 +224,9 @@ public class PPGameController : GameController
         ChangeCoins(-dog.CostToAdopt);
         ChangeVacantHomeSlots(-1);
     }
+
+	// Control Dogs
+
 
 	public bool TrySendDogToScout(Dog dog) 
 	{
@@ -243,6 +270,26 @@ public class PPGameController : GameController
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
 	}
 
+	// Redeem Gifts
+
+    public bool TryRedeemGift(int value, CurrencyType valueCurrencyType)
+    {
+        RedeemGift(value, valueCurrencyType);
+        return true;
+    }
+
+	public bool TryRedeemGift(GiftItem gift)
+    {
+        return TryRedeemGift(gift.Value, gift.ValueCurrencyType);
+    }
+
+	public void RedeemGift(int value, CurrencyType valueCurrencyType)
+    {
+        dataController.ChangeCurrencyByType(value, valueCurrencyType);
+    }
+
+	// Database
+
 	DogDatabase parseDatabase() 
 	{
 		TextAsset json = loadTextAssetInResources(GAME_DATA_FILE_PATH);
@@ -253,6 +300,12 @@ public class PPGameController : GameController
     {
         TextAsset json = loadTextAssetInResources(SHOP_FILE_PATH);
         return JsonUtility.FromJson<ShopDatabase>(json.text);
+    }
+
+	GiftDatabase parseGiftDatabase()
+    {
+        TextAsset json = loadTextAssetInResources(GIFT_FILE_PATH);
+        return JsonUtility.FromJson<GiftDatabase>(json.text);
     }
 
 	PPTuning parseTuning() 
