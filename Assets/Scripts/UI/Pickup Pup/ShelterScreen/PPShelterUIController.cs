@@ -20,6 +20,7 @@ public class PPShelterUIController : PPUIController
     {
         base.fetchReferences();
         database = DogDatabase.GetInstance;
+        EventController.Event(PPEvent.LoadShelter);
         populateAvailableDogs(database);
     }
 
