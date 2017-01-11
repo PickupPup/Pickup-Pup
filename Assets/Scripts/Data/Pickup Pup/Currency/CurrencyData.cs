@@ -7,7 +7,7 @@ using System.IO;
 using UnityEngine;
 
 [System.Serializable]
-public class CurrencyData
+public class CurrencyData : ResourceLoader
 {
     #region Instance Accessors
 
@@ -31,7 +31,7 @@ public class CurrencyData
     {
         get
         {
-            return Resources.Load<Sprite>(Path.Combine("Sprites", "Default"));
+            return Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
         }
     }
 

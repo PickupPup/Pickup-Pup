@@ -6,7 +6,7 @@
 [System.Serializable]
 public class HomeSlotsData : CurrencyData
 {
-    HomeSlot[] slots;
+    int vacantSlots;
 
     #region Instance Accessors
 
@@ -14,7 +14,7 @@ public class HomeSlotsData : CurrencyData
     {
         get
         {
-            return countSlotsWithStatus(HomeSlotStatus.Vacant);
+            return vacantSlots;
         }
     }
 
@@ -22,7 +22,7 @@ public class HomeSlotsData : CurrencyData
     {
         get
         {
-            return hasSlotWithStatus(HomeSlotStatus.Vacant);
+            return vacantSlots > 0;
         }
     }
 
@@ -30,7 +30,7 @@ public class HomeSlotsData : CurrencyData
     {
         get
         {
-            return countSlotsWithStatus(HomeSlotStatus.Occupied);
+            return amount - vacantSlots;
         }
     }
 
@@ -38,7 +38,7 @@ public class HomeSlotsData : CurrencyData
     {
         get
         {
-            return hasSlotWithStatus(HomeSlotStatus.Occupied);
+            return OccupiedSlots > 0;
         }
     }
 
@@ -48,11 +48,7 @@ public class HomeSlotsData : CurrencyData
     {
         type = CurrencyType.HomeSlots;
         amount = initialAmount;
-        slots = new HomeSlot[amount];
-        for (int i = 0; i < slots.Length; i++)
-        {
-            slots[i] = new HomeSlot(HomeSlotStatus.Vacant);
-        }
+        vacantSlots = amount;
     }
 
     #region CurrencyData Overrides
@@ -61,97 +57,14 @@ public class HomeSlotsData : CurrencyData
     // Ex: you need a vacant slot to adopt a dog
     public override bool CanAfford(int cost)
     {
-        return HasVacantSlot;
+        return vacantSlots >= cost;
     }
 
     public override void IncreaseBy(int deltaAmount)
     {
-        int slotsToChange = UnityEngine.Mathf.Abs(deltaAmount);
-        if (deltaAmount > 0)
-        {
-            // Change occupied slot(s) to vacant
-            changeSlots(HomeSlotStatus.Vacant, slotsToChange);
-        }
-        else if (deltaAmount < 0)
-        {
-            // Change vacant slot(s) to occupied
-            changeSlots(HomeSlotStatus.Occupied, slotsToChange);
-        }
+        vacantSlots += deltaAmount;
     }
 
     #endregion
-
-    void changeSlots(HomeSlotStatus desiredStatus, int numOfSlotsToChange)
-    {
-        int slotsChanged = 0;
-        foreach(HomeSlot slot in slots)
-        {
-            if (slot.Status != desiredStatus)
-            {
-                slot.Status = desiredStatus;
-                slotsChanged++;
-                if (slotsChanged == numOfSlotsToChange)
-                {
-                    return;
-                }
-            }
-        }
-    }
-
-    bool hasSlotWithStatus(HomeSlotStatus status)
-    {
-        foreach (HomeSlot slot in slots)
-        {
-            if (slot.Status == status)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    int countSlotsWithStatus(HomeSlotStatus status)
-    {
-        int slotsWithStatus = 0;
-        foreach(HomeSlot slot in slots)
-        {
-            if(slot.Status == status)
-            {
-                slotsWithStatus++;
-            }
-        }
-        return slotsWithStatus;
-    }
-
-}
-
-public enum HomeSlotStatus
-{
-    Occupied,
-    Vacant
-
-}
-
-[System.Serializable]
-public class HomeSlot
-{
-    HomeSlotStatus status;
-
-    public HomeSlot(HomeSlotStatus status)
-    {
-        this.status = status;
-    }
-
-    public HomeSlotStatus Status
-    {
-        get
-        {
-            return status;
-        }
-        set
-        {
-            status = value;
-        }
-    }
 
 }

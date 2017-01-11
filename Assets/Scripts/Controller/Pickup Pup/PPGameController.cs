@@ -90,9 +90,7 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-    #endregion
-
-    #region ICurrencySystem Accessors
+    #region ICurrencySystem Interface
 
     public CoinsData Coins
     {
@@ -120,8 +118,10 @@ public class PPGameController : GameController, ICurrencySystem
 
     #endregion
 
-	// The dog the player currently has selected
-	Dog selectedDog;
+    #endregion
+
+    // The dog the player currently has selected
+    Dog selectedDog;
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase database;
@@ -150,7 +150,7 @@ public class PPGameController : GameController, ICurrencySystem
 
     #endregion
 
-    #region ICurrencySystem Methods
+    #region ICurrencySystem Interface
 
     public void ChangeCoins(int deltaCoins) 
 	{

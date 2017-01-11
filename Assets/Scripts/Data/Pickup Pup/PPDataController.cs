@@ -38,8 +38,6 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
-    #endregion
-
     #region ICurrencySystem Accessors
 
     public CoinsData Coins
@@ -65,6 +63,8 @@ public class PPDataController : DataController, ICurrencySystem
             return currencies.HomeSlots;
         }
     }
+
+    #endregion
 
     #endregion
 
@@ -184,7 +184,7 @@ public class PPDataController : DataController, ICurrencySystem
         SaveGame();
     }
 
-    #region ICurrencySystem Methods
+    #region ICurrencySystem Interface
 
 	public void ChangeCoins(int deltaCoins) 
 	{
