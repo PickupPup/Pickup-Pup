@@ -27,10 +27,11 @@ public class PPShelterUIController : PPUIController
 
     void populateAvailableDogs(DogDatabase database)
     {
-        DogDescriptor[] dogs = database.RandomDogList(availableDogPortraits.Length);
+        DogDescriptor[] dogs = database.GetDailyRandomDogList(availableDogPortraits.Length);
         for (int i = 0; i < dogs.Length; i++)
         {
-            availableDogPortraits[i].Init(dogs[i], database.GetDogBreedSprite(dogs[i].Breed));
+            DogDescriptor dog = dogs[i];
+            availableDogPortraits[i].Init(dog, database.GetDogBreedSprite(dog.Breed));
         }
     }
 
