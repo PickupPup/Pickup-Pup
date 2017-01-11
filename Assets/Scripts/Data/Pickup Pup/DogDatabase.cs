@@ -86,8 +86,8 @@ public class DogDatabase : Database<DogDatabase>
 		populateDogBreedLookup();
 		setDogDataReferences();
 		randomizer = new RandomBuffer<DogDescriptor>(dogs);
-		dailyRandomizer = new RandomDailyBuffer<DogDescriptor>(dogs);
-	}	
+        dailyRandomizer = new RandomDailyBuffer<DogDescriptor>(dogs);
+    }	
 
 	public DogBreed GetBreed(string breedName) 
 	{
@@ -127,7 +127,7 @@ public class DogDatabase : Database<DogDatabase>
 			new RandomDailyBuffer<DogDescriptor>(dogs, day), count, startIndex);
 	}
 		
-	public DogDescriptor[] getDailyRandomDogListFromBuffer(
+	protected DogDescriptor[] getDailyRandomDogListFromBuffer(
 		RandomBuffer<DogDescriptor> buffer, 
 		int count, 
 		int startIndex = 0)
