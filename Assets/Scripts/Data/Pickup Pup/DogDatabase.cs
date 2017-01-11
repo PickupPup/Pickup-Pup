@@ -72,6 +72,9 @@ public class DogDatabase : Database<DogDatabase>
 	DogDescriptor[] dogs;
 
 	RandomBuffer<DogDescriptor> randomizer;
+	// This buffer is used to generate same sequence of dogs based off day
+	RandomBuffer<DogDescriptor> dailyRandomizer;
+
 	Dictionary<string, DogBreed> breedsByName;
 	[System.NonSerialized]
 	Dictionary<DogBreed, Sprite> dogSpriteLookup = new Dictionary<DogBreed, Sprite>();
@@ -83,6 +86,7 @@ public class DogDatabase : Database<DogDatabase>
 		populateDogBreedLookup();
 		setDogDataReferences();
 		randomizer = new RandomBuffer<DogDescriptor>(dogs);
+		dailyRandomizer = new RandomDailyBuffer<DogDescriptor>(dogs);
 	}	
 
 	public DogBreed GetBreed(string breedName) 
@@ -107,6 +111,31 @@ public class DogDatabase : Database<DogDatabase>
 	public DogDescriptor RandomDog() 
 	{
 		return randomizer.GetRandom();
+	}
+
+	// Returns sequence based on day
+	// Always starts from beginning unless start index is different
+	public DogDescriptor[] GetDailyRandomDogList(int count, int startIndex = 0)
+	{
+		return getDailyRandomDogListFromBuffer(dailyRandomizer, count, startIndex);
+	}
+
+	// Override to simulate a different day than current:
+	public DogDescriptor[] GetDailyRandomDogList(System.DateTime day, int count, int startIndex = 0)
+	{
+		return getDailyRandomDogListFromBuffer(
+			new RandomDailyBuffer<DogDescriptor>(dogs, day), count, startIndex);
+	}
+		
+	public DogDescriptor[] getDailyRandomDogListFromBuffer(
+		RandomBuffer<DogDescriptor> buffer, 
+		int count, 
+		int startIndex = 0)
+	{
+		buffer.Refresh();
+		int length = startIndex + count;
+		DogDescriptor[] fullSequence = buffer.GetRandom(length);
+		return ArrayUtil.GetRange(fullSequence, startIndex, count);
 	}
 
 	public DogDescriptor[] RandomDogList(int count) 
