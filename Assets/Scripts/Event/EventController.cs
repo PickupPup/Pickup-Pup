@@ -181,7 +181,8 @@ public enum PPEvent
 	Quit,
 	LoadStart,
 	LoadHome,
-    LoadShop,
+  LoadShop,
 	LoadLivingroom,
 	ScoutingDogLoaded,
+  LoadShelter,
 }
