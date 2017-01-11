@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class PPDataController : DataController, ICurrencySystem 
@@ -22,6 +23,22 @@ public class PPDataController : DataController, ICurrencySystem
 	#endregion
 
 	#region Instance Accessors
+
+	public DateTime LastSaveTime 
+	{
+		get
+		{
+			return currentGame.TimeStamp;
+		}
+	}
+
+	public float TimeInSecSinceLastSave
+	{
+		get
+		{
+			return currentGame.TimeInSecSinceLastSave;
+		}
+	}
 
 	public List<DogDescriptor> AdoptedDogs 
 	{

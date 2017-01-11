@@ -11,7 +11,7 @@ using UnityEngine;
 public abstract class PPData 
 {
 	protected const string BLACK_HEX = "#000000";
-	protected const int DEFAULT_INT = 0;
+	protected const int NONE_INT = 0;
 	protected const int NOT_FOUND_INT = -1;
 
 	const string HEX_HASH_PREFIX = "#";

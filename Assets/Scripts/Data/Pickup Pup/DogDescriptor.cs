@@ -151,10 +151,19 @@ public class DogDescriptor : PPDescriptor
 		descriptor.color = BLACK_HEX;
 		return descriptor;
 	}
-
+		
 	public DogDescriptor(DogDatabase data) : base(data) 
 	{
 		// NOTHING
+	}
+
+	public void UpdateFromSave(PPGameSave save)
+	{
+		_timeRemainingScouting -= save.TimeInSecSinceLastSave;
+		if(_timeRemainingScouting < NONE_INT)
+		{
+			_timeRemainingScouting = NONE_INT;
+		}
 	}
 
 	public override bool Equals(object obj)

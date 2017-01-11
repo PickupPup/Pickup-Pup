@@ -15,7 +15,7 @@ public class PPTimer : PPData
 	{
 		get 
 		{
-			return new PPTimer(DEFAULT_INT, DEFAULT_INT);
+			return new PPTimer(NONE_INT, NONE_INT);
 		}
 	}
 
