@@ -19,7 +19,7 @@ public class RandomBuffer<T>
 	}
 
 	T[] backingSource;
-	Random random;
+	protected Random random;
 	// Using a hash set for fast lookup
 	HashSet<int> usedIndices;
 
@@ -34,10 +34,15 @@ public class RandomBuffer<T>
 		setup();
 	}
 
-	void setup()
+	protected virtual void setup()
+	{
+		setupRandomFormula();
+		usedIndices = new HashSet<int>();
+	}
+
+	protected virtual void setupRandomFormula()
 	{
 		random = new Random();
-		usedIndices = new HashSet<int>();
 	}
 
 	// Adapted from: http://codereview.stackexchange.com/questions/61338/generate-random-numbers-without-repetitions
@@ -46,7 +51,7 @@ public class RandomBuffer<T>
 		// Avoids creating an infinite loop by dumping all of the used indices (once all indices have been used)
 		if(needsRefresh()) 
 		{
-			refresh();
+			Refresh();
 		}
 		int index;
 		do 
@@ -78,7 +83,7 @@ public class RandomBuffer<T>
 		return usedIndices.Count >= source.Count;
 	}
 			
-	void refresh() 
+	public virtual void Refresh() 
 	{
 		usedIndices.Clear();
 	}
