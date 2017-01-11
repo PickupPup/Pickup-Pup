@@ -43,7 +43,7 @@ public class HomeDisplay : PPUIElement
             {
                 // TEMP USE FOR TESTING
                 // 12 total stock photos
-                Sprite dogSprite = SpriteUtil.getDogSprite(Random.Range(1, 12));
+                Sprite dogSprite = SpriteUtil.GetDogSprite(Random.Range(1, 12));
 
 				dogSlots[i].Init(DogDescriptor.Default(), dogSprite);
             }

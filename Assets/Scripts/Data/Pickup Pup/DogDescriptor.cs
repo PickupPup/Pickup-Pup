@@ -43,6 +43,14 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+    public string Description
+    {
+        get
+        {
+            return description;
+        }
+    }
+
 	public int Age 
 	{
 		get 
@@ -107,7 +115,6 @@ public class DogDescriptor : PPDescriptor
 
 	#endregion
 
-
 	bool hasSpecialCost 
 	{
 		get 
@@ -126,6 +133,8 @@ public class DogDescriptor : PPDescriptor
 	int modCost;
 	[SerializeField]
 	int age;
+    [SerializeField]
+    string description;
 
 	[System.NonSerialized]
 	Dog linkedDog;
@@ -138,6 +147,7 @@ public class DogDescriptor : PPDescriptor
 		descriptor.age = 0;
 		descriptor.breed = string.Empty;
 		descriptor.color = BLACK_HEX;
+        descriptor.description = string.Empty;
 		return descriptor;
 	}
 

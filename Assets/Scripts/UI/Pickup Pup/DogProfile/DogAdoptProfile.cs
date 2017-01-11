@@ -13,6 +13,6 @@ public class DogAdoptProfile : DogProfile {
         base.SetProfile(index, dog);
 
         priceText.text = dog.CostToAdoptStr;
-        breedText.text = dog.Breed;
+        breedText.text = dog.Breed.Breed;
     }
 }

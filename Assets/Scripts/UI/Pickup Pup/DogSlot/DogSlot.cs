@@ -8,6 +8,16 @@ using UnityEngine.UI;
 
 public class DogSlot : PPUIElement
 {
+    #region Instance Accessors
+
+    public DogDescriptor DogInfo
+    {
+        get
+        {
+            return dogInfo;
+        }
+    }
+
 	protected bool hasDogInfo
 	{
 		get
@@ -23,6 +33,8 @@ public class DogSlot : PPUIElement
 			return dog != null;
 		}
 	}
+
+    #endregion
 
     protected DogDescriptor dogInfo;
 	protected Dog dog;

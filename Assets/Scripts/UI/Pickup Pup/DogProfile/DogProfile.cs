@@ -8,10 +8,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DogProfile : MonoBehaviourExtended
+public class DogProfile : PPUIElement
 {
     [SerializeField]
     Text nameText;
+    [SerializeField]
+    Text breedText;
     [SerializeField]
     Text descriptionText;
 
@@ -27,29 +29,27 @@ public class DogProfile : MonoBehaviourExtended
 
     protected DogDescriptor dog;
 
-	public virtual void SetProfile(int index, DogDescriptor dog)
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        SetProfile(1, game.Data.Dogs[1]);
+    }
+
+    public virtual void SetProfile(int index, DogDescriptor dog)
     {
         this.dog = dog;
+
         nameText.text = dog.Name;
-        descriptionText.text = "Description goes here.";
+        breedText.text = dog.Breed.Breed;
+        descriptionText.text = dog.Description;
 
-        dogThumbnail.sprite = SpriteUtil.GetDogSprite(dog.SpriteID);
+        dogThumbnail.sprite = dog.Portrait;
         // TODO: Get collar icon
-
-        if(index == 0) // If leftmost dog (meaning there are no dogs before this one)
-        {
-            leftArrow.SetActive(false);
-        }
-        else
-        {
-            leftArrow.SetActive(true);
-            // TODO: Check rightmost
-        }
     }
 
     public void EditName(string newName)
     {
-        dog.Name = newName;
+        //dog.Name = newName;
         nameText.text = dog.Name;
     }
 }
