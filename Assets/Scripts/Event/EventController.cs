@@ -182,5 +182,6 @@ public enum PPEvent
 	LoadStart,
 	LoadHome,
     LoadShop,
+    LoadShelter,
 
 }
