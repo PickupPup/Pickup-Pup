@@ -28,5 +28,4 @@ public class GiftSlot : PPUIElement
         giftImage.sprite = giftSprite;
     }
 
-
 }

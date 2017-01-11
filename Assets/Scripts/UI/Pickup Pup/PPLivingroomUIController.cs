@@ -34,6 +34,7 @@ public class PPLivingroomUIController : PPUIController
 	{
 		base.fetchReferences();
 		EventController.Event(PPEvent.LoadLivingroom);
+
 		// Display Updated Currency
         dogFoodDisplay.SetCurrency(gameController.DogFood);
         coinDisplay.SetCurrency(gameController.Coins);
@@ -44,13 +45,11 @@ public class PPLivingroomUIController : PPUIController
 	// TEMPORARY
 	void GenerateGift(GiftItem[] gifts)
 	{
-    for (int i = 0; i < giftSlots.Length; i++)
-    {
-
-        GiftRedeemSlot giftSlot = giftSlots[i];
-        giftSlot.Init(this, gifts[Random.Range(0,gifts.Length)]);
-
-    }
+		for (int i = 0; i < giftSlots.Length; i++)
+		{
+			GiftRedeemSlot giftSlot = giftSlots[i];
+			giftSlot.Init(this, gifts[Random.Range(0,gifts.Length)]);
+		}
 	}
 
 	public void RedeemGift(GiftItem gift)
@@ -63,6 +62,12 @@ public class PPLivingroomUIController : PPUIController
     {
         sceneController.LoadShelter();
     }
+
+	public void OnShopClick()
+    {
+        sceneController.LoadShop();
+    }
+
 
 	// Temporary Fix For Updating Currencies
 	public void Update()

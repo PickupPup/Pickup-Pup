@@ -35,7 +35,7 @@ public class RedeemDisplay : PPUIElement {
 		base.fetchReferences();
 	}
 
-
+	// Fade-in Background
 	public void OnEnable()
 	{
 		canv.SetAlpha(0);

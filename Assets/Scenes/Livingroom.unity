@@ -2502,11 +2502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
-  gift:
-    value: 0
-    giftName: 
-    valueCurrencyType: 0
-    giftDog: {fileID: 0}
   itemImage: {fileID: 1552959593}
 --- !u!114 &798100408
 MonoBehaviour:
@@ -2916,11 +2911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
-  gift:
-    value: 0
-    giftName: 
-    valueCurrencyType: 0
-    giftDog: {fileID: 0}
   itemImage: {fileID: 535427610}
 --- !u!1 &940033323
 GameObject:
@@ -4249,10 +4239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dogFoodDisplay: {fileID: 1951779183}
   coinDisplay: {fileID: 1361027093}
-  gifts: []
-  giftSlots: []
   rDisplay: {fileID: 1029714847}
-  tempSprite: {fileID: 21300002, guid: fb14c9d02d4406946848988f53ee60f2, type: 3}
 --- !u!1 &1154797324
 GameObject:
   m_ObjectHideFlags: 0
@@ -6440,11 +6427,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
-  gift:
-    value: 0
-    giftName: 
-    valueCurrencyType: 0
-    giftDog: {fileID: 0}
   itemImage: {fileID: 549747447}
 --- !u!114 &1679910135
 MonoBehaviour:
@@ -6598,11 +6580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
-  gift:
-    value: 0
-    giftName: 
-    valueCurrencyType: 0
-    giftDog: {fileID: 0}
   itemImage: {fileID: 1459983037}
 --- !u!114 &1684879518
 MonoBehaviour:
@@ -7429,7 +7406,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1847748333}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1148774672}
+        m_MethodName: OnAdoptClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1847748333
@@ -7705,7 +7693,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1951779181}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1148774667}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1951779181
@@ -8138,7 +8137,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2032513720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1148774672}
+        m_MethodName: LoadHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2032513720

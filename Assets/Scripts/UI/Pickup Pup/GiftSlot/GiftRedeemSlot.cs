@@ -9,12 +9,11 @@ using UnityEngine.UI;
 public class GiftRedeemSlot : GiftSlot 
 {
 
-    PPLivingroomUIController room;
-    [SerializeField]
-    GiftItem gift;
-
     [SerializeField]
     Image itemImage;
+
+    PPLivingroomUIController room;
+    GiftItem gift;
 
     #region GiftSlot Overrides
 
@@ -32,4 +31,5 @@ public class GiftRedeemSlot : GiftSlot
         room.RedeemGift(this.gift);
         gameObject.SetActive(false);
     }
+
 }
