@@ -31,7 +31,7 @@ public class RandomDailyBuffer<T> : RandomBuffer<T>
 	protected override void setupRandomFormula()
 	{	
 		int seed;
-		if (shouldOverrideDay)
+		if(shouldOverrideDay)
 		{
 			seed = generateSeedForDay(overrideDay);
 		}
@@ -44,14 +44,14 @@ public class RandomDailyBuffer<T> : RandomBuffer<T>
 
 	public override void Refresh()
 	{
-		base.Refresh ();
+		base.Refresh();
 		// Need to reseed formula to return to beginning of sequence
 		setupRandomFormula();
 	}
 
 	#endregion
 
-	private int generateSeedForDay (DateTime day)
+	private int generateSeedForDay(DateTime day)
 	{
 		return day.Year + day.Month + day.Day;
 	}

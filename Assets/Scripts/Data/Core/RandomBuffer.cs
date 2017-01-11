@@ -18,15 +18,16 @@ public class RandomBuffer<T>
 		}
 	}
 
-	T[] backingSource;
 	protected Random random;
+
+	T[] backingSource;
 	// Using a hash set for fast lookup
 	HashSet<int> usedIndices;
 
 	public RandomBuffer(T[] source, bool setupHandledInSubclass = false) 
 	{
 		this.backingSource = source;
-		if (!setupHandledInSubclass)
+		if(!setupHandledInSubclass)
 		{
 			setup();
 		}
