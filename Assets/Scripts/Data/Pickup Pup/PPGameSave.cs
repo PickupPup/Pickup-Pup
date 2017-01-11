@@ -10,51 +10,33 @@ public class PPGameSave : GameSave
 {
 	#region Instance Accessors
 
-	public Currency Coins 
-	{
-		get 
-		{
-			return currencies[CurrencyType.Coins];
-		}
-	}
-
-	public Currency Food 
-	{
-		get 
-		{
-			return currencies[CurrencyType.DogFood];
-		}
-	}
-
-    public Currency VacantHomeSlots
-    {
-        get
-        {
-            return currencies[CurrencyType.VacantHomeSlots];
-        }
-    }
-
 	public List<DogDescriptor> AdoptedDogs
 	{
 		get;
 		private set;
 	}
-
+		
 	public List<DogDescriptor> ScoutingDogs
 	{
 		get;
 		private set;
 	}
 
+    public CurrencySystem Currencies
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
-	Dictionary<CurrencyType, Currency> currencies;
+    CurrencySystem currencies;
 
-	public PPGameSave(DogDescriptor[] dogs, DogDescriptor[] scoutingDogs, params Currency[] currencies) 
+	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies) 
 	{
-		this.AdoptedDogs = new List<DogDescriptor>(dogs);
+		this.AdoptedDogs = new List<DogDescriptor>(adoptedDogs);
 		this.ScoutingDogs = new List<DogDescriptor>(scoutingDogs);
-		this.currencies = generateCurrencyLookup(currencies);
+        this.Currencies = currencies;
 	}
 		
 	public void SendDogToScout(Dog dog)
@@ -71,44 +53,14 @@ public class PPGameSave : GameSave
 		ScoutingDogs.Remove(dog.Info);
 	}
 
-	public bool HasCurrency(CurrencyType type) 
-	{
-		return currencies.ContainsKey(type);
-	}
-
-	public void Adopt(DogDescriptor dog) 
-	{
-		AdoptedDogs.Add(dog);
-	}
-
-	public void ChangeCoins(int deltaCoins) 
-	{
-		ChangeCurrencyAmount(CurrencyType.Coins, deltaCoins);
-	}
-
-	public void ChangeFood(int deltaFood) 
-	{
-		ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
-	}
-
-    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
+    public void SaveCurrencies(CurrencySystem currencies)
     {
-        ChangeCurrencyAmount(CurrencyType.VacantHomeSlots, deltaVacantHomeSlots);
+        this.Currencies = currencies;
     }
 
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 
-	{
-		currencies[type].IncreaseBy(deltaAmount);
-	}
-
-	Dictionary<CurrencyType, Currency> generateCurrencyLookup(Currency[] currencies) 
-	{
-		Dictionary<CurrencyType, Currency> lookup = new Dictionary<CurrencyType, Currency>();
-		foreach(Currency currency in currencies) 
-		{
-			lookup.Add(currency.Type, currency);
-		}
-		return lookup;
-	}
+    public void Adopt(DogDescriptor dog)
+    {
+        AdoptedDogs.Add(dog);
+    }
 
 }

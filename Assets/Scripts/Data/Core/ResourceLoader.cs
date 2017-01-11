@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author: Isaiah Mann
  * Description: Generic superclass to handle loading from resources
  */
 

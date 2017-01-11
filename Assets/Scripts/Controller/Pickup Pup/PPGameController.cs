@@ -7,7 +7,7 @@ using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PPGameController : GameController 
+public class PPGameController : GameController, ICurrencySystem 
 {
 	const string JSON_DIR = "JSON";
 
@@ -64,7 +64,7 @@ public class PPGameController : GameController
         }
     }
 
-	#region Instance Accesors
+	#region Instance Accessors
 
 	public DogDatabase Data
 	{
@@ -82,37 +82,31 @@ public class PPGameController : GameController
         }
     }
 
-	public Currency Coins
-	{
-		get 
-		{ 
-			return dataController.Coins; 
-		}
-	}
-
-	public Currency DogFood
-	{
-		get 
-		{ 
-			return dataController.DogFood; 
-		}
-	}
-
-    public Currency VacantHomeSlots
+    public bool DogsScoutingAtCapacity
     {
         get
         {
-            return dataController.VacantHomeSlots;
+            return dogsOutScouting.Count >= tuning.MaxDogsScouting;
         }
     }
 
-	public bool DogsScoutingAtCapacity 
-	{
-		get 
-		{
-			return dogsOutScouting.Count >= tuning.MaxDogsScouting;
-		}
-	}
+    #region ICurrencySystem Interface
+
+    public CoinsData Coins
+    {
+        get
+        {
+            return dataController.Coins;
+        }
+    }
+
+    public DogFoodData DogFood
+    {
+        get
+        {
+            return dataController.DogFood;
+        }
+    }
 
 	public bool HasTargetSlot
 	{
@@ -124,8 +118,18 @@ public class PPGameController : GameController
 
 	#endregion
 
-	// The dog the player currently has selected
-	Dog selectedDog;
+	public HomeSlotsData HomeSlots
+    {
+        get
+        {
+            return dataController.HomeSlots;
+        }
+    }
+
+    #endregion
+
+    // The dog the player currently has selected
+    Dog selectedDog;
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase database;
@@ -153,8 +157,6 @@ public class PPGameController : GameController
 		dataController.LoadGame();
 		handleLoadGame(dataController);
 	}
-		
-	#endregion
 
 	void handleLoadGame(PPDataController dataController)
 	{
@@ -188,8 +190,12 @@ public class PPGameController : GameController
 			return INVALID_VALUE;
 		}
 	}
-		
-	public void ChangeCoins(int deltaCoins) 
+
+    #endregion
+
+    #region ICurrencySystem Interface
+
+    public void ChangeCoins(int deltaCoins) 
 	{
 		dataController.ChangeCoins(deltaCoins);
 	}
@@ -199,20 +205,43 @@ public class PPGameController : GameController
 		dataController.ChangeFood(deltaFood);
 	}
 
-    public void ChangeVacantHomeSlots( int deltaVacantHomeSlots)
+    public void ChangeHomeSlots(int deltaHomeSlots)
     {
-        dataController.ChangeVacantHomeSlots(deltaVacantHomeSlots);
+        dataController.ChangeHomeSlots(deltaHomeSlots);
     }
+
+    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+    {
+        dataController.ChangeCurrencyAmount(type, deltaAmount);
+    }
+
+    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+    {
+        dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+    }
+
 
 	public void SetTargetSlot(DogSlot slot)
 	{
 		this.targetSlot = slot;
 	}
 		
+    public bool CanAfford(CurrencyType type, int amount)
+    {
+        return dataController.CanAfford(type, amount);
+    }
+
+    public bool HasCurrency(CurrencyType type)
+    {
+        return dataController.HasCurrency(type);
+    }
+
+    #endregion
+
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if(Coins.Amount < cost)
+        if (CanAfford(costCurrencyType, cost))
         {
             return false;
         }
@@ -222,31 +251,29 @@ public class PPGameController : GameController
 
     public bool TryBuyItem(ShopItem item)
     {
-        return TryBuyItem(item.Value, item.ValueCurrencyType, 
-            item.Cost, item.CostCurrencyType);
+		return TryBuyItem(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
     }
 
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        dataController.ChangeCurrencyByType(value, valueCurrencyType);
-        dataController.ChangeCurrencyByType(-cost, costCurrencyType);
+        ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
     {
-        if(Coins.Amount < dog.CostToAdopt || VacantHomeSlots.Amount <= 0)
+        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
         {
-            return false;
-        }
-        AdoptDog(dog);
-        return true;
+            AdoptDog(dog);
+            return true;
+        }        
+        return false;       
     }
 
     void AdoptDog(DogDescriptor dog)
     {
-        ChangeCoins(-dog.CostToAdopt);
-        ChangeVacantHomeSlots(-1);
+        dataController.ChangeCoins(-dog.CostToAdopt);
+        dataController.ChangeHomeSlots(-1);
     }
 
 	public bool TrySendDogToScout(Dog dog, out int slotIndex)
