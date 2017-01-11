@@ -8,16 +8,38 @@ using System;
 
 public class RandomDailyBuffer<T> : RandomBuffer<T>
 {
+	// Use to simulate a different day than the current
+	bool shouldOverrideDay;
+	DateTime overrideDay;
+
 	public RandomDailyBuffer(T[] source) : base(source)
 	{
+		
+	}
 
+	public RandomDailyBuffer(T[] source, DateTime day) :
+	base(source, setupHandledInSubclass:true)
+	{
+		this.shouldOverrideDay = true;
+		this.overrideDay = day;
+		// Need to call this again because superclass constructor always runs first
+		setupRandomFormula();
 	}
 
 	#region RandomBuffer Overrides
 
 	protected override void setupRandomFormula()
-	{
-		random = new Random(DateTime.Today.GetHashCode());	
+	{	
+		int seed;
+		if (shouldOverrideDay)
+		{
+			seed = generateSeedForDay(overrideDay);
+		}
+		else 
+		{
+			seed = generateSeedForDay(DateTime.Today);
+		}
+		random = new Random(seed);
 	}
 
 	public override void Refresh()
@@ -28,5 +50,10 @@ public class RandomDailyBuffer<T> : RandomBuffer<T>
 	}
 
 	#endregion
+
+	private int generateSeedForDay (DateTime day)
+	{
+		return day.Year + day.Month + day.Day;
+	}
 
 }

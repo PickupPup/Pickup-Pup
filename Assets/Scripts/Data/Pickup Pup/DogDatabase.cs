@@ -117,9 +117,24 @@ public class DogDatabase : Database<DogDatabase>
 	// Always starts from beginning unless start index is different
 	public DogDescriptor[] GetDailyRandomDogList(int count, int startIndex = 0)
 	{
-		dailyRandomizer.Refresh();
+		return getDailyRandomDogListFromBuffer(dailyRandomizer, count, startIndex);
+	}
+
+	// Override to simulate a different day than current:
+	public DogDescriptor[] GetDailyRandomDogList(System.DateTime day, int count, int startIndex = 0)
+	{
+		return getDailyRandomDogListFromBuffer(
+			new RandomDailyBuffer<DogDescriptor>(dogs, day), count, startIndex);
+	}
+		
+	public DogDescriptor[] getDailyRandomDogListFromBuffer(
+		RandomBuffer<DogDescriptor> buffer, 
+		int count, 
+		int startIndex = 0)
+	{
+		buffer.Refresh();
 		int length = startIndex + count;
-		DogDescriptor[] fullSequence = dailyRandomizer.GetRandom(length);
+		DogDescriptor[] fullSequence = buffer.GetRandom(length);
 		return ArrayUtil.GetRange(fullSequence, startIndex, count);
 	}
 

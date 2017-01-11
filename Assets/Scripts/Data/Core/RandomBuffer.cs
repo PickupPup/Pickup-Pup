@@ -23,10 +23,13 @@ public class RandomBuffer<T>
 	// Using a hash set for fast lookup
 	HashSet<int> usedIndices;
 
-	public RandomBuffer(T[] source) 
+	public RandomBuffer(T[] source, bool setupHandledInSubclass = false) 
 	{
 		this.backingSource = source;
-		setup();
+		if (!setupHandledInSubclass)
+		{
+			setup();
+		}
 	}
 
 	protected RandomBuffer()
