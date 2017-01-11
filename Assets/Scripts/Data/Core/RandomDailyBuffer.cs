@@ -22,8 +22,8 @@ public class RandomDailyBuffer<T> : RandomBuffer<T>
 	{
 		this.shouldOverrideDay = true;
 		this.overrideDay = day;
-		// Need to call this again because superclass constructor always runs first
-		setupRandomFormula();
+		// Need to call here because superclass constructor runs first (before we set the day override)
+		setup();
 	}
 
 	#region RandomBuffer Overrides
