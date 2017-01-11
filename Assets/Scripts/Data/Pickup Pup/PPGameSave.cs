@@ -10,84 +10,36 @@ public class PPGameSave : GameSave
 {
 	#region Instance Accessors
 
-	public Currency Coins 
-	{
-		get 
-		{
-			return currencies[CurrencyType.Coins];
-		}
-	}
-
-	public Currency Food 
-	{
-		get 
-		{
-			return currencies[CurrencyType.DogFood];
-		}
-	}
-
-    public Currency VacantHomeSlots
-    {
-        get
-        {
-            return currencies[CurrencyType.VacantHomeSlots];
-        }
-    }
-
 	public List<DogDescriptor> AdoptedDogs
 	{
 		get;
 		private set;
 	}
 
-	#endregion
-
-	Dictionary<CurrencyType, Currency> currencies;
-
-	public PPGameSave(DogDescriptor[] dogs, params Currency[] currencies) 
-	{
-		this.AdoptedDogs = new List<DogDescriptor>(dogs);
-		this.currencies = generateCurrencyLookup(currencies);
-	}
-
-	public bool HasCurrency(CurrencyType type) 
-	{
-		return currencies.ContainsKey(type);
-	}
-
-	public void Adopt(DogDescriptor dog) 
-	{
-		AdoptedDogs.Add(dog);
-	}
-
-	public void ChangeCoins(int deltaCoins) 
-	{
-		ChangeCurrencyAmount(CurrencyType.Coins, deltaCoins);
-	}
-
-	public void ChangeFood(int deltaFood) 
-	{
-		ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
-	}
-
-    public void ChangeVacantHomeSlots(int deltaVacantHomeSlots)
+    public CurrencySystem Currencies
     {
-        ChangeCurrencyAmount(CurrencyType.VacantHomeSlots, deltaVacantHomeSlots);
+        get;
+        private set;
     }
 
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount) 
+	#endregion
+
+    CurrencySystem currencies;
+
+	public PPGameSave(DogDescriptor[] dogs, CurrencySystem currencies) 
 	{
-		currencies[type].IncreaseBy(deltaAmount);
+		this.AdoptedDogs = new List<DogDescriptor>(dogs);
+        this.Currencies = currencies;
 	}
 
-	Dictionary<CurrencyType, Currency> generateCurrencyLookup(Currency[] currencies) 
-	{
-		Dictionary<CurrencyType, Currency> lookup = new Dictionary<CurrencyType, Currency>();
-		foreach(Currency currency in currencies) 
-		{
-			lookup.Add(currency.Type, currency);
-		}
-		return lookup;
-	}
+    public void SaveCurrencies(CurrencySystem currencies)
+    {
+        this.Currencies = currencies;
+    }
+
+    public void Adopt(DogDescriptor dog)
+    {
+        AdoptedDogs.Add(dog);
+    }
 
 }
