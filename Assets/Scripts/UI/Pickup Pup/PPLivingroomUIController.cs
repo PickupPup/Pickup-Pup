@@ -2,7 +2,7 @@
  * Author: James Hostetler
  * Description: Controls the Livingroom UI
  */
- 
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +18,7 @@ public class PPLivingroomUIController : PPUIController
     protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		EventController.Event(PPEvent.LoadLivingRoom);
+		EventController.Event(PPEvent.LoadLivingroom);
 		// Set Currency Displays
         dogFoodDisplay.SetCurrency(gameController.DogFood);
         coinDisplay.SetCurrency(gameController.Coins);

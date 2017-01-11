@@ -22,18 +22,44 @@ public abstract class Database<T> : ResourceLoader where T : class, new()
 
 	#endregion
 
+	public bool IsInitialized
+	{
+		get
+		{
+			return this.isInitialized;
+		}
+	}
+
 	static T _instance;
+
+	bool isInitialized;
 
 	protected Database() 
 	{
-		// NOTHING	
+		// NOTHING
 	}
 
-	public abstract void Initialize();
+	public virtual void Initialize()
+	{
+		isInitialized = true;
+	}
 
 	public static void AssignInstance(T instance)
 	{
 		_instance = instance;
 	}
 
+	// Returns false if the datbase has already been initialized
+	public virtual bool TryInit()
+	{
+		if(isInitialized)
+		{
+			return false;
+		}
+		else
+		{
+			Initialize();
+			return true;
+		}
+	}
 }
