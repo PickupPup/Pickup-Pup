@@ -78,8 +78,6 @@ public class DogDatabase : Database<DogDatabase>
 	RandomBuffer<DogDescriptor> dailyRandomizer;
 
 	Dictionary<string, DogBreed> breedsByName;
-	[System.NonSerialized]
-	Dictionary<DogDescriptor, Sprite> dogSpriteLookup = new Dictionary<DogDescriptor, Sprite>();
 
 	SpritesheetDatabase spriteDatabase;
 
@@ -150,39 +148,21 @@ public class DogDatabase : Database<DogDatabase>
 
 	public Sprite GetDogSprite(DogDescriptor dog) 
 	{
-		checkSpriteLookup();
-		// Error checking
-		if(dog == null)
+		string spriteName = getSpriteName(dog);
+		Sprite sprite;
+		if(dog == null || !spriteDatabase.TryGetSprite(spriteName, out sprite))
 		{
 			return DefaultSprite;
 		}
-
-		Sprite match;
-		if(dogSpriteLookup.TryGetValue(dog, out match)) 
+		else
 		{
-			return match;
-		} 
-		else 
-		{
-			match = loadSpriteFromResources(dog);
-			if(match != null) 
-			{
-				dogSpriteLookup.Add(dog, match);
-				return match;
-			}
-			else
-			{
-				return DefaultSprite;
-			}
+			return sprite;
 		}
 	}
-
-	void checkSpriteLookup()
+		
+	string getSpriteName(DogDescriptor dog)
 	{
-		if(dogSpriteLookup == null)
-		{
-			dogSpriteLookup = new Dictionary<DogDescriptor, Sprite>();
-		}
+		return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
 	}
 
 	public override bool TryInit()
@@ -241,20 +221,6 @@ public class DogDatabase : Database<DogDatabase>
 		foreach(DogDescriptor dog in dogs) 
 		{
 			dog.Initialize(this);
-		}
-	}
-
-	Sprite loadSpriteFromResources(DogDescriptor dog) 
-	{
-		Sprite sprite;
-		string spriteName = string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
-		if(spriteDatabase.TryGetSprite(spriteName, out sprite))
-		{
-			return sprite;
-		}
-		else
-		{
-			return DefaultSprite;
 		}
 	}
 

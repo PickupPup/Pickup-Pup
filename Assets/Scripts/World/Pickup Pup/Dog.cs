@@ -103,6 +103,22 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public bool HasSlot
+	{
+		get
+		{
+			return slot != null;
+		}
+	}
+
+	public DogSlot OccupiedSlot
+	{
+		get
+		{
+			return slot;
+		}
+	}
+
 	#endregion
 
 	bool hasDescriptor 
@@ -131,6 +147,7 @@ public class Dog : MobileObjectBehaviour
 	PPGameController game;
 	PPData.DogAction onScoutingTimerEnd;
 	PPData.DogActionf onScoutingTimerChange;
+	DogSlot slot;
 
 	#region Event Subscription
 
@@ -185,6 +202,16 @@ public class Dog : MobileObjectBehaviour
 		{
 			scoutingTimer.UnsubscribeFromTimeChange(dataAction);
 		}
+	}
+
+	public void AssignSlot(DogSlot slot)
+	{
+		this.slot = slot;
+	}
+
+	public void LeaveCurrentSlot()
+	{
+		this.slot = null;
 	}
 
 	void callOnScoutingTimerChange(float timer) 

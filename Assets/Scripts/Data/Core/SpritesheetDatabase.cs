@@ -57,9 +57,7 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 		foreach(JSONNode sheet in json.Childs)
 		{
 			string sheetName = sheet[SHEET];
-			Debug.Log(Path.Combine(SPRITES_DIR, sheetName));
 			Sprite[] spriteSheet = Resources.LoadAll<Sprite>(Path.Combine(SPRITES_DIR, sheetName));
-			Debug.Log(spriteSheet.Length);
 			int index = 0;
 			foreach(JSONNode sprite in sheet[SPRITES_DIR].AsArray)
 			{
