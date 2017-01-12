@@ -24,16 +24,40 @@ public class DogSlot : PPUIElement
 		}
 	}
 
+	bool hasButton {
+		get {
+			return button != null;
+		}
+	}
+		
     protected DogDescriptor dogInfo;
 	protected Dog dog;
     protected Image[] images;
 
-	PPData.DogAction onSlotClick;
+	UIButton button;
+	MonoAction onFreeSlotClick;
+	PPData.DogAction onOccupiedSlotClick;
 
     Image backgroundImage;
-    Image dogImage;
+    protected Image dogImage;
 
     bool setBackground = true;
+
+	#region MonoBehaviourExtended Overrides
+
+	protected override void setReferences()
+	{
+		base.setReferences();
+		button = ensureReference<UIButton>(searchChildren:true);
+		subscribeToUIButton();
+	}
+
+	#endregion
+
+	public int GetIndex()
+	{
+		return transform.GetSiblingIndex();
+	}
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
@@ -73,25 +97,75 @@ public class DogSlot : PPUIElement
 	{
 		if(hasDog)
 		{
-			callOnSlotClick(this.dog);
+			EventController.Event(PPEvent.ClickDogSlot, this.dog);
+			callOnOccupiedSlotClick(this.dog);
+		}
+		else 
+		{
+			EventController.Event(PPEvent.ClickDogSlot, new DogFactory(hideGameObjects:true).Create(this.dogInfo));
+			callOnFreeSlotClick();
+		}
+	}
+		
+	public void SubscribeToClickWhenOccupied(PPData.DogAction clickAction)
+	{
+		onOccupiedSlotClick += clickAction;
+	}
+
+	public void UnsubscribeFromClickWhenOccupied(PPData.DogAction clickAction)
+	{
+		onOccupiedSlotClick -= clickAction;
+	}
+
+	public void SubscribeToClickWhenFree(MonoAction clickAction)
+	{
+		onFreeSlotClick += clickAction;
+	}
+
+	public void UnsubscribeFromClickWhenFree(MonoAction clickAction)
+	{
+		onFreeSlotClick -= clickAction;
+	}
+
+	protected bool subscribeToUIButton()
+	{
+		if(hasButton)	
+		{
+			button.SubscribeToClick(ExecuteClick);
+			return true;
+		} 
+		else 
+		{
+			return false;
 		}
 	}
 
-	public void SubscribeToClick(PPData.DogAction clickAction)
+	protected bool unsubscribeFromUIButton()
 	{
-		onSlotClick += clickAction;
-	}
-
-	public void UnsubscribeFromClick(PPData.DogAction clickAction)
-	{
-		onSlotClick -= clickAction;
-	}
-
-	void callOnSlotClick(Dog dog)
-	{
-		if(onSlotClick != null)
+		if(hasButton)
 		{
-			onSlotClick(dog);
+			button.UnsubscribeFromClick(ExecuteClick);
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+
+	void callOnOccupiedSlotClick(Dog dog)
+	{
+		if(onOccupiedSlotClick != null)
+		{
+			onOccupiedSlotClick(dog);
+		}
+	}
+
+	void callOnFreeSlotClick()
+	{
+		if(onFreeSlotClick != null)
+		{
+			onFreeSlotClick();
 		}
 	}
 
