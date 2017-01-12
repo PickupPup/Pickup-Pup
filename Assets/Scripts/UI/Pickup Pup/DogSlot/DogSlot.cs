@@ -46,8 +46,10 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	bool hasButton {
-		get {
+	bool hasButton 
+	{
+		get 
+		{
 			return button != null;
 		}
 	}

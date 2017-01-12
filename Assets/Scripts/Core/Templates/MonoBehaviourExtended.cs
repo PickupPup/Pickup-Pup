@@ -290,4 +290,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		}
 	}
 
+	protected T parseFromJSONInResources<T>(string pathInResoures)
+	{
+		TextAsset json = Resources.Load<TextAsset>(pathInResoures);
+		return JsonUtility.FromJson<T>(json.text);
+	}
+
 }
