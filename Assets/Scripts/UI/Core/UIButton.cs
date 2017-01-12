@@ -64,8 +64,12 @@ public class UIButton : UIElement
 	protected override void setReferences()
 	{
 		base.setReferences();
-		button = GetComponent<Button>();
-		buttonGraphic = GetComponent<Image>();
+		button = ensureReference<Button>();
+		if(!button.targetGraphic)
+		{
+			button.targetGraphic = getTopImage();
+		}
+		buttonGraphic = button.image;
 		button.onClick.AddListener(executeClick);
 		if(hasButtonGraphic)
 		{
