@@ -50,7 +50,7 @@ public class RandomBuffer<T>
 	}
 
 	// Adapted from: http://codereview.stackexchange.com/questions/61338/generate-random-numbers-without-repetitions
-	int nextRandomIndex() 
+	protected virtual int nextRandomIndex() 
 	{
 		// Avoids creating an infinite loop by dumping all of the used indices (once all indices have been used)
 		if(needsRefresh()) 

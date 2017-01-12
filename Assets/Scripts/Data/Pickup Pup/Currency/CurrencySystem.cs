@@ -103,6 +103,11 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     #endregion
 
+	public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
+	{
+		return currencies.TryGetValue(type, out data);
+	}
+
     Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies)
     {
         Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();

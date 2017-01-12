@@ -19,6 +19,18 @@ public class PPSceneController : SingletonController<PPSceneController>
 
 	#endregion
 		
+	PPDataController dataController;
+
+	#region MonoBehaviourExtended
+
+	protected override void fetchReferences()
+	{
+		base.fetchReferences();
+		dataController = PPDataController.GetInstance;
+	}
+
+	#endregion
+
 	public void LoadStart() 
 	{
 		LoadScene(PPScene.Start);
@@ -41,6 +53,7 @@ public class PPSceneController : SingletonController<PPSceneController>
 
     public void LoadScene(PPScene scene) 
 	{
+		dataController.SaveGame();
 		SceneManager.LoadScene((int) scene);
 	}
 

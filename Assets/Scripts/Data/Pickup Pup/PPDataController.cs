@@ -3,6 +3,8 @@
  * Description: Handles save for Pickup Pup
  */
 
+using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class PPDataController : DataController, ICurrencySystem 
@@ -22,11 +24,35 @@ public class PPDataController : DataController, ICurrencySystem
 
 	#region Instance Accessors
 
+	public DateTime LastSaveTime 
+	{
+		get
+		{
+			return currentGame.TimeStamp;
+		}
+	}
+
+	public float TimeInSecSinceLastSave
+	{
+		get
+		{
+			return currentGame.TimeInSecSinceLastSave;
+		}
+	}
+
 	public List<DogDescriptor> AdoptedDogs 
 	{
 		get 
 		{
 			return currentGame.AdoptedDogs;
+		}
+	}
+
+	public List<DogDescriptor> ScoutingDogs
+	{
+		get
+		{
+			return currentGame.ScoutingDogs;
 		}
 	}
 
@@ -66,13 +92,21 @@ public class PPDataController : DataController, ICurrencySystem
 
     #endregion
 
-    #endregion
+	#endregion
+
+	[SerializeField]
+	bool saveOnApplicationPause;
+	[SerializeField]
+	bool saveOnApplicationQuit;
 
     PPGameSave currentGame;
     CurrencySystem currencies;
+
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
     MonoActionInt onHomeSlotsChange;
+
+	Dictionary<CurrencyType, MonoActionInt> onCurrencyChangeEvents;
 
 	public bool SaveGame()
 	{
@@ -90,19 +124,71 @@ public class PPDataController : DataController, ICurrencySystem
 
     protected PPGameSave getCurrentGame()
     {
-        return currentGame;
+		if(currentGame == null)
+		{
+			currentGame = getDefaultFile() as PPGameSave;
+		}
+		return currentGame;
     }
 
     public void SaveCurrencies()
     {
         currentGame.SaveCurrencies(currencies);
     }
+		
+	#region MonoBehaviourExtended Overrides
+
+	protected override void setReferences ()
+	{
+		base.setReferences ();
+		onCurrencyChangeEvents = new Dictionary<CurrencyType, MonoActionInt>()
+		{
+			{
+				CurrencyType.Coins, 
+				callOnCoinsChange
+			},
+			{
+				CurrencyType.DogFood, 
+				callOnFoodChange
+			},
+			{
+				CurrencyType.HomeSlots, 
+				callOnHomeSlotsChange
+			},
+		};
+	}
+
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		// Avoids saving twice in the same call on iOS: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationPause.html
+		#if UNITY_IOS
+		if(saveOnApplicationPause && !saveOnApplicationQuit)
+		{
+			SaveGame();
+		}
+		#else
+		if(saveOnApplicationPause)
+		{
+			SaveGame();
+		}
+		#endif
+	}
+
+	protected override void handleGameQuit()
+	{
+		if(saveOnApplicationQuit)
+		{
+			SaveGame();
+		}
+	}
+		
+	#endregion
 
     #region DataController Overrides
 
     protected override SerializableData getDefaultFile() 
 	{
-		return new PPGameSave(new DogDescriptor[0], CurrencySystem.Default);
+		return new PPGameSave(new DogDescriptor[0], new DogDescriptor[0], CurrencySystem.Default);
 	}		
 		
 	public override void Reset() 
@@ -178,6 +264,12 @@ public class PPDataController : DataController, ICurrencySystem
 
     #endregion
 
+	public void SendDogToScout(Dog dog)
+	{
+		currentGame.SendDogToScout(dog);
+		SaveGame();
+	}
+
     public void Adopt(DogDescriptor dog)
     {
         currentGame.Adopt(dog);
@@ -210,6 +302,11 @@ public class PPDataController : DataController, ICurrencySystem
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
         currencies.ChangeCurrencyAmount(type, deltaAmount);
+		CurrencyData data;
+		if(currencies.TryGetCurrency(type, out data))
+		{
+			tryCallCurrencyChangeAmount(type, data.Amount);
+		}
     }
 
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
@@ -228,5 +325,19 @@ public class PPDataController : DataController, ICurrencySystem
     }
 
     #endregion
+
+	bool tryCallCurrencyChangeAmount(CurrencyType type, int newAmount)
+	{
+		MonoActionInt currencyChange;
+		if(onCurrencyChangeEvents.TryGetValue(type, out currencyChange))
+		{
+			currencyChange(newAmount);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }

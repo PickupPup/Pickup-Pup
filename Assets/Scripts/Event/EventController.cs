@@ -269,5 +269,6 @@ public enum PPEvent
 	ScoutingDogLoaded,
     LoadShelter,
 	ClickDogSlot,
+	StartedScouting,
 
 }

@@ -11,4 +11,9 @@ public class ResourceLoader
 	protected const string SPRITES_DIR = "Sprites";
 	protected const string DEFAULT = "Default";
 	protected const string GAME_DATA = "GameData";
+	protected const string EXPORT = "Export";
+	protected const string SHEET = "Sheet";
+
+	protected const char JOIN_CHAR = '_';
+
 }

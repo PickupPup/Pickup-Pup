@@ -30,7 +30,6 @@ public class ShopItemSlot : PPUIElement
     public void Buy()
     {
         game.TryBuyItem(item);
-        shop.UpdateCurrencyDisplays();
     }
 
 }
