@@ -66,11 +66,11 @@ public class PPGameController : GameController, ICurrencySystem
 
 	#region Instance Accessors
 
-	public DogDatabase Data
+	public DogDatabase DogData
 	{
 		get 
 		{
-			return database; 
+			return dogDatabase; 
 		}
 	}
 
@@ -124,7 +124,7 @@ public class PPGameController : GameController, ICurrencySystem
     Dog selectedDog;
 	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
-	DogDatabase database;
+	DogDatabase dogDatabase;
     ShopDatabase shop;
 	PPDataController dataController;
 
@@ -133,10 +133,10 @@ public class PPGameController : GameController, ICurrencySystem
 	protected override void setReferences() 
 	{
 		base.setReferences();
-		database = parseDatabase();
+		dogDatabase = parseDogDatabase();
         shop = parseShopDatabase();
 		tuning = parseTuning();
-		database.Initialize();
+		dogDatabase.Initialize();
         shop.Initialize();
 	}
 
@@ -270,22 +270,19 @@ public class PPGameController : GameController, ICurrencySystem
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
 	}
 
-	DogDatabase parseDatabase() 
+	DogDatabase parseDogDatabase() 
 	{
-		TextAsset json = loadTextAssetInResources(GAME_DATA_FILE_PATH);
-		return JsonUtility.FromJson<DogDatabase>(json.text);
+        return parseFromJSONInResources<DogDatabase>(GAME_DATA_FILE_PATH);
 	}
 
     ShopDatabase parseShopDatabase()
     {
-        TextAsset json = loadTextAssetInResources(SHOP_FILE_PATH);
-        return JsonUtility.FromJson<ShopDatabase>(json.text);
+        return parseFromJSONInResources<ShopDatabase>(SHOP_FILE_PATH);
     }
 
 	PPTuning parseTuning() 
 	{
-		TextAsset json = loadTextAssetInResources(TUNING_FILE_PATH);
-		return JsonUtility.FromJson<PPTuning>(json.text);
+        return parseFromJSONInResources<PPTuning>(TUNING_FILE_PATH);
 	}
 
 }
