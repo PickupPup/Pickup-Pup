@@ -27,7 +27,7 @@ public class PPLivingroomUIController : PPUIController
      	giftBase = GiftDatabase.Instance;
 		giftBase.Initialize();
 		gifts = giftBase.Gifts;
-		GenerateGift(gifts);
+		generateGift(gifts);
     }
 
     protected override void fetchReferences() 
@@ -43,7 +43,7 @@ public class PPLivingroomUIController : PPUIController
 	#endregion
 
 	// TEMPORARY
-	void GenerateGift(GiftItem[] gifts)
+	void generateGift(GiftItem[] gifts)
 	{
 		for (int i = 0; i < giftSlots.Length; i++)
 		{
@@ -67,7 +67,6 @@ public class PPLivingroomUIController : PPUIController
     {
         sceneController.LoadShop();
     }
-
 
 	// Temporary Fix For Updating Currencies
 	public void Update()

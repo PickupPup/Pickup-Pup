@@ -6,11 +6,9 @@
 using UnityEngine;
 using System.IO;
 
-
 [System.Serializable]
 public class GiftDatabase : Database<GiftDatabase>
 {
-
     static Sprite defaultSprite
     {
         get
@@ -22,7 +20,7 @@ public class GiftDatabase : Database<GiftDatabase>
             else
             {
                 // Memoization for efficiency
-                _defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
+                _defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, GIFTS_DIR));
                 return _defaultSprite;
             }
         }

@@ -30,11 +30,6 @@ public class RedeemDisplay : PPUIElement {
 		canv = GetComponent<CanvasRenderer>();
 	}
 
-	protected override void fetchReferences()
-	{
-		base.fetchReferences();
-	}
-
 	// Fade-in Background
 	public void OnEnable()
 	{
@@ -60,11 +55,11 @@ public class RedeemDisplay : PPUIElement {
 
 	public void CloseDisplay()
 	{
-		StartCoroutine(CloseDisplayCo());
+		StartCoroutine(closeDisplayCoroutine());
 	}
 
 	// For Later Polish
-	IEnumerator CloseDisplayCo(){
+	IEnumerator closeDisplayCoroutine(){
 		RedeemButton.interactable = false;
 		RedeemReturnButton.interactable = false;
 		gameObject.SetActive(false);

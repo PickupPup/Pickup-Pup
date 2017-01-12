@@ -231,8 +231,6 @@ public class PPGameController : GameController, ICurrencySystem
         ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
-	// Adopt Dogs
-
     public bool TryAdoptDog(DogDescriptor dog)
     {
         if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
@@ -248,9 +246,6 @@ public class PPGameController : GameController, ICurrencySystem
         dataController.ChangeCoins(-dog.CostToAdopt);
         dataController.ChangeHomeSlots(-1);
     }
-
-	// Control Dogs
-
 
 	public bool TrySendDogToScout(Dog dog) 
 	{
@@ -294,8 +289,6 @@ public class PPGameController : GameController, ICurrencySystem
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
 	}
 
-	// Redeem Gifts
-
     public bool TryRedeemGift(int value, CurrencyType valueCurrencyType)
     {
         RedeemGift(value, valueCurrencyType);
@@ -304,15 +297,13 @@ public class PPGameController : GameController, ICurrencySystem
 
 	public bool TryRedeemGift(GiftItem gift)
     {
-        return TryRedeemGift(gift.Value, gift.ValueCurrencyType);
+        return TryRedeemGift(gift.Value, gift.ValueType);
     }
 
 	public void RedeemGift(int value, CurrencyType valueCurrencyType)
     {
 		dataController.ChangeCurrencyAmount(valueCurrencyType, value);
     }
-
-	// Database
 
 	DogDatabase parseDatabase() 
 	{

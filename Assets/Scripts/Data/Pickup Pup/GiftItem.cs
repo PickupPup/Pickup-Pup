@@ -33,7 +33,6 @@ public class GiftItem : PPData
         }
     }
 
-
     public int Value
     {
         get
@@ -50,15 +49,13 @@ public class GiftItem : PPData
         }
     }
 
-
-    public CurrencyType ValueCurrencyType
+    public CurrencyType ValueType
     {
-        get
-        {
-            return valueCurrencyType;
-        }
+ 		get 
+		{
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), valueType); 
+		}
     }
-
 
     public Dog GiftDog
     {
@@ -70,27 +67,27 @@ public class GiftItem : PPData
 
     #endregion
 
-    [SerializeField]
-    int value;
+
     [SerializeField]
     string giftName;
     [SerializeField]
-    CurrencyType valueCurrencyType;
+    int value;
+    [SerializeField]
+    string valueType;
 
 	// TEMP
 	[SerializeField]
     Dog giftDog;
 
-
 	public GiftItem(
         string giftName,
         int value,
-        CurrencyType valueCurrencyType
+        string valueType
         )
     {
         this.giftName = giftName;
         this.value = value;
-        this.valueCurrencyType = valueCurrencyType; 
+        this.valueType = valueType; 
     }
 
 	protected GiftItem()
