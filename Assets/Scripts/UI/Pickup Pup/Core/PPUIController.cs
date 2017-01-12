@@ -17,6 +17,18 @@ public class PPUIController : MonoBehaviourExtended
 		gameController = PPGameController.GetInstance;
     }
 
+	protected override void subscribeEvents()
+	{
+		base.subscribeEvents();
+		EventController.Subscribe(handlePPDogEvent);
+	}
+
+	protected override void unsubscribeEvents()
+	{
+		base.unsubscribeEvents();
+		EventController.Unsubscribe(handlePPDogEvent);
+	}
+
 	#endregion
 
     public void LoadStart() 
@@ -27,6 +39,19 @@ public class PPUIController : MonoBehaviourExtended
 	public void LoadHome()
 	{
 		sceneController.LoadHome();
+	}
+
+	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
+	{
+		if(gameEvent == PPEvent.ClickDogSlot)
+		{
+			handleDogSlotClicked(dog);
+		}
+	}
+
+	void handleDogSlotClicked(Dog dog)
+	{
+		// TODO: Insert universal dog slot handle code here
 	}
 
 }

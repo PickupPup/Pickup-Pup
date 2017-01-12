@@ -243,7 +243,7 @@ public class DogBrowser : PPUIElement
 		{
 			// Links together DogSlot and UIButton scripts
 			slot.GetComponent<UIButton>().SubscribeToClick(slot.ExecuteClick);
-			slot.SubscribeToClick(buttonController.HandleDogSlotClick);
+			slot.SubscribeToClickWhenOccupied(buttonController.HandleDogSlotClick);
 		}
 	}
 

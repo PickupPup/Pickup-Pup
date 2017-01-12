@@ -212,5 +212,26 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 	{
 		return (rawValue % modulus + modulus) % modulus;
 	}
+		
+	protected T ensureReference<T>(bool searchChildren = false) where T:Component
+	{
+		T component;
+		if(searchChildren)
+		{
+			component = GetComponentInChildren<T>();
+		}
+		else 
+		{
+			component = GetComponent<T>();
+		}
+		if(component)
+		{
+			return component;
+		}
+		else
+		{
+			return gameObject.AddComponent<T>();
+		}
+	}
 
 }
