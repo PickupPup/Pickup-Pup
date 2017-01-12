@@ -26,6 +26,11 @@ public class ScoutingDisplay : PPUIElement
 		}
 	}
 
+	public void SubscribeToTimerEnd(Dog dog)
+	{
+		dog.SubscribeToScoutingTimerEnd(handleScoutingTimerEnd);
+	}
+
 	#region Override MonoBehaviourExtended 
 
 	protected override void setReferences()
@@ -70,6 +75,19 @@ public class ScoutingDisplay : PPUIElement
 				}
 			);
 		}
+	}
+
+	void handleScoutingTimerEnd(Dog dog)
+	{
+		DogDescriptor dogInfo = dog.Info;
+		CurrencyData reward = game.GetGift(dogInfo);
+		ScoutingReport report = new ScoutingReport(dogInfo, reward);
+		scoutingReportDisplay.Init(report);
+	}
+
+	ScoutingReport getScoutingReport(Dog dog, CurrencyData reward)
+	{
+		return new ScoutingReport(dog.Info, reward);
 	}
 
 	void handleClickFreeSlot() 

@@ -135,6 +135,7 @@ public class PPGameController : GameController, ICurrencySystem
 	DogDatabase database;
     ShopDatabase shop;
 	PPDataController dataController;
+	PPGiftController giftController;
 	DogSlot targetSlot;
 
 	#region MonoBehaviourExtended Overrides
@@ -155,6 +156,8 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
+		giftController = PPGiftController.Instance;
+		giftController.Init(tuning);
 		handleLoadGame(dataController);
 	}
 
@@ -237,6 +240,13 @@ public class PPGameController : GameController, ICurrencySystem
     }
 
     #endregion
+
+	public CurrencyData GetGift(DogDescriptor dog)
+	{
+		CurrencyData data = giftController.GetGift(dog);
+		dataController.ChangeCurrencyAmount(data.Type, data.Amount);
+		return data;
+	}
 
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)

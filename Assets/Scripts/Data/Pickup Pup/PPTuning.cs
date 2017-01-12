@@ -10,6 +10,30 @@ public class PPTuning : PPData
 {
 	#region Instance Acessors
 
+	public float ChanceOfSecondary
+	{
+		get
+		{
+			return chanceOfSecondary;
+		}
+	}
+
+	public float ChanceOfSpecialization
+	{
+		get
+		{
+			return chanceOfSpecialization;
+		}
+	}
+
+	public float ChanceOfSpecialObject
+	{
+		get
+		{
+			return chanceOfSpecialGift;
+		}
+	}
+
 	public int MaxDogsScouting
 	{
 		get
@@ -262,6 +286,12 @@ public class PPTuning : PPData
 
 	#region JSON Fields
 
+	[SerializeField]
+	float chanceOfSecondary;
+	[SerializeField]
+	float chanceOfSpecialGift;
+	[SerializeField]
+	float chanceOfSpecialization;
 	[SerializeField]
 	int maxDogsScouting;
 	[SerializeField]

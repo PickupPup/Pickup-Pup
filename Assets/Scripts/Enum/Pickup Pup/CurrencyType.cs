@@ -9,6 +9,7 @@ public enum CurrencyType
     DogFood,
     HomeSlots,
     Time,
+	SpecialObject,
     None,
 
 }

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class DogOutsideSlot : DogSlot
 {
+	ScoutingDisplay scoutingDisplay;
     Text nameText;
     Text timerText;
 	[SerializeField]
@@ -23,6 +24,7 @@ public class DogOutsideSlot : DogSlot
 		timerText = text[1];
 		nameText.text = string.Empty;
 		timerText.text = string.Empty;
+		scoutingDisplay = GetComponentInParent<ScoutingDisplay>();
 	}
 
 	protected override void checkReferences()
@@ -80,6 +82,7 @@ public class DogOutsideSlot : DogSlot
 		dogImage.sprite = dog.Portrait;
 		dog.SetTimer(dogInfo.TimeRemainingScouting);
 		dog.ResumeTimer();
+		scoutingDisplay.SubscribeToTimerEnd(dog);
 	}
 		
 	public Dog BringDogIndoors()
@@ -93,6 +96,7 @@ public class DogOutsideSlot : DogSlot
 	{
 		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
 		dog.TrySendToScout();
+		scoutingDisplay.SubscribeToTimerEnd(dog);
 	}
 
 	void handleDogTimerChange(Dog dog, float timeRemaining)
