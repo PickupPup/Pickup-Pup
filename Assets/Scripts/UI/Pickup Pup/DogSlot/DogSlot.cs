@@ -33,12 +33,12 @@ public class DogSlot : PPUIElement
         set
         {
             // Fixes ref on previous dog
-            if (_dog != null)
+            if(_dog != null)
             {
                 _dog.LeaveCurrentSlot();
             }
             // Assigns slot to new dog (assuming the new value is not null)
-            if (value != null)
+            if(value != null)
             {
                 value.AssignSlot(this);
             }
@@ -90,9 +90,9 @@ public class DogSlot : PPUIElement
         this.dogInfo = dog;
 
         images = GetComponentsInChildren<Image>();
-        if (images.Length >= 2)
+        if(images.Length >= 2)
         {
-            if (setBackground)
+            if(setBackground)
             {
                 backgroundImage = images[0];
                 dogImage = images[1];
@@ -120,7 +120,7 @@ public class DogSlot : PPUIElement
 
     public void ExecuteClick()
     {
-        if (hasDog)
+        if(hasDog)
         {
             EventController.Event(PPEvent.ClickDogSlot, this.dog);
             callOnOccupiedSlotClick(this.dog);
@@ -155,7 +155,7 @@ public class DogSlot : PPUIElement
 
     protected bool subscribeToUIButton()
     {
-        if (hasButton)
+        if(hasButton)
         {
             button.SubscribeToClick(ExecuteClick);
             return true;
@@ -168,7 +168,7 @@ public class DogSlot : PPUIElement
 
     protected bool unsubscribeFromUIButton()
     {
-        if (hasButton)
+        if(hasButton)
         {
             button.UnsubscribeFromClick(ExecuteClick);
             return true;
@@ -181,7 +181,7 @@ public class DogSlot : PPUIElement
 
     void callOnOccupiedSlotClick(Dog dog)
     {
-        if (onOccupiedSlotClick != null)
+        if(onOccupiedSlotClick != null)
         {
             onOccupiedSlotClick(dog);
         }
@@ -189,7 +189,7 @@ public class DogSlot : PPUIElement
 
     void callOnFreeSlotClick()
     {
-        if (onFreeSlotClick != null)
+        if(onFreeSlotClick != null)
         {
             onFreeSlotClick();
         }
@@ -199,7 +199,7 @@ public class DogSlot : PPUIElement
     void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
         dogImage.sprite = dogSprite;
-        if (backgroundImage)
+        if(backgroundImage)
         {
             backgroundImage.sprite = backgroundSprite;
         }
