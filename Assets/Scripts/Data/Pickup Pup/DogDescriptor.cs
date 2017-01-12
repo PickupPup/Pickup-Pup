@@ -90,11 +90,11 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
-	public Color Color 
+	public string Color 
 	{
 		get 
 		{
-			return parseHexColor(this.color);
+			return this.color;
 		}
 	}
 
@@ -102,8 +102,7 @@ public class DogDescriptor : PPDescriptor
 	{
 		get
 		{
-			// return database.GetDogBreedSprite(this.Breed);
-			throw new System.NotImplementedException();
+			return database.GetDogSprite(this);
 		}
 	}
 

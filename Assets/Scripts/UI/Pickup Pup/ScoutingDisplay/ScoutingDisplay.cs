@@ -66,7 +66,6 @@ public class ScoutingDisplay : PPUIElement
 					handleClickFreeSlot();		
 				}
 			);
-			slot.SubscribeToUIButton();
 		}
 	}
 

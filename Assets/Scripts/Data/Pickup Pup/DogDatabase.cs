@@ -81,9 +81,12 @@ public class DogDatabase : Database<DogDatabase>
 	[System.NonSerialized]
 	Dictionary<DogDescriptor, Sprite> dogSpriteLookup = new Dictionary<DogDescriptor, Sprite>();
 
+	SpritesheetDatabase spriteDatabase;
+
 	public override void Initialize() 
 	{
 		base.Initialize();
+		this.spriteDatabase = SpritesheetDatabase.GetInstance;
 		AssignInstance(this);
 		populateDogBreedLookup();
 		setDogDataReferences();
@@ -243,10 +246,16 @@ public class DogDatabase : Database<DogDatabase>
 
 	Sprite loadSpriteFromResources(DogDescriptor dog) 
 	{
-//		string fileName = string.Format("{0}{1}{2}", dog.BreedName, dog.a
-//		string path = Path.Combine(SPRITES_DIR, fileName);
-		//return Resources.Load<Sprite>(path);
-		throw new System.NotImplementedException();
+		Sprite sprite;
+		string spriteName = string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
+		if(spriteDatabase.TryGetSprite(spriteName, out sprite))
+		{
+			return sprite;
+		}
+		else
+		{
+			return DefaultSprite;
+		}
 	}
 
 	// Returns false if data is already initialized

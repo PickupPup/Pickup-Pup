@@ -102,41 +102,14 @@ public class DogSlot : PPUIElement
 		}
 		else 
 		{
-			callOnFreeSlotClick();
-		}
-	}
-
-	public bool SubscribeToUIButton()
-	{
-		if(hasButton)	
-		{
-			button.SubscribeToClick(ExecuteClick);
-			return true;
-		} 
-		else 
-		{
 			EventController.Event(PPEvent.ClickDogSlot, new DogFactory(hideGameObjects:true).Create(this.dogInfo));
 			callOnFreeSlotClick();
-			return false;
 		}
 	}
 		
 	public void SubscribeToClickWhenOccupied(PPData.DogAction clickAction)
 	{
 		onOccupiedSlotClick += clickAction;
-	}
-
-	public bool UnsubscribeFromUIButton()
-	{
-		if(hasButton)
-		{
-			button.UnsubscribeFromClick(ExecuteClick);
-			return true;
-		}
-		else 
-		{
-			return false;
-		}
 	}
 
 	public void UnsubscribeFromClickWhenOccupied(PPData.DogAction clickAction)
