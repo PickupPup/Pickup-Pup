@@ -28,11 +28,24 @@ public class DogProfile : PPUIElement
     GameObject rightArrow;
 
     [SerializeField]
+    UIButton closeWindowHitArea;
+
+    [SerializeField]
     protected Button rehomeButton;
     [SerializeField]
     protected Button collarSlot;
 
     protected DogDescriptor dogInfo;
+
+    #region MonoBehaviourExtended Overrides
+
+    protected override void subscribeEvents()
+    {
+        base.subscribeEvents();
+        closeWindowHitArea.SubscribeToClick(Hide);
+    }
+
+    #endregion
 
     public virtual void SetProfile(Dog dog)
     {

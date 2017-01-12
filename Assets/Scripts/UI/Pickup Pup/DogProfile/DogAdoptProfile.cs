@@ -10,13 +10,25 @@ public class DogAdoptProfile : DogProfile
 {
     [SerializeField]
     Text priceText;
+    [SerializeField]
+    Button adoptButton;
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+        rehomeButton.interactable = false;
+        collarSlot.interactable = false;
+    }
 
     public override void SetProfile(Dog dog)
     {
         base.SetProfile(dog);
         priceText.text = dogInfo.CostToAdoptStr;
-        rehomeButton.interactable = false;
-        collarSlot.interactable = false;
+    }
+
+    public void TryAdopt()
+    {
+        game.TryAdoptDog(dogInfo);
     }
 
 }

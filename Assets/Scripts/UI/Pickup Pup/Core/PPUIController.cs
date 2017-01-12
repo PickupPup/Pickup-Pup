@@ -3,19 +3,27 @@
  * Description: Controls a UI
  */
 
+using UnityEngine;
+
 public class PPUIController : MonoBehaviourExtended 
-{
-	protected PPSceneController sceneController;
+{   
+    protected PPSceneController sceneController;
     protected PPGameController gameController;
     protected DogProfile dogProfile;
+    protected Dog selectedDog;
+
+    [SerializeField]
+    GameObject dogProfileObject;
 
     #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
     {
         base.setReferences();
-        dogProfile = GetComponentInChildren<DogProfile>();
-        dogProfile.Hide();
+        if (dogProfileObject != null)
+        {
+            dogProfileObject.SetActive(false);
+        }
     }
 
     protected override void fetchReferences() 
@@ -63,20 +71,32 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-			handleDogSlotClicked(dog);
+            selectedDog = dog;
+			handleDogSlotClicked(selectedDog);
 		}
 	}
 
 	void handleDogSlotClicked(Dog dog)
 	{
         // TODO: Insert universal dog slot handle code here
-        showDogProfile(dog);
+        if (dogProfileObject != null)
+        {
+            // TEMP until scouting code is finished
+            if (sceneController.CurrentScene == PPScene.Shelter)
+            {
+                showDogProfile(dog);
+            }
+        }
 	}
 
     void showDogProfile(Dog dog)
     {
+        dogProfileObject.SetActive(true);
+        if(!dogProfile)
+        {
+            dogProfile = dogProfileObject.GetComponent<DogProfile>();
+        }
         dogProfile.SetProfile(dog);
-        dogProfile.Show();
     }
 
 }
