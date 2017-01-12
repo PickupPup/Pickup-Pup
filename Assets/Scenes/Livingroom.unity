@@ -3212,7 +3212,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1003779950}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -4145,7 +4145,7 @@ GameObject:
   - component: {fileID: 1148774668}
   - component: {fileID: 1148774672}
   m_Layer: 5
-  m_Name: LivingroomUI
+  m_Name: LivingRoomUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4237,9 +4237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d69228fcea88014483f447da5c4c6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnNextLoad: 0
+  sceneController: {fileID: 0}
+  gameController: {fileID: 0}
   dogFoodDisplay: {fileID: 1951779183}
   coinDisplay: {fileID: 1361027093}
   rDisplay: {fileID: 1029714847}
+  gifts: []
+  giftSlots: []
+  giftBase:
+    isInitialized: 0
+    gifts: []
 --- !u!1 &1154797324
 GameObject:
   m_ObjectHideFlags: 0
@@ -5118,7 +5126,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1361027088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -7661,7 +7669,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1951779178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 

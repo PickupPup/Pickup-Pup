@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-public class PPLivingroomUIController : PPUIController
+public class PPLivingRoomUIController : PPUIController
 {
 	[SerializeField]
     CurrencyDisplay dogFoodDisplay;

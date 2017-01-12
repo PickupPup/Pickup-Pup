@@ -11,7 +11,7 @@ public class RedeemDisplay : PPUIElement {
   
     [SerializeField]
 	Text giftDescription;
-	PPLivingroomUIController room;
+	PPLivingRoomUIController room;
 	GiftItem gift;
 	Image background;
 	CanvasRenderer canv;
@@ -38,7 +38,7 @@ public class RedeemDisplay : PPUIElement {
 	}
 
 	// Updates To The Selected Gift
-	public void UpdateDisplay(GiftItem gift, PPLivingroomUIController room)
+	public void UpdateDisplay(GiftItem gift, PPLivingRoomUIController room)
 	{
 		this.gift = gift;
 		this.room = room;
