@@ -35,7 +35,7 @@ public class HomeDisplay : PPUIElement
     // Displays thumbnails of a sample of dogs currently at home.
     void displayThumbnails()
     {
-        int numOfDogs = game.Data.Dogs.Length;
+        int numOfDogs = game.DogData.Dogs.Length;
 
         for(int i = 0; i < dogSlots.Length; i++)
         {
