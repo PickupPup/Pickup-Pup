@@ -82,6 +82,14 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+	public string BreedName 
+	{
+		get 
+		{
+			return breed;
+		}
+	}
+
 	public Color Color 
 	{
 		get 
@@ -94,7 +102,8 @@ public class DogDescriptor : PPDescriptor
 	{
 		get
 		{
-			return database.GetDogBreedSprite(this.Breed);
+			// return database.GetDogBreedSprite(this.Breed);
+			throw new System.NotImplementedException();
 		}
 	}
 

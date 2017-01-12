@@ -9,6 +9,20 @@ using System.IO;
 
 public static class FileUtil 
 {
+	public static string CreatePath (params string[] directories) {
+		if (directories.Length >= 2) {
+			string path = Path.Combine(directories[0], directories[1]);
+			for (int i = 2; i < directories.Length; i++) {
+				path = Path.Combine(path, directories[i]);
+			}
+			return path;
+		} else if (directories.Length == 1) {
+			return Path.Combine(directories[0], string.Empty);
+		} else {
+			return Path.Combine(string.Empty, string.Empty);
+		}
+	}
+
 	public static string FileText(string path) 
 	{
 		return convertQuotationMarks(Resources.Load<TextAsset>(path).text);

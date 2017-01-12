@@ -79,7 +79,7 @@ public class DogDatabase : Database<DogDatabase>
 
 	Dictionary<string, DogBreed> breedsByName;
 	[System.NonSerialized]
-	Dictionary<DogBreed, Sprite> dogSpriteLookup = new Dictionary<DogBreed, Sprite>();
+	Dictionary<DogDescriptor, Sprite> dogSpriteLookup = new Dictionary<DogDescriptor, Sprite>();
 
 	public override void Initialize() 
 	{
@@ -145,40 +145,40 @@ public class DogDatabase : Database<DogDatabase>
 		return randomizer.GetRandom(count);
 	}
 
-	public Sprite GetDogBreedSprite(DogBreed breed) 
+	public Sprite GetDogSprite(DogDescriptor dog) 
 	{
-		checkLookup();
+		checkSpriteLookup();
 		// Error checking
-		if(breed == null || string.IsNullOrEmpty(breed.Breed))
+		if(dog == null)
 		{
 			return DefaultSprite;
 		}
 
 		Sprite match;
-		if(dogSpriteLookup.TryGetValue(breed, out match)) 
+		if(dogSpriteLookup.TryGetValue(dog, out match)) 
 		{
 			return match;
 		} 
 		else 
 		{
-			match = loadDogBreedSpriteFromSources(breed);
+			match = loadSpriteFromResources(dog);
 			if(match != null) 
 			{
-				dogSpriteLookup.Add(breed, match);
+				dogSpriteLookup.Add(dog, match);
 				return match;
 			}
 			else
 			{
-				throw new System.Exception(string.Format("Sprite for {0} not found", breed));
+				return DefaultSprite;
 			}
 		}
 	}
-		
-	void checkLookup()
+
+	void checkSpriteLookup()
 	{
 		if(dogSpriteLookup == null)
 		{
-			dogSpriteLookup = new Dictionary<DogBreed, Sprite>();
+			dogSpriteLookup = new Dictionary<DogDescriptor, Sprite>();
 		}
 	}
 
@@ -241,9 +241,12 @@ public class DogDatabase : Database<DogDatabase>
 		}
 	}
 
-	Sprite loadDogBreedSpriteFromSources(DogBreed breed) 
+	Sprite loadSpriteFromResources(DogDescriptor dog) 
 	{
-		return Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, breed.Breed));
+//		string fileName = string.Format("{0}{1}{2}", dog.BreedName, dog.a
+//		string path = Path.Combine(SPRITES_DIR, fileName);
+		//return Resources.Load<Sprite>(path);
+		throw new System.NotImplementedException();
 	}
 
 	// Returns false if data is already initialized
