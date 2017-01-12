@@ -14,6 +14,9 @@ public class DogOutsideSlot : DogSlot
 	[SerializeField]
 	Image dogImageOverride;
 
+	[SerializeField]
+	Sprite collarSprite;
+
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences ()
@@ -77,14 +80,23 @@ public class DogOutsideSlot : DogSlot
 		checkReferences();
 		this.dog = dog;
 		this.dogInfo = dog.Info;
-		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
+		subscribeTimerEvents(dog);
 		nameText.text = dog.Name;
 		dogImage.sprite = dog.Portrait;
 		dog.SetTimer(dogInfo.TimeRemainingScouting);
 		dog.ResumeTimer();
-		scoutingDisplay.SubscribeToTimerEnd(dog);
 	}
 		
+	public override void ClearSlot ()
+	{
+		// Call Dog functionality first because base method sets dog ref to null:
+		dog.StopTimer();
+		dogImage.sprite = collarSprite;
+		nameText.text = string.Empty;
+		timerText.text = string.Empty;
+		base.ClearSlot ();
+	}
+
 	public Dog BringDogIndoors()
 	{
 		Dog returningDog = this.dog;
@@ -92,11 +104,17 @@ public class DogOutsideSlot : DogSlot
 		return returningDog;
 	}
 
-	void initDogScouting(Dog dog)
+	void subscribeTimerEvents(Dog dog)
 	{
 		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
-		dog.TrySendToScout();
+		dog.SubscribeToScoutingTimerEnd(handleTimerEnd);
 		scoutingDisplay.SubscribeToTimerEnd(dog);
+	}
+
+	void initDogScouting(Dog dog)
+	{
+		dog.TrySendToScout();
+		subscribeTimerEvents(dog);
 	}
 
 	void handleDogTimerChange(Dog dog, float timeRemaining)
@@ -104,6 +122,14 @@ public class DogOutsideSlot : DogSlot
 		if(timerText)
 		{
 			timerText.text = dog.RemainingTimeScoutingStr;	
+		}
+	}
+
+	void handleTimerEnd()
+	{
+		if(dog)
+		{
+			ClearSlot();
 		}
 	}
 		

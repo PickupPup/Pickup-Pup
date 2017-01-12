@@ -104,7 +104,7 @@ public class DogSlot : PPUIElement
 		setSlot(this.dogInfo, dogSprite, backgroundSprite);
     }
 
-	public void ClearSlot()
+	public virtual void ClearSlot()
 	{
 		this.dog = null;
 		this.dogInfo = null;

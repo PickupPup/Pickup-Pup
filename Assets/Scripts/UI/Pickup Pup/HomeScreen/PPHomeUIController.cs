@@ -20,8 +20,8 @@ public class PPHomeUIController : PPUIController
 		base.fetchReferences();
 		EventController.Event(PPEvent.LoadHome);
         // Set Currency Displays
-        dogFoodDisplay.SetCurrency(gameController.DogFood);
-        coinDisplay.SetCurrency(gameController.Coins);
+		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
+		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
 	#endregion

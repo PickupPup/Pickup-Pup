@@ -74,6 +74,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 
 	#endregion
 
+	public virtual void Destroy()
+	{
+		Destroy(gameObject);
+	}
+
 	// Value should only be null if you're setting a trigger
 	public bool QueryAnimator(AnimParam param, string key, object value = null) 
 	{

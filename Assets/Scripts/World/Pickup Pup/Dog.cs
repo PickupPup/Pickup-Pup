@@ -139,6 +139,11 @@ public class Dog : MobileObjectBehaviour
 		scoutingTimer.Resume();
 	}
 
+	public void StopTimer()
+	{
+		scoutingTimer.Stop();
+	}
+
 	// Tracks how long the dog will be away from the house
 	[SerializeField]
 	protected PPTimer scoutingTimer;

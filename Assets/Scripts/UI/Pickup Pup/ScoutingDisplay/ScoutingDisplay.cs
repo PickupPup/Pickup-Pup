@@ -79,10 +79,20 @@ public class ScoutingDisplay : PPUIElement
 
 	void handleScoutingTimerEnd(Dog dog)
 	{
-		DogDescriptor dogInfo = dog.Info;
-		CurrencyData reward = game.GetGift(dogInfo);
-		ScoutingReport report = new ScoutingReport(dogInfo, reward);
-		scoutingReportDisplay.Init(report);
+		if(game)
+		{
+			DogDescriptor dogInfo = dog.Info;
+			CurrencyData reward = game.GetGift(dogInfo);
+			ScoutingReport report = new ScoutingReport(dogInfo, reward);
+			createReportUI(report);
+		}
+	}
+
+	ScoutingReportUI createReportUI(ScoutingReport report)
+	{
+		ScoutingReportUI reportUI = Instantiate(scoutingReportDisplay);
+		reportUI.Init(report);
+		return reportUI;
 	}
 
 	ScoutingReport getScoutingReport(Dog dog, CurrencyData reward)

@@ -5,19 +5,68 @@
 
 public class CurrencyDisplay : PPUIElement 
 {
-    CurrencyData currency;
+	CurrencyType type;
+	PPDataController dataController;
 
-    // Sets the Currency to display
-    public void SetCurrency(CurrencyData currency)
-    {
-        this.currency = currency;
-        OnUpdate();
-    }
+	public void Init(PPDataController dataController, CurrencyType type)
+	{
+		unsubscribeEvents();
+		this.dataController = dataController;
+		this.type = type;
+		subscribeEvents();
+		switch(type)
+		{
+			case CurrencyType.Coins:
+				updateAmount(dataController.Coins.Amount);
+				break;
+			case CurrencyType.DogFood:
+				updateAmount(dataController.DogFood.Amount);
+				break;
+		}
+	}
 
-    // Updates text to show the new amount of Currency
-    public void OnUpdate()
-    {
-        text.text = currency.Amount.ToString();
-    }    
+
+	#region MonoBehaviourExtended Overrides
+
+	protected override void subscribeEvents ()
+	{
+		base.subscribeEvents ();
+		if(dataController)
+		{
+			switch(type)
+			{
+				case CurrencyType.Coins:
+					dataController.SubscribeToCoinsChange(updateAmount);
+					break;
+				case CurrencyType.DogFood:
+					dataController.SubscribeToFoodChange(updateAmount);
+					break;
+			}
+		}
+	}
+
+	protected override void unsubscribeEvents ()
+	{
+		base.unsubscribeEvents ();
+		if(dataController)
+		{
+			switch(type)
+			{
+				case CurrencyType.Coins:
+					dataController.UnsubscribeFromCoinsChange(updateAmount);
+					break;
+				case CurrencyType.DogFood:
+					dataController.UnsubscribeToFoodChange(updateAmount);
+					break;
+			}
+		}
+	}
+
+	#endregion
+
+	void updateAmount(int newAmount)
+	{
+		text.text = newAmount.ToString();
+	}
 
 }

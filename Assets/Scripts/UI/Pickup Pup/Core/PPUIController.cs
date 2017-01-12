@@ -7,6 +7,7 @@ public class PPUIController : MonoBehaviourExtended
 {
 	protected PPSceneController sceneController;
     protected PPGameController gameController;
+	protected PPDataController dataController;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -15,6 +16,7 @@ public class PPUIController : MonoBehaviourExtended
 		base.fetchReferences();
 		sceneController = PPSceneController.Instance;
 		gameController = PPGameController.GetInstance;
+		dataController = PPDataController.GetInstance;
     }
 
 	protected override void subscribeEvents()

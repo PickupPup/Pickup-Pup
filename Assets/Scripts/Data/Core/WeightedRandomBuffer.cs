@@ -17,6 +17,7 @@ public class WeightedRandomBuffer<T> : RandomBuffer<T>
 	{
 		this.weights = weights;
 		this.precision = precision;
+		setupOdds();
 	}
 
 	void setupOdds()
@@ -29,7 +30,7 @@ public class WeightedRandomBuffer<T> : RandomBuffer<T>
 		int[] weightsAsIndexCounts = new int[weights.Length];
 		for(int i = 0; i < weightsAsIndexCounts.Length; i++)
 		{
-			int count = precision * (int) (weights[i] / sum);
+			int count = (int) ((float) precision * (weights[i] / sum));
 			weightsAsIndexCounts[i] = count;
 		}
 		indexesAsOdds = new int[precision];
@@ -37,6 +38,10 @@ public class WeightedRandomBuffer<T> : RandomBuffer<T>
 		int currentIndex = 0;
 		for(int i = 0; i < indexesAsOdds.Length; i++)
 		{
+			if(currentIndex >= weightsAsIndexCounts.Length)
+			{
+				break;
+			}
 			if(currentCount < weightsAsIndexCounts[currentIndex])
 			{
 				indexesAsOdds[i] = currentIndex;

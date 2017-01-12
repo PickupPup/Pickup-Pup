@@ -16,12 +16,34 @@ public class ScoutingReportUI : UIElement
 	[SerializeField]
 	Text reportText;
 
+	UIButton dismissButton;
+
+	#region MonoBehaviourExtended 
+
+	protected override void setReferences ()
+	{
+		base.setReferences ();
+		dismissButton = ensureReference<UIButton>();
+	}
+
+	#endregion
+
 	public void Init(ScoutingReport report)
 	{
 		this.dogPortrait.sprite = report.Dog.Portrait;
 		this.rewardIcon.sprite = report.Currency.Icon;
 		this.reportText.text = report.ToString();
 		Show();
+	}
+
+	public void SubscribeToDimiss(MonoAction action)
+	{
+		dismissButton.SubscribeToClick(action);
+	}
+
+	public void UnsubscribeFromDismiss(MonoAction action)
+	{
+		dismissButton.UnsubscribeFromClick(action);
 	}
 
 }
