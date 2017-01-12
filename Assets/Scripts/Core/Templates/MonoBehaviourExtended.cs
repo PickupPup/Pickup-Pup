@@ -60,9 +60,15 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 	void OnApplicationPause(bool isPaused)
 	{
 		handleGameTogglePause(isPaused);
+
 		// iOS Does not produce calls to OnApplicationQuit, so treat all pauses as quit events
 		#if UNITY_IOS
-		handleGameQuit();
+
+		if(isPaused)
+		{
+			handleGameQuit();
+		}
+
 		#endif
 	}
 

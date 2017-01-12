@@ -122,7 +122,11 @@ public class PPDataController : DataController, ICurrencySystem
 
     protected PPGameSave getCurrentGame()
     {
-        return currentGame;
+		if(currentGame == null)
+		{
+			currentGame = getDefaultFile() as PPGameSave;
+		}
+		return currentGame;
     }
 
     public void SaveCurrencies()
