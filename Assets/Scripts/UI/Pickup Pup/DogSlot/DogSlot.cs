@@ -24,6 +24,28 @@ public class DogSlot : PPUIElement
 		}
 	}
 
+	protected Dog dog
+	{
+		get
+		{
+			return _dog;
+		}
+		set
+		{
+			// Fixes ref on previous dog
+			if(_dog != null)
+			{
+				_dog.LeaveCurrentSlot();
+			}
+			// Assigns slot to new dog (assuming the new value is not null)
+			if(value != null)
+			{
+				value.AssignSlot(this);
+			}
+			_dog = value;
+		}
+	}
+
 	bool hasButton {
 		get {
 			return button != null;
@@ -31,9 +53,10 @@ public class DogSlot : PPUIElement
 	}
 		
     protected DogDescriptor dogInfo;
-	protected Dog dog;
+
     protected Image[] images;
 
+	Dog _dog;
 	UIButton button;
 	MonoAction onFreeSlotClick;
 	PPData.DogAction onOccupiedSlotClick;
@@ -102,7 +125,8 @@ public class DogSlot : PPUIElement
 		}
 		else 
 		{
-			EventController.Event(PPEvent.ClickDogSlot, new DogFactory(hideGameObjects:true).Create(this.dogInfo));
+			this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
+			EventController.Event(PPEvent.ClickDogSlot, dog);
 			callOnFreeSlotClick();
 		}
 	}
