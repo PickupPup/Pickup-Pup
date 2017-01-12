@@ -9,6 +9,7 @@ using SimpleJSON;
 using UnityEngine;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class SpritesheetDatabase : Database<SpritesheetDatabase>
 {
 	#region Static Accessors

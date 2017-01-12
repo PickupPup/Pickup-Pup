@@ -11,6 +11,9 @@ public class ScoutingDisplay : PPUIElement
 {
 	[SerializeField]
 	DogBrowser dogBrowser;
+	[SerializeField]
+	ScoutingReportUI scoutingReportDisplay;
+
 	DogOutsideSlot[] scoutingSlots;
 	Dictionary<int, DogOutsideSlot> slotsByIndex = new Dictionary<int, DogOutsideSlot>();
 

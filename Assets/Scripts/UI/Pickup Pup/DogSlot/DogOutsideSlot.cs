@@ -34,6 +34,24 @@ public class DogOutsideSlot : DogSlot
 		}
 	}
 
+	protected override void handleSceneLoaded(int sceneIndex)
+	{
+		base.handleSceneLoaded(sceneIndex);
+		if(!timerText)
+		{
+			timerText = gameObject.AddComponent<Text>();
+		}
+	}
+		
+	protected override void cleanupReferences()
+	{
+		base.cleanupReferences();
+		if(dog)
+		{
+			dog.UnsubscribeFromScoutingTimerChange(handleDogTimerChange);
+		}
+	}
+
 	#endregion
 
     #region DogSlot Overrides
@@ -79,7 +97,10 @@ public class DogOutsideSlot : DogSlot
 
 	void handleDogTimerChange(Dog dog, float timeRemaining)
 	{
-		timerText.text = dog.RemainingTimeScoutingStr;	
+		if(timerText)
+		{
+			timerText.text = dog.RemainingTimeScoutingStr;	
+		}
 	}
 		
 }
