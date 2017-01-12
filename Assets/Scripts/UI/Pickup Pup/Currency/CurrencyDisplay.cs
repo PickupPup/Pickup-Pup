@@ -28,9 +28,9 @@ public class CurrencyDisplay : PPUIElement
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void subscribeEvents ()
+	protected override void subscribeEvents()
 	{
-		base.subscribeEvents ();
+		base.subscribeEvents();
 		if(dataController)
 		{
 			switch(type)
@@ -45,9 +45,9 @@ public class CurrencyDisplay : PPUIElement
 		}
 	}
 
-	protected override void unsubscribeEvents ()
+	protected override void unsubscribeEvents()
 	{
-		base.unsubscribeEvents ();
+		base.unsubscribeEvents();
 		if(dataController)
 		{
 			switch(type)

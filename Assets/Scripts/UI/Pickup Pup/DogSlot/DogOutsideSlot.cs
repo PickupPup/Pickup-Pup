@@ -19,9 +19,9 @@ public class DogOutsideSlot : DogSlot
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void setReferences ()
+	protected override void setReferences()
 	{
-		base.setReferences ();
+		base.setReferences();
 		Text[] text = GetComponentsInChildren<Text>();
 		nameText = text[0];
 		timerText = text[1];
@@ -87,14 +87,14 @@ public class DogOutsideSlot : DogSlot
 		dog.ResumeTimer();
 	}
 		
-	public override void ClearSlot ()
+	public override void ClearSlot()
 	{
 		// Call Dog functionality first because base method sets dog ref to null:
 		dog.StopTimer();
 		dogImage.sprite = collarSprite;
 		nameText.text = string.Empty;
 		timerText.text = string.Empty;
-		base.ClearSlot ();
+		base.ClearSlot();
 	}
 
 	public Dog BringDogIndoors()

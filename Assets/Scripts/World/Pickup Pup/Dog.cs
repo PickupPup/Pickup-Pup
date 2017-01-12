@@ -277,7 +277,7 @@ public class Dog : MobileObjectBehaviour
 	{
 		if(!IsScouting && HasScoutingTimer) 
 		{
-			descriptor.HandleScoutingBegun(game.GetCurrentSlotIndex());
+			descriptor.HandleScoutingBegan(game.GetCurrentSlotIndex());
 			scoutingTimer.Begin();
 			int slotIndex;
 			bool wasSuccess = game.TrySendDogToScout(this, out slotIndex);

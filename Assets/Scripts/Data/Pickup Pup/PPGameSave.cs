@@ -70,11 +70,11 @@ public class PPGameSave : GameSave, ISerializable
 		if(!ScoutingDogs.Contains(dog.Info)) 
 		{
 			ScoutingDogs.Add(dog.Info);
-			dog.SubscribeToScoutingTimerEnd(handleDogFinishdScouting);
+			dog.SubscribeToScoutingTimerEnd(handleDogFinishedScouting);
 		}
 	}
 
-	void handleDogFinishdScouting(Dog dog)
+	void handleDogFinishedScouting(Dog dog)
 	{
 		ScoutingDogs.Remove(dog.Info);
 	}

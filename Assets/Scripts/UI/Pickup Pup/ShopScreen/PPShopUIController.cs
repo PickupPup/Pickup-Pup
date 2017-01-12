@@ -35,7 +35,6 @@ public class PPShopUIController : PPUIController
         base.fetchReferences();
         EventController.Event(PPEvent.LoadShop);
 
-        // Set Currency Displays
 		// Set Currency Displays
 		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
 		coinDisplay.Init(dataController, CurrencyType.Coins);

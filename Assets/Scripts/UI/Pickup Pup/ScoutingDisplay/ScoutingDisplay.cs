@@ -31,7 +31,7 @@ public class ScoutingDisplay : PPUIElement
 		dog.SubscribeToScoutingTimerEnd(handleScoutingTimerEnd);
 	}
 
-	#region Override MonoBehaviourExtended 
+	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences()
 	{

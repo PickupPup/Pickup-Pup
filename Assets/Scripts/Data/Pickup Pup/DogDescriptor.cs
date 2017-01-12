@@ -148,7 +148,6 @@ public class DogDescriptor : PPDescriptor
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
 	Dog linkedDog;
-	DogBreed _iBreed;
 
 	public static DogDescriptor Default() 
 	{
@@ -187,12 +186,12 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
-	public override int GetHashCode ()
+	public override int GetHashCode()
 	{
 		return this.name.GetHashCode() + this.breed.GetHashCode() + this.age.GetHashCode();
 	}
 
-	public void HandleScoutingBegun(int slotIndex)
+	public void HandleScoutingBegan(int slotIndex)
 	{
 		if(this.IsLinkedToDog)
 		{

@@ -178,7 +178,7 @@ public class PPGameController : GameController, ICurrencySystem
 		{
 			dog.SetGame(this);
 			dog.SetTimer(dog.Info.TimeRemainingScouting);
-			dog.Info.HandleScoutingBegun(dog.Info.ScoutingSlotIndex);
+			dog.Info.HandleScoutingBegan(dog.Info.ScoutingSlotIndex);
 			EventController.Event(PPEvent.ScoutingDogLoaded, dog);
 		}
 	}
