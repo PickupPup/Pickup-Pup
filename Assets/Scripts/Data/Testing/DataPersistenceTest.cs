@@ -56,6 +56,7 @@ public class DataPersistenceTest : MonoBehaviourExtended
 
 	void updateCoinsText(int coins) 
 	{
+        Debug.Log("updating coins");
 		coinText.text = string.Format("{0}: {1}", "Coins", coins);
 	}
 

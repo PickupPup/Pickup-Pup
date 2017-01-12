@@ -15,7 +15,7 @@ public class DogProfile : PPUIElement
     [SerializeField]
     Text breedText;
     [SerializeField]
-    Text descriptionText;
+    Text[] descriptionText;
 
     [SerializeField]
     Image dogThumbnail;
@@ -27,9 +27,12 @@ public class DogProfile : PPUIElement
     [SerializeField]
     GameObject rightArrow;
 
-    protected DogDescriptor dogInfo;
+    [SerializeField]
     protected Button rehomeButton;
+    [SerializeField]
     protected Button collarSlot;
+
+    protected DogDescriptor dogInfo;
 
     public virtual void SetProfile(Dog dog)
     {
@@ -37,7 +40,10 @@ public class DogProfile : PPUIElement
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-        descriptionText.text = dogInfo.Description;
+        for(int i = 0; i < dogInfo.Descriptions.Length; i++)
+        {
+            descriptionText[i].text = dogInfo.Descriptions[i];
+        }
 
         dogThumbnail.sprite = dog.Portrait;
         // TODO: Get collar icon

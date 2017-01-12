@@ -15,7 +15,7 @@ public class PPTimer : PPData
 	{
 		get 
 		{
-			return new PPTimer(DEFAULT_INT, DEFAULT_INT);
+			return new PPTimer(NONE_INT, NONE_INT);
 		}
 	}
 
@@ -182,7 +182,7 @@ public class PPTimer : PPData
 
 	public void SetTimeRemaining(float newTime, bool checkForEvents) 
 	{
-		timer.ModifyTimeRemaining(newTime, checkForEvents);
+		timer.SetTimeRemaining(newTime, checkForEvents);
 	}
 
 	public void ZeroOutTimeRemaining(bool shouldCallTimeUpEvent) 

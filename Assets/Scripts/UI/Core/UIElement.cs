@@ -106,6 +106,13 @@ public class UIElement : MonoBehaviourExtended
 		}
 	}
 
+	protected Image getTopImage()
+	{
+		// Assumes sort orders are standard:
+		Image[] images = GetComponentsInChildren<Image>();
+		return images[images.Length-1];
+	}
+
 	void startOpacityCoroutine(float startOpacity, float endOpacity, float time, bool loop) 
 	{
 		stopOpacityCoroutine();
