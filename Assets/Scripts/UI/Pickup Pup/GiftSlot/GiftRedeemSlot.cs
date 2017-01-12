@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class GiftRedeemSlot : GiftSlot 
 {
-
     [SerializeField]
     Image itemImage;
 

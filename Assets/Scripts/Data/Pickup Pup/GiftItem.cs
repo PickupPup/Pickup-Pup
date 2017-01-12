@@ -67,7 +67,6 @@ public class GiftItem : PPData
 
     #endregion
 
-
     [SerializeField]
     string giftName;
     [SerializeField]
