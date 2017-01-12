@@ -268,5 +268,6 @@ public enum PPEvent
     LoadShop,
 	ScoutingDogLoaded,
     LoadShelter,
+	ClickDogSlot,
 
 }

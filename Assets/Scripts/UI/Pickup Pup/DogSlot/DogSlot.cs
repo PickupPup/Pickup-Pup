@@ -48,7 +48,8 @@ public class DogSlot : PPUIElement
 	protected override void setReferences()
 	{
 		base.setReferences();
-		button = GetComponentInChildren<UIButton>();
+		button = ensureReference<UIButton>(searchChildren:true);
+		subscribeToUIButton();
 	}
 
 	#endregion
@@ -96,6 +97,7 @@ public class DogSlot : PPUIElement
 	{
 		if(hasDog)
 		{
+			EventController.Event(PPEvent.ClickDogSlot, this.dog);
 			callOnOccupiedSlotClick(this.dog);
 		}
 		else 
@@ -113,8 +115,15 @@ public class DogSlot : PPUIElement
 		} 
 		else 
 		{
+			EventController.Event(PPEvent.ClickDogSlot, new DogFactory(hideGameObjects:true).Create(this.dogInfo));
+			callOnFreeSlotClick();
 			return false;
 		}
+	}
+		
+	public void SubscribeToClickWhenOccupied(PPData.DogAction clickAction)
+	{
+		onOccupiedSlotClick += clickAction;
 	}
 
 	public bool UnsubscribeFromUIButton()
@@ -130,11 +139,6 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	public void SubscribeToClickWhenOccupied(PPData.DogAction clickAction)
-	{
-		onOccupiedSlotClick += clickAction;
-	}
-
 	public void UnsubscribeFromClickWhenOccupied(PPData.DogAction clickAction)
 	{
 		onOccupiedSlotClick -= clickAction;
@@ -148,6 +152,32 @@ public class DogSlot : PPUIElement
 	public void UnsubscribeFromClickWhenFree(MonoAction clickAction)
 	{
 		onFreeSlotClick -= clickAction;
+	}
+
+	protected bool subscribeToUIButton()
+	{
+		if(hasButton)	
+		{
+			button.SubscribeToClick(ExecuteClick);
+			return true;
+		} 
+		else 
+		{
+			return false;
+		}
+	}
+
+	protected bool unsubscribeFromUIButton()
+	{
+		if(hasButton)
+		{
+			button.UnsubscribeFromClick(ExecuteClick);
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
 	}
 
 	void callOnOccupiedSlotClick(Dog dog)
