@@ -27,21 +27,17 @@ public class DogProfile : PPUIElement
     [SerializeField]
     GameObject rightArrow;
 
-    protected DogDescriptor dog;
+    protected DogDescriptor dogInfo;
+    protected Button rehomeButton;
+    protected Button collarSlot;
 
-    protected override void fetchReferences()
+    public virtual void SetProfile(Dog dog)
     {
-        base.fetchReferences();
-        SetProfile(1, game.Data.Dogs[1]);
-    }
+        dogInfo = dog.Info;
 
-    public virtual void SetProfile(int index, DogDescriptor dog)
-    {
-        this.dog = dog;
-
-        nameText.text = dog.Name;
-        breedText.text = dog.Breed.Breed;
-        descriptionText.text = dog.Description;
+        nameText.text = dogInfo.Name;
+        breedText.text = dogInfo.Breed.Breed;
+        descriptionText.text = dogInfo.Description;
 
         dogThumbnail.sprite = dog.Portrait;
         // TODO: Get collar icon
@@ -49,7 +45,7 @@ public class DogProfile : PPUIElement
 
     public void EditName(string newName)
     {
-        //dog.Name = newName;
-        nameText.text = dog.Name;
+        // TODO: Make DogDescriptor name editable
+        nameText.text = dogInfo.Name;
     }
 }

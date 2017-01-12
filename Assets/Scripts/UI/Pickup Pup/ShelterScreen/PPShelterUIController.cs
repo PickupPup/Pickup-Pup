@@ -7,6 +7,7 @@ public class PPShelterUIController : PPUIController
 {
     DogSlot[] availableDogPortraits;
     DogDatabase database;
+    DogAdoptProfile dogProfile;
 
     #region MonoBehaviourExtended Overrides
 
@@ -14,6 +15,7 @@ public class PPShelterUIController : PPUIController
     {
         base.setReferences();
         availableDogPortraits = GetComponentsInChildren<DogSlot>();
+        dogProfile = GetComponentInChildren<DogAdoptProfile>();
     }
 
     protected override void fetchReferences()
@@ -34,6 +36,11 @@ public class PPShelterUIController : PPUIController
             DogDescriptor dog = dogs[i];
             availableDogPortraits[i].Init(dog, database.GetDogBreedSprite(dog.Breed));
         }
+    }
+
+    void showDogProfile()
+    {
+
     }
 
 }
