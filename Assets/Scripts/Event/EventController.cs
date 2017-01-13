@@ -265,10 +265,10 @@ public enum PPEvent
 	Quit,
 	LoadStart,
 	LoadHome,
-  LoadShop,
+  	LoadShop,
 	ScoutingDogLoaded,
-  LoadLivingroom,
-  LoadShelter,
+  	LoadLivingRoom,
+  	LoadShelter,
 	ClickDogSlot,
 	StartedScouting,
 

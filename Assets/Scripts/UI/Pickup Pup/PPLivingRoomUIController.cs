@@ -29,7 +29,7 @@ public class PPLivingRoomUIController : PPUIController
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        EventController.Event(PPEvent.LoadLivingroom);
+        EventController.Event(PPEvent.LoadLivingRoom);
 
         giftBase = gameController.Gifts;
         giftBase.Initialize();

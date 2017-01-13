@@ -7,8 +7,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class RedeemDisplay : PPUIElement {
-  
+public class RedeemDisplay : PPUIElement 
+{
     [SerializeField]
 	Text giftDescription;
 	PPLivingRoomUIController room;
@@ -65,4 +65,5 @@ public class RedeemDisplay : PPUIElement {
 		gameObject.SetActive(false);
 		yield break;
 	}
+	
 }
