@@ -272,6 +272,7 @@ public class PPGameController : GameController, ICurrencySystem
     {
         if (CanAfford(costCurrencyType, cost))
         {
+			print("Failed To Buy");
             return false;
         }
         buyItem(value, valueCurrencyType, cost, costCurrencyType);

@@ -23,21 +23,29 @@ public class PPShopUIController : PPUIController
     protected override void setReferences()
     {
         base.setReferences();
+        EventController.Event(PPEvent.LoadShop);
         itemSlots = GetComponentsInChildren<ShopItemSlot>();
-        shop = ShopDatabase.Instance;
-        shop.Initialize();
-        items = shop.Items;
-        populateShop(items);
+
     }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        EventController.Event(PPEvent.LoadShop);
 
+        shop = ShopDatabase.Instance;
+        shop.Initialize();
+        items = shop.Items;
+        populateShop(items);
+        StartCoroutine(initializeDisplay());
+    }
+
+    IEnumerator initializeDisplay(){
+
+        yield return new WaitForSeconds(0);
 		// Set Currency Displays
 		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
 		coinDisplay.Init(dataController, CurrencyType.Coins);
+
     }
 
     #endregion
@@ -49,6 +57,11 @@ public class PPShopUIController : PPUIController
             ShopItemSlot itemSlot = itemSlots[i];
             itemSlot.Init(this, items[i]);
         }
+    }
+
+    void Update(){
+		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
+		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     public void OnMenuClick()
