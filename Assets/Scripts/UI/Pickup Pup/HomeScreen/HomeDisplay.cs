@@ -1,10 +1,8 @@
 ﻿/*
  * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Displays the test dogs at home on the Main Screen.
- * Usage: Testing only. This class will likely be removed.
+ * Usage: REMOVE THIS CLASS AFTER FIRST PLAYABLE
  */
-
-using UnityEngine;
 
 public class HomeDisplay : PPUIElement
 {
@@ -43,9 +41,8 @@ public class HomeDisplay : PPUIElement
             {
                 // TEMP USE FOR TESTING
                 // 12 total stock photos
-                Sprite dogSprite = SpriteUtil.GetDogSprite(Random.Range(1, 12));
-
-				dogSlots[i].Init(DogDescriptor.Default(), dogSprite);
+                //Sprite dogSprite = SpriteUtil.GetDogSprite(Random.Range(1, 12));
+				//dogSlots[i].Init(DogDescriptor.Default(), dogSprite);
             }
         }
     }

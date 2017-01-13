@@ -6,7 +6,7 @@
 using UnityEngine;
 
 public class PPUIController : MonoBehaviourExtended 
-{   
+{
     protected PPSceneController sceneController;
     protected PPGameController gameController;
     protected DogProfile dogProfile;
@@ -79,7 +79,7 @@ public class PPUIController : MonoBehaviourExtended
 	void handleDogSlotClicked(Dog dog)
 	{
         // TODO: Insert universal dog slot handle code here
-        if (dogProfileObject != null)
+        if (dogProfileObject)
         {
             // TEMP until scouting code is finished
             if (sceneController.CurrentScene == PPScene.Shelter)

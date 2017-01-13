@@ -55,7 +55,10 @@ public class DogProfile : PPUIElement
         breedText.text = dogInfo.Breed.Breed;
         for(int i = 0; i < dogInfo.Descriptions.Length; i++)
         {
-            descriptionText[i].text = dogInfo.Descriptions[i];
+            if (i < descriptionText.Length)
+            {
+                descriptionText[i].text = dogInfo.Descriptions[i];
+            }
         }
 
         dogThumbnail.sprite = dog.Portrait;

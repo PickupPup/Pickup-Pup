@@ -47,7 +47,7 @@ public class DogDescriptor : PPDescriptor
     {
         get
         {
-            return new string[2] { description1, description2 };
+            return description;
         }
     }
 
@@ -134,9 +134,7 @@ public class DogDescriptor : PPDescriptor
 	[SerializeField]
 	int age;
     [SerializeField]
-    string description1;
-    [SerializeField]
-    string description2;
+    string[] description;
 
 	[System.NonSerialized]
 	Dog linkedDog;
@@ -149,8 +147,10 @@ public class DogDescriptor : PPDescriptor
 		descriptor.age = 0;
 		descriptor.breed = string.Empty;
 		descriptor.color = BLACK_HEX;
-        descriptor.description1 = string.Empty;
-        descriptor.description2 = string.Empty;
+        descriptor.description = new string[] 
+            {
+                string.Empty, string.Empty
+            };
 		return descriptor;
 	}
 
