@@ -15,6 +15,102 @@
       "type" : "Music",
       "channel" : 0,
       "volume" : 100
+    },
+    {
+      "name" : "PickupPup_Music_MainMusic_V1.5",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayMainMusic"
+      ],
+      "stopEvents" : [
+        "StopMainMusic"
+      ],
+      "loop" : true,
+      "type" : "Music",
+      "channel" : 0,
+      "volume" : 100
+    },
+    {
+      "name" : "PickupPup_SFX_MenuPopup_V2",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayMenuPopup"
+      ],
+      "stopEvents" : [
+        "StopMenuPopup"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "PickupPup_SFX_MenuClick_V2.2",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayMenuClick"
+      ],
+      "stopEvents" : [
+        "StopMenuClick"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "PickupPup_SFX_DogSendOut_V4",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayDogSendOut"
+      ],
+      "stopEvents" : [
+        "StopDogSendOut"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "PickupPup_SFX_DogReturn_V4",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayDogReturn"
+      ],
+      "stopEvents" : [
+        "StopDogReturn"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "PickupPup_SFX_Adopt_V7",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayAdopt"
+      ],
+      "stopEvents" : [
+        "StopAdopt"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     }
   ],
   "groups" : [
