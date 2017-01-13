@@ -7,75 +7,66 @@ using UnityEngine;
 
 public class PPLivingRoomUIController : PPUIController
 {
-	[SerializeField]
+    [SerializeField]
     CurrencyDisplay dogFoodDisplay;
-	[SerializeField]
+    [SerializeField]
     CurrencyDisplay coinDisplay;
-	[SerializeField]
-	RedeemDisplay rDisplay;
+    [SerializeField]
+    RedeemDisplay rDisplay;
 
-	GiftItem[] gifts;
-	GiftRedeemSlot[] giftSlots;
-	GiftDatabase giftBase;
+    GiftItem[] gifts;
+    GiftRedeemSlot[] giftSlots;
+    GiftDatabase giftBase;
 
-	#region MonoBehaviourExtended Overrides
+    #region MonoBehaviourExtended Overrides
 
-    protected override void setReferences() 
-	{
+    protected override void setReferences()
+    {
         base.setReferences();
-		giftSlots = GetComponentsInChildren<GiftRedeemSlot>();
-     	giftBase = GiftDatabase.Instance;
-		giftBase.Initialize();
-		gifts = giftBase.Gifts;
-		generateGift(gifts);
+        giftSlots = GetComponentsInChildren<GiftRedeemSlot>(); 
     }
 
-    protected override void fetchReferences() 
-	{
-		base.fetchReferences();
-		EventController.Event(PPEvent.LoadLivingroom);
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        EventController.Event(PPEvent.LoadLivingroom);
 
-		// Display Updated Currency
-        dogFoodDisplay.SetCurrency(gameController.DogFood);
-        coinDisplay.SetCurrency(gameController.Coins);
+        giftBase = gameController.Gifts;
+        giftBase.Initialize();
+        gifts = giftBase.Gifts;
+        generateGift(gifts);
+
+        // Display Updated Currency
+        dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
+        coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
-	#endregion
+    #endregion
 
-	// TEMPORARY
-	void generateGift(GiftItem[] gifts)
-	{
-		for (int i = 0; i < giftSlots.Length; i++)
-		{
-			GiftRedeemSlot giftSlot = giftSlots[i];
-			giftSlot.Init(this, gifts[Random.Range(0,gifts.Length)]);
-		}
-	}
+    // TEMPORARY
+    void generateGift(GiftItem[] gifts)
+    {
+        for (int i = 0; i < giftSlots.Length; i++)
+        {
+            GiftRedeemSlot giftSlot = giftSlots[i];
+            giftSlot.Init(this, gifts[Random.Range(0, gifts.Length)]);
+        }
+    }
 
-	public void RedeemGift(GiftItem gift)
-	{
-		rDisplay.gameObject.SetActive(true);
-		rDisplay.UpdateDisplay(gift,this);
-	}
+    public void RedeemGift(GiftItem gift)
+    {
+        rDisplay.gameObject.SetActive(true);
+        rDisplay.UpdateDisplay(gift, this);
+    }
 
     public void OnAdoptClick()
     {
         sceneController.LoadShelter();
     }
 
-	public void OnShopClick()
+    public void OnShopClick()
     {
         sceneController.LoadShop();
     }
-
-	// Temporary Fix For Updating Currencies
-	public void Update()
-	{
-        dogFoodDisplay.SetCurrency(gameController.DogFood);
-        coinDisplay.SetCurrency(gameController.Coins);
-        coinDisplay.OnUpdate();
-        dogFoodDisplay.OnUpdate();
-
-	}
 
 }

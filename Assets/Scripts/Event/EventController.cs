@@ -270,5 +270,6 @@ public enum PPEvent
   LoadLivingroom,
   LoadShelter,
 	ClickDogSlot,
+	StartedScouting,
 
 }

@@ -12,4 +12,9 @@ public class ResourceLoader
 	protected const string GIFTS_DIR = "Gifts";
 	protected const string DEFAULT = "Default";
 	protected const string GAME_DATA = "GameData";
+	protected const string EXPORT = "Export";
+	protected const string SHEET = "Sheet";
+
+	protected const char JOIN_CHAR = '_';
+
 }

@@ -106,7 +106,7 @@ public class DogSlot : PPUIElement
 		setSlot(this.dogInfo, dogSprite, backgroundSprite);
     }
 
-	public void ClearSlot()
+	public virtual void ClearSlot()
 	{
 		this.dog = null;
 		this.dogInfo = null;
@@ -120,6 +120,10 @@ public class DogSlot : PPUIElement
 
 	public void ExecuteClick()
 	{
+		if(hasDogInfo && !hasDog)
+		{
+			this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
+		}
 		if(hasDog)
 		{
 			EventController.Event(PPEvent.ClickDogSlot, this.dog);
@@ -127,8 +131,6 @@ public class DogSlot : PPUIElement
 		}
 		else 
 		{
-			this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
-			EventController.Event(PPEvent.ClickDogSlot, dog);
 			callOnFreeSlotClick();
 		}
 	}

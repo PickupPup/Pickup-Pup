@@ -71,17 +71,20 @@ public class DogDatabase : Database<DogDatabase>
 	[SerializeField]
 	DogDescriptor[] dogs;
 
+	[System.NonSerialized]
 	RandomBuffer<DogDescriptor> randomizer;
 	// This buffer is used to generate same sequence of dogs based off day
+	[System.NonSerialized]
 	RandomBuffer<DogDescriptor> dailyRandomizer;
 
 	Dictionary<string, DogBreed> breedsByName;
-	[System.NonSerialized]
-	Dictionary<DogBreed, Sprite> dogSpriteLookup = new Dictionary<DogBreed, Sprite>();
+
+	SpritesheetDatabase spriteDatabase;
 
 	public override void Initialize() 
 	{
 		base.Initialize();
+		this.spriteDatabase = SpritesheetDatabase.GetInstance;
 		AssignInstance(this);
 		populateDogBreedLookup();
 		setDogDataReferences();
@@ -143,34 +146,25 @@ public class DogDatabase : Database<DogDatabase>
 		return randomizer.GetRandom(count);
 	}
 
-	public Sprite GetDogBreedSprite(DogBreed breed) 
+	public Sprite GetDogSprite(DogDescriptor dog) 
 	{
-		// Error checking
-		if(breed == null || string.IsNullOrEmpty(breed.Breed))
+		string spriteName = getSpriteName(dog);
+		Sprite sprite;
+		if(dog == null || !spriteDatabase.TryGetSprite(spriteName, out sprite))
 		{
 			return DefaultSprite;
 		}
-
-		Sprite match;
-		if(dogSpriteLookup.TryGetValue(breed, out match)) 
+		else
 		{
-			return match;
-		} 
-		else 
-		{
-			match = loadDogBreedSpriteFromSources(breed);
-			if(match != null) 
-			{
-				dogSpriteLookup.Add(breed, match);
-				return match;
-			}
-			else
-			{
-				throw new System.Exception(string.Format("Sprite for {0} not found", breed));
-			}
+			return sprite;
 		}
 	}
 		
+	string getSpriteName(DogDescriptor dog)
+	{
+		return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
+	}
+
 	public override bool TryInit()
 	{
 		if(tryInitData())
@@ -228,11 +222,6 @@ public class DogDatabase : Database<DogDatabase>
 		{
 			dog.Initialize(this);
 		}
-	}
-
-	Sprite loadDogBreedSpriteFromSources(DogBreed breed) 
-	{
-		return Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, breed.Breed));
 	}
 
 	// Returns false if data is already initialized

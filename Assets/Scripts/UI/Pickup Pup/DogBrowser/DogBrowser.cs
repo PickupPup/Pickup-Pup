@@ -24,7 +24,7 @@ public class DogBrowser : PPUIElement
 	{
 		get
 		{
-			return buttonController.hasSelectedPage;
+			return buttonController.HasSelectedPage;
 		}
 	}
 
@@ -69,6 +69,7 @@ public class DogBrowser : PPUIElement
 
 	public void Open(int pageIndex = NONE_VALUE)
 	{
+		checkReferences();
 		Show();
 		SwitchToPage(pageIndex, onClickPageButton:false);
 	}
