@@ -8,7 +8,7 @@ public class CurrencyDisplay : PPUIElement
 	CurrencyType type;
 	PPDataController dataController;
 
-	public void Init(PPDataController dataController, CurrencyType type)
+    public void Init(PPDataController dataController, CurrencyType type)
 	{
 		unsubscribeEvents();
 		this.dataController = dataController;

@@ -3,13 +3,30 @@
  * Description: Controls a UI
  */
 
+using UnityEngine;
+
 public class PPUIController : MonoBehaviourExtended 
 {
-	protected PPSceneController sceneController;
+    protected PPSceneController sceneController;
     protected PPGameController gameController;
-	protected PPDataController dataController;
+    protected PPDataController dataController;
 
-	#region MonoBehaviourExtended Overrides
+    protected DogProfile dogProfile;
+    protected Dog selectedDog;
+
+    [SerializeField]
+    GameObject dogProfileObject;
+
+    #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+        if (dogProfileObject != null)
+        {
+            dogProfileObject.SetActive(false);
+        }
+    }
 
     protected override void fetchReferences() 
 	{
@@ -43,17 +60,46 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController.LoadHome();
 	}
 
+    public void LoadShelter()
+    {
+        sceneController.LoadShelter();
+    }
+
+    public void LoadShop()
+    {
+        sceneController.LoadShop();
+    }
+
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-			handleDogSlotClicked(dog);
+            selectedDog = dog;
+			handleDogSlotClicked(selectedDog);
 		}
 	}
 
 	void handleDogSlotClicked(Dog dog)
 	{
-		// TODO: Insert universal dog slot handle code here
+        // TODO: Insert universal dog slot handle code here
+        if (dogProfileObject)
+        {
+            // TEMP until scouting code is finished
+            if (sceneController.CurrentScene == PPScene.Shelter)
+            {
+                showDogProfile(dog);
+            }
+        }
 	}
+
+    void showDogProfile(Dog dog)
+    {
+        dogProfileObject.SetActive(true);
+        if(!dogProfile)
+        {
+            dogProfile = dogProfileObject.GetComponent<DogProfile>();
+        }
+        dogProfile.SetProfile(dog);
+    }
 
 }

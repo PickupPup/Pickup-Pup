@@ -27,13 +27,10 @@ public class DogAdoptionSlot : DogSlot
 
     #endregion
 
-    public void Adopt()
+    public void ShowAdopt()
     {
-        if(game.TryAdoptDog(dogInfo))
-        {
-            priceOrAdoptionStatus.text = "Adopted";
-            priceBackgroundImage.color = Color.red;
-        }
+        priceOrAdoptionStatus.text = "Adopted";
+        priceBackgroundImage.color = Color.red;
     }
 
 }
