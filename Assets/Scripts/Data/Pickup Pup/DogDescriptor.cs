@@ -73,19 +73,12 @@ public class DogDescriptor : PPDescriptor
 			}
 		}
 	}
-
-	public float RemainingTimeScouting
+		
+	public float TotalTimeToReturn
 	{
-		get 
+		get
 		{
-			if(IsLinkedToDog) 
-			{
-				return linkedDog.RemainingTimeScouting;
-			}
-			else 
-			{
-				return default(float);
-			}
+			return Breed.TimeToReturn;
 		}
 	}
 
@@ -97,11 +90,19 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
-	public Color Color 
+	public string BreedName 
 	{
 		get 
 		{
-			return parseHexColor(this.color);
+			return breed;
+		}
+	}
+
+	public string Color 
+	{
+		get 
+		{
+			return this.color;
 		}
 	}
 
@@ -109,7 +110,23 @@ public class DogDescriptor : PPDescriptor
 	{
 		get
 		{
-			return database.GetDogBreedSprite(this.Breed);
+			return database.GetDogSprite(this);
+		}
+	}
+
+	public float TimeRemainingScouting
+	{
+		get
+		{
+			return _timeRemainingScouting;
+		}
+	}
+
+	public int ScoutingSlotIndex
+	{
+		get 
+		{
+			return _scoutingSlotIndex;
 		}
 	}
 
@@ -136,9 +153,10 @@ public class DogDescriptor : PPDescriptor
     [SerializeField]
     string[] description;
 
+	float _timeRemainingScouting;
+	int _scoutingSlotIndex;
 	[System.NonSerialized]
 	Dog linkedDog;
-	DogBreed _iBreed;
 
 	public static DogDescriptor Default() 
 	{
@@ -153,10 +171,60 @@ public class DogDescriptor : PPDescriptor
             };
 		return descriptor;
 	}
-
+		
 	public DogDescriptor(DogDatabase data) : base(data) 
 	{
 		// NOTHING
+	}
+
+	public void UpdateFromSave(PPGameSave save)
+	{
+		_timeRemainingScouting -= save.TimeInSecSinceLastSave;
+		if(_timeRemainingScouting < NONE_INT)
+		{
+			_timeRemainingScouting = NONE_INT;
+		}
+	}
+
+	public override bool Equals(object obj)
+	{
+		if(obj is DogDescriptor)
+		{
+			DogDescriptor other = obj as DogDescriptor;
+			return this.name == other.name && this.breed == other.breed && this.age == other.age;
+		}
+		else
+		{
+			return base.Equals(obj);
+		}
+	}
+
+	public override int GetHashCode()
+	{
+		return this.name.GetHashCode() + this.breed.GetHashCode() + this.age.GetHashCode();
+	}
+
+	public void HandleScoutingBegan(int slotIndex)
+	{
+		if(this.IsLinkedToDog)
+		{
+			linkedDog.SubscribeToScoutingTimerChange(updateTimeRemainingScouting);
+		}
+		this._scoutingSlotIndex = slotIndex;
+	}
+
+	public void HandleScoutingEnded()
+	{
+		if(this.IsLinkedToDog)
+		{
+			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
+		}
+		this._scoutingSlotIndex = NOT_FOUND_INT;
+	}
+
+	void updateTimeRemainingScouting(float timeRemainingScouting)
+	{
+		_timeRemainingScouting = timeRemainingScouting;
 	}
 
 	public void LinkToDog(Dog dog) 

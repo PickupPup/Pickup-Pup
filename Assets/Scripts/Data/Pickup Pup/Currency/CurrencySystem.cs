@@ -8,21 +8,32 @@ using System.Collections.Generic;
 [System.Serializable]
 public class CurrencySystem : PPData, ICurrencySystem
 {
+
+	const int DEFAULT_COINS = 2000;
+	const int DEFAULT_DOG_FOOD = 0;
+	const int DEFAULT_HOME_SLOTS = 10;
+
     #region Static Accessors
 
     public static CurrencySystem Default
     {
         get
         {
+			checkStartingValues();
             return new CurrencySystem(
-                new CoinsData(2000),
-                new DogFoodData(0),
-                new HomeSlotsData(10)
+				new CoinsData(startingCoins),
+				new DogFoodData(startingDogFood),
+				new HomeSlotsData(startingHomeSlots)
             );
         }
     }
 
     #endregion
+
+	static int startingCoins;
+	static int startingDogFood;
+	static int startingHomeSlots;
+	static bool startingValuesInitialized;
 
     #region ICurrencySystem Accessors
 
@@ -103,6 +114,11 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     #endregion
 
+	public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
+	{
+		return currencies.TryGetValue(type, out data);
+	}
+
     Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies)
     {
         Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
@@ -112,5 +128,33 @@ public class CurrencySystem : PPData, ICurrencySystem
         }
         return lookup;
     }
+
+	static void checkStartingValues()
+	{
+		if(!startingValuesInitialized)
+		{
+			PPGameController game = PPGameController.GetInstance;
+			bool initFromTuning = false;
+			if(game)
+			{
+				PPTuning tuning = game.Tuning;
+				if(tuning != null)
+				{
+					startingCoins = tuning.StartingCoins;
+					startingDogFood = tuning.StartingDogFood;
+					startingHomeSlots = tuning.StartingHomeSlots;
+					initFromTuning = true;
+				}
+			}
+			// Fail safe method in case PPGameControlelr is not initialized yet
+			if(!initFromTuning)
+			{
+				startingCoins = DEFAULT_COINS;
+				startingDogFood = DEFAULT_DOG_FOOD;
+				startingHomeSlots = DEFAULT_HOME_SLOTS;
+			}
+			startingValuesInitialized = true;
+		}
+	}
 
 }

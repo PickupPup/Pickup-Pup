@@ -9,6 +9,8 @@ public class PPUIController : MonoBehaviourExtended
 {
     protected PPSceneController sceneController;
     protected PPGameController gameController;
+    protected PPDataController dataController;
+
     protected DogProfile dogProfile;
     protected Dog selectedDog;
 
@@ -31,6 +33,7 @@ public class PPUIController : MonoBehaviourExtended
 		base.fetchReferences();
 		sceneController = PPSceneController.Instance;
 		gameController = PPGameController.GetInstance;
+		dataController = PPDataController.GetInstance;
     }
 
 	protected override void subscribeEvents()

@@ -32,7 +32,7 @@ public class PPShelterUIController : PPUIController
         for (int i = 0; i < dogs.Length; i++)
         {
             DogDescriptor dog = dogs[i];
-            availableDogPortraits[i].Init(dog, database.GetDogBreedSprite(dog.Breed));
+			availableDogPortraits[i].Init(dog, database.GetDogSprite(dog));
         }
     }
 

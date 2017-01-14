@@ -13,7 +13,7 @@ public class Dog : MobileObjectBehaviour
 	{
 		get 
 		{
-			return RemainingTimeScouting > 0;
+			return RemainingTimeScouting > 0 && scoutingTimer.IsRunning;
 		}
 	}
 
@@ -29,6 +29,14 @@ public class Dog : MobileObjectBehaviour
 			{
 				return default(float);
 			}
+		}
+	}
+
+	public float TotalTimeToReturn
+	{
+		get
+		{
+			return Info.TotalTimeToReturn;
 		}
 	}
 
@@ -87,6 +95,14 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public int ScoutingIndex
+	{
+		get
+		{
+			return descriptor.ScoutingSlotIndex;
+		}
+	}
+
 	public bool HasSlot
 	{
 		get
@@ -102,7 +118,7 @@ public class Dog : MobileObjectBehaviour
 			return slot;
 		}
 	}
-		
+
 	#endregion
 
 	bool hasDescriptor 
@@ -111,6 +127,21 @@ public class Dog : MobileObjectBehaviour
 		{
 			return descriptor != null;
 		}
+	}
+
+	public void SetTimer(float newTime)
+	{
+		scoutingTimer.SetTimeRemaining(newTime, checkForEvents:true);
+	}
+
+	public void ResumeTimer()
+	{
+		scoutingTimer.Resume();
+	}
+
+	public void StopTimer()
+	{
+		scoutingTimer.Stop();
 	}
 
 	// Tracks how long the dog will be away from the house
@@ -218,6 +249,7 @@ public class Dog : MobileObjectBehaviour
 		if(HasScoutingTimer)
 		{
 			scoutingTimer.Init();
+			setupTimer(scoutingTimer);
 		}
 	}
 
@@ -236,16 +268,53 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public void SetGame(PPGameController game)
+	{
+		this.game = game;
+	}
+
 	public bool TrySendToScout()
 	{
 		if(!IsScouting && HasScoutingTimer) 
 		{
+			descriptor.HandleScoutingBegan(game.GetCurrentSlotIndex());
 			scoutingTimer.Begin();
-			return game.TrySendDogToScout(this);
+			int slotIndex;
+			bool wasSuccess = game.TrySendDogToScout(this, out slotIndex);
+			if(!wasSuccess)
+			{
+				descriptor.HandleScoutingEnded();
+			}
+			return wasSuccess;
 		} 
 		else 
 		{
 			return false;
+		}
+	}
+
+	public void GiveTimer(PPTimer timer)
+	{
+		this.scoutingTimer = timer;
+		setupTimer(timer);
+	}
+
+	void setupTimer(PPTimer timer)
+	{
+		timer.SubscribeToTimeChange(callOnScoutingTimerChange);
+		timer.SubscribeToTimeUp(callOnScountingTimerEnd);
+	}
+
+	public override bool Equals(object obj)
+	{
+		if(obj is Dog)
+		{
+			Dog other = obj as Dog;
+			return this.Info.Equals(other.Info);
+		}
+		else
+		{
+			return base.Equals(obj);
 		}
 	}
 

@@ -23,21 +23,27 @@ public class PPShopUIController : PPUIController
     protected override void setReferences()
     {
         base.setReferences();
+        EventController.Event(PPEvent.LoadShop);
         itemSlots = GetComponentsInChildren<ShopItemSlot>();
-        shop = ShopDatabase.Instance;
-        shop.Initialize();
-        items = shop.Items;
-        populateShop(items);
+
     }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        EventController.Event(PPEvent.LoadShop);
 
-        // Set Currency Displays
-        dogFoodDisplay.SetCurrency(gameController.DogFood);
-        coinDisplay.SetCurrency(gameController.Coins);
+        shop = ShopDatabase.Instance;
+        shop.Initialize();
+        items = shop.Items;
+        populateShop(items);
+		initializeDisplay();
+    }
+
+    void initializeDisplay()
+	{
+		// Set Currency Displays
+		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
+		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     #endregion
@@ -51,15 +57,9 @@ public class PPShopUIController : PPUIController
         }
     }
 
-    public void UpdateCurrencyDisplays()
-    {
-        // Have to set them a second time.
-        // Can we use an event for this within CurrencyDisplay?
-        dogFoodDisplay.SetCurrency(gameController.DogFood);
-        coinDisplay.SetCurrency(gameController.Coins);
-
-        coinDisplay.OnUpdate();
-        dogFoodDisplay.OnUpdate();
+    void Update(){
+		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
+		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     public void OnMenuClick()

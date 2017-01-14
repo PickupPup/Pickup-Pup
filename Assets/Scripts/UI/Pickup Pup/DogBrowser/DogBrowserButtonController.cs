@@ -10,7 +10,13 @@ public class DogBrowserButtonController : PPUIButtonController
 {	
 	#region Instance Accessors
 
-	public bool hasSelectedPage
+	public bool IsInitialized
+	{
+		get; 
+		private set;
+	}
+
+	public bool HasSelectedPage
 	{
 		get
 		{
@@ -68,7 +74,10 @@ public class DogBrowserButtonController : PPUIButtonController
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
-		setupButtons();
+		if(!IsInitialized)
+		{
+			setupButtons();
+		}
 	}
 
 	#endregion
@@ -85,7 +94,8 @@ public class DogBrowserButtonController : PPUIButtonController
 
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
-		if(hasSelectedPage)
+		checkReferences();
+		if(HasSelectedPage)
 		{
 			// Turn off the last page button 
 			selectedPageButton.Toggle();
@@ -95,6 +105,13 @@ public class DogBrowserButtonController : PPUIButtonController
 		{
 			selectedPageButton.Toggle();
 		}
+	}
+
+	public void Init(DogBrowser browser)
+	{
+		this.parentWindow = browser;
+		setupButtons();
+		IsInitialized = true;
 	}
 
 	void setupButtons()
@@ -110,6 +127,7 @@ public class DogBrowserButtonController : PPUIButtonController
 		}
 		pageBackwardButton.SubscribeToClick(parentWindow.PageBackward);
 		pageForwardButton.SubscribeToClick(parentWindow.PageForward);
+		IsInitialized = true;
 	}
 
 	// There are extra steps that do not need to be performed on init
@@ -170,7 +188,7 @@ public class DogBrowserButtonController : PPUIButtonController
 		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
 		parentWindow.RefreshPageInitChecks(pageButtons.Length);
 	}
-
+ 
 	public void HandleDogSlotClick(Dog dog)
 	{
 		if(onDogClick != null)

@@ -8,6 +8,9 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
+	protected bool referencesSet = false;
+	protected bool referencesFetched = false;
+
 	protected const int NONE_VALUE = 0;
 	protected const int INVALID_VALUE = -1;
 
@@ -22,13 +25,19 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 
 	void Awake() 
 	{
-		setReferences();
+		if(!referencesSet)
+		{
+			setReferences();
+		}
 		subscribeEvents();
 	}
 
 	void Start()
 	{
-		fetchReferences();
+		if(!referencesFetched)
+		{
+			fetchReferences();
+		}
 	}
 
 	void OnDestroy() 
@@ -43,7 +52,32 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		handleSceneLoaded(level);
 	}
 
+	void OnApplicationQuit()
+	{
+		handleGameQuit();
+	}
+
+	void OnApplicationPause(bool isPaused)
+	{
+		handleGameTogglePause(isPaused);
+
+		// iOS Does not produce calls to OnApplicationQuit, so treat all pauses as quit events
+		#if UNITY_IOS
+
+		if(isPaused)
+		{
+			handleGameQuit();
+		}
+
+		#endif
+	}
+
 	#endregion
+
+	public virtual void Destroy()
+	{
+		Destroy(gameObject);
+	}
 
 	// Value should only be null if you're setting a trigger
 	public bool QueryAnimator(AnimParam param, string key, object value = null) 
@@ -108,12 +142,24 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 
 	protected virtual void setReferences() 
 	{
-		// NOTHING
+		this.referencesSet = true;
 	}
 
 	protected virtual void fetchReferences() 
 	{
-		// NOTHING
+		this.referencesFetched = true;
+	}
+		
+	protected virtual void checkReferences()
+	{
+		if(!this.referencesSet)
+		{
+			this.setReferences();
+		}
+		if(!this.referencesFetched)
+		{
+			this.fetchReferences();
+		}
 	}
 
 	protected virtual void cleanupReferences() 
@@ -132,6 +178,16 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	protected virtual void handleGameTogglePause(bool isPaused)
+	{
+		// NOTHING
+	}
+
+	protected virtual void handleGameQuit()
+	{
+		// NOTHING
 	}
 
 	protected virtual void markForDestroyOnLoad() 
