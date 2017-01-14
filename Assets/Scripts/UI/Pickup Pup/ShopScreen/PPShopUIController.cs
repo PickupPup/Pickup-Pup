@@ -36,16 +36,14 @@ public class PPShopUIController : PPUIController
         shop.Initialize();
         items = shop.Items;
         populateShop(items);
-        StartCoroutine(initializeDisplay());
+		initializeDisplay();
     }
 
-    IEnumerator initializeDisplay(){
-
-        yield return new WaitForSeconds(0);
+    void initializeDisplay()
+	{
 		// Set Currency Displays
 		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
 		coinDisplay.Init(dataController, CurrencyType.Coins);
-
     }
 
     #endregion
