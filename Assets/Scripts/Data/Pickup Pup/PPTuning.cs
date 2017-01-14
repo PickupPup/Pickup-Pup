@@ -282,6 +282,31 @@ public class PPTuning : PPData
 		}
 	}
 
+	public int StartingCoins 
+	{
+		get 
+		{
+			return startingCoins;
+		}
+	}
+
+	public int StartingDogFood 
+	{
+		get 
+		{
+			return startingDogFood;
+		}
+
+	}
+
+	public int StartingHomeSlots
+	{
+		get 
+		{
+			return startingHomeSlots;
+		}
+	}
+
 	#endregion
 
 	#region JSON Fields
@@ -354,6 +379,12 @@ public class PPTuning : PPData
 	float chanceSpecialItemIsDog;
 	[SerializeField]
 	float chanceSpecialItemIsTubTub;
+	[SerializeField]
+	int startingCoins;
+	[SerializeField]
+	int startingDogFood;
+	[SerializeField]
+	int startingHomeSlots;
 
 	#endregion
 

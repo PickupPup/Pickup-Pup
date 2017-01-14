@@ -94,13 +94,20 @@ public class PPDataController : DataController, ICurrencySystem
 
 	#endregion
 
+	CurrencySystem currencies 
+	{
+		get 
+		{
+			return currentGame.Currencies;
+		}
+	}
+
 	[SerializeField]
 	bool saveOnApplicationPause;
 	[SerializeField]
 	bool saveOnApplicationQuit;
 
     PPGameSave currentGame;
-    CurrencySystem currencies;
 
 	MonoActionInt onCoinsChange;
 	MonoActionInt onFoodChange;
@@ -118,7 +125,6 @@ public class PPDataController : DataController, ICurrencySystem
     public PPGameSave LoadGame()
     {
         currentGame = Load() as PPGameSave;
-        currencies = currentGame.Currencies;
         return currentGame;
     }
 
