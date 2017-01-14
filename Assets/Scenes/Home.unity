@@ -913,6 +913,7 @@ GameObject:
   - component: {fileID: 230901137}
   - component: {fileID: 230901136}
   - component: {fileID: 230901135}
+  - component: {fileID: 230901138}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1024,6 +1025,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 230901133}
+--- !u!114 &230901138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230901133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791d65e69e5754dd69d828b80bcb26d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
 --- !u!1 &242617057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,6 +2292,7 @@ GameObject:
   - component: {fileID: 730388493}
   - component: {fileID: 730388492}
   - component: {fileID: 730388491}
+  - component: {fileID: 730388494}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -2390,6 +2404,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 730388489}
+--- !u!114 &730388494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 730388489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791d65e69e5754dd69d828b80bcb26d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
 --- !u!1 &751418890
 GameObject:
   m_ObjectHideFlags: 0

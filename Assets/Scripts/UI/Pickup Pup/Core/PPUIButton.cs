@@ -42,6 +42,7 @@ public class PPUIButton : PPUIElement
 	{
 		if(onClickAction != null)
 		{
+            EventController.Event("PlayMenuClick");
 			onClickAction();
 		}
 	}

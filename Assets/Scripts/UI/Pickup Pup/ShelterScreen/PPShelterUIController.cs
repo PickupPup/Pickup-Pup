@@ -41,6 +41,7 @@ public class PPShelterUIController : PPUIController
         if(gameController.TryAdoptDog(selectedDog.Info))
         {
             ((DogAdoptionSlot) selectedDog.OccupiedSlot).ShowAdopt();
+            EventController.Event("PlayAdopt");
             return true;
         }
         return false;

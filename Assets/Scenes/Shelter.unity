@@ -199,6 +199,16 @@ Prefab:
       propertyPath: dogProfileObject
       value: 
       objectReference: {fileID: 1414456318}
+    - target: {fileID: 114713051139108182, guid: 1de9a7bb5f44ff44faa1fda4841e3cd8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1744504087}
+    - target: {fileID: 114713051139108182, guid: 1de9a7bb5f44ff44faa1fda4841e3cd8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadHome
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1de9a7bb5f44ff44faa1fda4841e3cd8, type: 2}
   m_IsPrefabParent: 0
@@ -562,3 +572,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1744504087 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114567133989285116, guid: 6c18c567384a5444e8446d670695ec79,
+    type: 2}
+  m_PrefabInternal: {fileID: 1452551474}
+  m_Script: {fileID: 11500000, guid: 12aadcd26a63a4c5aba6db251a62d613, type: 3}
