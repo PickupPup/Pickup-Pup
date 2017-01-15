@@ -31,9 +31,9 @@ public class PPSceneController : SingletonController<PPSceneController>
 
 	#endregion
 
-	public void LoadStart() 
+	public void LoadMainMenu() 
 	{
-		LoadScene(PPScene.Start);
+		LoadScene(PPScene.MainMenu);
 	}
 
 	public void LoadHome() 
@@ -66,7 +66,7 @@ public class PPSceneController : SingletonController<PPSceneController>
 
 public enum PPScene 
 {
-	Start,
+	MainMenu,
 	Home,
     Shelter,
     Shop,

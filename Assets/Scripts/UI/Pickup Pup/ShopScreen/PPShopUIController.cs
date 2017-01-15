@@ -64,7 +64,7 @@ public class PPShopUIController : PPUIController
 
     public void OnMenuClick()
     {
-        sceneController.LoadHome();
+		sceneController.LoadMainMenu();
     }
 
     public void OnAdoptClick()

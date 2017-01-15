@@ -50,9 +50,9 @@ public class PPUIController : MonoBehaviourExtended
 
 	#endregion
 
-    public void LoadStart() 
+    public void LoadMainMenu() 
 	{
-		sceneController.LoadStart();
+		sceneController.LoadMainMenu();
 	}
 
 	public void LoadHome()
@@ -69,6 +69,11 @@ public class PPUIController : MonoBehaviourExtended
     {
         sceneController.LoadShop();
     }
+
+	public void LoadLivingRoom()
+	{
+		sceneController.LoadLivingRoom();
+	}
 
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
 	{
