@@ -451,7 +451,7 @@ public class AudioController : Controller, IAudioController
 	// Asynchronous loading to improve game load times
 	IEnumerator preloadAudioClip(AudioFile audioFile) 
 	{
-		ResourceRequest request = loader.GetClipAsync(audioFile.Name);
+		ResourceRequest request = loader.GetClipAsync(audioFile);
 		while(!request.isDone) 
 		{
 			if(audioFile.ClipIsSet()) 

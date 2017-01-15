@@ -1,19 +1,99 @@
 {
   "files" : [
     {
-      "name" : "test",
+      "name" : "MainMusic",
       "groups" : [
         "none"
       ],
       "events" : [
-        "PlayTest"
+        "PlayMainMusic"
       ],
       "stopEvents" : [
-        "StopTest"
+        "StopMainMusic"
       ],
       "loop" : true,
       "type" : "Music",
       "channel" : 0,
+      "volume" : 100
+    },
+    {
+      "name" : "MenuPopup",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayMenuPopup"
+      ],
+      "stopEvents" : [
+        "StopMenuPopup"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "MenuClick",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayMenuClick"
+      ],
+      "stopEvents" : [
+        "StopMenuClick"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "DogSendOut",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayDogSendOut"
+      ],
+      "stopEvents" : [
+        "StopDogSendOut"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "DogReturn",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayDogReturn"
+      ],
+      "stopEvents" : [
+        "StopDogReturn"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "Adopt",
+      "groups" : [
+        "none"
+      ],
+      "events" : [
+        "PlayAdopt"
+      ],
+      "stopEvents" : [
+        "StopAdopt"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
       "volume" : 100
     }
   ],

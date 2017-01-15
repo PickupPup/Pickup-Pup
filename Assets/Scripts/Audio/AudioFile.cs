@@ -44,7 +44,7 @@ public class AudioFile : AudioData, IAudioFile
 		get 
 		{
 			if(_clip == null) {
-				_clip = loader.GetClip(Name);
+				_clip = loader.GetClip(this);
 				callOnClipRequest();
 			}
 			return _clip;

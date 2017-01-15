@@ -47,7 +47,7 @@ public class DogBrowser : PPUIElement
 	Dog[] dogCollection;
 	bool[] pagesInitializedCheck;
 
-	#region MonoBehaviourExtended 
+	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences()
 	{
@@ -66,6 +66,11 @@ public class DogBrowser : PPUIElement
 	}
 
 	#endregion
+
+    void OnEnable()
+    {
+        EventController.Event("PlayMenuPopup");
+    }
 
 	public void Open(int pageIndex = NONE_VALUE)
 	{
@@ -148,7 +153,8 @@ public class DogBrowser : PPUIElement
 		
 	public void PageForward()
 	{
-		SwitchToPage(getPageForwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
+        EventController.Event("PlayMenuClick");
+        SwitchToPage(getPageForwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
 	}
 
 	int getPageForwardIndex(int currentPage)
@@ -158,7 +164,8 @@ public class DogBrowser : PPUIElement
 
 	public void PageBackward()
 	{
-		SwitchToPage(getPageBackwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
+        EventController.Event("PlayMenuClick");
+        SwitchToPage(getPageBackwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
 	}
 
 	int getPageBackwardIndex(int currentPage)

@@ -94,7 +94,7 @@ public class DogBrowserButtonController : PPUIButtonController
 
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
-		checkReferences();
+        checkReferences();
 		if(HasSelectedPage)
 		{
 			// Turn off the last page button 
@@ -193,6 +193,7 @@ public class DogBrowserButtonController : PPUIButtonController
 	{
 		if(onDogClick != null)
 		{
+            EventController.Event("PlayMenuClick");
 			onDogClick(dog);
 		}
 	}

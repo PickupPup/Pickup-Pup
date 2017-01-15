@@ -36,11 +36,18 @@ public class PPShelterUIController : PPUIController
         }
     }
 
+	// Need a void version in order to use w/ the Unity Event System (on a button click)
+	public void Adopt()
+	{
+		TryAdopt();
+	}
+
     public bool TryAdopt()
     {
         if(gameController.TryAdoptDog(selectedDog.Info))
         {
             ((DogAdoptionSlot) selectedDog.OccupiedSlot).ShowAdopt();
+            EventController.Event("PlayAdopt");
             return true;
         }
         return false;

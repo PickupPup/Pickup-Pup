@@ -354,13 +354,15 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void sendDogToScout(Dog dog) 
 	{
+        EventController.Event("PlayDogSendOut");
 		dogsOutScouting.Add(dog);
 		dog.SubscribeToScoutingTimerEnd(handleDogDoneScouting);
 	}
 
 	void handleDogDoneScouting(Dog dog) 
 	{
-		dogsOutScouting.Remove(dog);
+        EventController.Event("PlayDogReturn");
+        dogsOutScouting.Remove(dog);
 		// Need to unsubscribe to prevent stacking even subscriptions if dog is sent to scout again:
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
 	}
