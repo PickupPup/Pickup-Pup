@@ -8,6 +8,7 @@ using System.IO;
 using SimpleJSON;
 using UnityEngine;
 using System.Collections.Generic;
+using k = PPGlobal;
 
 [System.Serializable]
 public class SpritesheetDatabase : Database<SpritesheetDatabase>
@@ -31,7 +32,7 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 	{
 		get
 		{
-			return Path.Combine(JSON_DIR, SPRITES_DIR);
+			return Path.Combine(k.JSON_DIR, k.SPRITES_DIR);
 		}
 	}
 
@@ -43,7 +44,7 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 		base.Initialize();
 		TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
 		JSONNode json = JSON.Parse(jsonFile.text);
-		spriteLookup = initSpriteLookup(json[EXPORT]);
+		spriteLookup = initSpriteLookup(json[k.EXPORT]);
 	}
 
 	public bool TryGetSprite(string spriteName, out Sprite sprite)
@@ -57,10 +58,10 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 		Dictionary<string, Sprite> lookup = new Dictionary<string, Sprite>();
 		foreach(JSONNode sheet in json.Childs)
 		{
-			string sheetName = sheet[SHEET];
-			Sprite[] spriteSheet = Resources.LoadAll<Sprite>(Path.Combine(SPRITES_DIR, sheetName));
+			string sheetName = sheet[k.SHEET];
+			Sprite[] spriteSheet = Resources.LoadAll<Sprite>(Path.Combine(k.SPRITES_DIR, sheetName));
 			int index = 0;
-			foreach(JSONNode sprite in sheet[SPRITES_DIR].AsArray)
+			foreach(JSONNode sprite in sheet[k.SPRITES_DIR].AsArray)
 			{
 				lookup.Add(sprite, spriteSheet[index++]);
 			}

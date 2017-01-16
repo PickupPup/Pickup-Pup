@@ -6,11 +6,10 @@
 using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
+using k = PPGlobal;
 
 public class PPGameController : GameController, ICurrencySystem 
 {
-	const string JSON_DIR = "JSON";
-
 	#region Static Accessors
 
 	// Returns the Instance cast to the sublcass
@@ -28,7 +27,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		get
 		{
-			return Path.Combine(JSON_DIR, "Tuning");
+			return Path.Combine(k.JSON_DIR, k.TUNING);
 		}
 	}
 
@@ -36,7 +35,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		get 
 		{
-			return Path.Combine(JSON_DIR, "GameData");
+			return Path.Combine(k.JSON_DIR, k.GAME_DATA);
 		}
 	}
 
@@ -44,7 +43,7 @@ public class PPGameController : GameController, ICurrencySystem
     {
         get
         {
-            return Path.Combine(JSON_DIR, "ShopItems");
+			return Path.Combine(k.JSON_DIR, k.SHOP_ITEMS);
         }
     }
 
@@ -52,7 +51,7 @@ public class PPGameController : GameController, ICurrencySystem
     {
         get
         {
-            return Path.Combine(JSON_DIR, "GiftItems");
+			return Path.Combine(k.JSON_DIR, k.GIFT_ITEMS);
         }
     }
 
@@ -60,7 +59,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		get 
 		{
-			return Path.Combine(Application.persistentDataPath, "PickupPupSave.dat");
+			return Path.Combine(Application.persistentDataPath, k.SAVE_FILE);
 		}
 	}
 

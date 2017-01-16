@@ -4,11 +4,12 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 [System.Serializable]
 public class DogDescriptor : PPDescriptor 
 {
-	const float DEFAULT_TIME_TO_COLLECT = 10f;
+	const float DEFAULT_TIME_TO_COLLECT = k.DEFAULT_TIME_TO_COLLECT;
 
 	#region Instance Accessors
 

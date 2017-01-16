@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using k = PPGlobal;
 
 public class AudioLoader : ResourceLoader
 {
@@ -16,7 +17,7 @@ public class AudioLoader : ResourceLoader
 	{
 		get 
 		{
-			return new AudioLoader(defaultJSONPath, AUDIO_DIR);
+			return new AudioLoader(defaultJSONPath, k.AUDIO_DIR);
 		}
 	}
 
@@ -26,7 +27,7 @@ public class AudioLoader : ResourceLoader
 	{
 		get
 		{
-			return Path.Combine(JSON_DIR, "AudioList");
+			return Path.Combine(k.JSON_DIR, "AudioList");
 		}
 	}
 
@@ -56,7 +57,7 @@ public class AudioLoader : ResourceLoader
 
     void loadAudioFilenames()
     {
-        AudioClip[] audioClips = Resources.LoadAll<AudioClip>(AUDIO_DIR);
+        AudioClip[] audioClips = Resources.LoadAll<AudioClip>(k.AUDIO_DIR);
         foreach(AudioClip clip in audioClips)
         {
             if (!fileNames.Contains(clip.name))

@@ -6,6 +6,7 @@
 using UnityEngine;
 using System;
 using System.IO;
+using k = PPGlobal;
 
 [Serializable]
 public class ShopDatabase : Database<ShopDatabase>
@@ -21,7 +22,7 @@ public class ShopDatabase : Database<ShopDatabase>
             else
             {
                 // Memoization for efficiency
-                _defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
+                _defaultSprite = Resources.Load<Sprite>(Path.Combine(k.SPRITES_DIR, k.DEFAULT));
                 return _defaultSprite;
             }
         }
