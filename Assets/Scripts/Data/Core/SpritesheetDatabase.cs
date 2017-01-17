@@ -38,18 +38,21 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 	[System.NonSerialized]
 	Dictionary<string, Sprite> spriteLookup;
 
+    bool initialized;
+
 	public override void Initialize()
 	{
 		base.Initialize();
 		TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
 		JSONNode json = JSON.Parse(jsonFile.text);
 		spriteLookup = initSpriteLookup(json[EXPORT]);
+        initialized = true;
 	}
 
 	public bool TryGetSprite(string spriteName, out Sprite sprite)
-	{
-		checkSpriteBuffer();
-		return spriteLookup.TryGetValue(spriteName, out sprite);
+	{     
+        checkSpriteBuffer();
+        return spriteLookup.TryGetValue(spriteName, out sprite);
 	}
 		
 	Dictionary<string, Sprite> initSpriteLookup(JSONNode json)
@@ -72,8 +75,8 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 	{
 		if(spriteLookup == null)
 		{
-			spriteLookup = new Dictionary<string, Sprite>();
-		}
+            Initialize();
+        }
 	}
 
 }

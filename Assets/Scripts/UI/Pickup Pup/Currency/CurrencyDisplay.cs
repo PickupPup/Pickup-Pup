@@ -3,16 +3,24 @@
  * Description: Controls UI of Currency
  */
 
+using UnityEngine;
+using UnityEngine.UI;
+
 public class CurrencyDisplay : PPUIElement 
 {
+    [SerializeField]
+    Image iconImage;
+
 	CurrencyType type;
 	PPDataController dataController;
 
-    public void Init(PPDataController dataController, CurrencyType type)
+    public void Init(PPDataController dataController, CurrencyData currency)
 	{
 		unsubscribeEvents();
 		this.dataController = dataController;
-		this.type = type;
+
+		type = currency.Type;
+        iconImage.sprite = currency.Icon;
 		subscribeEvents();
 		switch(type)
 		{

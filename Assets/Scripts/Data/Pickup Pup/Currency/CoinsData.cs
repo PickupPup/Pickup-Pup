@@ -21,7 +21,9 @@ public class CoinsData : CurrencyData
     {
         get
         {
-            return base.Icon;
+            Sprite icon;
+            spriteDatabase.TryGetSprite("Coin", out icon);
+            return icon;
         }
     }
 

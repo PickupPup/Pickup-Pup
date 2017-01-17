@@ -37,8 +37,8 @@ public class PPLivingRoomUIController : PPUIController
         generateGift(gifts);
 
         // Display Updated Currency
-        dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
-        coinDisplay.Init(dataController, CurrencyType.Coins);
+        //dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
+        //coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     #endregion

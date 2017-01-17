@@ -21,7 +21,9 @@ public class DogFoodData : CurrencyData
     {
         get
         {
-            return base.Icon;
+            Sprite icon;
+            spriteDatabase.TryGetSprite("10_DogFood", out icon);
+            return icon;
         }
     }
 

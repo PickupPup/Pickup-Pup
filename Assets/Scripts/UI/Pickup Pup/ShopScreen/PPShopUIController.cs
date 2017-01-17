@@ -36,14 +36,6 @@ public class PPShopUIController : PPUIController
         shop.Initialize();
         items = shop.Items;
         populateShop(items);
-		initializeDisplay();
-    }
-
-    void initializeDisplay()
-	{
-		// Set Currency Displays
-		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
-		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     #endregion
@@ -55,11 +47,6 @@ public class PPShopUIController : PPUIController
             ShopItemSlot itemSlot = itemSlots[i];
             itemSlot.Init(this, items[i]);
         }
-    }
-
-    void Update(){
-		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
-		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     public void OnMenuClick()

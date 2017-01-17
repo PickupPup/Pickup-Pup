@@ -8,7 +8,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class CurrencySystem : PPData, ICurrencySystem
 {
-
 	const int DEFAULT_COINS = 2000;
 	const int DEFAULT_DOG_FOOD = 0;
 	const int DEFAULT_HOME_SLOTS = 10;

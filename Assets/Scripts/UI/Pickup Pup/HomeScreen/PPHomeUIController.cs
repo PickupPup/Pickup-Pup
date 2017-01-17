@@ -19,9 +19,6 @@ public class PPHomeUIController : PPUIController
 	{
 		base.fetchReferences();
 		EventController.Event(PPEvent.LoadHome);
-        // Set Currency Displays
-		dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
-		coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
 	#endregion
