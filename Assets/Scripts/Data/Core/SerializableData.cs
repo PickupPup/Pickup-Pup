@@ -3,15 +3,17 @@
  * Description: Abstract data class
  */
 
+using k = PPGlobal;
+
 [System.Serializable]
 public abstract class SerializableData 
 {
-	protected const string CURRENCY = "Currency";
-	protected const string ADOPTED = "Adopted";
-	protected const string SCOUTING = "Scouting";
-	protected const string TIME_STAMP = "TimeStamp";
+	protected const string CURRENCY = k.CURRENCY;
+	protected const string ADOPTED = k.ADOPTED;
+	protected const string SCOUTING = k.SCOUTING;
+	protected const string TIME_STAMP = k.TIME_STAMP;
 
-	const float FULL_PERCENT = 100f;
+	const float FULL_PERCENT = k.FULL_PERCENT;
 
 	protected float percentToDecimal(int percent)
 	{

@@ -8,8 +8,6 @@ using UnityEngine;
 [System.Serializable]
 public class DogDescriptor : PPDescriptor 
 {
-	const float DEFAULT_TIME_TO_COLLECT = 10f;
-
 	#region Instance Accessors
 
 	public bool IsLinkedToDog 
