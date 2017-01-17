@@ -5,7 +5,7 @@
 
 using UnityEngine;
 
-public class CurrencyPanel : SingletonController<PPUIElement>
+public class CurrencyPanel : SingletonController<CurrencyPanel>
 {
     [SerializeField]
     CurrencyDisplay coinsDisplay;
