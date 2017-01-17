@@ -4,15 +4,8 @@
  * Description: Controls the home screen
  */
 
-using UnityEngine;
-
 public class PPHomeUIController : PPUIController 
 {
-	[SerializeField]
-    CurrencyDisplay dogFoodDisplay;
-	[SerializeField]
-    CurrencyDisplay coinDisplay;
-
 	#region MonoBehaviourExtended Overrides
 
     protected override void fetchReferences() 

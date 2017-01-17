@@ -3,25 +3,56 @@
  * Description: Controls the display of multiple currencies on the Currency Panel
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrencyPanel : PPUIElement
+public class CurrencyPanel : SingletonController<PPUIElement>
 {
     [SerializeField]
-    CurrencyDisplay coinDisplay;
+    CurrencyDisplay coinsDisplay;
     [SerializeField]
     CurrencyDisplay dogFoodDisplay;
 
-    protected override void fetchReferences()
+    PPDataController dataController;
+
+    public void Init(PPDataController dataController)
     {
-        base.fetchReferences();
-        PPDataController dataController = PPDataController.GetInstance;
+        unsubscribeEvents();
+        this.dataController = dataController;
+        subscribeEvents();
 
         // Display Updated Currency
         dogFoodDisplay.Init(dataController, dataController.DogFood);
-        coinDisplay.Init(dataController, dataController.Coins);
+        coinsDisplay.Init(dataController, dataController.Coins);    
+    }
+
+    protected override void subscribeEvents()
+    {
+        base.subscribeEvents();
+        if(dataController)
+        {
+            dataController.SubscribeToCoinsChange(updateCoinsDisplay);
+            dataController.SubscribeToFoodChange(updateDogFoodDisplay);
+        }
+    }
+
+    protected override void unsubscribeEvents()
+    {
+        base.unsubscribeEvents();
+        if(dataController)
+        {
+            dataController.UnsubscribeFromCoinsChange(updateCoinsDisplay);
+            dataController.UnsubscribeFromFoodChange(updateDogFoodDisplay);
+        }
+    }
+
+    void updateCoinsDisplay(int newAmount)
+    {
+        coinsDisplay.updateAmount(newAmount);
+    }
+
+    void updateDogFoodDisplay(int newAmount)
+    {
+        dogFoodDisplay.updateAmount(newAmount);
     }
 
 }

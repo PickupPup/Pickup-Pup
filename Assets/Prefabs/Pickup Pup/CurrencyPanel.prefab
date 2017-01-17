@@ -44,7 +44,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1075700926621268
 GameObject:
   m_ObjectHideFlags: 1
@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 223175067898752338}
   - component: {fileID: 114305068144021568}
   - component: {fileID: 114293991735831520}
+  - component: {fileID: 114529120888782602}
   m_Layer: 5
   m_Name: CurrencyPanel
   m_TagString: Untagged
@@ -694,12 +695,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 760, y: 1334}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -917,6 +918,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114529120888782602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388646525770112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415433a26f816df47ad36158ee0246f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  coinsDisplay: {fileID: 114748189097721202}
+  dogFoodDisplay: {fileID: 114997765694934880}
 --- !u!114 &114637444103017340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -989,6 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+  iconImage: {fileID: 114437580356616522}
 --- !u!114 &114804406772249282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1293,6 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+  iconImage: {fileID: 114278535726864470}
 --- !u!222 &222075174207056932
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1430,7 +1447,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &224011393740670474
 RectTransform:
@@ -1761,7 +1778,7 @@ RectTransform:
   m_GameObject: {fileID: 1084400446327282}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.42803597, y: 0.42803597, z: 0.42803597}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224900804115513876}
   - {fileID: 224659772495038526}
@@ -1771,10 +1788,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 190.5, y: -32.18828}
-  m_SizeDelta: {x: 890.1121, y: 149.4}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 150}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224843104778158104
 RectTransform:
   m_ObjectHideFlags: 1

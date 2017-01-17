@@ -3,17 +3,8 @@
  * Description: Controls the shop screen
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PPShopUIController : PPUIController
 {
-    [SerializeField]
-    CurrencyDisplay dogFoodDisplay;
-    [SerializeField]
-    CurrencyDisplay coinDisplay;
-
     ShopItem[] items;
     ShopItemSlot[] itemSlots;
     ShopDatabase shop;
@@ -25,7 +16,6 @@ public class PPShopUIController : PPUIController
         base.setReferences();
         EventController.Event(PPEvent.LoadShop);
         itemSlots = GetComponentsInChildren<ShopItemSlot>();
-
     }
 
     protected override void fetchReferences()

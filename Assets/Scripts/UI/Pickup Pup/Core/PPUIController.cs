@@ -16,6 +16,8 @@ public class PPUIController : MonoBehaviourExtended
 
     [SerializeField]
     GameObject dogProfileObject;
+    [SerializeField]
+    CurrencyPanel currencyPanel;
 
     #region MonoBehaviourExtended Overrides
 
@@ -34,6 +36,8 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController = PPSceneController.Instance;
 		gameController = PPGameController.GetInstance;
 		dataController = PPDataController.GetInstance;
+
+        setCurrencyPanel();
     }
 
 	protected override void subscribeEvents()
@@ -106,6 +110,11 @@ public class PPUIController : MonoBehaviourExtended
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
         }
         dogProfile.SetProfile(dog);
+    }
+
+    void setCurrencyPanel()
+    {
+        currencyPanel.Init(dataController);
     }
 
 }

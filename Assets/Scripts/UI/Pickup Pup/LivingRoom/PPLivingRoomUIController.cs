@@ -8,10 +8,6 @@ using UnityEngine;
 public class PPLivingRoomUIController : PPUIController
 {
     [SerializeField]
-    CurrencyDisplay dogFoodDisplay;
-    [SerializeField]
-    CurrencyDisplay coinDisplay;
-    [SerializeField]
     RedeemDisplay rDisplay;
 
     GiftItem[] gifts;
@@ -35,10 +31,6 @@ public class PPLivingRoomUIController : PPUIController
         giftBase.Initialize();
         gifts = giftBase.Gifts;
         generateGift(gifts);
-
-        // Display Updated Currency
-        //dogFoodDisplay.Init(dataController, CurrencyType.DogFood);
-        //coinDisplay.Init(dataController, CurrencyType.Coins);
     }
 
     #endregion
