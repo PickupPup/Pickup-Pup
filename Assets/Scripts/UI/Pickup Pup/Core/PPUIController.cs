@@ -18,6 +18,8 @@ public class PPUIController : MonoBehaviourExtended
     GameObject dogProfileObject;
     [SerializeField]
     CurrencyPanel currencyPanel;
+    [SerializeField]
+    NavigationPanel navigationPanel;
 
     #region MonoBehaviourExtended Overrides
 
@@ -115,6 +117,11 @@ public class PPUIController : MonoBehaviourExtended
     void setCurrencyPanel()
     {
         currencyPanel.Init(dataController);
+    }
+
+    void setNavigationPanel(bool showAdoptButton)
+    {
+        navigationPanel.showAdoptButton(showAdoptButton);
     }
 
 }
