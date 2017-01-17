@@ -5,14 +5,15 @@
 
 using UnityEngine;
 using System.Collections;
+using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
 
-	protected const int NONE_VALUE = 0;
-	protected const int INVALID_VALUE = -1;
+	protected const int NONE_VALUE = k.NONE_VALUE;
+	protected static int INVALID_VALUE = k.INVALID_VALUE; 
 
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float monoFloat);

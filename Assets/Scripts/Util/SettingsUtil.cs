@@ -4,13 +4,14 @@
 */
 using UnityEngine;
 using System.Collections;
+using k = Global;
 
 public static class SettingsUtil 
 {	
 	// Keys used to acccess the settings from player prefs
-	const string musicMuteSettingsKey = "musicMute";
-	const string fxMuteSettingsKey = "fxMute";
-	const string voMuteSettingsKey = "voMute";
+	const string musicMuteSettingsKey = k.MUSIC_MUTE;
+	const string fxMuteSettingsKey = k.FX_MUTE;
+	const string voMuteSettingsKey = k.VO_MUTE;
 
 	#region Static Accessors
 
