@@ -5,7 +5,6 @@
 
 using System.IO;
 using UnityEngine;
-using k = PPGlobal;
 
 [System.Serializable]
 public class CurrencyData : ResourceLoader
@@ -32,7 +31,7 @@ public class CurrencyData : ResourceLoader
     {
         get
         {
-            return Resources.Load<Sprite>(Path.Combine(k.SPRITES_DIR, k.DEFAULT));
+            return Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
         }
     }
 

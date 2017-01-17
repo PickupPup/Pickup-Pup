@@ -6,7 +6,6 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using k = PPGlobal;
 
 public class ScoutingReportUI : UIElement 
 {	
@@ -52,8 +51,6 @@ public class ScoutingReportUI : UIElement
 [System.Serializable]
 public class ScoutingReport : PPData
 {
-	const string REPORT_FORMAT = k.REPORT_FORMAT;
-
 	public DogDescriptor Dog{get; private set;}
 	public CurrencyData Currency{get; private set;}
 

@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using k = PPGlobal;
 
 [System.Serializable]
 public class DogDatabase : Database<DogDatabase> 
@@ -36,7 +35,7 @@ public class DogDatabase : Database<DogDatabase>
 			else 
 			{
                 // Memoization for efficiency
-				_defaultSprite = Resources.Load<Sprite>(Path.Combine(k.SPRITES_DIR, k.DEFAULT));
+				_defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
 				return _defaultSprite;
 			}
 		}
@@ -48,7 +47,7 @@ public class DogDatabase : Database<DogDatabase>
 	{
 		get
 		{
-			TextAsset json = Resources.Load<TextAsset>(Path.Combine(k.JSON_DIR, k.GAME_DATA));
+			TextAsset json = Resources.Load<TextAsset>(Path.Combine(JSON_DIR, GAME_DATA));
 			return json.text;
 		}
 	}
@@ -163,7 +162,7 @@ public class DogDatabase : Database<DogDatabase>
 		
 	string getSpriteName(DogDescriptor dog)
 	{
-		return string.Format("{0}{1}{2}", dog.BreedName, k.JOIN_CHAR, dog.Color);
+		return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
 	}
 
 	public override bool TryInit()

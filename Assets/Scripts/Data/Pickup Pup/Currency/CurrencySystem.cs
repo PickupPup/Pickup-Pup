@@ -4,15 +4,10 @@
  */
 
 using System.Collections.Generic;
-using k = PPGlobal;
 
 [System.Serializable]
 public class CurrencySystem : PPData, ICurrencySystem
 {
-	const int DEFAULT_COINS = k.DEFAULT_COINS;
-	const int DEFAULT_DOG_FOOD = k.DEFAULT_DOG_FOOD;
-	const int DEFAULT_HOME_SLOTS = k.DEFAULT_HOME_SLOTS;
-
     #region Static Accessors
 
     public static CurrencySystem Default

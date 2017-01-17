@@ -5,7 +5,6 @@
 
 using UnityEngine;
 using System.IO;
-using k = PPGlobal;
 
 [System.Serializable]
 public class GiftDatabase : Database<GiftDatabase>
@@ -21,7 +20,7 @@ public class GiftDatabase : Database<GiftDatabase>
             else
             {
                 // Memoization for efficiency
-                _defaultSprite = Resources.Load<Sprite>(Path.Combine(k.SPRITES_DIR, k.GIFTS_DIR));
+                _defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, GIFTS_DIR));
                 return _defaultSprite;
             }
         }
