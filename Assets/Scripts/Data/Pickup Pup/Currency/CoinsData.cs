@@ -22,9 +22,7 @@ public class CoinsData : CurrencyData
     {
         get
         {
-            Sprite icon;
-            spriteDatabase.TryGetSprite(k.COIN_ICON, out icon);
-            return icon;
+			return fetchSprite(k.COIN_ICON);
         }
     }
 
