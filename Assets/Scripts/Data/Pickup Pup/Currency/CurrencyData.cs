@@ -31,24 +31,35 @@ public class CurrencyData : ResourceLoader
     {
         get
         {
+            return DefaultSprite;
+        }
+    }
+
+    public Sprite DefaultSprite
+    {
+        get
+        {
             return Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, DEFAULT));
         }
     }
 
     #endregion
 
+    protected SpritesheetDatabase spriteDatabase;
     protected CurrencyType type;
     protected int amount = 0;
 
     public CurrencyData(CurrencyType type, int initialAmount)
     {
+        spriteDatabase = SpritesheetDatabase.GetInstance;
+
         this.type = type;
         amount = initialAmount;
     }
 
     protected CurrencyData(int initialAmount)
     {
-        // NOTHING
+        spriteDatabase = SpritesheetDatabase.GetInstance;
     }
 
     public virtual void IncreaseBy(int deltaAmount)
@@ -60,5 +71,21 @@ public class CurrencyData : ResourceLoader
     {
         return amount >= cost;
     }
+
+	void checkDatabaseReferences()
+	{
+		if(spriteDatabase == null)
+		{
+			spriteDatabase = SpritesheetDatabase.GetInstance;
+		}
+	}
+
+	protected Sprite fetchSprite(string spriteName)
+	{
+		checkDatabaseReferences();
+		Sprite icon;
+		spriteDatabase.TryGetSprite(spriteName, out icon);
+		return icon;
+	}
 
 }

@@ -48,8 +48,8 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 
 	public bool TryGetSprite(string spriteName, out Sprite sprite)
 	{
-		checkSpriteBuffer();
-		return spriteLookup.TryGetValue(spriteName, out sprite);
+        checkSpriteBuffer();
+        return spriteLookup.TryGetValue(spriteName, out sprite);
 	}
 		
 	Dictionary<string, Sprite> initSpriteLookup(JSONNode json)
@@ -72,8 +72,8 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 	{
 		if(spriteLookup == null)
 		{
-			spriteLookup = new Dictionary<string, Sprite>();
-		}
+            Initialize();
+        }
 	}
 
 }
