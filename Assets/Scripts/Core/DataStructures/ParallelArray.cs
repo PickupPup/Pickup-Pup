@@ -68,7 +68,6 @@ public class ParallelArray<T, K>
 
 	public Dictionary<K, T> ToReverseDict() 
 	{
-
 		Dictionary<K, T> dict = new Dictionary<K, T>();
 		foreach(DataPair<T, K> pair in data) 
 		{
