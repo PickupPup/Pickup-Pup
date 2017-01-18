@@ -12,6 +12,10 @@ public class LanguageDatabase : Database<LanguageDatabase>
 {
 	string[] wordKeys;
 
+	public override void Initialize()
+	{
+		base.Initialize();
+	}
 
 }
 
@@ -36,7 +40,21 @@ public class Language : SerializableData
 	public Language(string languageName, ParallelArray<string, string> terms)
 	{
 		this.languageName = languageName;
-		// TODO: Parse paralell array to dict:
+		this.wordLookup = terms.ToDict();
+	}
+		
+	public string Get(string key) 
+	{
+		string value;
+		if(wordLookup.TryGetValue(key, out value))
+		{
+			return value;
+		}
+		else 
+		{
+			UnityEngine.Debug.LogErrorFormat("Key {0} not found in language", key);
+			return string.Empty;
+		}
 	}
 		
 }

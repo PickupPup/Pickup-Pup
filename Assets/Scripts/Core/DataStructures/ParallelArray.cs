@@ -4,8 +4,8 @@
  * Usage: [no notes]
  */
 
-// TODO: Implement method to parse a paralell array into a dict
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class ParallelArray<T, K>
@@ -47,6 +47,41 @@ public class ParallelArray<T, K>
 	public void Set(int index, T first, K second)
 	{
 		data[index] = new DataPair<T, K>(first, second);
+	}
+
+	public Dictionary<T, K> ToDict()
+	{
+		Dictionary<T, K> dict = new Dictionary<T, K>();
+		foreach(DataPair<T, K> pair in data) 
+		{
+			if(dict.ContainsKey(pair.First)) 
+			{
+				continue;
+			}
+			else 
+			{
+				dict.Add(pair.First, pair.Second);
+			}
+		}
+		return dict;
+	}
+
+	public Dictionary<K, T> ToReverseDict() 
+	{
+
+		Dictionary<K, T> dict = new Dictionary<K, T>();
+		foreach(DataPair<T, K> pair in data) 
+		{
+			if(dict.ContainsKey(pair.Second)) 
+			{
+				continue;
+			}
+			else 
+			{
+				dict.Add(pair.Second, pair.First);
+			}
+		}
+		return dict;
 	}
 
 	DataPair<T, K>[] generatePairs(T[] first, K[] second)
