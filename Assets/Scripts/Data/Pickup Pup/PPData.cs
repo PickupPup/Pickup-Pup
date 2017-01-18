@@ -6,17 +6,23 @@
 using System;
 using System.Globalization;
 using UnityEngine;
+using k = PPGlobal;
 
 [Serializable]
 public abstract class PPData 
 {
-	protected const string BLACK_HEX = "#000000";
-	protected const int NONE_INT = 0;
-	protected const int NOT_FOUND_INT = -1;
+	protected const string BLACK_HEX = k.BLACK_HEX;
+	protected const string REPORT_FORMAT = k.REPORT_FORMAT;
+	protected const int NONE_INT = k.NONE_VALUE;
+	protected const int NOT_FOUND_INT = k.INVALID_VALUE;
+	protected const int DEFAULT_COINS = k.DEFAULT_COINS;
+	protected const int DEFAULT_DOG_FOOD = k.DEFAULT_DOG_FOOD;
+	protected const int DEFAULT_HOME_SLOTS = k.DEFAULT_HOME_SLOTS;
+	protected const float DEFAULT_TIME_TO_COLLECT = k.DEFAULT_TIME_TO_COLLECT;
 
-	const string HEX_HASH_PREFIX = "#";
-	const string HEX_NUM_PREFIX = "0x";
-	const int CORRECT_HEX_NUM_LENGTH = 6;
+	const string HEX_HASH_PREFIX = k.HEX_HASH_PREFIX;
+	const string HEX_NUM_PREFIX = k.HEX_NUM_PREFIX;
+	const int CORRECT_HEX_NUM_LENGTH = k.CORRECT_HEX_NUM_LENGTH;
 
 	public delegate void DataAction();
 	public delegate void DataActionf(float value);
