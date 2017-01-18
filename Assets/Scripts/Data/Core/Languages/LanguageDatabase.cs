@@ -15,6 +15,12 @@ public class LanguageDatabase : Database<LanguageDatabase>
 	public override void Initialize()
 	{
 		base.Initialize();
+		JSONNode json = getJSONFromResources(LANGUAGES);
+	}
+
+	void populateLanguages(JSONNode json)
+	{
+		// JSONNode supportedJSON = json[
 	}
 
 }

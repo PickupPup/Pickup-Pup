@@ -4,6 +4,9 @@
  */
 
 using k = PPGlobal;
+using UnityEngine;
+using SimpleJSON;
+using System.IO;
 
 [System.Serializable]
 public class ResourceLoader 
@@ -17,7 +20,31 @@ public class ResourceLoader
 	protected const string EXPORT = k.EXPORT;
 	protected const string SHEET = k.SHEET;
 	protected const string TUNING = k.TUNING;
+	protected const string LANGUAGES = k.LANGUAGES;
+	protected const string SUPPORTED_LANGUAGES = k.SUPPORTED_LANGUAGS;
+	protected const string LANGUAGE_NAME = k.LANGUAGE_NAME;
 
 	protected const char JOIN_CHAR = k.JOIN_CHAR;
+
+	protected T loadFromResources<T>(string path) where T : UnityEngine.Object
+	{
+		return Resources.Load<T>(path);
+	}
+
+	protected string getTextFromResources(string path)
+	{
+		return loadFromResources<TextAsset>(path).text;
+	}
+
+	protected JSONNode getJSONFromResources(string fileName)
+	{
+		string jsonText = getTextFromResources(getJSONPathInResources(fileName));
+		return JSON.Parse(jsonText);
+	}
+
+	protected string getJSONPathInResources(string fileName)
+	{
+		return Path.Combine(JSON_DIR, fileName);
+	}
 
 }

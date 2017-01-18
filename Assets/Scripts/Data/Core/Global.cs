@@ -21,6 +21,14 @@ public class Global
 	public const string MUSIC_MUTE = "musicMute";
 	public const string FX_MUTE = "fxMute";
 	public const string VO_MUTE = "voMute";
+	public const string LANGUAGES = "Languages";
+	public const string LOOKUP = "Lookup";
+	public const string SUPPORTED = "Supported";
+	public const string SUPPORTED_LANGUAGS = SUPPORTED + LANGUAGES;
+	public const string KEY = "Key";
+	public const string LANGUAGE = "Language";
+	public const string NAME = "Name";
+	public const string LANGUAGE_NAME = LANGUAGE + NAME;
 
 	public const char JOIN_CHAR = '_';
 
