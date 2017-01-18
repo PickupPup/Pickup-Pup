@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 [System.Serializable]
 public class CoinsData : CurrencyData
@@ -22,7 +23,7 @@ public class CoinsData : CurrencyData
         get
         {
             Sprite icon;
-            spriteDatabase.TryGetSprite("Coin", out icon);
+            spriteDatabase.TryGetSprite(k.COIN_ICON, out icon);
             return icon;
         }
     }

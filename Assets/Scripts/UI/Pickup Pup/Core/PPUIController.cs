@@ -114,7 +114,10 @@ public class PPUIController : MonoBehaviourExtended
 
     void setCurrencyPanel()
     {
-        currencyPanel.Init(dataController);
+        if (currencyPanel)
+        {
+            currencyPanel.Init(dataController);
+        }
     }
 
 }

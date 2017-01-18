@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 [System.Serializable]
 public class DogFoodData : CurrencyData
@@ -22,7 +23,7 @@ public class DogFoodData : CurrencyData
         get
         {
             Sprite icon;
-            spriteDatabase.TryGetSprite("10_DogFood", out icon);
+            spriteDatabase.TryGetSprite(k.DOG_FOOD_ICON, out icon);
             return icon;
         }
     }
