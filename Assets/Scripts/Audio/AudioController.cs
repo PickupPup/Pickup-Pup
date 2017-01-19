@@ -10,6 +10,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using k = PPGlobal;
 
 public class AudioController : Controller, IAudioController
 {
@@ -42,6 +43,7 @@ public class AudioController : Controller, IAudioController
 	string customJSONPath;
 	[SerializeField]
 	string customAudioPath;
+	int musicVolume = k.FULL_VOLUME;
 
 	bool coroutinesActive = true;
 
@@ -109,6 +111,11 @@ public class AudioController : Controller, IAudioController
 	}
 
 	#endregion
+
+	public void SetMusicVolume(int volume)
+	{
+		this.musicVolume = volume;
+	}
 
 	public void Play(AudioFile file) 
 	{
