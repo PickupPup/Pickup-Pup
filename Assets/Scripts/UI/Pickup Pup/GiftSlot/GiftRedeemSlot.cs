@@ -1,6 +1,6 @@
 ﻿/*
  * Author: James Hostetler
- * Description: Controls a GiftSlot on the Livingroom & Yard scene.
+ * Description: Controls a GiftSlot on the Living Room & Yard scene.
  */
 
 using UnityEngine;
@@ -24,11 +24,14 @@ public class GiftRedeemSlot : GiftSlot
 
     #endregion
 	
-    //Leads to Redeem Display. Turns off GiftSlot.
+    // Leads to Redeem Display. Turns off GiftSlot.
     public void Redeem()
     {
-        room.RedeemGift(this.gift);
-        gameObject.SetActive(false);
+        if (room)
+        {
+            room.RedeemGift(this.gift);
+            gameObject.SetActive(false);
+        }
     }
 
 }
