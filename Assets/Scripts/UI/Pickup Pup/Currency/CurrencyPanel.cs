@@ -14,21 +14,12 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
     PPDataController dataController;
 
-    public void Init(PPDataController dataController)
-    {
-        unsubscribeEvents();
-        this.dataController = dataController;
-        subscribeEvents();
-
-        // Display Updated Currency
-        dogFoodDisplay.Init(dataController, dataController.DogFood);
-        coinsDisplay.Init(dataController, dataController.Coins);    
-    }
+    #region MonoBehaviourExtended Overrides
 
     protected override void subscribeEvents()
     {
         base.subscribeEvents();
-        if(dataController)
+        if (dataController)
         {
             dataController.SubscribeToCoinsChange(updateCoinsDisplay);
             dataController.SubscribeToFoodChange(updateDogFoodDisplay);
@@ -38,11 +29,24 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     protected override void unsubscribeEvents()
     {
         base.unsubscribeEvents();
-        if(dataController)
+        if (dataController)
         {
             dataController.UnsubscribeFromCoinsChange(updateCoinsDisplay);
             dataController.UnsubscribeFromFoodChange(updateDogFoodDisplay);
         }
+    }
+
+    #endregion
+
+    public void Init(PPDataController dataController)
+    {
+        unsubscribeEvents();
+        this.dataController = dataController;
+        subscribeEvents();
+
+        // Display Updated Currency
+        dogFoodDisplay.Init(dataController, dataController.DogFood);
+        coinsDisplay.Init(dataController, dataController.Coins);    
     }
 
     void updateCoinsDisplay(int newAmount)

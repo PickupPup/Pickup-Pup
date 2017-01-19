@@ -72,4 +72,20 @@ public class CurrencyData : ResourceLoader
         return amount >= cost;
     }
 
+	void checkDatabaseReferences()
+	{
+		if(spriteDatabase == null)
+		{
+			spriteDatabase = SpritesheetDatabase.GetInstance;
+		}
+	}
+
+	protected Sprite fetchSprite(string spriteName)
+	{
+		checkDatabaseReferences();
+		Sprite icon;
+		spriteDatabase.TryGetSprite(spriteName, out icon);
+		return icon;
+	}
+
 }
