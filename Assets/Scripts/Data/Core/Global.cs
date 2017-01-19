@@ -21,6 +21,11 @@ public class Global
 	public const string MUSIC_MUTE = "musicMute";
 	public const string FX_MUTE = "fxMute";
 	public const string VO_MUTE = "voMute";
+	public const string OFF = "Off";
+	public const string ON = "On";
+	public const string VOLUME = "Volume";
+	public const string MUSIC = "Music";
+	public const string MUSIC_VOLUME = MUSIC + VOLUME;
 
 	public const char JOIN_CHAR = '_';
 
@@ -28,5 +33,33 @@ public class Global
 	public const int CORRECT_HEX_NUM_LENGTH = 6;
 	public const int NONE_VALUE = 0;
 	public const int INVALID_VALUE = -1;
+	public const int TRUE_VALUE_INT = 1;
+	public const int FALSE_VALUE_INT = NONE_VALUE;
+
+	public static bool IntToBool(int value)
+	{
+		switch(value)
+		{
+			case TRUE_VALUE_INT:
+				return true;
+			case FALSE_VALUE_INT:
+				return false;
+			default:
+				return value > FALSE_VALUE_INT;
+		}
+	}
+
+	public static int BoolToInt(bool value)
+	{
+		switch(value)
+		{
+			case true:
+				return TRUE_VALUE_INT;
+			case false:
+				return FALSE_VALUE_INT;
+			default:
+				return default(int);	
+		}
+	}
 
 }
