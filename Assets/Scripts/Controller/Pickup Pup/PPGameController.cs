@@ -150,6 +150,7 @@ public class PPGameController : GameController, ICurrencySystem
 	DogDatabase dogDatabase;
     ShopDatabase shop;
 	GiftDatabase gifts;
+	LanguageDatabase languages;
 	PPDataController dataController;
 	PPGiftController giftController;
 	DogSlot targetSlot;
@@ -163,6 +164,8 @@ public class PPGameController : GameController, ICurrencySystem
         shop = parseShopDatabase();
 		gifts = parseGiftDatabase();
 		tuning = parseTuning();
+		languages = LanguageDatabase.Instance;
+		languages.Initialize();
 		dogDatabase.Initialize();
         shop.Initialize();
 		gifts.Initialize();

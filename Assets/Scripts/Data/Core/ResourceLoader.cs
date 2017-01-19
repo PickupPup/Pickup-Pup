@@ -23,6 +23,9 @@ public class ResourceLoader
 	protected const string LANGUAGES = k.LANGUAGES;
 	protected const string SUPPORTED_LANGUAGES = k.SUPPORTED_LANGUAGS;
 	protected const string LANGUAGE_NAME = k.LANGUAGE_NAME;
+	protected const string SUPPORTED = k.SUPPORTED;
+	protected const string LOOKUP = k.LOOKUP;
+	protected const string KEY = k.KEY;
 
 	protected const char JOIN_CHAR = k.JOIN_CHAR;
 
