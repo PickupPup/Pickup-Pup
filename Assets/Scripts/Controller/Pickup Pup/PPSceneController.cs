@@ -56,6 +56,11 @@ public class PPSceneController : SingletonController<PPSceneController>
         LoadScene(PPScene.LivingRoom);
     }
 
+    public void LoadYard()
+    {
+        LoadScene(PPScene.Yard);
+    }
+
     public void LoadScene(PPScene scene) 
 	{
 		dataController.SaveGame();
@@ -71,5 +76,6 @@ public enum PPScene
     Shelter,
     Shop,
     LivingRoom,
+    Yard,
 
 }

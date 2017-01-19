@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 [System.Serializable]
 public class CoinsData : CurrencyData
@@ -21,7 +22,7 @@ public class CoinsData : CurrencyData
     {
         get
         {
-            return base.Icon;
+			return fetchSprite(k.COIN_ICON);
         }
     }
 

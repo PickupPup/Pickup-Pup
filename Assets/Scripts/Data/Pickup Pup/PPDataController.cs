@@ -225,7 +225,7 @@ public class PPDataController : DataController, ICurrencySystem
         onFoodChange += foodAction;
     }
 
-    public void UnsubscribeToFoodChange(MonoActionInt foodAction)
+    public void UnsubscribeFromFoodChange(MonoActionInt foodAction)
     {
         onFoodChange -= foodAction;
     }
@@ -235,7 +235,7 @@ public class PPDataController : DataController, ICurrencySystem
         onHomeSlotsChange += HomeSlotsAction;
     }
 
-    public void UnsubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
+    public void UnsubscribeFromHomeSlotsChange(MonoActionInt HomeSlotsAction)
     {
         onHomeSlotsChange -= HomeSlotsAction;
     }
