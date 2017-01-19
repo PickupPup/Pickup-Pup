@@ -68,6 +68,7 @@ public class PPUIController : MonoBehaviourExtended
 
     public void LoadShelter()
     {
+        setNavigationPanel(false);
         sceneController.LoadShelter();
     }
 
@@ -124,7 +125,10 @@ public class PPUIController : MonoBehaviourExtended
 
     void setNavigationPanel(bool showAdoptButton)
     {
-        navigationPanel.showAdoptButton(showAdoptButton);
+        if (navigationPanel)
+        {
+            navigationPanel.showAdoptButton(showAdoptButton);
+        }
     }
 
 }
