@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 224928932809396022}
   - component: {fileID: 222578299948653582}
   - component: {fileID: 114413521669646586}
+  - component: {fileID: 114719961228325572}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -427,6 +428,7 @@ GameObject:
   - component: {fileID: 224471738723615108}
   - component: {fileID: 222664840119727960}
   - component: {fileID: 114931981595279462}
+  - component: {fileID: 114001411593152896}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1291,6 +1293,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114001411593152896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381943084498276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1945e61310a44818cbc244d455c848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  termKey: Menu
 --- !u!114 &114001988430379436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3409,6 +3424,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114719961228325572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129914672624750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1945e61310a44818cbc244d455c848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  termKey: Adopt
 --- !u!114 &114731705647109624
 MonoBehaviour:
   m_ObjectHideFlags: 1

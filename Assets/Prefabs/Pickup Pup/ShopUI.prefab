@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 224539382954045794}
   - component: {fileID: 222865241839236244}
   - component: {fileID: 114112608630061966}
+  - component: {fileID: 114771640087741294}
   m_Layer: 5
   m_Name: AdoptButtonText
   m_TagString: Untagged
@@ -789,6 +790,7 @@ GameObject:
   - component: {fileID: 224630836736074734}
   - component: {fileID: 222999455899601632}
   - component: {fileID: 114993340582170170}
+  - component: {fileID: 114563914095637008}
   m_Layer: 5
   m_Name: MenuButtonText
   m_TagString: Untagged
@@ -1660,6 +1662,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Price
+--- !u!114 &114563914095637008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952147194136146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1945e61310a44818cbc244d455c848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  termKey: Menu
 --- !u!114 &114581555579614438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1868,6 +1883,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114771640087741294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349761535349408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1945e61310a44818cbc244d455c848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  termKey: Adopt
 --- !u!114 &114781696941842374
 MonoBehaviour:
   m_ObjectHideFlags: 1

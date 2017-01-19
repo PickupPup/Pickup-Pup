@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 224104535360760110}
   - component: {fileID: 222044532283652560}
   - component: {fileID: 114117444400080530}
+  - component: {fileID: 114071430846968762}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -712,6 +713,23 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Price
+--- !u!114 &114071430846968762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971501267686872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de5a280723a546c2a76f31fbc0b5a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  joinString: ' '
+  termKey:
+  - Adopt
+  - A
+  - Dog
 --- !u!114 &114112064732197148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -752,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
