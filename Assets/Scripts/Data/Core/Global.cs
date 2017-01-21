@@ -24,7 +24,7 @@ public class Global
 	public const string LANGUAGES = "Languages";
 	public const string LOOKUP = "Lookup";
 	public const string SUPPORTED = "Supported";
-	public const string SUPPORTED_LANGUAGS = SUPPORTED + LANGUAGES;
+	public const string SUPPORTED_LANGUAGES = SUPPORTED + LANGUAGES;
 	public const string KEY = "Key";
 	public const string LANGUAGE = "Language";
 	public const string NAME = "Name";

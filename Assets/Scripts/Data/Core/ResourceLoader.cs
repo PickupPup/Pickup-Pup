@@ -21,7 +21,7 @@ public class ResourceLoader
 	protected const string SHEET = k.SHEET;
 	protected const string TUNING = k.TUNING;
 	protected const string LANGUAGES = k.LANGUAGES;
-	protected const string SUPPORTED_LANGUAGES = k.SUPPORTED_LANGUAGS;
+	protected const string SUPPORTED_LANGUAGES = k.SUPPORTED_LANGUAGES;
 	protected const string LANGUAGE_NAME = k.LANGUAGE_NAME;
 	protected const string SUPPORTED = k.SUPPORTED;
 	protected const string LOOKUP = k.LOOKUP;
