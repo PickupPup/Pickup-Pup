@@ -13,22 +13,39 @@ public class DogAdoptProfile : DogProfile
     [SerializeField]
     Button adoptButton;
 
+    Color defaultPriceColor;
+    Color overpricedColor = Color.red;
+
+    #region MonoBehaviourExtended Overrides
+
     protected override void setReferences()
     {
         base.setReferences();
-        rehomeButton.interactable = false;
-        collarSlot.interactable = false;
+        iconsObject.SetActive(false);
+        defaultPriceColor = priceText.color;
     }
+
+    #endregion
+
+    #region DogProfile Overrides
 
     public override void SetProfile(Dog dog)
     {
         base.SetProfile(dog);
         priceText.text = dogInfo.CostToAdoptStr;
+
+        checkReferences();
+
+        if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
+        {
+            priceText.color = overpricedColor;
+        }
+        else
+        {
+            priceText.color = defaultPriceColor;
+        }
     }
 
-    public void TryAdopt()
-    {
-        game.TryAdoptDog(dogInfo);
-    }
+    #endregion
 
 }

@@ -14,8 +14,7 @@ public class DogProfile : PPUIElement
     Text nameText;
     [SerializeField]
     Text breedText;
-    [SerializeField]
-    Text[] descriptionText;
+    Text[] descriptionText; 
 
     [SerializeField]
     Image dogThumbnail;
@@ -26,10 +25,14 @@ public class DogProfile : PPUIElement
     GameObject leftArrow;
     [SerializeField]
     GameObject rightArrow;
+    [SerializeField]
+    UIElement[] descriptionFields; // Normal description must come first (not special)
 
     [SerializeField]
     UIButton closeWindowHitArea;
 
+    [SerializeField]
+    protected GameObject iconsObject;
     [SerializeField]
     protected Button rehomeButton;
     [SerializeField]
@@ -38,6 +41,17 @@ public class DogProfile : PPUIElement
     protected DogDescriptor dogInfo;
 
     #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+
+        descriptionText = new Text[descriptionFields.Length];
+        for(int i = 0; i < descriptionText.Length; i++)
+        {
+            descriptionText[i] = descriptionFields[i].GetComponentInChildren<Text>();
+        }
+    }
 
     protected override void subscribeEvents()
     {
@@ -53,11 +67,16 @@ public class DogProfile : PPUIElement
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-        for(int i = 0; i < dogInfo.Descriptions.Length; i++)
+        for(int i = 0; i < descriptionText.Length; i++)
         {
-            if (i < descriptionText.Length)
+            if (i < dogInfo.Descriptions.Length)
             {
+                descriptionFields[i].Show();
                 descriptionText[i].text = dogInfo.Descriptions[i];
+            }
+            else
+            {
+                descriptionFields[i].Hide();
             }
         }
 
