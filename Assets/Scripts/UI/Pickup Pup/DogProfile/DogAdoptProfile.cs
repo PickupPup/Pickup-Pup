@@ -34,10 +34,8 @@ public class DogAdoptProfile : DogProfile
         base.SetProfile(dog);
         priceText.text = dogInfo.CostToAdoptStr;
 
-        if(!game)
-        {
-            fetchReferences();
-        }
+        checkReferences();
+
         if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
         {
             priceText.color = overpricedColor;

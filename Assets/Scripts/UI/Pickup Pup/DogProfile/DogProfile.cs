@@ -26,7 +26,7 @@ public class DogProfile : PPUIElement
     [SerializeField]
     GameObject rightArrow;
     [SerializeField]
-    GameObject[] descriptionFields; // Normal description must come first (not special)
+    UIElement[] descriptionFields; // Normal description must come first (not special)
 
     [SerializeField]
     UIButton closeWindowHitArea;
@@ -71,12 +71,12 @@ public class DogProfile : PPUIElement
         {
             if (i < dogInfo.Descriptions.Length)
             {
-                descriptionFields[i].gameObject.SetActive(true);
+                descriptionFields[i].Show();
                 descriptionText[i].text = dogInfo.Descriptions[i];
             }
             else
             {
-                descriptionFields[i].gameObject.SetActive(false);
+                descriptionFields[i].Hide();
             }
         }
 
