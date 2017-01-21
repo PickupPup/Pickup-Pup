@@ -11,7 +11,10 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     CurrencyDisplay coinsDisplay;
     [SerializeField]
     CurrencyDisplay dogFoodDisplay;
+	[SerializeField]
+	UIElement giftTimerDisplay;
 
+	PPTimer dailyGiftTimer;
     PPDataController dataController;
 
     #region MonoBehaviourExtended Overrides
@@ -38,7 +41,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
     #endregion
 
-    public void Init(PPDataController dataController)
+    public void Init(PPGameController gameController, PPDataController dataController)
     {
         unsubscribeEvents();
         this.dataController = dataController;
@@ -46,8 +49,31 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
         // Display Updated Currency
         dogFoodDisplay.Init(dataController, dataController.DogFood);
-        coinsDisplay.Init(dataController, dataController.Coins);    
+        coinsDisplay.Init(dataController, dataController.Coins);
+		initDailyGiftCountdown(gameController.Tuning, dataController);
     }
+
+	void initDailyGiftCountdown(PPTuning tuning, PPDataController dataController)
+	{
+		float dailyGiftCountdown;
+		if(dataController.DailyGiftCountdownRunning)
+		{
+			dailyGiftCountdown = dataController.DailyGiftCountdown;
+		}
+		else
+		{
+			dailyGiftCountdown = tuning.WaitTimeSecsForDailyGift;
+		}
+		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
+		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
+		dataController.StartDailyGiftCountdown(dailyGiftTimer);
+		dailyGiftTimer.Begin();
+	}
+		
+	void handleDailyGiftCountDownChange(float timeRemaining)
+	{
+		giftTimerDisplay.SetText(dailyGiftTimer.TimeRemainingStr);
+	}
 
     void updateCoinsDisplay(int newAmount)
     {

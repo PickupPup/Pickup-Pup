@@ -64,6 +64,22 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+	public float DailyGiftCountdown
+	{
+		get
+		{
+			return currentGame.DailyGiftCountdown;
+		}
+	}
+
+	public bool DailyGiftCountdownRunning
+	{
+		get
+		{
+			return DailyGiftCountdown > NONE_VALUE;
+		}
+	}
+
     #region ICurrencySystem Accessors
 
     public CoinsData Coins
@@ -331,6 +347,11 @@ public class PPDataController : DataController, ICurrencySystem
     }
 
     #endregion
+
+	public void StartDailyGiftCountdown(PPTimer timer)
+	{
+		currentGame.StartDailyGiftCountdown(timer);
+	}
 
 	bool tryCallCurrencyChangeAmount(CurrencyType type, int newAmount)
 	{

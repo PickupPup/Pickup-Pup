@@ -307,6 +307,22 @@ public class PPTuning : PPData
 		}
 	}
 
+	public float WaitTimeSecsForDailyGift
+	{
+		get 
+		{
+			return waitTimeSecsForDailyGift;
+		}
+	}
+
+	public float DefaultTimerTimeStepSec
+	{
+		get 
+		{
+			return defaultTimerTimeStepSec;
+		}
+	}
+
 	#endregion
 
 	#region JSON Fields
@@ -385,6 +401,10 @@ public class PPTuning : PPData
 	int startingDogFood;
 	[SerializeField]
 	int startingHomeSlots;
+	[SerializeField]
+	float waitTimeSecsForDailyGift;
+	[SerializeField]
+	float defaultTimerTimeStepSec;
 
 	#endregion
 

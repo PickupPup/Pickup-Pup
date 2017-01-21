@@ -29,6 +29,13 @@ public class PPGameSave : GameSave, ISerializable
         get;
         private set;
     }
+		
+	// In seconds:
+	public float DailyGiftCountdown
+	{
+		get;
+		private set;
+	}
 
 	#endregion
 
@@ -52,6 +59,12 @@ public class PPGameSave : GameSave, ISerializable
 			dog.UpdateFromSave(this);
 		}
 		this.Currencies = info.GetValue(CURRENCY, typeof(CurrencySystem)) as CurrencySystem;
+		this.DailyGiftCountdown = (float) info.GetValue(DAILY_GIFT_COUNTDOWN, typeof(float));
+		this.DailyGiftCountdown -= TimeInSecSinceLastSave;
+		if(this.DailyGiftCountdown < 0)
+		{
+			this.DailyGiftCountdown = 0;
+		}
 	}
 		
 	// Implement this method to serialize data. The method is called on serialization.
@@ -61,6 +74,7 @@ public class PPGameSave : GameSave, ISerializable
 		info.AddValue(ADOPTED, this.AdoptedDogs);
 		info.AddValue(SCOUTING, this.ScoutingDogs);
 		info.AddValue(CURRENCY, this.Currencies);
+		info.AddValue(DAILY_GIFT_COUNTDOWN, this.DailyGiftCountdown);
 	}
 
 	#endregion
@@ -72,6 +86,16 @@ public class PPGameSave : GameSave, ISerializable
 			ScoutingDogs.Add(dog.Info);
 			dog.SubscribeToScoutingTimerEnd(handleDogFinishedScouting);
 		}
+	}
+
+	public void StartDailyGiftCountdown(PPTimer timer)
+	{
+		timer.SubscribeToTimeChange(updateDailyGiftCountdown);
+	}
+
+	void updateDailyGiftCountdown(float timeRemaining)
+	{
+		this.DailyGiftCountdown = timeRemaining;
 	}
 
 	void handleDogFinishedScouting(Dog dog)

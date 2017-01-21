@@ -165,8 +165,9 @@ GameObject:
   - component: {fileID: 222772830705733926}
   - component: {fileID: 114637444103017340}
   - component: {fileID: 114804406772249282}
+  - component: {fileID: 114681110028622312}
   m_Layer: 5
-  m_Name: TimeAmount
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,7 +362,7 @@ GameObject:
   - component: {fileID: 222560819595870694}
   - component: {fileID: 114808999184062944}
   m_Layer: 5
-  m_Name: TimeAmount (1)
+  m_Name: Buttonheader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -929,9 +930,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415433a26f816df47ad36158ee0246f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternateSprites: []
   coinsDisplay: {fileID: 114748189097721202}
   dogFoodDisplay: {fileID: 114997765694934880}
+  giftTimerDisplay: {fileID: 114681110028622312}
 --- !u!114 &114637444103017340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -965,6 +966,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2:30:13
+--- !u!114 &114681110028622312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377921338825438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
 --- !u!114 &114681274725467782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1575,7 +1588,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224780577278048722}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1703,8 +1716,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224357121895715298}
   - {fileID: 224820241617946900}
+  - {fileID: 224357121895715298}
   m_Father: {fileID: 224609788372452216}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1763,7 +1776,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224780577278048722}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}

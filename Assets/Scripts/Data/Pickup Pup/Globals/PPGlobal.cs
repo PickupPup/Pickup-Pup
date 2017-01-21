@@ -13,6 +13,10 @@ public class PPGlobal : Global
 	public const string SCOUTING = "Scouting";
 	public const string TIME_STAMP = "TimeStamp";
 	public const string REPORT_FORMAT = "{0} brought you {1} {2}";
+	public const string DAILY = "Daily";
+	public const string GIFT = "Gift";
+	public const string COUNTDOWN = "Countdown";
+	public const string DAILY_GIFT_COUNTDOWN = DAILY + GIFT + COUNTDOWN;
 
     public const string COIN_ICON = "Coin";
     public const string DOG_FOOD_ICON = "10_DogFood";

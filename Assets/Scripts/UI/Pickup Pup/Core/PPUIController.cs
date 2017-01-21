@@ -119,7 +119,7 @@ public class PPUIController : MonoBehaviourExtended
     {
         if (currencyPanel)
         {
-            currencyPanel.Init(dataController);
+			currencyPanel.Init(gameController, dataController);
         }
     }
 
