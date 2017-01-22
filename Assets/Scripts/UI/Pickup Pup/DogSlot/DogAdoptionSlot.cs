@@ -15,14 +15,14 @@ public class DogAdoptionSlot : DogSlot
 
     #region DogSlot Overrides
 
-    public override void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+    public override void Init(DogDescriptor dog, Sprite dogSprite)
     {
-        base.Init(dog, dogSprite, backgroundSprite);
+        base.Init(dog, dogSprite);
 
         priceOrAdoptionStatus = GetComponentInChildren<Text>();
         priceOrAdoptionStatus.text = dog.CostToAdoptStr;
 
-        priceBackgroundImage = images[2];
+        priceBackgroundImage = images[1];
     }
 
     #endregion
