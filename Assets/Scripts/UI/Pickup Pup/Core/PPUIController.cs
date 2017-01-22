@@ -61,11 +61,6 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController.LoadMainMenu();
 	}
 
-	public void LoadHome()
-	{
-		sceneController.LoadHome();
-	}
-
     public void LoadShelter()
     {
         setNavigationPanel(false);
