@@ -22,7 +22,10 @@ public class ShopItemSlot : PPUIElement
     {
         this.shop = shop;
         this.item = item;
-        nameText.text = item.ItemName;
+        if (nameText)
+        {
+            nameText.text = item.ItemName;
+        }
         priceText.text = item.CostStr;
         // TODO: Set item Image
     }
