@@ -77,6 +77,11 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController.LoadLivingRoom();
 	}
 
+    public void LoadYard()
+    {
+        sceneController.LoadYard();
+    }
+
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
