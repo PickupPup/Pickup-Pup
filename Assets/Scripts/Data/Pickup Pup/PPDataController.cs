@@ -323,6 +323,16 @@ public class PPDataController : DataController, ICurrencySystem
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
         currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+        CurrencyData costData;
+        if (currencies.TryGetCurrency(costCurrencyType, out costData))
+        {
+            tryCallCurrencyChangeAmount(costCurrencyType, costData.Amount);
+        }
+        CurrencyData valueData;
+        if (currencies.TryGetCurrency(valueCurrencyType, out valueData))
+        {
+            tryCallCurrencyChangeAmount(valueCurrencyType, valueData.Amount);
+        }
     }
 
     public bool CanAfford(CurrencyType type, int amount)
