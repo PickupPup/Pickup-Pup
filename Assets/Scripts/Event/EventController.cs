@@ -152,7 +152,6 @@ public class EventController : SingletonController<EventController>
 			}
 		}
 	}
-		
 
 	public static void Event(string valueKey, float value) 
 	{

@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Author: Isaiah Mann, Grace Barrett-Snyder
  * Description: Used to store tuning variables
  */
 
@@ -9,6 +9,14 @@ using UnityEngine;
 public class PPTuning : PPData 
 {
 	#region Instance Acessors
+
+    public string AdoptText
+    {
+        get
+        {
+            return adoptText;
+        }
+    }
 
 	public float ChanceOfSecondary
 	{
@@ -65,6 +73,22 @@ public class PPTuning : PPData
 			return dailyNumberOfNewDogsAtShelter;
 		}
 	}
+
+    public Color DefaultBackgroundColor
+    {
+        get
+        {
+            return getColor(defaultBackgroundColorRGBA);
+        }
+    }
+
+    public Color DefaultTextColor
+    {
+        get
+        {
+            return getColor(defaultTextColorRGBA);
+        }
+    }
 
 	public int MinDogsToUnlockCollar
 	{
@@ -319,11 +343,7 @@ public class PPTuning : PPData
     {
         get
         {
-            if(adoptedTextColor == null)
-            {
-                adoptedTextColor = getColor(adoptedTextColorRGBA);
-            }
-            return adoptedTextColor;
+            return getColor(adoptedTextColorRGBA);
         }
     }
 
@@ -331,11 +351,7 @@ public class PPTuning : PPData
     {
         get
         {
-            if (adoptedBackgroundColor == null)
-            {
-                adoptedBackgroundColor = getColor(adoptedBackgroundColorRGBA);
-            }
-            return adoptedBackgroundColor;
+            return getColor(adoptedBackgroundColorRGBA);
         }
     }
 
@@ -343,11 +359,7 @@ public class PPTuning : PPData
     {
         get
         {
-            if (unaffordableTextColor == null)
-            {
-                unaffordableTextColor = getColor(unaffordableTextColorRGBA);
-            }
-            return unaffordableTextColor;
+            return getColor(unaffordableTextColorRGBA);
         }
     }
 
@@ -369,6 +381,10 @@ public class PPTuning : PPData
 	int dailyCoinBonus;
 	[SerializeField]
 	int dailyNumberOfNewDogsAtShelter;
+    [SerializeField]
+    int[] defaultBackgroundColorRGBA;
+    [SerializeField]
+    int[] defaultTextColorRGBA;
 	[SerializeField]
 	int minDogsToUnlockCollar;
 	[SerializeField]
@@ -430,6 +446,8 @@ public class PPTuning : PPData
 	[SerializeField]
 	int startingHomeSlots;
     [SerializeField]
+    string adoptText;
+    [SerializeField]
     string adoptedText;
     [SerializeField]
     int[] adoptedTextColorRGBA;
@@ -440,13 +458,24 @@ public class PPTuning : PPData
 
     #endregion
 
-    Color adoptedTextColor;
-    Color adoptedBackgroundColor;
-    Color unaffordableTextColor;
-
     Color getColor(int[] rgba)
     {
+        return getColor(convertColorValues(rgba));
+    }
+
+    Color getColor(float[] rgba)
+    {
         return new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
+    }
+
+    float[] convertColorValues(int[] rgba)
+    {
+        float[] convertedValues = new float[rgba.Length];
+        for(int i = 0; i < rgba.Length; i++)
+        {
+            convertedValues[i] = rgba[i] / 255f;
+        }
+        return convertedValues;
     }
 
 }

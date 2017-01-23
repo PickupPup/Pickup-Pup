@@ -14,18 +14,22 @@ public class DogAdoptionSlot : DogSlot
     Image priceBackgroundImage;
     Text priceOrAdoptionStatus;
 
-    Color adoptedColor = Color.red;
-    Color unaffordableColor = Color.red;
-    Color adoptedTextColor = Color.white;
-
     PPDataController dataController;
+    PPTuning tuning;
 
     #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+        priceOrAdoptionStatus = GetComponentInChildren<Text>();
+    }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
         dataController = PPDataController.GetInstance;
+        tuning = game.Tuning;
     }
 
     protected override void subscribeEvents()
@@ -55,31 +59,62 @@ public class DogAdoptionSlot : DogSlot
         unsubscribeEvents();
         base.Init(dog, dogSprite);
         subscribeEvents();
-
-        priceOrAdoptionStatus = GetComponentInChildren<Text>();
-        priceOrAdoptionStatus.text = dog.CostToAdoptStr;
-        iconHolder.Show();
-
+        
         checkReferences();
-        updateTextColor(game.Coins.Amount);
+        if(checkAdopted())
+        {
+            ShowAdopt();
+        }
+        else
+        {
+            ShowDefault();
+            updateTextColor(game.Coins.Amount);
+        }
     }
 
     #endregion
 
+    bool checkAdopted()
+    {
+        return PPDataController.GetInstance.CheckAdopted(dogInfo);
+    }
+
     public void ShowAdopt()
     {
-        priceOrAdoptionStatus.text = "ADOPTED";
-        priceOrAdoptionStatus.color = adoptedTextColor;
-        priceBackgroundImage.color = adoptedColor;
-        iconHolder.Hide();
+        setComponents(tuning.AdoptedText, tuning.AdoptedTextColor, tuning.AdoptedBackgroundColor, false);
         unsubscribeEvents();
+    }
+
+    public void ShowDefault()
+    {
+        setComponents(dogInfo.CostToAdoptStr, tuning.DefaultTextColor, tuning.DefaultBackgroundColor, true);
+    }
+
+    void setComponents(string priceOrAdoptionText, Color priceOrAdoptionTextColor, 
+        Color priceBackgroundColor, bool showIconHolder)
+    {
+        priceOrAdoptionStatus.text = priceOrAdoptionText;
+        priceOrAdoptionStatus.color = priceOrAdoptionTextColor;
+        priceBackgroundImage.color = priceBackgroundColor;
+        if (showIconHolder)
+        {
+            iconHolder.Show();
+        }
+        else
+        {
+            iconHolder.Hide();
+        }
     }
 
     void updateTextColor(int amount)
     {
         if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
         {           
-            priceOrAdoptionStatus.color = unaffordableColor;
+            priceOrAdoptionStatus.color = tuning.UnaffordableTextColor;
+        }
+        else
+        {
+            priceOrAdoptionStatus.color = tuning.DefaultTextColor;
         }
     }
 

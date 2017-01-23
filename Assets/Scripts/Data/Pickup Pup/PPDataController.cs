@@ -282,6 +282,11 @@ public class PPDataController : DataController, ICurrencySystem
         SaveGame();
     }
 
+    public bool CheckAdopted(DogDescriptor dog)
+    {
+        return AdoptedDogs.Contains(dog);
+    }
+
     #region ICurrencySystem Interface
 
 	public void ChangeCoins(int deltaCoins) 
