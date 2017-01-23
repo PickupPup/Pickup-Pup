@@ -17,6 +17,8 @@ public class DogAdoptProfile : DogProfile
     [SerializeField]
     UIElement costField;
 
+    PPTuning tuning;
+
     Color defaultPriceColor;
     Color overpricedColor = Color.red;
     Color adoptedTextColor = Color.white;
@@ -28,6 +30,12 @@ public class DogAdoptProfile : DogProfile
         base.setReferences();
         iconsObject.SetActive(false);
         defaultPriceColor = priceText.color;
+    }
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        tuning = game.Tuning;
     }
 
     #endregion
@@ -50,7 +58,7 @@ public class DogAdoptProfile : DogProfile
             checkReferences();
             if (!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
             {
-                priceText.color = overpricedColor;
+                priceText.color = tuning.UnaffordableTextColor;
             }
             else
             {
@@ -68,10 +76,10 @@ public class DogAdoptProfile : DogProfile
 
     void showAdopted()
     {
-        adoptButton.image.color = Color.red;
         adoptButton.interactable = false;
-        adoptButtonText.text = "ADOPTED";
-        adoptButtonText.color = adoptedTextColor;
+        adoptButton.image.color = tuning.AdoptedBackgroundColor;
+        adoptButtonText.text = tuning.AdoptedText;
+        adoptButtonText.color = tuning.AdoptedTextColor;
         costField.Hide();
     }
 

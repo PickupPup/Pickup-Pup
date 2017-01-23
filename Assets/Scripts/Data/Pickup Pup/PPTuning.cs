@@ -307,11 +307,55 @@ public class PPTuning : PPData
 		}
 	}
 
-	#endregion
+    public string AdoptedText
+    {
+        get
+        {
+            return adoptedText;
+        }
+    }
 
-	#region JSON Fields
+    public Color AdoptedTextColor
+    {
+        get
+        {
+            if(adoptedTextColor == null)
+            {
+                adoptedTextColor = getColor(adoptedTextColorRGBA);
+            }
+            return adoptedTextColor;
+        }
+    }
 
-	[SerializeField]
+    public Color AdoptedBackgroundColor
+    {
+        get
+        {
+            if (adoptedBackgroundColor == null)
+            {
+                adoptedBackgroundColor = getColor(adoptedBackgroundColorRGBA);
+            }
+            return adoptedBackgroundColor;
+        }
+    }
+
+    public Color UnaffordableTextColor
+    {
+        get
+        {
+            if (unaffordableTextColor == null)
+            {
+                unaffordableTextColor = getColor(unaffordableTextColorRGBA);
+            }
+            return unaffordableTextColor;
+        }
+    }
+
+    #endregion
+
+    #region JSON Fields
+
+    [SerializeField]
 	float chanceOfSecondary;
 	[SerializeField]
 	float chanceOfSpecialGift;
@@ -385,7 +429,24 @@ public class PPTuning : PPData
 	int startingDogFood;
 	[SerializeField]
 	int startingHomeSlots;
+    [SerializeField]
+    string adoptedText;
+    [SerializeField]
+    int[] adoptedTextColorRGBA;
+    [SerializeField]
+    int[] adoptedBackgroundColorRGBA;
+    [SerializeField]
+    int[] unaffordableTextColorRGBA;
 
-	#endregion
+    #endregion
+
+    Color adoptedTextColor;
+    Color adoptedBackgroundColor;
+    Color unaffordableTextColor;
+
+    Color getColor(int[] rgba)
+    {
+        return new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
+    }
 
 }
