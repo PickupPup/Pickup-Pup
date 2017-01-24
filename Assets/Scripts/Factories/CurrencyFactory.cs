@@ -9,40 +9,41 @@ using System.Reflection;
 
 public class CurrencyFactory : ObjectFactory<CurrencyData>
 {
+	const string CLASS_NAME_FORMAT = "{0}Data";
+
     // Expects: (string type, int amount, float percent (if discout))
     public override CurrencyData Create (params object[] args)
     {
-        CurrencyType type = Enum.Parse(typeof(CurrencyType), args[0].ToString());
+		string typeStr = args[0].ToString();
+		CurrencyType type = (CurrencyType) Enum.Parse(typeof(CurrencyType), typeStr);
         int amount = (int) args[1];
-        if(type)
+		if(type == CurrencyType.DogDiscount)
         {
-            return new 
+			return new DiscountData((float) args[2], amount);
         }
         else
         {
-            return new CurrencyData(type, amount);
+			Type currencyClassType = Type.GetType(getClassName(typeStr));
+			ConstructorInfo currencyConstructor = currencyClassType.GetConstructor(new Type[]
+				{
+					typeof(int)
+				});
+			return currencyConstructor.Invoke(new object[]
+				{
+					amount
+				}) as CurrencyData;
         }
     }
 
-    public CardMechanic GetMechanic (string json) {
-        JSONNode node = JSON.Parse(json);
-        string id = node[ID];
-        string variantType =  node[VARIANT];
-        MechanicType type = (MechanicType) Enum.Parse(typeof(MechanicType), node[TYPE]);
-        int delay = node[DELAY].AsInt;
-        int duration = node[DURATION].AsInt;
-        int power = node[POWER].AsInt;
-        string[] delegates = JSONToStringArray(node[DELEGATES].AsArray);
-        MechanicStats stats = new MechanicStats(id, type, delegates);
-        Type classType = Type.GetType(getClassName(variantType));
-        ConstructorInfo constructor = classType.GetConstructor(new Type[]{typeof(MechanicStats)});
-        return constructor.Invoke(new object[]{stats}) as CardMechanic;
-    }
-
-
+	string getClassName(string type)
+	{
+		return string.Format(CLASS_NAME_FORMAT, type);
+	}
+		
+	// Expects: (ParallelArray<string, int>, float percent (if the list includes discounts))
     public override CurrencyData[] CreateGroup (params object[] args)
     {
-        throw new System.NotImplementedException ();
+		throw new System.NotImplementedException();
     }
 
 }
