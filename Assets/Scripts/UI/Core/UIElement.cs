@@ -6,9 +6,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using k = PPGlobal;
 
 public class UIElement : MonoBehaviourExtended 
 {
+	protected const string OFF = k.OFF;
+	protected const string ON = k.ON;
+
 	#region Instance Accessors
 
 	public bool hasImage 

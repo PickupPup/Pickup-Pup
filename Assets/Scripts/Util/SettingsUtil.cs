@@ -9,9 +9,12 @@ using k = Global;
 public static class SettingsUtil 
 {	
 	// Keys used to acccess the settings from player prefs
-	const string musicMuteSettingsKey = k.MUSIC_MUTE;
-	const string fxMuteSettingsKey = k.FX_MUTE;
-	const string voMuteSettingsKey = k.VO_MUTE;
+	const string MUSIC_MUTE = k.MUSIC_MUTE;
+	const string FX_MUTE = k.FX_MUTE;
+	const string VO_MUTE = k.VO_MUTE;
+	const string MUSIC_VOLUME = k.MUSIC_VOLUME;
+
+	const int DEFAULT_VOLUME = k.FULL_VOLUME;
 
 	#region Static Accessors
 
@@ -19,7 +22,7 @@ public static class SettingsUtil
 	{
 		get 
 		{
-			return IsMuted(musicMuteSettingsKey);
+			return IsMuted(MUSIC_MUTE);
 		}
 	}
 
@@ -27,7 +30,7 @@ public static class SettingsUtil
 	{
 		get 
 		{
-			return IsMuted(fxMuteSettingsKey);
+			return IsMuted(FX_MUTE);
 		}
 	}
 
@@ -35,15 +38,25 @@ public static class SettingsUtil
 	{
 		get 
 		{
-			return IsMuted(voMuteSettingsKey);
+			return IsMuted(VO_MUTE);
 		}
 	}
 
 	#endregion
 
+	public static int GetMusicVolume()
+	{
+		return PlayerPrefs.GetInt(MUSIC_VOLUME, DEFAULT_VOLUME);
+	}
+
+	public static void SetMusicVolume(int volume)
+	{
+		PlayerPrefs.SetInt(MUSIC_VOLUME, volume);
+	}
+
 	public static void ToggleMusicMuted(bool muted) 
 	{
-		ToggleMute(musicMuteSettingsKey, muted);
+		ToggleMute(MUSIC_MUTE, muted);
 		EventController.Event 
 		(
 			AudioUtil.MuteActionFromBool(muted),
@@ -58,7 +71,7 @@ public static class SettingsUtil
 
 	public static void ToggleSFXMuted(bool muted) 
 	{
-		ToggleMute(fxMuteSettingsKey, muted);
+		ToggleMute(FX_MUTE, muted);
 		EventController.Event 
 		(
 			AudioUtil.MuteActionFromBool(muted),
@@ -73,7 +86,7 @@ public static class SettingsUtil
 
 	public static void ToggleVOMuted(bool muted) 
 	{
-		ToggleMute(voMuteSettingsKey, muted);
+		ToggleMute(VO_MUTE, muted);
 		EventController.Event 
 		(
 			AudioUtil.MuteActionFromBool(muted),
