@@ -8,29 +8,114 @@ using UnityEngine.UI;
 
 public class DogAdoptionSlot : DogSlot
 {
-    Text priceOrAdoptionStatus;
+    [SerializeField]
+    UIElement iconHolder;
+    [SerializeField]
     Image priceBackgroundImage;
+    Text priceOrAdoptionStatus;
 
-    Color adoptedColor = Color.red;
+    PPDataController dataController;
+    PPTuning tuning;
 
-    #region DogSlot Overrides
+    #region MonoBehaviourExtended Overrides
 
-    public override void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+    protected override void setReferences()
     {
-        base.Init(dog, dogSprite, backgroundSprite);
-
+        base.setReferences();
         priceOrAdoptionStatus = GetComponentInChildren<Text>();
-        priceOrAdoptionStatus.text = dog.CostToAdoptStr;
+    }
 
-        priceBackgroundImage = images[2];
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        dataController = PPDataController.GetInstance;
+        tuning = game.Tuning;
+    }
+
+    protected override void subscribeEvents()
+    {
+        base.subscribeEvents();
+        if(dataController)
+        {
+            dataController.SubscribeToCoinsChange(updateTextColor);
+        }
+    }
+
+    protected override void unsubscribeEvents()
+    {
+        base.unsubscribeEvents();
+        if(dataController)
+        {
+            dataController.UnsubscribeFromCoinsChange(updateTextColor);
+        }
     }
 
     #endregion
 
+    #region DogSlot Overrides
+
+    public override void Init(DogDescriptor dog, Sprite dogSprite)
+    {
+        unsubscribeEvents();
+        base.Init(dog, dogSprite);
+        subscribeEvents();
+        
+        checkReferences();
+        if(checkAdopted())
+        {
+            ShowAdopt();
+        }
+        else
+        {
+            ShowDefault();
+            updateTextColor(game.Coins.Amount);
+        }
+    }
+
+    #endregion
+
+    bool checkAdopted()
+    {
+        return PPDataController.GetInstance.CheckAdopted(dogInfo);
+    }
+
     public void ShowAdopt()
     {
-        priceOrAdoptionStatus.text = "Adopted";
-        priceBackgroundImage.color = Color.red;
+        setComponents(tuning.AdoptedText, tuning.AdoptedTextColor, tuning.AdoptedBackgroundColor, false);
+        unsubscribeEvents();
+    }
+
+    public void ShowDefault()
+    {
+        setComponents(dogInfo.CostToAdoptStr, tuning.DefaultTextColor, tuning.DefaultBackgroundColor, true);
+    }
+
+    void setComponents(string priceOrAdoptionText, Color priceOrAdoptionTextColor, 
+        Color priceBackgroundColor, bool showIconHolder)
+    {
+        priceOrAdoptionStatus.text = priceOrAdoptionText;
+        priceOrAdoptionStatus.color = priceOrAdoptionTextColor;
+        priceBackgroundImage.color = priceBackgroundColor;
+        if (showIconHolder)
+        {
+            iconHolder.Show();
+        }
+        else
+        {
+            iconHolder.Hide();
+        }
+    }
+
+    void updateTextColor(int amount)
+    {
+        if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
+        {           
+            priceOrAdoptionStatus.color = tuning.UnaffordableTextColor;
+        }
+        else
+        {
+            priceOrAdoptionStatus.color = tuning.DefaultTextColor;
+        }
     }
 
 }
