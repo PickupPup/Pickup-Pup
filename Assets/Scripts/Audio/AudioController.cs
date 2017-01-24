@@ -10,9 +10,14 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using k = PPGlobal;
 
 public class AudioController : Controller, IAudioController
 {
+	const int FULL_VOL = k.FULL_VOLUME;
+
+	private static AudioController _instance;
+
 	#region Static Accessors
 
 	// Singleton implementation
@@ -26,7 +31,17 @@ public class AudioController : Controller, IAudioController
 
 	#endregion
 
-	private static AudioController _instance;
+	int musicVolume 
+	{
+		get 
+		{
+			return SettingsUtil.GetMusicVolume();
+		}
+		set 
+		{
+			SettingsUtil.SetMusicVolume(value);
+		}
+	}
 
 	[SerializeField]
 	bool isAudioListener = false;
@@ -110,6 +125,12 @@ public class AudioController : Controller, IAudioController
 
 	#endregion
 
+	public void SetMusicVolume(int volume)
+	{
+		this.musicVolume = volume;
+		onMusicVolumeChange(this.musicVolume);
+	}
+
 	public void Play(AudioFile file) 
 	{
 		AudioSource source = getChannel(file.Channel);
@@ -171,6 +192,22 @@ public class AudioController : Controller, IAudioController
 		SettingsUtil.ToggleMusicMuted(!SettingsUtil.MusicMuted);
 	}
 
+	void onMusicVolumeChange(int newVolume)
+	{
+		foreach(AudioSource channel in channels.Values)
+		{
+			if(isMusicChannel(channel))
+			{
+				adjustToVolume(channel, newVolume);
+			}
+		}
+	}
+
+	bool isMusicChannel(AudioSource channel)
+	{
+		return getChannelType(channel) == AudioType.Music;
+	}
+
 	void checkMute(AudioFile file, AudioSource source) 
 	{
 		source.mute = AudioUtil.IsMuted(file.Type);
@@ -180,6 +217,23 @@ public class AudioController : Controller, IAudioController
 	bool channelExists(int channelNumber) 
 	{
 		return channels.ContainsKey(channelNumber);
+	}
+
+	// Volume should be on a [0, 100] scale
+	void adjustToVolume(AudioSource channel, int volume)
+	{
+		if(channel.clip)
+		{
+			float scaledVolume = volumeToDecimalf(volume);
+			AudioFile file = fileList.GetAudioFile(channel.clip);
+			scaledVolume *= file.Volumef;
+			channel.volume = scaledVolume;
+		}
+	}
+
+	float volumeToDecimalf(int volume)
+	{
+		return (float) volume / (float) FULL_VOL;
 	}
 
 	AudioSource getChannel(int channelNumber) 
@@ -274,6 +328,18 @@ public class AudioController : Controller, IAudioController
 				files.Add(file);
 				playEvents.Add(file.Events[j], files);
 			}
+		}
+	}
+
+	AudioType getChannelType(AudioSource channel)
+	{
+		if(channel.clip)
+		{
+			return fileList.GetAudioType(channel.clip);
+		}
+		else
+		{
+			return default(AudioType);
 		}
 	}
 
