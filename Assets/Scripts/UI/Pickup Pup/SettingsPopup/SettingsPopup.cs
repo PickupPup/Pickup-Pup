@@ -21,6 +21,8 @@ public class SettingsPopup : PPUIElement
 
 	[SerializeField]
 	UIButton resetButton;
+    [SerializeField]
+    UIButton toggleSFXButton;
 
 	AudioController audioController;
 	PPDataController dataController;
@@ -40,6 +42,7 @@ public class SettingsPopup : PPUIElement
 		base.setReferences();
 		musicSlider.onValueChanged.AddListener(handleMusicVolumeChange);
 		sfxToggle.onValueChanged.AddListener(handleToggleSFXMute);
+        toggleSFXButton.SubscribeToClick(toggleSFX);
 	}
 
 	protected override void fetchReferences()
@@ -63,6 +66,13 @@ public class SettingsPopup : PPUIElement
 		sfxStatus.SetText(isMuted ? OFF : ON);
 	}
 		
+    void toggleSFX()
+    {
+        bool isMuted = checkSFXMuted(sfxToggle.value);
+        isMuted = !isMuted;
+        sfxToggle.value = Global.BoolToInt(!isMuted);
+    }
+
 	bool checkSFXMuted(float sfxMuteState)
 	{
 		int state = (int) sfxMuteState;
