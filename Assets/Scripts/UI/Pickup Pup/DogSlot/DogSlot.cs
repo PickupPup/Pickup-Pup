@@ -85,25 +85,14 @@ public class DogSlot : PPUIElement
 	}
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
-    public virtual void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+    public virtual void Init(DogDescriptor dog, Sprite dogSprite)
     {
 		this.dogInfo = dog;
 
 		images = GetComponentsInChildren<Image>();
-		if(images.Length >= 2) 
-		{
-            if(setBackground)
-            {
-                backgroundImage = images[0];
-                dogImage = images[1];
-            }
-	        else
-            {
-                dogImage = images[0];
-            }
-		}
+        dogImage = images[1];
 
-		setSlot(this.dogInfo, dogSprite, backgroundSprite);
+		setSlot(this.dogInfo, dogSprite);
     }
 
 	public virtual void ClearSlot()

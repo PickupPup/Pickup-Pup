@@ -61,9 +61,9 @@ public class DogOutsideSlot : DogSlot
 
     #region DogSlot Overrides
 
-    public override void Init(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+    public override void Init(DogDescriptor dog, Sprite dogSprite)
     {
-        base.Init(dog, dogSprite, backgroundSprite);
+        base.Init(dog, dogSprite);
         nameText.text = dog.Name;
     }
 		
