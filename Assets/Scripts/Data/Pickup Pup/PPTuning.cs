@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Used to store tuning variables
  */
 
