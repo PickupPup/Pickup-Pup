@@ -121,9 +121,14 @@ public class AudioList
 		}
 	}
 
+	public AudioFile GetAudioFile(AudioClip clip)
+	{
+		return clipToFileDictionary[clip];
+	}
+
 	public AudioType GetAudioType(AudioClip clip) 
 	{
-		return clipToFileDictionary[clip].Type;
+		return GetAudioFile(clip).Type;
 	}
 
 	void processAudioFileAccess(AudioFile file) 
