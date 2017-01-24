@@ -61,11 +61,6 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController.LoadMainMenu();
 	}
 
-	public void LoadHome()
-	{
-		sceneController.LoadHome();
-	}
-
     public void LoadShelter()
     {
         setNavigationPanel(false);
@@ -81,6 +76,11 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		sceneController.LoadLivingRoom();
 	}
+
+    public void LoadYard()
+    {
+        sceneController.LoadYard();
+    }
 
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
 	{

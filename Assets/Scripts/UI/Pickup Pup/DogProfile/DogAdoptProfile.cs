@@ -11,10 +11,13 @@ public class DogAdoptProfile : DogProfile
     [SerializeField]
     Text priceText;
     [SerializeField]
+    Text adoptButtonText;
+    [SerializeField]
     Button adoptButton;
+    [SerializeField]
+    UIElement costField;
 
-    Color defaultPriceColor;
-    Color overpricedColor = Color.red;
+    PPTuning tuning;
 
     #region MonoBehaviourExtended Overrides
 
@@ -22,7 +25,12 @@ public class DogAdoptProfile : DogProfile
     {
         base.setReferences();
         iconsObject.SetActive(false);
-        defaultPriceColor = priceText.color;
+    }
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        tuning = game.Tuning;
     }
 
     #endregion
@@ -32,20 +40,65 @@ public class DogAdoptProfile : DogProfile
     public override void SetProfile(Dog dog)
     {
         base.SetProfile(dog);
-        priceText.text = dogInfo.CostToAdoptStr;
-
         checkReferences();
-
-        if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
+        if(checkAdopted(dogInfo))
         {
-            priceText.color = overpricedColor;
+            showAdopted();
         }
         else
         {
-            priceText.color = defaultPriceColor;
+            showDefault();
+            setPriceText();
         }
     }
 
     #endregion
+
+    bool checkAdopted(DogDescriptor dogInfo)
+    {
+        return PPDataController.GetInstance.CheckAdopted(dogInfo);
+    }
+
+    bool setPriceText()
+    {
+        priceText.text = dogInfo.CostToAdoptStr;
+
+        if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
+        {
+            priceText.color = tuning.UnaffordableTextColor;
+            return false;
+        }
+        priceText.color = tuning.DefaultTextColor;
+        return true;
+    }
+
+    void showAdopted()
+    {
+        setComponents(false, tuning.AdoptedBackgroundColor, tuning.AdoptedText, 
+            tuning.AdoptedTextColor, false);
+    }
+
+    void showDefault()
+    {
+        setComponents(setPriceText(), tuning.DefaultBackgroundColor, tuning.AdoptText,
+            tuning.DefaultTextColor, true);
+    }
+
+    void setComponents(bool adoptButtonInteractable, Color adoptButtonColor, 
+        string adoptButtonTextString, Color adoptButtonTextColor, bool showCostField)
+    {
+        adoptButton.interactable = adoptButtonInteractable;
+        adoptButton.image.color = adoptButtonColor;
+        adoptButtonText.text = adoptButtonTextString;
+        adoptButtonText.color = adoptButtonTextColor;
+        if(showCostField)
+        {
+            costField.Show();
+        }
+        else
+        {
+            costField.Hide();
+        }
+    }
 
 }

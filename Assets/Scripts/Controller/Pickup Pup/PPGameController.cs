@@ -303,6 +303,7 @@ public class PPGameController : GameController, ICurrencySystem
     {
         dataController.ChangeCoins(-dog.CostToAdopt);
         dataController.ChangeHomeSlots(-1);
+        dataController.Adopt(dog);
     }
 
 	public bool TrySendDogToScout(Dog dog, out int slotIndex)
