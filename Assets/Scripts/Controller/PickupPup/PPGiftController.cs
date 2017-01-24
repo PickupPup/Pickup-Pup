@@ -54,7 +54,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 		{
 			tuning.ChanceOfSpecialization,
 			tuning.ChanceOfSecondary,
-			tuning.ChanceOfSpecialObject,
+            tuning.ChanceOfSpecialGift,
 		};
 		return new WeightedRandomBuffer<CurrencyType>(currencies, weights);
 	}

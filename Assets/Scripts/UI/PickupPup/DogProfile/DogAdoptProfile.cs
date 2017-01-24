@@ -65,23 +65,23 @@ public class DogAdoptProfile : DogProfile
 
         if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
         {
-            priceText.color = tuning.UnaffordableTextColor;
+            priceText.color = tuning.UnaffordableColorRGBA;
             return false;
         }
-        priceText.color = tuning.DefaultTextColor;
+        priceText.color = tuning.AdoptedTextColorRGBA;
         return true;
     }
 
     void showAdopted()
     {
-        setComponents(false, tuning.AdoptedBackgroundColor, tuning.AdoptedText, 
-            tuning.AdoptedTextColor, false);
+        setComponents(false, tuning.AdoptedBackgroundColorRGBA, tuning.AdoptedText, 
+            tuning.AdoptedTextColorRGBA, false);
     }
 
     void showDefault()
     {
-        setComponents(setPriceText(), tuning.DefaultBackgroundColor, tuning.AdoptText,
-            tuning.DefaultTextColor, true);
+        setComponents(setPriceText(), tuning.AdoptedBackgroundColorRGBA, tuning.AdoptText,
+            tuning.AdoptedTextColorRGBA, true);
     }
 
     void setComponents(bool adoptButtonInteractable, Color adoptButtonColor, 
