@@ -63,7 +63,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		else
 		{
             // TODO: Fix
-			// dailyGiftCountdown = tuning.;
+//			dailyGiftCountdown = tuning.dail;
 		}
         // TODO: Fix
 		// dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
