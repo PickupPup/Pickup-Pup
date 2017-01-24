@@ -62,11 +62,9 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		}
 		else
 		{
-            // TODO: Fix
-//			dailyGiftCountdown = tuning.dail;
+            dailyGiftCountdown = tuning.WaitTimeSecsForDailyGift;
 		}
-        // TODO: Fix
-		// dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
+		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
 		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
 		dataController.StartDailyGiftCountdown(dailyGiftTimer);
 		dailyGiftTimer.Begin();
