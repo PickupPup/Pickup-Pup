@@ -53,6 +53,11 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		initDailyGiftCountdown(gameController.Tuning, dataController);
     }
 
+    public CurrencyData GetDailyGift() 
+    {
+        throw new System.NotImplementedException();
+    }
+
 	void initDailyGiftCountdown(PPTuning tuning, PPDataController dataController)
 	{
 		float dailyGiftCountdown;

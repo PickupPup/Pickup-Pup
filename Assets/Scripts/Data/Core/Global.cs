@@ -36,6 +36,8 @@ public class Global
 	public const int TRUE_VALUE_INT = 1;
 	public const int FALSE_VALUE_INT = NONE_VALUE;
 
+    public const float FULL_PERCENT_F = 100f;
+
 	public static bool IntToBool(int value)
 	{
 		switch(value)

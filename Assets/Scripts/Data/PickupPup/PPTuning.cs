@@ -154,11 +154,38 @@ public class PPTuning : PPData
     }
 
 
-    public int DailyCoinBonus
+    public float DailyGiftDiscountAmount
     {
         get
         {
-            return dailyCoinBonus;
+            return dailyGiftDiscountAmount;
+        }
+    }
+
+
+    public string[] DailyGiftOptions
+    {
+        get
+        {
+            return dailyGiftOptions;
+        }
+    }
+
+
+    public float[] DailyGiftAmounts
+    {
+        get
+        {
+            return dailyGiftAmounts;
+        }
+    }
+
+
+    public float[] DailyGiftWeights
+    {
+        get
+        {
+            return dailyGiftWeights;
         }
     }
 
@@ -413,7 +440,7 @@ public class PPTuning : PPData
             return waitTimeSecsForDailyGift;
         }
     }
-               
+                    
     #endregion
 
     #region JSON Fields
@@ -451,7 +478,13 @@ public class PPTuning : PPData
     [SerializeField]
     int costOfTwentyDogFoodCans;
     [SerializeField]
-    int dailyCoinBonus;
+    float dailyGiftDiscountAmount;
+    [SerializeField]
+    string[] dailyGiftOptions;
+    [SerializeField]
+    float[] dailyGiftAmounts;
+    [SerializeField]
+    float[] dailyGiftWeights;
     [SerializeField]
     int dailyNumberOfNewDogsAtShelter;
     [SerializeField]
