@@ -129,8 +129,6 @@ public class PPDataController : DataController, ICurrencySystem
 	MonoActionInt onFoodChange;
     MonoActionInt onHomeSlotsChange;
 
-	Dictionary<CurrencyType, MonoActionInt> onCurrencyChangeEvents;
-
 	public bool SaveGame()
 	{
 		Buffer(getCurrentGame());
@@ -159,26 +157,6 @@ public class PPDataController : DataController, ICurrencySystem
     }
 		
 	#region MonoBehaviourExtended Overrides
-
-	protected override void setReferences ()
-	{
-		base.setReferences ();
-		onCurrencyChangeEvents = new Dictionary<CurrencyType, MonoActionInt>()
-		{
-			{
-				CurrencyType.Coins, 
-				callOnCoinsChange
-			},
-			{
-				CurrencyType.DogFood, 
-				callOnFoodChange
-			},
-			{
-				CurrencyType.HomeSlots, 
-				callOnHomeSlotsChange
-			},
-		};
-	}
 
 	protected override void handleGameTogglePause(bool isPaused)
 	{
@@ -329,11 +307,6 @@ public class PPDataController : DataController, ICurrencySystem
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
         currencies.ChangeCurrencyAmount(type, deltaAmount);
-		CurrencyData data;
-		if(currencies.TryGetCurrency(type, out data))
-		{
-			tryCallCurrencyChangeAmount(type, data.Amount);
-		}
     }
 
 	public void GiveCurrency(CurrencyData currency)
@@ -344,16 +317,6 @@ public class PPDataController : DataController, ICurrencySystem
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
         currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
-        CurrencyData costData;
-        if (currencies.TryGetCurrency(costCurrencyType, out costData))
-        {
-            tryCallCurrencyChangeAmount(costCurrencyType, costData.Amount);
-        }
-        CurrencyData valueData;
-        if (currencies.TryGetCurrency(valueCurrencyType, out valueData))
-        {
-            tryCallCurrencyChangeAmount(valueCurrencyType, valueData.Amount);
-        }
     }
 
 	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)
@@ -387,19 +350,5 @@ public class PPDataController : DataController, ICurrencySystem
 	{
 		currentGame.StartDailyGiftCountdown(timer);
 	}
-
-	bool tryCallCurrencyChangeAmount(CurrencyType type, int newAmount)
-	{
-		MonoActionInt currencyChange;
-		if(onCurrencyChangeEvents.TryGetValue(type, out currencyChange))
-		{
-			currencyChange(newAmount);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
+		
 }

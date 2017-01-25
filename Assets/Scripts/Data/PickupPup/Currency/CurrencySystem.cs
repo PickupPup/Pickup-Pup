@@ -59,9 +59,26 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     #endregion
 
-	Dictionary<CurrencyType, CurrencyData> currencies;
-	Dictionary<CurrencyType, m.MonoActionInt> currencyChangeCallbacks;
+
+	Dictionary<CurrencyType, m.MonoActionInt> currencyChangeCallbacks
+	{
+		get
+		{
+			// Lazy reference (meaning not initialized until requested):
+			if(_currencyChangeCallbacks == null)
+			{
+				_currencyChangeCallbacks = new Dictionary<CurrencyType, m.MonoActionInt>();
+			}
+			return _currencyChangeCallbacks;
+		}
+	}
+		
 	CurrencyFactory factory;
+	Dictionary<CurrencyType, CurrencyData> currencies;
+
+	// Includes refs to MonoBehaviours so it can not be serialized
+	[System.NonSerialized]
+	Dictionary<CurrencyType, m.MonoActionInt> _currencyChangeCallbacks;
 
     public CurrencySystem(params CurrencyData[] currencies)
     {
@@ -90,13 +107,14 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
 		CurrencyData existingCurrency = getCurrency(type);
 		existingCurrency.ChangeBy(deltaAmount);
-		UnityEngine.Debug.Log(tryCallCurrencyChangeEvent(type));
+		tryCallCurrencyChangeEvent(type);
     }
 
 	public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback)
 	{
 		m.MonoActionInt handler = getCurrencyChangeEventDelegate(type);
 		handler += callback;
+		updateCurrencyChangeHandler(type, handler);
 	}
 
 	public void UnsubscribeFromCurrencyChange(CurrencyType type, m.MonoActionInt callback)
@@ -105,6 +123,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 		if(handler != null)
 		{
 			handler -= callback;
+			updateCurrencyChangeHandler(type, handler);
 		}
 	}
 
@@ -172,7 +191,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 		if(!currencies.TryGetValue(type, out currency))
 		{
 			currency = factory.Create(type.ToString(), DEFAULT_CURRENCY_AMOUNT, DEFAULT_DISCOUNT);
-
 		}
 		return currency;
 	}
@@ -195,6 +213,18 @@ public class CurrencySystem : PPData, ICurrencySystem
 		else 
 		{
 			return false;
+		}
+	}
+
+	void updateCurrencyChangeHandler(CurrencyType type, m.MonoActionInt handler)
+	{
+		if(currencyChangeCallbacks.ContainsKey(type))
+		{
+			currencyChangeCallbacks[type] = handler;
+		}
+		else 
+		{
+			currencyChangeCallbacks.Add(type, handler);
 		}
 	}
 
@@ -226,10 +256,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies, bool generateCallbacks = true)
     {
-		if(generateCallbacks)
-		{
-			currencyChangeCallbacks = new Dictionary<CurrencyType, m.MonoActionInt>();
-		}
         Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
         foreach (CurrencyData currency in currencies)
         {
