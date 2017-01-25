@@ -12,6 +12,8 @@ public class PPGiftController : SingletonController<PPGiftController>
 	const float DEFAULT_DISCOUNT = k.DEFAULT_DISCOUNT_DECIMAL;
 
 	PPTuning tuning;
+    PPDataController dataController;
+
 	WeightedRandomBuffer<CurrencyType> defaultReturnChances;
 	WeightedRandomBuffer<CurrencyData> giftChances;
 

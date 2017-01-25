@@ -80,6 +80,14 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+    public bool IsFirstGift
+    {
+        get
+        {
+            return currentGame.FirstGift;
+        }
+    }
+
     #region ICurrencySystem Accessors
 
     public CoinsData Coins
@@ -118,18 +126,23 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+    bool hasCurrencySystem
+    {
+        get
+        {
+            return currencies != null;
+        }
+    }
+
 	[SerializeField]
 	bool saveOnApplicationPause;
 	[SerializeField]
 	bool saveOnApplicationQuit;
 
     PPGameSave currentGame;
-	// For use for event subscriptions which occur before load is complete
-	Dictionary<CurrencyType, Queue<MonoActionInt>> currencyChangeDelegateBuffer;
-	// TODO:
-	// Check for null save and add to queue
-	// Dequeue into subscrption
-	// Call all events after buffer is clear 
+	
+    // For use for event subscriptions which occur before load is complete
+    Dictionary<CurrencyType, Queue<MonoActionInt>> currencyChangeDelegateBuffers = new Dictionary<CurrencyType, Queue<MonoActionInt>>();
 
 	public bool SaveGame()
 	{
@@ -141,6 +154,7 @@ public class PPDataController : DataController, ICurrencySystem
     public PPGameSave LoadGame()
     {
         currentGame = Load() as PPGameSave;
+        drainBufferedCurrencyDelegatesIntoCurrencySystem(currentGame.Currencies);
         return currentGame;
     }
 
@@ -255,12 +269,22 @@ public class PPDataController : DataController, ICurrencySystem
 
 	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)
 	{
-		currencies.SubscribeToCurrencyChange(type, callback);
+        if(hasCurrencySystem)
+        {
+		    currencies.SubscribeToCurrencyChange(type, callback);
+        }
+        else
+        {
+            bufferChangeCurrencyDelegate(type, callback);
+        }
 	}
 
 	public void UnsubscribeFromCurrencyChange(CurrencyType type, MonoActionInt callback)
 	{
-		currencies.UnsubscribeFromCurrencyChange(type, callback);
+        if(hasCurrencySystem)
+        {
+		    currencies.UnsubscribeFromCurrencyChange(type, callback);
+        }
 	}
 
 	public bool TryTakeCurrency(CurrencyData currency)
@@ -284,5 +308,34 @@ public class PPDataController : DataController, ICurrencySystem
 	{
 		currentGame.StartDailyGiftCountdown(timer);
 	}
-		
+	
+    public void ReceiveFirstGift()
+    {
+        currentGame.ReceiveFirstGift();
+    }
+
+    void bufferChangeCurrencyDelegate(CurrencyType type, MonoActionInt callback)
+    {
+        Queue<MonoActionInt> bufferedCallbacks;
+        if(!currencyChangeDelegateBuffers.TryGetValue(type, out bufferedCallbacks))
+        {
+            bufferedCallbacks = new Queue<MonoActionInt>();
+        }
+        bufferedCallbacks.Enqueue(callback);
+    }
+
+    void drainBufferedCurrencyDelegatesIntoCurrencySystem(CurrencySystem system)
+    {
+        foreach(CurrencyType currency in currencyChangeDelegateBuffers.Keys)
+        {
+            Queue<MonoActionInt> buffer = currencyChangeDelegateBuffers[currency];
+            while(buffer.Count > 0)
+            {
+                // Invokes upon subscription to ensure any delegates expecting initial calls are satisfied
+                system.SubscribeToCurrencyChange(currency, buffer.Dequeue(), invokeOnSubscribe:true);
+            }
+        }
+        currencyChangeDelegateBuffers.Clear();
+    }
+
 }

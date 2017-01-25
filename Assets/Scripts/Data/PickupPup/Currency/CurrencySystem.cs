@@ -110,6 +110,15 @@ public class CurrencySystem : PPData, ICurrencySystem
 		tryCallCurrencyChangeEvent(type);
     }
 
+    public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)
+    {
+        SubscribeToCurrencyChange(type, callback);
+        if(invokeOnSubscribe)
+        {
+            callback(currencies[type].Amount);
+        }
+    }
+
 	public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback)
 	{
 		m.MonoActionInt handler = getCurrencyChangeEventDelegate(type);

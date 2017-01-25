@@ -89,6 +89,11 @@ public class PPGameSave : GameSave, ISerializable
 
 	#endregion
 
+    public void ReceiveFirstGift()
+    {
+        FirstGift = false;
+    }
+
 	public void SendDogToScout(Dog dog)
 	{
 		if(!ScoutingDogs.Contains(dog.Info)) 
