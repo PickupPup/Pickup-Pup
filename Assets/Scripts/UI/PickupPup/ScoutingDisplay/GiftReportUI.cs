@@ -20,7 +20,7 @@ public class GiftReportUI : UIElement
 
 	UIButton dismissButton;
 
-	#region MonoBehaviourExtended 
+	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences ()
 	{
@@ -36,6 +36,13 @@ public class GiftReportUI : UIElement
             dismissButton.SubscribeToClick(Destroy);
         }
     }
+
+	public override bool TryClearEventSubscriptions()
+	{
+		base.TryClearEventSubscriptions();
+		dismissButton.TryClearEventSubscriptions();
+		return true;
+	}
 
 	#endregion
 

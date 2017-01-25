@@ -3,7 +3,7 @@
  * Description: Unity independent setup for a timer
  */
 
-public interface IGameTimer 
+public interface IGameTimer : ISubscribable
 {
 	#region Instance Accessors 
 

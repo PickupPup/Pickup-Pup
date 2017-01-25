@@ -14,7 +14,15 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 	[SerializeField]
 	UIElement giftTimerDisplay;
 	[SerializeField]
+	UIButton collectGiftButton;
+	[SerializeField]
+	GameObject giftTimerActiveDisplay;
+	[SerializeField]
+	GameObject giftAvailableDisplay;
+	[Space(10)]
+	[SerializeField]
 	GameObject giftReportPrefab;
+	[Space(10)]
 	[SerializeField]
 	bool overrideTimerForDebugging = false;
 
@@ -81,12 +89,24 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
             dailyGiftCountdown = tuning.WaitTimeSecsForDailyGift;
 		}
 		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
+		startGiftTimer();
+	}
+		
+	void startGiftTimer()
+	{
+		toggleBetweenTimerAndGiftReceived(giftReceived:false);
+		resetAndBeginGiftTimer();
+	}
+		
+	void resetAndBeginGiftTimer()
+	{
+		(dailyGiftTimer as ISubscribable).TryClearEventSubscriptions();
 		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
 		dailyGiftTimer.SubscribeToTimeUp(receiveDailyGift);
 		dataController.StartDailyGiftCountdown(dailyGiftTimer);
 		dailyGiftTimer.Begin();
 	}
-		
+
 	void handleDailyGiftCountDownChange(float timeRemaining)
 	{
 		giftTimerDisplay.SetText(dailyGiftTimer.TimeRemainingStr);
@@ -104,19 +124,33 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
 	void receiveDailyGift()
 	{
-		CurrencyData gift = getDailyGift();
-		dataController.GiveCurrency(gift);
-		displayReceivedGift(gift);
+		toggleBetweenTimerAndGiftReceived(giftReceived:true);
+		collectGiftButton.TryClearEventSubscriptions();
+		collectGiftButton.SubscribeToClick(collectReceivedGift);
 	}
 
-	void displayReceivedGift(CurrencyData gift)
+	void toggleBetweenTimerAndGiftReceived(bool giftReceived)
 	{
+		bool timerActive = !giftReceived;
+		giftTimerActiveDisplay.SetActive(timerActive);
+		giftAvailableDisplay.SetActive(giftReceived);
+		if(timerActive)
+		{
+			resetAndBeginGiftTimer();
+		}
+	}
+
+	void collectReceivedGift()
+	{
+		CurrencyData gift = getDailyGift();
+		dataController.GiveCurrency(gift);
         UIElement giftReport;
         if(!UIElement.TryPullFromSpawnPool(typeof(GiftReportUI), out giftReport))
         {
             giftReport = Instantiate(giftReportPrefab).GetComponent<GiftReportUI>();
         }
-        (giftReport as GiftReportUI).Init(gift);
+		(giftReport as GiftReportUI).Init(gift);
+		toggleBetweenTimerAndGiftReceived(giftReceived:false);
 	}
 
 }

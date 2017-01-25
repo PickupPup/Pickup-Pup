@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using k = Global;
 
-public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
+public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
@@ -130,6 +130,16 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable
 			return true;
 		}
 	}
+
+	#region ISubscribable Interface
+
+	// Returns a bool based on whether method is implemented
+	public virtual bool TryClearEventSubscriptions()
+	{
+		return false;
+	}
+
+	#endregion
 
 	protected virtual void subscribeEvents() 
 	{

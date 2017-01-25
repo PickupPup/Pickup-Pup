@@ -77,7 +77,14 @@ public class UIButton : UIElement
 			setButtonColors();
 		}
 	}
-
+		
+	public override bool TryClearEventSubscriptions()
+	{
+		base.TryClearEventSubscriptions();
+		UnsubscribeAllClickActions();
+		return true;
+	}
+		
 	#endregion
 
 	void setButtonColors()

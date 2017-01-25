@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class PPTimer : PPData 
+public class PPTimer : PPData, ISubscribable
 {
 	#region Static Accessors
 
@@ -122,6 +122,15 @@ public class PPTimer : PPData
 	{
 		timer.Teardown();
 	}
+
+	#region ISubscribable Interface
+
+	bool ISubscribable.TryClearEventSubscriptions()
+	{
+		return timer.TryClearEventSubscriptions();
+	}
+
+	#endregion
 
 	public void SubscribeToTimeChange(PPData.DataActionf action) 
 	{

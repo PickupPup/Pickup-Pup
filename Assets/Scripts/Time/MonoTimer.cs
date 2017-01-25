@@ -50,6 +50,18 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 	float maxTime;
 	bool timerIsRunning = false;
 
+	#region MonoBehaviourExtended Overrides 
+
+	public override bool TryClearEventSubscriptions()
+	{
+		base.TryClearEventSubscriptions();
+		onTimeChange = null;
+		onTimeUp = null;
+		return true;
+	}
+
+	#endregion
+
 	public void Reset() 
 	{
 		TimeRemaining = maxTime;

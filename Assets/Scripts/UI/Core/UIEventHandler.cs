@@ -14,9 +14,17 @@ public class UIEventHandler
 	[SerializeField]
 	string[] triggers;
 
+	[SerializeField]
+	bool triggerOnStart;
+
 	public bool RespondsToTrigger(string trigger) 
 	{
 		return StringUtil.OrEquals(trigger, this.triggers);
+	}
+
+	public bool RunsOnStart()
+	{
+		return triggerOnStart;
 	}
 
 	public void Execute(UIElement element) 
