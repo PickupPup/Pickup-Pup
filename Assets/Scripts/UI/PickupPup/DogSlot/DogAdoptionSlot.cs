@@ -37,7 +37,7 @@ public class DogAdoptionSlot : DogSlot
         base.subscribeEvents();
         if(dataController)
         {
-            dataController.SubscribeToCoinsChange(updateTextColor);
+			dataController.SubscribeToCurrencyChange(CurrencyType.Coins, updateTextColor);
         }
     }
 
@@ -46,7 +46,7 @@ public class DogAdoptionSlot : DogSlot
         base.unsubscribeEvents();
         if(dataController)
         {
-            dataController.UnsubscribeFromCoinsChange(updateTextColor);
+			dataController.UnsubscribeFromCurrencyChange(CurrencyType.Coins, updateTextColor);
         }
     }
 

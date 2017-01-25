@@ -35,21 +35,11 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     protected override void subscribeEvents()
     {
         base.subscribeEvents();
-        if (dataController)
-        {
-            dataController.SubscribeToCoinsChange(updateCoinsDisplay);
-            dataController.SubscribeToFoodChange(updateDogFoodDisplay);
-        }
     }
 
     protected override void unsubscribeEvents()
     {
         base.unsubscribeEvents();
-        if (dataController)
-        {
-            dataController.UnsubscribeFromCoinsChange(updateCoinsDisplay);
-            dataController.UnsubscribeFromFoodChange(updateDogFoodDisplay);
-        }
 		if(dailyGiftTimer != null)
 		{
 			dailyGiftTimer.UnsubscribeFromTimeChange(handleDailyGiftCountDownChange);

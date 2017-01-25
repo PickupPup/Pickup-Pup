@@ -37,13 +37,21 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
+	// The player gets their first gift w/out having to wait 24 hours
+	public bool FirstGift
+	{
+		get;
+		private set;
+	}
+
 	#endregion
 
-	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies) 
+	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies, bool firstGift = true)
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(adoptedDogs);
 		this.ScoutingDogs = new List<DogDescriptor>(scoutingDogs);
         this.Currencies = currencies;
+		this.FirstGift = firstGift;
 	}
 
 	#region ISerializable Interface 
@@ -65,6 +73,7 @@ public class PPGameSave : GameSave, ISerializable
 		{
 			this.DailyGiftCountdown = 0;
 		}
+		this.FirstGift = (bool) info.GetValue(FIRST_GIFT, typeof(bool));
 	}
 		
 	// Implement this method to serialize data. The method is called on serialization.
@@ -75,6 +84,7 @@ public class PPGameSave : GameSave, ISerializable
 		info.AddValue(SCOUTING, this.ScoutingDogs);
 		info.AddValue(CURRENCY, this.Currencies);
 		info.AddValue(DAILY_GIFT_COUNTDOWN, this.DailyGiftCountdown);
+		info.AddValue(FIRST_GIFT, this.FirstGift);
 	}
 
 	#endregion
@@ -112,5 +122,5 @@ public class PPGameSave : GameSave, ISerializable
     {
         AdoptedDogs.Add(dog);
     }
-
+		
 }

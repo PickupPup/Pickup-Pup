@@ -18,7 +18,7 @@ public class PPGlobal : Global
 	public const string GIFT = "Gift";
 	public const string COUNTDOWN = "Countdown";
 	public const string DAILY_GIFT_COUNTDOWN = DAILY + GIFT + COUNTDOWN;
-
+	public const string FIRST_GIFT = "FirstGift";
     public const string COIN_ICON = "Coin";
     public const string DOG_FOOD_ICON = "10_DogFood";
 

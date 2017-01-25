@@ -124,10 +124,12 @@ public class PPDataController : DataController, ICurrencySystem
 	bool saveOnApplicationQuit;
 
     PPGameSave currentGame;
-
-	MonoActionInt onCoinsChange;
-	MonoActionInt onFoodChange;
-    MonoActionInt onHomeSlotsChange;
+	// For use for event subscriptions which occur before load is complete
+	Dictionary<CurrencyType, Queue<MonoActionInt>> currencyChangeDelegateBuffer;
+	// TODO:
+	// Check for null save and add to queue
+	// Dequeue into subscrption
+	// Call all events after buffer is clear 
 
 	public bool SaveGame()
 	{
@@ -195,72 +197,7 @@ public class PPDataController : DataController, ICurrencySystem
 	{
 		base.Reset();
 		LoadGame();
-		callOnCoinsChange(Coins.Amount);
-		callOnFoodChange(DogFood.Amount);
-        callOnHomeSlotsChange(HomeSlots.Amount);
 	}
-
-    #endregion
-
-    #region Event Subscription
-
-    public void SubscribeToCoinsChange(MonoActionInt coinsAction)
-    {
-        onCoinsChange += coinsAction;
-    }
-
-    public void UnsubscribeFromCoinsChange(MonoActionInt coinsAction)
-    {
-        onCoinsChange -= coinsAction;
-    }
-
-    public void SubscribeToFoodChange(MonoActionInt foodAction)
-    {
-        onFoodChange += foodAction;
-    }
-
-    public void UnsubscribeFromFoodChange(MonoActionInt foodAction)
-    {
-        onFoodChange -= foodAction;
-    }
-
-    public void SubscribeToHomeSlotsChange(MonoActionInt HomeSlotsAction)
-    {
-        onHomeSlotsChange += HomeSlotsAction;
-    }
-
-    public void UnsubscribeFromHomeSlotsChange(MonoActionInt HomeSlotsAction)
-    {
-        onHomeSlotsChange -= HomeSlotsAction;
-    }
-
-    #endregion
-
-    #region Event Calls
-
-    protected void callOnCoinsChange(int coins) 
-	{ 
-		if(onCoinsChange != null)
-		{
-			onCoinsChange(coins);
-		}
-	}
-
-	protected void callOnFoodChange(int food)
-	{
-		if(onFoodChange != null) 
-		{
-			onFoodChange(food);
-		}
-	}
-
-    protected void callOnHomeSlotsChange(int homeSlots)
-    {
-        if(onHomeSlotsChange != null)
-        {
-            onHomeSlotsChange(homeSlots);
-        }
-    }
 
     #endregion
 
@@ -286,21 +223,18 @@ public class PPDataController : DataController, ICurrencySystem
 	public void ChangeCoins(int deltaCoins) 
 	{
 		currencies.ChangeCoins(deltaCoins);
-		callOnCoinsChange(Coins.Amount);
 		SaveGame();
 	}
 
 	public void ChangeFood(int deltaFood) 
 	{
         currencies.ChangeFood(deltaFood);
-		callOnFoodChange(DogFood.Amount);
 		SaveGame();
 	}
 
     public void ChangeHomeSlots(int deltaHomeSlots)
     {
         currencies.ChangeHomeSlots(deltaHomeSlots);
-        callOnHomeSlotsChange(HomeSlots.Amount);
         SaveGame();
     }
 
