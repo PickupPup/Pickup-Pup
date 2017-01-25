@@ -134,7 +134,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	#region ISubscribable Interface
 
 	// Returns a bool based on whether method is implemented
-	public virtual bool TryClearEventSubscriptions()
+	public virtual bool TryUnsubscribeAll()
 	{
 		return false;
 	}

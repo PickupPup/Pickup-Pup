@@ -60,7 +60,7 @@ public class CurrencyData : ResourceLoader
         setup(initialAmount);
     }
 
-    public virtual void IncreaseBy(int deltaAmount)
+    public virtual void ChangeBy(int deltaAmount)
     {
         amount += deltaAmount;
     }
@@ -69,11 +69,6 @@ public class CurrencyData : ResourceLoader
     {
         return amount >= cost;
     }
-
-	public virtual void Spend(int cost)
-	{
-		amount -= cost;
-	}
 
     void setup(int initialAmount)
     {

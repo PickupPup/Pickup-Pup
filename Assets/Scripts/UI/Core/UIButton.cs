@@ -78,9 +78,9 @@ public class UIButton : UIElement
 		}
 	}
 		
-	public override bool TryClearEventSubscriptions()
+	public override bool TryUnsubscribeAll()
 	{
-		base.TryClearEventSubscriptions();
+		base.TryUnsubscribeAll();
 		UnsubscribeAllClickActions();
 		return true;
 	}

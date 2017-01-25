@@ -7,6 +7,7 @@
 using System;
 using System.Reflection;
 
+[System.Serializable]
 public class CurrencyFactory : ObjectFactory<CurrencyData>
 {
 	const string CLASS_NAME_FORMAT = "{0}Data";
@@ -19,7 +20,14 @@ public class CurrencyFactory : ObjectFactory<CurrencyData>
         int amount = (int) args[1];
 		if(type == CurrencyType.DogDiscount)
         {
-			return new DiscountData((float) args[2], amount);
+			if(args.Length >= 3)
+			{
+				return new DiscountData((float) args[2], amount);
+			}
+			else 
+			{
+				return new DiscountData(DEFAULT_DISCOUNT, amount);
+			}
         }
         else
         {

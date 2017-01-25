@@ -37,10 +37,10 @@ public class GiftReportUI : UIElement
         }
     }
 
-	public override bool TryClearEventSubscriptions()
+	public override bool TryUnsubscribeAll()
 	{
-		base.TryClearEventSubscriptions();
-		dismissButton.TryClearEventSubscriptions();
+		base.TryUnsubscribeAll();
+		dismissButton.TryUnsubscribeAll();
 		return true;
 	}
 

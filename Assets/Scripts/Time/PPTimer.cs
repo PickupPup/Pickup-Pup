@@ -125,9 +125,9 @@ public class PPTimer : PPData, ISubscribable
 
 	#region ISubscribable Interface
 
-	bool ISubscribable.TryClearEventSubscriptions()
+	bool ISubscribable.TryUnsubscribeAll()
 	{
-		return timer.TryClearEventSubscriptions();
+		return timer.TryUnsubscribeAll();
 	}
 
 	#endregion

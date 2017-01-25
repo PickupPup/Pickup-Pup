@@ -6,6 +6,6 @@
 
 public interface ISubscribable 
 {
-	bool TryClearEventSubscriptions();
+	bool TryUnsubscribeAll();
 
 }

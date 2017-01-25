@@ -356,6 +356,16 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
+	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)
+	{
+		currencies.SubscribeToCurrencyChange(type, callback);
+	}
+
+	public void UnsubscribeFromCurrencyChange(CurrencyType type, MonoActionInt callback)
+	{
+		currencies.UnsubscribeFromCurrencyChange(type, callback);
+	}
+
 	public bool TryTakeCurrency(CurrencyData currency)
 	{
 		return currencies.TryTakeCurrency(currency);

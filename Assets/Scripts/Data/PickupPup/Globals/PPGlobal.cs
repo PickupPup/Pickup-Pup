@@ -29,5 +29,6 @@ public class PPGlobal : Global
 	public const int DEFAULT_COINS = 2000;
 	public const int DEFAULT_DOG_FOOD = 0;
 	public const int DEFAULT_HOME_SLOTS = 10;
+	public const int DEFAULT_CURRENCY_AMOUNT = 0;
 
 }

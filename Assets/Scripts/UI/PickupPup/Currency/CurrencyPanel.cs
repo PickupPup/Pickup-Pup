@@ -100,7 +100,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		
 	void resetAndBeginGiftTimer()
 	{
-		(dailyGiftTimer as ISubscribable).TryClearEventSubscriptions();
+		(dailyGiftTimer as ISubscribable).TryUnsubscribeAll();
 		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
 		dailyGiftTimer.SubscribeToTimeUp(receiveDailyGift);
 		dataController.StartDailyGiftCountdown(dailyGiftTimer);
@@ -125,7 +125,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 	void receiveDailyGift()
 	{
 		toggleBetweenTimerAndGiftReceived(giftReceived:true);
-		collectGiftButton.TryClearEventSubscriptions();
+		collectGiftButton.TryUnsubscribeAll();
 		collectGiftButton.SubscribeToClick(collectReceivedGift);
 	}
 

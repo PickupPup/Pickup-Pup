@@ -52,9 +52,9 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 
 	#region MonoBehaviourExtended Overrides 
 
-	public override bool TryClearEventSubscriptions()
+	public override bool TryUnsubscribeAll()
 	{
-		base.TryClearEventSubscriptions();
+		base.TryUnsubscribeAll();
 		onTimeChange = null;
 		onTimeUp = null;
 		return true;
