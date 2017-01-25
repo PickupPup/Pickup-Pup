@@ -30,6 +30,8 @@ public interface ICurrencySystem
     void ChangeCurrencyAmount(CurrencyType type, int deltaAmount);
     void ConvertCurrency(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType);
+	void GiveCurrency(CurrencyData currency);
+	bool TryTakeCurrency(CurrencyData currency);
     bool CanAfford(CurrencyType type, int amount);
     bool HasCurrency(CurrencyType type);
 

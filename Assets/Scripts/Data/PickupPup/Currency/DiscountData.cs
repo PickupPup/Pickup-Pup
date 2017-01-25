@@ -4,6 +4,7 @@
  * Usage: [no notes]
  */
 
+[System.Serializable]
 public class DiscountData : CurrencyData
 {
     #region Public Accessors 

@@ -336,6 +336,11 @@ public class PPDataController : DataController, ICurrencySystem
 		}
     }
 
+	public void GiveCurrency(CurrencyData currency)
+	{
+		currencies.GiveCurrency(currency);
+	}
+
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
         currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
@@ -350,6 +355,11 @@ public class PPDataController : DataController, ICurrencySystem
             tryCallCurrencyChangeAmount(valueCurrencyType, valueData.Amount);
         }
     }
+
+	public bool TryTakeCurrency(CurrencyData currency)
+	{
+		return currencies.TryTakeCurrency(currency);
+	}
 
     public bool CanAfford(CurrencyType type, int amount)
     {

@@ -43,7 +43,22 @@ public class CurrencyFactory : ObjectFactory<CurrencyData>
 	// Expects: (ParallelArray<string, int>, float percent (if the list includes discounts))
     public override CurrencyData[] CreateGroup (params object[] args)
     {
-		throw new System.NotImplementedException();
+		ParallelArray<string, int> currencyData = args[0] as ParallelArray<string, int>;
+		float discountPercent;
+		if(args.Length > 1)
+		{
+			discountPercent = (float) args[1];
+		}
+		else
+		{
+			discountPercent = DEFAULT_DISCOUNT;
+		}
+		CurrencyData[] currencies = new CurrencyData[currencyData.Length];
+		for(int i = 0; i < currencies.Length; i++)
+		{
+			currencies[i] = Create(currencyData[i].First, currencyData[i].Second, discountPercent);
+		}
+		return currencies;
     }
 
 }

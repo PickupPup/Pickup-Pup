@@ -12,7 +12,7 @@ public class ScoutingDisplay : PPUIElement
 	[SerializeField]
 	DogBrowser dogBrowser;
 	[SerializeField]
-	ScoutingReportUI scoutingReportDisplay;
+	GiftReportUI scoutingReportDisplay;
 
 	DogOutsideSlot[] scoutingSlots;
 	Dictionary<int, DogOutsideSlot> slotsByIndex = new Dictionary<int, DogOutsideSlot>();
@@ -83,21 +83,21 @@ public class ScoutingDisplay : PPUIElement
 		{
 			DogDescriptor dogInfo = dog.Info;
 			CurrencyData reward = game.GetGift(dogInfo);
-			ScoutingReport report = new ScoutingReport(dogInfo, reward);
+			GiftReport report = new GiftReport(dogInfo, reward);
 			createReportUI(report);
 		}
 	}
 
-	ScoutingReportUI createReportUI(ScoutingReport report)
+	GiftReportUI createReportUI(GiftReport report)
 	{
-		ScoutingReportUI reportUI = Instantiate(scoutingReportDisplay);
+		GiftReportUI reportUI = Instantiate(scoutingReportDisplay);
 		reportUI.Init(report);
 		return reportUI;
 	}
 
-	ScoutingReport getScoutingReport(Dog dog, CurrencyData reward)
+	GiftReport getScoutingReport(Dog dog, CurrencyData reward)
 	{
-		return new ScoutingReport(dog.Info, reward);
+		return new GiftReport(dog.Info, reward);
 	}
 
 	void handleClickFreeSlot() 

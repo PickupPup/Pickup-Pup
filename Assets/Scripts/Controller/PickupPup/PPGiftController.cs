@@ -5,11 +5,15 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 public class PPGiftController : SingletonController<PPGiftController>
 {	
+	const float DEFAULT_DISCOUNT = k.DEFAULT_DISCOUNT_DECIMAL;
+
 	PPTuning tuning;
 	WeightedRandomBuffer<CurrencyType> defaultReturnChances;
+	WeightedRandomBuffer<CurrencyData> giftChances;
 
 	public void Init(PPTuning tuning)
 	{
@@ -26,9 +30,14 @@ public class PPGiftController : SingletonController<PPGiftController>
 				tuning.DefaultChanceOfCollectingDogFood
 			}
 		);
+		giftChances = populateGifts(
+			tuning.DailyGiftOptions,
+			tuning.DailyGiftAmounts,
+			tuning.DailyGiftWeights,
+			tuning.DailyGiftDiscountAmount);
 	}
 
-	public CurrencyData GetGift(DogDescriptor dog)
+	public CurrencyData GetGiftFromDog(DogDescriptor dog)
 	{
 		CurrencyType specialization = dog.Breed.ISpecialization;
 		if(specialization == CurrencyType.None)
@@ -40,6 +49,11 @@ public class PPGiftController : SingletonController<PPGiftController>
 			CurrencyType type = getRandomizerBySpecialization(specialization).GetRandom();
 			return new CurrencyData(type, randomAmount());
 		}
+	}
+
+	public CurrencyData GetDailyGift()
+	{
+		return giftChances.GetRandom();
 	}
 
 	WeightedRandomBuffer<CurrencyType> getRandomizerBySpecialization(CurrencyType specialization)
@@ -57,6 +71,18 @@ public class PPGiftController : SingletonController<PPGiftController>
             tuning.ChanceOfSpecialGift,
 		};
 		return new WeightedRandomBuffer<CurrencyType>(currencies, weights);
+	}
+
+	WeightedRandomBuffer<CurrencyData> populateGifts(
+		string[] giftTypes, 
+		int[] giftAmounts, 
+		float[] giftChances,
+		float discountPercent)
+	{
+		ParallelArray<string, int> giftData = new ParallelArray<string, int>(giftTypes, giftAmounts);
+		CurrencyFactory giftFactory = new CurrencyFactory();
+		CurrencyData[] gifts = giftFactory.CreateGroup(giftData, discountPercent);
+		return new WeightedRandomBuffer<CurrencyData>(gifts, giftChances);
 	}
 
 	CurrencyType defaultRandomType()

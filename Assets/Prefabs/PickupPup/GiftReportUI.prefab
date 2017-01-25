@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 222744946651330124}
   - component: {fileID: 114669106309474960}
   m_Layer: 5
-  m_Name: ScoutingText
+  m_Name: RewardText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,9 +109,9 @@ GameObject:
   - component: {fileID: 223398400937714688}
   - component: {fileID: 114090405885910912}
   - component: {fileID: 114809595766534108}
-  - component: {fileID: 114216648968801538}
+  - component: {fileID: 114333400866646894}
   m_Layer: 5
-  m_Name: ScoutingReportUI
+  m_Name: GiftReportUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,21 +215,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Okay
---- !u!114 &114216648968801538
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1473165808563722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa33bbecd51f487aa09e9b4776a1900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alternateSprites: []
-  dogPortrait: {fileID: 114158827235088370}
-  rewardIcon: {fileID: 114632095141202956}
-  reportText: {fileID: 114669106309474960}
 --- !u!114 &114264872002182426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +227,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+--- !u!114 &114333400866646894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473165808563722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d58de1da96184a87953a664be809240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  dogPortrait: {fileID: 114158827235088370}
+  rewardIcon: {fileID: 114632095141202956}
+  reportText: {fileID: 114669106309474960}
 --- !u!114 &114357492573439896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114216648968801538}
+      - m_Target: {fileID: 0}
         m_MethodName: Destroy
         m_Mode: 1
         m_Arguments:

@@ -12,7 +12,8 @@ using k = PPGlobal;
 public abstract class PPData 
 {
 	protected const string BLACK_HEX = k.BLACK_HEX;
-	protected const string REPORT_FORMAT = k.REPORT_FORMAT;
+	protected const string DOG_GIFT_REPORT_FORMAT = k.DOG_GIFT_REPORT_FORMAT;
+	protected const string GENERIC_GIFT_REPORT_FORMAT = k.GENERIC_GIFT_REPORT_FORMAT;
 	protected const int NONE_INT = k.NONE_VALUE;
 	protected const int NOT_FOUND_INT = k.INVALID_VALUE;
 	protected const int DEFAULT_COINS = k.DEFAULT_COINS;

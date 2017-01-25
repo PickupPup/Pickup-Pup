@@ -87,6 +87,19 @@ public class CurrencySystem : PPData, ICurrencySystem
         currencies[type].IncreaseBy(deltaAmount);
     }
 
+	public void GiveCurrency(CurrencyData newCurrency)
+	{
+		CurrencyData existingCurrency;
+		if(TryGetCurrency(newCurrency.Type, out existingCurrency))
+		{
+			existingCurrency.IncreaseBy(newCurrency.Amount);
+		}
+		else 
+		{
+			addNewCurrency(newCurrency);
+		}
+	}
+		
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
         if (CanAfford(costCurrencyType, cost))
@@ -96,6 +109,27 @@ public class CurrencySystem : PPData, ICurrencySystem
         }
         // Otherwise do nothing
     }
+
+	public bool TryTakeCurrency(CurrencyData currencyToTake)
+	{
+		CurrencyData existingCurrency;
+		if(TryGetCurrency(currencyToTake.Type, out existingCurrency))
+		{
+			if(existingCurrency.Amount >= currencyToTake.Amount)
+			{
+				existingCurrency.Spend(currencyToTake.Amount);
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
+		else 
+		{
+			return false;
+		}
+	}
 
     public bool CanAfford(CurrencyType type, int cost)
     {
@@ -112,6 +146,11 @@ public class CurrencySystem : PPData, ICurrencySystem
 	public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
 	{
 		return currencies.TryGetValue(type, out data);
+	}
+
+	void addNewCurrency(CurrencyData currency)
+	{
+		currencies.Add(currency.Type, currency);
 	}
 
     Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies)

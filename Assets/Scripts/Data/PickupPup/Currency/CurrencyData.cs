@@ -70,6 +70,11 @@ public class CurrencyData : ResourceLoader
         return amount >= cost;
     }
 
+	public virtual void Spend(int cost)
+	{
+		amount -= cost;
+	}
+
     void setup(int initialAmount)
     {
         this.amount = initialAmount;

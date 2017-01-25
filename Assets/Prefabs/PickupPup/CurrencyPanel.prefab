@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 224820241617946900}
   - component: {fileID: 222560819595870694}
   - component: {fileID: 114808999184062944}
+  - component: {fileID: 114334247016894640}
   m_Layer: 5
   m_Name: Buttonheader
   m_TagString: Untagged
@@ -706,6 +707,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114334247016894640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1897374721032916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de5a280723a546c2a76f31fbc0b5a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  joinString: ' '
+  termKey:
+  - Free
+  - Gift
 --- !u!114 &114397618120542780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -933,6 +950,8 @@ MonoBehaviour:
   coinsDisplay: {fileID: 114748189097721202}
   dogFoodDisplay: {fileID: 114997765694934880}
   giftTimerDisplay: {fileID: 114681110028622312}
+  giftReportPrefab: {fileID: 1473165808563722, guid: e4fa16d4661524a56a37f6de68bd611e,
+    type: 2}
 --- !u!114 &114637444103017340
 MonoBehaviour:
   m_ObjectHideFlags: 1

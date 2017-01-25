@@ -10,6 +10,7 @@ public class PPUIController : MonoBehaviourExtended
     protected PPSceneController sceneController;
     protected PPGameController gameController;
     protected PPDataController dataController;
+	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
     protected Dog selectedDog;
@@ -38,7 +39,7 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController = PPSceneController.Instance;
 		gameController = PPGameController.GetInstance;
 		dataController = PPDataController.GetInstance;
-
+		giftController = PPGiftController.Instance;
         setCurrencyPanel();
     }
 
@@ -119,7 +120,7 @@ public class PPUIController : MonoBehaviourExtended
     {
         if (currencyPanel)
         {
-			currencyPanel.Init(gameController, dataController);
+			currencyPanel.Init(gameController, dataController, giftController);
         }
     }
 

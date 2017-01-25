@@ -13,9 +13,14 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     CurrencyDisplay dogFoodDisplay;
 	[SerializeField]
 	UIElement giftTimerDisplay;
+	[SerializeField]
+	GameObject giftReportPrefab;
+	[SerializeField]
+	bool overrideTimerForDebugging = false;
 
 	PPTimer dailyGiftTimer;
     PPDataController dataController;
+	PPGiftController giftController;
 
     #region MonoBehaviourExtended Overrides
 
@@ -37,14 +42,20 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
             dataController.UnsubscribeFromCoinsChange(updateCoinsDisplay);
             dataController.UnsubscribeFromFoodChange(updateDogFoodDisplay);
         }
+		if(dailyGiftTimer != null)
+		{
+			dailyGiftTimer.UnsubscribeFromTimeChange(handleDailyGiftCountDownChange);
+			dailyGiftTimer.UnsubscribeFromTimeUp(receiveDailyGift);
+		}
     }
 
     #endregion
 
-    public void Init(PPGameController gameController, PPDataController dataController)
+	public void Init(PPGameController gameController, PPDataController dataController, PPGiftController giftController)
     {
         unsubscribeEvents();
         this.dataController = dataController;
+		this.giftController = giftController;
         subscribeEvents();
 
         // Display Updated Currency
@@ -53,15 +64,15 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		initDailyGiftCountdown(gameController.Tuning, dataController);
     }
 
-    public CurrencyData GetDailyGift() 
+    CurrencyData getDailyGift() 
     {
-        throw new System.NotImplementedException();
+		return giftController.GetDailyGift();
     }
 
 	void initDailyGiftCountdown(PPTuning tuning, PPDataController dataController)
 	{
 		float dailyGiftCountdown;
-		if(dataController.DailyGiftCountdownRunning)
+		if(dataController.DailyGiftCountdownRunning && !overrideTimerForDebugging)
 		{
 			dailyGiftCountdown = dataController.DailyGiftCountdown;
 		}
@@ -71,6 +82,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		}
 		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
 		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
+		dailyGiftTimer.SubscribeToTimeUp(receiveDailyGift);
 		dataController.StartDailyGiftCountdown(dailyGiftTimer);
 		dailyGiftTimer.Begin();
 	}
@@ -89,5 +101,18 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     {
         dogFoodDisplay.updateAmount(newAmount);
     }
+
+	void receiveDailyGift()
+	{
+		CurrencyData gift = getDailyGift();
+		dataController.GiveCurrency(gift);
+		displayReceivedGift(gift);
+	}
+
+	void displayReceivedGift(CurrencyData gift)
+	{
+		GiftReportUI giftReport = Instantiate(giftReportPrefab).GetComponent<GiftReportUI>();
+		giftReport.Init(gift);
+	}
 
 }

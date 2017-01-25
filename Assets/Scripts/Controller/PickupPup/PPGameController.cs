@@ -150,6 +150,7 @@ public class PPGameController : GameController, ICurrencySystem
 	DogDatabase dogDatabase;
     ShopDatabase shop;
 	GiftDatabase gifts;
+	LanguageDatabase languages;
 	PPDataController dataController;
 	PPGiftController giftController;
 	DogSlot targetSlot;
@@ -163,6 +164,8 @@ public class PPGameController : GameController, ICurrencySystem
         shop = parseShopDatabase();
 		gifts = parseGiftDatabase();
 		tuning = parseTuning();
+		languages = LanguageDatabase.Instance;
+		languages.Initialize();
 		dogDatabase.Initialize();
         shop.Initialize();
 		gifts.Initialize();
@@ -247,6 +250,11 @@ public class PPGameController : GameController, ICurrencySystem
 		this.targetSlot = slot;
 	}
 		
+	public void GiveCurrency(CurrencyData currency)
+	{
+		dataController.GiveCurrency(currency);
+	}
+
     public bool CanAfford(CurrencyType type, int amount)
     {
         return dataController.CanAfford(type, amount);
@@ -257,11 +265,16 @@ public class PPGameController : GameController, ICurrencySystem
         return dataController.HasCurrency(type);
     }
 
+	public bool TryTakeCurrency(CurrencyData currency)
+	{
+		return dataController.TryTakeCurrency(currency);
+	}
+
     #endregion
 
 	public CurrencyData GetGift(DogDescriptor dog)
 	{
-		CurrencyData data = giftController.GetGift(dog);
+		CurrencyData data = giftController.GetGiftFromDog(dog);
 		dataController.ChangeCurrencyAmount(data.Type, data.Amount);
 		return data;
 	}

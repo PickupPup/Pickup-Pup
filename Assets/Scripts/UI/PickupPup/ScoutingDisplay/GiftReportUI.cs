@@ -7,7 +7,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoutingReportUI : UIElement 
+public class GiftReportUI : UIElement 
 {	
 	[SerializeField]
 	Image dogPortrait;
@@ -28,12 +28,20 @@ public class ScoutingReportUI : UIElement
 
 	#endregion
 
-	public void Init(ScoutingReport report)
+	public void Init(GiftReport report)
 	{
-		this.dogPortrait.sprite = report.Dog.Portrait;
+		if(report.HasDog)
+		{
+			this.dogPortrait.sprite = report.Dog.Portrait;
+		}
 		this.rewardIcon.sprite = report.Currency.Icon;
 		this.reportText.text = report.ToString();
 		Show();
+	}
+
+	public void Init(CurrencyData gift)
+	{
+		Init(new GiftReport(gift));
 	}
 
 	public void SubscribeToDimiss(MonoAction action)
@@ -49,20 +57,53 @@ public class ScoutingReportUI : UIElement
 }
 
 [System.Serializable]
-public class ScoutingReport : PPData
+public class GiftReport : PPData
 {
-	public DogDescriptor Dog{get; private set;}
-	public CurrencyData Currency{get; private set;}
+	#region Instance Accessors
 
-	public ScoutingReport(DogDescriptor dog, CurrencyData currency)
+	public bool HasDog
+	{
+		get
+		{
+			return Dog != null;
+		}
+	}
+
+	public DogDescriptor Dog
+	{
+		get; 
+		private set;
+	}
+
+	public CurrencyData Currency
+	{
+		get;
+		private set;
+	}
+
+	#endregion
+
+	public GiftReport(DogDescriptor dog, CurrencyData currency)
 	{
 		this.Dog = dog;
 		this.Currency = currency;
 	}
 
+	public GiftReport(CurrencyData currency)
+	{
+		this.Currency = currency;
+	}
+
 	public override string ToString()
 	{
-		return string.Format(REPORT_FORMAT, Dog.Name, Currency.Amount, Currency.Type);
+		if(HasDog)
+		{
+			return string.Format(DOG_GIFT_REPORT_FORMAT, Dog.Name, Currency.Amount, Currency.Type);
+		}
+		else
+		{
+			return string.Format(GENERIC_GIFT_REPORT_FORMAT, Currency.Amount, Currency.Type);
+		}
 	}
 
 }
