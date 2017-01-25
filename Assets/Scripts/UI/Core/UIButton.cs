@@ -36,6 +36,7 @@ public class UIButton : UIElement
 	public void UnsubscribeAllClickActions()
 	{
 		this.clickAction = null;
+
 	}
 
 	public void Select()

@@ -111,8 +111,12 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
 	void displayReceivedGift(CurrencyData gift)
 	{
-		GiftReportUI giftReport = Instantiate(giftReportPrefab).GetComponent<GiftReportUI>();
-		giftReport.Init(gift);
+        UIElement giftReport;
+        if(!UIElement.TryPullFromSpawnPool(typeof(GiftReportUI), out giftReport))
+        {
+            giftReport = Instantiate(giftReportPrefab).GetComponent<GiftReportUI>();
+        }
+        (giftReport as GiftReportUI).Init(gift);
 	}
 
 }

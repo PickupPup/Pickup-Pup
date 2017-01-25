@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+  shouldCollectInSpawnPool: 1
   joinString: ' '
   termKey:
   - Free
@@ -952,6 +953,7 @@ MonoBehaviour:
   giftTimerDisplay: {fileID: 114681110028622312}
   giftReportPrefab: {fileID: 1473165808563722, guid: e4fa16d4661524a56a37f6de68bd611e,
     type: 2}
+  overrideTimerForDebugging: 1
 --- !u!114 &114637444103017340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -997,6 +999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114681274725467782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1036,6 +1039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+  shouldCollectInSpawnPool: 1
   iconImage: {fileID: 114437580356616522}
 --- !u!114 &114804406772249282
 MonoBehaviour:
@@ -1341,6 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternateSprites: []
+  shouldCollectInSpawnPool: 1
   iconImage: {fileID: 114278535726864470}
 --- !u!222 &222075174207056932
 CanvasRenderer:

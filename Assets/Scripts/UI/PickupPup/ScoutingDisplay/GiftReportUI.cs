@@ -15,6 +15,8 @@ public class GiftReportUI : UIElement
 	Image rewardIcon;
 	[SerializeField]
 	Text reportText;
+    [SerializeField]
+    bool autoDestroyOnClick = true;
 
 	UIButton dismissButton;
 
@@ -23,8 +25,17 @@ public class GiftReportUI : UIElement
 	protected override void setReferences ()
 	{
 		base.setReferences ();
-		dismissButton = ensureReference<UIButton>();
+        dismissButton = ensureReference<UIButton>(searchChildren:true);
 	}
+
+    protected override void fetchReferences ()
+    {
+        base.fetchReferences ();
+        if(autoDestroyOnClick)
+        {
+            dismissButton.SubscribeToClick(Destroy);
+        }
+    }
 
 	#endregion
 

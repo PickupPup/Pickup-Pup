@@ -91,6 +91,68 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &285541497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 285541500}
+  - component: {fileID: 285541499}
+  - component: {fileID: 285541498}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &285541498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285541497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &285541499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285541497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &285541500
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285541497}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &399698710
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +306,7 @@ Prefab:
     - target: {fileID: 224900804115513876, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 114.41662
+      value: 122.672226
       objectReference: {fileID: 0}
     - target: {fileID: 224900804115513876, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
@@ -254,7 +316,7 @@ Prefab:
     - target: {fileID: 224900804115513876, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 198.83324
+      value: 215.34445
       objectReference: {fileID: 0}
     - target: {fileID: 224900804115513876, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
@@ -274,7 +336,7 @@ Prefab:
     - target: {fileID: 224659772495038526, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 318.14984
+      value: 342.9167
       objectReference: {fileID: 0}
     - target: {fileID: 224659772495038526, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
@@ -284,7 +346,7 @@ Prefab:
     - target: {fileID: 224659772495038526, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 198.83324
+      value: 215.34445
       objectReference: {fileID: 0}
     - target: {fileID: 224659772495038526, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
@@ -304,7 +366,7 @@ Prefab:
     - target: {fileID: 224609788372452216, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 576.6664
+      value: 617.94446
       objectReference: {fileID: 0}
     - target: {fileID: 224609788372452216, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
@@ -314,16 +376,11 @@ Prefab:
     - target: {fileID: 224609788372452216, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 308.3999
+      value: 324.91113
       objectReference: {fileID: 0}
     - target: {fileID: 224609788372452216, guid: 8d69af9264e9c13488259a47880b0431,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114529120888782602, guid: 8d69af9264e9c13488259a47880b0431,
-        type: 2}
-      propertyPath: overrideTimerForDebugging
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
