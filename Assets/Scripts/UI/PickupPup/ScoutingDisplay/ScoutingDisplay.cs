@@ -46,7 +46,7 @@ public class ScoutingDisplay : PPUIElement
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
-		game = PPGameController.GetInstance;
+		gameController = PPGameController.GetInstance;
 		setupScoutingSlots(scoutingSlots);
 	}
 
@@ -70,7 +70,7 @@ public class ScoutingDisplay : PPUIElement
 		{
 			slot.SubscribeToClickWhenFree(
 				delegate() {
-					game.SetTargetSlot(slot);
+					gameController.SetTargetSlot(slot);
 					handleClickFreeSlot();		
 				}
 			);
@@ -79,10 +79,10 @@ public class ScoutingDisplay : PPUIElement
 
 	void handleScoutingTimerEnd(Dog dog)
 	{
-		if(game)
+		if(gameController)
 		{
 			DogDescriptor dogInfo = dog.Info;
-			CurrencyData reward = game.GetGift(dogInfo);
+			CurrencyData reward = gameController.GetGift(dogInfo);
 			GiftReport report = new GiftReport(dogInfo, reward);
 			createReportUI(report);
 		}
@@ -108,7 +108,7 @@ public class ScoutingDisplay : PPUIElement
 
 	void handleDogSelected(Dog dog)
 	{
-		game.SendToTargetSlot(dog);
+		gameController.SendToTargetSlot(dog);
 		dogBrowser.UnsubscribeFromDogClick(handleDogSelected);
 		dogBrowser.Close();
 	}

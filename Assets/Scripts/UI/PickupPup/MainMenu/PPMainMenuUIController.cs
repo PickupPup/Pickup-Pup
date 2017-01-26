@@ -13,8 +13,6 @@ public class PPMainMenuUIController : PPUIElement
     [SerializeField]
     SettingsPopup settingsPopup;
 
-    PPSceneController sceneController;
-
     protected override void fetchReferences()
     {
         base.fetchReferences();
