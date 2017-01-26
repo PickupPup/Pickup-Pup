@@ -12,6 +12,8 @@ public class NavigationPanel : SingletonController<NavigationPanel>
     Button menuButton;
     [SerializeField]
     Button adoptButton;
+    [SerializeField]
+    PPMainMenuUIController mainMenu;
 
     PPSceneController sceneController;
 
@@ -35,7 +37,7 @@ public class NavigationPanel : SingletonController<NavigationPanel>
 
     public void OnMenuClick()
     {
-        sceneController.LoadMainMenu();
+        mainMenu.Toggle();
     }
 
     public void OnAdoptClick()

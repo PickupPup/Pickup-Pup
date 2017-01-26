@@ -6,14 +6,24 @@
 
 using UnityEngine;
 
-public class PPMainMenuUIController : PPUIController 
+public class PPMainMenuUIController : PPUIElement 
 {
     [SerializeField]
     GameObject dogBrowserObject;
+    [SerializeField]
+    SettingsPopup settingsPopup;
+
+    PPSceneController sceneController;
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        sceneController = PPSceneController.Instance;       
+    }
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        Hide();
     }
 
     public void OnShopClick()
@@ -31,7 +41,7 @@ public class PPMainMenuUIController : PPUIController
 
     public void OnSettingsClick()
     {
-        // Disabled
+        settingsPopup.Show();
     }
 
     public void OnGiftsClick()

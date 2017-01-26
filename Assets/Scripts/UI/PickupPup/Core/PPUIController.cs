@@ -57,11 +57,6 @@ public class PPUIController : MonoBehaviourExtended
 
 	#endregion
 
-    public void LoadMainMenu() 
-	{
-		sceneController.LoadMainMenu();
-	}
-
     public void LoadShelter()
     {
         setNavigationPanel(false);
