@@ -37,7 +37,7 @@ public class NavigationPanel : SingletonController<NavigationPanel>
 
     public void OnMenuClick()
     {
-        mainMenu.Show();
+        mainMenu.Toggle();
     }
 
     public void OnAdoptClick()
