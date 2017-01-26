@@ -24,6 +24,12 @@ public class UIEventListener : MonoBehaviourExtended
 		}
 	}
 
+	protected override void fetchReferences()
+	{
+		base.fetchReferences();
+		triggerHandlersOnStart();
+	}
+
 	protected override void handleNamedEvent(string eventName) 
 	{
 		base.handleNamedEvent(eventName);
@@ -35,6 +41,18 @@ public class UIEventListener : MonoBehaviourExtended
 			}
 		}
 	}
+
+	void triggerHandlersOnStart()
+	{
+		foreach(UIEventHandler handler in handlers)
+		{
+			if(handler.RunsOnStart())
+			{
+				handler.Execute(element);
+			}
+		}
+	}
+
 
 	#endregion
 

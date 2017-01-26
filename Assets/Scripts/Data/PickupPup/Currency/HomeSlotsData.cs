@@ -60,7 +60,7 @@ public class HomeSlotsData : CurrencyData
         return vacantSlots >= cost;
     }
 
-    public override void IncreaseBy(int deltaAmount)
+    public override void ChangeBy(int deltaAmount)
     {
         vacantSlots += deltaAmount;
     }

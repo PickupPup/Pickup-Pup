@@ -3,7 +3,8 @@
  * Description: Creates instances of an object (generic)
  */
 
-public abstract class ObjectFactory<T>
+[System.Serializable]
+public abstract class ObjectFactory<T> : ResourceLoader
 {
 	public abstract T Create(params object[] args);
 	public abstract T[] CreateGroup(params object[] args);

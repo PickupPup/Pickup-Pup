@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class PPTimer : PPData 
+public class PPTimer : PPData, ISubscribable
 {
 	#region Static Accessors
 
@@ -83,11 +83,19 @@ public class PPTimer : PPData
 	[System.NonSerialized]
 	IGameTimer timer;
 
-	public PPTimer(float maxTime, float timeStep) 
+    public PPTimer(float maxTime, float timeStep, bool autoStopAtZero = true) 
 	{
 		this.maxTime = maxTime;
 		this.timeStep = timeStep;
-		setupTimer(maxTime, timeStep);
+        this.timer = setupTimer(maxTime, timeStep);
+        if(autoStopAtZero)
+        {
+            this.timer.SubscribeToTimeUp(Stop);
+            this.timer.SubscribeToTimeUp(delegate 
+                {
+                    SetTimeRemaining(0, checkForEvents:false);
+                });
+        }
 	}
 
 	public void Init() 
@@ -106,7 +114,7 @@ public class PPTimer : PPData
 	IGameTimer setupTimer(float maxTime, float timeStep) 
 	{
 		GameObject timerObject = new GameObject();
-		timer = timerObject.AddComponent<MonoTimer>();
+		MonoTimer timer = timerObject.AddComponent<MonoTimer>();
 		return timer.Setup(maxTime, timeStep);
 	}
 
@@ -114,6 +122,15 @@ public class PPTimer : PPData
 	{
 		timer.Teardown();
 	}
+
+	#region ISubscribable Interface
+
+	bool ISubscribable.TryUnsubscribeAll()
+	{
+		return timer.TryUnsubscribeAll();
+	}
+
+	#endregion
 
 	public void SubscribeToTimeChange(PPData.DataActionf action) 
 	{

@@ -29,14 +29,29 @@ public class PPGameSave : GameSave, ISerializable
         get;
         private set;
     }
+		
+	// In seconds:
+	public float DailyGiftCountdown
+	{
+		get;
+		private set;
+	}
+
+	// The player gets their first gift w/out having to wait 24 hours
+	public bool HasGiftToRedeem
+	{
+		get;
+		private set;
+	}
 
 	#endregion
 
-	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies) 
+	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies, bool hasGiftToRedeem = true)
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(adoptedDogs);
 		this.ScoutingDogs = new List<DogDescriptor>(scoutingDogs);
         this.Currencies = currencies;
+        this.HasGiftToRedeem = hasGiftToRedeem;
 	}
 
 	#region ISerializable Interface 
@@ -52,6 +67,13 @@ public class PPGameSave : GameSave, ISerializable
 			dog.UpdateFromSave(this);
 		}
 		this.Currencies = info.GetValue(CURRENCY, typeof(CurrencySystem)) as CurrencySystem;
+		this.DailyGiftCountdown = (float) info.GetValue(DAILY_GIFT_COUNTDOWN, typeof(float));
+		this.DailyGiftCountdown -= TimeInSecSinceLastSave;
+		if(this.DailyGiftCountdown < 0)
+		{
+			this.DailyGiftCountdown = 0;
+		}
+		this.HasGiftToRedeem = (bool) info.GetValue(HAS_GIFT_TO_REDEEM, typeof(bool));
 	}
 		
 	// Implement this method to serialize data. The method is called on serialization.
@@ -61,9 +83,22 @@ public class PPGameSave : GameSave, ISerializable
 		info.AddValue(ADOPTED, this.AdoptedDogs);
 		info.AddValue(SCOUTING, this.ScoutingDogs);
 		info.AddValue(CURRENCY, this.Currencies);
+		info.AddValue(DAILY_GIFT_COUNTDOWN, this.DailyGiftCountdown);
+		info.AddValue(HAS_GIFT_TO_REDEEM, this.HasGiftToRedeem);
 	}
 
 	#endregion
+
+    public void RedeemGift(CurrencyData gift)
+    {
+        HasGiftToRedeem = false;
+        Currencies.GiveCurrency(gift);
+    }
+
+    public void NotifyHasGiftToRedeem()
+    {
+        HasGiftToRedeem = true;
+    }
 
 	public void SendDogToScout(Dog dog)
 	{
@@ -72,6 +107,16 @@ public class PPGameSave : GameSave, ISerializable
 			ScoutingDogs.Add(dog.Info);
 			dog.SubscribeToScoutingTimerEnd(handleDogFinishedScouting);
 		}
+	}
+
+	public void StartDailyGiftCountdown(PPTimer timer)
+	{
+		timer.SubscribeToTimeChange(updateDailyGiftCountdown);
+	}
+
+	void updateDailyGiftCountdown(float timeRemaining)
+	{
+		this.DailyGiftCountdown = timeRemaining;
 	}
 
 	void handleDogFinishedScouting(Dog dog)
@@ -88,5 +133,5 @@ public class PPGameSave : GameSave, ISerializable
     {
         AdoptedDogs.Add(dog);
     }
-
+		
 }

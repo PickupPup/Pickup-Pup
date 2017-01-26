@@ -11,7 +11,7 @@ public class CurrencyData : ResourceLoader
 {
     #region Instance Accessors
 
-    public int Amount
+    public virtual int Amount
     {
         get
         {
@@ -51,18 +51,16 @@ public class CurrencyData : ResourceLoader
 
     public CurrencyData(CurrencyType type, int initialAmount)
     {
-        spriteDatabase = SpritesheetDatabase.GetInstance;
-
+        setup(initialAmount);
         this.type = type;
-        amount = initialAmount;
     }
 
     protected CurrencyData(int initialAmount)
     {
-        spriteDatabase = SpritesheetDatabase.GetInstance;
+        setup(initialAmount);
     }
 
-    public virtual void IncreaseBy(int deltaAmount)
+    public virtual void ChangeBy(int deltaAmount)
     {
         amount += deltaAmount;
     }
@@ -70,6 +68,12 @@ public class CurrencyData : ResourceLoader
     public virtual bool CanAfford(int cost)
     {
         return amount >= cost;
+    }
+
+    void setup(int initialAmount)
+    {
+        this.amount = initialAmount;
+        checkDatabaseReferences();
     }
 
 	void checkDatabaseReferences()

@@ -250,6 +250,27 @@ public class PPGameController : GameController, ICurrencySystem
 		this.targetSlot = slot;
 	}
 		
+	public void GiveCurrency(CurrencyData currency)
+	{
+		dataController.GiveCurrency(currency);
+	}
+
+	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)
+	{
+		dataController.SubscribeToCurrencyChange(type, callback);
+	}
+
+	public void UnsubscribeFromCurrencyChange(CurrencyType type, MonoActionInt callback)
+	{
+		dataController.UnsubscribeFromCurrencyChange(type, callback);
+	}
+
+	bool ICurrencySystem.TryUnsubscribeAll()
+	{
+		(dataController as ICurrencySystem).TryUnsubscribeAll();
+		return true;
+	}
+
     public bool CanAfford(CurrencyType type, int amount)
     {
         return dataController.CanAfford(type, amount);
@@ -260,11 +281,16 @@ public class PPGameController : GameController, ICurrencySystem
         return dataController.HasCurrency(type);
     }
 
+	public bool TryTakeCurrency(CurrencyData currency)
+	{
+		return dataController.TryTakeCurrency(currency);
+	}
+
     #endregion
 
 	public CurrencyData GetGift(DogDescriptor dog)
 	{
-		CurrencyData data = giftController.GetGift(dog);
+		CurrencyData data = giftController.GetGiftFromDog(dog);
 		dataController.ChangeCurrencyAmount(data.Type, data.Amount);
 		return data;
 	}
