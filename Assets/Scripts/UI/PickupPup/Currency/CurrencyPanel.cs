@@ -43,7 +43,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		if(dailyGiftTimer != null)
 		{
 			dailyGiftTimer.UnsubscribeFromTimeChange(handleDailyGiftCountDownChange);
-			dailyGiftTimer.UnsubscribeFromTimeUp(receiveDailyGift);
+			dailyGiftTimer.UnsubscribeFromTimeUp(makeDailyGiftAvailableToRedeem);
 		}
     }
 
@@ -79,10 +79,9 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
             dailyGiftCountdown = tuning.WaitTimeSecsForDailyGift;
 		}
 		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
-        if(dataController.IsFirstGift)
+        if(dataController.HasGiftToRedeem)
         {
-            dataController.ReceiveFirstGift();
-            receiveDailyGift();
+            makeDailyGiftAvailableToRedeem();
         }
         else
         {
@@ -98,9 +97,10 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		
 	void resetAndBeginGiftTimer()
 	{
+        collectGiftButton.TryUnsubscribeAll();
 		(dailyGiftTimer as ISubscribable).TryUnsubscribeAll();
 		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
-		dailyGiftTimer.SubscribeToTimeUp(receiveDailyGift);
+		dailyGiftTimer.SubscribeToTimeUp(makeDailyGiftAvailableToRedeem);
 		dataController.StartDailyGiftCountdown(dailyGiftTimer);
 		dailyGiftTimer.Begin();
 	}
@@ -120,11 +120,12 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
         dogFoodDisplay.updateAmount(newAmount);
     }
 
-	void receiveDailyGift()
+	void makeDailyGiftAvailableToRedeem()
 	{
 		toggleBetweenTimerAndGiftReceived(giftReceived:true);
 		collectGiftButton.TryUnsubscribeAll();
-		collectGiftButton.SubscribeToClick(collectReceivedGift);
+		collectGiftButton.SubscribeToClick(redeemReceivedGift);
+        dataController.NotifyHasGiftToRedeem();
 	}
 
 	void toggleBetweenTimerAndGiftReceived(bool giftReceived)
@@ -138,10 +139,10 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		}
 	}
 
-	void collectReceivedGift()
+	void redeemReceivedGift()
 	{
 		CurrencyData gift = getDailyGift();
-		dataController.GiveCurrency(gift);
+        dataController.RedeemGift(gift);
         UIElement giftReport;
         if(!UIElement.TryPullFromSpawnPool(typeof(GiftReportUI), out giftReport))
         {

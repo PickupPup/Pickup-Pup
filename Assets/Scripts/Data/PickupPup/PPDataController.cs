@@ -80,11 +80,11 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
-    public bool IsFirstGift
+    public bool HasGiftToRedeem
     {
         get
         {
-            return currentGame.FirstGift;
+            return currentGame.HasGiftToRedeem;
         }
     }
 
@@ -309,9 +309,14 @@ public class PPDataController : DataController, ICurrencySystem
 		currentGame.StartDailyGiftCountdown(timer);
 	}
 	
-    public void ReceiveFirstGift()
+    public void RedeemGift(CurrencyData gift)
     {
-        currentGame.ReceiveFirstGift();
+        currentGame.RedeemGift(gift);
+    }
+
+    public void NotifyHasGiftToRedeem()
+    {
+        currentGame.NotifyHasGiftToRedeem();
     }
 
     void bufferChangeCurrencyDelegate(CurrencyType type, MonoActionInt callback)
