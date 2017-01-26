@@ -99,6 +99,7 @@ public class DogSlot : PPUIElement
 	{
 		this.dog = null;
 		this.dogInfo = null;
+        this.dogImage.sprite = null;
 	}
 
 	public virtual void Init(Dog dog)
