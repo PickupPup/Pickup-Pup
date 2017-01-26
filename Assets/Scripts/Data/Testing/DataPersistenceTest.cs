@@ -23,9 +23,9 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		base.fetchReferences();
 		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
-		dataController.SubscribeToCoinsChange(updateCoinsText);
-		dataController.SubscribeToFoodChange(updateFoodText);
-        dataController.SubscribeToHomeSlotsChange(updateHomeSlotsText);
+		dataController.SubscribeToCurrencyChange(CurrencyType.Coins, updateCoinsText);
+		dataController.SubscribeToCurrencyChange(CurrencyType.DogFood, updateFoodText);
+		dataController.SubscribeToCurrencyChange(CurrencyType.HomeSlots, updateHomeSlotsText);
 		dataController.LoadGame();
 
         // Display at start

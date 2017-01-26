@@ -84,6 +84,7 @@ public class DogOutsideSlot : DogSlot
 		nameText.text = dog.Name;
 		dogImage.sprite = dog.Portrait;
 		dog.SetTimer(dogInfo.TimeRemainingScouting);
+        timerText.text = dog.TimeRemainingStr;
 		dog.ResumeTimer();
 	}
 		

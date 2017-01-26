@@ -21,6 +21,14 @@ public class ParallelArray<T, K>
 		}
 	}
 
+	public int Length
+	{
+		get
+		{
+			return data.Length;
+		}
+	}
+
 	#endregion
 
 	DataPair<T, K>[] data;

@@ -9,10 +9,29 @@ using System.Collections.Generic;
 
 public class ScoutingDisplay : PPUIElement 
 {
+    #region Static Accessors
+
+    // Not quite a singleton, because the scouting display is distinct to each scene
+    public static ScoutingDisplay MostRecentInstance
+    {
+        get;
+        private set;
+    }
+
+    public static bool HasActiveInstance
+    {
+        get
+        {
+            return MostRecentInstance != null && MostRecentInstance.gameObject != null;
+        }
+    }
+
+    #endregion
+
 	[SerializeField]
 	DogBrowser dogBrowser;
 	[SerializeField]
-	ScoutingReportUI scoutingReportDisplay;
+	GiftReportUI scoutingReportDisplay;
 
 	DogOutsideSlot[] scoutingSlots;
 	Dictionary<int, DogOutsideSlot> slotsByIndex = new Dictionary<int, DogOutsideSlot>();
@@ -41,6 +60,7 @@ public class ScoutingDisplay : PPUIElement
 		{
 			slotsByIndex.Add(slot.transform.GetSiblingIndex(), slot);
 		}
+        MostRecentInstance = this;
 	}
 
 	protected override void fetchReferences()
@@ -83,21 +103,23 @@ public class ScoutingDisplay : PPUIElement
 		{
 			DogDescriptor dogInfo = dog.Info;
 			CurrencyData reward = game.GetGift(dogInfo);
-			ScoutingReport report = new ScoutingReport(dogInfo, reward);
+			GiftReport report = new GiftReport(dogInfo, reward);
 			createReportUI(report);
 		}
+        // Safeguard to prevent multiple copies of this method being subscribed:
+        dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
 	}
 
-	ScoutingReportUI createReportUI(ScoutingReport report)
+	GiftReportUI createReportUI(GiftReport report)
 	{
-		ScoutingReportUI reportUI = Instantiate(scoutingReportDisplay);
+		GiftReportUI reportUI = Instantiate(scoutingReportDisplay);
 		reportUI.Init(report);
 		return reportUI;
 	}
 
-	ScoutingReport getScoutingReport(Dog dog, CurrencyData reward)
+	GiftReport getScoutingReport(Dog dog, CurrencyData reward)
 	{
-		return new ScoutingReport(dog.Info, reward);
+		return new GiftReport(dog.Info, reward);
 	}
 
 	void handleClickFreeSlot() 

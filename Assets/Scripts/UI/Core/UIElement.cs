@@ -5,13 +5,18 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using k = PPGlobal;
+using u = UnityEngine;
 
 public class UIElement : MonoBehaviourExtended 
 {
 	protected const string OFF = k.OFF;
 	protected const string ON = k.ON;
+
+    static Dictionary<Type, Stack<UIElement>> uiElementSpawnPools = new Dictionary<Type, Stack<UIElement>>();
 
 	#region Instance Accessors
 
@@ -51,6 +56,8 @@ public class UIElement : MonoBehaviourExtended
 
 	[SerializeField]
 	protected Sprite[] alternateSprites;
+    [SerializeField]
+    protected bool shouldCollectInSpawnPool = true;
     protected Image image;
     protected Text text;
     protected CanvasGroup canvas;
@@ -78,11 +85,16 @@ public class UIElement : MonoBehaviourExtended
 		gameObject.SetActive(false);
 	}
 
+    public void Toggle()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
+
 	public void RandomSprite() 
 	{
 		if(hasImage && hasAlternateSprites) 
 		{
-			this.image.sprite = alternateSprites[Random.Range(0, alternateSprites.Length)];
+			this.image.sprite = alternateSprites[u.Random.Range(0, alternateSprites.Length)];
 		}
 	}
 
@@ -109,6 +121,11 @@ public class UIElement : MonoBehaviourExtended
 			stopOpacityCoroutine();
 		}
 	}
+
+    public override void Destroy()
+    {
+        collectInSpawnPool();
+    }
 
 	protected Image getTopImage()
 	{
@@ -158,5 +175,32 @@ public class UIElement : MonoBehaviourExtended
 			}
 		}
 	}
+
+    public static bool TryPullFromSpawnPool(Type type, out UIElement elem)
+    {
+        Stack<UIElement> pool;
+        if(uiElementSpawnPools.TryGetValue(type, out pool))
+        {
+            elem = pool.Pop();
+            elem.gameObject.SetActive(true);
+            return true;
+        }
+        else
+        {
+            elem = null;
+            return false;
+        }
+    }
+
+    void collectInSpawnPool()
+    {
+        Stack<UIElement> pool;
+        if(!uiElementSpawnPools.TryGetValue(this.GetType(), out pool))
+        {
+            pool = new Stack<UIElement>();   
+        }
+        gameObject.SetActive(false);
+        pool.Push(this);
+    }
 
 }

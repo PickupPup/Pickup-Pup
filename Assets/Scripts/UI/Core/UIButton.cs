@@ -36,6 +36,7 @@ public class UIButton : UIElement
 	public void UnsubscribeAllClickActions()
 	{
 		this.clickAction = null;
+
 	}
 
 	public void Select()
@@ -76,7 +77,14 @@ public class UIButton : UIElement
 			setButtonColors();
 		}
 	}
-
+		
+	public override bool TryUnsubscribeAll()
+	{
+		base.TryUnsubscribeAll();
+		UnsubscribeAllClickActions();
+		return true;
+	}
+		
 	#endregion
 
 	void setButtonColors()

@@ -21,8 +21,27 @@ public class CurrencyDisplay : PPUIElement
 
 		type = currency.Type;
         iconImage.sprite = currency.Icon;
-		subscribeEvents();
         updateAmount(currency.Amount);
+		this.dataController.SubscribeToCurrencyChange(type, updateAmount);
+	}
+
+	protected override void cleanupReferences()
+	{
+		base.cleanupReferences();
+		if(dataController)
+		{
+			dataController.UnsubscribeFromCurrencyChange(type, updateAmount);
+		}
+	}
+
+	protected override void subscribeEvents()
+	{
+		base.subscribeEvents();
+	}
+
+	protected override void unsubscribeEvents()
+	{
+		base.unsubscribeEvents();
 	}
 
 	public void updateAmount(int newAmount)

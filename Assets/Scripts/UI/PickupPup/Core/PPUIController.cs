@@ -10,6 +10,7 @@ public class PPUIController : MonoBehaviourExtended
     protected PPSceneController sceneController;
     protected PPGameController gameController;
     protected PPDataController dataController;
+	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
     protected Dog selectedDog;
@@ -38,7 +39,7 @@ public class PPUIController : MonoBehaviourExtended
 		sceneController = PPSceneController.Instance;
 		gameController = PPGameController.GetInstance;
 		dataController = PPDataController.GetInstance;
-
+		giftController = PPGiftController.Instance;
         setCurrencyPanel();
     }
 
@@ -55,11 +56,6 @@ public class PPUIController : MonoBehaviourExtended
 	}
 
 	#endregion
-
-    public void LoadMainMenu() 
-	{
-		sceneController.LoadMainMenu();
-	}
 
     public void LoadShelter()
     {
@@ -119,7 +115,7 @@ public class PPUIController : MonoBehaviourExtended
     {
         if (currencyPanel)
         {
-            currencyPanel.Init(dataController);
+			currencyPanel.Init(gameController, dataController, giftController);
         }
     }
 

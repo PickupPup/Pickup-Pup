@@ -119,6 +119,14 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+    public string TimeRemainingStr
+    {
+        get
+        {
+            return scoutingTimer.TimeRemainingStr;
+        }
+    }
+
 	#endregion
 
 	bool hasDescriptor 
@@ -153,6 +161,19 @@ public class Dog : MobileObjectBehaviour
 	PPData.DogAction onScoutingTimerEnd;
 	PPData.DogActionf onScoutingTimerChange;
 	DogSlot slot;
+
+    #region MonoBehaviourExtended Overrides
+
+    public override bool TryUnsubscribeAll()
+    {
+        base.TryUnsubscribeAll();
+        (scoutingTimer as ISubscribable).TryUnsubscribeAll();
+        onScoutingTimerChange = null;
+        onScoutingTimerEnd = null;
+        return true;
+    }
+
+    #endregion
 
 	#region Event Subscription
 
@@ -317,5 +338,10 @@ public class Dog : MobileObjectBehaviour
 			return base.Equals(obj);
 		}
 	}
+
+    public override int GetHashCode ()
+    {
+        return Info.GetHashCode();
+    }
 
 }

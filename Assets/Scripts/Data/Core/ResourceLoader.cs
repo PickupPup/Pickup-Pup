@@ -29,6 +29,20 @@ public class ResourceLoader
 
 	protected const char JOIN_CHAR = k.JOIN_CHAR;
 
+	protected const float DEFAULT_DISCOUNT = k.DEFAULT_DISCOUNT_DECIMAL;
+
+	const float FULL_PERCENT = k.FULL_PERCENT_F;
+
+    protected static float perecentToDecimal(int percentOf100)
+    {
+        return ((float) percentOf100) / FULL_PERCENT;
+    }
+
+    protected static int decimalToPercent(float fraction)
+    {
+        return (int) (fraction * FULL_PERCENT);
+    }
+
 	protected T loadFromResources<T>(string path) where T : UnityEngine.Object
 	{
 		return Resources.Load<T>(path);

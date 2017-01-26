@@ -39,14 +39,4 @@ public class PPShopUIController : PPUIController
         }
     }
 
-    public void OnMenuClick()
-    {
-		sceneController.LoadMainMenu();
-    }
-
-    public void OnAdoptClick()
-    {
-        sceneController.LoadShelter();
-    }
-
 }
