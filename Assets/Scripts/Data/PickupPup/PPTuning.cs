@@ -10,7 +10,7 @@ public class PPTuning : PPData
 {
 	#region Instance Acessors
 
-	public Color AdoptedBackgroundColorRGBA
+	public Color AdoptedBackgroundColor
 	{
 		get
 		{
@@ -26,7 +26,7 @@ public class PPTuning : PPData
 		}
 	}
 
-	public Color AdoptedTextColorRGBA
+	public Color AdoptedTextColor
 	{
 		get
 		{
@@ -178,6 +178,14 @@ public class PPTuning : PPData
 		}
 	}
 
+    public Color DefaultBackgroundColor
+    {
+        get
+        {
+            return getColor(defaultBackgroundColorRGBA);
+        }
+    }
+
 	public float DefaultChanceOfCollectingDogFood
 	{
 		get
@@ -194,13 +202,21 @@ public class PPTuning : PPData
 		}
 	}
 
-	public Color DefaultPriceColorRGBA
+	public Color DefaultPriceColor
 	{
 		get
 		{
 			return getColor(defaultPriceColorRGBA);
 		}
 	}
+
+    public Color DefaultTextColor
+    {
+        get
+        {
+            return getColor(defaultTextColorRGBA);
+        }
+    }
 
 	public float DefaultTimerTimeStepSec
 	{
@@ -370,11 +386,11 @@ public class PPTuning : PPData
 		}
 	}
 
-	public Color UnaffordableColorRGBA
+	public Color UnaffordableTextColor
 	{
 		get
 		{
-			return getColor(unaffordableColorRGBA);
+			return getColor(unaffordableTextColorRGBA);
 		}
 	}
 
@@ -440,12 +456,16 @@ public class PPTuning : PPData
 	float[] dailyGiftWeights;
 	[SerializeField]
 	int dailyNumberOfNewDogsAtShelter;
+    [SerializeField]
+    int[] defaultBackgroundColorRGBA;
 	[SerializeField]
 	float defaultChanceOfCollectingDogFood;
 	[SerializeField]
 	float defaultChanceOfCollectingMoney;
 	[SerializeField]
 	int[] defaultPriceColorRGBA;
+    [SerializeField]
+    int[] defaultTextColorRGBA;
 	[SerializeField]
 	float defaultTimerTimeStepSec;
 	[SerializeField]
@@ -489,7 +509,7 @@ public class PPTuning : PPData
 	[SerializeField]
 	float timeScoutingToTimeRestingRatio;
 	[SerializeField]
-	int[] unaffordableColorRGBA;
+	int[] unaffordableTextColorRGBA;
 	[SerializeField]
 	int videoAdCoinBonus;
 	[SerializeField]
