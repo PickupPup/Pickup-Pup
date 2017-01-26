@@ -33,6 +33,7 @@ public class SettingsPopup : PPUIElement
 		{
 			dataController.Reset();
 		}
+        requestReloadScene();
 	}
 
 	#region MonoBehaviourExtended Overrides
