@@ -9,6 +9,8 @@ using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
+    protected PPDataController dataController;
+
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
 
@@ -144,11 +146,13 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected virtual void subscribeEvents() 
 	{
 		EventController.Subscribe(handleNamedEvent);
+        EventController.Subscribe(handleNamedEventWithID);
 	}
 
 	protected virtual void unsubscribeEvents() 
 	{
 		EventController.Unsubscribe(handleNamedEvent);
+        EventController.Unsubscribe(handleNamedEventWithID);
 	}
 
 	protected virtual void setReferences() 
@@ -159,6 +163,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected virtual void fetchReferences() 
 	{
 		this.referencesFetched = true;
+        this.dataController = PPDataController.GetInstance;
 	}
 		
 	protected virtual void checkReferences()
@@ -182,6 +187,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	{
 		// NOTHING
 	}
+
+    protected virtual void handleNamedEventWithID(string eventName, string id)
+    {
+        // NOTHING
+    }
 
 	protected virtual void handleSceneLoaded(int sceneIndex) 
 	{
@@ -306,5 +316,17 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		TextAsset json = Resources.Load<TextAsset>(pathInResoures);
 		return JsonUtility.FromJson<T>(json.text);
 	}
+
+    protected bool trySaveGame()
+    {
+        if(dataController)
+        {
+            return dataController.Save();
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }

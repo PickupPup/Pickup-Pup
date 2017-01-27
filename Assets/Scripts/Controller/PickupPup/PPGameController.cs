@@ -12,7 +12,7 @@ public class PPGameController : GameController, ICurrencySystem
 {
 	#region Static Accessors
 
-	// Returns the Instance cast to the sublcass
+	// Returns the Instance cast to the sublcassmonob
 	public static PPGameController GetInstance 
 	{
 		get 
@@ -151,7 +151,6 @@ public class PPGameController : GameController, ICurrencySystem
     ShopDatabase shop;
 	GiftDatabase gifts;
 	LanguageDatabase languages;
-	PPDataController dataController;
 	PPGiftController giftController;
 	DogSlot targetSlot;
 
@@ -174,7 +173,6 @@ public class PPGameController : GameController, ICurrencySystem
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		dataController = PPDataController.GetInstance;
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
 		giftController = PPGiftController.Instance;
@@ -305,7 +303,7 @@ public class PPGameController : GameController, ICurrencySystem
         }
         else 
         {
-            print("Failed To Buy");
+            EventController.Event(k.GetPlayEvent(k.EMPTY));
             return false;
         }
     }
@@ -318,6 +316,7 @@ public class PPGameController : GameController, ICurrencySystem
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
+        EventController.Event(k.GetPlayEvent(k.PURCHASE));
         ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
@@ -386,14 +385,14 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void sendDogToScout(Dog dog) 
 	{
-        EventController.Event("PlayDogSendOut");
+        EventController.Event(k.GetPlayEvent(k.DOG_SENDOUT));
 		dogsOutScouting.Add(dog);
 		dog.SubscribeToScoutingTimerEnd(handleDogDoneScouting);
 	}
 
 	void handleDogDoneScouting(Dog dog) 
 	{
-        EventController.Event("PlayDogReturn");
+        EventController.Event(k.GetPlayEvent(k.DOG_RETURN));
         dogsOutScouting.Remove(dog);
 		// Need to unsubscribe to prevent stacking even subscriptions if dog is sent to scout again:
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);

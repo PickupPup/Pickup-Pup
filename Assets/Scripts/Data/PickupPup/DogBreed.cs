@@ -49,6 +49,14 @@ public class DogBreed : DogTrait
 		}
 	}
 
+    public string Size
+    {
+        get
+        {
+            return size;
+        }
+    }
+
 	public CurrencyType ISpecialization 
 	{
 		get 
@@ -75,6 +83,8 @@ public class DogBreed : DogTrait
 	float timeToReturn;
 	[SerializeField]
 	int costToAdopt;
+    [SerializeField]
+    string size;
 
 	public DogBreed(DogDatabase data) : base(data)
 	{

@@ -12,10 +12,11 @@ public class PPGiftController : SingletonController<PPGiftController>
 	const float DEFAULT_DISCOUNT = k.DEFAULT_DISCOUNT_DECIMAL;
 
 	PPTuning tuning;
-    PPDataController dataController;
 
 	WeightedRandomBuffer<CurrencyType> defaultReturnChances;
 	WeightedRandomBuffer<CurrencyData> giftChances;
+
+    CurrencyFactory giftFactory;
 
 	public void Init(PPTuning tuning)
 	{
@@ -37,20 +38,23 @@ public class PPGiftController : SingletonController<PPGiftController>
 			tuning.DailyGiftAmounts,
 			tuning.DailyGiftWeights,
 			tuning.DailyGiftDiscountAmount);
+        giftFactory = new CurrencyFactory();
 	}
 
 	public CurrencyData GetGiftFromDog(DogDescriptor dog)
 	{
 		CurrencyType specialization = dog.Breed.ISpecialization;
-		if(specialization == CurrencyType.None)
+        int amount = randomAmount();
+        CurrencyType type;
+        if(specialization == CurrencyType.None)
 		{
-			return new CurrencyData(defaultRandomType(), randomAmount());
+            type = defaultRandomType();
 		}
 		else
 		{
-			CurrencyType type = getRandomizerBySpecialization(specialization).GetRandom();
-			return new CurrencyData(type, randomAmount());
+			type = getRandomizerBySpecialization(specialization).GetRandom();
 		}
+        return giftFactory.Create(type, amount);
 	}
 
 	public CurrencyData GetDailyGift()

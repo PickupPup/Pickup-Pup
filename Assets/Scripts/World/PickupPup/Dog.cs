@@ -291,6 +291,7 @@ public class Dog : MobileObjectBehaviour
             redeemableGift = giftOverride;
         }
         callGiftEvent(k.FIND_GIFT, redeemableGift);
+        trySaveGame();
     }
       
     public CurrencyData RedeemGift()
@@ -298,6 +299,7 @@ public class Dog : MobileObjectBehaviour
         CurrencyData gift = redeemableGift;
         redeemableGift = null;
         callGiftEvent(k.REDEEM_GIFT, gift);
+        trySaveGame();
         return gift;
     }
 
@@ -321,6 +323,7 @@ public class Dog : MobileObjectBehaviour
 	{
 		base.fetchReferences();
 		gameController = PPGameController.GetInstance;
+        dataController = PPDataController.GetInstance;
 	}
 
 	protected override void cleanupReferences()

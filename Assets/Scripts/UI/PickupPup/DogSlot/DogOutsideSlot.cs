@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class DogOutsideSlot : DogSlot
 {
 	ScoutingDisplay scoutingDisplay;
+
     Text nameText;
     Text timerText;
 	[SerializeField]
@@ -83,18 +84,26 @@ public class DogOutsideSlot : DogSlot
 		checkReferences();
 		this.dog = dog;
 		this.dogInfo = dog.Info;
-		subscribeTimerEvents(dog);
 		nameText.text = dog.Name;
 		dogImage.sprite = dog.Portrait;
-		dog.SetTimer(dogInfo.TimeRemainingScouting);
-        timerText.text = dog.TimeRemainingStr;
-		dog.ResumeTimer();
+        subscribeTimerEvents(dog);
+        dog.SetTimer(dogInfo.TimeRemainingScouting);
+        if(dog.HasRedeemableGift)
+        {
+            handleGiftFound(dog.PeekAtGift);
+        }
+        else
+        {
+            timerText.text = dog.TimeRemainingStr;
+            dog.ResumeTimer();
+        }
 	}
 		
 	public override void ClearSlot()
 	{
 		// Call Dog functionality first because base method sets dog ref to null:
 		dog.StopTimer();
+        unsubscribeGiftEvents(dog);
 		dogImage.sprite = collarSprite;
 		nameText.text = string.Empty;
 		timerText.text = string.Empty;
@@ -121,6 +130,41 @@ public class DogOutsideSlot : DogSlot
 		subscribeTimerEvents(dog);
 	}
 
+    void subscribeGiftEvents(Dog dog)
+    {
+        dog.SubscribeToGiftEvents(handleDogGiftEvents);
+    }
+
+    void unsubscribeGiftEvents(Dog dog)
+    {
+        dog.UnsusbscribeFromGiftEvents(handleDogGiftEvents);
+    }
+
+    void handleDogGiftEvents(string eventName, CurrencyData gift)
+    {
+        switch(eventName)
+        {
+            case FIND_GIFT:
+                handleGiftFound(gift);
+                break;
+            case REDEEM_GIFT:
+                handleGiftRedeemed(gift);
+                break;
+        }
+    }
+
+    void handleGiftFound(CurrencyData gift)
+    {
+        redeemableGiftDisplay.SetActive(true);
+        redeemableGiftIcon.sprite = gift.Icon;
+        timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
+    }
+
+    void handleGiftRedeemed(CurrencyData gift)
+    {
+
+    }
+
 	void handleDogTimerChange(Dog dog, float timeRemaining)
 	{
 		if(timerText)
@@ -134,8 +178,6 @@ public class DogOutsideSlot : DogSlot
 		if(dog)
 		{
             dog.FindGift();
-            CurrencyData redeemableGift = dog.PeekAtGift;
-            redeemableGiftDisplay.SetActive(true);
 		}
 	}
 		
