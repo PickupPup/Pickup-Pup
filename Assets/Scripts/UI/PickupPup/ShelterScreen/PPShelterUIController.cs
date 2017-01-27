@@ -49,7 +49,6 @@ public class PPShelterUIController : PPUIController
         {
             ((DogAdoptionSlot) selectedDog.OccupiedSlot).ShowAdopt();
             EventController.Event("PlayAdopt");
-            UnityEngine.Debug.Log(selectedDogInfo.Breed.Size);
             EventController.Event("PlayBark", selectedDogInfo.Breed.Size);
             return true;
         }
