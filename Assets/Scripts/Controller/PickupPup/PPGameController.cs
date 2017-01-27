@@ -298,9 +298,9 @@ public class PPGameController : GameController, ICurrencySystem
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if (CanAfford(costCurrencyType, cost))
+        if (!CanAfford(costCurrencyType, cost))
         {
-			print("Failed To Buy");
+            EventController.Event("PlayEmpty");
             return false;
         }
         buyItem(value, valueCurrencyType, cost, costCurrencyType);
@@ -315,6 +315,7 @@ public class PPGameController : GameController, ICurrencySystem
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
+        EventController.Event("PlayPurchase");
         ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 

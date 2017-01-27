@@ -44,10 +44,13 @@ public class PPShelterUIController : PPUIController
 
     public bool TryAdopt()
     {
-        if(gameController.TryAdoptDog(selectedDog.Info))
+        DogDescriptor selectedDogInfo = selectedDog.Info;
+        if(gameController.TryAdoptDog(selectedDogInfo))
         {
             ((DogAdoptionSlot) selectedDog.OccupiedSlot).ShowAdopt();
             EventController.Event("PlayAdopt");
+            UnityEngine.Debug.Log(selectedDogInfo.Breed.Size);
+            EventController.Event("PlayBark", selectedDogInfo.Breed.Size);
             return true;
         }
         return false;

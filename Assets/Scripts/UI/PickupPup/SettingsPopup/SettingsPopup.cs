@@ -54,11 +54,21 @@ public class SettingsPopup : PPUIElement
 		sfxToggle.value = Global.BoolToInt(!SettingsUtil.SFXMuted);
 	}
 
-	#endregion
+    #endregion
 
-	// Limitation of the Toggle Slider: uses float values
-	// 0 == false, 1 == true
-	void handleToggleSFXMute(float sfxMuteState)
+    #region UIElement Overrides
+
+    public override void Hide()
+    {
+        EventController.Event("PlayBack");
+        base.Hide();
+    }
+
+    #endregion
+
+    // Limitation of the Toggle Slider: uses float values
+    // 0 == false, 1 == true
+    void handleToggleSFXMute(float sfxMuteState)
 	{
 		bool isMuted = checkSFXMuted(sfxMuteState);
 		SettingsUtil.ToggleSFXMuted(isMuted);

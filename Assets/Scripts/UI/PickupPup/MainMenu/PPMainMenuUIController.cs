@@ -15,19 +15,43 @@ public class PPMainMenuUIController : PPUIElement
 
     PPSceneController sceneController;
 
+    #region MonoBehaviourExtended Overrides
+
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        sceneController = PPSceneController.Instance;       
+        sceneController = PPSceneController.Instance;
     }
+
+    #endregion
+
+    #region UIElement Overrides
+
+    public override void Toggle()
+    {
+        if(gameObject.activeSelf)
+        {
+            EventController.Event("PlayBack");
+            Hide();
+        }
+        else
+        {
+            EventController.Event("PlayMenuPopup");
+            Show();
+        }
+    }
+
+    #endregion
 
     public void Close()
     {
+        EventController.Event("PlayBack");
         Hide();
     }
 
     public void OnShopClick()
     {
+        EventController.Event("PlayMenuClick");
         sceneController.LoadShop();
     }
 
@@ -35,22 +59,38 @@ public class PPMainMenuUIController : PPUIElement
     {
         if (dogBrowserObject)
         {
+            EventController.Event("PlayMenuPopup");
             dogBrowserObject.SetActive(true);
         }
     }
 
+    public void OnLivingRoomClick()
+    {
+        EventController.Event("PlayMenuClick");
+        sceneController.LoadLivingRoom();
+    }
+
+    public void OnYardClick()
+    {
+        EventController.Event("PlayMenuClick");
+        sceneController.LoadYard();
+    }
+
     public void OnSettingsClick()
     {
+        EventController.Event("PlayMenuClick");
         settingsPopup.Show();
     }
 
     public void OnGiftsClick()
     {
         // Disabled
+        EventController.Event("PlayEmpty");
     }
 
     public void OnWatchAdClick()
     {
         // Disabled
+        EventController.Event("PlayEmpty");
     }
 }

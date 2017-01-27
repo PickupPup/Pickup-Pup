@@ -81,6 +81,7 @@ public class DogBrowser : PPUIElement
 
 	public void Close()
 	{
+        EventController.Event("PlayBack");
 		Hide();
 	}
 

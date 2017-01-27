@@ -17,6 +17,9 @@ public class EventController : SingletonController<EventController>
 	public delegate void NamedEventAction(string nameOfEvent);
 	public event NamedEventAction OnNamedEvent;
 
+    public delegate void NamedEventActionWithID(string nameOfEvent, string id);
+    public event NamedEventActionWithID OnNamedEventWithID;
+
 	public delegate void NamedFloatAction(string valueKey, float key);
 	public event NamedFloatAction OnNamedFloatEvent;
 
@@ -45,6 +48,14 @@ public class EventController : SingletonController<EventController>
 			Instance.OnNamedEvent += eventAction;
 		}
 	}
+
+    public static void Subscribe(NamedEventActionWithID eventAction)
+    {
+        if(hasInstance)
+        {
+            Instance.OnNamedEventWithID += eventAction;
+        }
+    }
 
 	public static void Subscribe(NamedFloatAction eventAction) 
 	{
@@ -94,7 +105,15 @@ public class EventController : SingletonController<EventController>
 		}
 	}
 
-	public static void Unsubscribe(NamedFloatAction eventAction) 
+    public static void Unsubscribe(NamedEventActionWithID eventAction)
+    {
+        if (hasInstance)
+        {
+            Instance.OnNamedEventWithID -= eventAction;
+        }
+    }
+
+    public static void Unsubscribe(NamedFloatAction eventAction) 
 	{
 		if(hasInstance) 
 		{
@@ -153,7 +172,18 @@ public class EventController : SingletonController<EventController>
 		}
 	}
 
-	public static void Event(string valueKey, float value) 
+    public static void Event(string eventName, string id, bool isCallback = false)
+    {
+        if (hasInstance)
+        {
+            if (Instance.OnNamedEventWithID != null)
+            {
+                Instance.OnNamedEventWithID(eventName, id);
+            }
+        }
+    }
+
+    public static void Event(string valueKey, float value) 
 	{
 		if(hasInstance && Instance.OnNamedFloatEvent != null) 
 		{

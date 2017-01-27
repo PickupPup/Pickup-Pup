@@ -61,6 +61,16 @@ public class DogProfile : PPUIElement
 
     #endregion
 
+    #region UIElement Overrides
+
+    public override void Hide()
+    {
+        EventController.Event("PlayBack");
+        base.Hide();
+    }
+
+    #endregion
+
     public virtual void SetProfile(Dog dog)
     {
         dogInfo = dog.Info;
