@@ -3,6 +3,8 @@
  * Description: Controls the shelter screen
  */
 
+using k = PPGlobal;
+
 public class PPShelterUIController : PPUIController
 {
     DogSlot[] availableDogPortraits;
@@ -44,10 +46,12 @@ public class PPShelterUIController : PPUIController
 
     public bool TryAdopt()
     {
-        if(gameController.TryAdoptDog(selectedDog.Info))
+        DogDescriptor selectedDogInfo = selectedDog.Info;
+        if(gameController.TryAdoptDog(selectedDogInfo))
         {
             ((DogAdoptionSlot) selectedDog.OccupiedSlot).ShowAdopt();
-            EventController.Event("PlayAdopt");
+            EventController.Event(k.GetPlayEvent(k.ADOPT));
+            EventController.Event(k.GetPlayEvent(k.BARK), selectedDogInfo.Breed.Size);
             return true;
         }
         return false;

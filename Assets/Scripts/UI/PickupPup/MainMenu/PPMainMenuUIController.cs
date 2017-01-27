@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 public class PPMainMenuUIController : PPUIElement 
 {
@@ -13,19 +14,43 @@ public class PPMainMenuUIController : PPUIElement
     [SerializeField]
     SettingsPopup settingsPopup;
 
+    #region MonoBehaviourExtended Overrides
+
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        sceneController = PPSceneController.Instance;       
+        sceneController = PPSceneController.Instance;
     }
 
-    public void Close()
+    #endregion
+
+    #region UIElement Overrides
+
+    public override void Toggle()
     {
-        Hide();
+        if(gameObject.activeSelf)
+        {
+            EventController.Event(k.GetPlayEvent(k.BACK));
+            Hide();
+        }
+        else
+        {
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
+            Show();
+        }
+    }
+
+    #endregion
+
+    public override void Hide()
+    {
+        EventController.Event(k.GetPlayEvent(k.BACK));
+        base.Hide();
     }
 
     public void OnShopClick()
     {
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadShop();
     }
 
@@ -33,22 +58,38 @@ public class PPMainMenuUIController : PPUIElement
     {
         if (dogBrowserObject)
         {
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             dogBrowserObject.SetActive(true);
         }
     }
 
+    public void OnLivingRoomClick()
+    {
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
+        sceneController.LoadLivingRoom();
+    }
+
+    public void OnYardClick()
+    {
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
+        sceneController.LoadYard();
+    }
+
     public void OnSettingsClick()
     {
+        EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         settingsPopup.Show();
     }
 
     public void OnGiftsClick()
     {
         // Disabled
+        EventController.Event(k.GetPlayEvent(k.EMPTY));
     }
 
     public void OnWatchAdClick()
     {
         // Disabled
+        EventController.Event(k.GetPlayEvent(k.EMPTY));
     }
 }

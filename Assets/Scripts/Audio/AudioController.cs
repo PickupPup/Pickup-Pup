@@ -112,8 +112,34 @@ public class AudioController : Controller, IAudioController
 		}
 	}
 
-	// Uses C#'s delegate system
-	protected override void subscribeEvents() {
+    protected override void handleNamedEventWithID(string eventName, string id)
+    {
+        if (playEvents.ContainsKey(eventName))
+        {
+            foreach (AudioFile file in playEvents[eventName])
+            {
+                if (AudioUtil.HasID(file.Name, id))
+                {
+                    Play(file);
+                    break;
+                }
+            }
+        }
+        if (stopEvents.ContainsKey(eventName))
+        {
+            foreach (AudioFile file in stopEvents[eventName])
+            {
+                if (AudioUtil.HasID(file.Name, id))
+                {
+                    Stop(file);
+                    break;
+                }
+            }
+        }
+    }
+
+    // Uses C#'s delegate system
+    protected override void subscribeEvents() {
 		base.subscribeEvents();
 		EventController.Subscribe(handleAudioEvent);
 	}
@@ -360,7 +386,8 @@ public class AudioController : Controller, IAudioController
 		}
 	}
 		
-	void playMainMusic() {
+	void playMainMusic()
+    {
 		EventController.Event(mainMusicEventName);
 	}
 

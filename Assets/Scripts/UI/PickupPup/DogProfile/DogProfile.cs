@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class DogProfile : PPUIElement
 {
@@ -57,6 +58,16 @@ public class DogProfile : PPUIElement
     {
         base.subscribeEvents();
         closeWindowHitArea.SubscribeToClick(Hide);
+    }
+
+    #endregion
+
+    #region UIElement Overrides
+
+    public override void Hide()
+    {
+        EventController.Event(k.GetPlayEvent(k.BACK));
+        base.Hide();
     }
 
     #endregion

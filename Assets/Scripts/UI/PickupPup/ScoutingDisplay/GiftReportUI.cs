@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class GiftReportUI : UIElement 
 {	
@@ -22,15 +23,15 @@ public class GiftReportUI : UIElement
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void setReferences ()
+	protected override void setReferences()
 	{
-		base.setReferences ();
+		base.setReferences();
         dismissButton = ensureReference<UIButton>(searchChildren:true);
 	}
 
-    protected override void fetchReferences ()
+    protected override void fetchReferences()
     {
-        base.fetchReferences ();
+        base.fetchReferences();
         if(autoDestroyOnClick)
         {
             dismissButton.SubscribeToClick(Destroy);
@@ -44,9 +45,15 @@ public class GiftReportUI : UIElement
 		return true;
 	}
 
-	#endregion
+    public override void Destroy()
+    {
+        EventController.Event(k.GetPlayEvent(k.BACK));
+        base.Destroy();
+    }
 
-	public void Init(GiftReport report)
+    #endregion
+
+    public void Init(GiftReport report)
 	{
 		if(report.HasDog)
 		{
@@ -55,6 +62,7 @@ public class GiftReportUI : UIElement
 		this.rewardIcon.sprite = report.Currency.Icon;
 		this.reportText.text = report.ToString();
 		Show();
+        EventController.Event(k.GetPlayEvent(k.GIFT_REDEEM));
 	}
 
 	public void Init(CurrencyData gift)
