@@ -81,13 +81,13 @@ public class DogAdoptionSlot : DogSlot
 
     public void ShowAdopt()
     {
-        setComponents(tuning.AdoptedText, tuning.AdoptedTextColorRGBA, tuning.AdoptedBackgroundColorRGBA, false);
+        setComponents(tuning.AdoptedText, tuning.AdoptedTextColor, tuning.AdoptedBackgroundColor, false);
         unsubscribeEvents();
     }
 
     public void ShowDefault()
     {
-        setComponents(dogInfo.CostToAdoptStr, tuning.AdoptedTextColorRGBA, tuning.AdoptedBackgroundColorRGBA, true);
+        setComponents(dogInfo.CostToAdoptStr, tuning.DefaultTextColor, tuning.DefaultBackgroundColor, true);
     }
 
     void setComponents(string priceOrAdoptionText, Color priceOrAdoptionTextColor, 
@@ -110,11 +110,11 @@ public class DogAdoptionSlot : DogSlot
     {
         if(!gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
         {           
-            priceOrAdoptionStatus.color = tuning.AdoptedTextColorRGBA;
+            priceOrAdoptionStatus.color = tuning.UnaffordableTextColor;
         }
         else
         {
-            priceOrAdoptionStatus.color = tuning.AdoptedTextColorRGBA;
+            priceOrAdoptionStatus.color = tuning.DefaultPriceColor;
         }
     }
 
