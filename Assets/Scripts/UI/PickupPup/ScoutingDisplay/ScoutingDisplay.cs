@@ -30,7 +30,9 @@ public class ScoutingDisplay : PPUIElement
 
 	[SerializeField]
 	DogBrowser dogBrowser;
-	[SerializeField]
+    [SerializeField]
+    RedeemDisplay giftRedeemDisplay;
+    [SerializeField]
 	GiftReportUI scoutingReportDisplay;
 
 	DogOutsideSlot[] scoutingSlots;
@@ -99,18 +101,22 @@ public class ScoutingDisplay : PPUIElement
 
 	void handleScoutingTimerEnd(Dog dog)
 	{
-		if(game)
-		{
-			DogDescriptor dogInfo = dog.Info;
-			CurrencyData reward = game.GetGift(dogInfo);
-			GiftReport report = new GiftReport(dogInfo, reward);
-			createReportUI(report);
-		}
         // Safeguard to prevent multiple copies of this method being subscribed:
         dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
 	}
 
-	GiftReportUI createReportUI(GiftReport report)
+    void handleDogGiftCollected(Dog dog, bool resendOutToScout)
+    {
+        if(game)
+        {
+            DogDescriptor dogInfo = dog.Info;
+            CurrencyData reward = game.GetGift(dogInfo);
+            GiftReport report = new GiftReport(dogInfo, reward);
+            createGiftReportUI(report);
+        }
+    }
+
+	GiftReportUI createGiftReportUI(GiftReport report)
 	{
 		GiftReportUI reportUI = Instantiate(scoutingReportDisplay);
 		reportUI.Init(report);

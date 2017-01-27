@@ -13,7 +13,10 @@ public class DogOutsideSlot : DogSlot
     Text timerText;
 	[SerializeField]
 	Image dogImageOverride;
-
+    [SerializeField]
+    Image redeemableGiftIcon;
+    [SerializeField]
+    GameObject redeemableGiftDisplay;
 	[SerializeField]
 	Sprite collarSprite;
 
@@ -130,7 +133,7 @@ public class DogOutsideSlot : DogSlot
 	{
 		if(dog)
 		{
-			ClearSlot();
+			// TODO: Should convert to showing the gift panel
 		}
 	}
 		
