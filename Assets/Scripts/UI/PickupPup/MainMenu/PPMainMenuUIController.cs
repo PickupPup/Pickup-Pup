@@ -13,8 +13,6 @@ public class PPMainMenuUIController : PPUIElement
     [SerializeField]
     SettingsPopup settingsPopup;
 
-    PPSceneController sceneController;
-
     #region MonoBehaviourExtended Overrides
 
     protected override void fetchReferences()

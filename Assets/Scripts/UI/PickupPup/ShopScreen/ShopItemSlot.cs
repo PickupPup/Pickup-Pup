@@ -32,7 +32,7 @@ public class ShopItemSlot : PPUIElement
 
     public void Buy()
     {
-        game.TryBuyItem(item);
+        gameController.TryBuyItem(item);
     }
 
 }
