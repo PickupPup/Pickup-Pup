@@ -1,10 +1,11 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Handles the buttons for the DogBrowser
  * Usage: Should be a one to one relationship between each DogBrowser and its respective ButtonController
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 public class DogBrowserButtonController : PPUIButtonController 
 {	
@@ -193,7 +194,7 @@ public class DogBrowserButtonController : PPUIButtonController
 	{
 		if(onDogClick != null)
 		{
-            EventController.Event("PlayMenuClick");
+            EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
 			onDogClick(dog);
 		}
 	}

@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 public class PPUIController : MonoBehaviourExtended 
 {
@@ -102,7 +103,7 @@ public class PPUIController : MonoBehaviourExtended
 
     void showDogProfile(Dog dog)
     {
-        EventController.Event("PlayMenuPopup");
+        EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         dogProfileObject.SetActive(true);
         if(!dogProfile)
         {

@@ -5,9 +5,13 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Text.RegularExpressions;
+using k = Global;
 
 public static class AudioUtil 
 {
+    static Regex idRgx = new Regex(".+" + k.JOIN_CHAR + ".+");
+
 	public static AudioActionType MuteActionFromBool(bool muted) 
 	{
 		return muted ? AudioActionType.Mute : AudioActionType.Unmute;
@@ -59,5 +63,16 @@ public static class AudioUtil
 				throw new System.Collections.Generic.KeyNotFoundException();
 			}
 	}
+
+    public static bool HasID(string audioFileName, string id)
+    {
+        Regex rgx = new Regex(k.JOIN_CHAR + id);
+        return rgx.IsMatch(audioFileName);
+    }
+
+    public static bool HasID(string audioFileName)
+    {
+        return idRgx.IsMatch(audioFileName);
+    }
 
 }

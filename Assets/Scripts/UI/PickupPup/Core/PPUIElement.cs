@@ -5,14 +5,21 @@
 
 public class PPUIElement : UIElement 
 {
-    protected PPGameController game;
+    protected PPGameController gameController;
+    protected PPSceneController sceneController;
 
     #region MonoBehaviourExtended Overrides
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        game = PPGameController.GetInstance;
+        gameController = PPGameController.GetInstance;
+        sceneController = PPSceneController.Instance;
+    }
+
+    protected virtual bool requestReloadScene()
+    {
+        return sceneController.RequestReloadCurrentScene();
     }
 
     #endregion

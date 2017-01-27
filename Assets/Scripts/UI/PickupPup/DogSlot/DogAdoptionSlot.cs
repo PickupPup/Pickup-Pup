@@ -29,7 +29,7 @@ public class DogAdoptionSlot : DogSlot
     {
         base.fetchReferences();
         dataController = PPDataController.GetInstance;
-        tuning = game.Tuning;
+        tuning = gameController.Tuning;
     }
 
     protected override void subscribeEvents()
@@ -68,7 +68,7 @@ public class DogAdoptionSlot : DogSlot
         else
         {
             ShowDefault();
-            updateTextColor(game.Coins.Amount);
+            updateTextColor(gameController.Coins.Amount);
         }
     }
 
@@ -108,7 +108,7 @@ public class DogAdoptionSlot : DogSlot
 
     void updateTextColor(int amount)
     {
-        if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
+        if(!gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
         {           
             priceOrAdoptionStatus.color = tuning.UnaffordableTextColor;
         }

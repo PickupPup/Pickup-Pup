@@ -30,7 +30,7 @@ public class DogAdoptProfile : DogProfile
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        tuning = game.Tuning;
+        tuning = gameController.Tuning;
     }
 
     #endregion
@@ -63,7 +63,7 @@ public class DogAdoptProfile : DogProfile
     {
         priceText.text = dogInfo.CostToAdoptStr;
 
-        if(!game.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
+        if(!gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
         {
             priceText.color = tuning.UnaffordableTextColor;
             return false;

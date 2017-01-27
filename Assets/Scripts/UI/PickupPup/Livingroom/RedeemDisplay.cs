@@ -49,7 +49,7 @@ public class RedeemDisplay : PPUIElement
 
 	public void RedeemGift()
 	{
-		game.TryRedeemGift(this.gift);
+		gameController.TryRedeemGift(this.gift);
 		CloseDisplay();
 	}
 
