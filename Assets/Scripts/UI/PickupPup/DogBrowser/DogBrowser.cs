@@ -4,7 +4,8 @@
  * Usage: Should be attached to the parent element in the UI that holds the child elements
  */
 
- using UnityEngine;
+using UnityEngine;
+using k = PPGlobal;
 
 public class DogBrowser : PPUIElement 
 {	
@@ -69,7 +70,7 @@ public class DogBrowser : PPUIElement
 
     void OnEnable()
     {
-        EventController.Event("PlayMenuPopup");
+        EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
     }
 
 	public void Open(int pageIndex = NONE_VALUE)
@@ -81,7 +82,7 @@ public class DogBrowser : PPUIElement
 
 	public void Close()
 	{
-        EventController.Event("PlayBack");
+        EventController.Event(k.GetPlayEvent(k.BACK));
 		Hide();
 	}
 
@@ -154,7 +155,7 @@ public class DogBrowser : PPUIElement
 		
 	public void PageForward()
 	{
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         SwitchToPage(getPageForwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
 	}
 
@@ -165,7 +166,7 @@ public class DogBrowser : PPUIElement
 
 	public void PageBackward()
 	{
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         SwitchToPage(getPageBackwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
 	}
 

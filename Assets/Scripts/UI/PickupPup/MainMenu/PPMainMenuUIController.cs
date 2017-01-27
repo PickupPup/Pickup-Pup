@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 public class PPMainMenuUIController : PPUIElement 
 {
@@ -29,27 +30,27 @@ public class PPMainMenuUIController : PPUIElement
     {
         if(gameObject.activeSelf)
         {
-            EventController.Event("PlayBack");
+            EventController.Event(k.GetPlayEvent(k.BACK));
             Hide();
         }
         else
         {
-            EventController.Event("PlayMenuPopup");
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             Show();
         }
     }
 
     #endregion
 
-    public void Close()
+    public override void Hide()
     {
-        EventController.Event("PlayBack");
-        Hide();
+        EventController.Event(k.GetPlayEvent(k.BACK));
+        base.Hide();
     }
 
     public void OnShopClick()
     {
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadShop();
     }
 
@@ -57,38 +58,38 @@ public class PPMainMenuUIController : PPUIElement
     {
         if (dogBrowserObject)
         {
-            EventController.Event("PlayMenuPopup");
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             dogBrowserObject.SetActive(true);
         }
     }
 
     public void OnLivingRoomClick()
     {
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadLivingRoom();
     }
 
     public void OnYardClick()
     {
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadYard();
     }
 
     public void OnSettingsClick()
     {
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         settingsPopup.Show();
     }
 
     public void OnGiftsClick()
     {
         // Disabled
-        EventController.Event("PlayEmpty");
+        EventController.Event(k.GetPlayEvent(k.EMPTY));
     }
 
     public void OnWatchAdClick()
     {
         // Disabled
-        EventController.Event("PlayEmpty");
+        EventController.Event(k.GetPlayEvent(k.EMPTY));
     }
 }

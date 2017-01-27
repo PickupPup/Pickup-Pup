@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class DogProfile : PPUIElement
 {
@@ -65,7 +66,7 @@ public class DogProfile : PPUIElement
 
     public override void Hide()
     {
-        EventController.Event("PlayBack");
+        EventController.Event(k.GetPlayEvent(k.BACK));
         base.Hide();
     }
 

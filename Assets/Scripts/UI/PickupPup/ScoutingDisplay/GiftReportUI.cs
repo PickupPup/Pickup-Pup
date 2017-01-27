@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class GiftReportUI : UIElement 
 {	
@@ -46,7 +47,7 @@ public class GiftReportUI : UIElement
 
     public override void Destroy()
     {
-        EventController.Event("PlayBack");
+        EventController.Event(k.GetPlayEvent(k.BACK));
         base.Destroy();
     }
 
@@ -61,7 +62,7 @@ public class GiftReportUI : UIElement
 		this.rewardIcon.sprite = report.Currency.Icon;
 		this.reportText.text = report.ToString();
 		Show();
-        EventController.Event("PlayGiftRedeem");
+        EventController.Event(k.GetPlayEvent(k.GIFT_REDEEM));
 	}
 
 	public void Init(CurrencyData gift)

@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class SettingsPopup : PPUIElement 
 {
@@ -61,7 +62,7 @@ public class SettingsPopup : PPUIElement
 
     public override void Hide()
     {
-        EventController.Event("PlayBack");
+        EventController.Event(k.GetPlayEvent(k.BACK));
         base.Hide();
     }
 

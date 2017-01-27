@@ -5,6 +5,7 @@
  */
 
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class PPUIButton : PPUIElement 
 {
@@ -42,7 +43,7 @@ public class PPUIButton : PPUIElement
 	{
 		if(onClickAction != null)
 		{
-            EventController.Event("PlayMenuClick");
+            EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
 			onClickAction();
 		}
 	}

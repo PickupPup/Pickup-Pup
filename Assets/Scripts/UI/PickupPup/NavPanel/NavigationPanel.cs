@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class NavigationPanel : SingletonController<NavigationPanel>
 {
@@ -37,13 +38,13 @@ public class NavigationPanel : SingletonController<NavigationPanel>
 
     public void OnMenuClick()
     {
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         mainMenu.Toggle();
     }
 
     public void OnAdoptClick()
     {
-        EventController.Event("PlayMenuClick");
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadShelter();
     }
 
