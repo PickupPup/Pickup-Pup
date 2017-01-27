@@ -43,19 +43,55 @@ public class PPGiftController : SingletonController<PPGiftController>
 
 	public CurrencyData GetGiftFromDog(DogDescriptor dog)
 	{
-		CurrencyType specialization = dog.Breed.ISpecialization;
+        CurrencyData gift;
+        if(tryGetExistingGift(dog, out gift))
+        {
+            return gift;
+        }
+        else
+        {
+            return generateGift(dog);
+        }
+	}
+
+    bool tryGetExistingGift(DogDescriptor info, out CurrencyData gift)
+    {
+        if(info.IsLinkedToDog)
+        {
+            Dog dog = info.PeekDogLink;
+            if(dog.HasRedeemableGift)
+            {
+                gift = dog.PeekAtGift;
+                return true;
+            }
+            else 
+            {
+                gift = null;
+                return false;
+            }
+        }
+        else
+        {
+            gift = null;
+            return false;
+        }
+    }
+
+    CurrencyData generateGift(DogDescriptor dog)
+    {
+        CurrencyType specialization = dog.Breed.ISpecialization;
         int amount = randomAmount();
         CurrencyType type;
         if(specialization == CurrencyType.None)
-		{
+        {
             type = defaultRandomType();
-		}
-		else
-		{
-			type = getRandomizerBySpecialization(specialization).GetRandom();
-		}
+        }
+        else
+        {
+            type = getRandomizerBySpecialization(specialization).GetRandom();
+        }
         return giftFactory.Create(type, amount);
-	}
+    }
 
 	public CurrencyData GetDailyGift()
 	{

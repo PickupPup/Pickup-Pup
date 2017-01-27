@@ -241,9 +241,14 @@ public class Dog : MobileObjectBehaviour
 		this.slot = slot;
 	}
 
-	public void LeaveCurrentSlot()
+    // WARNING: Do not set callback to true from w/in the slot, otherwise you risk creating stackoverflow
+    public void LeaveCurrentSlot(bool callback)
 	{
-		this.slot = null;
+        if(callback)
+        {
+            this.slot.ClearSlot();
+        }
+        this.slot = null;
 	}
 
 	void callOnScoutingTimerChange(float timer) 
@@ -299,6 +304,7 @@ public class Dog : MobileObjectBehaviour
         CurrencyData gift = redeemableGift;
         redeemableGift = null;
         callGiftEvent(k.REDEEM_GIFT, gift);
+        gameController.GiveCurrency(gift);
         trySaveGame();
         return gift;
     }

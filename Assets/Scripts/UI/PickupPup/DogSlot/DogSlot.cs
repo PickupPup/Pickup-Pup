@@ -8,6 +8,18 @@ using UnityEngine.UI;
 
 public class DogSlot : PPUIElement
 {
+    #region Instance Accessors 
+
+    public Dog PeekDog
+    {
+        get
+        {
+            return this.dog;
+        }
+    }
+
+    #endregion
+
 	protected bool hasDogInfo
 	{
 		get
@@ -35,7 +47,7 @@ public class DogSlot : PPUIElement
 			// Fixes ref on previous dog
 			if(_dog != null)
 			{
-				_dog.LeaveCurrentSlot();
+                _dog.LeaveCurrentSlot(callback:false);
 			}
 			// Assigns slot to new dog (assuming the new value is not null)
 			if(value != null)
@@ -170,7 +182,7 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	void callOnOccupiedSlotClick(Dog dog)
+	protected virtual void callOnOccupiedSlotClick(Dog dog)
 	{
 		if(onOccupiedSlotClick != null)
 		{

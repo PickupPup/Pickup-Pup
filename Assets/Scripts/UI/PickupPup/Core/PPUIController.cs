@@ -10,7 +10,6 @@ public class PPUIController : MonoBehaviourExtended
 {
     protected PPSceneController sceneController;
     protected PPGameController gameController;
-    protected PPDataController dataController;
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;

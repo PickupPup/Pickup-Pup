@@ -79,6 +79,15 @@ public class DogOutsideSlot : DogSlot
 
     #endregion
 
+    #region UIElement Overrides 
+
+    public override void SetText (string text)
+    {
+        timerText.text = text;
+    }
+
+    #endregion
+
 	public void ResumeScouting(Dog dog)
 	{
 		checkReferences();
@@ -107,6 +116,7 @@ public class DogOutsideSlot : DogSlot
 		dogImage.sprite = collarSprite;
 		nameText.text = string.Empty;
 		timerText.text = string.Empty;
+        redeemableGiftDisplay.SetActive(false);
 		base.ClearSlot();
 	}
 
@@ -128,8 +138,9 @@ public class DogOutsideSlot : DogSlot
 	{
 		dog.TrySendToScout();
 		subscribeTimerEvents(dog);
+        subscribeGiftEvents(dog);
 	}
-
+        
     void subscribeGiftEvents(Dog dog)
     {
         dog.SubscribeToGiftEvents(handleDogGiftEvents);
@@ -167,7 +178,7 @@ public class DogOutsideSlot : DogSlot
 
 	void handleDogTimerChange(Dog dog, float timeRemaining)
 	{
-		if(timerText)
+        if(timerText && !dog.HasRedeemableGift)
 		{
 			timerText.text = dog.RemainingTimeScoutingStr;	
 		}
@@ -177,7 +188,7 @@ public class DogOutsideSlot : DogSlot
 	{
 		if(dog)
 		{
-            dog.FindGift();
+     //       dog.FindGift();
 		}
 	}
 		

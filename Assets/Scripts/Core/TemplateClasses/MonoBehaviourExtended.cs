@@ -163,7 +163,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected virtual void fetchReferences() 
 	{
 		this.referencesFetched = true;
-        this.dataController = PPDataController.GetInstance;
+        // Check if it has already been initialized, some classes may prefer to use a custom data controller
+        if(!this.dataController)
+        {
+            this.dataController = PPDataController.GetInstance;
+        }
 	}
 		
 	protected virtual void checkReferences()

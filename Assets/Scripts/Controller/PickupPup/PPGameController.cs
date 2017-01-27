@@ -289,7 +289,6 @@ public class PPGameController : GameController, ICurrencySystem
 	public CurrencyData GetGift(DogDescriptor dog)
 	{
 		CurrencyData data = giftController.GetGiftFromDog(dog);
-		dataController.ChangeCurrencyAmount(data.Type, data.Amount);
 		return data;
 	}
 
@@ -347,7 +346,14 @@ public class PPGameController : GameController, ICurrencySystem
 		} 
 		else 
 		{
-			slotIndex = targetSlot.transform.GetSiblingIndex();
+            if(targetSlot)
+            {
+			    slotIndex = targetSlot.transform.GetSiblingIndex();
+            }
+            else
+            {
+                slotIndex = dog.Info.ScoutingSlotIndex;
+            }
 			sendDogToScout(dog);
 			dataController.SendDogToScout(dog);
 			return true;

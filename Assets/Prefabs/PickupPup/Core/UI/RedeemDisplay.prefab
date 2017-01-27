@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 224406594244621948}
   - component: {fileID: 222507213975905500}
   - component: {fileID: 114558494536985778}
-  - component: {fileID: 225587353901570164}
   - component: {fileID: 114545427005248896}
   m_Layer: 5
   m_Name: RedeemDisplay
@@ -234,6 +233,7 @@ GameObject:
   - component: {fileID: 114647341287294250}
   - component: {fileID: 114668058904078854}
   - component: {fileID: 114380600124329078}
+  - component: {fileID: 225938137079232096}
   m_Layer: 5
   m_Name: RedeemDisplay
   m_TagString: Untagged
@@ -735,7 +735,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  dogPortrait: {fileID: 114816331222927612}
   giftDescription: {fileID: 114008190615439426}
+  giftPortrait: {fileID: 114732991784719978}
   RedeemButton: {fileID: 114626754200219216}
   RedeemReturnButton: {fileID: 114027541371837166}
 --- !u!114 &114440684563596832
@@ -873,7 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.359}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1049,7 +1051,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1252707988189500}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1739,12 +1741,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &225587353901570164
+--- !u!225 &225938137079232096
 CanvasGroup:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115920060974136}
+  m_GameObject: {fileID: 1421106392474512}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1

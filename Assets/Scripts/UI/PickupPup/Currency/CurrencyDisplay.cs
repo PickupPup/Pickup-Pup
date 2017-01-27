@@ -12,13 +12,11 @@ public class CurrencyDisplay : PPUIElement
     Image iconImage;
 
 	CurrencyType type;
-	PPDataController dataController;
 
-    public void Init(PPDataController dataController, CurrencyData currency)
+    public void Init(CurrencyData currency, PPDataController dataController)
 	{
+        this.dataController = dataController;
 		unsubscribeEvents();
-		this.dataController = dataController;
-
 		type = currency.Type;
         iconImage.sprite = currency.Icon;
         updateAmount(currency.Amount);

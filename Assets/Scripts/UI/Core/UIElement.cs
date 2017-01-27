@@ -98,7 +98,7 @@ public class UIElement : MonoBehaviourExtended
 		}
 	}
 
-	public void SetText(string text) 
+	public virtual void SetText(string text) 
 	{
 		if(hasText) 
 		{

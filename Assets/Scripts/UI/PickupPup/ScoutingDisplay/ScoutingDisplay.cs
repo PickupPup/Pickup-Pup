@@ -91,19 +91,27 @@ public class ScoutingDisplay : PPUIElement
 		foreach(DogOutsideSlot slot in slots) 
 		{
 			slot.SubscribeToClickWhenFree(
-				delegate() {
+				delegate
+                {
 					gameController.SetTargetSlot(slot);
-					handleClickFreeSlot();		
+					handleClickFreeSlot();
 				}
 			);
+            slot.SubscribeToClickWhenOccupied(
+                delegate 
+                {
+                    setupRedeemDisplay(slot.PeekDog);
+                    slot.SetText(string.Empty);
+                }
+            );
 		}
 	}
 
 	void handleScoutingTimerEnd(Dog dog)
 	{
-        dog.FindGift();
         // Safeguard to prevent multiple copies of this method being subscribed:
         dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
+        dog.FindGift();
 	}
 
     void handleDogGiftCollected(Dog dog, bool resendOutToScout)
@@ -115,6 +123,22 @@ public class ScoutingDisplay : PPUIElement
             GiftReport report = new GiftReport(dogInfo, reward);
             createGiftReportUI(report);
         }
+    }
+
+    void setupRedeemDisplay(Dog dog)
+    {
+        RedeemDisplay redeemDisplay = createRedeemDisplay(dog); 
+        redeemDisplay.Init(dog);
+    }
+
+    RedeemDisplay createRedeemDisplay(Dog dog)
+    {
+        UIElement elem;
+        if(!UIElement.TryPullFromSpawnPool(typeof(RedeemDisplay), out elem))
+        {
+            elem = Instantiate<UIElement>(giftRedeemDisplay);
+        }
+        return elem as RedeemDisplay;
     }
 
 	GiftReportUI createGiftReportUI(GiftReport report)
