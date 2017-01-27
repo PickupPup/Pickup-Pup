@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using k = PPGlobal;
 
 public class Dog : MobileObjectBehaviour 
 {
@@ -127,6 +128,24 @@ public class Dog : MobileObjectBehaviour
         }
     }
 
+    public bool HasRedeemableGift
+    {
+        get
+        {
+            return redeemableGift != null;   
+        }
+    }
+
+    // NOTE: Should not be used to actually redeem gift, 
+    // --> SEE public CurrenyData RedeemGift() below
+    public CurrencyData PeekAtGift
+    {
+        get
+        {
+            return redeemableGift;
+        }
+    }
+
 	#endregion
 
 	bool hasDescriptor 
@@ -137,30 +156,17 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
-	public void SetTimer(float newTime)
-	{
-		scoutingTimer.SetTimeRemaining(newTime, checkForEvents:true);
-	}
-
-	public void ResumeTimer()
-	{
-		scoutingTimer.Resume();
-	}
-
-	public void StopTimer()
-	{
-		scoutingTimer.Stop();
-	}
-
 	// Tracks how long the dog will be away from the house
 	[SerializeField]
 	protected PPTimer scoutingTimer;
 
 	DogDescriptor descriptor;
-	PPGameController game;
+    PPGameController gameController;
 	PPData.DogAction onScoutingTimerEnd;
 	PPData.DogActionf onScoutingTimerChange;
+    PPData.NamedCurrencyAction onGiftAction;
 	DogSlot slot;
+    CurrencyData redeemableGift;
 
     #region MonoBehaviourExtended Overrides
 
@@ -229,7 +235,7 @@ public class Dog : MobileObjectBehaviour
 			scoutingTimer.UnsubscribeFromTimeChange(dataAction);
 		}
 	}
-
+   
 	public void AssignSlot(DogSlot slot)
 	{
 		this.slot = slot;
@@ -258,6 +264,43 @@ public class Dog : MobileObjectBehaviour
 
 	#endregion
 
+    public void SetTimer(float newTime)
+    {
+        scoutingTimer.SetTimeRemaining(newTime, checkForEvents:true);
+    }
+
+    public void ResumeTimer()
+    {
+        scoutingTimer.Resume();
+    }
+
+    public void StopTimer()
+    {
+        scoutingTimer.Stop();
+    }
+
+    // Typically dog should find a random gift, but method can be overloaded to cause it to find a specific gift
+    public void FindGift(CurrencyData giftOverride = null)
+    {
+        if(giftOverride == null)
+        {
+            redeemableGift = gameController.GetGift(Info);
+        }
+        else
+        {
+            redeemableGift = giftOverride;
+        }
+        callGiftEvent(k.FIND_GIFT, redeemableGift);
+    }
+      
+    public CurrencyData RedeemGift()
+    {
+        CurrencyData gift = redeemableGift;
+        redeemableGift = null;
+        callGiftEvent(k.REDEEM_GIFT, gift);
+        return gift;
+    }
+
 	public void Set(DogDescriptor descriptor) 
 	{
 		this.descriptor = descriptor;
@@ -277,7 +320,7 @@ public class Dog : MobileObjectBehaviour
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		game = PPGameController.GetInstance;
+		gameController = PPGameController.GetInstance;
 	}
 
 	protected override void cleanupReferences()
@@ -291,17 +334,17 @@ public class Dog : MobileObjectBehaviour
 
 	public void SetGame(PPGameController game)
 	{
-		this.game = game;
+		this.gameController = game;
 	}
 
 	public bool TrySendToScout()
 	{
 		if(!IsScouting && HasScoutingTimer) 
 		{
-			descriptor.HandleScoutingBegan(game.GetCurrentSlotIndex());
+			descriptor.HandleScoutingBegan(gameController.GetCurrentSlotIndex());
 			scoutingTimer.Begin();
 			int slotIndex;
-			bool wasSuccess = game.TrySendDogToScout(this, out slotIndex);
+			bool wasSuccess = gameController.TrySendDogToScout(this, out slotIndex);
 			if(!wasSuccess)
 			{
 				descriptor.HandleScoutingEnded();
@@ -320,11 +363,29 @@ public class Dog : MobileObjectBehaviour
 		setupTimer(timer);
 	}
 
+    public void SubscribeToGiftEvents(PPData.NamedCurrencyAction currencyAction)
+    {
+        onGiftAction += currencyAction;
+    }
+
+    public void UnsusbscribeFromGiftEvents(PPData.NamedCurrencyAction currencyAction)
+    {
+        onGiftAction -= currencyAction;
+    }
+
 	void setupTimer(PPTimer timer)
 	{
 		timer.SubscribeToTimeChange(callOnScoutingTimerChange);
 		timer.SubscribeToTimeUp(callOnScountingTimerEnd);
 	}
+
+    void callGiftEvent(string eventName, CurrencyData gift)
+    {
+        if(onGiftAction != null)
+        {
+            onGiftAction(eventName, gift);
+        }
+    }
 
 	public override bool Equals(object obj)
 	{

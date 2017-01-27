@@ -133,7 +133,9 @@ public class DogOutsideSlot : DogSlot
 	{
 		if(dog)
 		{
-			// TODO: Should convert to showing the gift panel
+            dog.FindGift();
+            CurrencyData redeemableGift = dog.PeekAtGift;
+            redeemableGiftDisplay.SetActive(true);
 		}
 	}
 		
