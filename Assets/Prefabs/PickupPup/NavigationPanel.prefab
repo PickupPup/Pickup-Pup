@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114783973811704244}
   - component: {fileID: 114210034840450176}
   - component: {fileID: 114481001009264316}
+  - component: {fileID: 114097393329010990}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -95,6 +96,7 @@ GameObject:
   - component: {fileID: 114788011577711804}
   - component: {fileID: 114475208094521876}
   - component: {fileID: 114653245197485168}
+  - component: {fileID: 114082151360651542}
   m_Layer: 5
   m_Name: AdoptButton
   m_TagString: Untagged
@@ -121,6 +123,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114082151360651542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788649665501640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+--- !u!114 &114097393329010990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1338601481486712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114210034840450176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,6 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuButton: {fileID: 114210034840450176}
   adoptButton: {fileID: 114475208094521876}
+  mainMenu: {fileID: 0}
 --- !u!114 &114735677547880892
 MonoBehaviour:
   m_ObjectHideFlags: 1
