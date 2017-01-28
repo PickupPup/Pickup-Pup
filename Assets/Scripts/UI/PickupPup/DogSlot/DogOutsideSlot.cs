@@ -22,6 +22,8 @@ public class DogOutsideSlot : DogSlot
 	[SerializeField]
 	Sprite collarSprite;
 
+    bool redeemDisplayIsOpen = false;
+
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences()
@@ -134,6 +136,21 @@ public class DogOutsideSlot : DogSlot
 		ClearSlot();
 		return returningDog;
 	}
+
+
+    public void ToggleRedeemDisplayOpen(bool isOpen)
+    {
+        this.redeemDisplayIsOpen = isOpen;
+    }
+
+    protected override void callOnOccupiedSlotClick (Dog dog)
+    {
+        // Safeguard against opening up tons of copies of the panel
+        if(!redeemDisplayIsOpen)
+        {
+            base.callOnOccupiedSlotClick (dog);
+        }
+    }
 
 	void subscribeTimerEvents(Dog dog)
 	{

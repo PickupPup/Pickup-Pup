@@ -105,7 +105,6 @@ public class PPGameSave : GameSave, ISerializable
 		if(!ScoutingDogs.Contains(dog.Info)) 
 		{
 			ScoutingDogs.Add(dog.Info);
-			dog.SubscribeToScoutingTimerEnd(handleDogFinishedScouting);
 		}
 	}
 
@@ -118,12 +117,7 @@ public class PPGameSave : GameSave, ISerializable
 	{
 		this.DailyGiftCountdown = timeRemaining;
 	}
-
-	void handleDogFinishedScouting(Dog dog)
-	{
-		ScoutingDogs.Remove(dog.Info);
-	}
-
+                    
     public void SaveCurrencies(CurrencySystem currencies)
     {
         this.Currencies = currencies;

@@ -242,9 +242,9 @@ public class Dog : MobileObjectBehaviour
 	}
 
     // WARNING: Do not set callback to true from w/in the slot, otherwise you risk creating stackoverflow
-    public void LeaveCurrentSlot(bool callback)
+    public void LeaveCurrentSlot(bool callback, bool stopScouting)
 	{
-        if(slot is DogOutsideSlot)
+        if(stopScouting)
         {
             dataController.ScoutingDogs.Remove(this.Info);
         }

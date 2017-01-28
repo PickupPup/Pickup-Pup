@@ -104,6 +104,7 @@ public class ScoutingDisplay : PPUIElement
 					{
                     	setupRedeemDisplay(slot.PeekDog);
                     	slot.SetText(string.Empty);
+                        slot.ToggleRedeemDisplayOpen(isOpen:true);
 					}
                 }
             );

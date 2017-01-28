@@ -67,21 +67,11 @@ public class RedeemDisplay : PPUIElement
 		giftDescription.text = gift.GiftName.ToUpper();
 	}
 
-	public void RedeemGift()
-	{
-		gameController.TryRedeemGift(this.gift);
-		CloseDisplay();
-	}
-
-	public void CloseDisplay()
-	{
-		StartCoroutine(closeDisplayCoroutine());
-	}
-     
     void redeemGift(Dog dog)
     {
+        (dog.OccupiedSlot as DogOutsideSlot).ToggleRedeemDisplayOpen(isOpen:false);
         dog.RedeemGift();
-		dog.LeaveCurrentSlot(callback:true);
+        dog.LeaveCurrentSlot(callback:true, stopScouting:true);
         dataController.Save();
 		Destroy();
     }

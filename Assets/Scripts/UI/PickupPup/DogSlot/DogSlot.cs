@@ -47,7 +47,7 @@ public class DogSlot : PPUIElement
 			// Fixes ref on previous dog
 			if(_dog != null)
 			{
-                _dog.LeaveCurrentSlot(callback:false);
+                _dog.LeaveCurrentSlot(callback:false, stopScouting:false);
 			}
 			// Assigns slot to new dog (assuming the new value is not null)
 			if(value != null)
