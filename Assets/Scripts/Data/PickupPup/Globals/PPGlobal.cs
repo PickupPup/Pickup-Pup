@@ -22,7 +22,7 @@ public class PPGlobal : Global
 	public const string DAILY_GIFT_COUNTDOWN = DAILY + GIFT + COUNTDOWN;
 	public const string HAS_GIFT_TO_REDEEM = "HasGiftToRedeem";
     public const string COIN_ICON = "Coin";
-    public const string DOG_FOOD_ICON = "10_DogFood";
+    public const string DOG_FOOD_ICON = "dogfood_icon";
 
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;

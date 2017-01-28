@@ -1,17 +1,13 @@
 fileFormatVersion: 2
-guid: d09d7d13709b24ae2b4486c9a92b1253
-timeCreated: 1485560486
+guid: 919bba057c6d265489d67bfb19c624aa
+timeCreated: 1485544957
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: dogs3_0
-    21300002: dogs3_1
-    21300004: dogs3_2
-    21300006: dogs3_3
-    21300008: dogs3_4
-    21300010: dogs3_5
-    21300012: dogs3_6
-    21300014: dogs3_7
+    21300000: ui2_spritesheet_yard
+    21300002: ui2_spritesheet_livingroom
+    21300004: ui2_spritesheet_arrow
+    21300006: ui2_spritesheet_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -90,118 +86,45 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dogs3_0
+      name: ui2_spritesheet_yard
       rect:
         serializedVersion: 2
         x: 0
-        y: 1386
-        width: 693
-        height: 693
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: dogs3_1
+      name: ui2_spritesheet_livingroom
       rect:
         serializedVersion: 2
-        x: 693
-        y: 1386
-        width: 693
-        height: 693
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: dogs3_2
-      rect:
-        serializedVersion: 2
-        x: 1386
-        y: 1386
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: dogs3_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 693
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: dogs3_4
-      rect:
-        serializedVersion: 2
-        x: 693
-        y: 693
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: dogs3_5
-      rect:
-        serializedVersion: 2
-        x: 1386
-        y: 693
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: dogs3_6
+      name: ui2_spritesheet_arrow
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 693
-        height: 693
+        width: 1024
+        height: 1024
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: dogs3_7
-      rect:
-        serializedVersion: 2
-        x: 693
-        y: 0
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

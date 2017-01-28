@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: fb14c9d02d4406946848988f53ee60f2
-timeCreated: 1484089863
+timeCreated: 1485561138
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,6 +13,9 @@ TextureImporter:
     21300012: ui_spritesheet_11
     21300014: ui_spritesheet_12
     21300016: ui_spritesheet_4
+    21300018: ui_spritesheet_5
+    21300020: ui_spritesheet_6
+    21300022: ui_spritesheet_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -75,6 +78,22 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -82,10 +101,10 @@ TextureImporter:
       name: ui_spritesheet_0
       rect:
         serializedVersion: 2
-        x: 60
-        y: 1491
-        width: 490
-        height: 490
+        x: 0
+        y: 1386
+        width: 693
+        height: 693
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -95,10 +114,10 @@ TextureImporter:
       name: ui_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 657
-        y: 1488
-        width: 381
-        height: 520
+        x: 693
+        y: 1386
+        width: 693
+        height: 693
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -108,10 +127,10 @@ TextureImporter:
       name: ui_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 1093
-        y: 1475
-        width: 528
-        height: 501
+        x: 1386
+        y: 1386
+        width: 693
+        height: 693
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,62 +140,10 @@ TextureImporter:
       name: ui_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 68
-        y: 905
-        width: 520
-        height: 527
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_8
-      rect:
-        serializedVersion: 2
-        x: 1190
-        y: 605
-        width: 845
-        height: 855
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_10
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 160
-        width: 560
-        height: 531
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_11
-      rect:
-        serializedVersion: 2
-        x: 636
-        y: 55
-        width: 625
-        height: 661
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_12
-      rect:
-        serializedVersion: 2
-        x: 1277
-        y: 84
-        width: 737
-        height: 517
+        x: 0
+        y: 693
+        width: 693
+        height: 693
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,10 +153,62 @@ TextureImporter:
       name: ui_spritesheet_4
       rect:
         serializedVersion: 2
-        x: 630
-        y: 897
-        width: 532
-        height: 539
+        x: 693
+        y: 693
+        width: 693
+        height: 693
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ui_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 693
+        width: 693
+        height: 693
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ui_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 693
+        height: 693
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ui_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 693
+        height: 693
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ui_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 693
+        height: 693
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
