@@ -51,6 +51,7 @@ public class DogBrowser : PPUIElement
 	DogDatabase database;
 	Dog[] dogCollection;
 	bool[] pagesInitializedCheck;
+	bool inScoutingSelectMode = false;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -86,9 +87,10 @@ public class DogBrowser : PPUIElement
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
     }
-
-	public void Open(int pageIndex = NONE_VALUE)
+		
+	public void Open(bool inScoutingSelectMode, int pageIndex = NONE_VALUE)
 	{
+		this.inScoutingSelectMode = inScoutingSelectMode;
 		checkReferences();
 		Show();
 		SwitchToPage(pageIndex, onClickPageButton:false);
@@ -107,7 +109,7 @@ public class DogBrowser : PPUIElement
 			if(ArrayUtil.InRange(dogs, i) && dogs[i] != null)
 			{
 				dogSlots[i].Show();
-				dogSlots[i].Init(dogs[i]);
+				dogSlots[i].Init(dogs[i], inScoutingSelectMode);
 			}
 			else
 			{

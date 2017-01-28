@@ -8,6 +8,15 @@ using UnityEngine.UI;
 
 public class DogOutsideSlot : DogSlot
 {
+	// Disable this because it conflicts w/ scouting
+	protected override bool showProfileOnClick
+	{
+		get
+		{
+			return false;
+		}
+	}
+
 	ScoutingDisplay scoutingDisplay;
     Text nameText;
     Text timerText;
@@ -67,9 +76,9 @@ public class DogOutsideSlot : DogSlot
         nameText.text = dog.Name;
     }
 		
-	public override void Init(Dog dog)
+	public override void Init(Dog dog, bool inScoutingSelectMode)
 	{
-		base.Init(dog);
+		base.Init(dog, inScoutingSelectMode);
 		initDogScouting(dog);
 	}
 

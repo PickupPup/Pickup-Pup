@@ -370,7 +370,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		if(HasTargetSlot)
 		{
-			targetSlot.Init(dog);
+			targetSlot.Init(dog, inScoutingSelectMode:false);
 			ClearTargetSlot();
 		}
 	}
@@ -387,7 +387,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void sendDogToSlot(Dog dog, DogSlot slot)
 	{
-		slot.Init(dog);
+		slot.Init(dog, inScoutingSelectMode:false);
 	}
 
 	void sendDogToScout(Dog dog) 

@@ -93,11 +93,7 @@ public class PPUIController : MonoBehaviourExtended
         // TODO: Insert universal dog slot handle code here
         if (dogProfileObject)
         {
-            // TEMP until scouting code is finished
-            if (sceneController.CurrentScene == PPScene.Shelter)
-            {
-                showDogProfile(dog);
-            }
+        	showDogProfile(dog);
         }
 	}
 
