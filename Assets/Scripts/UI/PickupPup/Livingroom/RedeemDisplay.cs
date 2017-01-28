@@ -12,6 +12,8 @@ public class RedeemDisplay : PPUIElement
     [SerializeField]
     Image dogPortrait;
     [SerializeField]
+    Text dogNameDisplay;
+    [SerializeField]
 	Text giftDescription;
     [SerializeField]
     Image giftPortrait;
@@ -26,6 +28,7 @@ public class RedeemDisplay : PPUIElement
     {
         if(dog.HasRedeemableGift)
         {
+            dogNameDisplay.text = dog.Name;
             dogPortrait.sprite = dog.Portrait;
             CurrencyData gift = dog.PeekAtGift;
             giftDescription.text = gift.ToString();

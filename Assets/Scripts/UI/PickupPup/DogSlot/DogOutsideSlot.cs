@@ -75,7 +75,7 @@ public class DogOutsideSlot : DogSlot
 	public override void Init(Dog dog)
 	{
 		base.Init(dog);
-		initDogScouting(dog);
+        initDogScouting(dog, onResume:false);
 	}
 
     #endregion
@@ -104,6 +104,7 @@ public class DogOutsideSlot : DogSlot
         }
         else
         {
+            initDogScouting(dog, onResume:true);
             timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
@@ -134,9 +135,12 @@ public class DogOutsideSlot : DogSlot
 		scoutingDisplay.SubscribeToTimerEnd(dog);
 	}
 
-	void initDogScouting(Dog dog)
+    void initDogScouting(Dog dog, bool onResume)
 	{
-		dog.TrySendToScout();
+        if(!onResume)
+        {
+		    dog.TrySendToScout();
+        }
 		subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
 	}
