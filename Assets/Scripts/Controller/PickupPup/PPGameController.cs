@@ -184,6 +184,33 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void handleLoadGame(PPDataController dataController)
 	{
+		checkToAddStartingDogs(dataController);
+		setupScoutingOnLoad(dataController);
+	}
+
+	bool checkToAddStartingDogs(PPDataController dataController)
+	{
+		if(shouldAddStartingDogs(dataController))
+		{
+			for(int i = 0; i < tuning.StartingDogCount; i++)
+			{
+				dataController.Adopt(dogDatabase.RandomDog());
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool shouldAddStartingDogs(PPDataController dataController)
+	{
+		return dataController.DogCount == NONE_VALUE;
+	}
+
+	void setupScoutingOnLoad(PPDataController dataController)
+	{
 		List<DogDescriptor> dogs = dataController.ScoutingDogs;
 		if(dogs != null && dogs.Count > 0)
 		{
