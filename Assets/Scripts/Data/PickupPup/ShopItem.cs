@@ -81,7 +81,34 @@ public class ShopItem : PPData
         }
     }
 
+    public Sprite Icon
+    {
+        get
+        {
+            if(_icon == null)
+            {
+                if(!spritesheetDatabase.TryGetSprite(icon, out _icon))
+                {
+                    _icon = DogDatabase.DefaultSprite;
+                }
+            }
+            return _icon;
+        }
+    }
+
     #endregion
+
+    SpritesheetDatabase spritesheetDatabase
+    {
+        get
+        {
+            if(_spritesheetDatabase == null)
+            {
+                _spritesheetDatabase = SpritesheetDatabase.GetInstance;
+            }
+            return _spritesheetDatabase;
+        }
+    }
 
     [SerializeField]
     int cost;
@@ -93,6 +120,10 @@ public class ShopItem : PPData
     CurrencyType costCurrencyType;
     [SerializeField]
     CurrencyType valueCurrencyType;
+    [SerializeField]
+    string icon;
+    Sprite _icon;
+    SpritesheetDatabase _spritesheetDatabase;
 
     public ShopItem(
         string itemName,
