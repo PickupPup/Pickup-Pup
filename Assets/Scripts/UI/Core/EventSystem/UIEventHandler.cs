@@ -17,6 +17,14 @@ public class UIEventHandler
 	[SerializeField]
 	bool triggerOnStart;
 
+    [SerializeField]
+    bool triggerOnSwipe;
+    [SerializeField]
+    Direction[] validSwipeDirections;
+
+    [SerializeField]
+    bool triggerOnClick;
+
 	public bool RespondsToTrigger(string trigger) 
 	{
 		return StringUtil.OrEquals(trigger, this.triggers);
@@ -26,6 +34,16 @@ public class UIEventHandler
 	{
 		return triggerOnStart;
 	}
+
+    public bool RunsOnSwipe(Direction swipeDirection)
+    {
+        return triggerOnSwipe && ArrayUtil.Contains(validSwipeDirections, swipeDirection);
+    }
+
+    public bool RunsOnClick()
+    {
+        return triggerOnClick;
+    }
 
 	public void Execute(UIElement element) 
 	{

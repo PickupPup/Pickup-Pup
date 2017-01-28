@@ -16,6 +16,8 @@ public class UIElement : MonoBehaviourExtended
 	protected const string OFF = k.OFF;
 	protected const string ON = k.ON;
 
+    protected const float MIN_SWIPE_THRESHOLD = k.MIN_SWIPE_THRESHOLD;
+
     static Dictionary<Type, Stack<UIElement>> uiElementSpawnPools = new Dictionary<Type, Stack<UIElement>>();
 
 	#region Instance Accessors
@@ -52,6 +54,18 @@ public class UIElement : MonoBehaviourExtended
 		}
 	}
 
+    public Direction MostRecetSwipeDirection
+    {
+        get;
+        private set;
+    }
+
+    public bool HasReceivedSwipe
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	[SerializeField]
@@ -71,6 +85,7 @@ public class UIElement : MonoBehaviourExtended
 		image = GetComponentInChildren<Image>();
 		text = GetComponentInChildren<Text>();
 		canvas = GetComponentInChildren<CanvasGroup>();
+        HasReceivedSwipe = false;
 	}
 
 	#endregion
@@ -133,6 +148,12 @@ public class UIElement : MonoBehaviourExtended
 		Image[] images = GetComponentsInChildren<Image>();
 		return images[images.Length-1];
 	}
+
+    public virtual void InitializeSwipe(Direction direction)
+    {
+        this.HasReceivedSwipe = true;
+        this.MostRecetSwipeDirection = direction;
+    }
 
 	void startOpacityCoroutine(float startOpacity, float endOpacity, float time, bool loop) 
 	{
