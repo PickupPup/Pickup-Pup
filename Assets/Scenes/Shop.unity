@@ -1066,6 +1066,11 @@ Prefab:
       propertyPath: settingsPopup
       value: 
       objectReference: {fileID: 172649714}
+    - target: {fileID: 114976671936204298, guid: eb802c41a65744e4c956efbad2bc39af,
+        type: 2}
+      propertyPath: dogBrowser
+      value: 
+      objectReference: {fileID: 1703789334}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb802c41a65744e4c956efbad2bc39af, type: 2}
   m_IsPrefabParent: 0
@@ -1385,6 +1390,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6ec415babf284b1dbce7631f7ff192a, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1703789334 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114829477178275386, guid: d6ec415babf284b1dbce7631f7ff192a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1703789333}
+  m_Script: {fileID: 11500000, guid: f70ce91b97de84ce3aa8ce92ae3057ec, type: 3}
 --- !u!1001 &1748248579
 Prefab:
   m_ObjectHideFlags: 0
