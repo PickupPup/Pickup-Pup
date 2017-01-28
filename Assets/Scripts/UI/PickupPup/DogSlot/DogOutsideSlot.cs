@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class DogOutsideSlot : DogSlot
 {
@@ -173,7 +174,8 @@ public class DogOutsideSlot : DogSlot
 
     void handleGiftRedeemed(CurrencyData gift)
     {
-
+        EventController.Event(k.GetPlayEvent(k.GIFT_REDEEM));
+        EventController.Event(k.GetPlayEvent(k.BARK), dogInfo.Breed.Size);
     }
 
 	void handleDogTimerChange(Dog dog, float timeRemaining)
