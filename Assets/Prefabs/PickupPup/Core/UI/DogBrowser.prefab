@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 114930641940952366}
   - component: {fileID: 114829477178275386}
   - component: {fileID: 114275684136827656}
+  - component: {fileID: 114224628922401012}
   m_Layer: 5
   m_Name: DogBrowser
   m_TagString: Untagged
@@ -1317,6 +1318,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114224628922401012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425115051427350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34991c9fa8d6341f485923cce1a65a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  handlers:
+  - action: {fileID: 11400000, guid: 9d0c9e6e85edc41269eb718055241223, type: 2}
+    triggers: []
+    triggerOnStart: 0
+    triggerOnSwipe: 1
+    validSwipeDirections: 0100000003000000
+    triggerOnClick: 0
+  minValidSwipeDistance: 1
 --- !u!114 &114229696357131618
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,8 +25,7 @@ public class DogBrowser : PPUIElement, IPageable
     {
         get
         {
-            // TODO: Replace w/ const when Scouting PR is merged
-            return GetNumPages() == 1;
+            return GetNumPages() == SINGLE_VALUE;
         }
     }
 
@@ -204,19 +203,19 @@ public class DogBrowser : PPUIElement, IPageable
 		switch(browserMode)
 		{
 			case DogBrowserType.AdoptedDogs:
-				return Mathf.Clamp(dogCollection.Length / dogsPerPage, 1, dogCollection.Length);
+                return getNumPages(this.dogCollection);
 			case DogBrowserType.AllDogs:
-				return getNumPages(this.database);
+                return getNumPages(this.database.Dogs);
 			default:
 				return NONE_VALUE;
 		}
 	}
 
-	int getNumPages(DogDatabase database)
+	int getNumPages<T>(T[] dogs)
 	{
-		return Mathf.CeilToInt((float) database.Dogs.Length / (float) dogsPerPage);
+        return Mathf.Clamp(Mathf.CeilToInt((float) dogs.Length / (float) dogsPerPage), 1, dogs.Length);
 	}
-
+  
 	// TODO:
 	public void OpenRehomeScreen()
 	{
@@ -251,7 +250,7 @@ public class DogBrowser : PPUIElement, IPageable
 
 	int getPageWrapIndex(int rawIndex)
 	{
-		return mod(rawIndex, getNumPages(this.database));
+        return mod(rawIndex, GetNumPages());
 	}
 
 	Dog[] getDogsForPage(int pageIndex)
