@@ -65,7 +65,15 @@ public class DogSlot : PPUIElement
 			return button != null;
 		}
 	}
-		
+
+	protected virtual bool showProfileOnClick
+	{
+		get
+		{
+			return !inScoutingSelectMode;
+		}
+	}
+
     protected DogDescriptor dogInfo;
 
     protected Image[] images;
@@ -79,6 +87,7 @@ public class DogSlot : PPUIElement
     protected Image dogImage;
 
     bool setBackground = true;
+	bool inScoutingSelectMode = false;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -111,10 +120,15 @@ public class DogSlot : PPUIElement
 	{
 		this.dog = null;
 		this.dogInfo = null;
+		if(this.dogImage)
+		{
+        	this.dogImage.sprite = null;
+		}
 	}
 
-	public virtual void Init(Dog dog)
+	public virtual void Init(Dog dog, bool inScoutingSelectMode)
 	{
+		this.inScoutingSelectMode = inScoutingSelectMode;
 		this.dog = dog;
 		Init(dog.Info, dog.Portrait);
 	}
@@ -127,7 +141,10 @@ public class DogSlot : PPUIElement
 		}
 		if(hasDog)
 		{
-			EventController.Event(PPEvent.ClickDogSlot, this.dog);
+			if(!inScoutingSelectMode)
+			{
+				EventController.Event(PPEvent.ClickDogSlot, this.dog);
+			}
 			callOnOccupiedSlotClick(this.dog);
 		}
 		else 

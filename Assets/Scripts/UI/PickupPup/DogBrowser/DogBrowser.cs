@@ -9,6 +9,8 @@ using k = PPGlobal;
 
 public class DogBrowser : PPUIElement 
 {	
+	const int MIN_PAGES = SINGLE_VALUE;
+
 	#region Instance Accessors
 
 	public int CurrentPageIndex
@@ -40,6 +42,8 @@ public class DogBrowser : PPUIElement
 
 	[SerializeField]
 	int defaultStartPage;
+	[SerializeField]
+	DogBrowserType browserMode = DogBrowserType.AdoptedDogs;
 
 	DogBrowserButtonController buttonController;
 	DogSlot[] dogSlots;
@@ -47,6 +51,7 @@ public class DogBrowser : PPUIElement
 	DogDatabase database;
 	Dog[] dogCollection;
 	bool[] pagesInitializedCheck;
+	bool inScoutingSelectMode = false;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -57,12 +62,22 @@ public class DogBrowser : PPUIElement
 		buttonController = GetComponentInChildren<DogBrowserButtonController>();
 		dogSlots = GetComponentsInChildren<DogSlot>();
 		database = DogDatabase.GetInstance;
-		dogCollection = new Dog[database.Dogs.Length];
 	}
 
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				DogDescriptor[] dogInfos = dataController.AdoptedDogs.ToArray();
+				DogFactory dogFactory = new DogFactory(hideGameObjects:true);
+				dogCollection = dogFactory.CreateGroup(dogInfos);
+				break;
+			case DogBrowserType.AllDogs:
+				dogCollection = new Dog[database.Dogs.Length];
+				break;
+		}
 		setupDogSlots();
 	}
 
@@ -72,9 +87,10 @@ public class DogBrowser : PPUIElement
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
     }
-
-	public void Open(int pageIndex = NONE_VALUE)
+		
+	public void Open(bool inScoutingSelectMode, int pageIndex = NONE_VALUE)
 	{
+		this.inScoutingSelectMode = inScoutingSelectMode;
 		checkReferences();
 		Show();
 		SwitchToPage(pageIndex, onClickPageButton:false);
@@ -93,11 +109,11 @@ public class DogBrowser : PPUIElement
 			if(ArrayUtil.InRange(dogs, i) && dogs[i] != null)
 			{
 				dogSlots[i].Show();
-				dogSlots[i].Init(dogs[i]);
+				dogSlots[i].Init(dogs[i], inScoutingSelectMode);
 			}
 			else
 			{
-				dogSlots[i].Hide();
+                dogSlots[i].ClearSlot();
 			}
 		}
 	}
@@ -139,7 +155,15 @@ public class DogBrowser : PPUIElement
 
 	public int GetNumPages()
 	{
-		return getNumPages(this.database);
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				return Mathf.Clamp(dogCollection.Length / dogsPerPage, 1, dogCollection.Length);
+			case DogBrowserType.AllDogs:
+				return getNumPages(this.database);
+			default:
+				return NONE_VALUE;
+		}
 	}
 
 	int getNumPages(DogDatabase database)
@@ -186,6 +210,33 @@ public class DogBrowser : PPUIElement
 
 	Dog[] getDogsForPage(int pageIndex)
 	{
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				return getAdoptedDogsForPage(pageIndex);
+			case DogBrowserType.AllDogs:
+				return getDogsForPageFromAllDogs(pageIndex);
+			default:
+				return new Dog[0];
+		}
+	}
+
+	Dog[] getAdoptedDogsForPage(int pageIndex)
+	{
+		int startIndex = getStartIndex(pageIndex);
+		if(IntUtil.InRange(startIndex, dogCollection.Length))
+		{
+			int endIndex = Mathf.Clamp(startIndex + dogsPerPage, 0, dogCollection.Length);
+			return ArrayUtil.GetRange(dogCollection, startIndex, endIndex - startIndex);
+		}
+		else
+		{
+			return new Dog[0];
+		}
+	}
+
+	Dog[] getDogsForPageFromAllDogs(int pageIndex)
+	{
 		if(ArrayUtil.InRange(pagesInitializedCheck, pageIndex))
 		{
 			if(pagesInitializedCheck[pageIndex])
@@ -203,7 +254,7 @@ public class DogBrowser : PPUIElement
 			return new Dog[0];
 		}
 	}
-		
+
 	Dog[] loadDogsForPage(int pageIndex)
 	{
 		if(ArrayUtil.InRange(pagesInitializedCheck, pageIndex))
@@ -260,4 +311,10 @@ public class DogBrowser : PPUIElement
 		return currentlySelectedPageIndex == pageIndex;
 	}
 
+}
+
+public enum DogBrowserType
+{
+	AllDogs,
+	AdoptedDogs
 }

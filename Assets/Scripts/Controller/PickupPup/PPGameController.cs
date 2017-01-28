@@ -165,7 +165,6 @@ public class PPGameController : GameController, ICurrencySystem
 		tuning = parseTuning();
 		languages = LanguageDatabase.Instance;
 		languages.Initialize();
-		dogDatabase.Initialize();
         shop.Initialize();
 		gifts.Initialize();
 	}
@@ -173,6 +172,8 @@ public class PPGameController : GameController, ICurrencySystem
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
+		dataController = PPDataController.GetInstance;
+        dogDatabase.Initialize(dataController);
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
 		giftController = PPGiftController.Instance;
@@ -181,6 +182,33 @@ public class PPGameController : GameController, ICurrencySystem
 	}
 
 	void handleLoadGame(PPDataController dataController)
+	{
+		checkToAddStartingDogs(dataController);
+		setupScoutingOnLoad(dataController);
+	}
+
+	bool checkToAddStartingDogs(PPDataController dataController)
+	{
+		if(shouldAddStartingDogs(dataController))
+		{
+			for(int i = 0; i < tuning.StartingDogCount; i++)
+			{
+                dataController.Adopt(dogDatabase.RandomDog(mustBeUnadopted:true));
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	bool shouldAddStartingDogs(PPDataController dataController)
+	{
+		return dataController.DogCount == NONE_VALUE;
+	}
+
+	void setupScoutingOnLoad(PPDataController dataController)
 	{
 		List<DogDescriptor> dogs = dataController.ScoutingDogs;
 		if(dogs != null && dogs.Count > 0)
@@ -321,12 +349,20 @@ public class PPGameController : GameController, ICurrencySystem
 
     public bool TryAdoptDog(DogDescriptor dog)
     {
-        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
-        {
-            AdoptDog(dog);
-            return true;
-        }        
-        return false;       
+		if(dataController.CheckAdopted(dog))
+		{
+			// Trying to adopt a dog that is already adopted
+			return false;
+		}
+		else
+		{
+	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
+	        {
+	            AdoptDog(dog);
+	            return true;
+	        }        
+	        return false;       
+		}
     }
 
     void AdoptDog(DogDescriptor dog)
@@ -369,7 +405,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		if(HasTargetSlot)
 		{
-			targetSlot.Init(dog);
+			targetSlot.Init(dog, inScoutingSelectMode:false);
 			ClearTargetSlot();
 		}
 	}
@@ -386,7 +422,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void sendDogToSlot(Dog dog, DogSlot slot)
 	{
-		slot.Init(dog);
+		slot.Init(dog, inScoutingSelectMode:false);
 	}
 
 	void sendDogToScout(Dog dog) 
