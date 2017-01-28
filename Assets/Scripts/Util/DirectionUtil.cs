@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using k = Global;
 
 public static class DirectionUtil 
 {
@@ -23,6 +24,33 @@ public static class DirectionUtil
 				return Vector2.zero;
 		}
 	}
+
+    // NOTE: This does not correctly calculate / support --> zero / matching vectors
+    public static Direction DirectionFromVector(Vector2 vector)
+    {
+        if(Mathf.Abs(vector.x) > Mathf.Abs(vector.y))
+        {
+            if(k.IsPositive(vector.x))
+            {
+                return Direction.East;
+            }
+            else
+            {
+                return Direction.West;
+            }
+        }
+        else
+        {
+            if(k.IsPositive(vector.y))
+            {
+                return Direction.North;
+            }
+            else
+            {
+                return Direction.South;
+            }
+        }
+    }
 
 	public static Direction Clockwise90Degrees(Direction direction) 
 	{

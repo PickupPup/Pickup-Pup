@@ -7,7 +7,7 @@
 using UnityEngine;
 using k = PPGlobal;
 
-public class DogBrowser : PPUIElement 
+public class DogBrowser : PPUIElement, IPageable
 {	
 	const int MIN_PAGES = SINGLE_VALUE;
 
@@ -20,7 +20,44 @@ public class DogBrowser : PPUIElement
 			return this.currentlySelectedPageIndex;
 		}
 	}
-		
+	
+    public bool IsSinglePageBrowser
+    {
+        get
+        {
+            // TODO: Replace w/ const when Scouting PR is merged
+            return GetNumPages() == 1;
+        }
+    }
+
+    #region IPageable Interface
+
+    bool IPageable.PageWrapAllowed
+    {
+        get
+        {
+            return !IsSinglePageBrowser;
+        }
+    }
+
+    bool IPageable.CanPageForward
+    {
+        get
+        {
+            return !IsSinglePageBrowser;
+        }
+    }
+
+    bool IPageable.CanPageBackward
+    {
+        get
+        {
+            return !IsSinglePageBrowser;
+        }
+    }
+
+    #endregion
+
 	#endregion
 
 	bool hasSelectedPage
