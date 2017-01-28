@@ -4,10 +4,11 @@
  * Usage: [no notes]
  */
 
-public class SpecialObjectData : CurrencyData
+[System.Serializable]
+public class SpecialGiftData : CurrencyData
 {
-    public SpecialObjectData(int initialAmount):
-    base(CurrencyType.SpecialObject, initialAmount)
+    public SpecialGiftData(int initialAmount):
+    base(CurrencyType.SpecialGift, initialAmount)
     {
         // NOTHING
     }

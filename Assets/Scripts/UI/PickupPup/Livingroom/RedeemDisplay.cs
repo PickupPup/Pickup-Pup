@@ -72,7 +72,7 @@ public class RedeemDisplay : PPUIElement
         (dog.OccupiedSlot as DogOutsideSlot).ToggleRedeemDisplayOpen(isOpen:false);
         dog.RedeemGift();
         dog.LeaveCurrentSlot(callback:true, stopScouting:true);
-        dataController.Save();
+        dataController.SaveGame();
 		Destroy();
     }
 

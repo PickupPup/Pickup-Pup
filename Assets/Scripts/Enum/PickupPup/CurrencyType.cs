@@ -9,7 +9,7 @@ public enum CurrencyType
     DogFood,
     HomeSlots,
     Time,
-	SpecialObject,
+	SpecialGift,
     DogDiscount,
     None,
 

@@ -334,7 +334,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
     {
         if(dataController)
         {
-            return dataController.Save();
+            return dataController.SaveGame();
         }
         else
         {

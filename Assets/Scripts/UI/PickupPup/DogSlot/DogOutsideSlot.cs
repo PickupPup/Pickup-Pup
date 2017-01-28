@@ -93,6 +93,7 @@ public class DogOutsideSlot : DogSlot
 	{
         initDogScouting(dog, onResume:false);
 		base.Init(dog, inScoutingSelectMode);
+        dataController.SaveGame();
     }
 
     #endregion
@@ -125,6 +126,7 @@ public class DogOutsideSlot : DogSlot
             timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
+        dataController.SaveGame();
 	}
 		
 	public override void ClearSlot()

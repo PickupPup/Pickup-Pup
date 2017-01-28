@@ -104,7 +104,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 		{
 			specialization,
 			getSecondary(specialization),
-			CurrencyType.SpecialObject,
+			CurrencyType.SpecialGift,
 		};
 		float[] weights = new float[]
 		{
