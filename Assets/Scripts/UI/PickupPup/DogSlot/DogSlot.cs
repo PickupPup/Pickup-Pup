@@ -156,6 +156,11 @@ public class DogSlot : PPUIElement
 		onFreeSlotClick -= clickAction;
 	}
 
+    protected void toggleButtonActive(bool isActive)
+    {
+        button.ToggleInteractable(isActive);
+    }
+
 	protected bool subscribeToUIButton()
 	{
 		if(hasButton)	

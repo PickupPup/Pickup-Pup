@@ -166,6 +166,7 @@ public class DogOutsideSlot : DogSlot
         }
 		subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
+        toggleButtonActive(false);
 	}
         
     void subscribeGiftEvents(Dog dog)
@@ -193,6 +194,7 @@ public class DogOutsideSlot : DogSlot
 
     void handleGiftFound(CurrencyData gift)
     {
+        toggleButtonActive(true);
         redeemableGiftDisplay.SetActive(true);
         redeemableGiftIcon.sprite = gift.Icon;
         timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
