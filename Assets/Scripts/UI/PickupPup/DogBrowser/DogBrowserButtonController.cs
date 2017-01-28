@@ -133,9 +133,9 @@ public class DogBrowserButtonController : PPUIButtonController
 		}
 		else
 		{
-			pageBackwardButton.Hide();
-			pageForwardButton.Hide();
-			pageButtons[0].Hide();
+            pageBackwardButton.Hide();
+            pageForwardButton.Hide();
+            pageButtonParent.gameObject.SetActive(false);
 		}
 		IsInitialized = true;
 	}

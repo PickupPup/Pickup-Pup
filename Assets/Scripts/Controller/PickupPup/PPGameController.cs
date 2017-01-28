@@ -166,7 +166,6 @@ public class PPGameController : GameController, ICurrencySystem
 		tuning = parseTuning();
 		languages = LanguageDatabase.Instance;
 		languages.Initialize();
-		dogDatabase.Initialize();
         shop.Initialize();
 		gifts.Initialize();
 	}
@@ -175,6 +174,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		base.fetchReferences();
 		dataController = PPDataController.GetInstance;
+        dogDatabase.Initialize(dataController);
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
 		giftController = PPGiftController.Instance;
@@ -194,7 +194,7 @@ public class PPGameController : GameController, ICurrencySystem
 		{
 			for(int i = 0; i < tuning.StartingDogCount; i++)
 			{
-				dataController.Adopt(dogDatabase.RandomDog());
+                dataController.Adopt(dogDatabase.RandomDog(mustBeUnadopted:true));
 			}
 			return true;
 		}
