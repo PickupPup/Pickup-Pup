@@ -52,6 +52,20 @@ public class ScoutingDisplay : PPUIElement
 		dog.SubscribeToScoutingTimerEnd(handleScoutingTimerEnd);
 	}
 
+    public bool TryFindOpenSlot(out DogSlot openSlot)
+    {
+        for(int i = 0; i < scoutingSlots.Length; i++)
+        {
+            if(!scoutingSlots[i].HasDog)
+            {
+                openSlot = scoutingSlots[i];
+                return true;
+            }
+        }
+        openSlot = null;
+        return false;
+    }
+
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences()
@@ -156,7 +170,7 @@ public class ScoutingDisplay : PPUIElement
 	{
 		return new GiftReport(dog.Info, reward);
 	}
-
+        
 	void handleClickFreeSlot() 
 	{
 		dogBrowser.Open(inScoutingSelectMode:true);

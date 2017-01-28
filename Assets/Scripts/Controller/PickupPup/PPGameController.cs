@@ -406,18 +406,27 @@ public class PPGameController : GameController, ICurrencySystem
 		{
             if(targetSlot)
             {
-			    slotIndex = targetSlot.transform.GetSiblingIndex();
+                slotIndex = targetSlot.GetIndex();
             }
-            else
+            else if(dog.Info.ScoutingSlotIndex != INVALID_VALUE)
             {
                 slotIndex = dog.Info.ScoutingSlotIndex;
+            }
+            else if(ScoutingDisplay.MostRecentInstance.TryFindOpenSlot(out targetSlot))
+            {
+                slotIndex = targetSlot.GetIndex();
+            }
+            else 
+            {
+                slotIndex = INVALID_VALUE;
+                return false;
             }
 			sendDogToScout(dog);
 			dataController.SendDogToScout(dog);
 			return true;
 		}
 	}
-
+        
 	public void SelectDog(Dog dog)
 	{
 		this.selectedDog = dog;

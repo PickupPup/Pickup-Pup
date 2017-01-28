@@ -18,6 +18,14 @@ public class DogSlot : PPUIElement
         }
     }
 
+    public bool HasDog
+    {
+        get
+        {
+            return dog != null;
+        }
+    }
+
     #endregion
 
 	protected bool hasDogInfo
@@ -28,13 +36,6 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	protected bool hasDog
-	{
-		get
-		{
-			return dog != null;
-		}
-	}
 
 	protected Dog dog
 	{
@@ -135,11 +136,11 @@ public class DogSlot : PPUIElement
 
 	public void ExecuteClick()
 	{
-		if(hasDogInfo && !hasDog)
+		if(hasDogInfo && !HasDog)
 		{
 			this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
 		}
-		if(hasDog)
+		if(HasDog)
 		{
             if(showProfileOnClick)
 			{
