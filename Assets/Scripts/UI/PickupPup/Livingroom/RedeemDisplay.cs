@@ -1,39 +1,61 @@
 ﻿/*
- * Author: James Hostetler
+ * Authors: James Hostetler, Isaiah Mann
  * Description: Controls the Redeem Display.
  */
 
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using k = PPGlobal;
 
 public class RedeemDisplay : PPUIElement 
 {
     [SerializeField]
+    Image dogPortrait;
+    [SerializeField]
+    Text dogNameDisplay;
+    [SerializeField]
 	Text giftDescription;
-	PPLivingRoomUIController room;
+    [SerializeField]
+    Image giftPortrait;
 	GiftItem gift;
 	Image background;
-	CanvasRenderer canv;
 
 	// Need Eventually For Polish
 	[SerializeField]
 	Button RedeemButton;
-	[SerializeField]
-	Button RedeemReturnButton;
 
+	public void Init(Dog dog)
+    {
+        if(dog.HasRedeemableGift)
+        {
+            dogNameDisplay.text = formatRedeemMessage(dog);
+            dogPortrait.sprite = dog.Portrait;
+            CurrencyData gift = dog.PeekAtGift;
+            giftDescription.text = gift.ToString();
+            giftPortrait.sprite = gift.Icon;
+            RedeemButton.onClick.AddListener(
+                delegate 
+                {
+                    redeemGift(dog);
+                });
+        }
+    }
+       
+    #region MonoBehaviourExtended Overrides 
 
 	protected override void setReferences()
 	{
 		base.setReferences();
-		background = GetComponent<Image>();
-		canv = GetComponent<CanvasRenderer>();
+        background = GetComponentInChildren<Image>();
 	}
+
+    #endregion
 
 	// Fade-in Background
 	public void OnEnable()
 	{
-		canv.SetAlpha(0);
+        checkReferences();
 		background.CrossFadeAlpha(0.7f, 0.2f, false);
 	}
 
@@ -41,27 +63,31 @@ public class RedeemDisplay : PPUIElement
 	public void UpdateDisplay(GiftItem gift, PPLivingRoomUIController room)
 	{
 		this.gift = gift;
-		this.room = room;
 		RedeemButton.interactable = true;
-		RedeemReturnButton.interactable = true;
 		giftDescription.text = gift.GiftName.ToUpper();
 	}
 
-	public void RedeemGift()
-	{
-		gameController.TryRedeemGift(this.gift);
-		CloseDisplay();
-	}
+    void redeemGift(Dog dog)
+    {
+        if(dog.OccupiedSlot)
+        {
+            (dog.OccupiedSlot as DogOutsideSlot).ToggleRedeemDisplayOpen(isOpen:false);
+        }
+        dog.RedeemGift();
+        dog.LeaveCurrentSlot(callback:true, stopScouting:true);
+        dataController.SaveGame();
+		Destroy();
+    }
 
-	public void CloseDisplay()
-	{
-		StartCoroutine(closeDisplayCoroutine());
-	}
+    string formatRedeemMessage(Dog dog)
+    {
+        string formatText = languageDatabase.GetTerm(k.REDEEM_DISPLAY_TEXT_KEY);
+        return string.Format(formatText, dog.Name);
+    }
 
 	// For Later Polish
 	IEnumerator closeDisplayCoroutine(){
 		RedeemButton.interactable = false;
-		RedeemReturnButton.interactable = false;
 		gameObject.SetActive(false);
 		yield break;
 	}

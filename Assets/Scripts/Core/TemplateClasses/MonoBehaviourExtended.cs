@@ -9,21 +9,25 @@ using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
-    [SerializeField]
-    bool preserveOnSceneChange = false;
+    protected PPDataController dataController;
 
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
 
 	protected const int NONE_VALUE = k.NONE_VALUE;
-	protected static int INVALID_VALUE = k.INVALID_VALUE; 
+	protected const int INVALID_VALUE = k.INVALID_VALUE; 
+	protected const int SINGLE_VALUE = k.SINGLE_VALUE;
 
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float monoFloat);
 	public delegate void MonoActionInt(int monoInt);
 
-	IEnumerator moveCoroutine;
+    [SerializeField]
+    bool preserveOnSceneChange = false;
+   
 	bool destroyOnNextLoad = false;
+
+    IEnumerator moveCoroutine;
 
 	#region Unity Methods
 
@@ -168,6 +172,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected virtual void fetchReferences() 
 	{
 		this.referencesFetched = true;
+        // Check if it has already been initialized, some classes may prefer to use a custom data controller
+        if(!this.dataController)
+        {
+            this.dataController = PPDataController.GetInstance;
+        }
 	}
 		
 	protected virtual void checkReferences()
@@ -320,5 +329,17 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		TextAsset json = Resources.Load<TextAsset>(pathInResoures);
 		return JsonUtility.FromJson<T>(json.text);
 	}
+
+    protected bool trySaveGame()
+    {
+        if(dataController)
+        {
+            return dataController.SaveGame();
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }

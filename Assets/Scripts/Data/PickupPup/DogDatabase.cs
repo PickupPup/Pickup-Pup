@@ -81,7 +81,19 @@ public class DogDatabase : Database<DogDatabase>
 
 	SpritesheetDatabase spriteDatabase;
 
-	public override void Initialize() 
+    [System.NonSerialized]
+    PPDataController dataController;
+
+    public void Initialize(PPDataController dataController)
+    {
+        this.dataController = dataController;
+        if(!IsInitialized)
+        {
+            this.Initialize();
+        }
+    }
+
+    public override void Initialize() 
 	{
 		base.Initialize();
 		this.spriteDatabase = SpritesheetDatabase.GetInstance;
@@ -111,9 +123,22 @@ public class DogDatabase : Database<DogDatabase>
 		}
 	}
 
-	public DogDescriptor RandomDog() 
+    public DogDescriptor RandomDog(bool mustBeUnadopted) 
 	{
-		return randomizer.GetRandom();
+        DogDescriptor dog;
+        if(dataController.AllDogsAdopted(this) && mustBeUnadopted)
+        {
+            dog = DogDescriptor.Default();
+        }
+        else
+        {
+            do
+            {
+                dog = randomizer.GetRandom();
+            }
+            while(mustBeUnadopted && dataController.CheckAdopted(dog));
+        }
+        return dog;
 	}
 
 	// Returns sequence based on day
@@ -130,15 +155,34 @@ public class DogDatabase : Database<DogDatabase>
 			new RandomDailyBuffer<DogDescriptor>(dogs, day), count, startIndex);
 	}
 		
+    // Excludes already adopted dogs
 	protected DogDescriptor[] getDailyRandomDogListFromBuffer(
 		RandomBuffer<DogDescriptor> buffer, 
 		int count, 
 		int startIndex = 0)
 	{
 		buffer.Refresh();
-		int length = startIndex + count;
-		DogDescriptor[] fullSequence = buffer.GetRandom(length);
-		return ArrayUtil.GetRange(fullSequence, startIndex, count);
+        DogDescriptor[] fullSequence = buffer.GetRandom(dogs.Length);
+		DogDescriptor[] candidates = ArrayUtil.GetRange(fullSequence, startIndex, count);
+        // -1 for zero offset
+        int currentIndex = startIndex + count - 1;
+        int totalDogCount = fullSequence.Length;
+        for(int i = 0; i < candidates.Length; i++)
+        {
+            while(currentIndex < totalDogCount && dataController.CheckAdopted(candidates[i]))
+            {
+                if(!dataController.CheckAdopted(fullSequence[currentIndex]))
+                {
+                    candidates[i] = fullSequence[currentIndex];
+                }
+                currentIndex++;
+            }
+            if(currentIndex >= totalDogCount && dataController.CheckAdopted(candidates[i]))
+            {
+                candidates[i] = DogDescriptor.Default();
+            }
+        }
+        return candidates;
 	}
 
 	public DogDescriptor[] RandomDogList(int count) 

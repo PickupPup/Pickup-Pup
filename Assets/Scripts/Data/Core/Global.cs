@@ -4,6 +4,8 @@
  * Usage: [no notes]
  */
 
+using System;
+
 public class Global
 {
 	public const string AUDIO_DIR = "Audio";
@@ -41,10 +43,12 @@ public class Global
 	public const int CORRECT_HEX_NUM_LENGTH = 6;
 	public const int NONE_VALUE = 0;
 	public const int INVALID_VALUE = -1;
+	public const int SINGLE_VALUE = 1;
 	public const int TRUE_VALUE_INT = 1;
 	public const int FALSE_VALUE_INT = NONE_VALUE;
 
     public const float FULL_PERCENT_F = 100f;
+    public const float MIN_SWIPE_THRESHOLD = 1f;
 
 	public static bool IntToBool(int value)
 	{
@@ -71,5 +75,10 @@ public class Global
 				return default(int);	
 		}
 	}
+
+    public static bool IsPositive(float value)
+    {
+        return Math.Sign(value) > NONE_VALUE;
+    }
 
 }

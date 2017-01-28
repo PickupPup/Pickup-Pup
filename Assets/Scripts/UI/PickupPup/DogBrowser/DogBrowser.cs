@@ -7,8 +7,10 @@
 using UnityEngine;
 using k = PPGlobal;
 
-public class DogBrowser : PPUIElement 
+public class DogBrowser : PPUIElement, IPageable
 {	
+	const int MIN_PAGES = SINGLE_VALUE;
+
 	#region Instance Accessors
 
 	public int CurrentPageIndex
@@ -18,7 +20,43 @@ public class DogBrowser : PPUIElement
 			return this.currentlySelectedPageIndex;
 		}
 	}
-		
+	
+    public bool IsSinglePageBrowser
+    {
+        get
+        {
+            return GetNumPages() == SINGLE_VALUE;
+        }
+    }
+
+    #region IPageable Interface
+
+    bool IPageable.PageWrapAllowed
+    {
+        get
+        {
+            return !IsSinglePageBrowser;
+        }
+    }
+
+    bool IPageable.CanPageForward
+    {
+        get
+        {
+            return !IsSinglePageBrowser;
+        }
+    }
+
+    bool IPageable.CanPageBackward
+    {
+        get
+        {
+            return !IsSinglePageBrowser;
+        }
+    }
+
+    #endregion
+
 	#endregion
 
 	bool hasSelectedPage
@@ -40,6 +78,8 @@ public class DogBrowser : PPUIElement
 
 	[SerializeField]
 	int defaultStartPage;
+	[SerializeField]
+	DogBrowserType browserMode = DogBrowserType.AdoptedDogs;
 
 	DogBrowserButtonController buttonController;
 	DogSlot[] dogSlots;
@@ -47,6 +87,7 @@ public class DogBrowser : PPUIElement
 	DogDatabase database;
 	Dog[] dogCollection;
 	bool[] pagesInitializedCheck;
+	bool inScoutingSelectMode = false;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -57,12 +98,22 @@ public class DogBrowser : PPUIElement
 		buttonController = GetComponentInChildren<DogBrowserButtonController>();
 		dogSlots = GetComponentsInChildren<DogSlot>();
 		database = DogDatabase.GetInstance;
-		dogCollection = new Dog[database.Dogs.Length];
 	}
 
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				DogDescriptor[] dogInfos = dataController.AdoptedDogs.ToArray();
+				DogFactory dogFactory = new DogFactory(hideGameObjects:true);
+				dogCollection = dogFactory.CreateGroup(dogInfos);
+				break;
+			case DogBrowserType.AllDogs:
+				dogCollection = new Dog[database.Dogs.Length];
+				break;
+		}
 		setupDogSlots();
 	}
 
@@ -72,9 +123,10 @@ public class DogBrowser : PPUIElement
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
     }
-
-	public void Open(int pageIndex = NONE_VALUE)
+		
+	public void Open(bool inScoutingSelectMode, int pageIndex = NONE_VALUE)
 	{
+		this.inScoutingSelectMode = inScoutingSelectMode;
 		checkReferences();
 		Show();
 		SwitchToPage(pageIndex, onClickPageButton:false);
@@ -88,16 +140,25 @@ public class DogBrowser : PPUIElement
 
 	public void Set(Dog[] dogs) 
 	{
+        int currentDogIndex = 0;
 		for(int i = 0; i < dogSlots.Length; i++)
 		{
-			if(ArrayUtil.InRange(dogs, i) && dogs[i] != null)
+            // Filter out scoting dogs:
+            if(inScoutingSelectMode)
+            {
+                while(currentDogIndex < dogs.Length && dogs[currentDogIndex].IsScouting)
+                {
+                    currentDogIndex++;
+                }
+            }
+            if(ArrayUtil.InRange(dogs, currentDogIndex) && dogs[currentDogIndex] != null)
 			{
 				dogSlots[i].Show();
-				dogSlots[i].Init(dogs[i]);
+                dogSlots[i].Init(dogs[currentDogIndex++], inScoutingSelectMode);
 			}
 			else
 			{
-				dogSlots[i].Hide();
+                dogSlots[i].ClearSlot();
 			}
 		}
 	}
@@ -139,14 +200,22 @@ public class DogBrowser : PPUIElement
 
 	public int GetNumPages()
 	{
-		return getNumPages(this.database);
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+                return getNumPages(this.dogCollection);
+			case DogBrowserType.AllDogs:
+                return getNumPages(this.database.Dogs);
+			default:
+				return NONE_VALUE;
+		}
 	}
 
-	int getNumPages(DogDatabase database)
+	int getNumPages<T>(T[] dogs)
 	{
-		return Mathf.CeilToInt((float) database.Dogs.Length / (float) dogsPerPage);
+        return Mathf.Clamp(Mathf.CeilToInt((float) dogs.Length / (float) dogsPerPage), 1, dogs.Length);
 	}
-
+  
 	// TODO:
 	public void OpenRehomeScreen()
 	{
@@ -181,10 +250,37 @@ public class DogBrowser : PPUIElement
 
 	int getPageWrapIndex(int rawIndex)
 	{
-		return mod(rawIndex, getNumPages(this.database));
+        return mod(rawIndex, GetNumPages());
 	}
 
 	Dog[] getDogsForPage(int pageIndex)
+	{
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				return getAdoptedDogsForPage(pageIndex);
+			case DogBrowserType.AllDogs:
+				return getDogsForPageFromAllDogs(pageIndex);
+			default:
+				return new Dog[0];
+		}
+	}
+
+	Dog[] getAdoptedDogsForPage(int pageIndex)
+	{
+		int startIndex = getStartIndex(pageIndex);
+		if(IntUtil.InRange(startIndex, dogCollection.Length))
+		{
+			int endIndex = Mathf.Clamp(startIndex + dogsPerPage, 0, dogCollection.Length);
+			return ArrayUtil.GetRange(dogCollection, startIndex, endIndex - startIndex);
+		}
+		else
+		{
+			return new Dog[0];
+		}
+	}
+
+	Dog[] getDogsForPageFromAllDogs(int pageIndex)
 	{
 		if(ArrayUtil.InRange(pagesInitializedCheck, pageIndex))
 		{
@@ -203,7 +299,7 @@ public class DogBrowser : PPUIElement
 			return new Dog[0];
 		}
 	}
-		
+
 	Dog[] loadDogsForPage(int pageIndex)
 	{
 		if(ArrayUtil.InRange(pagesInitializedCheck, pageIndex))
@@ -260,4 +356,10 @@ public class DogBrowser : PPUIElement
 		return currentlySelectedPageIndex == pageIndex;
 	}
 
+}
+
+public enum DogBrowserType
+{
+	AllDogs,
+	AdoptedDogs
 }

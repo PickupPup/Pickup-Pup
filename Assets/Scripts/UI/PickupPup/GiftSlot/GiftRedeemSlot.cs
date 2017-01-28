@@ -27,7 +27,7 @@ public class GiftRedeemSlot : GiftSlot
     // Leads to Redeem Display. Turns off GiftSlot.
     public void Redeem()
     {
-        if (room)
+        if(room)
         {
             room.RedeemGift(this.gift);
             gameObject.SetActive(false);

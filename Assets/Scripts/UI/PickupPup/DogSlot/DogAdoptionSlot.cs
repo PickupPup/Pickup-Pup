@@ -14,7 +14,6 @@ public class DogAdoptionSlot : DogSlot
     Image priceBackgroundImage;
     Text priceOrAdoptionStatus;
 
-    PPDataController dataController;
     PPTuning tuning;
 
     #region MonoBehaviourExtended Overrides

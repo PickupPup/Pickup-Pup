@@ -27,7 +27,6 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 	bool overrideTimerForDebugging = false;
 
 	PPTimer dailyGiftTimer;
-    PPDataController dataController;
 	PPGiftController giftController;
 
     #region MonoBehaviourExtended Overrides
@@ -52,14 +51,14 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 	public void Init(PPGameController gameController, PPDataController dataController, PPGiftController giftController)
     {
         unsubscribeEvents();
-        this.dataController = dataController;
 		this.giftController = giftController;
+        this.dataController = dataController;
         subscribeEvents();
 
         // Display Updated Currency
-        dogFoodDisplay.Init(dataController, dataController.DogFood);
-        coinsDisplay.Init(dataController, dataController.Coins);
-		initDailyGiftCountdown(gameController.Tuning, dataController);
+        dogFoodDisplay.Init(dataController.DogFood, dataController);
+        coinsDisplay.Init(dataController.Coins, dataController);
+        initDailyGiftCountdown(gameController.Tuning, dataController);
     }
 
     CurrencyData getDailyGift() 
@@ -67,7 +66,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		return giftController.GetDailyGift();
     }
 
-	void initDailyGiftCountdown(PPTuning tuning, PPDataController dataController)
+    void initDailyGiftCountdown(PPTuning tuning, PPDataController dataController)
 	{
 		float dailyGiftCountdown;
 		if(dataController.DailyGiftCountdownRunning && !overrideTimerForDebugging)
@@ -79,6 +78,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
             dailyGiftCountdown = tuning.WaitTimeSecsForDailyGift;
 		}
 		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
+        giftTimerDisplay.SetText(dailyGiftTimer.TimeRemainingStr);
         if(dataController.HasGiftToRedeem)
         {
             makeDailyGiftAvailableToRedeem();

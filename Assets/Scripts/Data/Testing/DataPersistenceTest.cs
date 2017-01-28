@@ -9,8 +9,6 @@ using System.IO;
 
 public class DataPersistenceTest : MonoBehaviourExtended 
 {
-	PPDataController dataController;
-
 	[SerializeField]
 	Text coinText;
 	[SerializeField]

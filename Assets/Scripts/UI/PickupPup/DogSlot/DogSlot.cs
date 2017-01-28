@@ -8,6 +8,26 @@ using UnityEngine.UI;
 
 public class DogSlot : PPUIElement
 {
+    #region Instance Accessors 
+
+    public Dog PeekDog
+    {
+        get
+        {
+            return this.dog;
+        }
+    }
+
+    public bool HasDog
+    {
+        get
+        {
+            return dog != null;
+        }
+    }
+
+    #endregion
+
 	protected bool hasDogInfo
 	{
 		get
@@ -16,13 +36,6 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	protected bool hasDog
-	{
-		get
-		{
-			return dog != null;
-		}
-	}
 
 	protected Dog dog
 	{
@@ -35,7 +48,7 @@ public class DogSlot : PPUIElement
 			// Fixes ref on previous dog
 			if(_dog != null)
 			{
-				_dog.LeaveCurrentSlot();
+                _dog.LeaveCurrentSlot(callback:false, stopScouting:false);
 			}
 			// Assigns slot to new dog (assuming the new value is not null)
 			if(value != null)
@@ -53,7 +66,15 @@ public class DogSlot : PPUIElement
 			return button != null;
 		}
 	}
-		
+
+	protected virtual bool showProfileOnClick
+	{
+		get
+		{
+			return !inScoutingSelectMode;
+		}
+	}
+
     protected DogDescriptor dogInfo;
 
     protected Image[] images;
@@ -67,6 +88,7 @@ public class DogSlot : PPUIElement
     protected Image dogImage;
 
     bool setBackground = true;
+	bool inScoutingSelectMode = false;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -99,23 +121,31 @@ public class DogSlot : PPUIElement
 	{
 		this.dog = null;
 		this.dogInfo = null;
+		if(this.dogImage)
+		{
+        	this.dogImage.sprite = null;
+		}
 	}
 
-	public virtual void Init(Dog dog)
+	public virtual void Init(Dog dog, bool inScoutingSelectMode)
 	{
+		this.inScoutingSelectMode = inScoutingSelectMode;
 		this.dog = dog;
 		Init(dog.Info, dog.Portrait);
 	}
 
 	public void ExecuteClick()
 	{
-		if(hasDogInfo && !hasDog)
+		if(hasDogInfo && !HasDog)
 		{
 			this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
 		}
-		if(hasDog)
+		if(HasDog)
 		{
-			EventController.Event(PPEvent.ClickDogSlot, this.dog);
+            if(showProfileOnClick)
+			{
+				EventController.Event(PPEvent.ClickDogSlot, this.dog);
+			}
 			callOnOccupiedSlotClick(this.dog);
 		}
 		else 
@@ -144,6 +174,11 @@ public class DogSlot : PPUIElement
 		onFreeSlotClick -= clickAction;
 	}
 
+    protected void toggleButtonActive(bool isActive)
+    {
+        button.ToggleInteractable(isActive);
+    }
+
 	protected bool subscribeToUIButton()
 	{
 		if(hasButton)	
@@ -170,7 +205,7 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	void callOnOccupiedSlotClick(Dog dog)
+	protected virtual void callOnOccupiedSlotClick(Dog dog)
 	{
 		if(onOccupiedSlotClick != null)
 		{

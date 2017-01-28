@@ -35,6 +35,9 @@ public abstract class PPData
 	public delegate void DogActionStr(string eventName, Dog dog);
 	public delegate void PPDogAction(PPEvent ppEvent, Dog Dog);
 
+    public delegate void NamedCurrencyAction(string actionName, CurrencyData currency);
+    public delegate void CurrencyAction(CurrencyData currency);
+
 	protected DogDatabase database;
 
 	public PPData() 

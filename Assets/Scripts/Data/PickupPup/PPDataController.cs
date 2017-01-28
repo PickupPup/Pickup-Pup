@@ -172,7 +172,12 @@ public class PPDataController : DataController, ICurrencySystem
     {
         currentGame.SaveCurrencies(currencies);
     }
-		
+	
+    public bool AllDogsAdopted(DogDatabase dogDatabase)
+    {
+        return dogDatabase.Dogs.Length <= AdoptedDogs.Count;
+    }
+
 	#region MonoBehaviourExtended Overrides
 
 	protected override void handleGameTogglePause(bool isPaused)
@@ -211,6 +216,7 @@ public class PPDataController : DataController, ICurrencySystem
 	public override void Reset() 
 	{
 		base.Reset();
+        // Destroy the singleton so it's a true reset
 		LoadGame();
 	}
 

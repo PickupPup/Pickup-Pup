@@ -9,9 +9,30 @@ using System.Collections.Generic;
 
 public class ScoutingDisplay : PPUIElement 
 {
+    #region Static Accessors
+
+    // Not quite a singleton, because the scouting display is distinct to each scene
+    public static ScoutingDisplay MostRecentInstance
+    {
+        get;
+        private set;
+    }
+
+    public static bool HasActiveInstance
+    {
+        get
+        {
+            return MostRecentInstance != null && MostRecentInstance.gameObject != null;
+        }
+    }
+
+    #endregion
+
 	[SerializeField]
 	DogBrowser dogBrowser;
-	[SerializeField]
+    [SerializeField]
+    RedeemDisplay giftRedeemDisplay;
+    [SerializeField]
 	GiftReportUI scoutingReportDisplay;
 
 	DogOutsideSlot[] scoutingSlots;
@@ -31,6 +52,20 @@ public class ScoutingDisplay : PPUIElement
 		dog.SubscribeToScoutingTimerEnd(handleScoutingTimerEnd);
 	}
 
+    public bool TryFindOpenSlot(out DogSlot openSlot)
+    {
+        for(int i = 0; i < scoutingSlots.Length; i++)
+        {
+            if(!scoutingSlots[i].HasDog)
+            {
+                openSlot = scoutingSlots[i];
+                return true;
+            }
+        }
+        openSlot = null;
+        return false;
+    }
+
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences()
@@ -41,6 +76,7 @@ public class ScoutingDisplay : PPUIElement
 		{
 			slotsByIndex.Add(slot.transform.GetSiblingIndex(), slot);
 		}
+        MostRecentInstance = this;
 	}
 
 	protected override void fetchReferences()
@@ -69,26 +105,61 @@ public class ScoutingDisplay : PPUIElement
 		foreach(DogOutsideSlot slot in slots) 
 		{
 			slot.SubscribeToClickWhenFree(
-				delegate() {
+				delegate
+                {
 					gameController.SetTargetSlot(slot);
-					handleClickFreeSlot();		
+					handleClickFreeSlot();
 				}
 			);
+            slot.SubscribeToClickWhenOccupied(
+                delegate 
+                {
+					if(slot.PeekDog.HasRedeemableGift)
+					{
+                    	setupRedeemDisplay(slot.PeekDog);
+                    	slot.SetText(string.Empty);
+                        slot.ToggleRedeemDisplayOpen(isOpen:true);
+					}
+                }
+            );
 		}
 	}
 
 	void handleScoutingTimerEnd(Dog dog)
 	{
-		if(gameController)
-		{
-			DogDescriptor dogInfo = dog.Info;
-			CurrencyData reward = gameController.GetGift(dogInfo);
-			GiftReport report = new GiftReport(dogInfo, reward);
-			createReportUI(report);
-		}
+        // Safeguard to prevent multiple copies of this method being subscribed:
+        dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
+        dog.FindGift(shouldSave:true);
 	}
 
-	GiftReportUI createReportUI(GiftReport report)
+    void handleDogGiftCollected(Dog dog, bool resendOutToScout)
+    {
+        if(gameController)
+        {
+            DogDescriptor dogInfo = dog.Info;
+            CurrencyData reward = gameController.GetGift(dogInfo);
+            GiftReport report = new GiftReport(dogInfo, reward);
+            createGiftReportUI(report);
+        }
+    }
+
+    void setupRedeemDisplay(Dog dog)
+    {
+        RedeemDisplay redeemDisplay = createRedeemDisplay(dog); 
+		redeemDisplay.Init(dog);
+    }
+
+    RedeemDisplay createRedeemDisplay(Dog dog)
+    {
+        UIElement elem;
+        if(!UIElement.TryPullFromSpawnPool(typeof(RedeemDisplay), out elem))
+        {
+            elem = Instantiate<UIElement>(giftRedeemDisplay);
+        }
+        return elem as RedeemDisplay;
+    }
+
+	GiftReportUI createGiftReportUI(GiftReport report)
 	{
 		GiftReportUI reportUI = Instantiate(scoutingReportDisplay);
 		reportUI.Init(report);
@@ -99,10 +170,10 @@ public class ScoutingDisplay : PPUIElement
 	{
 		return new GiftReport(dog.Info, reward);
 	}
-
+        
 	void handleClickFreeSlot() 
 	{
-		dogBrowser.Open();
+		dogBrowser.Open(inScoutingSelectMode:true);
 		dogBrowser.SubscribeToDogClick(handleDogSelected);
 	}
 

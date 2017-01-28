@@ -126,8 +126,17 @@ public class DogBrowserButtonController : PPUIButtonController
 		{
 			setupPageButton(pageButtons[i], i);
 		}
-		pageBackwardButton.SubscribeToClick(parentWindow.PageBackward);
-		pageForwardButton.SubscribeToClick(parentWindow.PageForward);
+		if(numPages > SINGLE_VALUE)
+		{
+			pageBackwardButton.SubscribeToClick(parentWindow.PageBackward);
+			pageForwardButton.SubscribeToClick(parentWindow.PageForward);
+		}
+		else
+		{
+            pageBackwardButton.Hide();
+            pageForwardButton.Hide();
+            pageButtonParent.gameObject.SetActive(false);
+		}
 		IsInitialized = true;
 	}
 

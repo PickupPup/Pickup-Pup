@@ -31,7 +31,6 @@ public class PPSceneController : SingletonController<PPSceneController>
     [SerializeField]
     bool shouldZeroOutSceneLoadingBlockersOnLoadScene = true;
 
-    PPDataController dataController;
     // Set this to invalid until the script is fully loaded
     int sceneLoadingBlockers = INVALID_VALUE;
 
@@ -40,7 +39,6 @@ public class PPSceneController : SingletonController<PPSceneController>
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
-		dataController = PPDataController.GetInstance;
         // Now that refs are fetched, scenes can be loaded (need to be able to save before loading)
         zeroOutSceneLoadingBlockers();
 	}

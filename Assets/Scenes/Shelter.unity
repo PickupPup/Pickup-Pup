@@ -191,6 +191,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6ec415babf284b1dbce7631f7ff192a, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &287192428 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114829477178275386, guid: d6ec415babf284b1dbce7631f7ff192a,
+    type: 2}
+  m_PrefabInternal: {fileID: 287192427}
+  m_Script: {fileID: 11500000, guid: f70ce91b97de84ce3aa8ce92ae3057ec, type: 3}
 --- !u!1001 &454453653
 Prefab:
   m_ObjectHideFlags: 0
@@ -1022,6 +1028,11 @@ Prefab:
       propertyPath: dogBrowserObject
       value: 
       objectReference: {fileID: 1673167374}
+    - target: {fileID: 114976671936204298, guid: eb802c41a65744e4c956efbad2bc39af,
+        type: 2}
+      propertyPath: dogBrowser
+      value: 
+      objectReference: {fileID: 287192428}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb802c41a65744e4c956efbad2bc39af, type: 2}
   m_IsPrefabParent: 0

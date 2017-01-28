@@ -26,9 +26,8 @@ public class SettingsPopup : PPUIElement
     UIButton toggleSFXButton;
 
 	AudioController audioController;
-	PPDataController dataController;
 
-	public void ResetData()
+    public void ResetData()
 	{
 		if(dataController)
 		{

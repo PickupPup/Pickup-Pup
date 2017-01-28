@@ -16,12 +16,18 @@ public class PPGlobal : Global
 	public const string TIME_STAMP = "TimeStamp";
 	public const string DOG_GIFT_REPORT_FORMAT = "{0} brought you {1} {2}";
 	public const string GENERIC_GIFT_REPORT_FORMAT = "You received {0} {1}";
+    public const string REDEEM_DISPLAY_TEXT_KEY = "RedeemDisplayText";
 	public const string DAILY = "Daily";
 	public const string GIFT = "Gift";
 	public const string COUNTDOWN = "Countdown";
 	public const string DAILY_GIFT_COUNTDOWN = DAILY + GIFT + COUNTDOWN;
 	public const string HAS_GIFT_TO_REDEEM = "HasGiftToRedeem";
     public const string COIN_ICON = "Coin";
+    public const string FIND = "Find";
+    public const string REDEEM = "Redeem";
+    public const string FIND_GIFT = FIND + GIFT;
+    public const string REDEEM_GIFT = REDEEM + GIFT;
+    public const string TAP_TO_REDEEM = "TapToRedeem";
     public const string DOG_FOOD_ICON = "dogfood_icon";
 
     public const float FULL_PERCENT = 100f;
