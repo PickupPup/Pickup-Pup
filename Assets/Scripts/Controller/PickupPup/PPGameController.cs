@@ -12,7 +12,7 @@ public class PPGameController : GameController, ICurrencySystem
 {
 	#region Static Accessors
 
-	// Returns the Instance cast to the sublcassmonob
+	// Returns the Instance cast to the sublcass
 	public static PPGameController GetInstance 
 	{
 		get 
@@ -295,7 +295,7 @@ public class PPGameController : GameController, ICurrencySystem
     public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if (CanAfford(costCurrencyType, cost))
+        if(CanAfford(costCurrencyType, cost))
         {   
             buyItem(value, valueCurrencyType, cost, costCurrencyType);
             return true;
