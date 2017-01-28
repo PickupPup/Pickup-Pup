@@ -17,15 +17,12 @@ public class RedeemDisplay : PPUIElement
     Image giftPortrait;
 	GiftItem gift;
 	Image background;
-    Dog dog;
 
 	// Need Eventually For Polish
 	[SerializeField]
 	Button RedeemButton;
-	[SerializeField]
-	Button RedeemReturnButton;
 
-    public void Init(Dog dog)
+	public void Init(Dog dog)
     {
         if(dog.HasRedeemableGift)
         {
@@ -33,16 +30,10 @@ public class RedeemDisplay : PPUIElement
             CurrencyData gift = dog.PeekAtGift;
             giftDescription.text = gift.ToString();
             giftPortrait.sprite = gift.Icon;
-            this.dog = dog;
             RedeemButton.onClick.AddListener(
                 delegate 
                 {
-                    redeemGift(dog, scoutAgain:false);
-                });
-            RedeemReturnButton.onClick.AddListener(
-                delegate 
-                {
-                    redeemGift(dog, scoutAgain:true);
+                    redeemGift(dog);
                 });
         }
     }
@@ -69,7 +60,6 @@ public class RedeemDisplay : PPUIElement
 	{
 		this.gift = gift;
 		RedeemButton.interactable = true;
-		RedeemReturnButton.interactable = true;
 		giftDescription.text = gift.GiftName.ToUpper();
 	}
 
@@ -84,24 +74,16 @@ public class RedeemDisplay : PPUIElement
 		StartCoroutine(closeDisplayCoroutine());
 	}
      
-    void redeemGift(Dog dog, bool scoutAgain)
+    void redeemGift(Dog dog)
     {
         dog.RedeemGift();
-        if(scoutAgain)
-        {
-            dog.TrySendToScout();
-        }
-        else
-        {
-            dog.LeaveCurrentSlot(callback:true);
-        }
-        gameObject.SetActive(false);
+		dog.LeaveCurrentSlot(callback:true);
+		Destroy();
     }
 
 	// For Later Polish
 	IEnumerator closeDisplayCoroutine(){
 		RedeemButton.interactable = false;
-		RedeemReturnButton.interactable = false;
 		gameObject.SetActive(false);
 		yield break;
 	}

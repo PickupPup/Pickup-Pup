@@ -131,7 +131,6 @@ public class DogOutsideSlot : DogSlot
 	void subscribeTimerEvents(Dog dog)
 	{
 		dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
-		dog.SubscribeToScoutingTimerEnd(handleTimerEnd);
 		scoutingDisplay.SubscribeToTimerEnd(dog);
 	}
 
@@ -183,14 +182,6 @@ public class DogOutsideSlot : DogSlot
         if(timerText && !dog.HasRedeemableGift)
 		{
 			timerText.text = dog.RemainingTimeScoutingStr;	
-		}
-	}
-
-	void handleTimerEnd()
-	{
-		if(dog)
-		{
-     //       dog.FindGift();
 		}
 	}
 		

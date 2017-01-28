@@ -100,8 +100,11 @@ public class ScoutingDisplay : PPUIElement
             slot.SubscribeToClickWhenOccupied(
                 delegate 
                 {
-                    setupRedeemDisplay(slot.PeekDog);
-                    slot.SetText(string.Empty);
+					if(slot.PeekDog.HasRedeemableGift)
+					{
+                    	setupRedeemDisplay(slot.PeekDog);
+                    	slot.SetText(string.Empty);
+					}
                 }
             );
 		}
@@ -128,7 +131,7 @@ public class ScoutingDisplay : PPUIElement
     void setupRedeemDisplay(Dog dog)
     {
         RedeemDisplay redeemDisplay = createRedeemDisplay(dog); 
-        redeemDisplay.Init(dog);
+		redeemDisplay.Init(dog);
     }
 
     RedeemDisplay createRedeemDisplay(Dog dog)
