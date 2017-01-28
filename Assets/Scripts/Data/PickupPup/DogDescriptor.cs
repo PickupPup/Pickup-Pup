@@ -10,6 +10,14 @@ public class DogDescriptor : PPDescriptor
 {
 	#region Instance Accessors
 
+    public Dog PeekDogLink
+    {
+        get
+        {
+            return linkedDog;
+        }
+    }
+
 	public bool IsLinkedToDog 
 	{
 		get 
