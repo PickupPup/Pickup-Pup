@@ -9,6 +9,8 @@ using k = PPGlobal;
 
 public class DogBrowser : PPUIElement 
 {	
+	const int MIN_PAGES = SINGLE_VALUE;
+
 	#region Instance Accessors
 
 	public int CurrentPageIndex
@@ -151,7 +153,15 @@ public class DogBrowser : PPUIElement
 
 	public int GetNumPages()
 	{
-		return getNumPages(this.database);
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				return Mathf.Clamp(dogCollection.Length / dogsPerPage, 1, dogCollection.Length);
+			case DogBrowserType.AllDogs:
+				return getNumPages(this.database);
+			default:
+				return NONE_VALUE;
+		}
 	}
 
 	int getNumPages(DogDatabase database)

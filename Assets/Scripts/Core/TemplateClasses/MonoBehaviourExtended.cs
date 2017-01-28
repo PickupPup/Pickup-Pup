@@ -15,7 +15,8 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected bool referencesFetched = false;
 
 	protected const int NONE_VALUE = k.NONE_VALUE;
-	protected static int INVALID_VALUE = k.INVALID_VALUE; 
+	protected const int INVALID_VALUE = k.INVALID_VALUE; 
+	protected const int SINGLE_VALUE = k.SINGLE_VALUE;
 
 	public delegate void MonoAction();
 	public delegate void MonoActionf(float monoFloat);
