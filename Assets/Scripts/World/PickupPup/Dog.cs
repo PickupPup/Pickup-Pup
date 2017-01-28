@@ -14,7 +14,8 @@ public class Dog : MobileObjectBehaviour
 	{
 		get 
 		{
-			return RemainingTimeScouting > 0 && scoutingTimer.IsRunning;
+            checkReferences();
+            return dataController.ScoutingDogs.Contains(this.Info);
 		}
 	}
 

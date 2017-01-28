@@ -141,6 +141,14 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+    public bool MainMenuIsOpen
+    {
+        get
+        {
+            return mainMenuIsOpen;
+        }
+    }
+
     #endregion
 
     // The dog the player currently has selected
@@ -153,6 +161,7 @@ public class PPGameController : GameController, ICurrencySystem
 	LanguageDatabase languages;
 	PPGiftController giftController;
 	DogSlot targetSlot;
+    bool mainMenuIsOpen = false;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -314,6 +323,11 @@ public class PPGameController : GameController, ICurrencySystem
 
     #endregion
 
+    public void ToggleMainMenuOpen(bool menuIsOpen)
+    {
+        this.mainMenuIsOpen = menuIsOpen;
+    }
+
 	public CurrencyData GetGift(DogDescriptor dog)
 	{
 		CurrencyData data = giftController.GetGiftFromDog(dog);
@@ -405,7 +419,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		if(HasTargetSlot)
 		{
-			targetSlot.Init(dog, inScoutingSelectMode:false);
+            targetSlot.Init(dog, inScoutingSelectMode:false);
 			ClearTargetSlot();
 		}
 	}
@@ -422,7 +436,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void sendDogToSlot(Dog dog, DogSlot slot)
 	{
-		slot.Init(dog, inScoutingSelectMode:false);
+        slot.Init(dog, inScoutingSelectMode:false);
 	}
 
 	void sendDogToScout(Dog dog) 

@@ -10,7 +10,7 @@ using k = PPGlobal;
 public class PPMainMenuUIController : PPUIElement 
 {
     [SerializeField]
-    GameObject dogBrowserObject;
+    DogBrowser dogBrowser;
     [SerializeField]
     SettingsPopup settingsPopup;
 
@@ -38,6 +38,10 @@ public class PPMainMenuUIController : PPUIElement
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             Show();
         }
+        if(gameController)
+        {
+            gameController.ToggleMainMenuOpen(gameObject.activeSelf);
+        }
     }
 
     #endregion
@@ -55,10 +59,10 @@ public class PPMainMenuUIController : PPUIElement
 
     public void OnAllDogsClick()
     {
-        if (dogBrowserObject)
+        if (dogBrowser)
         {
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-            dogBrowserObject.SetActive(true);
+            dogBrowser.Open(inScoutingSelectMode:false);
         }
     }
 

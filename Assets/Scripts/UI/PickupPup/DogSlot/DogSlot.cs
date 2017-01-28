@@ -141,7 +141,7 @@ public class DogSlot : PPUIElement
 		}
 		if(hasDog)
 		{
-			if(!inScoutingSelectMode)
+            if(showProfileOnClick)
 			{
 				EventController.Event(PPEvent.ClickDogSlot, this.dog);
 			}

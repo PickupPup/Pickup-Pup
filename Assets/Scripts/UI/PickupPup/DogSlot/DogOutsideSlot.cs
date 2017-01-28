@@ -132,11 +132,11 @@ public class DogOutsideSlot : DogSlot
 		// Call Dog functionality first because base method sets dog ref to null:
 		dog.StopTimer();
         unsubscribeGiftEvents(dog);
-		dogImage.sprite = collarSprite;
 		nameText.text = string.Empty;
 		timerText.text = string.Empty;
         redeemableGiftDisplay.SetActive(false);
 		base.ClearSlot();
+        dogImage.sprite = collarSprite;
 	}
 
 	public Dog BringDogIndoors()

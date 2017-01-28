@@ -104,12 +104,21 @@ public class DogBrowser : PPUIElement
 
 	public void Set(Dog[] dogs) 
 	{
+        int currentDogIndex = 0;
 		for(int i = 0; i < dogSlots.Length; i++)
 		{
-			if(ArrayUtil.InRange(dogs, i) && dogs[i] != null)
+            // Filter out scoting dogs:
+            if(inScoutingSelectMode)
+            {
+                while(currentDogIndex < dogs.Length && dogs[currentDogIndex].IsScouting)
+                {
+                    currentDogIndex++;
+                }
+            }
+            if(ArrayUtil.InRange(dogs, currentDogIndex) && dogs[currentDogIndex] != null)
 			{
 				dogSlots[i].Show();
-				dogSlots[i].Init(dogs[i], inScoutingSelectMode);
+                dogSlots[i].Init(dogs[currentDogIndex++], inScoutingSelectMode);
 			}
 			else
 			{
