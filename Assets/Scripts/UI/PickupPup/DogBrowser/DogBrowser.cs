@@ -155,7 +155,6 @@ public class DogBrowser : PPUIElement
 		
 	public void PageForward()
 	{
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         SwitchToPage(getPageForwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
 	}
 
@@ -166,7 +165,6 @@ public class DogBrowser : PPUIElement
 
 	public void PageBackward()
 	{
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         SwitchToPage(getPageBackwardIndex(currentlySelectedPageIndex), onClickPageButton:false);
 	}
 

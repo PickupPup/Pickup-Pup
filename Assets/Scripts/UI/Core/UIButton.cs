@@ -7,7 +7,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIButton : UIElement
+public class UIButton : UIInteractable
 {
 	protected bool hasButtonGraphic
 	{

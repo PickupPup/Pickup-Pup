@@ -194,7 +194,6 @@ public class DogBrowserButtonController : PPUIButtonController
 	{
 		if(onDogClick != null)
 		{
-            EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
 			onDogClick(dog);
 		}
 	}
