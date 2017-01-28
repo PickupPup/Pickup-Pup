@@ -70,7 +70,6 @@ public class DogBrowser : PPUIElement
 				DogDescriptor[] dogInfos = dataController.AdoptedDogs.ToArray();
 				DogFactory dogFactory = new DogFactory(hideGameObjects:true);
 				dogCollection = dogFactory.CreateGroup(dogInfos);
-				Debug.Log(dogCollection.Length);
 				break;
 			case DogBrowserType.AllDogs:
 				dogCollection = new Dog[database.Dogs.Length];

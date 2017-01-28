@@ -321,12 +321,20 @@ public class PPGameController : GameController, ICurrencySystem
 
     public bool TryAdoptDog(DogDescriptor dog)
     {
-        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
-        {
-            AdoptDog(dog);
-            return true;
-        }        
-        return false;       
+		if(dataController.CheckAdopted(dog))
+		{
+			// Trying to adopt a dog that is already adopted
+			return false;
+		}
+		else
+		{
+	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
+	        {
+	            AdoptDog(dog);
+	            return true;
+	        }        
+	        return false;       
+		}
     }
 
     void AdoptDog(DogDescriptor dog)
