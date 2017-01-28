@@ -99,7 +99,7 @@ public class AudioController : Controller, IAudioController
 		base.cleanupReferences();
 		unsubscribeEvents();
 	}
-
+        
 	protected override void handleNamedEvent(string eventName)
 	{
 		if(playEvents.ContainsKey(eventName)) 
@@ -308,6 +308,7 @@ public class AudioController : Controller, IAudioController
 			{
 				playMainMusic();
 			}
+            SetMusicVolume(musicVolume);
 		}
 	}
 

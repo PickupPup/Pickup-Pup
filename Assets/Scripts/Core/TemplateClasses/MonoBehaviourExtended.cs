@@ -21,8 +21,12 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	public delegate void MonoActionf(float monoFloat);
 	public delegate void MonoActionInt(int monoInt);
 
-	IEnumerator moveCoroutine;
+    [SerializeField]
+    bool preserveOnSceneChange = false;
+   
 	bool destroyOnNextLoad = false;
+
+    IEnumerator moveCoroutine;
 
 	#region Unity Methods
 
@@ -157,6 +161,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 	protected virtual void setReferences() 
 	{
+        if(preserveOnSceneChange)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 		this.referencesSet = true;
 	}
 

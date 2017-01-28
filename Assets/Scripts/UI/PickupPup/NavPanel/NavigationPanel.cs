@@ -38,13 +38,11 @@ public class NavigationPanel : SingletonController<NavigationPanel>
 
     public void OnMenuClick()
     {
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         mainMenu.Toggle();
     }
 
     public void OnAdoptClick()
     {
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadShelter();
     }
 
