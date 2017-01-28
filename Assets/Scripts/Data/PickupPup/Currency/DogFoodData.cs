@@ -3,6 +3,7 @@
  * Description: Stores data for the Player's dog food currency.
  */
 
+using System.IO;
 using UnityEngine;
 using k = PPGlobal;
 
@@ -22,7 +23,7 @@ public class DogFoodData : CurrencyData
     {
         get
         {
-			return fetchSprite(k.DOG_FOOD_ICON);
+			return Resources.Load<Sprite>(Path.Combine(k.SPRITES_DIR, k.DOG_FOOD_ICON));
         }
     }
 
