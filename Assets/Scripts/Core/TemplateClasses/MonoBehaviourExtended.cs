@@ -9,6 +9,8 @@ using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
+    protected PPDataController dataController;
+
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
 
@@ -161,6 +163,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	protected virtual void fetchReferences() 
 	{
 		this.referencesFetched = true;
+        // Check if it has already been initialized, some classes may prefer to use a custom data controller
+        if(!this.dataController)
+        {
+            this.dataController = PPDataController.GetInstance;
+        }
 	}
 		
 	protected virtual void checkReferences()
@@ -313,5 +320,17 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		TextAsset json = Resources.Load<TextAsset>(pathInResoures);
 		return JsonUtility.FromJson<T>(json.text);
 	}
+
+    protected bool trySaveGame()
+    {
+        if(dataController)
+        {
+            return dataController.Save();
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }

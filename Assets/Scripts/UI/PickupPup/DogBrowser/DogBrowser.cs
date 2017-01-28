@@ -40,6 +40,8 @@ public class DogBrowser : PPUIElement
 
 	[SerializeField]
 	int defaultStartPage;
+	[SerializeField]
+	DogBrowserType browserMode = DogBrowserType.AdoptedDogs;
 
 	DogBrowserButtonController buttonController;
 	DogSlot[] dogSlots;
@@ -57,12 +59,23 @@ public class DogBrowser : PPUIElement
 		buttonController = GetComponentInChildren<DogBrowserButtonController>();
 		dogSlots = GetComponentsInChildren<DogSlot>();
 		database = DogDatabase.GetInstance;
-		dogCollection = new Dog[database.Dogs.Length];
 	}
 
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				DogDescriptor[] dogInfos = dataController.AdoptedDogs.ToArray();
+				DogFactory dogFactory = new DogFactory(hideGameObjects:true);
+				dogCollection = dogFactory.CreateGroup(dogInfos);
+				Debug.Log(dogCollection.Length);
+				break;
+			case DogBrowserType.AllDogs:
+				dogCollection = new Dog[database.Dogs.Length];
+				break;
+		}
 		setupDogSlots();
 	}
 
@@ -188,6 +201,33 @@ public class DogBrowser : PPUIElement
 
 	Dog[] getDogsForPage(int pageIndex)
 	{
+		switch(browserMode)
+		{
+			case DogBrowserType.AdoptedDogs:
+				return getAdoptedDogsForPage(pageIndex);
+			case DogBrowserType.AllDogs:
+				return getDogsForPageFromAllDogs(pageIndex);
+			default:
+				return new Dog[0];
+		}
+	}
+
+	Dog[] getAdoptedDogsForPage(int pageIndex)
+	{
+		int startIndex = getStartIndex(pageIndex);
+		if(IntUtil.InRange(startIndex, dogCollection.Length))
+		{
+			int endIndex = Mathf.Clamp(startIndex + dogsPerPage, 0, dogCollection.Length);
+			return ArrayUtil.GetRange(dogCollection, startIndex, endIndex - startIndex);
+		}
+		else
+		{
+			return new Dog[0];
+		}
+	}
+
+	Dog[] getDogsForPageFromAllDogs(int pageIndex)
+	{
 		if(ArrayUtil.InRange(pagesInitializedCheck, pageIndex))
 		{
 			if(pagesInitializedCheck[pageIndex])
@@ -205,7 +245,7 @@ public class DogBrowser : PPUIElement
 			return new Dog[0];
 		}
 	}
-		
+
 	Dog[] loadDogsForPage(int pageIndex)
 	{
 		if(ArrayUtil.InRange(pagesInitializedCheck, pageIndex))
@@ -262,4 +302,10 @@ public class DogBrowser : PPUIElement
 		return currentlySelectedPageIndex == pageIndex;
 	}
 
+}
+
+public enum DogBrowserType
+{
+	AllDogs,
+	AdoptedDogs
 }
