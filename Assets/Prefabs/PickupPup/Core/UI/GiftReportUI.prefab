@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114333400866646894
@@ -239,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d58de1da96184a87953a664be809240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   dogPortrait: {fileID: 114158827235088370}
@@ -480,7 +482,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!224 &224460889765197352
 RectTransform:

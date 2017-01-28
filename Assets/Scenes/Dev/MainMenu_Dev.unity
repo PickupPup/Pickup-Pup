@@ -188,16 +188,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114976671936204298, guid: eb802c41a65744e4c956efbad2bc39af,
-        type: 2}
-      propertyPath: dogBrowserObject
-      value: 
-      objectReference: {fileID: 1510451397}
-    - target: {fileID: 114976671936204298, guid: eb802c41a65744e4c956efbad2bc39af,
-        type: 2}
-      propertyPath: settingsPopup
-      value: 
-      objectReference: {fileID: 370958185}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb802c41a65744e4c956efbad2bc39af, type: 2}
   m_IsPrefabParent: 0
@@ -348,12 +338,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 369153192}
---- !u!114 &370958185 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114555401586043714, guid: 36addd15c2c3143fca398d5e62972863,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905568542}
-  m_Script: {fileID: 11500000, guid: 0a5fe1dc07dfa4298986bf1b9f9af6b2, type: 3}
 --- !u!1 &377707308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,11 +1270,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6ec415babf284b1dbce7631f7ff192a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1510451397 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1425115051427350, guid: d6ec415babf284b1dbce7631f7ff192a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1510451396}
 --- !u!1 &1575257959
 GameObject:
   m_ObjectHideFlags: 0

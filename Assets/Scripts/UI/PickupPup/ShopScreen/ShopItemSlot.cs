@@ -27,7 +27,7 @@ public class ShopItemSlot : PPUIElement
             nameText.text = item.ItemName;
         }
         priceText.text = item.CostStr;
-        // TODO: Set item Image
+        itemImage.sprite = item.Icon;
     }
 
     public void Buy()
