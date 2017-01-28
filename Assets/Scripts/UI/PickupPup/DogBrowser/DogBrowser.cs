@@ -110,7 +110,7 @@ public class DogBrowser : PPUIElement
 			}
 			else
 			{
-				dogSlots[i].Hide();
+                dogSlots[i].ClearSlot();
 			}
 		}
 	}
