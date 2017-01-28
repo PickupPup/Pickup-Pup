@@ -55,6 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5880f4730969f425b83699e01b2a0e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   resetDataKey: 113
   saveOnApplicationPause: 0
   saveOnApplicationQuit: 1
@@ -69,8 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1e45d12d45e46539f39fc7d269914b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 1
   alsoCallPPEventsAsStrings: 1
-  tryAlsoCallStringsAsPPEvents: 1
+  tryAlsoCallStringsAsPPEvents: 0
 --- !u!114 &114567133989285116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,6 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12aadcd26a63a4c5aba6db251a62d613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  shouldZeroOutSceneLoadingBlockersOnLoadScene: 1
 --- !u!114 &114949839597236378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b75887beeeb43d2b0cd0f4d0b6f54f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 1
 --- !u!114 &114966013612004634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,3 +109,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6049accc3d94425f9b27de4d53042de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 1

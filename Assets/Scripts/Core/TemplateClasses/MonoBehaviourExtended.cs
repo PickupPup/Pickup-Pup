@@ -9,6 +9,9 @@ using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
+    [SerializeField]
+    bool preserveOnSceneChange = false;
+
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
 
@@ -155,6 +158,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 	protected virtual void setReferences() 
 	{
+        if(preserveOnSceneChange)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 		this.referencesSet = true;
 	}
 

@@ -50,7 +50,6 @@ public class PPMainMenuUIController : PPUIElement
 
     public void OnShopClick()
     {
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadShop();
     }
 
@@ -65,13 +64,11 @@ public class PPMainMenuUIController : PPUIElement
 
     public void OnLivingRoomClick()
     {
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadLivingRoom();
     }
 
     public void OnYardClick()
     {
-        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
         sceneController.LoadYard();
     }
 
