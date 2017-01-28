@@ -244,7 +244,11 @@ public class Dog : MobileObjectBehaviour
     // WARNING: Do not set callback to true from w/in the slot, otherwise you risk creating stackoverflow
     public void LeaveCurrentSlot(bool callback)
 	{
-        if(callback)
+        if(slot is DogOutsideSlot)
+        {
+            dataController.ScoutingDogs.Remove(this.Info);
+        }
+        if(callback && slot)
         {
             this.slot.ClearSlot();
         }
@@ -301,6 +305,10 @@ public class Dog : MobileObjectBehaviour
       
     public CurrencyData RedeemGift()
     {
+        if(!HasRedeemableGift)
+        {
+            FindGift();
+        }
         CurrencyData gift = redeemableGift;
         redeemableGift = null;
         callGiftEvent(k.REDEEM_GIFT, gift);

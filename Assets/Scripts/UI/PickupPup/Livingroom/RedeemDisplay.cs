@@ -6,6 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using k = PPGlobal;
 
 public class RedeemDisplay : PPUIElement 
 {
@@ -28,7 +29,7 @@ public class RedeemDisplay : PPUIElement
     {
         if(dog.HasRedeemableGift)
         {
-            dogNameDisplay.text = dog.Name;
+            dogNameDisplay.text = formatRedeemMessage(dog);
             dogPortrait.sprite = dog.Portrait;
             CurrencyData gift = dog.PeekAtGift;
             giftDescription.text = gift.ToString();
@@ -81,7 +82,14 @@ public class RedeemDisplay : PPUIElement
     {
         dog.RedeemGift();
 		dog.LeaveCurrentSlot(callback:true);
+        dataController.Save();
 		Destroy();
+    }
+
+    string formatRedeemMessage(Dog dog)
+    {
+        string formatText = languageDatabase.GetTerm(k.REDEEM_DISPLAY_TEXT_KEY);
+        return string.Format(formatText, dog.Name);
     }
 
 	// For Later Polish

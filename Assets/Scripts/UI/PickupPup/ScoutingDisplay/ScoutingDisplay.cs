@@ -44,16 +44,6 @@ public class ScoutingDisplay : PPUIElement
 		if(slotsByIndex.TryGetValue(slotIndex, out slot))
 		{
 			slot.ResumeScouting(dog);
-            slot.SubscribeToClickWhenOccupied(
-                delegate 
-                {
-                    if(slot.PeekDog.HasRedeemableGift)
-                    {
-                        setupRedeemDisplay(slot.PeekDog);
-                        slot.SetText(string.Empty);
-                    }
-                }
-            );
 		}
 	}
 

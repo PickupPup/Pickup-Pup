@@ -16,6 +16,7 @@ public class PPGlobal : Global
 	public const string TIME_STAMP = "TimeStamp";
 	public const string DOG_GIFT_REPORT_FORMAT = "{0} brought you {1} {2}";
 	public const string GENERIC_GIFT_REPORT_FORMAT = "You received {0} {1}";
+    public const string REDEEM_DISPLAY_TEXT_KEY = "RedeemDisplayText";
 	public const string DAILY = "Daily";
 	public const string GIFT = "Gift";
 	public const string COUNTDOWN = "Countdown";

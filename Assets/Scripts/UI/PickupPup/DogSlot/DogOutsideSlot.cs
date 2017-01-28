@@ -62,6 +62,12 @@ public class DogOutsideSlot : DogSlot
 		}
 	}
 
+    public override bool TryUnsubscribeAll()
+    {
+        unsubscribeFromUIButton();
+        return true;
+    }
+
 	#endregion
 
     #region DogSlot Overrides
