@@ -244,6 +244,17 @@ public class EventController : SingletonController<EventController>
 		}
 	}
 
+    public static void Event(string eventName, Dog dog)
+    {
+        if(hasInstance)
+        {
+            if(Instance.OnNamedDogEvent != null)
+            {
+                Instance.OnNamedDogEvent(eventName, dog);
+            }
+        }
+    }
+
 	static void callPPEventAsString(PPEvent gameEvent) 
 	{
 		Event(gameEvent.ToString(), isCallback:true);

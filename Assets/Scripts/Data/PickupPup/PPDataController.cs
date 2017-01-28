@@ -6,6 +6,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using k = PPGlobal;
 
 public class PPDataController : DataController, ICurrencySystem 
 {
@@ -223,6 +224,7 @@ public class PPDataController : DataController, ICurrencySystem
 
     public void Adopt(DogDescriptor dog)
     {
+        EventController.Event(k.ADOPT, dog.PeekDogLink);
         currentGame.Adopt(dog);
         SaveGame();
     }
