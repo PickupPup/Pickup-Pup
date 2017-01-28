@@ -74,7 +74,6 @@ public class PPGameSave : GameSave, ISerializable
 			this.DailyGiftCountdown = 0;
 		}
 		this.HasGiftToRedeem = (bool) info.GetValue(HAS_GIFT_TO_REDEEM, typeof(bool));
-        UnityEngine.Debug.Log(ScoutingDogs.Count);
 	}
 		
 	// Implement this method to serialize data. The method is called on serialization.
