@@ -136,6 +136,12 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+    public CurrencyData RedeemableGift
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -227,6 +233,18 @@ public class DogDescriptor : PPDescriptor
 		}
 		this._scoutingSlotIndex = NOT_FOUND_INT;
 	}
+
+    public void FindGift(CurrencyData gift)
+    {
+        this.RedeemableGift = gift;
+    }
+
+    public CurrencyData RedeemGift()
+    {
+        CurrencyData gift = this.RedeemableGift;
+        this.RedeemableGift = null;
+        return gift;
+    }
 
 	void updateTimeRemainingScouting(float timeRemainingScouting)
 	{

@@ -115,7 +115,7 @@ public class ScoutingDisplay : PPUIElement
 	{
         // Safeguard to prevent multiple copies of this method being subscribed:
         dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
-        dog.FindGift();
+        dog.FindGift(shouldSave:true);
 	}
 
     void handleDogGiftCollected(Dog dog, bool resendOutToScout)

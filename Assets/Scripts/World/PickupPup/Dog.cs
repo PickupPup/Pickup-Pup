@@ -157,6 +157,14 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+    CurrencyData redeemableGift
+    {
+        get
+        {
+            return Info.RedeemableGift;
+        }
+    }
+
 	// Tracks how long the dog will be away from the house
 	[SerializeField]
 	protected PPTimer scoutingTimer;
@@ -167,7 +175,6 @@ public class Dog : MobileObjectBehaviour
 	PPData.DogActionf onScoutingTimerChange;
     PPData.NamedCurrencyAction onGiftAction;
 	DogSlot slot;
-    CurrencyData redeemableGift;
 
     #region MonoBehaviourExtended Overrides
 
@@ -290,28 +297,32 @@ public class Dog : MobileObjectBehaviour
     }
 
     // Typically dog should find a random gift, but method can be overloaded to cause it to find a specific gift
-    public void FindGift(CurrencyData giftOverride = null)
+    public void FindGift(bool shouldSave, CurrencyData giftOverride = null)
     {
+        CurrencyData gift;
         if(giftOverride == null)
         {
-            redeemableGift = gameController.GetGift(Info);
+            gift = gameController.GetGift(Info);
         }
         else
         {
-            redeemableGift = giftOverride;
+            gift = giftOverride;
         }
+        Info.FindGift(gift);
         callGiftEvent(k.FIND_GIFT, redeemableGift);
-        trySaveGame();
+        if(shouldSave)
+        {
+            trySaveGame();
+        }
     }
       
     public CurrencyData RedeemGift()
     {
         if(!HasRedeemableGift)
         {
-            FindGift();
+            FindGift(shouldSave:false);
         }
-        CurrencyData gift = redeemableGift;
-        redeemableGift = null;
+        CurrencyData gift = Info.RedeemGift();
         callGiftEvent(k.REDEEM_GIFT, gift);
         gameController.GiveCurrency(gift);
         trySaveGame();

@@ -181,7 +181,6 @@ public class PPGameController : GameController, ICurrencySystem
 	protected override void fetchReferences() 
 	{
 		base.fetchReferences();
-		dataController = PPDataController.GetInstance;
         dogDatabase.Initialize(dataController);
 		dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
@@ -189,6 +188,17 @@ public class PPGameController : GameController, ICurrencySystem
 		giftController.Init(tuning);
 		handleLoadGame(dataController);
 	}
+
+    protected override void handleSceneLoaded(int sceneIndex)
+    {
+        if(isSingleton)
+        {
+            base.handleSceneLoaded(sceneIndex);
+            setupScoutingOnLoad(dataController);
+        }
+    }
+
+    #endregion
 
 	void handleLoadGame(PPDataController dataController)
 	{
@@ -219,7 +229,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void setupScoutingOnLoad(PPDataController dataController)
 	{
-		List<DogDescriptor> dogs = dataController.ScoutingDogs;
+        List<DogDescriptor> dogs = dataController.ScoutingDogs;
 		if(dogs != null && dogs.Count > 0)
 		{
 			Dog[] dogObjs = new DogFactory(hideGameObjects:true).CreateGroup(dogs.ToArray());
@@ -250,8 +260,6 @@ public class PPGameController : GameController, ICurrencySystem
 			return INVALID_VALUE;
 		}
 	}
-
-    #endregion
 
     #region ICurrencySystem Interface
 
