@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114138594320742604
@@ -548,6 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114321554440247928
@@ -816,6 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e590b60e7a843544b03feaa957fcc8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   nameText: {fileID: 114005360748274562}
@@ -1045,6 +1048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114944156310453926
@@ -1220,7 +1224,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!224 &224051899823776298
 RectTransform:
