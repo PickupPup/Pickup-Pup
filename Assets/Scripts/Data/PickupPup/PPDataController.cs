@@ -230,8 +230,8 @@ public class PPDataController : DataController, ICurrencySystem
 
     public void Adopt(DogDescriptor dog)
     {
-        EventController.Event(k.ADOPT, dog.PeekDogLink);
         currentGame.Adopt(dog);
+        EventController.Event(k.ADOPT, dog.PeekDogLink);
         SaveGame();
     }
 
