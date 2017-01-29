@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DogFactory : ObjectFactory<Dog>
 {
@@ -41,5 +42,15 @@ public class DogFactory : ObjectFactory<Dog>
 		}
 		return dogs;
 	}
+
+    public List<Dog> CreateGroupList(List<DogDescriptor> dogInfos)
+    {
+        List<Dog> dogs = new List<Dog>();
+        for (int i = 0; i < dogInfos.Count; i++)
+        {
+            dogs.Add(Create(dogInfos[i]));
+        }
+        return dogs;
+    }
 
 }
