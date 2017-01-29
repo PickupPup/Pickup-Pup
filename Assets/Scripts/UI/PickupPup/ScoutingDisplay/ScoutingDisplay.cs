@@ -181,7 +181,7 @@ public class ScoutingDisplay : PPUIElement
 	{
 		gameController.SendToTargetSlot(dog);
 		dogBrowser.UnsubscribeFromDogClick(handleDogSelected);
-		dogBrowser.Close();
+		dogBrowser.Hide();
 	}
 
 	void handlePPDogEvent(PPEvent eventName, Dog dog)

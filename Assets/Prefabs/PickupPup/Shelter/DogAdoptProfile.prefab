@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 224241168554744662}
   - component: {fileID: 114515674173817594}
   - component: {fileID: 114429311784214336}
-  - component: {fileID: 114983295283208508}
   - component: {fileID: 222631245659664092}
   m_Layer: 5
   m_Name: CloseProfileHitArea
@@ -580,7 +579,6 @@ MonoBehaviour:
   descriptionFields:
   - {fileID: 114729693639688886}
   - {fileID: 114679373013876612}
-  closeWindowHitArea: {fileID: 114983295283208508}
   iconsObject: {fileID: 1421931473714304}
   rehomeButton: {fileID: 114086301235419660}
   collarSlot: {fileID: 114478812636912244}
@@ -876,7 +874,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114515674173817594}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114086468083648258}
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114471595983493374
@@ -1363,20 +1372,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
---- !u!114 &114983295283208508
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216579926519562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveOnSceneChange: 0
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
 --- !u!222 &222028096401675322
 CanvasRenderer:
   m_ObjectHideFlags: 1

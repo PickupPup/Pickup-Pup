@@ -224,7 +224,6 @@ GameObject:
   - component: {fileID: 224764037808486192}
   - component: {fileID: 114808042300218036}
   - component: {fileID: 114470009647809340}
-  - component: {fileID: 114215185432596304}
   - component: {fileID: 222496321471751850}
   m_Layer: 5
   m_Name: CloseProfileHitArea
@@ -538,20 +537,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114215185432596304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1408706884413824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveOnSceneChange: 0
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
 --- !u!114 &114321554440247928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,7 +643,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114808042300218036}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114641595301203040}
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114492719435416394
@@ -830,7 +826,6 @@ MonoBehaviour:
   descriptionFields:
   - {fileID: 114887773477957654}
   - {fileID: 114124458648663892}
-  closeWindowHitArea: {fileID: 114215185432596304}
   iconsObject: {fileID: 1388039298375222}
   rehomeButton: {fileID: 114321554440247928}
   collarSlot: {fileID: 114213218655212642}
