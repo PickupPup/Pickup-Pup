@@ -187,7 +187,7 @@ public class DogOutsideSlot : DogSlot
 
     void unsubscribeGiftEvents(Dog dog)
     {
-        dog.UnsusbscribeFromGiftEvents(handleDogGiftEvents);
+        dog.UnsubscribeFromGiftEvents(handleDogGiftEvents);
     }
 
     void handleDogGiftEvents(string eventName, CurrencyData gift)
