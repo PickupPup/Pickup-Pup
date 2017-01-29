@@ -40,6 +40,10 @@ GameObject:
   - component: {fileID: 222552986912036466}
   - component: {fileID: 114139923137214882}
   - component: {fileID: 114161346421758674}
+  - component: {fileID: 114683808189004528}
+  - component: {fileID: 114528820134662228}
+  - component: {fileID: 114650581523783744}
+  - component: {fileID: 225722238681186394}
   m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
@@ -559,6 +563,26 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114528820134662228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270172303619314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34991c9fa8d6341f485923cce1a65a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  handlers:
+  - action: {fileID: 11400000, guid: 4a89434783b324db0a5e781c42b6cbd2, type: 2}
+    triggers: []
+    triggerOnStart: 1
+    triggerOnSwipe: 0
+    validSwipeDirections: 
+    triggerOnClick: 0
+  minValidSwipeDistance: 1
 --- !u!114 &114569000331848476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -577,6 +601,34 @@ MonoBehaviour:
   m_PreferredHeight: 670
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+--- !u!114 &114650581523783744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270172303619314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34991c9fa8d6341f485923cce1a65a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  handlers: []
+  minValidSwipeDistance: 1
+--- !u!114 &114683808189004528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270172303619314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114753879749921970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,6 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11baadc700d152142ba6d4a5bd6a81fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   dogProfileObject: {fileID: 0}
   currencyPanel: {fileID: 0}
   navigationPanel: {fileID: 0}
@@ -999,3 +1052,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225722238681186394
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270172303619314}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
