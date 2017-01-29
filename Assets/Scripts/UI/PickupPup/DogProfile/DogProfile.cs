@@ -30,9 +30,6 @@ public class DogProfile : PPUIElement
     UIElement[] descriptionFields; // Normal description must come first (not special)
 
     [SerializeField]
-    UIButton closeWindowHitArea;
-
-    [SerializeField]
     protected GameObject iconsObject;
     [SerializeField]
     protected Button rehomeButton;
@@ -52,12 +49,6 @@ public class DogProfile : PPUIElement
         {
             descriptionText[i] = descriptionFields[i].GetComponentInChildren<Text>();
         }
-    }
-
-    protected override void subscribeEvents()
-    {
-        base.subscribeEvents();
-        closeWindowHitArea.SubscribeToClick(Hide);
     }
 
     #endregion

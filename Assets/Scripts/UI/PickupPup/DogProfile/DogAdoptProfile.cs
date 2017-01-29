@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class DogAdoptProfile : DogProfile
 {
@@ -33,6 +34,12 @@ public class DogAdoptProfile : DogProfile
         tuning = gameController.Tuning;
     }
 
+    protected override void subscribeEvents()
+    {
+        base.subscribeEvents();
+        EventController.Subscribe(handleAdoptEvent);
+    }
+
     #endregion
 
     #region DogProfile Overrides
@@ -53,6 +60,14 @@ public class DogAdoptProfile : DogProfile
     }
 
     #endregion
+
+    void handleAdoptEvent(string eventName, Dog dog)
+    {
+        if (eventName == k.ADOPT && dog.Info.Equals(dogInfo))
+        {
+            showAdopted();
+        }
+    }
 
     bool checkAdopted(DogDescriptor dogInfo)
     {

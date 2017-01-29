@@ -132,13 +132,17 @@ public class DogBrowser : PPUIElement, IPageable
 		SwitchToPage(pageIndex, onClickPageButton:false);
 	}
 
-	public void Close()
+    #region UIElement Overrides
+
+    public override void Hide()
 	{
         EventController.Event(k.GetPlayEvent(k.BACK));
-		Hide();
+		base.Hide();
 	}
 
-	public void Set(Dog[] dogs) 
+    #endregion
+
+    public void Set(Dog[] dogs) 
 	{
         int currentDogIndex = 0;
 		for(int i = 0; i < dogSlots.Length; i++)
