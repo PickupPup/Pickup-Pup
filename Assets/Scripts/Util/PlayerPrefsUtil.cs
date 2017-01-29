@@ -7,6 +7,33 @@ using UnityEngine;
 
 public static class PlayerPrefsUtil 
 {
+    public static bool ShowedShelterPrompt
+    {
+        get
+        {
+            return showedShelterPrompt;
+        }
+        set
+        {
+            showedShelterPrompt = value;
+        }
+    }
+
+    public static bool ShowedScoutingPrompt
+    {
+        get
+        {
+            return showedScoutingPrompt;
+        }
+        set
+        {
+            showedScoutingPrompt = value;
+        }
+    }
+
+    static bool showedShelterPrompt;
+    static bool showedScoutingPrompt;
+
 	/*
 	 * PlayerPrefs has no bool class
 	 * This wrapped provides that functionality
