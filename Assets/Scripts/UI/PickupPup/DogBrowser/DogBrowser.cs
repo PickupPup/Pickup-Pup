@@ -365,9 +365,6 @@ public class DogBrowser : PPUIElement, IPageable
                 DogFactory dogFactory = new DogFactory(hideGameObjects: true);
                 dogCollection = dogFactory.CreateGroupList(dogInfos);
                 break;
-            case DogBrowserType.AllDogs:
-                // Nothing
-                break;
         }
     }
 
