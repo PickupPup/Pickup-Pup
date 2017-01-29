@@ -14,6 +14,7 @@ public class PPUIController : MonoBehaviourExtended
 
     protected DogProfile dogProfile;
     protected Dog selectedDog;
+    protected PromptID promptID;
 
     [SerializeField]
     GameObject dogProfileObject;
@@ -21,6 +22,8 @@ public class PPUIController : MonoBehaviourExtended
     CurrencyPanel currencyPanel;
     [SerializeField]
     NavigationPanel navigationPanel;
+    [SerializeField]
+    PopupPrompt popupPrompt;
 
     #region MonoBehaviourExtended Overrides
 
@@ -30,6 +33,10 @@ public class PPUIController : MonoBehaviourExtended
         if (dogProfileObject != null)
         {
             dogProfileObject.SetActive(false);
+        }
+        if(popupPrompt)
+        {
+            showPopupPrompt();
         }
     }
 
@@ -105,6 +112,12 @@ public class PPUIController : MonoBehaviourExtended
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
         }
         dogProfile.SetProfile(dog);
+    }
+
+    protected virtual void showPopupPrompt()
+    {
+        PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
+        prompt.Set(promptID);
     }
 
     void setCurrencyPanel()
