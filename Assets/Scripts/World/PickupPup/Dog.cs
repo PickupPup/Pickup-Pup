@@ -397,7 +397,7 @@ public class Dog : MobileObjectBehaviour
         onGiftAction += currencyAction;
     }
 
-    public void UnsusbscribeFromGiftEvents(PPData.NamedCurrencyAction currencyAction)
+    public void UnsubscribeFromGiftEvents(PPData.NamedCurrencyAction currencyAction)
     {
         onGiftAction -= currencyAction;
     }
