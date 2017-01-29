@@ -46,4 +46,24 @@ public static class ListUtil
 		}
 	}
 
+    public static bool InRange<T>(List<T> source, int startIndex, int length)
+    {
+        return InRange(source, startIndex) && InRange(source, startIndex + length - 1);
+    }
+
+    public static List<T> CopyRange<T>(List<T> source, List<T> target, int sourceIndex, int targetIndex, int length)
+    {
+        if (InRange(source, sourceIndex) && InRange(target, targetIndex, length))
+        {
+            List<T> sublist = source.GetRange(sourceIndex, sourceIndex + length);
+            target.InsertRange(targetIndex, sublist);
+            return target;
+        }
+        else
+        {
+            // Returns empty list if there was an error
+            return new List<T>();
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 [System.Serializable]
 public class DogDatabase : Database<DogDatabase> 
@@ -233,6 +234,12 @@ public class DogDatabase : Database<DogDatabase>
 			return new DogDescriptor[0];
 		}
 	}
+
+    // Bounds must be in range
+    public List<DogDescriptor> GetDogRangeList(int start, int length)
+    {
+        return GetDogRange(start, length).ToList();
+    }
 
 	bool inRangeOfDogsArr(int start, int length)
 	{
