@@ -104,6 +104,14 @@ public class PPGameController : GameController, ICurrencySystem
             return gifts;
         }
     }
+
+    public LanguageDatabase Languages
+    {
+        get
+        {
+            return languages;
+        }
+    }
 		
     #region ICurrencySystem Interface
 

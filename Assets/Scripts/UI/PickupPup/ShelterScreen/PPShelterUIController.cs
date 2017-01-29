@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Controls the shelter screen
  */
 
@@ -14,6 +14,7 @@ public class PPShelterUIController : PPUIController
 
     protected override void setReferences()
     {
+        promptID = PromptID.ShelterPrompt;
         base.setReferences();
         availableDogPortraits = GetComponentsInChildren<DogSlot>();
     }
@@ -24,6 +25,19 @@ public class PPShelterUIController : PPUIController
         database = DogDatabase.GetInstance;
         EventController.Event(PPEvent.LoadShelter);
         populateAvailableDogs(database);
+    }
+
+    #endregion
+
+    #region PPUIController Overrides
+
+    protected override void showPopupPrompt()
+    {
+        if(!PlayerPrefsUtil.ShowedShelterPrompt)
+        {
+            base.showPopupPrompt();
+            PlayerPrefsUtil.ShowedShelterPrompt = true;
+        }  
     }
 
     #endregion
