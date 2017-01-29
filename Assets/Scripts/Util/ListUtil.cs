@@ -61,7 +61,7 @@ public static class ListUtil
         }
         else
         {
-            // Returns empty array if there was an error
+            // Returns empty list if there was an error
             return new List<T>();
         }
     }
