@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 114829477178275386}
   - component: {fileID: 114275684136827656}
   - component: {fileID: 114545622417900452}
+  - component: {fileID: 114103935253585618}
   m_Layer: 5
   m_Name: AllDogBrowser
   m_TagString: Untagged
@@ -938,6 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114024677204412724
@@ -1059,6 +1061,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114103935253585618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425115051427350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  overrideAutoSort: 0
+  isTopLayerCanvas: 0
 --- !u!114 &114107930274076200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1070,6 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114112114804278772
@@ -1083,6 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114118431342941718
@@ -1108,6 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114131128113247210
@@ -1202,6 +1223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114165749212004550
@@ -1242,6 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114202780867703038
@@ -1282,6 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114221046373475884
@@ -1322,6 +1346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114250423353530166
@@ -1410,13 +1435,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8624e755bd94e2496c600707395c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   pageButtonRef: {fileID: 1160778752883856}
   pageButtonParent: {fileID: 224220737125569122}
   pageBackwardButton: {fileID: 114112114804278772}
   pageForwardButton: {fileID: 114164380738010282}
-  closeWindowHitArea: {fileID: 114292257243731584}
   rehomeButton: {fileID: 114945358630142426}
 --- !u!114 &114286731513834564
 MonoBehaviour:
@@ -1483,6 +1508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114314768691105216
@@ -1496,6 +1522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114317826938374472
@@ -1509,6 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114320536004119268
@@ -1658,6 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b1c68f19006400693844d07ad1186e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   shouldToggleImage: 0
@@ -1678,6 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114390179109419258
@@ -1691,6 +1721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114391478249890366
@@ -2001,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114475769020049698
@@ -2136,6 +2168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114506074481929202
@@ -2240,6 +2273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b1c68f19006400693844d07ad1186e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   shouldToggleImage: 0
@@ -2260,6 +2294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34991c9fa8d6341f485923cce1a65a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   handlers:
   - action: {fileID: 11400000, guid: 9d0c9e6e85edc41269eb718055241223, type: 2}
     triggers: []
@@ -2306,6 +2341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b1c68f19006400693844d07ad1186e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   shouldToggleImage: 0
@@ -2367,6 +2403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b1c68f19006400693844d07ad1186e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   shouldToggleImage: 0
@@ -2811,6 +2848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b1c68f19006400693844d07ad1186e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   shouldToggleImage: 0
@@ -2858,6 +2896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8260d406df23b67498e992404fa95b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114829477178275386
@@ -2871,6 +2910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70ce91b97de84ce3aa8ce92ae3057ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   defaultStartPage: 0
@@ -3112,6 +3152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114947513051354582
@@ -3178,6 +3219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114964167657613474
@@ -3191,6 +3233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114971762276300524
@@ -3231,6 +3274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114984507651156020
