@@ -11,3 +11,5 @@ Casual mobile game with dogs.
 ## Specs
 - Unity: **v5.5.0f3**
 - Language: **C#**
+
+Hi Grace!
