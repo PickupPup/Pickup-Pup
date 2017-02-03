@@ -17,7 +17,23 @@ public class PPUIElement : UIElement
     protected PPSceneController sceneController;
     protected LanguageDatabase languageDatabase;
 
+    bool hasCanvasRef
+    {
+        get
+        {
+            return canvasRef != null;
+        }
+    }
+
+    UICanvas canvasRef;
+
     #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+        canvasRef = GetComponent<UICanvas>();
+    }
 
     protected override void fetchReferences()
     {
@@ -30,6 +46,28 @@ public class PPUIElement : UIElement
     protected virtual bool requestReloadScene()
     {
         return sceneController.RequestReloadCurrentScene();
+    }
+
+    #endregion
+
+    #region UIElementOverrides
+
+    public override void Show()
+    {
+        base.Show();
+        if (hasCanvasRef)
+        {
+            canvasRef.Show();
+        }
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        if (hasCanvasRef)
+        {
+            canvasRef.Hide();
+        }
     }
 
     #endregion
