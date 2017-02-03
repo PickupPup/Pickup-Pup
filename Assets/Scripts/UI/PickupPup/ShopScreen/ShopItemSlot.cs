@@ -11,11 +11,12 @@ public class ShopItemSlot : PPUIElement
     [SerializeField]
     Text nameText;
     [SerializeField]
-    Text priceText;
-    [SerializeField]
     Image itemImage;
 	[SerializeField]
 	Text amountText;
+
+    [SerializeField]
+    PriceTag priceTag;
 
     PPShopUIController shop;
     ShopItem item;
@@ -32,7 +33,8 @@ public class ShopItemSlot : PPUIElement
 		{
 			amountText.text = item.Value.ToString();
 		}
-        priceText.text = item.CostStr;
+        priceTag.Set(item.Cost);
+        priceTag.ShowPurchasable();
         itemImage.sprite = item.Icon;
     }
 

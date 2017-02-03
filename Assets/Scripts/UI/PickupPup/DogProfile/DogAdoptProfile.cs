@@ -63,7 +63,7 @@ public class DogAdoptProfile : DogProfile
 
     void handleAdoptEvent(string eventName, Dog dog)
     {
-        if (eventName == k.ADOPT && dog.Info.Equals(dogInfo))
+        if (eventName == k.ADOPT && dog != null && dog.Info.Equals(dogInfo))
         {
             showAdopted();
         }
