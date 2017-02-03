@@ -165,6 +165,8 @@ public class DogDatabase : Database<DogDatabase>
 		buffer.Refresh();
         DogDescriptor[] fullSequence = buffer.GetRandom(dogs.Length);
 		DogDescriptor[] candidates = ArrayUtil.GetRange(fullSequence, startIndex, count);
+        // Allows for faster lookup versus O(n) to check array
+        HashSet<DogDescriptor> currentCandidates = new HashSet<DogDescriptor>(candidates);
         // -1 for zero offset
         int currentIndex = startIndex + count - 1;
         int totalDogCount = fullSequence.Length;
@@ -174,10 +176,18 @@ public class DogDatabase : Database<DogDatabase>
             {
                 if(!dataController.CheckAdopted(fullSequence[currentIndex]))
                 {
-                    candidates[i] = fullSequence[currentIndex];
+                    if(!currentCandidates.Contains(fullSequence[currentIndex]))
+                    {
+                        // Remove the old dog from the Hash (because it's invalid)
+                        currentCandidates.Remove(candidates[i]);
+                        candidates[i] = fullSequence[currentIndex];
+                        // Update the Hash w/ the new dog
+                        currentCandidates.Add(candidates[i]);
+                    }
                 }
                 currentIndex++;
             }
+            currentIndex++;
             if(currentIndex >= totalDogCount && dataController.CheckAdopted(candidates[i]))
             {
                 candidates[i] = DogDescriptor.Default();
