@@ -37,7 +37,6 @@ public class UICanvas : UIElement
         }
     }
 
-
     bool overrideAutoSort
     {
         get 
@@ -107,7 +106,6 @@ public class UICanvas : UIElement
         {
             addToAutoSort();
         }
-
     }
 
     public override void Hide()
