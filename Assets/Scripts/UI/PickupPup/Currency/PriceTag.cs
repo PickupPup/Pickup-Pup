@@ -87,6 +87,7 @@ public class PriceTag : PPUIElement
     public void ShowNonPurchasable()
     {
         setComponents(nonPurchasableText, nonPurchasableTextColor, nonPurchasableBackgroundColor, false);
+        unsubscribeEvents();
     }
 
     protected void setComponents(string priceTextString, Color priceTextColor,

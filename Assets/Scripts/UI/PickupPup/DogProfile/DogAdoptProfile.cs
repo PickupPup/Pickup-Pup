@@ -72,19 +72,6 @@ public class DogAdoptProfile : DogProfile
         return PPDataController.GetInstance.CheckAdopted(dogInfo);
     }
 
-    bool setPriceText()
-    {
-        priceText.text = dogInfo.CostToAdoptStr;
-
-        if(!gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
-        {
-            priceText.color = tuning.UnaffordableTextColor;
-            return false;
-        }
-        priceText.color = tuning.DefaultTextColor;
-        return true;
-    }
-
     void showAdopted()
     {
         setComponents(false, tuning.AdoptedBackgroundColor, tuning.AdoptedText, 
@@ -93,7 +80,8 @@ public class DogAdoptProfile : DogProfile
 
     void showDefault()
     {
-        setComponents(setPriceText(), tuning.DefaultBackgroundColor, tuning.AdoptText,
+        bool canAfford = gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt);
+        setComponents(canAfford, tuning.DefaultBackgroundColor, tuning.AdoptText,
             tuning.DefaultTextColor, true);
     }
 
@@ -106,11 +94,11 @@ public class DogAdoptProfile : DogProfile
         adoptButtonText.color = adoptButtonTextColor;
         if(showCostField)
         {
-            costField.Show();
+            priceTag.Show();
         }
         else
         {
-            costField.Hide();
+            priceTag.Hide();
         }
     }
 
