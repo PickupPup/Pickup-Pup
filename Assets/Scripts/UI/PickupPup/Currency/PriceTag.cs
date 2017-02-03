@@ -80,30 +80,14 @@ public class PriceTag : PPUIElement
 
     public void ShowPurchasable()
     {
-        setComponents(priceStr, tuning.DefaultTextColor, tuning.DefaultBackgroundColor, true);
+        setComponents(priceText, priceStr, tuning.DefaultTextColor, priceBackgroundImage, tuning.DefaultBackgroundColor, iconHolder, true);
         updateTextColor(gameController.Coins.Amount);
     }
 
     public void ShowNonPurchasable()
     {
-        setComponents(nonPurchasableText, nonPurchasableTextColor, nonPurchasableBackgroundColor, false);
+        setComponents(priceText, nonPurchasableText, nonPurchasableTextColor, priceBackgroundImage, nonPurchasableBackgroundColor, iconHolder, false);
         unsubscribeEvents();
-    }
-
-    protected void setComponents(string priceTextString, Color priceTextColor,
-        Color priceBackgroundColor, bool showIconHolder)
-    {
-        priceText.text = priceTextString;
-        priceText.color = priceTextColor;
-        priceBackgroundImage.color = priceBackgroundColor;
-        if (showIconHolder)
-        {
-            iconHolder.Show();
-        }
-        else
-        {
-            iconHolder.Hide();
-        }
     }
 
     void updateTextColor(int amount)

@@ -4,6 +4,8 @@
  */
 
 using k = PPGlobal;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PPUIElement : UIElement 
 {
@@ -32,8 +34,40 @@ public class PPUIElement : UIElement
 
     #endregion
 
-    protected void setComponents(params object[] args)
+    protected void setComponents(Text text, string textString, Color textColor,
+        Image image, Color imageColor, UIElement uiElement, bool showUIElement)
     {
-        // NOTHING
+        if (text)
+        {
+            text.text = textString;
+            text.color = textColor;
+        }
+        if (image)
+        {
+            image.color = imageColor;
+        }
+        if (uiElement)
+        {
+            if (showUIElement)
+            {
+                uiElement.Show();
+            }
+            else
+            {
+                uiElement.Hide();
+            }
+        }
     }
+
+    protected void setComponents(Text text, string textString, Color textColor,
+        Image image, Color imageColor, Button button, bool buttonInteractable,
+        UIElement uiElement, bool showUIElement)
+    {
+        if (button)
+        {
+            button.interactable = buttonInteractable;
+        }
+        setComponents(text, textString, textColor, image, imageColor, uiElement, showUIElement);
+    }
+
 }
