@@ -67,7 +67,7 @@ public class PriceTag : PPUIElement
         priceStr = PPData.FormatCost(price);
 
         checkReferences();
-        updateTextColor(gameController.Coins.Amount);
+        ShowPurchasable();
         subscribeEvents();
     }
 
