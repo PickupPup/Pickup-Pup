@@ -700,6 +700,7 @@ GameObject:
   - component: {fileID: 114022691052147692}
   - component: {fileID: 114914853225584186}
   - component: {fileID: 114220403255730712}
+  - component: {fileID: 114080153203158754}
   m_Layer: 5
   m_Name: ShopUI
   m_TagString: Untagged
@@ -1145,6 +1146,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Price
+--- !u!114 &114080153203158754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715482888227682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  sortRule: 2
 --- !u!114 &114086924442321130
 MonoBehaviour:
   m_ObjectHideFlags: 1

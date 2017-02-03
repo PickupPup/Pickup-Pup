@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 114709001207167400}
   - component: {fileID: 114379196200229042}
   - component: {fileID: 114478302162614070}
+  - component: {fileID: 114452841039722818}
   m_Layer: 5
   m_Name: ShelterUI
   m_TagString: Untagged
@@ -1025,6 +1026,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114452841039722818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1888930163741836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  sortRule: 2
 --- !u!114 &114478302162614070
 MonoBehaviour:
   m_ObjectHideFlags: 1
