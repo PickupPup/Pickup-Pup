@@ -37,7 +37,7 @@ public class ShopItem : PPData
     {
         get
         {
-            return formatCost(cost);
+            return PPData.FormatCost(cost);
         }
     }
 
@@ -53,7 +53,7 @@ public class ShopItem : PPData
     {
         get
         {
-            return formatCost(value);
+            return PPData.FormatCost(value);
         }
     }
 

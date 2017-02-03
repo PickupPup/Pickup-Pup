@@ -37,7 +37,7 @@ public class DogBreed : DogTrait
 	{ 
 		get 
 		{
-			return formatCost(costToAdopt);
+			return PPData.FormatCost(costToAdopt);
 		}
 	}
 

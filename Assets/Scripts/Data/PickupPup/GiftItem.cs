@@ -45,7 +45,7 @@ public class GiftItem : PPData
     {
         get
         {
-            return formatCost(value);
+            return PPData.FormatCost(value);
         }
     }
 

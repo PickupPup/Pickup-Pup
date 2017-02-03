@@ -10,13 +10,11 @@ using k = PPGlobal;
 public class DogAdoptProfile : DogProfile
 {
     [SerializeField]
-    Text priceText;
+    PriceTag priceTag;
     [SerializeField]
     Text adoptButtonText;
     [SerializeField]
     Button adoptButton;
-    [SerializeField]
-    UIElement costField;
 
     PPTuning tuning;
 
@@ -55,7 +53,7 @@ public class DogAdoptProfile : DogProfile
         else
         {
             showDefault();
-            setPriceText();
+            priceTag.Set(dogInfo.CostToAdopt);
         }
     }
 
@@ -63,7 +61,7 @@ public class DogAdoptProfile : DogProfile
 
     void handleAdoptEvent(string eventName, Dog dog)
     {
-        if (eventName == k.ADOPT && dog.Info.Equals(dogInfo))
+        if (eventName == k.ADOPT && dog != null && dog.Info.Equals(dogInfo))
         {
             showAdopted();
         }
@@ -74,46 +72,19 @@ public class DogAdoptProfile : DogProfile
         return PPDataController.GetInstance.CheckAdopted(dogInfo);
     }
 
-    bool setPriceText()
-    {
-        priceText.text = dogInfo.CostToAdoptStr;
-
-        if(!gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt))
-        {
-            priceText.color = tuning.UnaffordableTextColor;
-            return false;
-        }
-        priceText.color = tuning.DefaultTextColor;
-        return true;
-    }
-
     void showAdopted()
     {
-        setComponents(false, tuning.AdoptedBackgroundColor, tuning.AdoptedText, 
-            tuning.AdoptedTextColor, false);
+        setComponents(adoptButtonText, tuning.AdoptedText, tuning.AdoptedTextColor, 
+            adoptButton.image, tuning.AdoptedBackgroundColor, adoptButton, false, 
+            priceTag, false);
     }
 
     void showDefault()
     {
-        setComponents(setPriceText(), tuning.DefaultBackgroundColor, tuning.AdoptText,
-            tuning.DefaultTextColor, true);
-    }
-
-    void setComponents(bool adoptButtonInteractable, Color adoptButtonColor, 
-        string adoptButtonTextString, Color adoptButtonTextColor, bool showCostField)
-    {
-        adoptButton.interactable = adoptButtonInteractable;
-        adoptButton.image.color = adoptButtonColor;
-        adoptButtonText.text = adoptButtonTextString;
-        adoptButtonText.color = adoptButtonTextColor;
-        if(showCostField)
-        {
-            costField.Show();
-        }
-        else
-        {
-            costField.Hide();
-        }
+        bool canAfford = gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt);
+        setComponents(adoptButtonText, tuning.AdoptedText, tuning.DefaultTextColor,
+            adoptButton.image, tuning.DefaultBackgroundColor, adoptButton, canAfford,
+            priceTag, true);
     }
 
 }

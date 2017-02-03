@@ -40,7 +40,7 @@ public class DogDescriptor : PPDescriptor
 		{
 			if(hasSpecialCost) 
 			{
-				return formatCost(modCost);
+				return PPData.FormatCost(modCost);
 			} 
 			else 
 			{

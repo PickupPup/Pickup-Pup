@@ -4,6 +4,8 @@
  */
 
 using k = PPGlobal;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PPUIElement : UIElement 
 {
@@ -53,7 +55,7 @@ public class PPUIElement : UIElement
     public override void Show()
     {
         base.Show();
-        if(hasCanvasRef)
+        if (hasCanvasRef)
         {
             canvasRef.Show();
         }
@@ -62,12 +64,48 @@ public class PPUIElement : UIElement
     public override void Hide()
     {
         base.Hide();
-        if(hasCanvasRef)
+        if (hasCanvasRef)
         {
             canvasRef.Hide();
         }
     }
 
     #endregion
+
+    protected void setComponents(Text text, string textString, Color textColor,
+        Image image, Color imageColor, UIElement uiElement, bool showUIElement)
+    {
+        if (text)
+        {
+            text.text = textString;
+            text.color = textColor;
+        }
+        if (image)
+        {
+            image.color = imageColor;
+        }
+        if (uiElement)
+        {
+            if (showUIElement)
+            {
+                uiElement.Show();
+            }
+            else
+            {
+                uiElement.Hide();
+            }
+        }
+    }
+
+    protected void setComponents(Text text, string textString, Color textColor,
+        Image image, Color imageColor, Button button, bool buttonInteractable,
+        UIElement uiElement, bool showUIElement)
+    {
+        if (button)
+        {
+            button.interactable = buttonInteractable;
+        }
+        setComponents(text, textString, textColor, image, imageColor, uiElement, showUIElement);
+    }
 
 }
