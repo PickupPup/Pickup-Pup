@@ -261,4 +261,16 @@ public class DogDescriptor : PPDescriptor
 		this.linkedDog = null;
 	}
 
+    #region Object Overrides 
+
+    public override string ToString ()
+    {
+        return string.Format("Dog: {0}, {1}, {2}", 
+            Name,
+            Breed,
+            Age);
+    }
+
+    #endregion
+
 }
