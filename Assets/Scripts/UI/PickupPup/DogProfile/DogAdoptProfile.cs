@@ -10,13 +10,11 @@ using k = PPGlobal;
 public class DogAdoptProfile : DogProfile
 {
     [SerializeField]
-    Text priceText;
+    PriceTag priceTag;
     [SerializeField]
     Text adoptButtonText;
     [SerializeField]
     Button adoptButton;
-    [SerializeField]
-    UIElement costField;
 
     PPTuning tuning;
 
@@ -55,7 +53,7 @@ public class DogAdoptProfile : DogProfile
         else
         {
             showDefault();
-            setPriceText();
+            priceTag.Set(dogInfo.CostToAdopt);
         }
     }
 

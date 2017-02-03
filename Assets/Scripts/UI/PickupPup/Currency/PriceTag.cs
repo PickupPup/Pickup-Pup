@@ -89,7 +89,7 @@ public class PriceTag : PPUIElement
         setComponents(nonPurchasableText, nonPurchasableTextColor, nonPurchasableBackgroundColor, false);
     }
 
-    void setComponents(string priceTextString, Color priceTextColor,
+    protected void setComponents(string priceTextString, Color priceTextColor,
         Color priceBackgroundColor, bool showIconHolder)
     {
         priceText.text = priceTextString;

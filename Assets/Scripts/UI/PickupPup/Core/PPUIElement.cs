@@ -31,4 +31,9 @@ public class PPUIElement : UIElement
     }
 
     #endregion
+
+    protected void setComponents(params object[] args)
+    {
+        // NOTHING
+    }
 }
