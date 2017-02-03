@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 114305068144021568}
   - component: {fileID: 114293991735831520}
   - component: {fileID: 114529120888782602}
+  - component: {fileID: 114072208196653034}
   m_Layer: 5
   m_Name: CurrencyPanel
   m_TagString: Untagged
@@ -558,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 0
 --- !u!114 &114034638618204744
@@ -587,6 +589,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114072208196653034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388646525770112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 0
+  sortRule: 1
 --- !u!114 &114111936265916794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,6 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114263860003944070
@@ -780,10 +798,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34991c9fa8d6341f485923cce1a65a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   handlers:
   - action: {fileID: 11400000, guid: 4a89434783b324db0a5e781c42b6cbd2, type: 2}
     triggers: []
     triggerOnStart: 1
+    triggerOnSwipe: 0
+    validSwipeDirections: 
+    triggerOnClick: 0
+  minValidSwipeDistance: 1
 --- !u!114 &114301589314616128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -861,6 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de5a280723a546c2a76f31fbc0b5a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   joinString: ' '
@@ -1118,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415433a26f816df47ad36158ee0246f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   coinsDisplay: {fileID: 114748189097721202}
   dogFoodDisplay: {fileID: 114997765694934880}
   giftTimerDisplay: {fileID: 114681110028622312}
@@ -1198,6 +1223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114681274725467782
@@ -1271,6 +1297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   iconImage: {fileID: 114437580356616522}
@@ -1610,6 +1637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   iconImage: {fileID: 114278535726864470}
@@ -1774,7 +1802,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!224 &224011393740670474
 RectTransform:

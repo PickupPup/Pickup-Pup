@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 114156563743912746}
   - component: {fileID: 225931517391235212}
   - component: {fileID: 114017009141393054}
+  - component: {fileID: 114855426678409608}
   m_Layer: 5
   m_Name: PopupPrompt
   m_TagString: Untagged
@@ -396,6 +397,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &114855426678409608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1714510460943716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  overrideAutoSort: 0
+  isTopLayerCanvas: 0
 --- !u!114 &114969662067242802
 MonoBehaviour:
   m_ObjectHideFlags: 1

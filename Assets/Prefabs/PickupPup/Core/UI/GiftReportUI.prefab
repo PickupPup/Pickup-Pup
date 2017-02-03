@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 114090405885910912}
   - component: {fileID: 114809595766534108}
   - component: {fileID: 114333400866646894}
+  - component: {fileID: 114549895172376814}
   m_Layer: 5
   m_Name: GiftReportUI
   m_TagString: Untagged
@@ -326,6 +327,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114549895172376814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473165808563722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  overrideAutoSort: 0
+  isTopLayerCanvas: 0
 --- !u!114 &114563298728639698
 MonoBehaviour:
   m_ObjectHideFlags: 1
