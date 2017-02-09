@@ -4,10 +4,9 @@
  */
 
 using UnityEngine;
-using UnityEngine.UI;
 using k = PPGlobal;
 
-public class DogAdoptionSlot : DogSlot
+public class DogShelterSlot : DogSlot
 {
     PriceTag priceTag;
     PPTuning tuning;
@@ -43,8 +42,8 @@ public class DogAdoptionSlot : DogSlot
         checkReferences();
         priceTag.Set(dog.CostToAdopt);
         priceTag.SetNonPurchasable(tuning.AdoptedText, tuning.AdoptedTextColor, tuning.AdoptedBackgroundColor);
-        
-        if(checkAdopted())
+
+        if (checkAdopted())
         {
             ShowAdopt();
         }

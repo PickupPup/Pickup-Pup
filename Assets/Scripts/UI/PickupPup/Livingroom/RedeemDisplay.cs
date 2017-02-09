@@ -71,7 +71,7 @@ public class RedeemDisplay : PPUIElement
     {
         if(dog.OccupiedSlot)
         {
-            (dog.OccupiedSlot as DogOutsideSlot).ToggleRedeemDisplayOpen(isOpen:false);
+            (dog.OccupiedSlot as DogCollarSlot).ToggleRedeemDisplayOpen(isOpen:false);
         }
         dog.RedeemGift();
         dog.LeaveCurrentSlot(callback:true, stopScouting:true);

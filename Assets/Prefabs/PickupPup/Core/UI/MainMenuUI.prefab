@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222708035007164946}
   - component: {fileID: 114273550214648354}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: ShopButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222765188950752112}
   - component: {fileID: 114009236639220898}
   m_Layer: 5
-  m_Name: Text
+  m_Name: YardButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 222864197464323850}
   - component: {fileID: 114857208672916768}
   m_Layer: 5
-  m_Name: Text
+  m_Name: LivingRoomButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 114974190543141868}
   - component: {fileID: 114628048192170270}
   m_Layer: 5
-  m_Name: MenuFrame
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 222657706850248818}
   - component: {fileID: 114125964870937804}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ShopButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 222671410194715690}
   - component: {fileID: 114134288010519394}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: LivingRoomButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 222415692150680934}
   - component: {fileID: 114359697998733462}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: SettingsButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 222197937675548806}
   - component: {fileID: 114975076193120938}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: GiftsButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 222064599899781992}
   - component: {fileID: 114060237427465910}
   m_Layer: 5
-  m_Name: Text
+  m_Name: SettingsButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 222458696863771002}
   - component: {fileID: 114220920147828184}
   m_Layer: 5
-  m_Name: Text
+  m_Name: GiftsButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 222768850391928832}
   - component: {fileID: 114518749702221202}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AdButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 222785333424050220}
   - component: {fileID: 114662428370458292}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: YardButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 224542231220902008}
   - component: {fileID: 114189570144715600}
   m_Layer: 5
-  m_Name: MenuPadding
+  m_Name: Padding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 114723052423597644}
   - component: {fileID: 114670151448941650}
   m_Layer: 5
-  m_Name: CloseBrowserHitArea
+  m_Name: CloseHitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 222530386937146704}
   - component: {fileID: 114529427826427640}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: AllDogsButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,7 +379,7 @@ GameObject:
   - component: {fileID: 222086830952330498}
   - component: {fileID: 114756394447634224}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AllDogsButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1273,8 +1273,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
-  overrideAutoSort: 0
-  isTopLayerCanvas: 0
+  sortRule: 0
 --- !u!114 &114589268010027904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1822,14 +1821,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302222667971700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3036b15e30914e8bade48d4902569f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 71f8b7ec12bb1e045adbba136d45be01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   dogBrowser: {fileID: 0}
-  settingsPopup: {fileID: 0}
+  settingsMenu: {fileID: 0}
 --- !u!114 &114990313165875072
 MonoBehaviour:
   m_ObjectHideFlags: 1
