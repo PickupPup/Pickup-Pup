@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 114971762276300524}
   - component: {fileID: 114475769020049698}
   m_Layer: 5
-  m_Name: CloseBrowserHitArea
+  m_Name: CloseHitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 222225518444096152}
   - component: {fileID: 114165749212004550}
   m_Layer: 5
-  m_Name: RehomeIcon
+  m_Name: RehomeButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 222804174366619448}
   - component: {fileID: 114887607807091904}
   m_Layer: 5
-  m_Name: RehomeText
+  m_Name: RehomeButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1997,8 +1997,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
-  overrideAutoSort: 0
-  isTopLayerCanvas: 0
+  sortRule: 0
 --- !u!114 &114463674597417546
 MonoBehaviour:
   m_ObjectHideFlags: 1

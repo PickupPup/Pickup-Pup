@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222295968191054330}
   - component: {fileID: 114545236010863140}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AdoptButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 222409979273787044}
   - component: {fileID: 114875434208861662}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MenuButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 114788011577711804}
   m_OnClick:
     m_PersistentCalls:
