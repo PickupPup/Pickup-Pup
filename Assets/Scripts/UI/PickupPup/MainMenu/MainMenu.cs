@@ -7,12 +7,12 @@
 using UnityEngine;
 using k = PPGlobal;
 
-public class PPMainMenuUIController : PPUIElement 
+public class MainMenu : PPUIElement
 {
     [SerializeField]
     DogBrowser dogBrowser;
     [SerializeField]
-    SettingsPopup settingsPopup;
+    SettingsMenu settingsMenu;
 
     #region MonoBehaviourExtended Overrides
 
@@ -28,7 +28,7 @@ public class PPMainMenuUIController : PPUIElement
 
     public override void Toggle()
     {
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
             EventController.Event(k.GetPlayEvent(k.BACK));
             Hide();
@@ -38,7 +38,7 @@ public class PPMainMenuUIController : PPUIElement
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             Show();
         }
-        if(gameController)
+        if (gameController)
         {
             gameController.ToggleMainMenuOpen(gameObject.activeSelf);
         }
@@ -62,7 +62,7 @@ public class PPMainMenuUIController : PPUIElement
         if (dogBrowser)
         {
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-            dogBrowser.Open(inScoutingSelectMode:false);
+            dogBrowser.Open(inScoutingSelectMode: false);
         }
     }
 
@@ -79,7 +79,7 @@ public class PPMainMenuUIController : PPUIElement
     public void OnSettingsClick()
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-        settingsPopup.Show();
+        settingsMenu.Show();
     }
 
     public void OnGiftsClick()
@@ -93,4 +93,5 @@ public class PPMainMenuUIController : PPUIElement
         // Disabled
         EventController.Event(k.GetPlayEvent(k.EMPTY));
     }
+
 }
