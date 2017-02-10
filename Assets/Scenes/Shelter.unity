@@ -569,6 +569,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 437a8e25c3d87014d9fe0dc6bbeab588, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &555726707 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114478302162614070, guid: 1de9a7bb5f44ff44faa1fda4841e3cd8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1063029712}
+  m_Script: {fileID: 11500000, guid: a6db30b4b29e33440b05c2f293e87c19, type: 3}
 --- !u!114 &620899895 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114976671936204298, guid: eb802c41a65744e4c956efbad2bc39af,
@@ -1011,6 +1017,16 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114990475635054266, guid: ebb1f312e95b2114e9dc0dbf8acc8e62,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 555726707}
+    - target: {fileID: 114990475635054266, guid: ebb1f312e95b2114e9dc0dbf8acc8e62,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Adopt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ebb1f312e95b2114e9dc0dbf8acc8e62, type: 2}
