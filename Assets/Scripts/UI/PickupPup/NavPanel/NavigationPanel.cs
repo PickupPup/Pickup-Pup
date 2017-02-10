@@ -14,7 +14,7 @@ public class NavigationPanel : SingletonController<NavigationPanel>
     [SerializeField]
     Button adoptButton;
     [SerializeField]
-    PPMainMenuUIController mainMenu;
+    MainMenu mainMenu;
 
     PPSceneController sceneController;
 

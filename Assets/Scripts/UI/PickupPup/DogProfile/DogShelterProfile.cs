@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using k = PPGlobal;
 
-public class DogAdoptProfile : DogProfile
+public class DogShelterProfile : DogProfile
 {
     [SerializeField]
     PriceTag priceTag;
@@ -46,7 +46,7 @@ public class DogAdoptProfile : DogProfile
     {
         base.SetProfile(dog);
         checkReferences();
-        if(checkAdopted(dogInfo))
+        if (checkAdopted(dogInfo))
         {
             showAdopted();
         }
@@ -74,8 +74,8 @@ public class DogAdoptProfile : DogProfile
 
     void showAdopted()
     {
-        setComponents(adoptButtonText, tuning.AdoptedText, tuning.AdoptedTextColor, 
-            adoptButton.image, tuning.AdoptedBackgroundColor, adoptButton, false, 
+        setComponents(adoptButtonText, tuning.AdoptedText, tuning.AdoptedTextColor,
+            adoptButton.image, tuning.AdoptedBackgroundColor, adoptButton, false,
             priceTag, false);
     }
 
