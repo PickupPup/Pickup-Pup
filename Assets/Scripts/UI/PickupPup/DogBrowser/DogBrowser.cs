@@ -134,6 +134,10 @@ public class DogBrowser : PPUIElement, IPageable
 
     public override void Hide()
 	{
+        if(gameController.HasTargetSlot)
+        {
+            gameController.ClearTargetSlot();
+        }
         EventController.Event(k.GetPlayEvent(k.BACK));
 		base.Hide();
 	}

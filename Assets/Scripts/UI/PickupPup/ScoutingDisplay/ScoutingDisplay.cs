@@ -35,12 +35,12 @@ public class ScoutingDisplay : PPUIElement
     [SerializeField]
 	GiftReportUI scoutingReportDisplay;
 
-	DogOutsideSlot[] scoutingSlots;
-	Dictionary<int, DogOutsideSlot> slotsByIndex = new Dictionary<int, DogOutsideSlot>();
+	DogCollarSlot[] scoutingSlots;
+	Dictionary<int, DogCollarSlot> slotsByIndex = new Dictionary<int, DogCollarSlot>();
 
 	public void SendToSlot(Dog dog, int slotIndex)
 	{
-		DogOutsideSlot slot;
+		DogCollarSlot slot;
 		if(slotsByIndex.TryGetValue(slotIndex, out slot))
 		{
 			slot.ResumeScouting(dog);
@@ -71,8 +71,8 @@ public class ScoutingDisplay : PPUIElement
 	protected override void setReferences()
 	{
 		base.setReferences();
-		scoutingSlots = GetComponentsInChildren<DogOutsideSlot>();
-		foreach(DogOutsideSlot slot in scoutingSlots)
+		scoutingSlots = GetComponentsInChildren<DogCollarSlot>();
+		foreach(DogCollarSlot slot in scoutingSlots)
 		{
 			slotsByIndex.Add(slot.transform.GetSiblingIndex(), slot);
 		}
@@ -100,9 +100,9 @@ public class ScoutingDisplay : PPUIElement
 
 	#endregion 
 
-	void setupScoutingSlots(DogOutsideSlot[] slots)
+	void setupScoutingSlots(DogCollarSlot[] slots)
 	{
-		foreach(DogOutsideSlot slot in slots) 
+		foreach(DogCollarSlot slot in slots) 
 		{
 			slot.SubscribeToClickWhenFree(
 				delegate

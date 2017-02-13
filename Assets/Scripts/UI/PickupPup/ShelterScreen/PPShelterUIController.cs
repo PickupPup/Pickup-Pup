@@ -63,7 +63,7 @@ public class PPShelterUIController : PPUIController
         DogDescriptor selectedDogInfo = selectedDog.Info;
         if(gameController.TryAdoptDog(selectedDogInfo))
         {
-            ((DogAdoptionSlot) selectedDog.OccupiedSlot).ShowAdopt();
+            ((DogShelterSlot) selectedDog.OccupiedSlot).ShowAdopt();
             EventController.Event(k.GetPlayEvent(k.ADOPT));
             EventController.Event(k.GetPlayEvent(k.BARK), selectedDogInfo.Breed.Size);
             return true;
