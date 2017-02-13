@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeedingController : SingletonController<FeedingController> {
+public class DogFoodBowl : MonoBehaviour {
 
     #region Instance Accessors
 
-    public float FeedTimerLeft 
+    public float FeedTimerLeft
     {
         get
         {
@@ -24,30 +24,28 @@ public class FeedingController : SingletonController<FeedingController> {
 
     #endregion
 
-    [SerializeField]
-    PPTimer feedingTimer;
+    static PPTimer feedingTimer = null;
+
+    void Start () {
+        if(feedingTimer == null)
+        {
+            feedingTimer = new PPTimer(20, 1f);
+            feedingTimer.SetTimeRemaining(0, false);
+        }
+    }
 
     int calculateDogFoodNeeded()
     {
         return PPDataController.GetInstance.DogCount - PPDataController.GetInstance.ScoutingDogs.Count;
     }
 
-    public bool TryFeedDogs()
+    public void feedDogs()
     {
         if (PPDataController.GetInstance.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
         {
-            feedDogs();
-            return true;
+            PPDataController.GetInstance.ChangeFood(-calculateDogFoodNeeded());
+            feedingTimer.SetTimeRemaining(20, false);
+            feedingTimer.Begin();
         }
-        return false;
     }
-
-    void feedDogs()
-    {
-        dataController.ChangeFood(-calculateDogFoodNeeded());
-        feedingTimer.SetTimeRemaining(20, false);
-
-        //TODO implement sprite change
-    }
-
 }
