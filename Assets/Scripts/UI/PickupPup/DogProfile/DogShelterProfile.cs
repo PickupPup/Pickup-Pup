@@ -74,15 +74,15 @@ public class DogShelterProfile : DogProfile
 
     void showAdopted()
     {
-        setComponents(adoptButtonText, tuning.AdoptedText, tuning.AdoptedTextColor,
-            adoptButton.image, tuning.AdoptedBackgroundColor, adoptButton, false,
+        setComponents(adoptButtonText, tuning.AdoptedText, tuning.NonPurchasableTextColor,
+            adoptButton.image, tuning.NonPurchasableBackgroundColor, adoptButton, false,
             priceTag, false);
     }
 
     void showDefault()
     {
         bool canAfford = gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt);
-        setComponents(adoptButtonText, tuning.AdoptedText, tuning.DefaultTextColor,
+        setComponents(adoptButtonText, tuning.AdoptText, tuning.DefaultTextColor,
             adoptButton.image, tuning.DefaultBackgroundColor, adoptButton, canAfford,
             priceTag, true);
     }

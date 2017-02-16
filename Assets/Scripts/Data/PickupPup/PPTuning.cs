@@ -10,27 +10,11 @@ public class PPTuning : PPData
 {
 	#region Instance Acessors
 
-	public Color AdoptedBackgroundColor
-	{
-		get
-		{
-			return getColor(adoptedBackgroundColorRGBA);
-		}
-	}
-
 	public string AdoptedText
 	{
 		get
 		{
 			return adoptedText;
-		}
-	}
-
-	public Color AdoptedTextColor
-	{
-		get
-		{
-			return getColor(adoptedTextColorRGBA);
 		}
 	}
 
@@ -312,7 +296,23 @@ public class PPTuning : PPData
 		{
 			return missedFeedingsBeforeSeizure;
 		}
-	}
+    }
+
+    public Color NonPurchasableBackgroundColor
+    {
+	    get
+	    {
+		    return getColor(nonPurchasableBackgroundColorRGBA);
+        }
+    }
+
+    public Color NonPurchasableTextColor
+    {
+	    get
+	    {
+		    return getColor(nonPurchasableTextColorRGBA);
+        }
+    }
 
 	public float PuppyChanceOfRunningAwayDuringScouting
 	{
@@ -423,11 +423,7 @@ public class PPTuning : PPData
     #region JSON Fields
 
 	[SerializeField]
-	int[] adoptedBackgroundColorRGBA;
-	[SerializeField]
 	string adoptedText;
-	[SerializeField]
-	int[] adoptedTextColorRGBA;
 	[SerializeField]
 	string adoptText;
 	[SerializeField]
@@ -498,7 +494,11 @@ public class PPTuning : PPData
 	int minSeniorDogAge;
 	[SerializeField]
 	int missedFeedingsBeforeSeizure;
-	[SerializeField]
+    [SerializeField]
+    int[] nonPurchasableBackgroundColorRGBA;
+    [SerializeField]
+    int[] nonPurchasableTextColorRGBA;
+    [SerializeField]
 	float puppyChanceOfRunningAwayDuringScouting;
 	[SerializeField]
 	float puppyScoutingTimeModifier;
