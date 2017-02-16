@@ -41,7 +41,17 @@ public class DogProfileButtonController : PPUIButtonController
 
     #endregion
 
-    public void SwitchToProfile(int index)
+    public void Init(DogProfile profile, List<Dog> dogsList)
+    {
+        this.parentWindow = profile;
+        this.dogsList = dogsList;
+        IsInitialized = true;
+
+        pageBackwardButton.SubscribeToClick(previousProfile);
+        pageForwardButton.SubscribeToClick(nextProfile);
+    }
+
+    void switchToProfile(int index)
     {
         checkReferences();
         currentProfileIndex = index;
@@ -49,21 +59,14 @@ public class DogProfileButtonController : PPUIButtonController
         parentWindow.SetProfile(dogsList[currentProfileIndex]);
     }
 
-    public void Init(DogProfile profile, List<Dog> dogsList)
+    void nextProfile()
     {
-        this.parentWindow = profile;
-        this.dogsList = dogsList;
-        IsInitialized = true;
+        switchToProfile(currentProfileIndex + 1);
     }
 
-    public void NextProfile()
+    void previousProfile()
     {
-        SwitchToProfile(currentProfileIndex + 1);
-    }
-
-    public void PreviousProfile()
-    {
-        SwitchToProfile(currentProfileIndex - 1);
+        switchToProfile(currentProfileIndex - 1);
     }
 
     bool checkCurrentIndex()
