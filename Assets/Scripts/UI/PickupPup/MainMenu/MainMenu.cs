@@ -82,6 +82,11 @@ public class MainMenu : PPUIElement
         settingsMenu.Show();
     }
 
+    public void OnShelterClick()
+    {
+        sceneController.LoadShelter();
+    }
+
     public void OnGiftsClick()
     {
         // Disabled
