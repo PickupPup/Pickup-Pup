@@ -74,7 +74,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224643084004473666}
-  - component: {fileID: 222302356698451102}
   - component: {fileID: 114493588718953672}
   m_Layer: 5
   m_Name: DogImage
@@ -476,7 +475,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1267195235063240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100d1f4cba64c442ea9a858620479305, type: 3}
+  m_Script: {fileID: 11500000, guid: 86ec315516dbf03458de798c835ae41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 0
@@ -516,7 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4766436, g: 0.66609, b: 0.85294116, a: 1}
+  m_Color: {r: 0.88235295, g: 0.49019608, b: 0.49019608, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -575,12 +574,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013399260457960}
---- !u!222 &222302356698451102
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141307998442430}
 --- !u!222 &222368662083962878
 CanvasRenderer:
   m_ObjectHideFlags: 1
