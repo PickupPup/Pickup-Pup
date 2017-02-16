@@ -22,11 +22,6 @@ public class DogProfile : PPUIElement
     [SerializeField]
     Image collarImage;
 
-    [SerializeField]
-    GameObject leftArrow;
-    [SerializeField]
-    GameObject rightArrow;
-    [SerializeField]
     UIElement[] descriptionFields; // Normal description must come first (not special)
 
     [SerializeField]
