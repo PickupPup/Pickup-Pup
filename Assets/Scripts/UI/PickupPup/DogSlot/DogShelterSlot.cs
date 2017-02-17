@@ -41,7 +41,7 @@ public class DogShelterSlot : DogSlot
 
         checkReferences();
         priceTag.Set(dog.CostToAdopt);
-        priceTag.SetNonPurchasable(tuning.AdoptedText, tuning.AdoptedTextColor, tuning.AdoptedBackgroundColor);
+        priceTag.SetNonPurchasable(tuning.AdoptedText, tuning.NonPurchasableTextColor, tuning.NonPurchasableBackgroundColor);
 
         if (checkAdopted())
         {
