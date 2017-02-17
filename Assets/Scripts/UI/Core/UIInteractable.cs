@@ -7,6 +7,7 @@
 public class UIInteractable : UIElement
 {
     protected UISFXHandler sfxHandler;
+    protected bool interactable;
 
     protected override void setReferences()
     {

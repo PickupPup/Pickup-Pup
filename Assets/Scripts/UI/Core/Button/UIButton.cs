@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 public class UIButton : UIInteractable
 {
+    public bool Interactable
+    {
+        get { return button.interactable; }
+    }
+
 	protected bool hasButtonGraphic
 	{
 		get
@@ -57,7 +62,8 @@ public class UIButton : UIInteractable
 
 	public void ToggleInteractable(bool isInteractable)
 	{
-		button.interactable = isInteractable;
+        sfxHandler.SetInteractable(isInteractable);
+		button.interactable = interactable;
 	}
 
 	#region MonoBehaviourExtended Overrides
@@ -71,6 +77,7 @@ public class UIButton : UIInteractable
 			button.targetGraphic = getTopImage();
 		}
 		buttonGraphic = button.image;
+        sfxHandler.SetInteractable(button.interactable);
 		button.onClick.AddListener(executeClick);
 		if(hasButtonGraphic)
 		{
