@@ -103,7 +103,7 @@ public class PPUIController : MonoBehaviourExtended
         }
 	}
 
-    void showDogProfile(Dog dog)
+    protected virtual void showDogProfile(Dog dog)
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         dogProfileObject.SetActive(true);

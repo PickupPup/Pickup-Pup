@@ -3,12 +3,17 @@
  * Description: Controls the shelter screen
  */
 
+using UnityEngine;
 using k = PPGlobal;
 
 public class PPShelterUIController : PPUIController
 {
     DogSlot[] availableDogPortraits;
     DogDatabase database;
+    DogShelterProfile dogShelterProfile;
+
+    [SerializeField]
+    GameObject dogShelterProfileObject;
 
     #region MonoBehaviourExtended Overrides
 
@@ -17,6 +22,10 @@ public class PPShelterUIController : PPUIController
         promptID = PromptID.ShelterPrompt;
         base.setReferences();
         availableDogPortraits = GetComponentsInChildren<DogSlot>();
+        if (dogShelterProfileObject != null)
+        {
+            dogShelterProfileObject.SetActive(false);
+        }
     }
 
     protected override void fetchReferences()
@@ -69,6 +78,24 @@ public class PPShelterUIController : PPUIController
             return true;
         }
         return false;
+    }
+
+    protected override void showDogProfile(Dog dog)
+    {      
+        if(dataController.AdoptedDogs.Contains(dog.Info))
+        {
+            base.showDogProfile(dog);
+        }
+        else
+        {
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
+            dogShelterProfileObject.SetActive(true);
+            if (!dogShelterProfile)
+            {
+                dogShelterProfile = dogShelterProfileObject.GetComponent<DogShelterProfile>();
+            }
+            dogShelterProfile.SetProfile(dog);
+        }     
     }
 
 }
