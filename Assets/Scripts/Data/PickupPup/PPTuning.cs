@@ -208,7 +208,15 @@ public class PPTuning : PPData
 		{
 			return defaultTimerTimeStepSec;
 		}
-	}
+    }
+
+    public float LoadingTime
+    {
+	    get
+	    {
+		    return loadingTime;
+	    }
+    }
 
 	public int MaxAmountPerTypeFromScouting
 	{
@@ -472,7 +480,9 @@ public class PPTuning : PPData
 	int[] defaultTextColorRGBA;
 	[SerializeField]
 	float defaultTimerTimeStepSec;
-	[SerializeField]
+    [SerializeField]
+    float loadingTime;
+    [SerializeField]
 	int maxAmountPerTypeFromScouting;
 	[SerializeField]
 	float maxCouponDiscount;
