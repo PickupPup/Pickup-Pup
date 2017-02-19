@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class ShelterTutorial : Tutorial
 {
@@ -16,7 +17,13 @@ public class ShelterTutorial : Tutorial
     [SerializeField]
     GameObject currencyPanelObject;
     [SerializeField]
-    GameObject dogShelterSlotObject;
+    UIButton collectGiftButton;
+    [SerializeField]
+    GameObject dogShelterSlotParentObject;
+    [SerializeField]
+    DogShelterSlot[] dogShelterSlots;
+    [SerializeField]
+    DogShelterProfile dogShelterProfile;
     [SerializeField]
     Button adoptDogButton;
     [SerializeField]
@@ -25,12 +32,11 @@ public class ShelterTutorial : Tutorial
     Color adoptDogButtonColor;
     [SerializeField]
     Color adoptDogButtonTextColor;
-    [SerializeField]
-    GameObject livingRoomButtonObject;
 
     protected override void setReferences()
     {
         base.setReferences();
+        dogShelterSlots = dogShelterSlotParentObject.GetComponentsInChildren<DogShelterSlot>();
     }
 
     protected override void fetchReferences()
@@ -41,17 +47,29 @@ public class ShelterTutorial : Tutorial
     protected override void subscribeEvents()
     {
         base.subscribeEvents();
+        foreach(DogSlot slot in dogShelterSlots)
+        {
+            slot.SubscribeToClickWhenOccupied(handleOccupiedSlotClick);
+        }
+        EventController.Subscribe(handleAdoptEvent);
+        collectGiftButton.SubscribeToClick(handleRedeemedGift);
     }
 
     protected override void unsubscribeEvents()
     {
         base.unsubscribeEvents();
+        foreach(DogSlot slot in dogShelterSlots)
+        {
+            slot.UnsubscribeFromClickWhenOccupied(handleOccupiedSlotClick);
+        }
+        EventController.Unsubscribe(handleAdoptEvent);
+        collectGiftButton.UnsubscribeFromClick(handleRedeemedGift);
     }
 
     public override void StartTutorial()
     {
         base.StartTutorial();
-        onStart(TutorialEvent.Shelter);
+        callOnStart(TutorialEvent.Shelter);
     }
 
     protected override void onStart(TutorialEvent tutorialEvent)
@@ -63,9 +81,10 @@ public class ShelterTutorial : Tutorial
                 showPopup(PromptID.ShelterPrompt);
                 break;
             case TutorialEvent.ShelterSlot:
-                highlight(dogShelterSlotObject);
+                highlight(dogShelterSlotParentObject);
                 break;
             case TutorialEvent.AdoptDog:
+                highlight(dogShelterProfile.gameObject);
                 adoptDogButton.image.color = adoptDogButtonColor;
                 adoptDogButtonText.color = adoptDogButtonTextColor;
                 break;
@@ -84,17 +103,26 @@ public class ShelterTutorial : Tutorial
         switch (tutorialEvent)
         {
             case TutorialEvent.Shelter:
-                onStart(TutorialEvent.ShelterSlot);
+                callOnStart(TutorialEvent.ShelterSlot);
                 break;
             case TutorialEvent.ShelterSlot:
-                unhighlight(dogShelterSlotObject);
+                unhighlight(dogShelterSlotParentObject);
+                callOnStart(TutorialEvent.AdoptDog);
                 break;
             case TutorialEvent.AdoptDog:
+                unhighlight(dogShelterProfile.gameObject);
+                dogShelterProfile.Hide();
+                callOnStart(TutorialEvent.DailyGift);
                 break;
             case TutorialEvent.DailyGift:
                 unhighlight(currencyPanelObject);
+                callOnStart(TutorialEvent.MainMenu);
                 break;
             case TutorialEvent.MainMenu:
+                callOnStart(TutorialEvent.LivingRoom);
+                break;
+            case TutorialEvent.LivingRoom:
+                base.onComplete(tutorialEvent);
                 finish();
                 break;
             default:
@@ -107,6 +135,40 @@ public class ShelterTutorial : Tutorial
     {
         PlayerPrefsUtil.CompletedShelterTutorial = true;
         base.finish();
+    }
+
+    protected override void handleOverlayClick()
+    {
+        base.handleOverlayClick();
+        if(currentTutorial == TutorialEvent.Shelter)
+        {
+            callOnComplete(currentTutorial);
+        }
+    }
+
+    void handleOccupiedSlotClick(Dog dog)
+    {
+        if(currentTutorial == TutorialEvent.ShelterSlot)
+        {
+            callOnComplete(currentTutorial);
+        }
+    }
+
+    void handleAdoptEvent(string eventName, Dog dog)
+    {
+        if(eventName == k.ADOPT && currentTutorial == TutorialEvent.AdoptDog)
+        {
+            callOnComplete(TutorialEvent.AdoptDog);
+        }
+    }
+
+    void handleRedeemedGift()
+    {
+        Debug.Log("handling redeemed gift");
+        if(currentTutorial == TutorialEvent.DailyGift)
+        {
+            callOnComplete(TutorialEvent.DailyGift);
+        }
     }
 
 }

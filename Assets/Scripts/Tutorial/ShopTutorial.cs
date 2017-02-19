@@ -13,9 +13,9 @@ public class ShopTutorial : Tutorial
     }
 
     [SerializeField]
-    GameObject shopItemSlotObject;
+    UIButton shopItemSlotButton;
     [SerializeField]
-    GameObject livingRoomButtonObject;
+    GameObject shopItemSlotObject;
 
     protected override void setReferences()
     {
@@ -30,16 +30,19 @@ public class ShopTutorial : Tutorial
     protected override void subscribeEvents()
     {
         base.subscribeEvents();
+        shopItemSlotButton.SubscribeToClick(handleShopButtonClick);
     }
 
     protected override void unsubscribeEvents()
     {
         base.unsubscribeEvents();
+        shopItemSlotButton.UnsubscribeFromClick(handleShopButtonClick);
     }
 
     public override void StartTutorial()
     {
         base.StartTutorial();
+        callOnStart(TutorialEvent.BuyFood);
     }
 
     protected override void onStart(TutorialEvent tutorialEvent)
@@ -47,12 +50,7 @@ public class ShopTutorial : Tutorial
         switch (tutorialEvent)
         {
             case TutorialEvent.BuyFood:
-                break;
-            case TutorialEvent.CollarSlot:
-                break;
-            case TutorialEvent.SelectDogInBrowser:
-                break;
-            case TutorialEvent.RedeemGift:
+                highlight(shopItemSlotObject);
                 break;
             default:
                 base.onStart(tutorialEvent);
@@ -65,16 +63,24 @@ public class ShopTutorial : Tutorial
         switch (tutorialEvent)
         {
             case TutorialEvent.BuyFood:
+                unhighlight(shopItemSlotObject);
+                callOnStart(TutorialEvent.MainMenu);
                 break;
-            case TutorialEvent.CollarSlot:
-                break;
-            case TutorialEvent.SelectDogInBrowser:
-                break;
-            case TutorialEvent.RedeemGift:
+            case TutorialEvent.MainMenu:
+                base.onComplete(TutorialEvent.MainMenu);
+                callOnStart(TutorialEvent.LivingRoom);
                 break;
             default:
                 base.onComplete(tutorialEvent);
                 break;
+        }
+    }
+
+    void handleShopButtonClick()
+    {
+        if(currentTutorial == TutorialEvent.BuyFood)
+        {
+            callOnComplete(TutorialEvent.BuyFood);
         }
     }
 

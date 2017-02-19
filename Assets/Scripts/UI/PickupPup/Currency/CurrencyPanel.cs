@@ -123,7 +123,8 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 	void makeDailyGiftAvailableToRedeem()
 	{
 		toggleBetweenTimerAndGiftReceived(giftReceived:true);
-		collectGiftButton.TryUnsubscribeAll();
+        // TODO
+		//collectGiftButton.TryUnsubscribeAll();
 		collectGiftButton.SubscribeToClick(redeemReceivedGift);
         dataController.NotifyHasGiftToRedeem();
 	}

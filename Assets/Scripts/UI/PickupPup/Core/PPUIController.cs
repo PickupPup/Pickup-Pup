@@ -38,6 +38,7 @@ public class PPUIController : MonoBehaviourExtended
         }
         if(tutorial && !tutorial.Completed)
         {
+            tutorial.GetComponent<UICanvas>().Show();
             tutorial.StartTutorial();
             /*if (popupPrompt)
             {

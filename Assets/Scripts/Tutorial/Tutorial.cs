@@ -13,22 +13,30 @@ public class Tutorial : MonoBehaviourExtended
         }
     }
 
+    UICanvas canvas;
     [SerializeField]
     PopupPrompt popupPrompt;
     [SerializeField]
-    Image overlay;
+    UIButton overlay;
     [SerializeField]
     GameObject navigationPanelObject;
     [SerializeField]
     UIButton menuNavButton;
     [SerializeField]
     UIButton shelterNavButton;
+    [SerializeField]
+    UIButton livingRoomButton;
+
+    Dictionary<GameObject, Transform> highlightedObjects;
+    protected TutorialEvent currentTutorial;
 
     bool completed;
 
     protected override void setReferences()
     {
         base.setReferences();
+        canvas = GetComponent<UICanvas>();
+        highlightedObjects = new Dictionary<GameObject, Transform>();
     }
 
     protected override void fetchReferences()
@@ -39,16 +47,28 @@ public class Tutorial : MonoBehaviourExtended
     protected override void subscribeEvents()
     {
         base.subscribeEvents();
+        overlay.SubscribeToClick(handleOverlayClick);
+        menuNavButton.SubscribeToClick(handleMenuButtonClick);
+        livingRoomButton.SubscribeToClick(handleLivingRoomButtonClick);
     }
 
     protected override void unsubscribeEvents()
     {
         base.unsubscribeEvents();
+        overlay.UnsubscribeFromClick(handleOverlayClick);
+        menuNavButton.UnsubscribeFromClick(handleMenuButtonClick);
+        livingRoomButton.UnsubscribeFromClick(handleLivingRoomButtonClick);
     }
 
     public virtual void StartTutorial()
     {
         completed = false;
+    }
+
+    protected void callOnStart(TutorialEvent tutorialEvent)
+    {
+        currentTutorial = tutorialEvent;
+        onStart(currentTutorial);
     }
 
     protected virtual void onStart(TutorialEvent tutorialEvent)
@@ -59,6 +79,7 @@ public class Tutorial : MonoBehaviourExtended
                 showNavPanel(true, false);
                 break;
             case TutorialEvent.LivingRoom:
+                highlight(livingRoomButton.gameObject);
                 break;
             case TutorialEvent.Shelter:
                 showNavPanel(false, true);
@@ -66,13 +87,20 @@ public class Tutorial : MonoBehaviourExtended
         }
     }
 
+    protected void callOnComplete(TutorialEvent tutorialEvent)
+    {
+        onComplete(tutorialEvent);
+    }
+
     protected virtual void onComplete(TutorialEvent tutorialEvent)
     {
         switch(tutorialEvent)
         {
-            case TutorialEvent.MainMenu:               
+            case TutorialEvent.MainMenu:
+                unhighlight(navigationPanelObject);              
                 break;
             case TutorialEvent.LivingRoom:
+                unhighlight(livingRoomButton.gameObject);
                 break;
             case TutorialEvent.Shelter:            
                 break;
@@ -81,19 +109,26 @@ public class Tutorial : MonoBehaviourExtended
 
     protected void showPopup(PromptID promptID)
     {
-        PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
-        prompt.GetComponent<PPUIElement>().Show();
-        prompt.Set(promptID);
+        overlay.Show();
+        Debug.Log("showing popup");
+        popupPrompt.GetComponent<PPUIElement>().Show();
+        popupPrompt.Set(promptID);
     }
 
     protected void highlight(GameObject gameObject)
     {
-        // TODO
+        overlay.Show();
+        highlightedObjects.Add(gameObject, gameObject.transform.parent);
+        gameObject.transform.SetParent(transform);
     }
 
     protected void unhighlight(GameObject gameObject)
     {
-        // TODO
+        if(highlightedObjects.ContainsKey(gameObject))
+        {
+            gameObject.transform.SetParent(highlightedObjects[gameObject]);
+            overlay.Hide();
+        }
     }
 
     void showNavPanel(bool enableMenuButton, bool enableShelterButton)
@@ -103,15 +138,41 @@ public class Tutorial : MonoBehaviourExtended
         shelterNavButton.enabled = enableShelterButton;
     }
 
-    protected void showOverlay(bool show)
-    {
-        overlay.enabled = show;
-    }
-
     protected virtual void finish()
     {
         unsubscribeEvents();
         completed = true;
+        canvas.Hide();
+    }
+
+    protected virtual void handleOverlayClick()
+    {
+        TryClosePopup();
+    }
+
+    protected virtual void handleMenuButtonClick()
+    {
+        if (currentTutorial == TutorialEvent.MainMenu)
+        {
+            callOnComplete(TutorialEvent.MainMenu);
+        }
+    }
+
+    void handleLivingRoomButtonClick()
+    {
+        if (currentTutorial == TutorialEvent.LivingRoom)
+        {
+            callOnComplete(TutorialEvent.LivingRoom);
+        }
+    }
+
+    public void TryClosePopup()
+    {
+        if(popupPrompt.isActiveAndEnabled)
+        {
+            popupPrompt.Hide();
+            overlay.Hide();
+        }
     }
 
 }
