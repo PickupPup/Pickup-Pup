@@ -28,7 +28,8 @@ public class Tutorial : MonoBehaviourExtended
     UIButton livingRoomButton;
 
     Dictionary<GameObject, Transform> highlightedObjects;
-    protected TutorialEvent currentTutorial;
+    protected static Dictionary<TutorialEvent, bool> tutorialEvents; // Value is true if the tutorial has been completed
+    protected static TutorialEvent currentTutorial;
 
     bool completed;
 
@@ -37,6 +38,7 @@ public class Tutorial : MonoBehaviourExtended
         base.setReferences();
         canvas = GetComponent<UICanvas>();
         highlightedObjects = new Dictionary<GameObject, Transform>();
+        tutorialEvents = new Dictionary<TutorialEvent, bool>();
     }
 
     protected override void fetchReferences()
@@ -65,10 +67,17 @@ public class Tutorial : MonoBehaviourExtended
         completed = false;
     }
 
-    protected void callOnStart(TutorialEvent tutorialEvent)
-    {
-        currentTutorial = tutorialEvent;
-        onStart(currentTutorial);
+    protected void callOnStart(TutorialEvent tutorialEvent, bool forceStart = false)
+    {       
+        if(!tutorialEvents.ContainsKey(tutorialEvent))
+        {
+            tutorialEvents.Add(tutorialEvent, false);
+        }
+        else if(forceStart || !tutorialEvents[tutorialEvent])
+        {
+            currentTutorial = tutorialEvent;
+            onStart(tutorialEvent);
+        }
     }
 
     protected virtual void onStart(TutorialEvent tutorialEvent)
@@ -90,6 +99,10 @@ public class Tutorial : MonoBehaviourExtended
     protected void callOnComplete(TutorialEvent tutorialEvent)
     {
         onComplete(tutorialEvent);
+        if (tutorialEvents.ContainsKey(tutorialEvent))
+        {
+            tutorialEvents[tutorialEvent] = true;
+        }
     }
 
     protected virtual void onComplete(TutorialEvent tutorialEvent)

@@ -87,6 +87,7 @@ public class ShopTutorial : Tutorial
     protected override void finish()
     {
         PlayerPrefsUtil.CompletedShopTutorial = true;
+        callOnStart(TutorialEvent.CollarSlot);
         base.finish();
     }
 

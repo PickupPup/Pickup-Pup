@@ -139,6 +139,7 @@ public class ShelterTutorial : Tutorial
 
     protected override void handleOverlayClick()
     {
+        Debug.Log("handling overlay click in shelter tut");
         base.handleOverlayClick();
         if(currentTutorial == TutorialEvent.Shelter)
         {

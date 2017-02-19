@@ -17,11 +17,19 @@ public class LivingRoomTutorial : Tutorial
     [SerializeField]
     GameObject dogInHome;
     [SerializeField]
+    DogCollarSlot dogCollarSlot;
+    [SerializeField]
     GameObject dogCollarSlotObject;
+    [SerializeField]
+    GameObject dogBrowserObject;
     [SerializeField]
     GameObject dogHomeSlotObject;
     [SerializeField]
+    DogHomeSlot dogHomeSlot;
+    [SerializeField]
     GameObject shopButtonObject;
+    [SerializeField]
+    UIButton shopButton;
     [SerializeField]
     GameObject shelterButtonObject;
 
@@ -38,31 +46,58 @@ public class LivingRoomTutorial : Tutorial
     protected override void subscribeEvents()
     {
         base.subscribeEvents();
+        dogHomeSlot.SubscribeToClickWhenOccupied(handleDogHomeSlotClick);
+        dogCollarSlot.SubscribeToClickWhenFree(handleDogCollarSlotClick);
+        shopButton.SubscribeToClick(handleShopButtonClick);
     }
 
     protected override void unsubscribeEvents()
     {
         base.unsubscribeEvents();
+        dogHomeSlot.UnsubscribeFromClickWhenOccupied(handleDogHomeSlotClick);
+        dogCollarSlot.UnsubscribeFromClickWhenFree(handleDogCollarSlotClick);
+        shopButton.UnsubscribeFromClick(handleShopButtonClick);
     }
 
     public override void StartTutorial()
     {
         base.StartTutorial();
+        if (tutorialEvents.ContainsKey(currentTutorial) && !tutorialEvents[currentTutorial])
+        {
+            // Restart unfinished tutorial event
+            callOnStart(currentTutorial);
+        }
+        else
+        {
+            // Default start
+            callOnStart(TutorialEvent.LivingRoom, true);
+        }
     }
 
     protected override void onStart(TutorialEvent tutorialEvent)
     {
         switch (tutorialEvent)
         {
+            case TutorialEvent.LivingRoom:
+                showPopup(PromptID.ScoutingPrompt);
+                break;
             case TutorialEvent.DogInHome:
+                //Temp - Auto complete
+                callOnComplete(TutorialEvent.DogInHome);
+                // TODO: highlight dog
                 break;
             case TutorialEvent.Shop:
+                highlight(shopButtonObject);
                 break;
-            case TutorialEvent.CollarSlot:
+            case TutorialEvent.CollarSlot: // Started in ShopTutorial
+                highlight(dogCollarSlotObject);
                 break;
             case TutorialEvent.SelectDogInBrowser:
+                highlight(dogBrowserObject);
+                highlight(dogHomeSlotObject);
                 break;
             case TutorialEvent.RedeemGift:
+                // TODO: Add start call
                 break;
             default:
                 base.onStart(tutorialEvent);
@@ -74,17 +109,30 @@ public class LivingRoomTutorial : Tutorial
     {
         switch (tutorialEvent)
         {
+            case TutorialEvent.LivingRoom:
+                callOnStart(TutorialEvent.DogInHome);
+                break;
             case TutorialEvent.DogInHome:
+                callOnStart(TutorialEvent.MainMenu);
                 break;
             case TutorialEvent.MainMenu:
+                base.onComplete(tutorialEvent);
+                callOnStart(TutorialEvent.Shop);
                 break;
             case TutorialEvent.Shop:
+                unhighlight(shopButtonObject);
                 break;
             case TutorialEvent.CollarSlot:
+                unhighlight(dogCollarSlotObject);
+                callOnStart(TutorialEvent.SelectDogInBrowser);
                 break;
             case TutorialEvent.SelectDogInBrowser:
+                unhighlight(dogBrowserObject);
+                unhighlight(dogHomeSlotObject);
                 break;
             case TutorialEvent.RedeemGift:
+                //  TODO: Add complete call
+                callOnStart(TutorialEvent.Shelter);
                 break;
             case TutorialEvent.Shelter:
                 finish();
@@ -92,6 +140,39 @@ public class LivingRoomTutorial : Tutorial
             default:
                 base.onComplete(tutorialEvent);
                 break;
+        }
+    }
+
+    protected override void handleOverlayClick()
+    {
+        base.handleOverlayClick();
+        if (currentTutorial == TutorialEvent.DogInHome || currentTutorial == TutorialEvent.LivingRoom)
+        {
+            callOnComplete(currentTutorial);
+        }
+    }
+
+    void handleDogHomeSlotClick(Dog dog)
+    {
+        if (currentTutorial == TutorialEvent.SelectDogInBrowser)
+        {
+            callOnComplete(currentTutorial);
+        }
+    }
+
+    void handleDogCollarSlotClick()
+    {
+        if (currentTutorial == TutorialEvent.CollarSlot)
+        {
+            callOnComplete(currentTutorial);
+        }
+    }
+
+    void handleShopButtonClick()
+    {
+        if(currentTutorial == TutorialEvent.Shop)
+        {
+            callOnComplete(currentTutorial);
         }
     }
 
