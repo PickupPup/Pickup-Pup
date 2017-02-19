@@ -32,7 +32,7 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
 
     void IPointerDownHandler.OnPointerDown(PointerEventData ptrEvent)
     {
-        if((button && button.interactable))
+        if((button && button.enabled && button.interactable))
         {
             EventController.Event(clickEnabledSoundEvent);
         }

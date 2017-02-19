@@ -62,11 +62,8 @@ public class UIButton : UIInteractable
 
 	public void ToggleInteractable(bool isInteractable)
 	{
-        if (!isInteractable)
-        {
-            checkReferences();
-            button.interactable = interactable;
-        }
+        checkReferences();
+        button.interactable = isInteractable;
 	}
 
 	#region MonoBehaviourExtended Overrides
