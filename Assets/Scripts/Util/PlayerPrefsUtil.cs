@@ -31,14 +31,53 @@ public static class PlayerPrefsUtil
         }
     }
 
+    public static bool CompletedShelterTutorial
+    {
+        get
+        {
+            return completedShelterTutorial;
+        }
+        set
+        {
+            completedShelterTutorial = value;
+        }
+    }
+
+    public static bool CompletedLivingRoomTutorial
+    {
+        get
+        {
+            return completedLivingRoomTutorial;
+        }
+        set
+        {
+            completedLivingRoomTutorial = value;
+        }
+    }
+
+    public static bool CompletedShopTutorial
+    {
+        get
+        {
+            return completedShopTutorial;
+        }
+        set
+        {
+            completedShopTutorial = value;
+        }
+    }
+
     static bool showedShelterPrompt;
     static bool showedScoutingPrompt;
+    static bool completedShelterTutorial;
+    static bool completedLivingRoomTutorial;
+    static bool completedShopTutorial;
 
-	/*
+    /*
 	 * PlayerPrefs has no bool class
 	 * This wrapped provides that functionality
 	*/
-	public static bool GetBool(string key) 
+    public static bool GetBool(string key) 
 	{
 		return IntToBool(PlayerPrefs.GetInt(key, 0));
 	}

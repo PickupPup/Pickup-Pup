@@ -24,6 +24,8 @@ public class PPUIController : MonoBehaviourExtended
     NavigationPanel navigationPanel;
     [SerializeField]
     PopupPrompt popupPrompt;
+    [SerializeField]
+    Tutorial tutorial;
 
     #region MonoBehaviourExtended Overrides
 
@@ -34,10 +36,14 @@ public class PPUIController : MonoBehaviourExtended
         {
             dogProfileObject.SetActive(false);
         }
-        if(popupPrompt)
+        if(tutorial && !tutorial.Completed)
         {
-            showPopupPrompt();
-        }
+            tutorial.StartTutorial();
+            /*if (popupPrompt)
+            {
+                showPopupPrompt();
+            }*/
+        } 
     }
 
     protected override void fetchReferences() 
