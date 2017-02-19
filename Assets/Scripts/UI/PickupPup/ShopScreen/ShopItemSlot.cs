@@ -22,6 +22,8 @@ public class ShopItemSlot : PPUIElement
     PPShopUIController shop;
     ShopItem item;
 
+    #region MonoBehaviourExtended Overrides
+
     protected override void setReferences()
     {
         base.setReferences();
@@ -51,6 +53,8 @@ public class ShopItemSlot : PPUIElement
             dataController.UnsubscribeFromCurrencyChange(CurrencyType.Coins, tryToggle);
         }
     }
+
+    #endregion
 
     public void Init(PPShopUIController shop, ShopItem item)
     {
