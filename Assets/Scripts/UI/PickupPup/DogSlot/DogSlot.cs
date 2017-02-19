@@ -91,8 +91,11 @@ public class DogSlot : PPUIElement
 	{
 		base.setReferences();
 		button = ensureReference<UIButton>(searchChildren:true);
-		subscribeToUIButton();
-	}
+        images = GetComponentsInChildren<Image>();
+        dogImage = images[1];
+        subscribeToUIButton();
+        //enable(hasDogInfo);
+    }
 
 	#endregion
 
@@ -106,9 +109,6 @@ public class DogSlot : PPUIElement
     {
 		this.dogInfo = dog;
 
-		images = GetComponentsInChildren<Image>();
-        dogImage = images[1];
-
 		setSlot(this.dogInfo, dogSprite);
     }
 
@@ -119,8 +119,9 @@ public class DogSlot : PPUIElement
 		if(this.dogImage)
 		{
         	this.dogImage.sprite = null;
-		}
-	}
+        }
+        enable(false);
+    }
 
 	public virtual void Init(Dog dog, bool inScoutingSelectMode)
 	{
@@ -216,9 +217,20 @@ public class DogSlot : PPUIElement
 		}
 	}
 
+    void enable(bool isEnabled)
+    {
+        dogImage.enabled = isEnabled;
+        if (backgroundImage)
+        {
+            backgroundImage.enabled = isEnabled;
+        }
+        button.ToggleInteractable(isEnabled);
+    }
+
     // Sets the dog and background sprites of this Dog Slot.
 	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
     {
+        enable(true);
         dogImage.sprite = dogSprite;
 		if(backgroundImage)
         {

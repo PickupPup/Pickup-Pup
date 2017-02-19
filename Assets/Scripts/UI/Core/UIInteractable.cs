@@ -9,10 +9,14 @@ public class UIInteractable : UIElement
     protected UISFXHandler sfxHandler;
     protected bool interactable;
 
+    #region MonoBehaviourExtended Overrides
+
     protected override void setReferences()
     {
         base.setReferences ();
         sfxHandler = ensureReference<UISFXHandler>();
     }
+
+    #endregion
 
 }

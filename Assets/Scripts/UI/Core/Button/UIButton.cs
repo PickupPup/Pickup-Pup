@@ -62,8 +62,11 @@ public class UIButton : UIInteractable
 
 	public void ToggleInteractable(bool isInteractable)
 	{
-        sfxHandler.SetInteractable(isInteractable);
-		button.interactable = interactable;
+        if (!isInteractable)
+        {
+            checkReferences();
+            button.interactable = interactable;
+        }
 	}
 
 	#region MonoBehaviourExtended Overrides
@@ -77,7 +80,6 @@ public class UIButton : UIInteractable
 			button.targetGraphic = getTopImage();
 		}
 		buttonGraphic = button.image;
-        sfxHandler.SetInteractable(button.interactable);
 		button.onClick.AddListener(executeClick);
 		if(hasButtonGraphic)
 		{

@@ -5,21 +5,34 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using k = PPGlobal;
 
-public class UISFXHandler : UIInteractable, IPointerClickHandler
+public class UISFXHandler : UIInteractable, IPointerDownHandler
 {
     [SerializeField]
     string clickEnabledSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
     [SerializeField]
     string clickDisabledSoundEvent = k.GetPlayEvent(k.EMPTY);
 
-    #region IPointerClickHandler Interface
+    Button button;
 
-    void IPointerClickHandler.OnPointerClick(PointerEventData ptrEvent)
+    #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
     {
-        if(interactable)
+        base.setReferences();
+        button = GetComponent<Button>();
+    }
+
+    #endregion
+
+    #region IPointerDownHandler Interface
+
+    void IPointerDownHandler.OnPointerDown(PointerEventData ptrEvent)
+    {
+        if((button && button.interactable))
         {
             EventController.Event(clickEnabledSoundEvent);
         }
@@ -30,10 +43,5 @@ public class UISFXHandler : UIInteractable, IPointerClickHandler
     }
 
     #endregion
-
-    public void SetInteractable(bool isInteractable)
-    {
-        interactable = isInteractable;
-    }
 
 }

@@ -15,6 +15,7 @@ public class DogShelterProfile : DogProfile
     Text adoptButtonText;
     [SerializeField]
     Button adoptButton;
+    UIButton adoptUIButton;
 
     PPTuning tuning;
 
@@ -24,6 +25,7 @@ public class DogShelterProfile : DogProfile
     {
         base.setReferences();
         iconsObject.SetActive(false);
+        adoptUIButton = adoptButton.GetComponent<UIButton>();
     }
 
     protected override void fetchReferences()
