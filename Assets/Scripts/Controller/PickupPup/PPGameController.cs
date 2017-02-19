@@ -159,6 +159,18 @@ public class PPGameController : GameController, ICurrencySystem
 
     #endregion
 
+    #region Controller Overrides
+
+    protected override bool shouldReSetRefsOnReset 
+    {
+        get 
+        {
+            return false;
+        }
+    }
+
+    #endregion
+
     // The dog the player currently has selected
     Dog selectedDog;
 	List<Dog> dogsOutScouting = new List<Dog>();
@@ -190,7 +202,7 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		base.fetchReferences();
         dogDatabase.Initialize(dataController);
-		dataController.SetFilePath(SAVE_FILE_PATH);
+        dataController.SetFilePath(SAVE_FILE_PATH);
 		dataController.LoadGame();
 		giftController = PPGiftController.Instance;
 		giftController.Init(tuning);
@@ -202,7 +214,10 @@ public class PPGameController : GameController, ICurrencySystem
         if(isSingleton)
         {
             base.handleSceneLoaded(sceneIndex);
-            setupScoutingOnLoad(dataController);
+            if(dataController)
+            {
+                setupScoutingOnLoad(dataController);
+            }
         }
     }
 

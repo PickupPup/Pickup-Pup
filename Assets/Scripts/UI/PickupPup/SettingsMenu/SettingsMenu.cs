@@ -33,7 +33,7 @@ public class SettingsMenu : PPUIElement
         {
             dataController.Reset();
         }
-        requestReloadScene();
+        requestReloadScene(refreshSystems:true);
     }
 
     #region MonoBehaviourExtended Overrides
