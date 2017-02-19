@@ -79,7 +79,9 @@ public class DogSlot : PPUIElement
 	MonoAction onFreeSlotClick;
 	PPData.DogAction onOccupiedSlotClick;
 
+    [SerializeField]
     Image backgroundImage;
+    [SerializeField]
     protected Image dogImage;
 
     bool setBackground = true;
@@ -91,8 +93,6 @@ public class DogSlot : PPUIElement
 	{
 		base.setReferences();
 		button = ensureReference<UIButton>(searchChildren:true);
-        images = GetComponentsInChildren<Image>();
-        dogImage = images[1];
         subscribeToUIButton();
         enable(HasDog);
     }
@@ -217,7 +217,7 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-    protected void enable(bool isEnabled)
+    protected override void enable(bool isEnabled)
     {
         dogImage.enabled = dogImage.sprite;
         if (backgroundImage)

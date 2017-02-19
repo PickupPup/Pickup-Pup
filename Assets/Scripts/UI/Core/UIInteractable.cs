@@ -7,7 +7,6 @@
 public class UIInteractable : UIElement
 {
     protected UISFXHandler sfxHandler;
-    protected bool interactable;
 
     #region MonoBehaviourExtended Overrides
 

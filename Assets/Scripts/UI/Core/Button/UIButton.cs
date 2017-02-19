@@ -11,7 +11,10 @@ public class UIButton : UIInteractable
 {
     public bool Interactable
     {
-        get { return button.interactable; }
+        get
+        {
+            return button.interactable;
+        }
     }
 
 	protected bool hasButtonGraphic
@@ -21,6 +24,14 @@ public class UIButton : UIInteractable
 			return buttonGraphic != null;
 		}
 	}
+
+    public Image ButtonGraphic
+    {
+        get
+        {
+            return buttonGraphic;
+        }
+    }
 
 	protected Button button;
 	protected Image buttonGraphic;
@@ -41,7 +52,6 @@ public class UIButton : UIInteractable
 	public void UnsubscribeAllClickActions()
 	{
 		this.clickAction = null;
-
 	}
 
 	public void Select()

@@ -14,8 +14,7 @@ public class DogShelterProfile : DogProfile
     [SerializeField]
     Text adoptButtonText;
     [SerializeField]
-    Button adoptButton;
-    UIButton adoptUIButton;
+    UIButton adoptButton;
 
     PPTuning tuning;
 
@@ -25,7 +24,6 @@ public class DogShelterProfile : DogProfile
     {
         base.setReferences();
         iconsObject.SetActive(false);
-        adoptUIButton = adoptButton.GetComponent<UIButton>();
     }
 
     protected override void fetchReferences()
@@ -77,7 +75,7 @@ public class DogShelterProfile : DogProfile
     void showAdopted()
     {
         setComponents(adoptButtonText, tuning.AdoptedText, tuning.NonPurchasableTextColor,
-            adoptButton.image, tuning.NonPurchasableBackgroundColor, adoptButton, false,
+            adoptButton.ButtonGraphic, tuning.NonPurchasableBackgroundColor, adoptButton, false,
             priceTag, false);
     }
 
@@ -85,7 +83,7 @@ public class DogShelterProfile : DogProfile
     {
         bool canAfford = gameController.CanAfford(CurrencyType.Coins, dogInfo.CostToAdopt);
         setComponents(adoptButtonText, tuning.AdoptText, tuning.DefaultTextColor,
-            adoptButton.image, tuning.DefaultBackgroundColor, adoptButton, canAfford,
+            adoptButton.ButtonGraphic, tuning.DefaultBackgroundColor, adoptButton, canAfford,
             priceTag, true);
     }
 
