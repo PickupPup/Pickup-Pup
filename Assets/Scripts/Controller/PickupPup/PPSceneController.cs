@@ -120,6 +120,7 @@ public class PPSceneController : SingletonController<PPSceneController>
 
 public enum PPScene 
 {
+    Loading,
     Shelter,
     Shop,
     LivingRoom,
