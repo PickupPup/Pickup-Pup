@@ -29,6 +29,7 @@ public class PPGlobal : Global
     public const string REDEEM_GIFT = REDEEM + GIFT;
     public const string TAP_TO_REDEEM = "TapToRedeem";
     public const string DOG_FOOD_ICON = "dogfood_icon";
+    public const string WORLD = "World";
 
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;

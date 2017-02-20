@@ -330,6 +330,23 @@ public class PPDataController : DataController, ICurrencySystem
 
     #endregion
 
+    public void EnterRoom(DogDescriptor dog, PPScene room)
+    {
+        currentGame.EnterRoom(dog, room);
+        SaveGame();
+    }
+
+    public void LeaveRoom(DogDescriptor dog)
+    {
+        currentGame.LeaveRoom(dog);
+        SaveGame();
+    }
+
+    public DogDescriptor[] DogsInRoom(PPScene room)
+    {
+        return currentGame.DogsInRoom(room);
+    }
+
 	public void StartDailyGiftCountdown(PPTimer timer)
 	{
 		currentGame.StartDailyGiftCountdown(timer);
