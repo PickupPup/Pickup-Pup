@@ -31,6 +31,8 @@ public class ResourceLoader
 
 	protected const float DEFAULT_DISCOUNT = k.DEFAULT_DISCOUNT_DECIMAL;
 
+    protected const int ZERO_INDEX_OFFSET = k.ZERO_INDEX_OFFSET;
+
 	const float FULL_PERCENT = k.FULL_PERCENT_F;
 
     protected static float perecentToDecimal(int percentOf100)

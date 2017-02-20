@@ -96,7 +96,6 @@ public class PPUIController : MonoBehaviourExtended
 
 	void handleDogSlotClicked(Dog dog)
 	{
-        // TODO: Insert universal dog slot handle code here
         if (dogProfileObject)
         {
         	showDogProfile(dog);
@@ -111,12 +110,14 @@ public class PPUIController : MonoBehaviourExtended
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
         }
+        dogProfile.Show();
         dogProfile.SetProfile(dog);
     }
 
     protected virtual void showPopupPrompt()
     {
         PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
+        prompt.GetComponent<PPUIElement>().Show();
         prompt.Set(promptID);
     }
 
