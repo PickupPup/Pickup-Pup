@@ -105,6 +105,11 @@ public class PPSceneController : SingletonController<PPSceneController>
         sceneLoadingBlockers--;
     }
 
+    public bool IsWorldScene(PPScene scene)
+    {
+        return scene == PPScene.LivingRoom || scene == PPScene.Yard;
+    }
+
     // Currently does not care about which scene, but may need more advanced logic in future
     bool canLoadScene(PPScene scene)
     {

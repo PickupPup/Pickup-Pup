@@ -105,6 +105,22 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+    public PPScene MostRecentRoom
+    {
+        get
+        {
+            return descriptor.MostRecentRoom;
+        }
+    }
+
+    public bool IsInWorld
+    {
+        get
+        {
+            return descriptor.IsInWorld;
+        }
+    }
+
 	public bool HasSlot
 	{
 		get
@@ -334,6 +350,16 @@ public class Dog : MobileObjectBehaviour
 		this.descriptor = descriptor;
 		this.descriptor.LinkToDog(this);
 	}
+
+    public void EnterRoom(PPScene room)
+    {
+        this.descriptor.EnterRoom(room);
+    }
+
+    public void LeaveRoom()
+    {
+        this.descriptor.LeaveRoom();
+    }
 
 	protected override void setReferences()
 	{

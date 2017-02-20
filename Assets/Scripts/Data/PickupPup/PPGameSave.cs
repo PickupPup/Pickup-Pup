@@ -24,6 +24,21 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
+    // Dogs that are neither already in the world or scouting
+    public DogDescriptor[] AvailableDogs
+    {
+        get
+        {
+            return this.getAvailableDogs();
+        }
+    }
+
+    public Dictionary<PPScene, List<DogDescriptor>> WorldDogs
+    {
+        get;
+        private set;
+    }
+
     public CurrencySystem Currencies
     {
         get;
@@ -50,6 +65,7 @@ public class PPGameSave : GameSave, ISerializable
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(adoptedDogs);
 		this.ScoutingDogs = new List<DogDescriptor>(scoutingDogs);
+        this.WorldDogs = new Dictionary<PPScene, List<DogDescriptor>>();
         this.Currencies = currencies;
         this.HasGiftToRedeem = hasGiftToRedeem;
 	}
@@ -127,5 +143,18 @@ public class PPGameSave : GameSave, ISerializable
     {
         AdoptedDogs.Add(dog);
     }
-		
+	
+    DogDescriptor[] getAvailableDogs()
+    {
+        List<DogDescriptor> available = new List<DogDescriptor>();
+        foreach(DogDescriptor dog in AdoptedDogs)
+        {
+            if(!(dog.IsInWorld || dog.IsScouting))
+            {
+                available.Add(dog);
+            }
+        }
+        return available.ToArray();
+    }
+
 }

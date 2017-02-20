@@ -59,6 +59,14 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+    public DogDescriptor[] AvailableDogs
+    {
+        get
+        {
+            return currentGame.AvailableDogs;
+        }
+    }
+
 	public int DogCount 
 	{
 		get 

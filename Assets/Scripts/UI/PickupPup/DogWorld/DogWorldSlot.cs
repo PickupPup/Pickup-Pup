@@ -4,11 +4,8 @@
  * Usage: [no notes]
  */
 
-public class DogHotSpot : PPUIElement
+public class DogWorldSlot : DogSlot
 {	
-    public void PlaceDog(Dog dog)
-    {
-        // TODO: Implement
-    }
+    
 
 }

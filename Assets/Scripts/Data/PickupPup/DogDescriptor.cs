@@ -148,6 +148,24 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public PPScene MostRecentRoom
+    {
+        get;
+        private set;
+    }
+
+    public bool IsInWorld
+    {
+        get;
+        private set;
+    }
+
+    public bool IsScouting
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -225,6 +243,7 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingBegan(int slotIndex)
 	{
+        this.IsScouting = true;
 		if(this.IsLinkedToDog)
 		{
 			linkedDog.SubscribeToScoutingTimerChange(updateTimeRemainingScouting);
@@ -234,6 +253,7 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
+        this.IsScouting = false;
 		if(this.IsLinkedToDog)
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
@@ -251,6 +271,17 @@ public class DogDescriptor : PPDescriptor
         CurrencyData gift = this.RedeemableGift;
         this.RedeemableGift = null;
         return gift;
+    }
+
+    public void EnterRoom(PPScene room)
+    {
+        this.MostRecentRoom = room;
+        this.IsInWorld = true;
+    }
+
+    public void LeaveRoom()
+    {
+        this.IsInWorld = false;
     }
 
 	void updateTimeRemainingScouting(float timeRemainingScouting)
