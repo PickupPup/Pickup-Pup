@@ -74,7 +74,6 @@ public class ShelterTutorial : Tutorial
 
     protected override void onStart(TutorialEvent tutorialEvent)
     {
-        Debug.Log("on start: " + tutorialEvent.ToString());
         switch (tutorialEvent)
         {
             case TutorialEvent.Shelter:
@@ -99,7 +98,6 @@ public class ShelterTutorial : Tutorial
 
     protected override void onComplete(TutorialEvent tutorialEvent)
     {
-        Debug.Log("on complete: " + tutorialEvent.ToString());
         switch (tutorialEvent)
         {
             case TutorialEvent.Shelter:
@@ -139,7 +137,6 @@ public class ShelterTutorial : Tutorial
 
     protected override void handleOverlayClick()
     {
-        Debug.Log("handling overlay click in shelter tut");
         base.handleOverlayClick();
         if(currentTutorial == TutorialEvent.Shelter)
         {
@@ -165,7 +162,6 @@ public class ShelterTutorial : Tutorial
 
     void handleRedeemedGift()
     {
-        Debug.Log("handling redeemed gift");
         if(currentTutorial == TutorialEvent.DailyGift)
         {
             callOnComplete(TutorialEvent.DailyGift);

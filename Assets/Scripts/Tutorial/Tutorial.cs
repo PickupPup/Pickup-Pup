@@ -125,7 +125,6 @@ public class Tutorial : MonoBehaviourExtended
     protected void showPopup(PromptID promptID)
     {
         overlay.Show();
-        Debug.Log("showing popup");
         popupPrompt.GetComponent<PPUIElement>().Show();
         popupPrompt.Set(promptID);
     }
