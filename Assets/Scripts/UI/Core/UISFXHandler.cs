@@ -1,23 +1,45 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: For playing SFX on events
  * Usage: [no notes]
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using k = PPGlobal;
 
-public class UISFXHandler : UIElement, IPointerClickHandler
+public class UISFXHandler : UIInteractable, IPointerDownHandler
 {
     [SerializeField]
-    string clickSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
+    string clickEnabledSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
+    [SerializeField]
+    string clickDisabledSoundEvent = k.GetPlayEvent(k.EMPTY);
 
-    #region IPointerClickHanlder Interface
+    Button button;
 
-    void IPointerClickHandler.OnPointerClick(PointerEventData ptrEvent)
+    #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
     {
-        EventController.Event(clickSoundEvent);
+        base.setReferences();
+        button = GetComponent<Button>();
+    }
+
+    #endregion
+
+    #region IPointerDownHandler Interface
+
+    void IPointerDownHandler.OnPointerDown(PointerEventData ptrEvent)
+    {
+        if((button && button.enabled && button.interactable))
+        {
+            EventController.Event(clickEnabledSoundEvent);
+        }
+        else
+        {
+            EventController.Event(clickDisabledSoundEvent);
+        }
     }
 
     #endregion
