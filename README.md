@@ -7,6 +7,7 @@ Casual mobile game with dogs.
 - [Isaiah Mann](http://isaiahmann.com/)
 - [Grace Barrett-Snyder](http://gracebarsny.com/)
 - [James Hostetler](http://metkis.com/)
+- Timothy Ng
 
 ## Specs
 - Unity: **v5.5.0f3**

@@ -94,7 +94,7 @@ public abstract class PPData
 		}
 	}
 
-	protected string formatCost(int cost) 
+	public static string FormatCost(int cost) 
 	{
 		// String formatter to concat integer with dollar sign:
 		return string.Format("${0}", cost);	

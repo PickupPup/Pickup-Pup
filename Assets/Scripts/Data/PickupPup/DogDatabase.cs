@@ -142,6 +142,42 @@ public class DogDatabase : Database<DogDatabase>
         return dog;
 	}
 
+    public DogDescriptor[] GetInOrderDogList(
+        int count, 
+        bool skipAdopted, 
+        int startIndex = 0, 
+        int maxMasterIndex = int.MaxValue)
+    {
+        DogDescriptor[] dogList = new DogDescriptor[count];
+        int endIndex = startIndex + count - ZERO_INDEX_OFFSET;
+        int indexInMasterDogArr = startIndex;
+        for(int i = startIndex; i <= endIndex; i++)
+        {
+            if(ArrayUtil.InRange(this.dogs, indexInMasterDogArr))
+            {
+                do
+                {
+                    if(indexInMasterDogArr < maxMasterIndex)
+                    {
+                        dogList[i] = this.dogs[indexInMasterDogArr];
+                    }
+                    else
+                    {
+                        dogList[i] = DogDescriptor.Default();
+                    }
+                }
+                while(skipAdopted &&
+                    ArrayUtil.InRange(this.dogs, indexInMasterDogArr) &&
+                    dataController.CheckAdopted(this.dogs[indexInMasterDogArr++]));
+            }
+            else
+            {
+                dogList[i] = DogDescriptor.Default();
+            }
+        }
+        return dogList; 
+    }
+
 	// Returns sequence based on day
 	// Always starts from beginning unless start index is different
 	public DogDescriptor[] GetDailyRandomDogList(int count, int startIndex = 0)
@@ -165,8 +201,10 @@ public class DogDatabase : Database<DogDatabase>
 		buffer.Refresh();
         DogDescriptor[] fullSequence = buffer.GetRandom(dogs.Length);
 		DogDescriptor[] candidates = ArrayUtil.GetRange(fullSequence, startIndex, count);
+        // Allows for faster lookup versus O(n) to check array
+        HashSet<DogDescriptor> currentCandidates = new HashSet<DogDescriptor>(candidates);
         // -1 for zero offset
-        int currentIndex = startIndex + count - 1;
+        int currentIndex = startIndex + count - ZERO_INDEX_OFFSET;
         int totalDogCount = fullSequence.Length;
         for(int i = 0; i < candidates.Length; i++)
         {
@@ -174,10 +212,18 @@ public class DogDatabase : Database<DogDatabase>
             {
                 if(!dataController.CheckAdopted(fullSequence[currentIndex]))
                 {
-                    candidates[i] = fullSequence[currentIndex];
+                    if(!currentCandidates.Contains(fullSequence[currentIndex]))
+                    {
+                        // Remove the old dog from the Hash (because it's invalid)
+                        currentCandidates.Remove(candidates[i]);
+                        candidates[i] = fullSequence[currentIndex];
+                        // Update the Hash w/ the new dog
+                        currentCandidates.Add(candidates[i]);
+                    }
                 }
                 currentIndex++;
             }
+            currentIndex++;
             if(currentIndex >= totalDogCount && dataController.CheckAdopted(candidates[i]))
             {
                 candidates[i] = DogDescriptor.Default();

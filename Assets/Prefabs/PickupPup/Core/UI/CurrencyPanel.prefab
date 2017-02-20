@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222617535794968980}
   - component: {fileID: 114524859967828928}
   m_Layer: 5
-  m_Name: plus
+  m_Name: PlusSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 222933687893491546}
   - component: {fileID: 114743145313298836}
   m_Layer: 5
-  m_Name: Text
+  m_Name: GiftAvailableText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,8 +144,9 @@ GameObject:
   - component: {fileID: 222877304240638018}
   - component: {fileID: 114868140261287782}
   - component: {fileID: 114851329548302154}
+  - component: {fileID: 114920987311091794}
   m_Layer: 5
-  m_Name: CoinPanel
+  m_Name: CoinsDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +180,7 @@ GameObject:
   - component: {fileID: 222223893893772314}
   - component: {fileID: 114263860003944070}
   - component: {fileID: 114880352566092046}
-  - component: {fileID: 114748189097721202}
+  - component: {fileID: 114231211558410614}
   m_Layer: 5
   m_Name: CoinButton
   m_TagString: Untagged
@@ -198,8 +199,9 @@ GameObject:
   - component: {fileID: 222188783688761456}
   - component: {fileID: 114304882295099238}
   - component: {fileID: 114409330800619958}
+  - component: {fileID: 114665060218495216}
   m_Layer: 5
-  m_Name: FoodPanel
+  m_Name: DogFoodDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,7 +254,7 @@ GameObject:
   - component: {fileID: 114804406772249282}
   - component: {fileID: 114681110028622312}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: GiftTimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,6 +272,7 @@ GameObject:
   - component: {fileID: 114305068144021568}
   - component: {fileID: 114293991735831520}
   - component: {fileID: 114529120888782602}
+  - component: {fileID: 114072208196653034}
   m_Layer: 5
   m_Name: CurrencyPanel
   m_TagString: Untagged
@@ -289,7 +292,7 @@ GameObject:
   - component: {fileID: 114488741730425434}
   - component: {fileID: 114862864113951042}
   m_Layer: 5
-  m_Name: CoinsAmount
+  m_Name: CoinsAmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -306,7 +309,7 @@ GameObject:
   - component: {fileID: 222537562161182342}
   - component: {fileID: 114408964575365246}
   m_Layer: 5
-  m_Name: plus
+  m_Name: PlusSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +327,7 @@ GameObject:
   - component: {fileID: 114397618120542780}
   - component: {fileID: 114301589314616128}
   m_Layer: 5
-  m_Name: outline
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +362,7 @@ GameObject:
   - component: {fileID: 222603724401478082}
   - component: {fileID: 114439886395758850}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: GiftIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,8 +393,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224640343952417064}
-  - component: {fileID: 222878930321910726}
-  - component: {fileID: 114681274725467782}
+  - component: {fileID: 114908784205101020}
   m_Layer: 5
   m_Name: IconHolder
   m_TagString: Untagged
@@ -410,9 +412,9 @@ GameObject:
   - component: {fileID: 222326147110339038}
   - component: {fileID: 114034638618204744}
   - component: {fileID: 114902884280022178}
-  - component: {fileID: 114997765694934880}
+  - component: {fileID: 114366861327635960}
   m_Layer: 5
-  m_Name: FoodButton
+  m_Name: DogFoodButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,7 +432,7 @@ GameObject:
   - component: {fileID: 114881680795243496}
   - component: {fileID: 114903143335202076}
   m_Layer: 5
-  m_Name: FoodAmount
+  m_Name: DogFoodAmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +467,7 @@ GameObject:
   - component: {fileID: 114808999184062944}
   - component: {fileID: 114334247016894640}
   m_Layer: 5
-  m_Name: Buttonheader
+  m_Name: GiftTimerLabelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,8 +481,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224011393740670474}
-  - component: {fileID: 222859415629252830}
-  - component: {fileID: 114180506686911642}
+  - component: {fileID: 114630558728291676}
   m_Layer: 5
   m_Name: IconHolder
   m_TagString: Untagged
@@ -558,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 0
 --- !u!114 &114034638618204744
@@ -587,6 +589,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114072208196653034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388646525770112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 0
+  sortRule: 1
 --- !u!114 &114111936265916794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -641,33 +658,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114180506686911642
+--- !u!114 &114231211558410614
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1970828376847720}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1262614276610696}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300024, guid: 438a896320124094fa3f7102729eb15b, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114244209061073100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,6 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114263860003944070
@@ -780,10 +785,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34991c9fa8d6341f485923cce1a65a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   handlers:
   - action: {fileID: 11400000, guid: 4a89434783b324db0a5e781c42b6cbd2, type: 2}
     triggers: []
     triggerOnStart: 1
+    triggerOnSwipe: 0
+    validSwipeDirections: 
+    triggerOnClick: 0
+  minValidSwipeDistance: 1
 --- !u!114 &114301589314616128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -861,12 +871,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de5a280723a546c2a76f31fbc0b5a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   joinString: ' '
   termKey:
   - Free
   - Gift
+--- !u!114 &114366861327635960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1842413798279076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114397618120542780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1118,8 +1143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415433a26f816df47ad36158ee0246f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinsDisplay: {fileID: 114748189097721202}
-  dogFoodDisplay: {fileID: 114997765694934880}
+  preserveOnSceneChange: 0
+  coinsDisplay: {fileID: 114920987311091794}
+  dogFoodDisplay: {fileID: 114665060218495216}
   giftTimerDisplay: {fileID: 114681110028622312}
   collectGiftButton: {fileID: 114018719488338428}
   giftTimerActiveDisplay: {fileID: 1130718371587316}
@@ -1154,6 +1180,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114630558728291676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970828376847720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114637444103017340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1187,6 +1227,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2:30:13
+--- !u!114 &114665060218495216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1336047551116388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  iconImage: {fileID: 114278535726864470}
 --- !u!114 &114681110028622312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1198,35 +1253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
---- !u!114 &114681274725467782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1785416920554512}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300024, guid: 438a896320124094fa3f7102729eb15b, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!114 &114743145313298836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1260,20 +1289,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: FREE GIFT!
---- !u!114 &114748189097721202
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1262614276610696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
-  iconImage: {fileID: 114437580356616522}
 --- !u!114 &114763582433706518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1545,18 +1560,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114034638618204744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114903143335202076
@@ -1572,6 +1576,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRichText: 0
   m_spacing: -25
+--- !u!114 &114908784205101020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1785416920554512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+--- !u!114 &114920987311091794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238066058124530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  iconImage: {fileID: 114437580356616522}
 --- !u!114 &114932135542227518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1599,20 +1632,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114997765694934880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1842413798279076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
-  iconImage: {fileID: 114278535726864470}
 --- !u!222 &222075174207056932
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1709,12 +1728,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084400446327282}
---- !u!222 &222859415629252830
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1970828376847720}
 --- !u!222 &222860192321819296
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1739,12 +1752,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238066058124530}
---- !u!222 &222878930321910726
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1785416920554512}
 --- !u!222 &222933687893491546
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1774,7 +1781,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!224 &224011393740670474
 RectTransform:

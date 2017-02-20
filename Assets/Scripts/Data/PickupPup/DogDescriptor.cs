@@ -40,7 +40,7 @@ public class DogDescriptor : PPDescriptor
 		{
 			if(hasSpecialCost) 
 			{
-				return formatCost(modCost);
+				return PPData.FormatCost(modCost);
 			} 
 			else 
 			{
@@ -142,6 +142,12 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public bool EmptyDescriptor
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -181,6 +187,7 @@ public class DogDescriptor : PPDescriptor
             {
                 string.Empty, string.Empty
             };
+        descriptor.EmptyDescriptor = true;
 		return descriptor;
 	}
 		
@@ -260,5 +267,17 @@ public class DogDescriptor : PPDescriptor
 	{
 		this.linkedDog = null;
 	}
+
+    #region Object Overrides 
+
+    public override string ToString ()
+    {
+        return string.Format("Dog: {0}, {1}, {2}", 
+            Name,
+            Breed,
+            Age);
+    }
+
+    #endregion
 
 }

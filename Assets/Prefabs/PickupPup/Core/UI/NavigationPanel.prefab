@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222295968191054330}
   - component: {fileID: 114545236010863140}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AdoptButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 114783973811704244}
   - component: {fileID: 114210034840450176}
   - component: {fileID: 114481001009264316}
-  - component: {fileID: 114097393329010990}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -60,6 +59,7 @@ GameObject:
   - component: {fileID: 114931392169972346}
   - component: {fileID: 114672392339741156}
   - component: {fileID: 114698850581731470}
+  - component: {fileID: 114770146319239734}
   m_Layer: 5
   m_Name: NavigationPanel
   m_TagString: Untagged
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 222409979273787044}
   - component: {fileID: 114875434208861662}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MenuButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,19 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
---- !u!114 &114097393329010990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1338601481486712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
 --- !u!114 &114210034840450176
@@ -367,9 +355,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf68e00759a73c4ea9f8cb67c95d2ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
   menuButton: {fileID: 114210034840450176}
   adoptButton: {fileID: 114475208094521876}
   mainMenu: {fileID: 0}
+  dogProfile: {fileID: 0}
+  dogBrowser: {fileID: 0}
 --- !u!114 &114735677547880892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,6 +383,21 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &114770146319239734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463354799113070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dce3f19dcdb04aeab42268ed31b1e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  sortRule: 1
 --- !u!114 &114783973811704244
 MonoBehaviour:
   m_ObjectHideFlags: 1

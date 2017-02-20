@@ -11,17 +11,54 @@ public class ShopItemSlot : PPUIElement
     [SerializeField]
     Text nameText;
     [SerializeField]
-    Text priceText;
-    [SerializeField]
     Image itemImage;
 	[SerializeField]
 	Text amountText;
 
+    [SerializeField]
+    PriceTag priceTag;
+    Button button;
+
     PPShopUIController shop;
     ShopItem item;
 
+    #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+        button = GetComponent<Button>();
+    }
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        dataController = PPDataController.GetInstance;
+    }
+
+    protected override void subscribeEvents()
+    {
+        base.subscribeEvents();
+        if (dataController)
+        {
+            dataController.SubscribeToCurrencyChange(CurrencyType.Coins, tryToggle);
+        }
+    }
+
+    protected override void unsubscribeEvents()
+    {
+        base.unsubscribeEvents();
+        if (dataController)
+        {
+            dataController.UnsubscribeFromCurrencyChange(CurrencyType.Coins, tryToggle);
+        }
+    }
+
+    #endregion
+
     public void Init(PPShopUIController shop, ShopItem item)
     {
+        subscribeEvents();
         this.shop = shop;
         this.item = item;
         if (nameText)
@@ -32,13 +69,22 @@ public class ShopItemSlot : PPUIElement
 		{
 			amountText.text = item.Value.ToString();
 		}
-        priceText.text = item.CostStr;
+        priceTag.Set(item.Cost);
+        priceTag.ShowPurchasable();
         itemImage.sprite = item.Icon;
     }
 
     public void Buy()
     {
         gameController.TryBuyItem(item);
+    }
+
+    void tryToggle(int amount)
+    {
+        if(button)
+        {
+            button.interactable = gameController.CanAfford(item.CostCurrencyType, item.Cost);
+        }
     }
 
 }

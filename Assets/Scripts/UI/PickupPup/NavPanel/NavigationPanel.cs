@@ -14,7 +14,11 @@ public class NavigationPanel : SingletonController<NavigationPanel>
     [SerializeField]
     Button adoptButton;
     [SerializeField]
-    PPMainMenuUIController mainMenu;
+    MainMenu mainMenu;
+    [SerializeField]
+    DogProfile dogProfile;
+    [SerializeField]
+    DogBrowser dogBrowser;
 
     PPSceneController sceneController;
 
@@ -39,6 +43,14 @@ public class NavigationPanel : SingletonController<NavigationPanel>
     public void OnMenuClick()
     {
         mainMenu.Toggle();
+        if(dogProfile)
+        {
+            dogProfile.Hide();
+        }
+        if(dogBrowser)
+        {
+            dogBrowser.Hide();
+        }
     }
 
     public void OnAdoptClick()
