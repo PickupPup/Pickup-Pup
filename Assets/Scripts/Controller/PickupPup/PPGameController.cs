@@ -247,7 +247,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	bool shouldAddStartingDogs(PPDataController dataController)
 	{
-		return dataController.DogCount == NONE_VALUE;
+        return dataController.ShouldGiveFreeDogs;
 	}
 
 	void setupScoutingOnLoad(PPDataController dataController)

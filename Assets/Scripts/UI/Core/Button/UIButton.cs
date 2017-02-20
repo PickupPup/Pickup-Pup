@@ -9,6 +9,14 @@ using UnityEngine.UI;
 
 public class UIButton : UIInteractable
 {
+    public bool Interactable
+    {
+        get
+        {
+            return button.interactable;
+        }
+    }
+
 	protected bool hasButtonGraphic
 	{
 		get
@@ -16,6 +24,14 @@ public class UIButton : UIInteractable
 			return buttonGraphic != null;
 		}
 	}
+
+    public Image ButtonGraphic
+    {
+        get
+        {
+            return buttonGraphic;
+        }
+    }
 
 	protected Button button;
 	protected Image buttonGraphic;
@@ -36,7 +52,6 @@ public class UIButton : UIInteractable
 	public void UnsubscribeAllClickActions()
 	{
 		this.clickAction = null;
-
 	}
 
 	public void Select()
@@ -57,7 +72,8 @@ public class UIButton : UIInteractable
 
 	public void ToggleInteractable(bool isInteractable)
 	{
-		button.interactable = isInteractable;
+        checkReferences();
+        button.interactable = isInteractable;
 	}
 
 	#region MonoBehaviourExtended Overrides

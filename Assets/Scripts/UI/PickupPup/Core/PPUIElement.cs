@@ -71,6 +71,11 @@ public class PPUIElement : UIElement
 
     #endregion
 
+    protected virtual void enable(bool isEnabled)
+    {
+
+    }
+
     protected void setComponents(Text text, string textString, Color textColor,
         Image image, Color imageColor, UIElement uiElement, bool showUIElement)
     {
@@ -97,12 +102,12 @@ public class PPUIElement : UIElement
     }
 
     protected void setComponents(Text text, string textString, Color textColor,
-        Image image, Color imageColor, Button button, bool buttonInteractable,
+        Image image, Color imageColor, UIButton button, bool buttonInteractable,
         UIElement uiElement, bool showUIElement)
     {
         if (button)
         {
-            button.interactable = buttonInteractable;
+            button.ToggleInteractable(buttonInteractable);
         }
         setComponents(text, textString, textColor, image, imageColor, uiElement, showUIElement);
     }
