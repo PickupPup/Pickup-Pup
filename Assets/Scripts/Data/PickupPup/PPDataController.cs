@@ -10,6 +10,8 @@ using k = PPGlobal;
 
 public class PPDataController : DataController, ICurrencySystem 
 {
+    const bool FREE_STARTING_DOGS_ENABLED = false;
+
 	#region Static Accessors
 
 	// Casts the singleton from the superclass:
@@ -86,6 +88,14 @@ public class PPDataController : DataController, ICurrencySystem
         get
         {
             return currentGame.HasGiftToRedeem;
+        }
+    }
+
+    public bool ShouldGiveFreeDogs 
+    {
+        get
+        {
+            return FREE_STARTING_DOGS_ENABLED && DogCount == NONE_VALUE;
         }
     }
 
