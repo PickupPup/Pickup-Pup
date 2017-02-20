@@ -33,6 +33,8 @@ public class LivingRoomTutorial : Tutorial
     [SerializeField]
     GameObject shelterButtonObject;
 
+    TutorialEvent defaultStartEvent = TutorialEvent.DogInHome;
+
     protected override void setReferences()
     {
         base.setReferences();
@@ -62,15 +64,15 @@ public class LivingRoomTutorial : Tutorial
     public override void StartTutorial()
     {
         base.StartTutorial();
-        if (tutorialEvents.ContainsKey(currentTutorial) && !tutorialEvents[currentTutorial])
+        if (tutorialEvents.ContainsKey(defaultStartEvent) && !tutorialEvents[defaultStartEvent])
         {
-            // Restart unfinished tutorial event
-            callOnStart(currentTutorial, true);
+            // Default start
+            callOnStart(TutorialEvent.DogInHome);
         }
         else
         {
-            // Default start
-            callOnStart(TutorialEvent.LivingRoom, true);
+            // Restart unfinished tutorial event
+            callOnStart(currentTutorial, true);
         }
     }
 
@@ -79,7 +81,7 @@ public class LivingRoomTutorial : Tutorial
         switch (tutorialEvent)
         {
             case TutorialEvent.LivingRoom:
-                showPopup(PromptID.ScoutingPrompt);
+                showPopup(PromptID.FirstLivingRoomPrompt);
                 break;
             case TutorialEvent.DogInHome:
                 //Temp - Auto complete
@@ -88,6 +90,9 @@ public class LivingRoomTutorial : Tutorial
                 break;
             case TutorialEvent.Shop:
                 highlight(shopButtonObject);
+                break;
+            case TutorialEvent.Scouting:
+                showPopup(PromptID.ScoutingPrompt);
                 break;
             case TutorialEvent.CollarSlot: // Started in ShopTutorial
                 highlight(dogCollarSlotObject);
@@ -110,10 +115,10 @@ public class LivingRoomTutorial : Tutorial
         switch (tutorialEvent)
         {
             case TutorialEvent.LivingRoom:
-                callOnStart(TutorialEvent.DogInHome);
+                callOnStart(TutorialEvent.MainMenu, true);
                 break;
             case TutorialEvent.DogInHome:
-                callOnStart(TutorialEvent.MainMenu);
+                callOnStart(TutorialEvent.LivingRoom, true);
                 break;
             case TutorialEvent.MainMenu:
                 base.onComplete(tutorialEvent);
@@ -121,6 +126,9 @@ public class LivingRoomTutorial : Tutorial
                 break;
             case TutorialEvent.Shop:
                 unhighlight(shopButtonObject);
+                break;
+            case TutorialEvent.Scouting:
+                callOnStart(TutorialEvent.CollarSlot);
                 break;
             case TutorialEvent.CollarSlot:
                 unhighlight(dogCollarSlotObject);
@@ -146,7 +154,7 @@ public class LivingRoomTutorial : Tutorial
     protected override void handleOverlayClick()
     {
         base.handleOverlayClick();
-        if (currentTutorial == TutorialEvent.DogInHome || currentTutorial == TutorialEvent.LivingRoom)
+        if (currentTutorial == TutorialEvent.DogInHome || currentTutorial == TutorialEvent.LivingRoom || currentTutorial == TutorialEvent.Scouting)
         {
             callOnComplete(currentTutorial);
         }

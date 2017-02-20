@@ -38,15 +38,6 @@ public class PPShelterUIController : PPUIController
         shelterTutorial.StartTutorial();
     }
 
-    protected override void showPopupPrompt()
-    {
-        if(!PlayerPrefsUtil.ShowedShelterPrompt)
-        {
-            base.showPopupPrompt();
-            PlayerPrefsUtil.ShowedShelterPrompt = true;
-        }  
-    }
-
     #endregion
 
     void populateAvailableDogs(DogDatabase database)

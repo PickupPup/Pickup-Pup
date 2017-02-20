@@ -122,13 +122,6 @@ public class PPUIController : MonoBehaviourExtended
         dogProfile.SetProfile(dog);
     }
 
-    protected virtual void showPopupPrompt()
-    {
-        PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
-        prompt.GetComponent<PPUIElement>().Show();
-        prompt.Set(promptID);
-    }
-
     void setCurrencyPanel()
     {
         if (currencyPanel)

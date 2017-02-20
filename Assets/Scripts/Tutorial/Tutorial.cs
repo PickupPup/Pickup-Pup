@@ -64,6 +64,7 @@ public class Tutorial : MonoBehaviourExtended
 
     public virtual void StartTutorial()
     {
+        tutorialEvents.Clear();
         completed = false;
     }
 
@@ -71,6 +72,7 @@ public class Tutorial : MonoBehaviourExtended
     {       
         if(!tutorialEvents.ContainsKey(tutorialEvent))
         {
+            Debug.Log("adding key: " + tutorialEvent);
             tutorialEvents.Add(tutorialEvent, false);
         }
         if(forceStart || !tutorialEvents[tutorialEvent])
@@ -147,9 +149,9 @@ public class Tutorial : MonoBehaviourExtended
 
     void showNavPanel(bool enableMenuButton, bool enableShelterButton)
     {
-        highlight(navigationPanelObject);
-        menuNavButton.enabled = enableMenuButton;
-        shelterNavButton.enabled = enableShelterButton;
+        menuNavButton.ToggleInteractable(enableMenuButton);
+        shelterNavButton.ToggleInteractable(enableShelterButton);
+        highlight(navigationPanelObject);    
     }
 
     protected virtual void finish()
@@ -201,6 +203,7 @@ public enum TutorialEvent
     DogInHome,
     Shop,
     BuyFood,
+    Scouting,
     CollarSlot,
     SelectDogInBrowser,
     RedeemGift,

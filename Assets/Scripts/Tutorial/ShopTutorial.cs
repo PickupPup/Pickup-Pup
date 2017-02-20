@@ -53,7 +53,7 @@ public class ShopTutorial : Tutorial
                 highlight(shopItemSlotObject);
                 break;
             case TutorialEvent.Shop:
-                showPopup(PromptID.ShelterPrompt);
+                showPopup(PromptID.ShopPrompt);
                 break;
             default:
                 base.onStart(tutorialEvent);
@@ -105,7 +105,7 @@ public class ShopTutorial : Tutorial
     protected override void finish()
     {
         PlayerPrefsUtil.CompletedShopTutorial = true;
-        callOnStart(TutorialEvent.CollarSlot);
+        callOnStart(TutorialEvent.Scouting);
         base.finish();
     }
 
