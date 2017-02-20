@@ -210,6 +210,14 @@ public class PPTuning : PPData
         }
     }
 
+    public float DogFoodFeedTimeSec
+    {
+        get
+        {
+            return dogFoodFeedTimeSec;
+        }
+    }
+
     public float LoadingTime
     {
         get
@@ -504,6 +512,8 @@ public class PPTuning : PPData
     int[] defaultTextColorRGBA;
     [SerializeField]
     float defaultTimerTimeStepSec;
+    [SerializeField]
+    float dogFoodFeedTimeSec;
     [SerializeField]
     float loadingTime;
     [SerializeField]

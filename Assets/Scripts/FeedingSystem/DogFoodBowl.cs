@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/*
+ * Author: Timothy Ng
+ * Description: Handles the feeding dog code through calling FeedDogs
+ */
+
 using UnityEngine.UI;
 
 
 public class DogFoodBowl : MonoBehaviourExtended
 {
-
     #region Instance Accessors
 
     public float FeedTimerLeft
@@ -28,17 +29,21 @@ public class DogFoodBowl : MonoBehaviourExtended
     #endregion
 
     static PPTimer feedingTimer = null;
+    Button buttonReference;
 
+    #region MonoBehaviourExtended Overrides 
     protected override void fetchReferences() {
         base.fetchReferences();
+        
 
         if (feedingTimer == null)
         {
-            feedingTimer = new PPTimer(20, 1f);
+            feedingTimer = new PPTimer(PPGameController.GetInstance.Tuning.DogFoodFeedTimeSec, 1f);
             feedingTimer.SetTimeRemaining(0, false);
         }
         feedingTimer.SubscribeToTimeUp(handleFeedingTimeUp);
-        GetComponent<Button>().interactable = !IsCurrentlyFeeding;
+        buttonReference = GetComponent<Button>();
+        buttonReference.interactable = !IsCurrentlyFeeding;
     }
 
     protected override void cleanupReferences()
@@ -46,25 +51,27 @@ public class DogFoodBowl : MonoBehaviourExtended
         base.cleanupReferences();
         feedingTimer.UnsubscribeFromTimeUp(handleFeedingTimeUp);
     }
+    #endregion
+
 
     int calculateDogFoodNeeded()
     {
-        return PPDataController.GetInstance.DogCount - PPDataController.GetInstance.ScoutingDogs.Count;
+        return dataController.DogCount - dataController.ScoutingDogs.Count;
     }
 
     public void FeedDogs()
     {
-        if (PPDataController.GetInstance.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
+        if (dataController.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
         {
-            PPDataController.GetInstance.ChangeFood(-calculateDogFoodNeeded());
-            feedingTimer.SetTimeRemaining(20, true);
+            dataController.ChangeFood(-calculateDogFoodNeeded());
+            feedingTimer.Reset();
             feedingTimer.Begin();
-            GetComponent<Button>().interactable = false;
+            buttonReference.interactable = false;
         }
     }
 
     void handleFeedingTimeUp()
     {
-        GetComponent<Button>().interactable = true;
+        buttonReference.interactable = true;
     }
 }
