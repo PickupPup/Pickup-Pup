@@ -105,6 +105,11 @@ public class PPSceneController : SingletonController<PPSceneController>
         sceneLoadingBlockers--;
     }
 
+	public void LoadSceneAsync(PPScene scene)
+	{
+		SceneManager.LoadSceneAsync((int) scene);
+	}
+
     // Currently does not care about which scene, but may need more advanced logic in future
     bool canLoadScene(PPScene scene)
     {

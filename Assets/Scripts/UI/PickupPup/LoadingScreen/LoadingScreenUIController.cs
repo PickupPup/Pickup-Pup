@@ -1,28 +1,44 @@
-﻿using System.Collections;
+﻿/*
+ * Authors: Grace Barrett-Snyder, Isaiah Mann 
+ * Description: Used to cover up loaded with a screen
+ */
+
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class LoadingScreenUIController : PPUIController
 {
-    PPScene nextScene;
-    float loadingTime;
+	const PPScene STARTING_SCENE = PPScene.Shelter;
 
-    protected override void setReferences()
-    {
-        base.setReferences();
-        nextScene = PPScene.Shelter;
-    }
+	[SerializeField]
+	bool loadNextSceneOnInit;
+
+	PPScene nextScene = STARTING_SCENE;
+
+	public void SetNextScene(PPScene scene)
+	{
+		this.nextScene = scene;
+	}
+
+	public void LoadNextScene()
+	{
+		sceneController.LoadSceneAsync(nextScene);
+	}
+
+
+	#region MonoBehaviourExtended Overrides 
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        loadingTime = gameController.Tuning.LoadingTime;
-        StartCoroutine(loadSceneAfterDelay(nextScene));
+		if(loadNextSceneOnInit)
+		{
+			LoadNextScene();
+		}
     }
 
-    IEnumerator loadSceneAfterDelay(PPScene scene)
-    {
-        yield return new WaitForSeconds(loadingTime);
-        sceneController.LoadScene(scene);
-    }
+	#endregion
+
 }

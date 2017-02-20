@@ -208,15 +208,7 @@ public class PPTuning : PPData
 		{
 			return defaultTimerTimeStepSec;
 		}
-    }
-
-    public float LoadingTime
-    {
-	    get
-	    {
-		    return loadingTime;
-	    }
-    }
+	}
 
 	public int MaxAmountPerTypeFromScouting
 	{
@@ -304,23 +296,23 @@ public class PPTuning : PPData
 		{
 			return missedFeedingsBeforeSeizure;
 		}
-    }
+	}
 
-    public Color NonPurchasableBackgroundColor
-    {
-	    get
-	    {
-		    return getColor(nonPurchasableBackgroundColorRGBA);
-        }
-    }
+	public Color NonPurchasableBackgroundColor
+	{
+		get
+		{
+			return getColor(nonPurchasableBackgroundColorRGBA);
+		}
+	}
 
-    public Color NonPurchasableTextColor
-    {
-	    get
-	    {
-		    return getColor(nonPurchasableTextColorRGBA);
-        }
-    }
+	public Color NonPurchasableTextColor
+	{
+		get
+		{
+			return getColor(nonPurchasableTextColorRGBA);
+		}
+	}
 
 	public float PuppyChanceOfRunningAwayDuringScouting
 	{
@@ -338,6 +330,14 @@ public class PPTuning : PPData
 		}
 	}
 
+	public bool SampleShelterDogsInOrder
+	{
+		get
+		{
+			return sampleShelterDogsInOrder;
+		}
+	}
+
 	public float SeniorDogScoutingTimeModifier
 	{
 		get
@@ -346,11 +346,27 @@ public class PPTuning : PPData
 		}
 	}
 
+	public int ShelterDogsLimit
+	{
+		get
+		{
+			return shelterDogsLimit;
+		}
+	}
+
 	public float ShelterResellCostScale
 	{
 		get
 		{
 			return shelterResellCostScale;
+		}
+	}
+
+	public bool ShouldLimitShelterDogs
+	{
+		get
+		{
+			return shouldLimitShelterDogs;
 		}
 	}
 
@@ -425,7 +441,7 @@ public class PPTuning : PPData
 			return waitTimeSecsForDailyGift;
 		}
 	}
-		                   
+		
     #endregion
 
     #region JSON Fields
@@ -480,9 +496,7 @@ public class PPTuning : PPData
 	int[] defaultTextColorRGBA;
 	[SerializeField]
 	float defaultTimerTimeStepSec;
-    [SerializeField]
-    float loadingTime;
-    [SerializeField]
+	[SerializeField]
 	int maxAmountPerTypeFromScouting;
 	[SerializeField]
 	float maxCouponDiscount;
@@ -504,18 +518,24 @@ public class PPTuning : PPData
 	int minSeniorDogAge;
 	[SerializeField]
 	int missedFeedingsBeforeSeizure;
-    [SerializeField]
-    int[] nonPurchasableBackgroundColorRGBA;
-    [SerializeField]
-    int[] nonPurchasableTextColorRGBA;
-    [SerializeField]
+	[SerializeField]
+	int[] nonPurchasableBackgroundColorRGBA;
+	[SerializeField]
+	int[] nonPurchasableTextColorRGBA;
+	[SerializeField]
 	float puppyChanceOfRunningAwayDuringScouting;
 	[SerializeField]
 	float puppyScoutingTimeModifier;
 	[SerializeField]
+	bool sampleShelterDogsInOrder;
+	[SerializeField]
 	float seniorDogScoutingTimeModifier;
 	[SerializeField]
+	int shelterDogsLimit;
+	[SerializeField]
 	float shelterResellCostScale;
+	[SerializeField]
+	bool shouldLimitShelterDogs;
 	[SerializeField]
 	int specialDogCount;
 	[SerializeField]
