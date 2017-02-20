@@ -219,12 +219,18 @@ public class DogSlot : PPUIElement
 
     protected override void enable(bool isEnabled)
     {
-        dogImage.enabled = dogImage.sprite;
+		if(dogImage)
+		{
+        	dogImage.enabled = dogImage.sprite;
+		}
         if (backgroundImage)
         {
             backgroundImage.enabled = isEnabled;
         }
-        button.ToggleInteractable(dogImage.sprite);
+		if(button && dogImage)
+		{
+        	button.ToggleInteractable(dogImage.sprite);
+		}
     }
 
     // Sets the dog and background sprites of this Dog Slot.
