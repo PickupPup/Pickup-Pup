@@ -25,7 +25,7 @@ public class PPUIController : MonoBehaviourExtended
     [SerializeField]
     PopupPrompt popupPrompt;
     [SerializeField]
-    Tutorial tutorial;
+    protected Tutorial tutorial;
 
     #region MonoBehaviourExtended Overrides
 
@@ -38,12 +38,7 @@ public class PPUIController : MonoBehaviourExtended
         }
         if(tutorial && !tutorial.Completed)
         {
-            tutorial.GetComponent<UICanvas>().Show();
-            tutorial.StartTutorial();
-            /*if (popupPrompt)
-            {
-                showPopupPrompt();
-            }*/
+            startTutorial();
         } 
     }
 
@@ -90,6 +85,12 @@ public class PPUIController : MonoBehaviourExtended
     public void LoadYard()
     {
         sceneController.LoadYard();
+    }
+
+    protected virtual void startTutorial()
+    {
+        tutorial.GetComponent<UICanvas>().Show();
+        tutorial.StartTutorial();
     }
 
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)

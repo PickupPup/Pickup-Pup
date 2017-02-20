@@ -73,10 +73,11 @@ public class Tutorial : MonoBehaviourExtended
         {
             tutorialEvents.Add(tutorialEvent, false);
         }
-        else if(forceStart || !tutorialEvents[tutorialEvent])
+        if(forceStart || !tutorialEvents[tutorialEvent])
         {
             currentTutorial = tutorialEvent;
             onStart(tutorialEvent);
+            Debug.Log("on start: " + tutorialEvent.ToString());
         }
     }
 
@@ -102,6 +103,7 @@ public class Tutorial : MonoBehaviourExtended
         if (tutorialEvents.ContainsKey(tutorialEvent))
         {
             tutorialEvents[tutorialEvent] = true;
+            Debug.Log("on complete: " + tutorialEvent.ToString());
         }
     }
 

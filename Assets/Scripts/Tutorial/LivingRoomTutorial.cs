@@ -65,7 +65,7 @@ public class LivingRoomTutorial : Tutorial
         if (tutorialEvents.ContainsKey(currentTutorial) && !tutorialEvents[currentTutorial])
         {
             // Restart unfinished tutorial event
-            callOnStart(currentTutorial);
+            callOnStart(currentTutorial, true);
         }
         else
         {
@@ -132,7 +132,7 @@ public class LivingRoomTutorial : Tutorial
                 break;
             case TutorialEvent.RedeemGift:
                 //  TODO: Add complete call
-                callOnStart(TutorialEvent.Shelter);
+                callOnStart(TutorialEvent.Shelter, true);
                 break;
             case TutorialEvent.Shelter:
                 finish();

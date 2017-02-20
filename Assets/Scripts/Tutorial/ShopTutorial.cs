@@ -42,7 +42,7 @@ public class ShopTutorial : Tutorial
     public override void StartTutorial()
     {
         base.StartTutorial();
-        callOnStart(TutorialEvent.BuyFood);
+        callOnStart(TutorialEvent.Shop);
     }
 
     protected override void onStart(TutorialEvent tutorialEvent)
@@ -51,6 +51,9 @@ public class ShopTutorial : Tutorial
         {
             case TutorialEvent.BuyFood:
                 highlight(shopItemSlotObject);
+                break;
+            case TutorialEvent.Shop:
+                showPopup(PromptID.ShelterPrompt);
                 break;
             default:
                 base.onStart(tutorialEvent);
@@ -62,13 +65,19 @@ public class ShopTutorial : Tutorial
     {
         switch (tutorialEvent)
         {
+            case TutorialEvent.Shop:
+                callOnStart(TutorialEvent.BuyFood);
+                break;
             case TutorialEvent.BuyFood:
                 unhighlight(shopItemSlotObject);
-                callOnStart(TutorialEvent.MainMenu);
+                callOnStart(TutorialEvent.MainMenu, true);
                 break;
             case TutorialEvent.MainMenu:
                 base.onComplete(TutorialEvent.MainMenu);
-                callOnStart(TutorialEvent.LivingRoom);
+                callOnStart(TutorialEvent.LivingRoom, true);
+                break;
+            case TutorialEvent.LivingRoom:
+                finish();
                 break;
             default:
                 base.onComplete(tutorialEvent);
@@ -81,6 +90,15 @@ public class ShopTutorial : Tutorial
         if(currentTutorial == TutorialEvent.BuyFood)
         {
             callOnComplete(TutorialEvent.BuyFood);
+        }
+    }
+
+    protected override void handleOverlayClick()
+    {
+        base.handleOverlayClick();
+        if (currentTutorial == TutorialEvent.Shop)
+        {
+            callOnComplete(currentTutorial);
         }
     }
 

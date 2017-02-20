@@ -24,6 +24,7 @@ public class PopupPrompt : PPUIElement
     public void Set(PromptID id)
     {
         currentID = id;
+        Debug.Log(id.ToString());
         if (currentID != PromptID.None)
         {
             if(languages == null)
@@ -31,6 +32,7 @@ public class PopupPrompt : PPUIElement
                 checkReferences();
             }
             SetText(languages.GetTerm(currentID.ToString()));
+            Debug.Log(languages.GetTerm(currentID.ToString()));
         }
     }
 
