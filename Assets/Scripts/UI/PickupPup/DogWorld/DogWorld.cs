@@ -6,10 +6,12 @@
 
 public class DogWorld : PPUIController 
 {	
-    void populateHotSpots()
+    DogHotSpot[] dogs;
+
+    protected override void setReferences()
     {
-        DogHotSpot[] spots = DogHotSpot.GetActiveHotSpots();
-        // TODO: Finish this by placing dogs in all these slots
+        base.setReferences();
+        dogs = GetComponentsInChildren<DogHotSpot>();
     }
 
 }
