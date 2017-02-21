@@ -65,7 +65,7 @@ public class PPSceneController : SingletonController<PPSceneController>
         LoadScene(PPScene.Yard);
     }
 
-    public void LoadScene(PPScene scene) 
+    public void LoadScene(PPScene scene, bool refreshSystems = false) 
 	{
 		dataController.SaveGame();
 		SceneManager.LoadScene((int) scene);
@@ -73,15 +73,19 @@ public class PPSceneController : SingletonController<PPSceneController>
         {
             zeroOutSceneLoadingBlockers();
         }
+        if(refreshSystems)
+        {
+            gameController.HandleSystemReset(caller:this);
+        }
 	}
 
     // TODO: Implement an async version of this that stores a queue of scene loading requests 
     // TODO: Implement an async version to loan scenes additively
-    public bool RequestLoadScene(PPScene scene)
+    public bool RequestLoadScene(PPScene scene, bool refreshSystems)
     {
         if(canLoadScene(scene)) 
         {
-            LoadScene(scene);
+            LoadScene(scene, refreshSystems);
             return true;
         }
         else 
@@ -90,9 +94,9 @@ public class PPSceneController : SingletonController<PPSceneController>
         }
     }
         
-    public bool RequestReloadCurrentScene()
+    public bool RequestReloadCurrentScene(bool refreshSystems = false)
     {
-        return RequestLoadScene(CurrentScene);
+        return RequestLoadScene(CurrentScene, refreshSystems);
     }
 
     public void BlockFromLoadingScenes()
