@@ -95,7 +95,7 @@ public class PPDataController : DataController, ICurrencySystem
     {
         get
         {
-            return FREE_STARTING_DOGS_ENABLED && DogCount == NONE_VALUE;
+            return DogCount == NONE_VALUE && FREE_STARTING_DOGS_ENABLED;
         }
     }
 
@@ -335,6 +335,22 @@ public class PPDataController : DataController, ICurrencySystem
     public void NotifyHasGiftToRedeem()
     {
         currentGame.NotifyHasGiftToRedeem();
+    }
+
+    // Returns true if the tutorial is not already being tracked
+    public bool TrackTutorial(TutorialDescriptor tutorial)        
+    {
+        return currentGame.TrackTutorial(tutorial);
+    }
+
+    public bool IsTrackingTutorial(TutorialDescriptor tutorial)
+    {
+        return currentGame.IsTrackingTutorial(tutorial);
+    }
+
+    public bool FetchTutorial(string id, out TutorialDescriptor tutorial)
+    {
+        return currentGame.FetchTutorial(id, out tutorial);
     }
 
     void bufferChangeCurrencyDelegate(CurrencyType type, MonoActionInt callback)

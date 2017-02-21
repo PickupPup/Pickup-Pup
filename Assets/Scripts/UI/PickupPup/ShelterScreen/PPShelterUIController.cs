@@ -46,13 +46,11 @@ public class PPShelterUIController : PPUIController
 
     #region PPUIController Overrides
 
-    protected override void showPopupPrompt()
+    protected override void startTutorial()
     {
-        if(!PlayerPrefsUtil.ShowedShelterPrompt)
-        {
-            base.showPopupPrompt();
-            PlayerPrefsUtil.ShowedShelterPrompt = true;
-        }  
+        ShelterTutorial shelterTutorial = (ShelterTutorial) tutorial;
+        shelterTutorial.GetComponent<UICanvas>().Show();
+        shelterTutorial.StartTutorial();
     }
 
     #endregion

@@ -14,6 +14,7 @@ public abstract class SerializableData
 	protected const string TIME_STAMP = k.TIME_STAMP;
 	protected const string DAILY_GIFT_COUNTDOWN = k.DAILY_GIFT_COUNTDOWN;
 	protected const string HAS_GIFT_TO_REDEEM = k.HAS_GIFT_TO_REDEEM;
+    protected const string TUTORIAL = k.TUTORIAL;
 
 	const float FULL_PERCENT = k.FULL_PERCENT;
 

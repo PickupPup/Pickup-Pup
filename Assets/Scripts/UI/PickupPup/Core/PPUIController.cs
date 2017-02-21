@@ -24,6 +24,8 @@ public class PPUIController : MonoBehaviourExtended
     NavigationPanel navigationPanel;
     [SerializeField]
     PopupPrompt popupPrompt;
+    [SerializeField]
+    protected Tutorial tutorial;
 
     #region MonoBehaviourExtended Overrides
 
@@ -34,10 +36,10 @@ public class PPUIController : MonoBehaviourExtended
         {
             dogProfileObject.SetActive(false);
         }
-        if(popupPrompt)
+        if(tutorial && !tutorial.Completed)
         {
-            showPopupPrompt();
-        }
+            startTutorial();
+        } 
     }
 
     protected override void fetchReferences() 
@@ -85,6 +87,12 @@ public class PPUIController : MonoBehaviourExtended
         sceneController.LoadYard();
     }
 
+    protected virtual void startTutorial()
+    {
+        tutorial.GetComponent<UICanvas>().Show();
+        tutorial.StartTutorial();
+    }
+
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
@@ -112,13 +120,6 @@ public class PPUIController : MonoBehaviourExtended
         }
         dogProfile.Show();
         dogProfile.SetProfile(dog);
-    }
-
-    protected virtual void showPopupPrompt()
-    {
-        PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
-        prompt.GetComponent<PPUIElement>().Show();
-        prompt.Set(promptID);
     }
 
     void setCurrencyPanel()

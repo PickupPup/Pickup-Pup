@@ -30,6 +30,17 @@ public class PPShopUIController : PPUIController
 
     #endregion
 
+    #region PPUIController Overrides
+
+    protected override void startTutorial()
+    {
+        ShopTutorial shopTutorial = (ShopTutorial) tutorial;
+        shopTutorial.GetComponent<UICanvas>().Show();
+        shopTutorial.StartTutorial();
+    }
+
+    #endregion
+
     void populateShop(ShopItem[] items)
     {
         for (int i = 0; i < itemSlots.Length; i++)

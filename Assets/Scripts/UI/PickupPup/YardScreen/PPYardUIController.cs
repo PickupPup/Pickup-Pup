@@ -21,19 +21,6 @@ public class PPYardUIController : PPUIController
 
     #endregion
 
-    #region PPUIController Overrides
-
-    protected override void showPopupPrompt()
-    {
-        if (!PlayerPrefsUtil.ShowedScoutingPrompt)
-        {
-            base.showPopupPrompt();
-            PlayerPrefsUtil.ShowedScoutingPrompt = true;
-        }
-    }
-
-    #endregion
-
     public void OnDoorTap()
     {
         LoadLivingRoom();

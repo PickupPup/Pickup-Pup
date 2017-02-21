@@ -38,13 +38,11 @@ public class PPLivingRoomUIController : PPUIController
 
     #region PPUIController Overrides
 
-    protected override void showPopupPrompt()
+    protected override void startTutorial()
     {
-        if (!PlayerPrefsUtil.ShowedScoutingPrompt)
-        {
-            base.showPopupPrompt();
-            PlayerPrefsUtil.ShowedScoutingPrompt = true;
-        }
+        LivingRoomTutorial livingRoomTutorial = (LivingRoomTutorial) tutorial;
+        livingRoomTutorial.GetComponent<UICanvas>().Show();
+        livingRoomTutorial.StartTutorial();
     }
 
     #endregion
@@ -61,7 +59,7 @@ public class PPLivingRoomUIController : PPUIController
 
     public void RedeemGift(GiftItem gift)
     {
-        rDisplay.gameObject.SetActive(true);
+        rDisplay.Show();
         rDisplay.UpdateDisplay(gift, this);
     }
 
