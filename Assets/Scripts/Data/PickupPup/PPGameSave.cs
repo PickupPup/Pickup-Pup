@@ -24,6 +24,12 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
+    public Dictionary<string, TutorialDescriptor> TrackedTutorials
+    {
+        get;
+        private set;
+    }
+
     public CurrencySystem Currencies
     {
         get;
@@ -43,7 +49,7 @@ public class PPGameSave : GameSave, ISerializable
 		get;
 		private set;
 	}
-
+        
 	#endregion
 
 	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies, bool hasGiftToRedeem = true)
@@ -74,6 +80,8 @@ public class PPGameSave : GameSave, ISerializable
 			this.DailyGiftCountdown = 0;
 		}
 		this.HasGiftToRedeem = (bool) info.GetValue(HAS_GIFT_TO_REDEEM, typeof(bool));
+        this.TrackedTutorials = info.GetValue(TUTORIAL, 
+            typeof(Dictionary<string, TutorialDescriptor>)) as Dictionary<string, TutorialDescriptor>;
 	}
 		
 	// Implement this method to serialize data. The method is called on serialization.
@@ -85,6 +93,8 @@ public class PPGameSave : GameSave, ISerializable
 		info.AddValue(CURRENCY, this.Currencies);
 		info.AddValue(DAILY_GIFT_COUNTDOWN, this.DailyGiftCountdown);
 		info.AddValue(HAS_GIFT_TO_REDEEM, this.HasGiftToRedeem);
+        // Need to convert HashSet to List for proper serialization
+        info.AddValue(TUTORIAL, this.TrackedTutorials);
 	}
 
 	#endregion
@@ -128,4 +138,28 @@ public class PPGameSave : GameSave, ISerializable
         AdoptedDogs.Add(dog);
     }
 		
+    // Returns true if the tutorial is not already being tracked
+    public bool TrackTutorial(TutorialDescriptor tutorial)        
+    {
+        if(!IsTrackingTutorial(tutorial))
+        {
+            this.TrackedTutorials.Add(tutorial.ID, tutorial);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool IsTrackingTutorial(TutorialDescriptor tutorial)
+    {
+        return this.TrackedTutorials.ContainsKey(tutorial.ID);
+    }
+
+    public bool FetchTutorial(string id, out TutorialDescriptor tutorial)
+    {
+        return this.TrackedTutorials.TryGetValue(id, out tutorial);
+    }
+
 }

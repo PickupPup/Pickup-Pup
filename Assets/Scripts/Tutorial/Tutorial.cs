@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Tutorial : TutorialObject
 {
+    protected static Dictionary<TutorialEvent, bool> tutorialEvents; // Value is true if the tutorial has been completed
+    protected static TutorialEvent currentTutorial;
+
+
+    #region Instance Accessors 
+
     public virtual bool Completed
     {
         get
@@ -13,6 +19,12 @@ public class Tutorial : TutorialObject
         }
     }
 
+    #endregion
+
+    [SerializeField]
+    string id = string.Empty;
+
+    [SerializeField]
     UICanvas canvas;
     [SerializeField]
     PopupPrompt popupPrompt;
@@ -27,15 +39,16 @@ public class Tutorial : TutorialObject
     [SerializeField]
     UIButton livingRoomButton;
 
+    TutorialDescriptor info;
     Dictionary<GameObject, Transform> highlightedObjects;
-    protected static Dictionary<TutorialEvent, bool> tutorialEvents; // Value is true if the tutorial has been completed
-    protected static TutorialEvent currentTutorial;
 
     bool completed;
+    bool newlyBegunTutorial;
 
     protected override void setReferences()
     {
         base.setReferences();
+        info = new TutorialDescriptor(this.id);
         canvas = GetComponent<UICanvas>();
         highlightedObjects = new Dictionary<GameObject, Transform>();
         tutorialEvents = new Dictionary<TutorialEvent, bool>();
@@ -44,6 +57,7 @@ public class Tutorial : TutorialObject
     protected override void fetchReferences()
     {
         base.fetchReferences();
+        this.newlyBegunTutorial = dataController.TrackTutorial(this.info);
     }
 
     protected override void subscribeEvents()

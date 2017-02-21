@@ -36,6 +36,7 @@ public class Global
 	public const string VOLUME = "Volume";
 	public const string MUSIC = "Music";
 	public const string MUSIC_VOLUME = MUSIC + VOLUME;
+    public const string TUTORIAL = "Tutorial";
 
 	public const char JOIN_CHAR = '_';
 
