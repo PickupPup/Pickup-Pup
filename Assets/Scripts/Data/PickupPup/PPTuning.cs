@@ -210,22 +210,14 @@ public class PPTuning : PPData
         }
     }
 
-    public float DogFoodFeedTimeSec
+	public float DogFoodFeedTimeSec
     {
         get
         {
             return dogFoodFeedTimeSec;
         }
     }
-
-    public float LoadingTime
-    {
-        get
-        {
-            return loadingTime;
-        }
-    }
-
+		
     public int MaxAmountPerTypeFromScouting
     {
         get
@@ -514,8 +506,6 @@ public class PPTuning : PPData
     float defaultTimerTimeStepSec;
     [SerializeField]
     float dogFoodFeedTimeSec;
-    [SerializeField]
-    float loadingTime;
     [SerializeField]
     int maxAmountPerTypeFromScouting;
     [SerializeField]

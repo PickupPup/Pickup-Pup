@@ -170,7 +170,6 @@ public class Dog : MobileObjectBehaviour
 	protected PPTimer scoutingTimer;
 
 	DogDescriptor descriptor;
-    PPGameController gameController;
 	PPData.DogAction onScoutingTimerEnd;
 	PPData.DogActionf onScoutingTimerChange;
     PPData.NamedCurrencyAction onGiftAction;

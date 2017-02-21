@@ -5,7 +5,6 @@
 
 using UnityEngine.UI;
 
-
 public class DogFoodBowl : MonoBehaviourExtended
 {
     #region Instance Accessors
@@ -32,11 +31,12 @@ public class DogFoodBowl : MonoBehaviourExtended
     Button buttonReference;
 
     #region MonoBehaviourExtended Overrides 
+
     protected override void fetchReferences() {
         base.fetchReferences();
         
 
-        if (feedingTimer == null)
+        if(feedingTimer == null)
         {
             feedingTimer = new PPTimer(PPGameController.GetInstance.Tuning.DogFoodFeedTimeSec, 1f);
             feedingTimer.SetTimeRemaining(0, false);
@@ -51,8 +51,8 @@ public class DogFoodBowl : MonoBehaviourExtended
         base.cleanupReferences();
         feedingTimer.UnsubscribeFromTimeUp(handleFeedingTimeUp);
     }
-    #endregion
 
+    #endregion
 
     int calculateDogFoodNeeded()
     {
@@ -61,7 +61,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     public void FeedDogs()
     {
-        if (dataController.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
+        if(dataController.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
         {
             dataController.ChangeFood(-calculateDogFoodNeeded());
             feedingTimer.Reset();
@@ -74,4 +74,5 @@ public class DogFoodBowl : MonoBehaviourExtended
     {
         buttonReference.interactable = true;
     }
+
 }

@@ -9,7 +9,6 @@ using k = PPGlobal;
 public class PPUIController : MonoBehaviourExtended 
 {
     protected PPSceneController sceneController;
-    protected PPGameController gameController;
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;

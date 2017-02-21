@@ -31,6 +31,18 @@ public class AudioController : Controller, IAudioController
 
 	#endregion
 
+    #region Controller Overrides 
+
+    protected override bool shouldReSetRefsOnReset 
+    {
+        get 
+        {
+            return false;
+        }
+    }
+        
+    #endregion
+
 	int musicVolume 
 	{
 		get 
