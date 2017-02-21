@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tutorial : MonoBehaviourExtended
+public class Tutorial : TutorialObject
 {
     public virtual bool Completed
     {
