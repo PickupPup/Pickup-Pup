@@ -91,19 +91,19 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		
 	void startGiftTimer()
 	{
-		toggleBetweenTimerAndGiftReceived(giftReceived:false);
 		resetAndBeginGiftTimer();
 	}
 		
 	void resetAndBeginGiftTimer()
 	{
+        collectGiftButton.ToggleInteractable(false);
         collectGiftButton.TryUnsubscribeAll();
-		(dailyGiftTimer as ISubscribable).TryUnsubscribeAll();
+        (dailyGiftTimer as ISubscribable).TryUnsubscribeAll();
 		dailyGiftTimer.SubscribeToTimeChange(handleDailyGiftCountDownChange);
 		dailyGiftTimer.SubscribeToTimeUp(makeDailyGiftAvailableToRedeem);
 		dataController.StartDailyGiftCountdown(dailyGiftTimer);
-		dailyGiftTimer.Begin();
-	}
+		dailyGiftTimer.Begin();     
+    }
 
 	void handleDailyGiftCountDownChange(float timeRemaining)
 	{
@@ -122,10 +122,11 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
 	void makeDailyGiftAvailableToRedeem()
 	{
-		toggleBetweenTimerAndGiftReceived(giftReceived:true);
-        // TODO
-		//collectGiftButton.TryUnsubscribeAll();
-		collectGiftButton.SubscribeToClick(redeemReceivedGift);
+        toggleBetweenTimerAndGiftReceived(giftReceived: true);
+        collectGiftButton.TryUnsubscribeAll();
+        collectGiftButton.ToggleInteractable(true);
+        collectGiftButton.SubscribeToClick(redeemReceivedGift);
+        
         dataController.NotifyHasGiftToRedeem();
 	}
 

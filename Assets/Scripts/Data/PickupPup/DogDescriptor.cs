@@ -142,6 +142,12 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public bool EmptyDescriptor
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -181,6 +187,7 @@ public class DogDescriptor : PPDescriptor
             {
                 string.Empty, string.Empty
             };
+        descriptor.EmptyDescriptor = true;
 		return descriptor;
 	}
 		

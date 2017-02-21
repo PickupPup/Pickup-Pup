@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 114510381920019976}
   - component: {fileID: 114450670105146682}
   - component: {fileID: 114266082693572166}
-  - component: {fileID: 114006305216485352}
   m_Layer: 5
   m_Name: DogPortrait
   m_TagString: Untagged
@@ -181,20 +180,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114006305216485352
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560415093053638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ed0a642701c5cc48a84420cd986bc64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveOnSceneChange: 0
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
 --- !u!114 &114007762425245578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,6 +196,7 @@ MonoBehaviour:
   currencyPanel: {fileID: 0}
   navigationPanel: {fileID: 0}
   popupPrompt: {fileID: 0}
+  loadNextSceneOnInit: 1
 --- !u!114 &114184906936798678
 MonoBehaviour:
   m_ObjectHideFlags: 1

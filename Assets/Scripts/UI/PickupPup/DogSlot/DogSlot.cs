@@ -79,7 +79,9 @@ public class DogSlot : PPUIElement
 	MonoAction onFreeSlotClick;
 	PPData.DogAction onOccupiedSlotClick;
 
+    [SerializeField]
     Image backgroundImage;
+    [SerializeField]
     protected Image dogImage;
 
     bool setBackground = true;
@@ -91,8 +93,9 @@ public class DogSlot : PPUIElement
 	{
 		base.setReferences();
 		button = ensureReference<UIButton>(searchChildren:true);
-		subscribeToUIButton();
-	}
+        subscribeToUIButton();
+        enable(HasDog);
+    }
 
 	#endregion
 
@@ -104,10 +107,7 @@ public class DogSlot : PPUIElement
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog, Sprite dogSprite)
     {
-		this.dogInfo = dog;
-
-		images = GetComponentsInChildren<Image>();
-        dogImage = images[1];
+        this.dogInfo = dog;
 
 		setSlot(this.dogInfo, dogSprite);
     }
@@ -119,8 +119,9 @@ public class DogSlot : PPUIElement
 		if(this.dogImage)
 		{
         	this.dogImage.sprite = null;
-		}
-	}
+        }
+        enable(false);
+    }
 
 	public virtual void Init(Dog dog, bool inScoutingSelectMode)
 	{
@@ -216,11 +217,28 @@ public class DogSlot : PPUIElement
 		}
 	}
 
+    protected override void enable(bool isEnabled)
+    {
+		if(dogImage)
+		{
+        	dogImage.enabled = dogImage.sprite;
+		}
+        if (backgroundImage)
+        {
+            backgroundImage.enabled = isEnabled;
+        }
+		if(button && dogImage)
+		{
+        	button.ToggleInteractable(dogImage.sprite);
+		}
+    }
+
     // Sets the dog and background sprites of this Dog Slot.
 	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
-    {
+    {      
         dogImage.sprite = dogSprite;
-		if(backgroundImage)
+        enable(true);
+        if (backgroundImage)
         {
         	backgroundImage.sprite = backgroundSprite;
 		}

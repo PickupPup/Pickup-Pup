@@ -139,6 +139,7 @@ public class DogCollarSlot : DogSlot
         redeemableGiftDisplay.SetActive(false);
         base.ClearSlot();
         dogImage.sprite = collarSprite;
+        enable(true);
     }
 
     public Dog BringDogIndoors()

@@ -10,530 +10,550 @@ public class PPTuning : PPData
 {
 	#region Instance Acessors
 
-	public string AdoptedText
-	{
-		get
-		{
-			return adoptedText;
-		}
-	}
-
-	public string AdoptText
-	{
-		get
-		{
-			return adoptText;
-		}
-	}
-
-	public float ChanceOfDogsEatingPoop
-	{
-		get
-		{
-			return chanceOfDogsEatingPoop;
-		}
-	}
-
-	public float ChanceOfRareObject
-	{
-		get
-		{
-			return chanceOfRareObject;
-		}
-	}
-
-	public float ChanceOfSecondary
-	{
-		get
-		{
-			return chanceOfSecondary;
-		}
-	}
-
-	public float ChanceOfSpecialGift
-	{
-		get
-		{
-			return chanceOfSpecialGift;
-		}
-	}
-
-	public float ChanceOfSpecialization
-	{
-		get
-		{
-			return chanceOfSpecialization;
-		}
-	}
-
-	public float ChanceSpecialItemIsDog
-	{
-		get
-		{
-			return chanceSpecialItemIsDog;
-		}
-	}
-
-	public float ChanceSpecialItemIsPresent
-	{
-		get
-		{
-			return chanceSpecialItemIsPresent;
-		}
-	}
-
-	public float ChanceSpecialItemIsTubTub
-	{
-		get
-		{
-			return chanceSpecialItemIsTubTub;
-		}
-	}
-
-	public int CostOfFiveDogFoodCans
-	{
-		get
-		{
-			return costOfFiveDogFoodCans;
-		}
-	}
-
-	public int CostOfOneDogFoodCan
-	{
-		get
-		{
-			return costOfOneDogFoodCan;
-		}
-	}
-
-	public int CostOfTenDogFoodCans
-	{
-		get
-		{
-			return costOfTenDogFoodCans;
-		}
-	}
-
-	public int CostOfTwentyDogFoodCans
-	{
-		get
-		{
-			return costOfTwentyDogFoodCans;
-		}
-	}
-
-	public int[] DailyGiftAmounts
-	{
-		get
-		{
-			return dailyGiftAmounts;
-		}
-	}
-
-	public float DailyGiftDiscountAmount
-	{
-		get
-		{
-			return dailyGiftDiscountAmount;
-		}
-	}
-
-	public string[] DailyGiftOptions
-	{
-		get
-		{
-			return dailyGiftOptions;
-		}
-	}
-
-	public float[] DailyGiftWeights
-	{
-		get
-		{
-			return dailyGiftWeights;
-		}
-	}
-
-	public int DailyNumberOfNewDogsAtShelter
-	{
-		get
-		{
-			return dailyNumberOfNewDogsAtShelter;
-		}
-	}
-
-	public Color DefaultBackgroundColor
-	{
-		get
-		{
-			return getColor(defaultBackgroundColorRGBA);
-		}
-	}
-
-	public float DefaultChanceOfCollectingDogFood
-	{
-		get
-		{
-			return defaultChanceOfCollectingDogFood;
-		}
-	}
-
-	public float DefaultChanceOfCollectingMoney
-	{
-		get
-		{
-			return defaultChanceOfCollectingMoney;
-		}
-	}
-
-	public Color DefaultPriceColor
-	{
-		get
-		{
-			return getColor(defaultPriceColorRGBA);
-		}
-	}
-
-	public Color DefaultTextColor
-	{
-		get
-		{
-			return getColor(defaultTextColorRGBA);
-		}
-	}
-
-	public float DefaultTimerTimeStepSec
-	{
-		get
-		{
-			return defaultTimerTimeStepSec;
-		}
-    }
-
-    public float LoadingTime
+    public string AdoptedText
     {
-	    get
-	    {
-		    return loadingTime;
-	    }
+        get
+        {
+            return adoptedText;
+        }
     }
 
-	public int MaxAmountPerTypeFromScouting
-	{
-		get
-		{
-			return maxAmountPerTypeFromScouting;
-		}
-	}
+    public string AdoptText
+    {
+        get
+        {
+            return adoptText;
+        }
+    }
 
-	public float MaxCouponDiscount
-	{
-		get
-		{
-			return maxCouponDiscount;
-		}
-	}
+    public float ChanceOfDogsEatingPoop
+    {
+        get
+        {
+            return chanceOfDogsEatingPoop;
+        }
+    }
 
-	public int MaxDogsInHouse
-	{
-		get
-		{
-			return maxDogsInHouse;
-		}
-	}
+    public float ChanceOfRareObject
+    {
+        get
+        {
+            return chanceOfRareObject;
+        }
+    }
 
-	public int MaxDogsScouting
-	{
-		get
-		{
-			return maxDogsScouting;
-		}
-	}
+    public float ChanceOfSecondary
+    {
+        get
+        {
+            return chanceOfSecondary;
+        }
+    }
 
-	public int MaxNumberAdsPerDay
-	{
-		get
-		{
-			return maxNumberAdsPerDay;
-		}
-	}
+    public float ChanceOfSpecialGift
+    {
+        get
+        {
+            return chanceOfSpecialGift;
+        }
+    }
 
-	public int MaxPuppyAge
-	{
-		get
-		{
-			return maxPuppyAge;
-		}
-	}
+    public float ChanceOfSpecialization
+    {
+        get
+        {
+            return chanceOfSpecialization;
+        }
+    }
 
-	public float MinCouponDiscount
-	{
-		get
-		{
-			return minCouponDiscount;
-		}
-	}
+    public float ChanceSpecialItemIsDog
+    {
+        get
+        {
+            return chanceSpecialItemIsDog;
+        }
+    }
 
-	public int MinDogFoodToUnlockCollar
-	{
-		get
-		{
-			return minDogFoodToUnlockCollar;
-		}
-	}
+    public float ChanceSpecialItemIsPresent
+    {
+        get
+        {
+            return chanceSpecialItemIsPresent;
+        }
+    }
 
-	public int MinDogsToUnlockCollar
-	{
-		get
-		{
-			return minDogsToUnlockCollar;
-		}
-	}
+    public float ChanceSpecialItemIsTubTub
+    {
+        get
+        {
+            return chanceSpecialItemIsTubTub;
+        }
+    }
 
-	public int MinSeniorDogAge
-	{
-		get
-		{
-			return minSeniorDogAge;
-		}
-	}
+    public int CostOfFiveDogFoodCans
+    {
+        get
+        {
+            return costOfFiveDogFoodCans;
+        }
+    }
 
-	public int MissedFeedingsBeforeSeizure
-	{
-		get
-		{
-			return missedFeedingsBeforeSeizure;
-		}
+    public int CostOfOneDogFoodCan
+    {
+        get
+        {
+            return costOfOneDogFoodCan;
+        }
+    }
+
+    public int CostOfTenDogFoodCans
+    {
+        get
+        {
+            return costOfTenDogFoodCans;
+        }
+    }
+
+    public int CostOfTwentyDogFoodCans
+    {
+        get
+        {
+            return costOfTwentyDogFoodCans;
+        }
+    }
+
+    public int[] DailyGiftAmounts
+    {
+        get
+        {
+            return dailyGiftAmounts;
+        }
+    }
+
+    public float DailyGiftDiscountAmount
+    {
+        get
+        {
+            return dailyGiftDiscountAmount;
+        }
+    }
+
+    public string[] DailyGiftOptions
+    {
+        get
+        {
+            return dailyGiftOptions;
+        }
+    }
+
+    public float[] DailyGiftWeights
+    {
+        get
+        {
+            return dailyGiftWeights;
+        }
+    }
+
+    public int DailyNumberOfNewDogsAtShelter
+    {
+        get
+        {
+            return dailyNumberOfNewDogsAtShelter;
+        }
+    }
+
+    public Color DefaultBackgroundColor
+    {
+        get
+        {
+            return getColor(defaultBackgroundColorRGBA);
+        }
+    }
+
+    public float DefaultChanceOfCollectingDogFood
+    {
+        get
+        {
+            return defaultChanceOfCollectingDogFood;
+        }
+    }
+
+    public float DefaultChanceOfCollectingMoney
+    {
+        get
+        {
+            return defaultChanceOfCollectingMoney;
+        }
+    }
+
+    public Color DefaultPriceColor
+    {
+        get
+        {
+            return getColor(defaultPriceColorRGBA);
+        }
+    }
+
+    public Color DefaultTextColor
+    {
+        get
+        {
+            return getColor(defaultTextColorRGBA);
+        }
+    }
+
+    public float DefaultTimerTimeStepSec
+    {
+        get
+        {
+            return defaultTimerTimeStepSec;
+        }
+    }
+
+    public int MaxAmountPerTypeFromScouting
+    {
+        get
+        {
+            return maxAmountPerTypeFromScouting;
+        }
+    }
+
+    public float MaxCouponDiscount
+    {
+        get
+        {
+            return maxCouponDiscount;
+        }
+    }
+
+    public int MaxDogsInHouse
+    {
+        get
+        {
+            return maxDogsInHouse;
+        }
+    }
+
+    public int MaxDogsScouting
+    {
+        get
+        {
+            return maxDogsScouting;
+        }
+    }
+
+    public int MaxNumberAdsPerDay
+    {
+        get
+        {
+            return maxNumberAdsPerDay;
+        }
+    }
+
+    public int MaxPuppyAge
+    {
+        get
+        {
+            return maxPuppyAge;
+        }
+    }
+
+    public float MinCouponDiscount
+    {
+        get
+        {
+            return minCouponDiscount;
+        }
+    }
+
+    public int MinDogFoodToUnlockCollar
+    {
+        get
+        {
+            return minDogFoodToUnlockCollar;
+        }
+    }
+
+    public int MinDogsToUnlockCollar
+    {
+        get
+        {
+            return minDogsToUnlockCollar;
+        }
+    }
+
+    public int MinSeniorDogAge
+    {
+        get
+        {
+            return minSeniorDogAge;
+        }
+    }
+
+    public int MissedFeedingsBeforeSeizure
+    {
+        get
+        {
+            return missedFeedingsBeforeSeizure;
+        }
     }
 
     public Color NonPurchasableBackgroundColor
     {
-	    get
-	    {
-		    return getColor(nonPurchasableBackgroundColorRGBA);
+        get
+        {
+            return getColor(nonPurchasableBackgroundColorRGBA);
         }
     }
 
     public Color NonPurchasableTextColor
     {
-	    get
-	    {
-		    return getColor(nonPurchasableTextColorRGBA);
+        get
+        {
+            return getColor(nonPurchasableTextColorRGBA);
         }
     }
 
-	public float PuppyChanceOfRunningAwayDuringScouting
-	{
-		get
-		{
-			return puppyChanceOfRunningAwayDuringScouting;
-		}
-	}
+    public float PuppyChanceOfRunningAwayDuringScouting
+    {
+        get
+        {
+            return puppyChanceOfRunningAwayDuringScouting;
+        }
+    }
 
-	public float PuppyScoutingTimeModifier
-	{
-		get
-		{
-			return puppyScoutingTimeModifier;
-		}
-	}
+    public float PuppyScoutingTimeModifier
+    {
+        get
+        {
+            return puppyScoutingTimeModifier;
+        }
+    }
 
-	public float SeniorDogScoutingTimeModifier
-	{
-		get
-		{
-			return seniorDogScoutingTimeModifier;
-		}
-	}
+    public bool SampleShelterDogsInOrder
+    {
+        get
+        {
+            return sampleShelterDogsInOrder;
+        }
+    }
 
-	public float ShelterResellCostScale
-	{
-		get
-		{
-			return shelterResellCostScale;
-		}
-	}
+    public float SeniorDogScoutingTimeModifier
+    {
+        get
+        {
+            return seniorDogScoutingTimeModifier;
+        }
+    }
 
-	public int SpecialDogCount
-	{
-		get
-		{
-			return specialDogCount;
-		}
-	}
+    public int ShelterDogsLimit
+    {
+        get
+        {
+            return shelterDogsLimit;
+        }
+    }
 
-	public int StartingCoins
-	{
-		get
-		{
-			return startingCoins;
-		}
-	}
+    public float ShelterResellCostScale
+    {
+        get
+        {
+            return shelterResellCostScale;
+        }
+    }
 
-	public int StartingDogCount
-	{
-		get
-		{
-			return startingDogCount;
-		}
-	}
+    public bool ShouldLimitShelterDogs
+    {
+        get
+        {
+            return shouldLimitShelterDogs;
+        }
+    }
 
-	public int StartingDogFood
-	{
-		get
-		{
-			return startingDogFood;
-		}
-	}
+    public int SpecialDogCount
+    {
+        get
+        {
+            return specialDogCount;
+        }
+    }
 
-	public int StartingHomeSlots
-	{
-		get
-		{
-			return startingHomeSlots;
-		}
-	}
+    public int StartingCoins
+    {
+        get
+        {
+            return startingCoins;
+        }
+    }
 
-	public float TimeScoutingToTimeRestingRatio
-	{
-		get
-		{
-			return timeScoutingToTimeRestingRatio;
-		}
-	}
+    public int StartingDogCount
+    {
+        get
+        {
+            return startingDogCount;
+        }
+    }
 
-	public Color UnaffordableTextColor
-	{
-		get
-		{
-			return getColor(unaffordableTextColorRGBA);
-		}
-	}
+    public int StartingDogFood
+    {
+        get
+        {
+            return startingDogFood;
+        }
+    }
 
-	public int VideoAdCoinBonus
-	{
-		get
-		{
-			return videoAdCoinBonus;
-		}
-	}
+    public int StartingHomeSlots
+    {
+        get
+        {
+            return startingHomeSlots;
+        }
+    }
 
-	public float WaitTimeSecsForDailyGift
-	{
-		get
-		{
-			return waitTimeSecsForDailyGift;
-		}
-	}
+    public float TimeScoutingToTimeRestingRatio
+    {
+        get
+        {
+            return timeScoutingToTimeRestingRatio;
+        }
+    }
+
+    public Color UnaffordableTextColor
+    {
+        get
+        {
+            return getColor(unaffordableTextColorRGBA);
+        }
+    }
+
+    public int VideoAdCoinBonus
+    {
+        get
+        {
+            return videoAdCoinBonus;
+        }
+    }
+
+    public float WaitTimeSecsForDailyGift
+    {
+        get
+        {
+            return waitTimeSecsForDailyGift;
+        }
+    }
 		                   
     #endregion
 
     #region JSON Fields
 
-	[SerializeField]
-	string adoptedText;
-	[SerializeField]
-	string adoptText;
-	[SerializeField]
-	float chanceOfDogsEatingPoop;
-	[SerializeField]
-	float chanceOfRareObject;
-	[SerializeField]
-	float chanceOfSecondary;
-	[SerializeField]
-	float chanceOfSpecialGift;
-	[SerializeField]
-	float chanceOfSpecialization;
-	[SerializeField]
-	float chanceSpecialItemIsDog;
-	[SerializeField]
-	float chanceSpecialItemIsPresent;
-	[SerializeField]
-	float chanceSpecialItemIsTubTub;
-	[SerializeField]
-	int costOfFiveDogFoodCans;
-	[SerializeField]
-	int costOfOneDogFoodCan;
-	[SerializeField]
-	int costOfTenDogFoodCans;
-	[SerializeField]
-	int costOfTwentyDogFoodCans;
-	[SerializeField]
-	int[] dailyGiftAmounts;
-	[SerializeField]
-	float dailyGiftDiscountAmount;
-	[SerializeField]
-	string[] dailyGiftOptions;
-	[SerializeField]
-	float[] dailyGiftWeights;
-	[SerializeField]
-	int dailyNumberOfNewDogsAtShelter;
-	[SerializeField]
-	int[] defaultBackgroundColorRGBA;
-	[SerializeField]
-	float defaultChanceOfCollectingDogFood;
-	[SerializeField]
-	float defaultChanceOfCollectingMoney;
-	[SerializeField]
-	int[] defaultPriceColorRGBA;
-	[SerializeField]
-	int[] defaultTextColorRGBA;
-	[SerializeField]
-	float defaultTimerTimeStepSec;
     [SerializeField]
-    float loadingTime;
+    string adoptedText;
     [SerializeField]
-	int maxAmountPerTypeFromScouting;
-	[SerializeField]
-	float maxCouponDiscount;
-	[SerializeField]
-	int maxDogsInHouse;
-	[SerializeField]
-	int maxDogsScouting;
-	[SerializeField]
-	int maxNumberAdsPerDay;
-	[SerializeField]
-	int maxPuppyAge;
-	[SerializeField]
-	float minCouponDiscount;
-	[SerializeField]
-	int minDogFoodToUnlockCollar;
-	[SerializeField]
-	int minDogsToUnlockCollar;
-	[SerializeField]
-	int minSeniorDogAge;
-	[SerializeField]
-	int missedFeedingsBeforeSeizure;
+    string adoptText;
+    [SerializeField]
+    float chanceOfDogsEatingPoop;
+    [SerializeField]
+    float chanceOfRareObject;
+    [SerializeField]
+    float chanceOfSecondary;
+    [SerializeField]
+    float chanceOfSpecialGift;
+    [SerializeField]
+    float chanceOfSpecialization;
+    [SerializeField]
+    float chanceSpecialItemIsDog;
+    [SerializeField]
+    float chanceSpecialItemIsPresent;
+    [SerializeField]
+    float chanceSpecialItemIsTubTub;
+    [SerializeField]
+    int costOfFiveDogFoodCans;
+    [SerializeField]
+    int costOfOneDogFoodCan;
+    [SerializeField]
+    int costOfTenDogFoodCans;
+    [SerializeField]
+    int costOfTwentyDogFoodCans;
+    [SerializeField]
+    int[] dailyGiftAmounts;
+    [SerializeField]
+    float dailyGiftDiscountAmount;
+    [SerializeField]
+    string[] dailyGiftOptions;
+    [SerializeField]
+    float[] dailyGiftWeights;
+    [SerializeField]
+    int dailyNumberOfNewDogsAtShelter;
+    [SerializeField]
+    int[] defaultBackgroundColorRGBA;
+    [SerializeField]
+    float defaultChanceOfCollectingDogFood;
+    [SerializeField]
+    float defaultChanceOfCollectingMoney;
+    [SerializeField]
+    int[] defaultPriceColorRGBA;
+    [SerializeField]
+    int[] defaultTextColorRGBA;
+    [SerializeField]
+    float defaultTimerTimeStepSec;
+    [SerializeField]
+    int maxAmountPerTypeFromScouting;
+    [SerializeField]
+    float maxCouponDiscount;
+    [SerializeField]
+    int maxDogsInHouse;
+    [SerializeField]
+    int maxDogsScouting;
+    [SerializeField]
+    int maxNumberAdsPerDay;
+    [SerializeField]
+    int maxPuppyAge;
+    [SerializeField]
+    float minCouponDiscount;
+    [SerializeField]
+    int minDogFoodToUnlockCollar;
+    [SerializeField]
+    int minDogsToUnlockCollar;
+    [SerializeField]
+    int minSeniorDogAge;
+    [SerializeField]
+    int missedFeedingsBeforeSeizure;
     [SerializeField]
     int[] nonPurchasableBackgroundColorRGBA;
     [SerializeField]
     int[] nonPurchasableTextColorRGBA;
     [SerializeField]
-	float puppyChanceOfRunningAwayDuringScouting;
-	[SerializeField]
-	float puppyScoutingTimeModifier;
-	[SerializeField]
-	float seniorDogScoutingTimeModifier;
-	[SerializeField]
-	float shelterResellCostScale;
-	[SerializeField]
-	int specialDogCount;
-	[SerializeField]
-	int startingCoins;
-	[SerializeField]
-	int startingDogCount;
-	[SerializeField]
-	int startingDogFood;
-	[SerializeField]
-	int startingHomeSlots;
-	[SerializeField]
-	float timeScoutingToTimeRestingRatio;
-	[SerializeField]
-	int[] unaffordableTextColorRGBA;
-	[SerializeField]
-	int videoAdCoinBonus;
-	[SerializeField]
-	float waitTimeSecsForDailyGift;
+    float puppyChanceOfRunningAwayDuringScouting;
+    [SerializeField]
+    float puppyScoutingTimeModifier;
+    [SerializeField]
+    bool sampleShelterDogsInOrder;
+    [SerializeField]
+    float seniorDogScoutingTimeModifier;
+    [SerializeField]
+    int shelterDogsLimit;
+    [SerializeField]
+    float shelterResellCostScale;
+    [SerializeField]
+    bool shouldLimitShelterDogs;
+    [SerializeField]
+    int specialDogCount;
+    [SerializeField]
+    int startingCoins;
+    [SerializeField]
+    int startingDogCount;
+    [SerializeField]
+    int startingDogFood;
+    [SerializeField]
+    int startingHomeSlots;
+    [SerializeField]
+    float timeScoutingToTimeRestingRatio;
+    [SerializeField]
+    int[] unaffordableTextColorRGBA;
+    [SerializeField]
+    int videoAdCoinBonus;
+    [SerializeField]
+    float waitTimeSecsForDailyGift;
 
     #endregion
 
