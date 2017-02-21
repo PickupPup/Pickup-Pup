@@ -34,8 +34,6 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     protected override void fetchReferences() {
         base.fetchReferences();
-        
-
         if(feedingTimer == null)
         {
             feedingTimer = new PPTimer(PPGameController.GetInstance.Tuning.DogFoodFeedTimeSec, 1f);
