@@ -210,14 +210,14 @@ public class PPTuning : PPData
         }
     }
 
-	public float DogFoodFeedTimeSec
+    public float DogFoodFeedTimeSec
     {
         get
         {
             return dogFoodFeedTimeSec;
         }
     }
-		
+
     public int MaxAmountPerTypeFromScouting
     {
         get
@@ -449,7 +449,7 @@ public class PPTuning : PPData
             return waitTimeSecsForDailyGift;
         }
     }
-		                   
+        
     #endregion
 
     #region JSON Fields
