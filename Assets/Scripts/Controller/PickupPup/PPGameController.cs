@@ -188,15 +188,17 @@ public class PPGameController : GameController, ICurrencySystem
 	protected override void setReferences() 
 	{
 		base.setReferences();
-		dogDatabase = parseDogDatabase();
-        shop = parseShopDatabase();
-		gifts = parseGiftDatabase();
-		tuning = parseTuning();
-		languages = LanguageDatabase.Instance;
-		Debug.Log(languages.GetHashCode());
-		languages.Initialize();
-        shop.Initialize();
-		gifts.Initialize();
+        if(isSingleton)
+        {
+    		dogDatabase = parseDogDatabase();
+            shop = parseShopDatabase();
+    		gifts = parseGiftDatabase();
+    		tuning = parseTuning();
+    		languages = LanguageDatabase.Instance;
+    		languages.Initialize();
+            shop.Initialize();
+    		gifts.Initialize();
+        }
 	}
 
 	protected override void fetchReferences() 

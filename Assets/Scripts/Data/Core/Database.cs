@@ -22,7 +22,7 @@ public abstract class Database<T> : ResourceLoader where T : class, new()
 
 	#endregion
 
-	public bool IsInitialized
+	public virtual bool IsInitialized
 	{
 		get
 		{

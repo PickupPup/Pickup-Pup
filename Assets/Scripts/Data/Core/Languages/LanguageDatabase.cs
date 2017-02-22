@@ -13,6 +13,14 @@ public class LanguageDatabase : Database<LanguageDatabase>
 {
 	#region Instance Accessors
 
+    public override bool IsInitialized 
+    {
+        get 
+        {
+            return base.IsInitialized && languages != null;
+        }
+    }
+
 	public string this[string key]
 	{
 		get
@@ -57,16 +65,19 @@ public class LanguageDatabase : Database<LanguageDatabase>
 
 	public bool HasTerm(string key)
 	{
+        checkInit();
 		return currentLanguage.HasTerm(key);
 	}
 
 	public string GetTerm(string key)
 	{
+        checkInit();
 		return currentLanguage.GetTerm(key);
 	}
 
 	public bool TrySetLanguage(string languageName)
 	{
+        checkInit();
 		Language newLanguage;
 		if(this.languages.TryGetValue(languageName, out newLanguage))
 		{
@@ -81,6 +92,7 @@ public class LanguageDatabase : Database<LanguageDatabase>
 
 	public string[] GetSupportedLanguages()
 	{
+        checkInit();
 		return languages.Keys.ToArray();
 	}
 
@@ -98,6 +110,14 @@ public class LanguageDatabase : Database<LanguageDatabase>
 		}
 		return languageSet;
 	}
+
+    void checkInit()
+    {
+        if(!IsInitialized)
+        {
+            Initialize();
+        }
+    }
 
 	Dictionary<string, Language> populateLanguages(JSONNode json)
 	{
