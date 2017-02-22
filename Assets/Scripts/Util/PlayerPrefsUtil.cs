@@ -1,5 +1,5 @@
 /*
-* Author: Isaiah Mann
+* Authors: Isaiah Mann, Grace Barrett-Snyder
 * Description: Util class to complement Unity's PlayerPrefs class
 */
 
@@ -7,6 +7,8 @@ using UnityEngine;
 
 public static class PlayerPrefsUtil 
 {
+	#region Static Accessors 
+
     public static bool ShowedShelterPrompt
     {
         get
@@ -31,8 +33,36 @@ public static class PlayerPrefsUtil
         }
     }
 
+	public static bool ShowedFirstLivingRoomPrompt
+	{
+		get
+		{
+			return showedFirstLivingRoomPrompt;
+		}
+		set
+		{
+			showedFirstLivingRoomPrompt = value;
+		}
+	}
+
+	public static bool ShowedShopPrompt
+	{
+		get
+		{
+			return showedShopPrompt;
+		}
+		set
+		{
+			showedShopPrompt = value;
+		}
+	}
+
+	#endregion
+
     static bool showedShelterPrompt;
     static bool showedScoutingPrompt;
+	static bool showedFirstLivingRoomPrompt;
+	static bool showedShopPrompt;
 
 	/*
 	 * PlayerPrefs has no bool class
