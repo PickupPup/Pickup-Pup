@@ -20,7 +20,7 @@ public class SingletonController<T> : Controller where T : class
 	}
 
 	#endregion
-		
+
 	protected static bool hasInstance 
 	{
 		get 
@@ -45,7 +45,7 @@ public class SingletonController<T> : Controller where T : class
 
 	protected override void setReferences() 
 	{
-		if(tryInit(ref _instance, this as T, gameObject, dontDestroyOnLoad)) 
+        if(tryInit(ref _instance, this as T, gameObject, dontDestroyOnLoad) || setReferencesOverride)
 		{
 			base.setReferences();
 		}

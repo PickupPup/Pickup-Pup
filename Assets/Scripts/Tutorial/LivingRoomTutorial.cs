@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LivingRoomTutorial : Tutorial
 {
+	#region Instance Accessors 
+
     public override bool Completed
     {
         get
@@ -11,6 +13,8 @@ public class LivingRoomTutorial : Tutorial
             return PlayerPrefsUtil.CompletedLivingRoomTutorial;
         }
     }
+
+	#endregion
 
     [SerializeField]
     GameObject currencyPanelObject;

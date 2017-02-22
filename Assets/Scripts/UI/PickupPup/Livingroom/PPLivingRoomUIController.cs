@@ -18,7 +18,14 @@ public class PPLivingRoomUIController : PPUIController
 
     protected override void setReferences()
     {
-        promptID = PromptID.ScoutingPrompt;
+		if(PlayerPrefsUtil.ShowedFirstLivingRoomPrompt)
+		{
+			promptID = PromptID.ScoutingPrompt;
+		}
+		else
+		{
+			promptID = PromptID.FirstLivingRoomPrompt;
+		}
         base.setReferences();
         giftSlots = GetComponentsInChildren<GiftRedeemSlot>(); 
     }
@@ -43,6 +50,16 @@ public class PPLivingRoomUIController : PPUIController
         LivingRoomTutorial livingRoomTutorial = (LivingRoomTutorial) tutorial;
         livingRoomTutorial.GetComponent<UICanvas>().Show();
         livingRoomTutorial.StartTutorial();
+		if(!PlayerPrefsUtil.ShowedFirstLivingRoomPrompt)
+		{
+			base.showPopupPrompt();
+			PlayerPrefsUtil.ShowedFirstLivingRoomPrompt = true;
+		}	
+        else if(!PlayerPrefsUtil.ShowedScoutingPrompt)
+        {
+            base.showPopupPrompt();
+            PlayerPrefsUtil.ShowedScoutingPrompt = true;
+        }
     }
 
     #endregion

@@ -13,7 +13,6 @@ public class PPUIElement : UIElement
     protected const string REDEEM_GIFT = k.REDEEM_GIFT;
     protected const string TAP_TO_REDEEM = k.TAP_TO_REDEEM;
 
-    protected PPGameController gameController;
     protected PPSceneController sceneController;
     protected LanguageDatabase languageDatabase;
 
@@ -40,12 +39,12 @@ public class PPUIElement : UIElement
         base.fetchReferences();
         gameController = PPGameController.GetInstance;
         sceneController = PPSceneController.Instance;
-        languageDatabase = LanguageDatabase.Instance;
+		languageDatabase = gameController.Languages;
     }
 
-    protected virtual bool requestReloadScene()
+    protected virtual bool requestReloadScene(bool refreshSystems = false)
     {
-        return sceneController.RequestReloadCurrentScene();
+        return sceneController.RequestReloadCurrentScene(refreshSystems);
     }
 
     #endregion

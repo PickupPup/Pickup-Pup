@@ -52,6 +52,7 @@ public class LanguageDatabase : Database<LanguageDatabase>
 		{
 			currentLanguage = options[default(int)];
 		}
+		AssignInstance(this);
 	}
 
 	public bool HasTerm(string key)

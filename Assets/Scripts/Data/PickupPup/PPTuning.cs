@@ -210,6 +210,14 @@ public class PPTuning : PPData
         }
     }
 
+	public float DogFoodFeedTimeSec
+    {
+        get
+        {
+            return dogFoodFeedTimeSec;
+        }
+    }
+		
     public int MaxAmountPerTypeFromScouting
     {
         get
@@ -496,6 +504,8 @@ public class PPTuning : PPData
     int[] defaultTextColorRGBA;
     [SerializeField]
     float defaultTimerTimeStepSec;
+    [SerializeField]
+    float dogFoodFeedTimeSec;
     [SerializeField]
     int maxAmountPerTypeFromScouting;
     [SerializeField]

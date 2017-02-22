@@ -13,6 +13,7 @@ public class PPShopUIController : PPUIController
 
     protected override void setReferences()
     {
+		promptID = PromptID.ShopPrompt;
         base.setReferences();
         EventController.Event(PPEvent.LoadShop);
         itemSlots = GetComponentsInChildren<ShopItemSlot>();
@@ -21,7 +22,6 @@ public class PPShopUIController : PPUIController
     protected override void fetchReferences()
     {
         base.fetchReferences();
-
         shop = ShopDatabase.Instance;
         shop.Initialize();
         items = shop.Items;

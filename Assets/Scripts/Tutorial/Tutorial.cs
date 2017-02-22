@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Tutorial : TutorialObject
 {
+	static Tutorial()
+	{
+		tutorialEvents = new Dictionary<TutorialEvent, bool>();
+	}
+
     protected static Dictionary<TutorialEvent, bool> tutorialEvents; // Value is true if the tutorial has been completed
     protected static TutorialEvent currentTutorial;
 
@@ -51,7 +56,6 @@ public class Tutorial : TutorialObject
         info = new TutorialDescriptor(this.id);
         canvas = GetComponent<UICanvas>();
         highlightedObjects = new Dictionary<GameObject, Transform>();
-        tutorialEvents = new Dictionary<TutorialEvent, bool>();
     }
 
     protected override void fetchReferences()
@@ -86,14 +90,12 @@ public class Tutorial : TutorialObject
     {       
         if(!tutorialEvents.ContainsKey(tutorialEvent))
         {
-            Debug.Log("adding key: " + tutorialEvent);
             tutorialEvents.Add(tutorialEvent, false);
         }
         if(forceStart || !tutorialEvents[tutorialEvent])
         {
             currentTutorial = tutorialEvent;
             onStart(tutorialEvent);
-            Debug.Log("on start: " + tutorialEvent.ToString());
         }
     }
 

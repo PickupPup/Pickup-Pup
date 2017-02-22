@@ -67,7 +67,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1418943991371142
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 0
+  id: 
+  canvas: {fileID: 0}
   popupPrompt: {fileID: 114143030193481574}
   overlay: {fileID: 114881704710157066}
   navigationPanelObject: {fileID: 0}
@@ -186,7 +188,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
-  currentID: 1
+  currentID: 3
 --- !u!114 &114315816545337884
 MonoBehaviour:
   m_ObjectHideFlags: 1

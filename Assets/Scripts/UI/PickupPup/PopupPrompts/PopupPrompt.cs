@@ -9,28 +9,13 @@ public class PopupPrompt : PPUIElement
 {
     [SerializeField]
     PromptID currentID;
-    LanguageDatabase languages;
-
-    #region MonoBehaviourExtended Overrides
-
-    protected override void fetchReferences()
-    {
-        base.fetchReferences();
-        languages = PPGameController.GetInstance.Languages;
-    }
-
-    #endregion
 
     public void Set(PromptID id)
     {
         currentID = id;
         if (currentID != PromptID.None)
         {
-            if(languages == null)
-            {
-                checkReferences();
-            }
-            SetText(languages.GetTerm(currentID.ToString()));
+			SetText(languageDatabase.GetTerm(currentID.ToString()));
         }
     }
 

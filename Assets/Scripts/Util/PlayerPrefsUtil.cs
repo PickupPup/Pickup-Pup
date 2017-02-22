@@ -1,5 +1,5 @@
 /*
-* Author: Isaiah Mann
+* Authors: Isaiah Mann, Grace Barrett-Snyder
 * Description: Util class to complement Unity's PlayerPrefs class
 */
 
@@ -7,15 +7,17 @@ using UnityEngine;
 
 public static class PlayerPrefsUtil 
 {
+	#region Static Accessors 
+
     public static bool ShowedShelterPrompt
     {
         get
         {
-            return showedShelterPrompt;
+            return _showedShelterPrompt;
         }
         set
         {
-            showedShelterPrompt = value;
+            _showedShelterPrompt = value;
         }
     }
 
@@ -23,61 +25,90 @@ public static class PlayerPrefsUtil
     {
         get
         {
-            return showedScoutingPrompt;
+            return _showedScoutingPrompt;
         }
         set
         {
-            showedScoutingPrompt = value;
+            _showedScoutingPrompt = value;
         }
     }
 
-    public static bool CompletedShelterTutorial
-    {
-        get
-        {
-            return completedShelterTutorial;
-        }
-        set
-        {
-            completedShelterTutorial = value;
-        }
-    }
+	public static bool ShowedFirstLivingRoomPrompt
+	{
+		get
+		{
+			return _showedFirstLivingRoomPrompt;
+		}
+		set
+		{
+			_showedFirstLivingRoomPrompt = value;
+		}
+	}
 
-    public static bool CompletedLivingRoomTutorial
-    {
-        get
-        {
-            return completedLivingRoomTutorial;
-        }
-        set
-        {
-            completedLivingRoomTutorial = value;
-        }
-    }
+	public static bool ShowedShopPrompt
+	{
+		get
+		{
+			return _showedShopPrompt;
+		}
+		set
+		{
+			_showedShopPrompt = value;
+		}
+	}
 
-    public static bool CompletedShopTutorial
-    {
-        get
-        {
-            return completedShopTutorial;
-        }
-        set
-        {
-            completedShopTutorial = value;
-        }
-    }
+	public static bool CompletedLivingRoomTutorial
+	{
+		get
+		{
+			return _completedLivingRoomTutorial;	
+		}
+		set
+		{
+			_completedLivingRoomTutorial = value;
+		}
+	}
 
-    static bool showedShelterPrompt;
-    static bool showedScoutingPrompt;
-    static bool completedShelterTutorial;
-    static bool completedLivingRoomTutorial;
-    static bool completedShopTutorial;
+	public static bool CompletedShelterTutorial
+	{
+		get
+		{
+			return _completedShelterTutorial;
+		}
+		set
+		{
+			_completedShelterTutorial = value;
+		}
+	}
 
-    /*
+	public static bool CompletedShopTutorial
+	{
+		get
+		{
+			return _completedShopTutorial;
+		}
+		set
+		{
+			_completedShopTutorial = value;
+		}
+	}
+
+	#endregion
+
+	static bool _showedShelterPrompt;
+	static bool _showedScoutingPrompt;
+	static bool _showedFirstLivingRoomPrompt;
+	static bool _showedShopPrompt;
+
+	static bool _completedLivingRoomTutorial;
+	static bool _completedShelterTutorial;
+	static bool _completedShopTutorial;
+
+	/*
 	 * PlayerPrefs has no bool class
 	 * This wrapped provides that functionality
 	*/
-    public static bool GetBool(string key) 
+	public static bool GetBool(string key) 
 	{
 		return IntToBool(PlayerPrefs.GetInt(key, 0));
 	}

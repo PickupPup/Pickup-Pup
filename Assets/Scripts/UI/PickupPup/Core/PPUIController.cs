@@ -9,7 +9,6 @@ using k = PPGlobal;
 public class PPUIController : MonoBehaviourExtended 
 {
     protected PPSceneController sceneController;
-    protected PPGameController gameController;
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
@@ -36,10 +35,6 @@ public class PPUIController : MonoBehaviourExtended
         {
             dogProfileObject.SetActive(false);
         }
-        if(tutorial && !tutorial.Completed)
-        {
-            startTutorial();
-        } 
     }
 
     protected override void fetchReferences() 
@@ -50,6 +45,10 @@ public class PPUIController : MonoBehaviourExtended
 		dataController = PPDataController.GetInstance;
 		giftController = PPGiftController.Instance;
         setCurrencyPanel();
+		if(tutorial && !tutorial.Completed)
+		{
+			startTutorial();
+		} 
     }
 
 	protected override void subscribeEvents()
@@ -92,6 +91,13 @@ public class PPUIController : MonoBehaviourExtended
         tutorial.GetComponent<UICanvas>().Show();
         tutorial.StartTutorial();
     }
+
+	protected virtual void showPopupPrompt()
+	{
+		PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
+		prompt.GetComponent<PPUIElement>().Show();
+		prompt.Set(promptID);
+	}
 
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)
 	{
