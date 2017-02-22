@@ -25,6 +25,23 @@ public class DogFoodBowl : MonoBehaviourExtended
         }
     }
 
+    public float GetFeedingTime
+    {
+        get
+        {
+            // Check to prevent stack overflow (if timer instantly completes)
+            float tuningTime = gameController.Tuning.DogFoodFeedTimeSec;
+            if(tuningTime > NONE_VALUE)
+            {
+                return tuningTime;
+            }
+            else
+            {
+                return SINGLE_VALUE;
+            }
+        }
+    }
+
     #endregion
 
     static PPTimer feedingTimer = null;
@@ -32,11 +49,12 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     #region MonoBehaviourExtended Overrides 
 
-    protected override void fetchReferences() {
+    protected override void fetchReferences() 
+    {
         base.fetchReferences();
         if(feedingTimer == null)
         {
-            feedingTimer = new PPTimer(PPGameController.GetInstance.Tuning.DogFoodFeedTimeSec, 1f);
+            feedingTimer = new PPTimer(GetFeedingTime, 1f);
             feedingTimer.SetTimeRemaining(0, false);
         }
         feedingTimer.SubscribeToTimeUp(handleFeedingTimeUp);
