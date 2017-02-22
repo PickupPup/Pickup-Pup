@@ -18,7 +18,14 @@ public class PPLivingRoomUIController : PPUIController
 
     protected override void setReferences()
     {
-        promptID = PromptID.ScoutingPrompt;
+		if(PlayerPrefsUtil.ShowedFirstLivingRoomPrompt)
+		{
+			promptID = PromptID.ScoutingPrompt;
+		}
+		else
+		{
+			promptID = PromptID.FirstLivingRoomPrompt;
+		}
         base.setReferences();
         giftSlots = GetComponentsInChildren<GiftRedeemSlot>(); 
     }
@@ -40,7 +47,12 @@ public class PPLivingRoomUIController : PPUIController
 
     protected override void showPopupPrompt()
     {
-        if (!PlayerPrefsUtil.ShowedScoutingPrompt)
+		if(!PlayerPrefsUtil.ShowedFirstLivingRoomPrompt)
+		{
+			base.showPopupPrompt();
+			PlayerPrefsUtil.ShowedFirstLivingRoomPrompt = true;
+		}	
+        else if(!PlayerPrefsUtil.ShowedScoutingPrompt)
         {
             base.showPopupPrompt();
             PlayerPrefsUtil.ShowedScoutingPrompt = true;
