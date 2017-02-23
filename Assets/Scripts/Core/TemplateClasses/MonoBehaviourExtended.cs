@@ -10,6 +10,7 @@ using k = Global;
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
     protected PPDataController dataController;
+    protected PPGameController gameController;
 
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
@@ -176,6 +177,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
         if(!this.dataController)
         {
             this.dataController = PPDataController.GetInstance;
+        }
+        if(!this.gameController)
+        {
+            this.gameController = PPGameController.GetInstance;
         }
 	}
 		
