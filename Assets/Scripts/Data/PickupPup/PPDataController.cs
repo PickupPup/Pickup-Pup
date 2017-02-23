@@ -107,6 +107,14 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
+    public PPTuning Tuning
+    {
+        get
+        {
+            return gameController.Tuning;
+        }
+    }
+
     #region ICurrencySystem Accessors
 
     public CoinsData Coins

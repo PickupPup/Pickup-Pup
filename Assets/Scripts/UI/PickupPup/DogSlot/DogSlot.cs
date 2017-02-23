@@ -105,11 +105,10 @@ public class DogSlot : PPUIElement
 	}
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
-    public virtual void Init(DogDescriptor dog, Sprite dogSprite)
+    public virtual void Init(DogDescriptor dog)
     {
         this.dogInfo = dog;
-
-		setSlot(this.dogInfo, dogSprite);
+		setSlot(this.dogInfo);
     }
 
 	public virtual void ClearSlot()
@@ -127,7 +126,7 @@ public class DogSlot : PPUIElement
 	{
 		this.inScoutingSelectMode = inScoutingSelectMode;
 		this.dog = dog;
-		Init(dog.Info, dog.Portrait);
+		Init(dog.Info);
 	}
 
 	public void ExecuteClick()
@@ -233,10 +232,15 @@ public class DogSlot : PPUIElement
 		}
     }
 
+    protected virtual void setSprite(DogDescriptor dog)
+    {
+        dogImage.sprite = dog.Portrait;
+    }
+
     // Sets the dog and background sprites of this Dog Slot.
-	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+	void setSlot(DogDescriptor dog, Sprite backgroundSprite = null)
     {      
-        dogImage.sprite = dogSprite;
+        setSprite(dog);
         enable(true);
         if (backgroundImage)
         {

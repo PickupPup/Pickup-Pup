@@ -76,8 +76,7 @@ public class PPShelterUIController : PPUIController
         dogs = fillInEmptySlots(dogs);
         for(int i = 0; i < dogs.Length; i++)
         {
-            DogDescriptor dog = dogs[i];
-			availableDogPortraits[i].Init(dog, database.GetDogSprite(dog));
+            availableDogPortraits[i].Init(dogs[i]);
         }
     }
 

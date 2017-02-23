@@ -218,6 +218,14 @@ public class PPTuning : PPData
         }
     }
 
+    public string InWorldKey
+    {
+        get
+        {
+            return inWorldKey;
+        }
+    }
+
     public int MaxAmountPerTypeFromScouting
     {
         get
@@ -506,6 +514,8 @@ public class PPTuning : PPData
     float defaultTimerTimeStepSec;
     [SerializeField]
     float dogFoodFeedTimeSec;
+    [SerializeField]
+    string inWorldKey;
     [SerializeField]
     int maxAmountPerTypeFromScouting;
     [SerializeField]

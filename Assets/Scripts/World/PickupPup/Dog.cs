@@ -97,6 +97,21 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+    public Sprite WorldSprite
+    {
+        get
+        {
+            if(hasDescriptor)
+            {
+                return descriptor.WorldSprite;
+            }
+            else
+            {
+                return DogDatabase.DefaultSprite;
+            }
+        }
+    }
+
 	public int ScoutingIndex
 	{
 		get
