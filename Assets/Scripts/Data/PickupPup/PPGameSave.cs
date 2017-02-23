@@ -126,6 +126,11 @@ public class PPGameSave : GameSave, ISerializable
 		}
 	}
 
+    public void ClearScoutingDogs()
+    {
+        ScoutingDogs.Clear();
+    }
+
 	public void StartDailyGiftCountdown(PPTimer timer)
 	{
 		timer.SubscribeToTimeChange(updateDailyGiftCountdown);

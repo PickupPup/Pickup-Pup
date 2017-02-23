@@ -152,7 +152,7 @@ public class DogDatabase : Database<DogDatabase>
             {
                 dog = randomizer.GetRandom();
             }
-            while(mustBeUnadopted && dataController.CheckAdopted(dog));
+            while(mustBeUnadopted && dataController.CheckIsAdopted(dog));
         }
         return dog;
 	}
@@ -183,7 +183,7 @@ public class DogDatabase : Database<DogDatabase>
                 }
                 while(skipAdopted &&
                     ArrayUtil.InRange(this.dogs, indexInMasterDogArr) &&
-                    dataController.CheckAdopted(this.dogs[indexInMasterDogArr++]));
+                    dataController.CheckIsAdopted(this.dogs[indexInMasterDogArr++]));
             }
             else
             {
@@ -223,9 +223,9 @@ public class DogDatabase : Database<DogDatabase>
         int totalDogCount = fullSequence.Length;
         for(int i = 0; i < candidates.Length; i++)
         {
-            while(currentIndex < totalDogCount && dataController.CheckAdopted(candidates[i]))
+            while(currentIndex < totalDogCount && dataController.CheckIsAdopted(candidates[i]))
             {
-                if(!dataController.CheckAdopted(fullSequence[currentIndex]))
+                if(!dataController.CheckIsAdopted(fullSequence[currentIndex]))
                 {
                     if(!currentCandidates.Contains(fullSequence[currentIndex]))
                     {
@@ -239,7 +239,7 @@ public class DogDatabase : Database<DogDatabase>
                 currentIndex++;
             }
             currentIndex++;
-            if(currentIndex >= totalDogCount && dataController.CheckAdopted(candidates[i]))
+            if(currentIndex >= totalDogCount && dataController.CheckIsAdopted(candidates[i]))
             {
                 candidates[i] = DogDescriptor.Default();
             }

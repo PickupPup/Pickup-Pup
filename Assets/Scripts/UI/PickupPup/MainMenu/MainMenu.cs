@@ -65,7 +65,7 @@ public class MainMenu : PPUIElement
         if (dogBrowser)
         {
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-            dogBrowser.Open(inScoutingSelectMode: false);
+            dogBrowser.Open(inScoutingSelectMode:false);
         }
     }
 

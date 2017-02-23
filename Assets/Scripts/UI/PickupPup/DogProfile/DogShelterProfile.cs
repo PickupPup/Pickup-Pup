@@ -69,7 +69,7 @@ public class DogShelterProfile : DogProfile
 
     bool checkAdopted(DogDescriptor dogInfo)
     {
-        return PPDataController.GetInstance.CheckAdopted(dogInfo);
+        return PPDataController.GetInstance.CheckIsAdopted(dogInfo);
     }
 
     void showAdopted()

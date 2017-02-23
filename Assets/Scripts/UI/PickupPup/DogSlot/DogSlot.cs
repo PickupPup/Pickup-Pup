@@ -114,6 +114,14 @@ public class DogSlot : PPUIElement
     {
         this.dogInfo = dog;
 		setSlot(this.dogInfo);
+        if(this.dogInfo.IsLinkedToDog)
+        {
+            this.dog = dogInfo.PeekDogLink;
+        }
+        else
+        {
+            this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
+        }
     }
 
 	public virtual void ClearSlot()
@@ -221,7 +229,7 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	void callOnFreeSlotClick()
+	protected virtual void callOnFreeSlotClick()
 	{
 		if(onFreeSlotClick != null)
 		{

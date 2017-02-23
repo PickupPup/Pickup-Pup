@@ -254,6 +254,22 @@ public class PPDataController : DataController, ICurrencySystem
 		SaveGame();
 	}
 
+    public void ClearScoutingDogs()
+    {
+        currentGame.ClearScoutingDogs();
+        SaveGame();
+    }
+
+    public bool CheckIsScouting(DogDescriptor dog)
+    {
+        return ScoutingDogs.Contains(dog);
+    }
+
+    public bool CheckIsScouting(Dog dog)
+    {
+        return CheckIsScouting(dog.Info);
+    }
+
     public void Adopt(DogDescriptor dog)
     {
         currentGame.Adopt(dog);
@@ -261,7 +277,7 @@ public class PPDataController : DataController, ICurrencySystem
         SaveGame();
     }
 
-    public bool CheckAdopted(DogDescriptor dog)
+    public bool CheckIsAdopted(DogDescriptor dog)
     {
         return AdoptedDogs.Contains(dog);
     }
