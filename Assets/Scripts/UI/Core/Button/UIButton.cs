@@ -39,6 +39,9 @@ public class UIButton : UIInteractable
 	protected Color selectedColor = Color.gray;
 	protected Color deselectedColor = Color.white;
 
+    [SerializeField]
+    bool suppressStandardSFX;
+
 	public void SubscribeToClick(MonoAction action)
 	{
 		this.clickAction += action;
@@ -92,6 +95,14 @@ public class UIButton : UIInteractable
 		{
 			setButtonColors();
 		}
+        if(suppressStandardSFX)
+        {
+            UISFXHandler sfxHandler = GetComponent<UISFXHandler>();
+            if(sfxHandler)
+            {
+                sfxHandler.ToggleActive(false);
+            }
+        }
 	}
 		
 	public override bool TryUnsubscribeAll()

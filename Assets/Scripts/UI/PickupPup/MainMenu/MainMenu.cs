@@ -30,12 +30,10 @@ public class MainMenu : PPUIElement
     {
         if (gameObject.activeSelf)
         {
-            EventController.Event(k.GetPlayEvent(k.BACK));
             Hide();
         }
         else
         {
-            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             Show();
         }
         if (gameController)
@@ -48,8 +46,13 @@ public class MainMenu : PPUIElement
 
     public override void Hide()
     {
-        EventController.Event(k.GetPlayEvent(k.BACK));
         base.Hide();
+        EventController.Event(k.GetPlayEvent(k.BACK));
+    }
+
+    public override void Show()
+    {
+        base.Show();
     }
 
     public void OnShopClick()

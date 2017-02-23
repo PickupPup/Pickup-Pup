@@ -40,6 +40,8 @@ public class PPGlobal : Global
     public const int DEFAULT_HOME_SLOTS = 10;
     public const int DEFAULT_CURRENCY_AMOUNT = 0;
 
+    #region Audio System
+
     public const string PLAY = "Play";
     public const string STOP = "Stop";
 
@@ -54,6 +56,8 @@ public class PPGlobal : Global
     public const string MENU_CLICK = "MenuClick";
     public const string MENU_POPUP = "MenuPopup";
     public const string MAIN_MUSIC = "MainMusic";
+    public const string CHANGE_SCENE = "ChangeScene";
+    public const string ADD_FOOD = "AddFood";
 
     public static string GetPlayEvent(string id)
     {
@@ -64,5 +68,7 @@ public class PPGlobal : Global
     {
         return STOP + id;
     }
+
+    #endregion
 
 }

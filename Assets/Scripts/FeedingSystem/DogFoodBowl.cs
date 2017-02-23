@@ -5,6 +5,8 @@
 
 using UnityEngine.UI;
 
+using k = PPGlobal;
+
 public class DogFoodBowl : MonoBehaviourExtended
 {
     #region Instance Accessors
@@ -83,6 +85,11 @@ public class DogFoodBowl : MonoBehaviourExtended
             feedingTimer.Reset();
             feedingTimer.Begin();
             buttonReference.interactable = false;
+            EventController.Event(k.GetPlayEvent(k.ADD_FOOD));
+        }
+        else
+        {
+            EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
     }
 

@@ -3,7 +3,6 @@
     {
       "name" : "MainMusic",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayMainMusic"
@@ -19,7 +18,6 @@
     {
       "name" : "MenuPopup",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayMenuPopup"
@@ -35,7 +33,6 @@
     {
       "name" : "MenuClick",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayMenuClick"
@@ -51,7 +48,6 @@
     {
       "name" : "DogSendOut",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayDogSendOut"
@@ -67,7 +63,6 @@
     {
       "name" : "DogReturn",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayDogReturn"
@@ -83,7 +78,6 @@
     {
       "name" : "Adopt",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayAdopt"
@@ -99,7 +93,6 @@
     {
       "name" : "Barks_Small",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayBark"
@@ -115,7 +108,6 @@
     {
       "name" : "Barks_Medium",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayBark"
@@ -131,7 +123,6 @@
     {
       "name" : "Barks_Large",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayBark"
@@ -147,7 +138,6 @@
     {
       "name" : "Purchase",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayPurchase"
@@ -163,7 +153,6 @@
     {
       "name" : "GiftRedeem",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayGiftRedeem"
@@ -179,7 +168,6 @@
     {
       "name" : "Back",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayBack"
@@ -195,7 +183,6 @@
     {
       "name" : "Empty",
       "groups" : [
-        "none"
       ],
       "events" : [
         "PlayEmpty"
@@ -207,6 +194,34 @@
       "type" : "SFX",
       "channel" : 1,
       "volume" : 100
+    },
+    {
+      "name" : "Move",
+      "groups" : [
+      ],
+      "events" : [
+        "PlayChangeScene"
+      ],
+      "stopEvents" : [
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
+    },
+    {
+      "name" : "Food",
+      "groups" : [
+      ],
+      "events" : [
+        "PlayAddFood"
+      ],
+      "stopEvents" : [
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 1
     }
   ],
   "groups" : [
