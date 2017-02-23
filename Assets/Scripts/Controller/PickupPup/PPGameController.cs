@@ -394,7 +394,7 @@ public class PPGameController : GameController, ICurrencySystem
 
     public bool TryAdoptDog(DogDescriptor dog)
     {
-		if(dataController.CheckAdopted(dog))
+		if(dataController.CheckIsAdopted(dog))
 		{
 			// Trying to adopt a dog that is already adopted
 			return false;

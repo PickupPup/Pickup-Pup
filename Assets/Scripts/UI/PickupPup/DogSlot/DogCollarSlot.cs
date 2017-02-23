@@ -87,19 +87,31 @@ public class DogCollarSlot : DogSlot
     {
         base.Init(dog);
         nameText.text = dog.Name;
+        if(this.dog)
+        {
+            initDogScouting(this.dog, onResume:false);
+        }
     }
 
     public override void Init(Dog dog, bool inScoutingSelectMode)
     {
-        initDogScouting(dog, onResume: false);
         base.Init(dog, inScoutingSelectMode);
-        dataController.SaveGame();
+        initDogScouting(dog, onResume: false);
     }
 
     protected override void handleChangeDog(Dog previousDog)
     {
         base.handleChangeDog(previousDog);
         unsubscribeFromDogEvents(previousDog);
+    }
+
+    protected override void callOnOccupiedSlotClick(Dog dog)
+    {
+        // Safeguard against opening up tons of copies of the panel
+        if(!redeemDisplayIsOpen)
+        {
+            base.callOnOccupiedSlotClick(dog);
+        }
     }
 
     #endregion
@@ -138,7 +150,7 @@ public class DogCollarSlot : DogSlot
             timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
-        dataController.SaveGame();
+        dataController.SendDogToScout(dog);
     }
 
     public override void ClearSlot()
@@ -166,16 +178,7 @@ public class DogCollarSlot : DogSlot
     {
         this.redeemDisplayIsOpen = isOpen;
     }
-
-    protected override void callOnOccupiedSlotClick(Dog dog)
-    {
-        // Safeguard against opening up tons of copies of the panel
-        if (!redeemDisplayIsOpen)
-        {
-            base.callOnOccupiedSlotClick(dog);
-        }
-    }
-
+        
     void subscribeTimerEvents(Dog dog)
     {
         dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
@@ -191,10 +194,7 @@ public class DogCollarSlot : DogSlot
     void initDogScouting(Dog dog, bool onResume)
     {
         unsubscribeFromDogEvents(dog);
-        if (!onResume)
-        {
-            dog.TrySendToScout();
-        }
+        dog.TrySendToScout();
         subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
         toggleButtonActive(false);

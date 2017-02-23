@@ -189,8 +189,21 @@ public class ScoutingDisplay : PPUIElement
 		return new GiftReport(dog.Info, reward);
 	}
         
+    void refreshScoutingDogs()
+    {
+        dataController.ClearScoutingDogs();
+        foreach(DogCollarSlot slot in scoutingSlots)
+        {
+            if(slot.HasDog)
+            {
+                dataController.SendDogToScout(slot.PeekDog);
+            }
+        }
+    }
+
 	void handleClickFreeSlot() 
 	{
+        refreshScoutingDogs();
 		dogBrowser.Open(inScoutingSelectMode:true);
 		dogBrowser.SubscribeToDogClick(handleDogSelected);
 	}

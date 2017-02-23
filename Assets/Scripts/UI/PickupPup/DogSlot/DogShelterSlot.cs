@@ -57,7 +57,7 @@ public class DogShelterSlot : DogSlot
 
     bool checkAdopted()
     {
-        return PPDataController.GetInstance.CheckAdopted(dogInfo);
+        return PPDataController.GetInstance.CheckIsAdopted(dogInfo);
     }
 
     void handleAdoptEvent(string eventName, Dog dog)

@@ -15,7 +15,7 @@ public class Dog : MobileObjectBehaviour
 		get 
 		{
             checkReferences();
-            return dataController.ScoutingDogs.Contains(this.Info);
+            return dataController.CheckIsScouting(this);
 		}
 	}
 
