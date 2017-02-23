@@ -6,6 +6,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using k = PPGlobal;
+
 public class PPSceneController : SingletonController<PPSceneController> 
 {
 	#region Instance Accessors
@@ -69,6 +71,10 @@ public class PPSceneController : SingletonController<PPSceneController>
 	{
 		dataController.SaveGame();
 		SceneManager.LoadScene((int) scene);
+        if(shouldPlayChangeSceneSFX(scene))
+        {
+            EventController.Event(k.GetPlayEvent(k.CHANGE_SCENE));
+        }
         if(shouldZeroOutSceneLoadingBlockersOnLoadScene)
         {
             zeroOutSceneLoadingBlockers();
@@ -79,8 +85,6 @@ public class PPSceneController : SingletonController<PPSceneController>
         }
 	}
 
-    // TODO: Implement an async version of this that stores a queue of scene loading requests 
-    // TODO: Implement an async version to loan scenes additively
     public bool RequestLoadScene(PPScene scene, bool refreshSystems)
     {
         if(canLoadScene(scene)) 
@@ -128,6 +132,11 @@ public class PPSceneController : SingletonController<PPSceneController>
     void zeroOutSceneLoadingBlockers()
     {
         sceneLoadingBlockers = NONE_VALUE;
+    }
+
+    bool shouldPlayChangeSceneSFX(PPScene newScene)
+    {
+        return IsWorldScene(newScene);
     }
 
 }

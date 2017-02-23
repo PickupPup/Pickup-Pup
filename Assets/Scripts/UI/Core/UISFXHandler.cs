@@ -18,6 +18,8 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
 
     Button button;
 
+    bool isActive = true;
+
     #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
@@ -32,16 +34,24 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
 
     void IPointerDownHandler.OnPointerDown(PointerEventData ptrEvent)
     {
-        if((button && button.enabled && button.interactable))
+        if(isActive)
         {
-            EventController.Event(clickEnabledSoundEvent);
-        }
-        else
-        {
-            EventController.Event(clickDisabledSoundEvent);
+            if(button && button.enabled && button.interactable)
+            {
+                EventController.Event(clickEnabledSoundEvent);
+            }
+            else
+            {
+                EventController.Event(clickDisabledSoundEvent);
+            }
         }
     }
 
     #endregion
+
+    public void ToggleActive(bool isActive)
+    {
+        this.isActive = isActive;
+    }
 
 }
