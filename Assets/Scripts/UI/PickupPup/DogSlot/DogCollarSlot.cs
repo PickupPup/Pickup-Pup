@@ -69,7 +69,7 @@ public class DogCollarSlot : DogSlot
         base.cleanupReferences();
         if (dog)
         {
-            dog.UnsubscribeFromScoutingTimerChange(handleDogTimerChange);
+            unsubscribeFromDogEvents(dog);
         }
     }
 
@@ -83,9 +83,9 @@ public class DogCollarSlot : DogSlot
 
     #region DogSlot Overrides
 
-    public override void Init(DogDescriptor dog, Sprite dogSprite)
+    public override void Init(DogDescriptor dog)
     {
-        base.Init(dog, dogSprite);
+        base.Init(dog);
         nameText.text = dog.Name;
     }
 
@@ -94,6 +94,12 @@ public class DogCollarSlot : DogSlot
         initDogScouting(dog, onResume: false);
         base.Init(dog, inScoutingSelectMode);
         dataController.SaveGame();
+    }
+
+    protected override void handleChangeDog(Dog previousDog)
+    {
+        base.handleChangeDog(previousDog);
+        unsubscribeFromDogEvents(previousDog);
     }
 
     #endregion
@@ -106,6 +112,12 @@ public class DogCollarSlot : DogSlot
     }
 
     #endregion
+
+    void unsubscribeFromDogEvents(Dog dog)
+    {
+        unsubscribeTimerEvents(dog);
+        unsubscribeGiftEvents(dog);
+    }
 
     public void ResumeScouting(Dog dog)
     {
@@ -170,8 +182,15 @@ public class DogCollarSlot : DogSlot
         scoutingDisplay.SubscribeToTimerEnd(dog);
     }
 
+    void unsubscribeTimerEvents(Dog dog)
+    {
+        dog.UnsubscribeFromScoutingTimerChange(handleDogTimerChange);
+        scoutingDisplay.UnsubscribeFromTimerEnd(dog);
+    }
+
     void initDogScouting(Dog dog, bool onResume)
     {
+        unsubscribeFromDogEvents(dog);
         if (!onResume)
         {
             dog.TrySendToScout();
@@ -207,9 +226,18 @@ public class DogCollarSlot : DogSlot
     void handleGiftFound(CurrencyData gift)
     {
         toggleButtonActive(true);
-        redeemableGiftDisplay.SetActive(true);
-        redeemableGiftIcon.sprite = gift.Icon;
-        timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
+        if(redeemableGiftDisplay)
+        {
+            redeemableGiftDisplay.SetActive(true);
+        }
+        if(redeemableGiftIcon)
+        {
+            redeemableGiftIcon.sprite = gift.Icon;
+        }
+        if(timerText)
+        {
+            timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
+        }
     }
 
     void handleGiftRedeemed(CurrencyData gift)

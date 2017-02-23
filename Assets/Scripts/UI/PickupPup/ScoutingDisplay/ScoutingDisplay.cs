@@ -52,6 +52,11 @@ public class ScoutingDisplay : PPUIElement
 		dog.SubscribeToScoutingTimerEnd(handleScoutingTimerEnd);
 	}
 
+    public void UnsubscribeFromTimerEnd(Dog dog)
+    {
+        dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
+    }
+
     public bool TryFindOpenSlot(out DogSlot openSlot)
     {
         for(int i = 0; i < scoutingSlots.Length; i++)
@@ -96,9 +101,21 @@ public class ScoutingDisplay : PPUIElement
 	{
 		base.unsubscribeEvents();
 		EventController.Unsubscribe(handlePPDogEvent);
+        unsubscribeFromAllDogs();
 	}
-
+        
 	#endregion 
+
+    void unsubscribeFromAllDogs()
+    {
+        foreach(DogCollarSlot scoutingSlot in scoutingSlots)
+        {
+            if(scoutingSlot.HasDog)
+            {
+                scoutingSlot.PeekDog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
+            }
+        }
+    }
 
 	void setupScoutingSlots(DogCollarSlot[] slots)
 	{
@@ -130,6 +147,7 @@ public class ScoutingDisplay : PPUIElement
         // Safeguard to prevent multiple copies of this method being subscribed:
         dog.UnsubscribeFromScoutingTimerEnd(handleScoutingTimerEnd);
         dog.FindGift(shouldSave:true);
+        dog.Info.HandleScoutingEnded();
 	}
 
     void handleDogGiftCollected(Dog dog, bool resendOutToScout)

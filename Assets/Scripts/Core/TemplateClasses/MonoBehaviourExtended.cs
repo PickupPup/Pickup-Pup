@@ -198,7 +198,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 	protected virtual void cleanupReferences() 
 	{
-		// NOTHING
+        unsubscribeEvents();
 	}
 
 	protected virtual void handleNamedEvent(string eventName) 

@@ -24,6 +24,21 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
+    // Dogs that are neither already in the world or scouting
+    public DogDescriptor[] AvailableDogs
+    {
+        get
+        {
+            return this.getAvailableDogs();
+        }
+    }
+
+    public Dictionary<PPScene, List<DogDescriptor>> WorldDogs
+    {
+        get;
+        private set;
+    }
+
     public CurrencySystem Currencies
     {
         get;
@@ -50,6 +65,7 @@ public class PPGameSave : GameSave, ISerializable
 	{
 		this.AdoptedDogs = new List<DogDescriptor>(adoptedDogs);
 		this.ScoutingDogs = new List<DogDescriptor>(scoutingDogs);
+        this.WorldDogs = new Dictionary<PPScene, List<DogDescriptor>>();
         this.Currencies = currencies;
         this.HasGiftToRedeem = hasGiftToRedeem;
 	}
@@ -61,11 +77,12 @@ public class PPGameSave : GameSave, ISerializable
 	base(info, context)
 	{
 		this.AdoptedDogs = info.GetValue(ADOPTED, typeof(List<DogDescriptor>)) as List<DogDescriptor>;
-		this.ScoutingDogs = info.GetValue(SCOUTING, typeof(List<DogDescriptor>)) as List<DogDescriptor>;
+        this.ScoutingDogs = info.GetValue(SCOUTING, typeof(List<DogDescriptor>)) as List<DogDescriptor>;
 		foreach(DogDescriptor dog in this.ScoutingDogs)
 		{
 			dog.UpdateFromSave(this);
 		}
+        this.WorldDogs = info.GetValue(WORLD, typeof(Dictionary<PPScene, List<DogDescriptor>>)) as Dictionary<PPScene, List<DogDescriptor>>;
 		this.Currencies = info.GetValue(CURRENCY, typeof(CurrencySystem)) as CurrencySystem;
 		this.DailyGiftCountdown = (float) info.GetValue(DAILY_GIFT_COUNTDOWN, typeof(float));
 		this.DailyGiftCountdown -= TimeInSecSinceLastSave;
@@ -85,6 +102,7 @@ public class PPGameSave : GameSave, ISerializable
 		info.AddValue(CURRENCY, this.Currencies);
 		info.AddValue(DAILY_GIFT_COUNTDOWN, this.DailyGiftCountdown);
 		info.AddValue(HAS_GIFT_TO_REDEEM, this.HasGiftToRedeem);
+        info.AddValue(WORLD, this.WorldDogs);
 	}
 
 	#endregion
@@ -127,5 +145,63 @@ public class PPGameSave : GameSave, ISerializable
     {
         AdoptedDogs.Add(dog);
     }
-		
+	
+    public void EnterRoom(DogDescriptor dog, PPScene room)
+    {
+        dog.EnterRoom(room);
+        addDogToRoom(dog, room);
+    }
+
+    public void LeaveRoom(DogDescriptor dog)
+    {
+        removeFromRoom(dog, dog.MostRecentRoom);
+        dog.LeaveRoom();
+    }
+
+    public DogDescriptor[] DogsInRoom(PPScene room)
+    {
+        List<DogDescriptor> inRoom;
+        if(WorldDogs.TryGetValue(room, out inRoom))
+        {
+            return inRoom.ToArray();
+        }
+        else
+        {
+            return new DogDescriptor[NONE_VALUE];
+        }
+    }
+
+    void addDogToRoom(DogDescriptor dog, PPScene room)
+    {
+        List<DogDescriptor> inRoom;
+        if(!WorldDogs.TryGetValue(room, out inRoom))
+        {
+            inRoom = new List<DogDescriptor>();
+            WorldDogs.Add(room, inRoom);
+        }
+        inRoom.Add(dog);
+    }
+
+    void removeFromRoom(DogDescriptor dog, PPScene room)
+    {
+        List<DogDescriptor> inRoom;
+        if(WorldDogs.TryGetValue(room, out inRoom))
+        {
+            inRoom.Remove(dog);
+        }
+    }
+
+    DogDescriptor[] getAvailableDogs()
+    {
+        List<DogDescriptor> available = new List<DogDescriptor>();
+        foreach(DogDescriptor dog in AdoptedDogs)
+        {
+            if(!(dog.IsInWorld || dog.IsScouting))
+            {
+                available.Add(dog);
+            }
+        }
+        return available.ToArray();
+    }
+
 }

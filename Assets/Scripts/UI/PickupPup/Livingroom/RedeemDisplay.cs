@@ -69,7 +69,7 @@ public class RedeemDisplay : PPUIElement
 
     void redeemGift(Dog dog)
     {
-        if(dog.OccupiedSlot)
+        if(dog.OccupiedSlot && dog.OccupiedSlot is DogCollarSlot)
         {
             (dog.OccupiedSlot as DogCollarSlot).ToggleRedeemDisplayOpen(isOpen:false);
         }

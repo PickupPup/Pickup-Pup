@@ -64,8 +64,23 @@ public class DogDatabase : Database<DogDatabase>
 			return this.dogs;
 		}
 	}
-
+        
 	#endregion
+
+    PPTuning tuning
+    {
+        get
+        {
+            if(dataController)
+            {
+                return dataController.Tuning;
+            }
+            else
+            {
+                return PPGameController.GetInstance.Tuning;
+            }
+        }
+    }
 
 	[SerializeField]
 	DogBreed[] breeds;
@@ -250,11 +265,30 @@ public class DogDatabase : Database<DogDatabase>
 			return sprite;
 		}
 	}
-		
+	
+    public Sprite GetDogWorldSprite(DogDescriptor dog)
+    {
+        string spriteName = getWorldSpriteName(dog);
+        Sprite sprite;
+        if(dog == null || !spriteDatabase.TryGetSprite(spriteName, out sprite))
+        {
+            return DefaultSprite;
+        }
+        else
+        {
+            return sprite;
+        }
+    }
+
 	string getSpriteName(DogDescriptor dog)
 	{
 		return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
 	}
+
+    string getWorldSpriteName(DogDescriptor dog)
+    {
+        return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, tuning.InWorldKey);
+    }
 
 	public override bool TryInit()
 	{

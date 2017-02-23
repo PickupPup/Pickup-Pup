@@ -5,6 +5,8 @@
 
 using UnityEngine;
 
+using m = MonoBehaviourExtended;
+
 [System.Serializable]
 public class DogDescriptor : PPDescriptor 
 {
@@ -120,6 +122,14 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+    public Sprite WorldSprite
+    {
+        get
+        {
+            return database.GetDogWorldSprite(this);
+        }
+    }
+
 	public float TimeRemainingScouting
 	{
 		get
@@ -143,6 +153,24 @@ public class DogDescriptor : PPDescriptor
     }
 
     public bool EmptyDescriptor
+    {
+        get;
+        private set;
+    }
+
+    public PPScene MostRecentRoom
+    {
+        get;
+        private set;
+    }
+
+    public bool IsInWorld
+    {
+        get;
+        private set;
+    }
+
+    public bool IsScouting
     {
         get;
         private set;
@@ -175,6 +203,10 @@ public class DogDescriptor : PPDescriptor
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
 	Dog linkedDog;
+    [System.NonSerialized]
+    m.MonoAction onBeginScouting;
+    [System.NonSerialized]
+    m.MonoAction onDoneScouting;
 
 	public static DogDescriptor Default() 
 	{
@@ -225,6 +257,8 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingBegan(int slotIndex)
 	{
+        this.IsScouting = true;
+        callBeginScouting();
 		if(this.IsLinkedToDog)
 		{
 			linkedDog.SubscribeToScoutingTimerChange(updateTimeRemainingScouting);
@@ -234,6 +268,8 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
+        this.IsScouting = false;
+        callDoneScouting();
 		if(this.IsLinkedToDog)
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
@@ -251,6 +287,53 @@ public class DogDescriptor : PPDescriptor
         CurrencyData gift = this.RedeemableGift;
         this.RedeemableGift = null;
         return gift;
+    }
+
+    public void EnterRoom(PPScene room)
+    {
+        this.MostRecentRoom = room;
+        this.IsInWorld = true;
+    }
+
+    public void LeaveRoom()
+    {
+        this.IsInWorld = false;
+    }
+
+    public void SubscribeToBeginScouting(m.MonoAction del)
+    {
+        this.onBeginScouting += del;
+    }
+
+    public void UnsubscribeFromBeginScouting(m.MonoAction del)
+    {
+        this.onBeginScouting -= del;
+    }
+
+    public void SubscribeToDoneScouting(m.MonoAction del)
+    {
+        this.onDoneScouting += del;
+    }
+
+    public void UnsubscribeFromDoneScouting(m.MonoAction del)
+    {
+        this.onDoneScouting -= del;
+    }
+
+    void callBeginScouting()
+    {
+        if(this.onBeginScouting != null)
+        {
+            this.onBeginScouting();
+        }
+    }
+
+    void callDoneScouting()
+    {
+        if(this.onDoneScouting != null)
+        {
+            this.onDoneScouting();
+        }
     }
 
 	void updateTimeRemainingScouting(float timeRemainingScouting)

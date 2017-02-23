@@ -108,6 +108,11 @@ public class PPSceneController : SingletonController<PPSceneController>
     {
         sceneLoadingBlockers--;
     }
+        
+    public bool IsWorldScene(PPScene scene)
+    {
+        return scene == PPScene.LivingRoom || scene == PPScene.Yard;
+    }
 
 	public void LoadSceneAsync(PPScene scene)
 	{

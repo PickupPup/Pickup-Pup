@@ -45,6 +45,11 @@ public class DogSlot : PPUIElement
 		}
 		set
 		{
+            // A chance to handle any cleanup
+            if(_dog != null)
+            {
+                handleChangeDog(_dog);
+            }
 			// Assigns slot to new dog (assuming the new value is not null)
 			if(value != null)
 			{
@@ -105,11 +110,10 @@ public class DogSlot : PPUIElement
 	}
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
-    public virtual void Init(DogDescriptor dog, Sprite dogSprite)
+    public virtual void Init(DogDescriptor dog)
     {
         this.dogInfo = dog;
-
-		setSlot(this.dogInfo, dogSprite);
+		setSlot(this.dogInfo);
     }
 
 	public virtual void ClearSlot()
@@ -127,7 +131,7 @@ public class DogSlot : PPUIElement
 	{
 		this.inScoutingSelectMode = inScoutingSelectMode;
 		this.dog = dog;
-		Init(dog.Info, dog.Portrait);
+		Init(dog.Info);
 	}
 
 	public void ExecuteClick()
@@ -170,9 +174,17 @@ public class DogSlot : PPUIElement
 		onFreeSlotClick -= clickAction;
 	}
 
+    protected virtual void handleChangeDog(Dog previousDog)
+    {
+        // NOTHING
+    }
+
     protected void toggleButtonActive(bool isActive)
     {
-        button.ToggleInteractable(isActive);
+        if(button)
+        {
+            button.ToggleInteractable(isActive);
+        }
     }
 
 	protected bool subscribeToUIButton()
@@ -233,10 +245,15 @@ public class DogSlot : PPUIElement
 		}
     }
 
+    protected virtual void setSprite(DogDescriptor dog)
+    {
+        dogImage.sprite = dog.Portrait;
+    }
+
     // Sets the dog and background sprites of this Dog Slot.
-	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+	void setSlot(DogDescriptor dog, Sprite backgroundSprite = null)
     {      
-        dogImage.sprite = dogSprite;
+        setSprite(dog);
         enable(true);
         if (backgroundImage)
         {

@@ -59,6 +59,14 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+    public DogDescriptor[] AvailableDogs
+    {
+        get
+        {
+            return currentGame.AvailableDogs;
+        }
+    }
+
 	public int DogCount 
 	{
 		get 
@@ -96,6 +104,14 @@ public class PPDataController : DataController, ICurrencySystem
         get
         {
             return FREE_STARTING_DOGS_ENABLED && DogCount == NONE_VALUE;
+        }
+    }
+
+    public PPTuning Tuning
+    {
+        get
+        {
+            return gameController.Tuning;
         }
     }
 
@@ -321,6 +337,23 @@ public class PPDataController : DataController, ICurrencySystem
     }
 
     #endregion
+
+    public void EnterRoom(DogDescriptor dog, PPScene room)
+    {
+        currentGame.EnterRoom(dog, room);
+        SaveGame();
+    }
+
+    public void LeaveRoom(DogDescriptor dog)
+    {
+        currentGame.LeaveRoom(dog);
+        SaveGame();
+    }
+
+    public DogDescriptor[] DogsInRoom(PPScene room)
+    {
+        return currentGame.DogsInRoom(room);
+    }
 
 	public void StartDailyGiftCountdown(PPTimer timer)
 	{
