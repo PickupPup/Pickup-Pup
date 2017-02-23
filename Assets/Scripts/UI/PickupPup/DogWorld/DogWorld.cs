@@ -64,6 +64,10 @@ public class DogWorld : PPUIController
             else
             {
                 this.dogsSlots[i].Init(dogs[i], inScoutingSelectMode:false);
+                if(dogs[i].IsScouting)
+                {
+                    this.dogsSlots[i].Hide();
+                }
             }
         }
     }

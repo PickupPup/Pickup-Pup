@@ -16,6 +16,16 @@ public class DogWorldSlot : DogSlot
         dogImage = GetComponent<Image>();
     }
 
+    protected override void cleanupReferences()
+    {
+        base.cleanupReferences();
+        if(dogInfo != null)
+        {
+            dogInfo.UnsubscribeFromBeginScouting(handleScoutingBegun);
+            dogInfo.UnsubscribeFromDoneScouting(handleScoutingDone);
+        }
+    }
+
     #endregion
 
     #region DogSlot Overrides 

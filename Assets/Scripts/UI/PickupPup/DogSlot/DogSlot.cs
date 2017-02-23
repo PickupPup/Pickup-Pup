@@ -45,6 +45,11 @@ public class DogSlot : PPUIElement
 		}
 		set
 		{
+            // A chance to handle any cleanup
+            if(_dog != null)
+            {
+                handleChangeDog(_dog);
+            }
 			// Assigns slot to new dog (assuming the new value is not null)
 			if(value != null)
 			{
@@ -169,9 +174,17 @@ public class DogSlot : PPUIElement
 		onFreeSlotClick -= clickAction;
 	}
 
+    protected virtual void handleChangeDog(Dog previousDog)
+    {
+        // NOTHING
+    }
+
     protected void toggleButtonActive(bool isActive)
     {
-        button.ToggleInteractable(isActive);
+        if(button)
+        {
+            button.ToggleInteractable(isActive);
+        }
     }
 
 	protected bool subscribeToUIButton()
