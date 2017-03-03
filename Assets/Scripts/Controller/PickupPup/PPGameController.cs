@@ -93,7 +93,7 @@ public class PPGameController : GameController, ICurrencySystem
     {
         get
         {
-            return dogsOutScouting.Count >= tuning.MaxDogsScouting;
+			return dataController.ScoutingDogs.Count >= tuning.MaxDogsScouting;
         }
     }
 		
@@ -173,7 +173,7 @@ public class PPGameController : GameController, ICurrencySystem
 
     // The dog the player currently has selected
     Dog selectedDog;
-	List<Dog> dogsOutScouting = new List<Dog>();
+//	List<Dog> dogsOutScouting = new List<Dog>();
 	PPTuning tuning;
 	DogDatabase dogDatabase;
     ShopDatabase shop;
@@ -256,7 +256,7 @@ public class PPGameController : GameController, ICurrencySystem
 		if(dogs != null && dogs.Count > 0)
 		{
 			Dog[] dogObjs = new DogFactory(hideGameObjects:true).CreateGroup(dogs.ToArray());
-			dogsOutScouting = new List<Dog>(dogObjs);
+//			dogsOutScouting = new List<Dog>(dogObjs);
 			callScoutingDogsLoaded(dogObjs);
 		}
 	}
@@ -420,7 +420,7 @@ public class PPGameController : GameController, ICurrencySystem
 	public bool TrySendDogToScout(Dog dog, out int slotIndex)
 	{
 		// Can only send a certain number of dogs out to scout
-		if(DogsScoutingAtCapacity || dogsOutScouting.Contains(dog)) 
+		if(DogsScoutingAtCapacity)
 		{
 			slotIndex = INVALID_VALUE;
 			return false;
@@ -482,14 +482,14 @@ public class PPGameController : GameController, ICurrencySystem
 	void sendDogToScout(Dog dog) 
 	{
         EventController.Event(k.GetPlayEvent(k.DOG_SENDOUT));
-		dogsOutScouting.Add(dog);
+//		dogsOutScouting.Add(dog);
 		dog.SubscribeToScoutingTimerEnd(handleDogDoneScouting);
 	}
 
 	void handleDogDoneScouting(Dog dog) 
 	{
         EventController.Event(k.GetPlayEvent(k.DOG_RETURN));
-        dogsOutScouting.Remove(dog);
+//        dogsOutScouting.Remove(dog);
 		// Need to unsubscribe to prevent stacking even subscriptions if dog is sent to scout again:
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
 	}
