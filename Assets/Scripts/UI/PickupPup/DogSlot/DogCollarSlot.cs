@@ -140,13 +140,13 @@ public class DogCollarSlot : DogSlot
         dogImage.sprite = dog.Portrait;
         subscribeTimerEvents(dog);
         dog.SetTimer(dogInfo.TimeRemainingScouting);
+		initDogScouting(dog, onResume: true);
         if (dog.HasRedeemableGift)
         {
             handleGiftFound(dog.PeekAtGift);
         }
         else
         {
-            initDogScouting(dog, onResume: true);
             timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
