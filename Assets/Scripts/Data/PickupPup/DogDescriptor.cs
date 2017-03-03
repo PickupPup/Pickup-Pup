@@ -274,7 +274,7 @@ public class DogDescriptor : PPDescriptor
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
 		}
-		this._scoutingSlotIndex = NOT_FOUND_INT;
+//		this._scoutingSlotIndex = NOT_FOUND_INT;
 	}
 
     public void FindGift(CurrencyData gift)
