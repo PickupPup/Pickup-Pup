@@ -10,6 +10,8 @@ Casual mobile game with dogs.
 - Timothy Ng
 - [Benjamin Page](http://ben-page.com/)
 - [Phil Yum](http://spriteproject.com/)
+- [Liam O'Donnell-Carey](http://liamodc.com)
+
 ## Specs
 - Unity: **v5.5.0f3**
 - Language: **C#**
