@@ -18,6 +18,8 @@ public class PPUIController : MonoBehaviourExtended
     [SerializeField]
     GameObject dogProfileObject;
     [SerializeField]
+    GameObject dogProfileShelterObject;
+    [SerializeField]
     CurrencyPanel currencyPanel;
     [SerializeField]
     NavigationPanel navigationPanel;
@@ -33,7 +35,11 @@ public class PPUIController : MonoBehaviourExtended
         {
             dogProfileObject.SetActive(false);
         }
-        if(popupPrompt)
+        if (dogProfileShelterObject != null)
+        {
+            dogProfileShelterObject.SetActive(false);
+        }
+        if (popupPrompt)
         {
             showPopupPrompt();
         }
@@ -104,11 +110,19 @@ public class PPUIController : MonoBehaviourExtended
     void showDogProfile(Dog dog)
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-        dogProfileObject.SetActive(true);
-        if(!dogProfile)
+        
+
+        if (dataController.AdoptedDogs.Contains(dog.Info))
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
+            dogProfileObject.SetActive(true);
         }
+        else
+        {
+            dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
+            dogProfileShelterObject.SetActive(true);
+        }
+
         dogProfile.Show();
         dogProfile.SetProfile(dog);
     }
