@@ -5,12 +5,25 @@ using UnityEngine.Purchasing;
 
 public class IAPManager : MonoBehaviour, IStoreListener
 {
+    #region Static Accessors
+
     public static IAPManager Instance { set; get; }
+
+    #endregion
 
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
 
     public static string testConsumable = "consumableCustom";
+
+    #region Buy Functions
+
+    public void Buy()
+    {
+        BuyProductID(testConsumable);
+    }
+
+    #endregion
 
     void Awake()
     {
@@ -42,12 +55,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
     private bool IsInitialized()
     {
         return m_StoreController != null && m_StoreExtensionProvider != null;
-    }
-
-
-    public void Buy()
-    {
-        BuyProductID(testConsumable);
     }
 
     void BuyProductID(string productId)

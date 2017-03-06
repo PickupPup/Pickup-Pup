@@ -7,11 +7,13 @@ public class UnityAdsButton : MonoBehaviour
 {
     public string zoneId;
     Button m_Button;
+
     void Start()
     {
         m_Button = GetComponent<Button>();
         if (m_Button) m_Button.onClick.AddListener(ShowAdPlacement);
     }
+
     void Update()
     {
         if (m_Button)
@@ -20,6 +22,7 @@ public class UnityAdsButton : MonoBehaviour
             m_Button.interactable = Advertisement.IsReady(zoneId);
         }
     }
+
     void ShowAdPlacement()
     {
         if (string.IsNullOrEmpty(zoneId)) zoneId = null;
@@ -27,6 +30,7 @@ public class UnityAdsButton : MonoBehaviour
         options.resultCallback = HandleShowResult;
         Advertisement.Show(zoneId, options);
     }
+
     void HandleShowResult(ShowResult result)
     {
         switch (result)
