@@ -11,9 +11,7 @@ public class PPShelterUIController : PPUIController
     DogSlot[] availableDogPortraits;
     DogDatabase database;
     DogShelterProfile dogShelterProfile;
-
-    [SerializeField]
-    GameObject dogShelterProfileObject;
+	DogProfileButtonController dogProfileButtonController;
 
     #region MonoBehaviourExtended Overrides
 
@@ -22,10 +20,18 @@ public class PPShelterUIController : PPUIController
         promptID = PromptID.ShelterPrompt;
         base.setReferences();
         availableDogPortraits = GetComponentsInChildren<DogSlot>();
-        if (dogShelterProfileObject != null)
+		if (dogProfileObject != null)
         {
-            dogShelterProfileObject.SetActive(false);
+			dogProfileObject.SetActive(false);
         }
+		if (!dogShelterProfile)
+		{
+			dogShelterProfile = dogProfileObject.GetComponent<DogShelterProfile>();
+		}
+		if (!dogProfileButtonController)
+		{
+			dogProfileButtonController = dogProfileObject.GetComponent<DogProfileButtonController>();
+		}
     }
 
     protected override void fetchReferences()
@@ -33,7 +39,12 @@ public class PPShelterUIController : PPUIController
         base.fetchReferences();
         database = DogDatabase.GetInstance;
         EventController.Event(PPEvent.LoadShelter);
-        populateAvailableDogs(database);
+        var dogs = populateAvailableDogs(database);
+		dogProfileButtonController.Init (dogShelterProfile, dogs);
+		dogProfileButtonController.OnSwitchProfile += (index) => {
+			selectedDogInfo = availableDogPortraits[index].PeekDogInfo;
+			selectedSlot = availableDogPortraits[index];
+		};
     }
 
     #endregion
@@ -49,9 +60,19 @@ public class PPShelterUIController : PPUIController
         }  
     }
 
+	protected override void handleDogSlotClicked (Dog dog)
+	{
+		base.handleDogSlotClicked (dog);
+		for (int i = 0; i < availableDogPortraits.Length; i++) {
+			if (availableDogPortraits [i] == dog.OccupiedSlot) {
+				dogProfileButtonController.SetCurrentIndex (i);
+			}
+		}
+	}
+
     #endregion
 
-    void populateAvailableDogs(DogDatabase database)
+	DogDescriptor[] populateAvailableDogs(DogDatabase database)
     {
         DogDescriptor[] dogs = database.GetDailyRandomDogList(availableDogPortraits.Length);
         for(int i = 0; i < dogs.Length; i++)
@@ -59,6 +80,7 @@ public class PPShelterUIController : PPUIController
             DogDescriptor dog = dogs[i];
 			availableDogPortraits[i].Init(dog, database.GetDogSprite(dog));
         }
+		return dogs;
     }
 
 	// Need a void version in order to use w/ the Unity Event System (on a button click)
@@ -69,10 +91,9 @@ public class PPShelterUIController : PPUIController
 
     public bool TryAdopt()
     {
-        DogDescriptor selectedDogInfo = selectedDog.Info;
         if(gameController.TryAdoptDog(selectedDogInfo))
         {
-            ((DogShelterSlot) selectedDog.OccupiedSlot).ShowAdopt();
+			((DogShelterSlot) selectedSlot).ShowAdopt();
             EventController.Event(k.GetPlayEvent(k.ADOPT));
             EventController.Event(k.GetPlayEvent(k.BARK), selectedDogInfo.Breed.Size);
             return true;
@@ -89,11 +110,10 @@ public class PPShelterUIController : PPUIController
         else
         {
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-            dogShelterProfileObject.SetActive(true);
-            if (!dogShelterProfile)
-            {
-                dogShelterProfile = dogShelterProfileObject.GetComponent<DogShelterProfile>();
-            }
+			if (dogProfileObject != null)
+			{
+				dogProfileObject.SetActive(true);
+			}
             dogShelterProfile.SetProfile(dog);
         }     
     }

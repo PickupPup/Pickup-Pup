@@ -10,6 +10,13 @@ public class DogSlot : PPUIElement
 {
     #region Instance Accessors 
 
+	public DogDescriptor PeekDogInfo
+	{
+		get {
+			return this.dogInfo;
+		}
+	}
+
     public Dog PeekDog
     {
         get

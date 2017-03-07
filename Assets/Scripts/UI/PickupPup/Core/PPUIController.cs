@@ -13,11 +13,12 @@ public class PPUIController : MonoBehaviourExtended
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
-    protected Dog selectedDog;
+    protected DogDescriptor selectedDogInfo;
+	protected DogSlot selectedSlot;
     protected PromptID promptID;
 
     [SerializeField]
-    GameObject dogProfileObject;
+    protected GameObject dogProfileObject;
     [SerializeField]
     CurrencyPanel currencyPanel;
     [SerializeField]
@@ -89,12 +90,13 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-            selectedDog = dog;
-			handleDogSlotClicked(selectedDog);
+			selectedDogInfo = dog.Info;
+			selectedSlot = dog.OccupiedSlot;
+			handleDogSlotClicked(dog);
 		}
 	}
 
-	void handleDogSlotClicked(Dog dog)
+	protected virtual void handleDogSlotClicked(Dog dog)
 	{
         // TODO: Insert universal dog slot handle code here
         if (dogProfileObject)

@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class DogProfileButtonController : PPUIButtonController
 {
+	public MonoActionInt OnSwitchProfile;
+
     #region Instance Accessors
 
     public bool IsInitialized
@@ -41,15 +43,22 @@ public class DogProfileButtonController : PPUIButtonController
 
     #endregion
 
-    public void Init(DogProfile profile, List<Dog> dogsList)
+	public void Init(DogProfile profile, DogDescriptor[] dogs)
     {
         this.parentWindow = profile;
-        this.dogsList = dogsList;
         IsInitialized = true;
 
-        pageBackwardButton.SubscribeToClick(previousProfile);
-        pageForwardButton.SubscribeToClick(nextProfile);
+		updateDogList (dogs);
+
+		pageBackwardButton.SubscribeToClick(previousProfile);
+		pageForwardButton.SubscribeToClick(nextProfile);
     }
+
+	void updateDogList(DogDescriptor[] dogInfos) {
+		var adoptedDogs = PPDataController.GetInstance.AdoptedDogs;
+		DogFactory dogFactory = new DogFactory(hideGameObjects: true);
+		dogsList = dogFactory.CreateGroupList(new List<DogDescriptor>(dogInfos));
+	}
 
     void switchToProfile(int index)
     {
@@ -57,6 +66,8 @@ public class DogProfileButtonController : PPUIButtonController
         currentProfileIndex = index;
         checkCurrentIndex();
         parentWindow.SetProfile(dogsList[currentProfileIndex]);
+		if (OnSwitchProfile != null)
+			OnSwitchProfile (currentProfileIndex);
     }
 
     void nextProfile()
@@ -71,7 +82,7 @@ public class DogProfileButtonController : PPUIButtonController
 
     bool checkCurrentIndex()
     {
-        if(currentProfileIndex >= 0 && currentProfileIndex < dogsList.Count)
+        if(currentProfileIndex < 0 || currentProfileIndex >= dogsList.Count)
         {
             fixCurrentIndex();
             return false;
@@ -90,5 +101,9 @@ public class DogProfileButtonController : PPUIButtonController
             currentProfileIndex = currentProfileIndex = 0;
         }
     }
+
+	public void SetCurrentIndex(int index) {
+		currentProfileIndex = index;
+	}
 
 }

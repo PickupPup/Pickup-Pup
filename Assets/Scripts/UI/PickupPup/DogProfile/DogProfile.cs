@@ -39,11 +39,12 @@ public class DogProfile : PPUIElement
     {
         base.setReferences();
 
-        descriptionText = new Text[descriptionFields.Length];
-        for(int i = 0; i < descriptionText.Length; i++)
-        {
-            descriptionText[i] = descriptionFields[i].GetComponentInChildren<Text>();
-        }
+		if (descriptionFields != null) {
+			descriptionText = new Text[descriptionFields.Length];
+			for (int i = 0; i < descriptionText.Length; i++) {
+				descriptionText [i] = descriptionFields [i].GetComponentInChildren<Text> ();
+			}
+		}
     }
 
     #endregion
@@ -64,18 +65,16 @@ public class DogProfile : PPUIElement
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-        for(int i = 0; i < descriptionText.Length; i++)
-        {
-            if (i < dogInfo.Descriptions.Length)
-            {
-                descriptionFields[i].Show();
-                descriptionText[i].text = dogInfo.Descriptions[i];
-            }
-            else
-            {
-                descriptionFields[i].Hide();
-            }
-        }
+		if (descriptionText != null) {
+			for (int i = 0; i < descriptionText.Length; i++) {
+				if (i < dogInfo.Descriptions.Length) {
+					descriptionFields [i].Show ();
+					descriptionText [i].text = dogInfo.Descriptions [i];
+				} else {
+					descriptionFields [i].Hide ();
+				}
+			}
+		}
 
         dogThumbnail.sprite = dog.Portrait;
         // TODO: Get collar icon
