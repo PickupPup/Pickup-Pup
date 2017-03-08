@@ -9,7 +9,7 @@ using UnityEngine;
 public abstract class MonoTest : MonoBehaviourExtended 
 {
     const string PASS = "TEST PASSED";
-    const string FAIL = "Test Failed";
+    const string FAIL = "TEST FAILED";
 
     #region MonoBehaviourExtended Overrides
 
