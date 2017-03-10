@@ -13,7 +13,6 @@ public class PPUIController : MonoBehaviourExtended
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
-    protected DogDescriptor selectedDogInfo;
 	protected DogSlot selectedSlot;
     protected PromptID promptID;
 
@@ -90,7 +89,6 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-			selectedDogInfo = dog.Info;
 			selectedSlot = dog.OccupiedSlot;
 			handleDogSlotClicked(dog);
 		}
@@ -112,6 +110,7 @@ public class PPUIController : MonoBehaviourExtended
         if(!dogProfile)
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
+			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
         dogProfile.SetProfile(dog);
     }

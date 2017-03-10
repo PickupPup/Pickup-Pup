@@ -11,6 +11,17 @@ using k = PPGlobal;
 
 public class DogProfile : PPUIElement
 {
+	DogProfileButtonController _buttonController;
+	public DogProfileButtonController buttonController {
+		get {
+			if (!_buttonController)
+			{
+				_buttonController = transform.GetComponent<DogProfileButtonController>();
+			}
+			return _buttonController;
+		}
+	}
+
     [SerializeField]
     Text nameText;
     [SerializeField]
@@ -62,6 +73,7 @@ public class DogProfile : PPUIElement
     public virtual void SetProfile(Dog dog)
     {
         dogInfo = dog.Info;
+		buttonController.CalibrateIndex (dog);
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;

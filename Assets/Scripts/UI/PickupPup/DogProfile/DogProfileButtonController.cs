@@ -8,8 +8,6 @@ using UnityEngine;
 
 public class DogProfileButtonController : PPUIButtonController
 {
-	public MonoActionInt OnSwitchProfile;
-
     #region Instance Accessors
 
     public bool IsInitialized
@@ -17,6 +15,11 @@ public class DogProfileButtonController : PPUIButtonController
         get;
         private set;
     }
+
+	public DogDescriptor SelectedDogInfo {
+		get; 
+		private set;
+	}
 
     #endregion
 
@@ -55,7 +58,6 @@ public class DogProfileButtonController : PPUIButtonController
     }
 
 	void updateDogList(DogDescriptor[] dogInfos) {
-		var adoptedDogs = PPDataController.GetInstance.AdoptedDogs;
 		DogFactory dogFactory = new DogFactory(hideGameObjects: true);
 		dogsList = dogFactory.CreateGroupList(new List<DogDescriptor>(dogInfos));
 	}
@@ -66,8 +68,8 @@ public class DogProfileButtonController : PPUIButtonController
         currentProfileIndex = index;
         checkCurrentIndex();
         parentWindow.SetProfile(dogsList[currentProfileIndex]);
-		if (OnSwitchProfile != null)
-			OnSwitchProfile (currentProfileIndex);
+
+		SelectedDogInfo = dogsList [currentProfileIndex].Info;
     }
 
     void nextProfile()
@@ -102,8 +104,13 @@ public class DogProfileButtonController : PPUIButtonController
         }
     }
 
-	public void SetCurrentIndex(int index) {
-		currentProfileIndex = index;
+	public void CalibrateIndex(Dog dog) {
+		for(int i = 0; i < dogsList.Count; i++) {
+			var _dog = dogsList [i];
+			if (_dog.Info == dog.Info) {
+				currentProfileIndex = i;
+				break;
+			}
+		}
 	}
-
 }
