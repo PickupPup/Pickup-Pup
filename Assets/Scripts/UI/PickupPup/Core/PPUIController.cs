@@ -12,7 +12,6 @@ public class PPUIController : MonoBehaviourExtended
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
-	protected DogSlot selectedSlot;
     protected PromptID promptID;
 
     [SerializeField]
@@ -88,7 +87,6 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-			selectedSlot = dog.OccupiedSlot;
 			handleDogSlotClicked(dog);
 		}
 	}

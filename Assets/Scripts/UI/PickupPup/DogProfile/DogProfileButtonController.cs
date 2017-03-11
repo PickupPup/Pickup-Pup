@@ -17,8 +17,15 @@ public class DogProfileButtonController : PPUIButtonController
     }
 
 	public DogDescriptor SelectedDogInfo {
-		get; 
-		private set;
+		get {
+			return dogsList [currentProfileIndex].Info;
+		}
+	}
+
+	public int SelectedIndex {
+		get {
+			return currentProfileIndex;
+		}
 	}
 
     #endregion
@@ -68,8 +75,6 @@ public class DogProfileButtonController : PPUIButtonController
         currentProfileIndex = index;
         checkCurrentIndex();
         parentWindow.SetProfile(dogsList[currentProfileIndex]);
-
-		SelectedDogInfo = dogsList [currentProfileIndex].Info;
     }
 
     void nextProfile()
