@@ -3,6 +3,7 @@
  * Description: Controls the shelter screen
  */
 
+using UnityEngine;
 using k = PPGlobal;
 
 public class PPShelterUIController : PPUIController
@@ -24,6 +25,8 @@ public class PPShelterUIController : PPUIController
 
     DogSlot[] availableDogPortraits;
     DogDatabase database;
+	[SerializeField] DogShelterProfile dogShelterProfile;
+
 
     #region MonoBehaviourExtended Overrides
 
@@ -32,6 +35,10 @@ public class PPShelterUIController : PPUIController
         promptID = PromptID.ShelterPrompt;
         base.setReferences();
         availableDogPortraits = GetComponentsInChildren<DogSlot>();
+		if (dogProfileObject != null)
+        {
+			dogProfileObject.SetActive(false);
+        }
     }
 
     protected override void fetchReferences()
@@ -39,7 +46,9 @@ public class PPShelterUIController : PPUIController
         base.fetchReferences();
         database = DogDatabase.GetInstance;
         EventController.Event(PPEvent.LoadShelter);
-        populateAvailableDogs(database);
+
+        var dogs = populateAvailableDogs(database);
+		dogShelterProfile.buttonController.Init (dogShelterProfile, dogs);
     }
 
     #endregion
@@ -57,7 +66,7 @@ public class PPShelterUIController : PPUIController
 
     #endregion
 
-    void populateAvailableDogs(DogDatabase database)
+	DogDescriptor[] populateAvailableDogs(DogDatabase database)
     {
         DogDescriptor[] dogs;
         if(tuning.SampleShelterDogsInOrder)
@@ -78,6 +87,7 @@ public class PPShelterUIController : PPUIController
         {
             availableDogPortraits[i].Init(dogs[i]);
         }
+		return dogs;
     }
 
     // Fills in empty slots w/ already adopted dogs
@@ -94,7 +104,7 @@ public class PPShelterUIController : PPUIController
                 revisedList[i] = adoptedList[indexInAdopted--];
             }
         }
-        return revisedList;
+		return revisedList;
     }
 
 	// Need a void version in order to use w/ the Unity Event System (on a button click)
@@ -105,15 +115,29 @@ public class PPShelterUIController : PPUIController
 
     public bool TryAdopt()
     {
-        DogDescriptor selectedDogInfo = selectedDog.Info;
-        if(gameController.TryAdoptDog(selectedDogInfo))
+		if(gameController.TryAdoptDog(dogShelterProfile.buttonController.SelectedDogInfo))
         {
-            ((DogShelterSlot) selectedDog.OccupiedSlot).ShowAdopt();
+			DogShelterSlot slot = (DogShelterSlot)availableDogPortraits [dogShelterProfile.buttonController.SelectedIndex];
+			slot.ShowAdopt();
             EventController.Event(k.GetPlayEvent(k.ADOPT));
-            EventController.Event(k.GetPlayEvent(k.BARK), selectedDogInfo.Breed.Size);
+			EventController.Event(k.GetPlayEvent(k.BARK), dogShelterProfile.buttonController.SelectedDogInfo.Breed.Size);
             return true;
         }
         return false;
+    }
+
+    protected override void showDogProfile(Dog dog)
+    {      
+        if(dataController.AdoptedDogs.Contains(dog.Info))
+        {
+            base.showDogProfile(dog);
+        }
+        else
+        {
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
+			dogShelterProfile.gameObject.SetActive(true);
+			dogShelterProfile.SetProfile(dog);
+        }     
     }
 
 }

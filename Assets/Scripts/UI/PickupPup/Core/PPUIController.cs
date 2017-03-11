@@ -12,11 +12,10 @@ public class PPUIController : MonoBehaviourExtended
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
-    protected Dog selectedDog;
     protected PromptID promptID;
 
     [SerializeField]
-    GameObject dogProfileObject;
+    protected GameObject dogProfileObject;
     [SerializeField]
     CurrencyPanel currencyPanel;
     [SerializeField]
@@ -88,12 +87,11 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-            selectedDog = dog;
-			handleDogSlotClicked(selectedDog);
+			handleDogSlotClicked(dog);
 		}
 	}
 
-	void handleDogSlotClicked(Dog dog)
+	protected virtual void handleDogSlotClicked(Dog dog)
 	{
         if (dogProfileObject)
         {
@@ -101,13 +99,14 @@ public class PPUIController : MonoBehaviourExtended
         }
 	}
 
-    void showDogProfile(Dog dog)
+    protected virtual void showDogProfile(Dog dog)
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         dogProfileObject.SetActive(true);
         if(!dogProfile)
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
+			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
         dogProfile.Show();
         dogProfile.SetProfile(dog);
