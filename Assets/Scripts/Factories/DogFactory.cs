@@ -20,7 +20,7 @@ public class DogFactory : ObjectFactory<Dog>
 	public override Dog Create(params object[] args)
 	{
 		DogDescriptor info = args[0] as DogDescriptor;
-		// <onoBehaviours must be assigned to GameObjects
+		// MonoBehaviours must be assigned to GameObjects:
 		GameObject dogObject = new GameObject();
 		if(this.hideGameObjects)
 		{

@@ -4,12 +4,17 @@
  * Usage: Should be attached to a GameObject with a button on it or in its children
  */
 
+using UnityEngine;
 using UnityEngine.UI;
+
 using k = PPGlobal;
 
 public class PPUIButton : PPUIElement 
 {
 	protected Button button;
+
+    [SerializeField]
+    bool createsPopup;
 
 	MonoAction onClickAction;
 
@@ -39,11 +44,19 @@ public class PPUIButton : PPUIElement
 		callOnClickAction();
 	}
 
+    protected virtual bool shouldPlayClickSFX()
+    {
+        return !createsPopup;
+    }
+
 	void callOnClickAction()
 	{
 		if(onClickAction != null)
 		{
-            EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
+            if(shouldPlayClickSFX())
+            {
+                EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
+            }
 			onClickAction();
 		}
 	}

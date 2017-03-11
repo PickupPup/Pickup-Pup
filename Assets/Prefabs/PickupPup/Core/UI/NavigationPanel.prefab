@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 114783973811704244}
   - component: {fileID: 114210034840450176}
   - component: {fileID: 114481001009264316}
-  - component: {fileID: 114097393329010990}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -130,20 +129,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788649665501640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveOnSceneChange: 0
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
---- !u!114 &114097393329010990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1338601481486712}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
@@ -374,6 +359,8 @@ MonoBehaviour:
   menuButton: {fileID: 114210034840450176}
   adoptButton: {fileID: 114475208094521876}
   mainMenu: {fileID: 0}
+  dogProfile: {fileID: 0}
+  dogBrowser: {fileID: 0}
 --- !u!114 &114735677547880892
 MonoBehaviour:
   m_ObjectHideFlags: 1

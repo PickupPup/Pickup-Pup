@@ -15,7 +15,7 @@ public class Dog : MobileObjectBehaviour
 		get 
 		{
             checkReferences();
-            return dataController.ScoutingDogs.Contains(this.Info);
+            return dataController.CheckIsScouting(this);
 		}
 	}
 
@@ -97,6 +97,21 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+    public Sprite WorldSprite
+    {
+        get
+        {
+            if(hasDescriptor)
+            {
+                return descriptor.WorldSprite;
+            }
+            else
+            {
+                return DogDatabase.DefaultSprite;
+            }
+        }
+    }
+
 	public int ScoutingIndex
 	{
 		get
@@ -104,6 +119,22 @@ public class Dog : MobileObjectBehaviour
 			return descriptor.ScoutingSlotIndex;
 		}
 	}
+
+    public PPScene MostRecentRoom
+    {
+        get
+        {
+            return descriptor.MostRecentRoom;
+        }
+    }
+
+    public bool IsInWorld
+    {
+        get
+        {
+            return descriptor.IsInWorld;
+        }
+    }
 
 	public bool HasSlot
 	{
@@ -170,7 +201,6 @@ public class Dog : MobileObjectBehaviour
 	protected PPTimer scoutingTimer;
 
 	DogDescriptor descriptor;
-    PPGameController gameController;
 	PPData.DogAction onScoutingTimerEnd;
 	PPData.DogActionf onScoutingTimerChange;
     PPData.NamedCurrencyAction onGiftAction;
@@ -334,6 +364,16 @@ public class Dog : MobileObjectBehaviour
 		this.descriptor = descriptor;
 		this.descriptor.LinkToDog(this);
 	}
+
+    public void EnterRoom(PPScene room)
+    {
+        this.descriptor.EnterRoom(room);
+    }
+
+    public void LeaveRoom()
+    {
+        this.descriptor.LeaveRoom();
+    }
 
 	protected override void setReferences()
 	{

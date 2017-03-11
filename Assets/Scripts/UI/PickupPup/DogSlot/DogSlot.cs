@@ -52,6 +52,11 @@ public class DogSlot : PPUIElement
 		}
 		set
 		{
+            // A chance to handle any cleanup
+            if(_dog != null)
+            {
+                handleChangeDog(_dog);
+            }
 			// Assigns slot to new dog (assuming the new value is not null)
 			if(value != null)
 			{
@@ -86,7 +91,9 @@ public class DogSlot : PPUIElement
 	MonoAction onFreeSlotClick;
 	PPData.DogAction onOccupiedSlotClick;
 
+    [SerializeField]
     Image backgroundImage;
+    [SerializeField]
     protected Image dogImage;
 
     bool setBackground = true;
@@ -98,8 +105,9 @@ public class DogSlot : PPUIElement
 	{
 		base.setReferences();
 		button = ensureReference<UIButton>(searchChildren:true);
-		subscribeToUIButton();
-	}
+        subscribeToUIButton();
+        enable(HasDog);
+    }
 
 	#endregion
 
@@ -109,14 +117,18 @@ public class DogSlot : PPUIElement
 	}
 
     // Initializes this Dog Slot by setting component references and displaying its sprites.
-    public virtual void Init(DogDescriptor dog, Sprite dogSprite)
+    public virtual void Init(DogDescriptor dog)
     {
-		this.dogInfo = dog;
-
-		images = GetComponentsInChildren<Image>();
-        dogImage = images[1];
-
-		setSlot(this.dogInfo, dogSprite);
+        this.dogInfo = dog;
+		setSlot(this.dogInfo);
+        if(this.dogInfo.IsLinkedToDog)
+        {
+            this.dog = dogInfo.PeekDogLink;
+        }
+        else
+        {
+            this.dog = new DogFactory(hideGameObjects:true).Create(this.dogInfo);
+        }
     }
 
 	public virtual void ClearSlot()
@@ -126,14 +138,15 @@ public class DogSlot : PPUIElement
 		if(this.dogImage)
 		{
         	this.dogImage.sprite = null;
-		}
-	}
+        }
+        enable(false);
+    }
 
 	public virtual void Init(Dog dog, bool inScoutingSelectMode)
 	{
 		this.inScoutingSelectMode = inScoutingSelectMode;
 		this.dog = dog;
-		Init(dog.Info, dog.Portrait);
+		Init(dog.Info);
 	}
 
 	public void ExecuteClick()
@@ -176,9 +189,17 @@ public class DogSlot : PPUIElement
 		onFreeSlotClick -= clickAction;
 	}
 
+    protected virtual void handleChangeDog(Dog previousDog)
+    {
+        // NOTHING
+    }
+
     protected void toggleButtonActive(bool isActive)
     {
-        button.ToggleInteractable(isActive);
+        if(button)
+        {
+            button.ToggleInteractable(isActive);
+        }
     }
 
 	protected bool subscribeToUIButton()
@@ -215,7 +236,7 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-	void callOnFreeSlotClick()
+	protected virtual void callOnFreeSlotClick()
 	{
 		if(onFreeSlotClick != null)
 		{
@@ -223,11 +244,33 @@ public class DogSlot : PPUIElement
 		}
 	}
 
-    // Sets the dog and background sprites of this Dog Slot.
-	void setSlot(DogDescriptor dog, Sprite dogSprite, Sprite backgroundSprite = null)
+    protected override void enable(bool isEnabled)
     {
-        dogImage.sprite = dogSprite;
-		if(backgroundImage)
+		if(dogImage)
+		{
+        	dogImage.enabled = dogImage.sprite;
+		}
+        if (backgroundImage)
+        {
+            backgroundImage.enabled = isEnabled;
+        }
+		if(button && dogImage)
+		{
+        	button.ToggleInteractable(dogImage.sprite);
+		}
+    }
+
+    protected virtual void setSprite(DogDescriptor dog)
+    {
+        dogImage.sprite = dog.Portrait;
+    }
+
+    // Sets the dog and background sprites of this Dog Slot.
+	void setSlot(DogDescriptor dog, Sprite backgroundSprite = null)
+    {      
+        setSprite(dog);
+        enable(true);
+        if (backgroundImage)
         {
         	backgroundImage.sprite = backgroundSprite;
 		}

@@ -64,8 +64,23 @@ public class DogDatabase : Database<DogDatabase>
 			return this.dogs;
 		}
 	}
-
+        
 	#endregion
+
+    PPTuning tuning
+    {
+        get
+        {
+            if(dataController)
+            {
+                return dataController.Tuning;
+            }
+            else
+            {
+                return PPGameController.GetInstance.Tuning;
+            }
+        }
+    }
 
 	[SerializeField]
 	DogBreed[] breeds;
@@ -137,10 +152,46 @@ public class DogDatabase : Database<DogDatabase>
             {
                 dog = randomizer.GetRandom();
             }
-            while(mustBeUnadopted && dataController.CheckAdopted(dog));
+            while(mustBeUnadopted && dataController.CheckIsAdopted(dog));
         }
         return dog;
 	}
+
+    public DogDescriptor[] GetInOrderDogList(
+        int count, 
+        bool skipAdopted, 
+        int startIndex = 0, 
+        int maxMasterIndex = int.MaxValue)
+    {
+        DogDescriptor[] dogList = new DogDescriptor[count];
+        int endIndex = startIndex + count - ZERO_INDEX_OFFSET;
+        int indexInMasterDogArr = startIndex;
+        for(int i = startIndex; i <= endIndex; i++)
+        {
+            if(ArrayUtil.InRange(this.dogs, indexInMasterDogArr))
+            {
+                do
+                {
+                    if(indexInMasterDogArr < maxMasterIndex)
+                    {
+                        dogList[i] = this.dogs[indexInMasterDogArr];
+                    }
+                    else
+                    {
+                        dogList[i] = DogDescriptor.Default();
+                    }
+                }
+                while(skipAdopted &&
+                    ArrayUtil.InRange(this.dogs, indexInMasterDogArr) &&
+                    dataController.CheckIsAdopted(this.dogs[indexInMasterDogArr++]));
+            }
+            else
+            {
+                dogList[i] = DogDescriptor.Default();
+            }
+        }
+        return dogList; 
+    }
 
 	// Returns sequence based on day
 	// Always starts from beginning unless start index is different
@@ -168,13 +219,13 @@ public class DogDatabase : Database<DogDatabase>
         // Allows for faster lookup versus O(n) to check array
         HashSet<DogDescriptor> currentCandidates = new HashSet<DogDescriptor>(candidates);
         // -1 for zero offset
-        int currentIndex = startIndex + count - 1;
+        int currentIndex = startIndex + count - ZERO_INDEX_OFFSET;
         int totalDogCount = fullSequence.Length;
         for(int i = 0; i < candidates.Length; i++)
         {
-            while(currentIndex < totalDogCount && dataController.CheckAdopted(candidates[i]))
+            while(currentIndex < totalDogCount && dataController.CheckIsAdopted(candidates[i]))
             {
-                if(!dataController.CheckAdopted(fullSequence[currentIndex]))
+                if(!dataController.CheckIsAdopted(fullSequence[currentIndex]))
                 {
                     if(!currentCandidates.Contains(fullSequence[currentIndex]))
                     {
@@ -188,7 +239,7 @@ public class DogDatabase : Database<DogDatabase>
                 currentIndex++;
             }
             currentIndex++;
-            if(currentIndex >= totalDogCount && dataController.CheckAdopted(candidates[i]))
+            if(currentIndex >= totalDogCount && dataController.CheckIsAdopted(candidates[i]))
             {
                 candidates[i] = DogDescriptor.Default();
             }
@@ -214,11 +265,30 @@ public class DogDatabase : Database<DogDatabase>
 			return sprite;
 		}
 	}
-		
+	
+    public Sprite GetDogWorldSprite(DogDescriptor dog)
+    {
+        string spriteName = getWorldSpriteName(dog);
+        Sprite sprite;
+        if(dog == null || !spriteDatabase.TryGetSprite(spriteName, out sprite))
+        {
+            return DefaultSprite;
+        }
+        else
+        {
+            return sprite;
+        }
+    }
+
 	string getSpriteName(DogDescriptor dog)
 	{
 		return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, dog.Color);
 	}
+
+    string getWorldSpriteName(DogDescriptor dog)
+    {
+        return string.Format("{0}{1}{2}", dog.BreedName, JOIN_CHAR, tuning.InWorldKey);
+    }
 
 	public override bool TryInit()
 	{

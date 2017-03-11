@@ -29,6 +29,7 @@ public class PPGlobal : Global
     public const string REDEEM_GIFT = REDEEM + GIFT;
     public const string TAP_TO_REDEEM = "TapToRedeem";
     public const string DOG_FOOD_ICON = "dogfood_icon";
+    public const string WORLD = "World";
 
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;
@@ -38,6 +39,8 @@ public class PPGlobal : Global
     public const int DEFAULT_DOG_FOOD = 0;
     public const int DEFAULT_HOME_SLOTS = 10;
     public const int DEFAULT_CURRENCY_AMOUNT = 0;
+
+    #region Audio System
 
     public const string PLAY = "Play";
     public const string STOP = "Stop";
@@ -53,6 +56,8 @@ public class PPGlobal : Global
     public const string MENU_CLICK = "MenuClick";
     public const string MENU_POPUP = "MenuPopup";
     public const string MAIN_MUSIC = "MainMusic";
+    public const string CHANGE_SCENE = "ChangeScene";
+    public const string ADD_FOOD = "AddFood";
 
     public static string GetPlayEvent(string id)
     {
@@ -63,5 +68,7 @@ public class PPGlobal : Global
     {
         return STOP + id;
     }
+
+    #endregion
 
 }

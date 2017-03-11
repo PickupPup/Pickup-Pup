@@ -76,8 +76,7 @@ public class DogBrowser : PPUIElement, IPageable
 			return dogSlots.Length;
 		}
 	}
-
-
+        
 	[SerializeField]
 	int defaultStartPage;
 	[SerializeField]
@@ -125,15 +124,22 @@ public class DogBrowser : PPUIElement, IPageable
 	public void Open(bool inScoutingSelectMode, int pageIndex = NONE_VALUE)
 	{
 		this.inScoutingSelectMode = inScoutingSelectMode;
+        this.currentlySelectedPageIndex = pageIndex;
 		checkReferences();
 		Show();
-		SwitchToPage(pageIndex, onClickPageButton:false);
 	}
 
     #region UIElement Overrides
 
+    public override void Show()
+    {
+        base.Show();
+        SwitchToPage(this.currentlySelectedPageIndex, onClickPageButton:false);
+    }
+
     public override void Hide()
 	{
+        checkReferences();
         if(gameController.HasTargetSlot)
         {
             gameController.ClearTargetSlot();

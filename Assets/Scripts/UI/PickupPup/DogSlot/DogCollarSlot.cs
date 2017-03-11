@@ -69,7 +69,7 @@ public class DogCollarSlot : DogSlot
         base.cleanupReferences();
         if (dog)
         {
-            dog.UnsubscribeFromScoutingTimerChange(handleDogTimerChange);
+            unsubscribeFromDogEvents(dog);
         }
     }
 
@@ -83,17 +83,35 @@ public class DogCollarSlot : DogSlot
 
     #region DogSlot Overrides
 
-    public override void Init(DogDescriptor dog, Sprite dogSprite)
+    public override void Init(DogDescriptor dog)
     {
-        base.Init(dog, dogSprite);
+        base.Init(dog);
         nameText.text = dog.Name;
+        if(this.dog)
+        {
+            initDogScouting(this.dog, onResume:false);
+        }
     }
 
     public override void Init(Dog dog, bool inScoutingSelectMode)
     {
-        initDogScouting(dog, onResume: false);
         base.Init(dog, inScoutingSelectMode);
-        dataController.SaveGame();
+        initDogScouting(dog, onResume: false);
+    }
+
+    protected override void handleChangeDog(Dog previousDog)
+    {
+        base.handleChangeDog(previousDog);
+        unsubscribeFromDogEvents(previousDog);
+    }
+
+    protected override void callOnOccupiedSlotClick(Dog dog)
+    {
+        // Safeguard against opening up tons of copies of the panel
+        if(!redeemDisplayIsOpen)
+        {
+            base.callOnOccupiedSlotClick(dog);
+        }
     }
 
     #endregion
@@ -106,6 +124,12 @@ public class DogCollarSlot : DogSlot
     }
 
     #endregion
+
+    void unsubscribeFromDogEvents(Dog dog)
+    {
+        unsubscribeTimerEvents(dog);
+        unsubscribeGiftEvents(dog);
+    }
 
     public void ResumeScouting(Dog dog)
     {
@@ -126,7 +150,7 @@ public class DogCollarSlot : DogSlot
             timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
-        dataController.SaveGame();
+        dataController.SendDogToScout(dog);
     }
 
     public override void ClearSlot()
@@ -139,6 +163,7 @@ public class DogCollarSlot : DogSlot
         redeemableGiftDisplay.SetActive(false);
         base.ClearSlot();
         dogImage.sprite = collarSprite;
+        enable(true);
     }
 
     public Dog BringDogIndoors()
@@ -153,28 +178,23 @@ public class DogCollarSlot : DogSlot
     {
         this.redeemDisplayIsOpen = isOpen;
     }
-
-    protected override void callOnOccupiedSlotClick(Dog dog)
-    {
-        // Safeguard against opening up tons of copies of the panel
-        if (!redeemDisplayIsOpen)
-        {
-            base.callOnOccupiedSlotClick(dog);
-        }
-    }
-
+        
     void subscribeTimerEvents(Dog dog)
     {
         dog.SubscribeToScoutingTimerChange(handleDogTimerChange);
         scoutingDisplay.SubscribeToTimerEnd(dog);
     }
 
+    void unsubscribeTimerEvents(Dog dog)
+    {
+        dog.UnsubscribeFromScoutingTimerChange(handleDogTimerChange);
+        scoutingDisplay.UnsubscribeFromTimerEnd(dog);
+    }
+
     void initDogScouting(Dog dog, bool onResume)
     {
-        if (!onResume)
-        {
-            dog.TrySendToScout();
-        }
+        unsubscribeFromDogEvents(dog);
+        dog.TrySendToScout();
         subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
         toggleButtonActive(false);
@@ -206,9 +226,18 @@ public class DogCollarSlot : DogSlot
     void handleGiftFound(CurrencyData gift)
     {
         toggleButtonActive(true);
-        redeemableGiftDisplay.SetActive(true);
-        redeemableGiftIcon.sprite = gift.Icon;
-        timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
+        if(redeemableGiftDisplay)
+        {
+            redeemableGiftDisplay.SetActive(true);
+        }
+        if(redeemableGiftIcon)
+        {
+            redeemableGiftIcon.sprite = gift.Icon;
+        }
+        if(timerText)
+        {
+            timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
+        }
     }
 
     void handleGiftRedeemed(CurrencyData gift)

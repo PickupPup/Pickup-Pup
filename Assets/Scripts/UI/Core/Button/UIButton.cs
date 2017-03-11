@@ -9,6 +9,14 @@ using UnityEngine.UI;
 
 public class UIButton : UIInteractable
 {
+    public bool Interactable
+    {
+        get
+        {
+            return button.interactable;
+        }
+    }
+
 	protected bool hasButtonGraphic
 	{
 		get
@@ -17,11 +25,22 @@ public class UIButton : UIInteractable
 		}
 	}
 
+    public Image ButtonGraphic
+    {
+        get
+        {
+            return buttonGraphic;
+        }
+    }
+
 	protected Button button;
 	protected Image buttonGraphic;
 	protected MonoAction clickAction;
 	protected Color selectedColor = Color.gray;
 	protected Color deselectedColor = Color.white;
+
+    [SerializeField]
+    bool suppressStandardSFX;
 
 	public void SubscribeToClick(MonoAction action)
 	{
@@ -36,7 +55,6 @@ public class UIButton : UIInteractable
 	public void UnsubscribeAllClickActions()
 	{
 		this.clickAction = null;
-
 	}
 
 	public void Select()
@@ -57,7 +75,8 @@ public class UIButton : UIInteractable
 
 	public void ToggleInteractable(bool isInteractable)
 	{
-		button.interactable = isInteractable;
+        checkReferences();
+        button.interactable = isInteractable;
 	}
 
 	#region MonoBehaviourExtended Overrides
@@ -76,6 +95,14 @@ public class UIButton : UIInteractable
 		{
 			setButtonColors();
 		}
+        if(suppressStandardSFX)
+        {
+            UISFXHandler sfxHandler = GetComponent<UISFXHandler>();
+            if(sfxHandler)
+            {
+                sfxHandler.ToggleActive(false);
+            }
+        }
 	}
 		
 	public override bool TryUnsubscribeAll()

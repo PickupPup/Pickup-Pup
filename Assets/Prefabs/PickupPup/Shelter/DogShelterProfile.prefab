@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 222887675072195166}
   - component: {fileID: 114594267024604114}
   - component: {fileID: 114990475635054266}
+  - component: {fileID: 114041301470148104}
   m_Layer: 5
   m_Name: AdoptButton
   m_TagString: Untagged
@@ -637,6 +638,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Breed
+--- !u!114 &114041301470148104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1338912397147898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114042059557386222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -988,6 +1004,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114303309020401570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1327,7 +1344,7 @@ MonoBehaviour:
   collarSlot: {fileID: 114984513812053680}
   priceTag: {fileID: 114813881980820032}
   adoptButtonText: {fileID: 114621311768175322}
-  adoptButton: {fileID: 114990475635054266}
+  adoptButton: {fileID: 114041301470148104}
 --- !u!114 &114621311768175322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1554,6 +1571,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114813881980820032
 MonoBehaviour:
   m_ObjectHideFlags: 1

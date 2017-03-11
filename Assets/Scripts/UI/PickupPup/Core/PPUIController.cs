@@ -9,7 +9,6 @@ using k = PPGlobal;
 public class PPUIController : MonoBehaviourExtended 
 {
     protected PPSceneController sceneController;
-    protected PPGameController gameController;
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
@@ -96,7 +95,6 @@ public class PPUIController : MonoBehaviourExtended
 
 	protected virtual void handleDogSlotClicked(Dog dog)
 	{
-        // TODO: Insert universal dog slot handle code here
         if (dogProfileObject)
         {
         	showDogProfile(dog);
@@ -112,12 +110,14 @@ public class PPUIController : MonoBehaviourExtended
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
 			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
+        dogProfile.Show();
         dogProfile.SetProfile(dog);
     }
 
     protected virtual void showPopupPrompt()
     {
         PopupPrompt prompt = (PopupPrompt) Instantiate(popupPrompt);
+        prompt.GetComponent<PPUIElement>().Show();
         prompt.Set(promptID);
     }
 

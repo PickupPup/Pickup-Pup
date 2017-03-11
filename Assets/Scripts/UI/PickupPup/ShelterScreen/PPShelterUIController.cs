@@ -8,6 +8,21 @@ using k = PPGlobal;
 
 public class PPShelterUIController : PPUIController
 {
+    PPTuning tuning 
+    {
+        get
+        {
+            if(gameController) 
+            {
+                return gameController.Tuning;
+            }
+            else
+            {
+                return new PPTuning();
+            }
+        }
+    }
+
     DogSlot[] availableDogPortraits;
     DogDatabase database;
 	[SerializeField] DogShelterProfile dogShelterProfile;
@@ -53,13 +68,43 @@ public class PPShelterUIController : PPUIController
 
 	DogDescriptor[] populateAvailableDogs(DogDatabase database)
     {
-        DogDescriptor[] dogs = database.GetDailyRandomDogList(availableDogPortraits.Length);
+        DogDescriptor[] dogs;
+        if(tuning.SampleShelterDogsInOrder)
+        {
+            dogs = database.GetInOrderDogList(
+                availableDogPortraits.Length, 
+                skipAdopted:true, 
+                startIndex:0, 
+                maxMasterIndex:(tuning.ShouldLimitShelterDogs ? 
+                    tuning.ShelterDogsLimit : int.MaxValue));
+        }
+        else
+        {
+            dogs = database.GetDailyRandomDogList(availableDogPortraits.Length);
+        }
+        dogs = fillInEmptySlots(dogs);
         for(int i = 0; i < dogs.Length; i++)
         {
-            DogDescriptor dog = dogs[i];
-			availableDogPortraits[i].Init(dog, database.GetDogSprite(dog));
+            availableDogPortraits[i].Init(dogs[i]);
         }
 		return dogs;
+    }
+
+    // Fills in empty slots w/ already adopted dogs
+    DogDescriptor[] fillInEmptySlots(DogDescriptor[] listWithEmpties)
+    {
+        DogDescriptor[] revisedList = listWithEmpties;
+        DogDescriptor[] adoptedList = dataController.AdoptedDogs.ToArray();
+        int indexInAdopted = adoptedList.Length - SINGLE_VALUE;
+        for(int i = 0; i < listWithEmpties.Length; i++)
+        {
+            if(listWithEmpties[i].EmptyDescriptor && 
+                ArrayUtil.InRange(adoptedList, indexInAdopted))
+            {
+                revisedList[i] = adoptedList[indexInAdopted--];
+            }
+        }
+		return revisedList;
     }
 
 	// Need a void version in order to use w/ the Unity Event System (on a button click)

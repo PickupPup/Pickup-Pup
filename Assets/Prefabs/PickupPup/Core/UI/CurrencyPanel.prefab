@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 222223893893772314}
   - component: {fileID: 114263860003944070}
   - component: {fileID: 114880352566092046}
+  - component: {fileID: 114231211558410614}
   m_Layer: 5
   m_Name: CoinButton
   m_TagString: Untagged
@@ -411,6 +412,7 @@ GameObject:
   - component: {fileID: 222326147110339038}
   - component: {fileID: 114034638618204744}
   - component: {fileID: 114902884280022178}
+  - component: {fileID: 114366861327635960}
   m_Layer: 5
   m_Name: DogFoodButton
   m_TagString: Untagged
@@ -656,6 +658,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114231211558410614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262614276610696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114244209061073100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -862,6 +878,20 @@ MonoBehaviour:
   termKey:
   - Free
   - Gift
+--- !u!114 &114366861327635960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1842413798279076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114397618120542780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1530,18 +1560,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114034638618204744}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114903143335202076

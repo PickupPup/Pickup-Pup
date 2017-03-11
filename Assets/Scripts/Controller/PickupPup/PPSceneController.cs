@@ -6,6 +6,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using k = PPGlobal;
+
 public class PPSceneController : SingletonController<PPSceneController> 
 {
 	#region Instance Accessors
@@ -65,23 +67,29 @@ public class PPSceneController : SingletonController<PPSceneController>
         LoadScene(PPScene.Yard);
     }
 
-    public void LoadScene(PPScene scene) 
+    public void LoadScene(PPScene scene, bool refreshSystems = false) 
 	{
 		dataController.SaveGame();
 		SceneManager.LoadScene((int) scene);
+        if(shouldPlayChangeSceneSFX(scene))
+        {
+            EventController.Event(k.GetPlayEvent(k.CHANGE_SCENE));
+        }
         if(shouldZeroOutSceneLoadingBlockersOnLoadScene)
         {
             zeroOutSceneLoadingBlockers();
         }
+        if(refreshSystems)
+        {
+            gameController.HandleSystemReset(caller:this);
+        }
 	}
 
-    // TODO: Implement an async version of this that stores a queue of scene loading requests 
-    // TODO: Implement an async version to loan scenes additively
-    public bool RequestLoadScene(PPScene scene)
+    public bool RequestLoadScene(PPScene scene, bool refreshSystems)
     {
         if(canLoadScene(scene)) 
         {
-            LoadScene(scene);
+            LoadScene(scene, refreshSystems);
             return true;
         }
         else 
@@ -90,9 +98,9 @@ public class PPSceneController : SingletonController<PPSceneController>
         }
     }
         
-    public bool RequestReloadCurrentScene()
+    public bool RequestReloadCurrentScene(bool refreshSystems = false)
     {
-        return RequestLoadScene(CurrentScene);
+        return RequestLoadScene(CurrentScene, refreshSystems);
     }
 
     public void BlockFromLoadingScenes()
@@ -104,6 +112,16 @@ public class PPSceneController : SingletonController<PPSceneController>
     {
         sceneLoadingBlockers--;
     }
+        
+    public bool IsWorldScene(PPScene scene)
+    {
+        return scene == PPScene.LivingRoom || scene == PPScene.Yard;
+    }
+
+	public void LoadSceneAsync(PPScene scene)
+	{
+		SceneManager.LoadSceneAsync((int) scene);
+	}
 
     // Currently does not care about which scene, but may need more advanced logic in future
     bool canLoadScene(PPScene scene)
@@ -116,10 +134,16 @@ public class PPSceneController : SingletonController<PPSceneController>
         sceneLoadingBlockers = NONE_VALUE;
     }
 
+    bool shouldPlayChangeSceneSFX(PPScene newScene)
+    {
+        return IsWorldScene(newScene);
+    }
+
 }
 
 public enum PPScene 
 {
+    Loading,
     Shelter,
     Shop,
     LivingRoom,

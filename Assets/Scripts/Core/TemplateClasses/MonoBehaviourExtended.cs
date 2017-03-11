@@ -10,6 +10,7 @@ using k = Global;
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
     protected PPDataController dataController;
+    protected PPGameController gameController;
 
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
@@ -177,6 +178,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
         {
             this.dataController = PPDataController.GetInstance;
         }
+        if(!this.gameController)
+        {
+            this.gameController = PPGameController.GetInstance;
+        }
 	}
 		
 	protected virtual void checkReferences()
@@ -193,7 +198,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 	protected virtual void cleanupReferences() 
 	{
-		// NOTHING
+        unsubscribeEvents();
 	}
 
 	protected virtual void handleNamedEvent(string eventName) 

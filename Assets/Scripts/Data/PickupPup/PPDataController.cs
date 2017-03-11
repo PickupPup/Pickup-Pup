@@ -10,6 +10,8 @@ using k = PPGlobal;
 
 public class PPDataController : DataController, ICurrencySystem 
 {
+    const bool FREE_STARTING_DOGS_ENABLED = false;
+
 	#region Static Accessors
 
 	// Casts the singleton from the superclass:
@@ -57,6 +59,14 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+    public DogDescriptor[] AvailableDogs
+    {
+        get
+        {
+            return currentGame.AvailableDogs;
+        }
+    }
+
 	public int DogCount 
 	{
 		get 
@@ -86,6 +96,22 @@ public class PPDataController : DataController, ICurrencySystem
         get
         {
             return currentGame.HasGiftToRedeem;
+        }
+    }
+
+    public bool ShouldGiveFreeDogs 
+    {
+        get
+        {
+            return FREE_STARTING_DOGS_ENABLED && DogCount == NONE_VALUE;
+        }
+    }
+
+    public PPTuning Tuning
+    {
+        get
+        {
+            return gameController.Tuning;
         }
     }
 
@@ -228,6 +254,22 @@ public class PPDataController : DataController, ICurrencySystem
 		SaveGame();
 	}
 
+    public void ClearScoutingDogs()
+    {
+        currentGame.ClearScoutingDogs();
+        SaveGame();
+    }
+
+    public bool CheckIsScouting(DogDescriptor dog)
+    {
+        return ScoutingDogs.Contains(dog);
+    }
+
+    public bool CheckIsScouting(Dog dog)
+    {
+        return CheckIsScouting(dog.Info);
+    }
+
     public void Adopt(DogDescriptor dog)
     {
         currentGame.Adopt(dog);
@@ -235,7 +277,7 @@ public class PPDataController : DataController, ICurrencySystem
         SaveGame();
     }
 
-    public bool CheckAdopted(DogDescriptor dog)
+    public bool CheckIsAdopted(DogDescriptor dog)
     {
         return AdoptedDogs.Contains(dog);
     }
@@ -311,6 +353,23 @@ public class PPDataController : DataController, ICurrencySystem
     }
 
     #endregion
+
+    public void EnterRoom(DogDescriptor dog, PPScene room)
+    {
+        currentGame.EnterRoom(dog, room);
+        SaveGame();
+    }
+
+    public void LeaveRoom(DogDescriptor dog)
+    {
+        currentGame.LeaveRoom(dog);
+        SaveGame();
+    }
+
+    public DogDescriptor[] DogsInRoom(PPScene room)
+    {
+        return currentGame.DogsInRoom(room);
+    }
 
 	public void StartDailyGiftCountdown(PPTimer timer)
 	{
