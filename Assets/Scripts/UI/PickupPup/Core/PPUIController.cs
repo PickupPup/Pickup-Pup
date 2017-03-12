@@ -113,16 +113,12 @@ public class PPUIController : MonoBehaviourExtended
         if(dataController.CheckIsAdopted(dog.Info))
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
-<<<<<<< HEAD
-            dogProfileObject.SetActive(true);
-=======
 			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
->>>>>>> master
         }
         else
         {
             dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
-            dogProfileShelterObject.SetActive(true);
+            dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
 
         dogProfile.Show();
