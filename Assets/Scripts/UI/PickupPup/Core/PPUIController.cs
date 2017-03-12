@@ -31,15 +31,15 @@ public class PPUIController : MonoBehaviourExtended
     protected override void setReferences()
     {
         base.setReferences();
-        if (dogProfileObject != null)
+        if(dogProfileObject)
         {
             dogProfileObject.SetActive(false);
         }
-        if (dogProfileShelterObject != null)
+        if(dogProfileShelterObject)
         {
             dogProfileShelterObject.SetActive(false);
         }
-        if (popupPrompt)
+        if(popupPrompt)
         {
             showPopupPrompt();
         }
@@ -101,7 +101,7 @@ public class PPUIController : MonoBehaviourExtended
 
 	void handleDogSlotClicked(Dog dog)
 	{
-        if (dogProfileObject)
+        if(dogProfileObject)
         {
         	showDogProfile(dog);
         }
@@ -112,7 +112,7 @@ public class PPUIController : MonoBehaviourExtended
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         
 
-        if (dataController.AdoptedDogs.Contains(dog.Info))
+        if(dataController.CheckIsAdopted(dog.Info))
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
             dogProfileObject.SetActive(true);
