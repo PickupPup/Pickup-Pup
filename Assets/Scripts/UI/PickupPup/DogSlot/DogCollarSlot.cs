@@ -281,14 +281,11 @@ public class DogCollarSlot : DogSlot
         float startPoint = timeRemaining / totalTime;
         float endPoint = (timeRemaining - 1) / totalTime;
         float lerpTime = 0;
-        float currentPoint = startPoint;
-        float lerpLimit = 1;
 
-        while(lerpTime < lerpLimit)
+        while(lerpTime < 1)
         {
             lerpTime += Time.deltaTime;
-            currentPoint = Mathf.Lerp(startPoint, endPoint, lerpTime);
-            radialFill.fillAmount = currentPoint;
+            radialFill.fillAmount = Mathf.Lerp(startPoint, endPoint, lerpTime);
             yield return new WaitForEndOfFrame();
         }
     }
