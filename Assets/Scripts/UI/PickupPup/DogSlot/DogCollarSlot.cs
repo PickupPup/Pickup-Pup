@@ -5,9 +5,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using k = PPGlobal;
 
 public class DogCollarSlot : DogSlot
@@ -55,7 +53,7 @@ public class DogCollarSlot : DogSlot
     protected override void checkReferences()
     {
         base.checkReferences();
-        if (dogImageOverride)
+        if(dogImageOverride)
         {
             dogImage = dogImageOverride;
         }
@@ -64,7 +62,7 @@ public class DogCollarSlot : DogSlot
     protected override void handleSceneLoaded(int sceneIndex)
     {
         base.handleSceneLoaded(sceneIndex);
-        if (!timerText)
+        if(!timerText)
         {
             timerText = gameObject.AddComponent<Text>();
         }
@@ -73,7 +71,7 @@ public class DogCollarSlot : DogSlot
     protected override void cleanupReferences()
     {
         base.cleanupReferences();
-        if (dog)
+        if(dog)
         {
             unsubscribeFromDogEvents(dog);
         }
@@ -114,7 +112,7 @@ public class DogCollarSlot : DogSlot
     protected override void callOnOccupiedSlotClick(Dog dog)
     {
         // Safeguard against opening up tons of copies of the panel
-        if (!redeemDisplayIsOpen)
+        if(!redeemDisplayIsOpen)
         {
             base.callOnOccupiedSlotClick(dog);
         }
@@ -147,7 +145,7 @@ public class DogCollarSlot : DogSlot
         subscribeTimerEvents(dog);
         dog.SetTimer(dogInfo.TimeRemainingScouting);
 		initDogScouting(dog, onResume: true);
-        if (dog.HasRedeemableGift)
+        if(dog.HasRedeemableGift)
         {
             handleGiftFound(dog.PeekAtGift);
         }
@@ -205,7 +203,7 @@ public class DogCollarSlot : DogSlot
         subscribeGiftEvents(dog);
         toggleButtonActive(false);
 
-        //BP Set radialFill to be active and cover button and start lerp from the beginning
+        //BP Activate radial fill image and start lerp coroutine
         radialFill.gameObject.SetActive(true);
         float timeTotal = dog.Info.TotalTimeToReturn;
         float timeRemaining = dog.Info.TimeRemainingScouting;
@@ -238,7 +236,7 @@ public class DogCollarSlot : DogSlot
     void handleGiftFound(CurrencyData gift)
     {
         // BP gift has been found, so deactivate the radial fill image
-        if (radialFill != null)
+        if(radialFill != null)
         {
             radialFill.gameObject.SetActive(false);
         }
@@ -265,12 +263,11 @@ public class DogCollarSlot : DogSlot
 
     void handleDogTimerChange(Dog dog, float timeRemaining)
     {
-        if (timerText && !dog.HasRedeemableGift)
+        if(timerText && !dog.HasRedeemableGift)
         {
             timerText.text = dog.RemainingTimeScoutingStr;
 
-            //BP Instead of doing the below line, start a lerp every second that lerps the radial fill down a second
-            //radialFill.fillAmount = timeRemaining / dog.Info.TotalTimeToReturn;
+            //BP Start a lerp every second that lerps the radial fill down a second
             float totalTime = dog.Info.TotalTimeToReturn;
             StartCoroutine(lerpRadial(timeRemaining, totalTime));
             
@@ -283,13 +280,14 @@ public class DogCollarSlot : DogSlot
     {
         float startPoint = timeRemaining / totalTime;
         float endPoint = (timeRemaining - 1) / totalTime;
-        float t = 0;
+        float lerpTime = 0;
         float currentPoint = startPoint;
+        float lerpLimit = 1;
 
-        while (t < 1)
+        while(lerpTime < lerpLimit)
         {
-            t += Time.deltaTime;
-            currentPoint = Mathf.Lerp(startPoint, endPoint, t);
+            lerpTime += Time.deltaTime;
+            currentPoint = Mathf.Lerp(startPoint, endPoint, lerpTime);
             radialFill.fillAmount = currentPoint;
             yield return new WaitForEndOfFrame();
         }
