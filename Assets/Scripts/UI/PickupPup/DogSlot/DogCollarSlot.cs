@@ -207,8 +207,9 @@ public class DogCollarSlot : DogSlot
 
         //BP Set radialFill to be active and cover button and start lerp from the beginning
         radialFill.gameObject.SetActive(true);
-        float totalTime = dog.Info.TotalTimeToReturn;
-        StartCoroutine(lerpRadial(totalTime, totalTime));
+        float timeTotal = dog.Info.TotalTimeToReturn;
+        float timeRemaining = dog.Info.TimeRemainingScouting;
+        StartCoroutine(lerpRadial(timeRemaining, timeTotal));
     }
 
     void subscribeGiftEvents(Dog dog)
