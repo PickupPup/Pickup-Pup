@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+ * Authors: Tim Ng, Isaiah Mann
+ * Description: Used for ad handling
+ */
+
+#if UNITY_ADS
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
@@ -47,3 +54,5 @@ public class UnityAdsButton : MonoBehaviour
         }
     }
 }
+
+#endif
