@@ -177,7 +177,8 @@ public class AudioController : Controller, IAudioController
 		float clipTime = 0;
 		if(file.Type == AudioType.FX) 
 		{
-			if(source.clip != null && source.isPlaying) 
+            //BP added '!' before source.isPlaying, fixes duplicate audiosources via coroutine
+			if(source.clip != null && !source.isPlaying) 
 			{ 
 				if(!AudioUtil.IsMuted(AudioType.FX)) 
 				{
