@@ -11,6 +11,17 @@ using k = PPGlobal;
 
 public class DogProfile : PPUIElement
 {
+	DogProfileButtonController _buttonController;
+	public DogProfileButtonController buttonController {
+		get {
+			if (!_buttonController)
+			{
+				_buttonController = transform.GetComponent<DogProfileButtonController>();
+			}
+			return _buttonController;
+		}
+	}
+
     [SerializeField]
     Text nameText;
     [SerializeField]
@@ -22,11 +33,6 @@ public class DogProfile : PPUIElement
     [SerializeField]
     Image collarImage;
 
-    [SerializeField]
-    GameObject leftArrow;
-    [SerializeField]
-    GameObject rightArrow;
-    [SerializeField]
     UIElement[] descriptionFields; // Normal description must come first (not special)
 
     [SerializeField]
@@ -44,11 +50,12 @@ public class DogProfile : PPUIElement
     {
         base.setReferences();
 
-        descriptionText = new Text[descriptionFields.Length];
-        for(int i = 0; i < descriptionText.Length; i++)
-        {
-            descriptionText[i] = descriptionFields[i].GetComponentInChildren<Text>();
-        }
+		if (descriptionFields != null) {
+			descriptionText = new Text[descriptionFields.Length];
+			for (int i = 0; i < descriptionText.Length; i++) {
+				descriptionText [i] = descriptionFields [i].GetComponentInChildren<Text> ();
+			}
+		}
     }
 
     #endregion
@@ -66,21 +73,20 @@ public class DogProfile : PPUIElement
     public virtual void SetProfile(Dog dog)
     {
         dogInfo = dog.Info;
+		buttonController.CalibrateIndex (dog);
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-        for(int i = 0; i < descriptionText.Length; i++)
-        {
-            if (i < dogInfo.Descriptions.Length)
-            {
-                descriptionFields[i].Show();
-                descriptionText[i].text = dogInfo.Descriptions[i];
-            }
-            else
-            {
-                descriptionFields[i].Hide();
-            }
-        }
+		if (descriptionText != null) {
+			for (int i = 0; i < descriptionText.Length; i++) {
+				if (i < dogInfo.Descriptions.Length) {
+					descriptionFields [i].Show ();
+					descriptionText [i].text = dogInfo.Descriptions [i];
+				} else {
+					descriptionFields [i].Hide ();
+				}
+			}
+		}
 
         dogThumbnail.sprite = dog.Portrait;
         // TODO: Get collar icon

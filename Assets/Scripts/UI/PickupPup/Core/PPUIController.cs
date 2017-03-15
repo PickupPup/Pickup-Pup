@@ -12,11 +12,12 @@ public class PPUIController : MonoBehaviourExtended
 	protected PPGiftController giftController;
 
     protected DogProfile dogProfile;
-    protected Dog selectedDog;
     protected PromptID promptID;
 
     [SerializeField]
-    GameObject dogProfileObject;
+    protected GameObject dogProfileObject;
+    [SerializeField]
+    GameObject dogProfileShelterObject;
     [SerializeField]
     CurrencyPanel currencyPanel;
     [SerializeField]
@@ -29,9 +30,13 @@ public class PPUIController : MonoBehaviourExtended
     protected override void setReferences()
     {
         base.setReferences();
-        if (dogProfileObject != null)
+        if(dogProfileObject)
         {
             dogProfileObject.SetActive(false);
+        }
+        if(dogProfileShelterObject)
+        {
+            dogProfileShelterObject.SetActive(false);
         }
         if(popupPrompt)
         {
@@ -88,27 +93,34 @@ public class PPUIController : MonoBehaviourExtended
 	{
 		if(gameEvent == PPEvent.ClickDogSlot)
 		{
-            selectedDog = dog;
-			handleDogSlotClicked(selectedDog);
+			handleDogSlotClicked(dog);
 		}
 	}
 
-	void handleDogSlotClicked(Dog dog)
+	protected virtual void handleDogSlotClicked(Dog dog)
 	{
-        if (dogProfileObject)
+        if(dogProfileObject)
         {
         	showDogProfile(dog);
         }
 	}
 
-    void showDogProfile(Dog dog)
+    protected virtual void showDogProfile(Dog dog)
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-        dogProfileObject.SetActive(true);
-        if(!dogProfile)
+        
+
+        if(dataController.CheckIsAdopted(dog.Info))
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
+			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
+        else
+        {
+            dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
+            dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
+        }
+
         dogProfile.Show();
         dogProfile.SetProfile(dog);
     }
