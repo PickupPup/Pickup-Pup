@@ -10,6 +10,18 @@ using k = PPGlobal;
 
 public class RedeemDisplay : PPUIElement 
 {
+    #region Instance Accessors
+
+    public GiftItem GetGift
+    {
+        get
+        {
+            return gift;
+        }
+    }
+
+    #endregion
+
     [SerializeField]
     Image dogPortrait;
     [SerializeField]
@@ -53,8 +65,9 @@ public class RedeemDisplay : PPUIElement
     #endregion
 
 	// Fade-in Background
-	public void OnEnable()
+	new public void OnEnable()
 	{
+        base.OnEnable();
         checkReferences();
 		background.CrossFadeAlpha(0.7f, 0.2f, false);
 	}

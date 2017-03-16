@@ -35,7 +35,7 @@ public class PPShopUIController : PPUIController
         for (int i = 0; i < itemSlots.Length; i++)
         {
             ShopItemSlot itemSlot = itemSlots[i];
-            itemSlot.Init(this, items[i]);
+            itemSlot.Init(items[i]);
         }
     }
 

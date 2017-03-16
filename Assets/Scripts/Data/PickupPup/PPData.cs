@@ -38,7 +38,25 @@ public abstract class PPData
     public delegate void NamedCurrencyAction(string actionName, CurrencyData currency);
     public delegate void CurrencyAction(CurrencyData currency);
 
-	protected DogDatabase database;
+	protected DogDatabase database
+    {
+        get
+        {
+            if(_database == null)
+            {
+                _database = DogDatabase.GetInstance;
+            }
+            return _database;
+        }
+        set
+        {
+            _database = value;
+        }
+    }
+
+    // Need to prevent serializing this to avoid a serialization loop:
+    [NonSerialized]
+    DogDatabase _database;
 
 	public PPData() 
 	{
