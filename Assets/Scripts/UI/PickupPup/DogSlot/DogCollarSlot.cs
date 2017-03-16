@@ -1,10 +1,11 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Ben Page
  * Description: Controls a DogSlot for a Dog that's outside (has name and timer).
  */
 
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using k = PPGlobal;
 
 public class DogCollarSlot : DogSlot
@@ -30,6 +31,9 @@ public class DogCollarSlot : DogSlot
     GameObject redeemableGiftDisplay;
     [SerializeField]
     Sprite collarSprite;
+    //BP radialFill holds the image that covers the button when dog is 'scouting'
+    [SerializeField]
+    Image radialFill;
 
     bool redeemDisplayIsOpen = false;
 
@@ -49,7 +53,7 @@ public class DogCollarSlot : DogSlot
     protected override void checkReferences()
     {
         base.checkReferences();
-        if (dogImageOverride)
+        if(dogImageOverride)
         {
             dogImage = dogImageOverride;
         }
@@ -58,7 +62,7 @@ public class DogCollarSlot : DogSlot
     protected override void handleSceneLoaded(int sceneIndex)
     {
         base.handleSceneLoaded(sceneIndex);
-        if (!timerText)
+        if(!timerText)
         {
             timerText = gameObject.AddComponent<Text>();
         }
@@ -67,7 +71,7 @@ public class DogCollarSlot : DogSlot
     protected override void cleanupReferences()
     {
         base.cleanupReferences();
-        if (dog)
+        if(dog)
         {
             unsubscribeFromDogEvents(dog);
         }
@@ -140,13 +144,13 @@ public class DogCollarSlot : DogSlot
         dogImage.sprite = dog.Portrait;
         subscribeTimerEvents(dog);
         dog.SetTimer(dogInfo.TimeRemainingScouting);
-        if (dog.HasRedeemableGift)
+		initDogScouting(dog, onResume: true);
+        if(dog.HasRedeemableGift)
         {
             handleGiftFound(dog.PeekAtGift);
         }
         else
         {
-            initDogScouting(dog, onResume: true);
             timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
@@ -198,6 +202,12 @@ public class DogCollarSlot : DogSlot
         subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
         toggleButtonActive(false);
+
+        //BP Activate radial fill image and start lerp coroutine
+        radialFill.gameObject.SetActive(true);
+        float timeTotal = dog.Info.TotalTimeToReturn;
+        float timeRemaining = dog.Info.TimeRemainingScouting;
+        StartCoroutine(lerpRadial(timeRemaining, timeTotal));
     }
 
     void subscribeGiftEvents(Dog dog)
@@ -225,6 +235,11 @@ public class DogCollarSlot : DogSlot
 
     void handleGiftFound(CurrencyData gift)
     {
+        // BP gift has been found, so deactivate the radial fill image
+        if(radialFill != null)
+        {
+            radialFill.gameObject.SetActive(false);
+        }
         toggleButtonActive(true);
         if(redeemableGiftDisplay)
         {
@@ -248,10 +263,30 @@ public class DogCollarSlot : DogSlot
 
     void handleDogTimerChange(Dog dog, float timeRemaining)
     {
-        if (timerText && !dog.HasRedeemableGift)
+        if(timerText && !dog.HasRedeemableGift)
         {
             timerText.text = dog.RemainingTimeScoutingStr;
+
+            //BP Start a lerp every second that lerps the radial fill down a second
+            float totalTime = dog.Info.TotalTimeToReturn;
+            StartCoroutine(lerpRadial(timeRemaining, totalTime));
+            
+
         }
     }
+    
+    //BP Makes transition smooth from second to second
+    IEnumerator lerpRadial(float timeRemaining, float totalTime)
+    {
+        float startPoint = timeRemaining / totalTime;
+        float endPoint = (timeRemaining - 1) / totalTime;
+        float lerpTime = 0;
 
+        while(lerpTime < 1)
+        {
+            lerpTime += Time.deltaTime;
+            radialFill.fillAmount = Mathf.Lerp(startPoint, endPoint, lerpTime);
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

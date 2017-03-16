@@ -203,7 +203,6 @@ public class ScoutingDisplay : PPUIElement
 
 	void handleClickFreeSlot() 
 	{
-        refreshScoutingDogs();
 		dogBrowser.Open(inScoutingSelectMode:true);
 		dogBrowser.SubscribeToDogClick(handleDogSelected);
 	}
