@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 222010418720906228}
   - component: {fileID: 114546456945507006}
   m_Layer: 5
-  m_Name: DescriptionText
+  m_Name: SpecialDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 222463401753851396}
   - component: {fileID: 114946958905833358}
   m_Layer: 5
-  m_Name: SpecialDescriptionText
+  m_Name: GeneralDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 114849265316004062}
   - component: {fileID: 114124458648663892}
   m_Layer: 5
-  m_Name: SpecialDescriptionField
+  m_Name: GeneralDescriptionField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 114372857672047018}
   - component: {fileID: 114887773477957654}
   m_Layer: 5
-  m_Name: DescriptionField
+  m_Name: SpecialDescriptionField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Description
+  m_Text: Special Description
 --- !u!114 &114548563022123350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1104,6 +1104,9 @@ MonoBehaviour:
   breedText: {fileID: 114708809905128850}
   dogThumbnail: {fileID: 114569111408898918}
   collarImage: {fileID: 114105206250486876}
+  descriptionFields:
+  - {fileID: 114124458648663892}
+  - {fileID: 114887773477957654}
   iconsObject: {fileID: 1388039298375222}
   rehomeButton: {fileID: 114321554440247928}
   collarSlot: {fileID: 114213218655212642}
@@ -1461,7 +1464,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Special Description
+  m_Text: General Description
 --- !u!222 &222010418720906228
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -1629,8 +1632,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 123.59837, y: -120}
-  m_SizeDelta: {x: 247.19675, y: 57.5}
+  m_AnchoredPosition: {x: 142.54915, y: -120}
+  m_SizeDelta: {x: 285.0983, y: 57.5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224101618433542170
 RectTransform:
@@ -1667,8 +1670,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 123.59837, y: -120}
-  m_SizeDelta: {x: 247.19675, y: 120}
+  m_AnchoredPosition: {x: 142.54915, y: -120}
+  m_SizeDelta: {x: 285.0983, y: 120}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224103923597820020
 RectTransform:
@@ -1706,8 +1709,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 123.59837, y: 0}
-  m_SizeDelta: {x: 247.19675, y: 100}
+  m_AnchoredPosition: {x: 142.54915, y: 0}
+  m_SizeDelta: {x: 285.0983, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224174032817008700
 RectTransform:
@@ -1802,8 +1805,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 123.59837, y: -57.5}
-  m_SizeDelta: {x: 247.19675, y: 57.5}
+  m_AnchoredPosition: {x: 142.54915, y: -57.5}
+  m_SizeDelta: {x: 285.0983, y: 57.5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224317115091731262
 RectTransform:
@@ -1913,8 +1916,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 71.09837, y: -52.5}
-  m_SizeDelta: {x: 142.19675, y: 47.5}
+  m_AnchoredPosition: {x: 90.04915, y: -52.5}
+  m_SizeDelta: {x: 180.0983, y: 47.5}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224590560563046542
 RectTransform:
@@ -1974,8 +1977,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 71.09837, y: 0}
-  m_SizeDelta: {x: 142.19675, y: 47.5}
+  m_AnchoredPosition: {x: 90.04915, y: 0}
+  m_SizeDelta: {x: 180.0983, y: 47.5}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &224708642269547438
 RectTransform:
