@@ -11,6 +11,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 {
     protected PPDataController dataController;
     protected PPGameController gameController;
+	protected AnalyticsController analytics;
 
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
@@ -182,6 +183,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
         {
             this.gameController = PPGameController.GetInstance;
         }
+		if(!this.analytics)
+		{
+			this.analytics = AnalyticsController.Instance;
+		}
 	}
 		
 	protected virtual void checkReferences()

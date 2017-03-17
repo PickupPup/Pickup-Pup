@@ -17,6 +17,8 @@ public class PPUIController : MonoBehaviourExtended
     [SerializeField]
     protected GameObject dogProfileObject;
     [SerializeField]
+    GameObject dogProfileShelterObject;
+    [SerializeField]
     CurrencyPanel currencyPanel;
     [SerializeField]
     NavigationPanel navigationPanel;
@@ -28,9 +30,13 @@ public class PPUIController : MonoBehaviourExtended
     protected override void setReferences()
     {
         base.setReferences();
-        if (dogProfileObject != null)
+        if(dogProfileObject)
         {
             dogProfileObject.SetActive(false);
+        }
+        if(dogProfileShelterObject)
+        {
+            dogProfileShelterObject.SetActive(false);
         }
         if(popupPrompt)
         {
@@ -93,7 +99,7 @@ public class PPUIController : MonoBehaviourExtended
 
 	protected virtual void handleDogSlotClicked(Dog dog)
 	{
-        if (dogProfileObject)
+        if(dogProfileObject)
         {
         	showDogProfile(dog);
         }
@@ -102,12 +108,19 @@ public class PPUIController : MonoBehaviourExtended
     protected virtual void showDogProfile(Dog dog)
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-        dogProfileObject.SetActive(true);
-        if(!dogProfile)
+        
+
+        if(dataController.CheckIsAdopted(dog.Info))
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
 			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
+        else
+        {
+            dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
+            dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
+        }
+
         dogProfile.Show();
         dogProfile.SetProfile(dog);
     }
