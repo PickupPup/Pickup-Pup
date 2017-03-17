@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author(s): Isaiah Mann, Ben Page
  * Description: Used to control the audio in the game
  * Is a Singleton (only one instance can exist at once)
  * Attached to a GameObject that stores all AudioSources and AudioListeners for the game
@@ -169,6 +169,19 @@ public class AudioController : Controller, IAudioController
 		onMusicVolumeChange(this.musicVolume);
 	}
 
+    //BP Does the sound already have a channel (ie an audiosource on 'Audio' gameObject)?
+    bool ClipHasChannel(AudioFile file)
+    {
+        foreach(AudioSource channel in channels.Values)
+        {
+            if(file.Clip.name.CompareTo(channel.clip.name) == 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 	public void Play(AudioFile file) 
 	{
 		AudioSource source = getChannel(file.Channel);
@@ -177,8 +190,7 @@ public class AudioController : Controller, IAudioController
 		float clipTime = 0;
 		if(file.Type == AudioType.FX) 
 		{
-            //BP added '!' before source.isPlaying, fixes duplicate audiosources via coroutine
-			if(source.clip != null && !source.isPlaying) 
+			if(source.clip != null && source.isPlaying && !ClipHasChannel(file)) 
 			{ 
 				if(!AudioUtil.IsMuted(AudioType.FX)) 
 				{
