@@ -12,9 +12,9 @@ using k = PPGlobal;
 public class UISFXHandler : UIInteractable, IPointerDownHandler
 {
     [SerializeField]
-    string clickEnabledSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
+    public string clickEnabledSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
     [SerializeField]
-    string clickDisabledSoundEvent = k.GetPlayEvent(k.EMPTY);
+    public string clickDisabledSoundEvent = k.GetPlayEvent(k.EMPTY);
 
     Button button;
 

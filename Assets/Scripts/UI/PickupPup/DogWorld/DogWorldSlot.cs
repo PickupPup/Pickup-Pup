@@ -50,5 +50,15 @@ public class DogWorldSlot : DogSlot
     {
         this.Show();
     }
-        
+
+    /* BP Unsure if this is the preferred spot for this, but we apparently
+     * don't want any click noises for the dogs in the scene (yard/living room) */
+    void Start()
+    {
+        UISFXHandler sfxScript = GetComponent<UISFXHandler>();
+        sfxScript.clickEnabledSoundEvent = "";
+        sfxScript.clickDisabledSoundEvent = "";
+
+    }
+
 }
