@@ -235,6 +235,7 @@ public class DogCollarSlot : DogSlot
 
     void handleGiftFound(CurrencyData gift)
     {
+        EventController.Event(k.GetPlayEvent(k.DOG_RETURN));
         // BP gift has been found, so deactivate the radial fill image
         if(radialFill != null)
         {
