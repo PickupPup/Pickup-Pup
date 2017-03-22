@@ -109,15 +109,15 @@ public class PPUIController : MonoBehaviourExtended
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         
-
-        if(dataController.CheckIsAdopted(dog.Info))
+        if(dog.OccupiedSlot.GetComponent<DogShelterSlot>())
         {
-            dogProfile = dogProfileObject.GetComponent<DogProfile>();
-			dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
+            dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
         }
         else
         {
-            dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
+            
+            //dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
+            dogProfile = dogProfileObject.GetComponent<DogProfile>();
             dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
 
