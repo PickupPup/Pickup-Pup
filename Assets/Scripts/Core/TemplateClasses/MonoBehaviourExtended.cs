@@ -4,7 +4,10 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using System.Collections;
+
 using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
@@ -57,11 +60,6 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		StopAllCoroutines();
 	}
 
-	void OnLevelWasLoaded(int level) 
-	{
-		handleSceneLoaded(level);
-	}
-
 	void OnApplicationQuit()
 	{
 		handleGameQuit();
@@ -81,6 +79,16 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 		#endif
 	}
+
+    protected virtual void OnEnable()
+    {
+        SceneManager.sceneLoaded += handleSceneLoaded;
+    }
+
+    protected virtual void OnDisable()
+    {
+        SceneManager.sceneLoaded -= handleSceneLoaded;
+    }
 
 	#endregion
 
@@ -150,6 +158,12 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 
 	#endregion
 
+    // Adapted from: http://answers.unity3d.com/questions/1174255/since-onlevelwasloaded-is-deprecated-in-540b15-wha.html
+    protected virtual void handleSceneLoaded(Scene scene, LoadSceneMode loadingMode)
+    {
+        handleSceneLoaded(scene.buildIndex);   
+    }
+        
 	protected virtual void subscribeEvents() 
 	{
 		EventController.Subscribe(handleNamedEvent);

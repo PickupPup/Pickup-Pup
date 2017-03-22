@@ -103,7 +103,7 @@ public class PPDataController : DataController, ICurrencySystem
     {
         get
         {
-            return FREE_STARTING_DOGS_ENABLED && DogCount == NONE_VALUE;
+            return DogCount == NONE_VALUE && FREE_STARTING_DOGS_ENABLED;
         }
     }
 

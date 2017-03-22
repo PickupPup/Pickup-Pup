@@ -21,7 +21,7 @@ public class PriceTag : PPUIElement
     int price;
     string priceStr;
     CurrencyData currency;
-    CurrencyType currencyType;
+    CurrencyType currencyType = default(CurrencyType);
 
     PPTuning tuning;
 

@@ -19,7 +19,6 @@ public class ShopItemSlot : PPUIElement
     PriceTag priceTag;
     Button button;
 
-    PPShopUIController shop;
     ShopItem item;
 
     #region MonoBehaviourExtended Overrides
@@ -56,10 +55,9 @@ public class ShopItemSlot : PPUIElement
 
     #endregion
 
-    public void Init(PPShopUIController shop, ShopItem item)
+    public void Init(ShopItem item)
     {
         subscribeEvents();
-        this.shop = shop;
         this.item = item;
         if (nameText)
         {

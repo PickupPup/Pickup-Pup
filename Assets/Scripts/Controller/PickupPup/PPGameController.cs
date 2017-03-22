@@ -485,7 +485,6 @@ public class PPGameController : GameController, ICurrencySystem
 
 	void handleDogDoneScouting(Dog dog) 
 	{
-        EventController.Event(k.GetPlayEvent(k.DOG_RETURN));
 		// Need to unsubscribe to prevent stacking even subscriptions if dog is sent to scout again:
 		dog.UnsubscribeFromScoutingTimerEnd(handleDogDoneScouting);
 	}

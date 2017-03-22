@@ -32,7 +32,7 @@ public class DogProfile : PPUIElement
     Image dogThumbnail;
     [SerializeField]
     Image collarImage;
-
+	[SerializeField]
     UIElement[] descriptionFields; // Normal description must come first (not special)
 
     [SerializeField]

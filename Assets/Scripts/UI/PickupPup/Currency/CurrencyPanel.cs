@@ -69,6 +69,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     void initDailyGiftCountdown(PPTuning tuning, PPDataController dataController)
 	{
 		float dailyGiftCountdown;
+        bool redeemOnTimerReset = false;
 		if(dataController.DailyGiftCountdownRunning && !overrideTimerForDebugging)
 		{
 			dailyGiftCountdown = dataController.DailyGiftCountdown;
@@ -76,10 +77,11 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 		else
 		{
             dailyGiftCountdown = tuning.WaitTimeSecsForDailyGift;
+            redeemOnTimerReset = true;
 		}
 		dailyGiftTimer = new PPTimer(dailyGiftCountdown, tuning.DefaultTimerTimeStepSec);
         giftTimerDisplay.SetText(dailyGiftTimer.TimeRemainingStr);
-        if(dataController.HasGiftToRedeem)
+        if(dataController.HasGiftToRedeem || redeemOnTimerReset)
         {
             makeDailyGiftAvailableToRedeem();
         }

@@ -113,7 +113,7 @@ public class PPUIController : MonoBehaviourExtended
         if(dataController.CheckIsAdopted(dog.Info))
         {
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
-			dogProfile.buttonController.Init (dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
+			dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
         else
         {
