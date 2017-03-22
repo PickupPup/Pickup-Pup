@@ -566,6 +566,16 @@ Prefab:
       propertyPath: mainMenu
       value: 
       objectReference: {fileID: 620899895}
+    - target: {fileID: 114698850581731470, guid: 437a8e25c3d87014d9fe0dc6bbeab588,
+        type: 2}
+      propertyPath: dogBrowser
+      value: 
+      objectReference: {fileID: 287192428}
+    - target: {fileID: 114698850581731470, guid: 437a8e25c3d87014d9fe0dc6bbeab588,
+        type: 2}
+      propertyPath: dogProfile
+      value: 
+      objectReference: {fileID: 907075790}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 437a8e25c3d87014d9fe0dc6bbeab588, type: 2}
   m_IsPrefabParent: 0
@@ -686,6 +696,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1591753207718850, guid: 5e902f4eaa4321f41bb54172e44ac30c,
     type: 2}
   m_PrefabInternal: {fileID: 907075788}
+--- !u!114 &907075790 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114641595301203040, guid: 5e902f4eaa4321f41bb54172e44ac30c,
+    type: 2}
+  m_PrefabInternal: {fileID: 907075788}
+  m_Script: {fileID: 11500000, guid: 7e590b60e7a843544b03feaa957fcc8d, type: 3}
 --- !u!114 &937168497 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114698850581731470, guid: 437a8e25c3d87014d9fe0dc6bbeab588,
