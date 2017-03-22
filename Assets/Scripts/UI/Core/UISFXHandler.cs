@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page
  * Description: For playing SFX on events
  * Usage: [no notes]
  */

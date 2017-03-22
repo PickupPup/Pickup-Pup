@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Author: Grace Barrett-Snyder, Ben Page
  * Description: Controls the navigation buttons (menu and adopt) on every screen
  */
 

@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author(s): Isaiah Mann, Ben Page
  * Description: Dogs will travel / be displayed at this spot on the UI
  * Usage: [no notes]
  */
