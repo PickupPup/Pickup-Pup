@@ -113,14 +113,15 @@ public class DogBrowser : PPUIElement, IPageable
         base.subscribeEvents();
         EventController.Subscribe(handleAdoptEvent);
     }
-
-    #endregion
-
-    void OnEnable()
+        
+    protected override void OnEnable()
     {
+        base.OnEnable();
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
     }
 		
+    #endregion
+
 	public void Open(bool inScoutingSelectMode, int pageIndex = NONE_VALUE)
 	{
 		this.inScoutingSelectMode = inScoutingSelectMode;

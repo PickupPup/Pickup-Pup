@@ -82,6 +82,14 @@ public class DogSlot : PPUIElement
 		}
 	}
 
+    protected bool backgroundIsSet
+    {
+        get
+        {
+            return setBackground;
+        }
+    }
+
     protected DogDescriptor dogInfo;
 
     protected Image[] images;

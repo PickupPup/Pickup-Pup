@@ -105,7 +105,7 @@ public class DogProfileButtonController : PPUIButtonController
         }
         else if(currentProfileIndex >= dogsList.Count)
         {
-            currentProfileIndex = currentProfileIndex = 0;
+            currentProfileIndex = 0;
         }
     }
 

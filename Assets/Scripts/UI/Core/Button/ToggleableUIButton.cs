@@ -54,7 +54,7 @@ public class ToggleableUIButton : UILabeledButton
 		toggleOffAction -= toggleAction;
 	}
 		
-	public virtual void Toggle() 
+    public override void Toggle() 
 	{
 		toggled = !toggled;
 		if(shouldShowToggle) 

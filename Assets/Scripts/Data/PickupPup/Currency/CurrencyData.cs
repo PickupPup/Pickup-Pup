@@ -45,7 +45,9 @@ public class CurrencyData : ResourceLoader
 
     #endregion
 
+    [System.NonSerialized]
     protected SpritesheetDatabase spriteDatabase;
+
     protected CurrencyType type;
     protected int amount = 0;
 
