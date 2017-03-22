@@ -115,8 +115,6 @@ public class PPUIController : MonoBehaviourExtended
         }
         else
         {
-            
-            //dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
             dogProfile = dogProfileObject.GetComponent<DogProfile>();
             dogProfile.buttonController.Init(dogProfile, PPDataController.GetInstance.AdoptedDogs.ToArray());
         }
