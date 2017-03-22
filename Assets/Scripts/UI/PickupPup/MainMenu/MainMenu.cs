@@ -53,6 +53,7 @@ public class MainMenu : PPUIElement
     public override void Show()
     {
         base.Show();
+        EventController.Event(k.GetPlayEvent(k.MENU_CLICK));
     }
 
     public void OnShopClick()

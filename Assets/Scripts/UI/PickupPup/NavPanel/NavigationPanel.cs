@@ -42,15 +42,18 @@ public class NavigationPanel : SingletonController<NavigationPanel>
 
     public void OnMenuClick()
     {
+        
         mainMenu.Toggle();
-        if(dogProfile)
+        if(dogProfile.isActiveAndEnabled)
         {
             dogProfile.Hide();
         }
-        if(dogBrowser)
+        if(dogBrowser.isActiveAndEnabled)
         {
             dogBrowser.Hide();
         }
+        
+        
     }
 
     public void OnAdoptClick()
