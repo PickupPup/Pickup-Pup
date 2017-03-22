@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['hasactiveinstance',['HasActiveInstance',['../class_scouting_display.html#a533d92310e469ae699d896438519f86c',1,'ScoutingDisplay']]],
+  ['hasalternatesprites',['hasAlternateSprites',['../class_u_i_element.html#a55306b364249f2cf2ebb4882a9a64cbb',1,'UIElement']]],
+  ['hasbuttongraphic',['hasButtonGraphic',['../class_u_i_button.html#a9d853f7871eae8c65e84c38e76d57800',1,'UIButton']]],
+  ['hascanvasgroup',['hasCanvasGroup',['../class_u_i_element.html#aa1970985e64c43fdfdd70660e3ce674f',1,'UIElement']]],
+  ['hascurrentlanguage',['HasCurrentLanguage',['../class_language_database.html#a92e1e417656ece848e6f0580eecd58e2',1,'LanguageDatabase']]],
+  ['hasdog',['HasDog',['../class_dog_slot.html#a5b83c0a5d9321524668360dd60035c2d',1,'DogSlot.HasDog()'],['../class_gift_report.html#a7d17894cc79416e8a447eaf47d4ed8a3',1,'GiftReport.HasDog()']]],
+  ['hasdoginfo',['hasDogInfo',['../class_dog_slot.html#a7af5a5d5480d53cea72b0e28e11aa8f9',1,'DogSlot']]],
+  ['hasfirstorderexecution',['hasFirstOrderExecution',['../class_game_controller.html#a903000159efae9ee80a26108f7f50425',1,'GameController.hasFirstOrderExecution()'],['../class_controller.html#a622a1cf252487854aa688780c51455c0',1,'Controller.hasFirstOrderExecution()']]],
+  ['hasgifttoredeem',['HasGiftToRedeem',['../class_p_p_data_controller.html#aab076c7ab580cb17112fe1b414506581',1,'PPDataController.HasGiftToRedeem()'],['../class_p_p_game_save.html#ad63d7b67242214714ad893aff4f9fe2f',1,'PPGameSave.HasGiftToRedeem()']]],
+  ['hasimage',['hasImage',['../class_u_i_element.html#a0ab65c0cb72bff155e78db00c3378989',1,'UIElement']]],
+  ['hasinstance',['hasInstance',['../class_singleton_controller.html#a3a95e6a2c22825af0cce1c7bd6f64ff3',1,'SingletonController']]],
+  ['haslanguage',['HasLanguage',['../class_u_i_dict_element.html#a00b5290a667a4c50c27a02b70ab5fac6',1,'UIDictElement']]],
+  ['hasoccupiedslot',['HasOccupiedSlot',['../class_home_slots_data.html#ad22e0e97dcd5914a114fef4a9b2c909e',1,'HomeSlotsData']]],
+  ['hasreceivedswipe',['HasReceivedSwipe',['../class_u_i_element.html#a6681eb6c57542ae3cdd5ad57227115f0',1,'UIElement']]],
+  ['hasredeemablegift',['HasRedeemableGift',['../class_dog.html#a5c24afb817350aa47b9351f35196acc3',1,'Dog']]],
+  ['hassavebuffer',['hasSaveBuffer',['../class_data_controller.html#a3ca6ca4b28b65ddd0a4d7a68a8c5b9a1',1,'DataController']]],
+  ['hasscoutingtimer',['HasScoutingTimer',['../class_dog.html#a48e6693910ae6f40abaa12fd1893722f',1,'Dog']]],
+  ['hasselectedpage',['HasSelectedPage',['../class_dog_browser_button_controller.html#ada87944aee84000d6bf4bb9051a510f1',1,'DogBrowserButtonController']]],
+  ['hasslot',['HasSlot',['../class_dog.html#a908459e3ad3baa68899935ada181c099',1,'Dog']]],
+  ['hastargetslot',['HasTargetSlot',['../class_p_p_game_controller.html#a79ce0075f31fd5cd802d22287b67c969',1,'PPGameController']]],
+  ['hastext',['hasText',['../class_u_i_element.html#a1be94e49b2013eb698173c5ad7cf1940',1,'UIElement']]],
+  ['hasvacantslot',['HasVacantSlot',['../class_home_slots_data.html#a3804fa8ad6c2ca1c51b652ff83ad79b0',1,'HomeSlotsData']]],
+  ['homeslots',['HomeSlots',['../class_p_p_game_controller.html#a448d531c38b897fe346f622e934b9254',1,'PPGameController.HomeSlots()'],['../class_currency_system.html#a965460f10f0380d51f749fc9ecbb1f90',1,'CurrencySystem.HomeSlots()'],['../interface_i_currency_system.html#a392b0376276ec3865452a35b3a988fc2',1,'ICurrencySystem.HomeSlots()'],['../class_p_p_data_controller.html#a35a856d709b9fbafa44eaac87689ad61',1,'PPDataController.HomeSlots()']]]
+];
