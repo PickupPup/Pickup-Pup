@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['icon',['Icon',['../class_coins_data.html#a6f89a6dcc511aa51cbc5101d54496137',1,'CoinsData.Icon()'],['../class_currency_data.html#a084bffb0663bc89c5061462f0c8b5a19',1,'CurrencyData.Icon()'],['../class_dog_food_data.html#ace47f30a244efe35fafe0d407368df38',1,'DogFoodData.Icon()'],['../class_shop_item.html#ab195b9e9eab4d032996a690a2dc9a1af',1,'ShopItem.Icon()']]],
+  ['id',['ID',['../class_data_event.html#a4fdd8764939935e64c3e47e9b8f27224',1,'DataEvent']]],
+  ['info',['Info',['../class_dog.html#a68363106198643f897386117070e5bf7',1,'Dog']]],
+  ['instance',['Instance',['../class_i_a_p_manager.html#a57099258f1102392e956fea3bbdf47ae',1,'IAPManager.Instance()'],['../class_audio_controller.html#a81e017cd55384031d3688e01cc7bd4de',1,'AudioController.Instance()'],['../class_singleton_controller.html#a22cd49037d55829471de369efb04f334',1,'SingletonController.Instance()'],['../class_database.html#ae2e62275c90351a0247166cc6f61bfda',1,'Database.Instance()']]],
+  ['interactable',['Interactable',['../class_u_i_button.html#a9a1662a6a4c75ddeffbd5c59502d8dd6',1,'UIButton']]],
+  ['inworldkey',['InWorldKey',['../class_p_p_tuning.html#a3ffa2ce89d59732a4851311bb1ba2f61',1,'PPTuning']]],
+  ['iscurrentlyfeeding',['IsCurrentlyFeeding',['../class_dog_food_bowl.html#ab5cc5bf429ade03b5b44a9b65a6d0593',1,'DogFoodBowl']]],
+  ['isdefault',['IsDefault',['../class_language.html#a675843052e090bfd9c6d391f7b4cb53b',1,'Language']]],
+  ['isinitialized',['IsInitialized',['../class_database.html#ab230a8469a9bc4384e315a9438e4f2d6',1,'Database.IsInitialized()'],['../class_dog_browser_button_controller.html#a093a49f7624d1d2d28c28d2aca654977',1,'DogBrowserButtonController.IsInitialized()'],['../class_dog_profile_button_controller.html#a06fc00f62eb5fd0887d6d0c61df60749',1,'DogProfileButtonController.IsInitialized()']]],
+  ['isinworld',['IsInWorld',['../class_dog_descriptor.html#a2ddd18b5d7bfe6a615a129ca394ffd8e',1,'DogDescriptor.IsInWorld()'],['../class_dog.html#ad99d8a40186b4a8bacd6cdc3a6428f12',1,'Dog.IsInWorld()']]],
+  ['islinkedtodog',['IsLinkedToDog',['../class_dog_descriptor.html#a50504ee466be0737da468e559e83cbce',1,'DogDescriptor']]],
+  ['ispecialization',['ISpecialization',['../class_dog_breed.html#a91fa37a80c186c1fbddfed7b2727d5c5',1,'DogBreed']]],
+  ['isrunning',['IsRunning',['../interface_i_game_timer.html#a24a48718438c9bd3c04550df9301d0f3',1,'IGameTimer.IsRunning()'],['../class_mono_timer.html#ad73c3b51778853854334ebeb1fdc02fd',1,'MonoTimer.IsRunning()'],['../class_p_p_timer.html#a555c736f77e7ec9b5566f879f645dc59',1,'PPTimer.IsRunning()']]],
+  ['isscouting',['IsScouting',['../class_dog_descriptor.html#a6ad02e500c71832ed3b7ba3cce2cd2e5',1,'DogDescriptor.IsScouting()'],['../class_dog.html#ac4f9e480b95c5140b9277c03f0299663',1,'Dog.IsScouting()']]],
+  ['issinglepagebrowser',['IsSinglePageBrowser',['../class_dog_browser.html#ac4cce9acbe8a5ebefa72c5fa62dbe613',1,'DogBrowser']]],
+  ['issingleton',['isSingleton',['../class_singleton_controller.html#ab1dd5bc6dd2366c3cfa5f4730c3ec0e4',1,'SingletonController']]],
+  ['issupported',['IsSupported',['../class_language.html#ad696b97fe6bbde207beb0dd27eb2d0ff',1,'Language']]],
+  ['istimersetup',['IsTimerSetup',['../class_p_p_timer.html#afc980facee912b6fd25b432fa14b3638',1,'PPTimer']]],
+  ['istoggled',['IsToggled',['../class_toggleable_u_i_button.html#a599e4e3b340e1c6d1500b1a1b16e429a',1,'ToggleableUIButton']]],
+  ['itemname',['ItemName',['../class_shop_item.html#a9130c7a957d2cbf1aec576f7200d2155',1,'ShopItem']]],
+  ['items',['Items',['../class_shop_database.html#a64327e9d266a1bc3068629183e0ae231',1,'ShopDatabase']]]
+];
