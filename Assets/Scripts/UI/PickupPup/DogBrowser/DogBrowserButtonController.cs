@@ -102,7 +102,6 @@ public class DogBrowserButtonController : PPUIButtonController
 	public void SwitchToPage(int pageIndex, bool onClickPageButton)
 	{
         checkReferences();
-        updatePageButtons();
 		if(HasSelectedPage)
 		{
 			// Turn off the last page button 
@@ -177,6 +176,7 @@ public class DogBrowserButtonController : PPUIButtonController
 	ToggleableColorUIButton addPageButton(int pageIndex, bool addingOnInit)
 	{
 		GameObject buttonobject = Instantiate(pageButtonRef, pageButtonParent);
+        buttonobject.SetActive(true);
 		ToggleableColorUIButton pageButton = buttonobject.GetComponent<ToggleableColorUIButton>();
 		if(!addingOnInit)
 		{
@@ -197,7 +197,15 @@ public class DogBrowserButtonController : PPUIButtonController
 		{
 			trimPageButtons(pages);
 		}
-		refreshPageButtonReferences();
+        if(numPages > SINGLE_VALUE)
+        {
+            pageButtonParent.gameObject.SetActive(true);
+            for(int i = 0; i < pages; i++)
+            {
+                pageButtons[i].Show();
+            }
+        }
+        refreshPageButtonReferences();
 	}
 
 	void trimPageButtons(int desiredLength)
