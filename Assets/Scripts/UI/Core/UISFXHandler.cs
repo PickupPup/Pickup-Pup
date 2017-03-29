@@ -56,8 +56,9 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
 
     public void ToggleSoundsEnabled(bool areEnabled)
     {
-        if (areEnabled == false)
+        if (!areEnabled)
         {
+            Debug.Log(areEnabled);
             clickEnabledSoundEvent = "";
             clickDisabledSoundEvent = "";
         }
