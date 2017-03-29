@@ -9,10 +9,17 @@ using k = PPGlobal;
 
 public class MainMenu : PPUIElement
 {
+	[Header("External References")]
     [SerializeField]
     DogBrowser dogBrowser;
     [SerializeField]
     SettingsMenu settingsMenu;
+
+	[Header("Internal References")]
+	[SerializeField]
+	GameObject dogDropdown;
+	[SerializeField]
+	GameObject settingsDropdown;
 
     #region MonoBehaviourExtended Overrides
 
@@ -102,5 +109,15 @@ public class MainMenu : PPUIElement
         // Disabled
         EventController.Event(k.GetPlayEvent(k.EMPTY));
     }
+
+	public void ToggleDogDropdown()
+	{
+		dogDropdown.SetActive(!dogDropdown.activeSelf);
+	}
+
+	public void ToggleSettingsDropdown()
+	{
+		settingsDropdown.SetActive(!settingsDropdown.activeSelf);
+	}
 
 }
