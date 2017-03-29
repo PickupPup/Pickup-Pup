@@ -12,9 +12,9 @@ using k = PPGlobal;
 public class UISFXHandler : UIInteractable, IPointerDownHandler
 {
     [SerializeField]
-    public string clickEnabledSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
+    string clickEnabledSoundEvent = k.GetPlayEvent(k.MENU_CLICK);
     [SerializeField]
-    public string clickDisabledSoundEvent = k.GetPlayEvent(k.EMPTY);
+    string clickDisabledSoundEvent = k.GetPlayEvent(k.EMPTY);
 
     Button button;
 
@@ -34,9 +34,9 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
 
     void IPointerDownHandler.OnPointerDown(PointerEventData ptrEvent)
     {
-        if(isActive)
+        if (isActive)
         {
-            if(button && button.enabled && button.interactable)
+            if (button && button.enabled && button.interactable)
             {
                 EventController.Event(clickEnabledSoundEvent);
             }
@@ -54,4 +54,12 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
         this.isActive = isActive;
     }
 
+    public void ToggleSoundsEnabled(bool areEnabled)
+    {
+        if (areEnabled == false)
+        {
+            clickEnabledSoundEvent = "";
+            clickDisabledSoundEvent = "";
+        }
+    }
 }

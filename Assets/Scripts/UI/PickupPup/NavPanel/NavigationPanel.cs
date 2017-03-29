@@ -44,7 +44,7 @@ public class NavigationPanel : SingletonController<NavigationPanel>
     {
         
         mainMenu.Toggle();
-        if(dogProfile.isActiveAndEnabled)
+        if(dogProfile && dogProfile.isActiveAndEnabled)
         {
             dogProfile.Hide();
         }
