@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author(s): Isaiah Mann, Ben Page
  * Description: Dogs will travel / be displayed at this spot on the UI
  * Usage: [no notes]
  */
@@ -14,6 +14,8 @@ public class DogWorldSlot : DogSlot
     {
         base.setReferences();
         dogImage = GetComponent<Image>();
+        UISFXHandler sfxScript = GetComponent<UISFXHandler>();
+        sfxScript.DisableSounds();
     }
 
     protected override void cleanupReferences()
@@ -50,5 +52,4 @@ public class DogWorldSlot : DogSlot
     {
         this.Show();
     }
-        
 }
