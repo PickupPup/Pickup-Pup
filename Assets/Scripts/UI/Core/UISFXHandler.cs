@@ -58,7 +58,6 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
     {
         if (!areEnabled)
         {
-            Debug.Log(areEnabled);
             clickEnabledSoundEvent = "";
             clickDisabledSoundEvent = "";
         }
