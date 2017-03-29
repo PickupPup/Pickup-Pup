@@ -15,7 +15,7 @@ public class DogWorldSlot : DogSlot
         base.setReferences();
         dogImage = GetComponent<Image>();
         UISFXHandler sfxScript = GetComponent<UISFXHandler>();
-        sfxScript.ToggleSoundsEnabled(false);
+        sfxScript.DisableSounds();
     }
 
     protected override void cleanupReferences()

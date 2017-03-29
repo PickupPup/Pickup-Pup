@@ -48,7 +48,7 @@ public class NavigationPanel : SingletonController<NavigationPanel>
         {
             dogProfile.Hide();
         }
-        if(dogBrowser.isActiveAndEnabled)
+        if(dogBrowser && dogBrowser.isActiveAndEnabled)
         {
             dogBrowser.Hide();
         }

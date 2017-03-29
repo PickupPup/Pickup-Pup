@@ -54,12 +54,9 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
         this.isActive = isActive;
     }
 
-    public void ToggleSoundsEnabled(bool areEnabled)
+    public void DisableSounds()
     {
-        if (!areEnabled)
-        {
-            clickEnabledSoundEvent = "";
-            clickDisabledSoundEvent = "";
-        }
+        clickEnabledSoundEvent = "";
+        clickDisabledSoundEvent = "";
     }
 }

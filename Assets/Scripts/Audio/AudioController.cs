@@ -233,6 +233,10 @@ public class AudioController : Controller, IAudioController
 				source.Stop();
 			}
 		}
+        if (activeSFX.Contains(file.Clip))
+        {
+            activeSFX.Remove(file.Clip);
+        }
 	}
 
 	public void ToggleFXMute() 
