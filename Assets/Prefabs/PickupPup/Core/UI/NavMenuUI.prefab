@@ -70,8 +70,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224405978397950568}
+  - component: {fileID: 114681874858026576}
   m_Layer: 5
-  m_Name: FoodPanel
+  m_Name: FoodDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,8 +86,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224537566414020800}
+  - component: {fileID: 114306567831375986}
   m_Layer: 5
-  m_Name: CoinsPanel
+  m_Name: CoinsDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,6 +228,7 @@ GameObject:
   - component: {fileID: 222118153588065616}
   - component: {fileID: 114994167172094942}
   - component: {fileID: 114958690643369962}
+  - component: {fileID: 114657377800197028}
   m_Layer: 5
   m_Name: CurrencyPanel
   m_TagString: Untagged
@@ -634,6 +637,21 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &114306567831375986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1227047968466294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  iconImage: {fileID: 114799895188562686}
 --- !u!114 &114345726389482292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1011,6 +1029,42 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114657377800197028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1429701185055096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415433a26f816df47ad36158ee0246f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  coinsDisplay: {fileID: 114306567831375986}
+  dogFoodDisplay: {fileID: 114681874858026576}
+  giftTimerDisplay: {fileID: 0}
+  collectGiftButton: {fileID: 0}
+  giftTimerActiveDisplay: {fileID: 0}
+  giftAvailableDisplay: {fileID: 0}
+  giftReportPrefab: {fileID: 1473165808563722, guid: e4fa16d4661524a56a37f6de68bd611e,
+    type: 2}
+  overrideTimerForDebugging: 0
+--- !u!114 &114681874858026576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1067516573437410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa18e556a25fac448b10e19477c3e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
+  iconImage: {fileID: 114702635907954346}
 --- !u!114 &114702635907954346
 MonoBehaviour:
   m_ObjectHideFlags: 1
