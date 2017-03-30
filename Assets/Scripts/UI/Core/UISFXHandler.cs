@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page
  * Description: For playing SFX on events
  * Usage: [no notes]
  */
@@ -34,9 +34,9 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
 
     void IPointerDownHandler.OnPointerDown(PointerEventData ptrEvent)
     {
-        if(isActive)
+        if (isActive)
         {
-            if(button && button.enabled && button.interactable)
+            if (button && button.enabled && button.interactable)
             {
                 EventController.Event(clickEnabledSoundEvent);
             }
@@ -54,4 +54,9 @@ public class UISFXHandler : UIInteractable, IPointerDownHandler
         this.isActive = isActive;
     }
 
+    public void DisableSounds()
+    {
+        clickEnabledSoundEvent = "";
+        clickDisabledSoundEvent = "";
+    }
 }

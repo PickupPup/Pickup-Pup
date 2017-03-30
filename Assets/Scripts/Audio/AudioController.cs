@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author(s): Isaiah Mann, Ben Page
  * Description: Used to control the audio in the game
  * Is a Singleton (only one instance can exist at once)
  * Attached to a GameObject that stores all AudioSources and AudioListeners for the game
@@ -92,7 +92,10 @@ public class AudioController : Controller, IAudioController
 	// Backup channels that are dynamically created to allow SFX to finish without being cut off (empty when no SFX are playing)
 	List<AudioSource> tempSFXChannels = new List<AudioSource>();
 
-	[Header("Sweeteners")]
+    // A HashSet of all active (currently playing) SFX
+    HashSet<AudioClip> activeSFX = new HashSet<AudioClip>();
+
+    [Header("Sweeteners")]
 	[SerializeField]
 	float shortestSweetenerPlayFrequenecy = 10;
 	[SerializeField]
@@ -169,6 +172,16 @@ public class AudioController : Controller, IAudioController
 		onMusicVolumeChange(this.musicVolume);
 	}
 
+    bool clipIsActive(AudioFile file)
+    {
+        if(activeSFX.Contains(file.Clip))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    
 	public void Play(AudioFile file) 
 	{
 		AudioSource source = getChannel(file.Channel);
@@ -177,7 +190,7 @@ public class AudioController : Controller, IAudioController
 		float clipTime = 0;
 		if(file.Type == AudioType.FX) 
 		{
-			if(source.clip != null && source.isPlaying) 
+			if(source.clip != null && source.isPlaying && !clipIsActive(file)) 
 			{ 
 				if(!AudioUtil.IsMuted(AudioType.FX)) 
 				{
@@ -201,7 +214,14 @@ public class AudioController : Controller, IAudioController
 			source.time = clipTime;
 		}
 		source.Play();
+        if(fileList.GetAudioType(source.clip) == AudioType.FX)
+        {
+            activeSFX.Add(source.clip);
+            StartCoroutine(removeClipWhenFinished(source.clip));
+        }
 	}
+
+    
 
 	public void Stop(AudioFile file) 
 	{
@@ -213,6 +233,10 @@ public class AudioController : Controller, IAudioController
 				source.Stop();
 			}
 		}
+        if (activeSFX.Contains(file.Clip))
+        {
+            activeSFX.Remove(file.Clip);
+        }
 	}
 
 	public void ToggleFXMute() 
@@ -489,17 +513,24 @@ public class AudioController : Controller, IAudioController
 		}
 	}
 
-	// Coroutine that varies the frequency with which it plays audio files
-	IEnumerator cycleTracksFrequenecyRange(RandomizedQueue<AudioFile> files, float minFrequency, float maxFrequency) 
-	{
-		while(coroutinesActive) 
-		{
-			Play(files.Cycle());
-			yield return new WaitForSeconds(UnityEngine.Random.Range(minFrequency, maxFrequency));
-		}
-	}
-		
-	IEnumerator completeOnTempChannel(AudioClip clip, float timeStamp, float volume) 
+    // Coroutine that varies the frequency with which it plays audio files
+    IEnumerator cycleTracksFrequenecyRange(RandomizedQueue<AudioFile> files, float minFrequency, float maxFrequency)
+    {
+        while (coroutinesActive)
+        {
+            Play(files.Cycle());
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minFrequency, maxFrequency));
+        }
+    }
+
+    // Removes SFX clip from tracking mechanism when finished
+    IEnumerator removeClipWhenFinished(AudioClip clip)
+    {
+        yield return new WaitForSeconds(clip.length);
+        activeSFX.Remove(clip);
+    }
+
+    IEnumerator completeOnTempChannel(AudioClip clip, float timeStamp, float volume) 
 	{
 		AudioSource tempChannel = null;
 		AudioType clipType = fileList.GetAudioType(clip);

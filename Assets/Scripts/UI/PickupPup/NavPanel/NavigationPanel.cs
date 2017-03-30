@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Author: Grace Barrett-Snyder, Ben Page
  * Description: Controls the navigation buttons (menu and adopt) on every screen
  */
 
@@ -42,15 +42,18 @@ public class NavigationPanel : SingletonController<NavigationPanel>
 
     public void OnMenuClick()
     {
+        
         mainMenu.Toggle();
-        if(dogProfile)
+        if(dogProfile && dogProfile.isActiveAndEnabled)
         {
             dogProfile.Hide();
         }
-        if(dogBrowser)
+        if(dogBrowser && dogBrowser.isActiveAndEnabled)
         {
             dogBrowser.Hide();
         }
+        
+        
     }
 
     public void OnAdoptClick()
