@@ -375,6 +375,7 @@ public class DogBrowser : PPUIElement, IPageable
                 List<DogDescriptor> dogInfos = dataController.AdoptedDogs;
                 DogFactory dogFactory = new DogFactory(hideGameObjects: true);
                 dogCollection = dogFactory.CreateGroupList(dogInfos);
+                buttonController.RefreshPages();
                 break;
         }
     }
