@@ -72,14 +72,6 @@ public class RedeemDisplay : PPUIElement
 		background.CrossFadeAlpha(0.7f, 0.2f, false);
 	}
 
-	// Updates To The Selected Gift
-	public void UpdateDisplay(GiftItem gift, PPLivingRoomUIController room)
-	{
-		this.gift = gift;
-		RedeemButton.interactable = true;
-		giftDescription.text = gift.GiftName.ToUpper();
-	}
-
     void redeemGift(Dog dog)
     {
         if(dog.OccupiedSlot && dog.OccupiedSlot is DogCollarSlot)
