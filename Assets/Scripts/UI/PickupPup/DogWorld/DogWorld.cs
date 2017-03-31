@@ -6,12 +6,14 @@
 
 using UnityEngine;
 
-public class DogWorld : PPUIController 
+public class DogWorld : MonoBehaviourExtended 
 {	
     [SerializeField]
     PPScene room;
 
     DogWorldSlot[] dogsSlots;
+
+    #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
     {
@@ -25,6 +27,8 @@ public class DogWorld : PPUIController
         Dog[] dogs = chooseDogs(this.dogsSlots);
         placeDogs(dogs);
     }
+
+    #endregion
 
     Dog[] chooseDogs(DogWorldSlot[] openSpots)
     {
