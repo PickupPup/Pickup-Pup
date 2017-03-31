@@ -18,7 +18,6 @@ public class DogWorldSlot : DogSlot
         UISFXHandler sfxScript = GetComponent<UISFXHandler>();
         sfxScript.DisableSounds();
         GetComponent<Button>().transition = Selectable.Transition.None;
-        Debug.Log(GetComponent<Button>() != null);
     }
 
     protected override void cleanupReferences()
