@@ -57,14 +57,14 @@ public class PPSceneController : SingletonController<PPSceneController>
         LoadScene(PPScene.Shop);
     }
 
-    public void LoadLivingRoom()
+    public void LoadHome()
     {
-        LoadScene(PPScene.LivingRoom);
+        LoadScene(PPScene.Home);
     }
 
     public void LoadYard()
     {
-        LoadScene(PPScene.Yard);
+        LoadScene(PPScene.Home);
     }
 
     public void LoadScene(PPScene scene, bool refreshSystems = false) 
@@ -115,7 +115,7 @@ public class PPSceneController : SingletonController<PPSceneController>
         
     public bool IsWorldScene(PPScene scene)
     {
-        return scene == PPScene.LivingRoom || scene == PPScene.Yard;
+        return scene == PPScene.Home;
     }
 
 	public void LoadSceneAsync(PPScene scene)
@@ -144,9 +144,8 @@ public class PPSceneController : SingletonController<PPSceneController>
 public enum PPScene 
 {
     Loading,
+    Home,
     Shelter,
     Shop,
-    LivingRoom,
-    Yard,
 
 }

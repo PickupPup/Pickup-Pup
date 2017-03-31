@@ -70,14 +70,14 @@ public class MainMenu : PPUIElement
         }
     }
 
-    public void OnLivingRoomClick()
+    public void OnHomeClick()
     {
-        sceneController.LoadLivingRoom();
+        sceneController.LoadHome();
     }
 
     public void OnYardClick()
     {
-        sceneController.LoadYard();
+        sceneController.LoadHome();
     }
 
     public void OnSettingsClick()
