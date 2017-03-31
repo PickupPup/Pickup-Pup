@@ -61,6 +61,8 @@ public class DogBrowserButtonController : PPUIButtonController
 	ToggleableColorUIButton[] pageButtons;
 	ToggleableColorUIButton selectedPageButton;
 
+    bool shouldRefresh;
+
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences()
@@ -79,8 +81,14 @@ public class DogBrowserButtonController : PPUIButtonController
 		}
 	}
 
-	#endregion
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        updatePageButtons();
+    }
 
+	#endregion
+        
 	public void SubscribeToDogClick(PPData.DogAction dogClickAction)
 	{
 		onDogClick += dogClickAction;
@@ -113,34 +121,62 @@ public class DogBrowserButtonController : PPUIButtonController
 		IsInitialized = true;
 	}
 
+    public void RefreshPages()
+    {
+        this.shouldRefresh = true;
+    }
+
 	void setupButtons()
 	{
-		rehomeButton.SubscribeToClick(parentWindow.OpenRehomeScreen);
-		refreshPageButtonReferences();
-		maintainCorrectPageButtonCount(onInit:true);
-		parentWindow.SwitchToDefaultPage(onClickPageButton:false);
-		for(int i = 0; i < pageButtons.Length; i++)
-		{
-			setupPageButton(pageButtons[i], i);
-		}
-		if(numPages > SINGLE_VALUE)
-		{
-			pageBackwardButton.SubscribeToClick(parentWindow.PageBackward);
-			pageForwardButton.SubscribeToClick(parentWindow.PageForward);
-		}
-		else
-		{
+	    rehomeButton.SubscribeToClick(parentWindow.OpenRehomeScreen);
+        refreshPageButtonReferences();
+        setupPageNavigation();
+		IsInitialized = true;
+	}
+
+    void setupPageNavigation()
+    {
+        maintainCorrectPageButtonCount(onInit:true);
+        parentWindow.SwitchToDefaultPage(onClickPageButton:false);
+        for(int i = 0; i < pageButtons.Length; i++)
+        {
+            setupPageButton(pageButtons[i], i);
+        }
+        if(numPages > SINGLE_VALUE)
+        {
+            refreshNavigationButtons();
+        }
+        else
+        {
             pageBackwardButton.Hide();
             pageForwardButton.Hide();
             pageButtonParent.gameObject.SetActive(false);
-		}
-		IsInitialized = true;
-	}
+        }
+    }
+
+    void updatePageButtons()
+    {
+        if(shouldRefresh && referencesFetched)
+        {
+            maintainCorrectPageButtonCount(onInit:false);
+            shouldRefresh = false;
+        }
+    }
+
+    void refreshNavigationButtons()
+    {
+        // Need to clear them to fresh
+        pageBackwardButton.UnsubscribeAllClickActions();
+        pageForwardButton.UnsubscribeAllClickActions();
+        pageBackwardButton.SubscribeToClick(parentWindow.PageBackward);
+        pageForwardButton.SubscribeToClick(parentWindow.PageForward);
+    }
 
 	// There are extra steps that do not need to be performed on init
 	ToggleableColorUIButton addPageButton(int pageIndex, bool addingOnInit)
 	{
 		GameObject buttonobject = Instantiate(pageButtonRef, pageButtonParent);
+        buttonobject.SetActive(true);
 		ToggleableColorUIButton pageButton = buttonobject.GetComponent<ToggleableColorUIButton>();
 		if(!addingOnInit)
 		{
@@ -161,14 +197,22 @@ public class DogBrowserButtonController : PPUIButtonController
 		{
 			trimPageButtons(pages);
 		}
-		refreshPageButtonReferences();
+        if(numPages > SINGLE_VALUE)
+        {
+            pageButtonParent.gameObject.SetActive(true);
+            for(int i = 0; i < pages; i++)
+            {
+                pageButtons[i].Show();
+            }
+        }
+        refreshPageButtonReferences();
 	}
 
 	void trimPageButtons(int desiredLength)
 	{
 		for(int i = desiredLength; i < pageButtons.Length; i++)
 		{
-			Destroy(pageButtons[i].gameObject);
+            pageButtons[i].gameObject.SetActive(false);
 		}
 	}
 
@@ -192,7 +236,7 @@ public class DogBrowserButtonController : PPUIButtonController
 
 	void refreshPageButtonReferences()
 	{
-		pageButtons = GetComponentsInChildren<ToggleableColorUIButton>();
+        pageButtons = GetComponentsInChildren<ToggleableColorUIButton>(includeInactive:true);
 		parentWindow.RefreshPageInitChecks(pageButtons.Length);
 	}
  
