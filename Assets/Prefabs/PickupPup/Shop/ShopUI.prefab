@@ -1483,6 +1483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 0
   dogProfileObject: {fileID: 0}
+  dogProfileShelterObject: {fileID: 0}
   currencyPanel: {fileID: 0}
   navigationPanel: {fileID: 0}
   popupPrompt: {fileID: 114017009141393054, guid: b9f58b33305f84146b6f7f1bd6029099,
@@ -1965,6 +1966,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114447036734616756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2047,6 +2049,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114551881381442890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2347,7 +2350,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300004, guid: 7bf19b716feb0654b9436081b94d468d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5aab9dca0e89e34b9bf6a9c55198198, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2547,6 +2550,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114744597071082012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2841,6 +2845,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114914853225584186
 MonoBehaviour:
   m_ObjectHideFlags: 1
