@@ -130,9 +130,19 @@ public class PPTimer : PPData, ISubscribable
 		return timer.TryUnsubscribeAll();
 	}
 
-	#endregion
+    #endregion
 
-	public void SubscribeToTimeChange(PPData.DataActionf action) 
+    public void SubscribeToTimeBegin(DataAction action)
+    {
+        timer.SubscribeToTimeBegin(action);
+    }
+
+    public void UnsubscribeFromTimeBegin(DataAction action)
+    {
+        timer.UnsubscribeFromTimeBegin(action);
+    }
+
+    public void SubscribeToTimeChange(PPData.DataActionf action) 
 	{
 		timer.SubscribeToTimeChange(action);
 	}

@@ -79,14 +79,14 @@ public class PPUIController : MonoBehaviourExtended
         sceneController.LoadShop();
     }
 
-	public void LoadLivingRoom()
+	public void LoadHome()
 	{
-		sceneController.LoadLivingRoom();
+		sceneController.LoadHome();
 	}
 
     public void LoadYard()
     {
-        sceneController.LoadYard();
+        sceneController.LoadHome();
     }
 
 	void handlePPDogEvent(PPEvent gameEvent, Dog dog)

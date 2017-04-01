@@ -307,10 +307,8 @@ public enum PPEvent
 	LoadHome,
   	LoadShop,
 	ScoutingDogLoaded,
-  	LoadLivingRoom,
   	LoadShelter,
 	ClickDogSlot,
 	StartedScouting,
-    LoadYard,
 
 }
