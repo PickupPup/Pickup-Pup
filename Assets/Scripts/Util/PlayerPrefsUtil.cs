@@ -33,15 +33,15 @@ public static class PlayerPrefsUtil
         }
     }
 
-	public static bool ShowedFirstLivingRoomPrompt
+	public static bool ShowedFirstHomePrompt
 	{
 		get
 		{
-			return showedFirstLivingRoomPrompt;
+			return showedFirstHomePrompt;
 		}
 		set
 		{
-			showedFirstLivingRoomPrompt = value;
+			showedFirstHomePrompt = value;
 		}
 	}
 
@@ -61,7 +61,7 @@ public static class PlayerPrefsUtil
 
     static bool showedShelterPrompt;
     static bool showedScoutingPrompt;
-	static bool showedFirstLivingRoomPrompt;
+	static bool showedFirstHomePrompt;
 	static bool showedShopPrompt;
 
 	/*

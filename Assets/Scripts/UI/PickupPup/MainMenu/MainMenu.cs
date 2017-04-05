@@ -70,21 +70,26 @@ public class MainMenu : PPUIElement
 
     public void OnAllDogsClick()
     {
-        if (dogBrowser)
+        if(dogBrowser)
         {
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             dogBrowser.Open(inScoutingSelectMode:false);
         }
     }
 
+    public void OnHomeClick()
+    {
+        sceneController.LoadHome();
+    }
+
     public void OnLivingRoomClick()
     {
-        sceneController.LoadLivingRoom();
+        OnHomeClick();
     }
 
     public void OnYardClick()
     {
-        sceneController.LoadYard();
+        OnHomeClick();
     }
 
     public void OnSettingsClick()

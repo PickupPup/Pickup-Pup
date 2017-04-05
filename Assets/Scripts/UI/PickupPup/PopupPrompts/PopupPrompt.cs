@@ -41,6 +41,6 @@ public enum PromptID
     None,
     ShelterPrompt,
     ScoutingPrompt,
-	FirstLivingRoomPrompt,
+	FirstHomePrompt,
 	ShopPrompt,
 }

@@ -4,6 +4,7 @@
  */
 
 using UnityEngine.UI;
+using UnityEngine;
 
 using k = PPGlobal;
 
@@ -59,6 +60,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             feedingTimer = new PPTimer(GetFeedingTime, 1f);
             feedingTimer.SetTimeRemaining(0, false);
         }
+        feedingTimer.SubscribeToTimeBegin(handleFeedingTimeBegin);
         feedingTimer.SubscribeToTimeUp(handleFeedingTimeUp);
         buttonReference = GetComponent<Button>();
         buttonReference.interactable = !IsCurrentlyFeeding;
@@ -67,6 +69,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     protected override void cleanupReferences()
     {
         base.cleanupReferences();
+        feedingTimer.UnsubscribeFromTimeBegin(handleFeedingTimeBegin);
         feedingTimer.UnsubscribeFromTimeUp(handleFeedingTimeUp);
     }
 
@@ -91,6 +94,11 @@ public class DogFoodBowl : MonoBehaviourExtended
         {
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
+    }
+
+    void handleFeedingTimeBegin()
+    {
+        buttonReference.interactable = !IsCurrentlyFeeding;
     }
 
     void handleFeedingTimeUp()
