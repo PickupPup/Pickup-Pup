@@ -14,16 +14,22 @@ public class SettingsMenu : PPUIElement
     Slider musicSlider;
     [SerializeField]
     Slider sfxToggle;
+    [SerializeField]
+    Slider navPanelToggle;
 
     [SerializeField]
     UIElement musicVolume;
     [SerializeField]
     UIElement sfxStatus;
+    [SerializeField]
+    UIElement navPanelStatus;
 
     [SerializeField]
     UIButton resetButton;
     [SerializeField]
     UIButton toggleSFXButton;
+    [SerializeField]
+    UIButton toggleNavPanelButton;
 
     AudioController audioController;
 
@@ -43,7 +49,9 @@ public class SettingsMenu : PPUIElement
         base.setReferences();
         musicSlider.onValueChanged.AddListener(handleMusicVolumeChange);
         sfxToggle.onValueChanged.AddListener(handleToggleSFXMute);
+        navPanelToggle.onValueChanged.AddListener(handleToggleNavPanel);
         toggleSFXButton.SubscribeToClick(toggleSFX);
+        toggleNavPanelButton.SubscribeToClick(toggleNavPanel);
     }
 
     protected override void fetchReferences()
@@ -53,6 +61,7 @@ public class SettingsMenu : PPUIElement
         dataController = PPDataController.GetInstance;
         musicSlider.value = SettingsUtil.GetMusicVolume();
         sfxToggle.value = Global.BoolToInt(!SettingsUtil.SFXMuted);
+        navPanelToggle.value = SettingsUtil.NavDropDownType;
     }
 
     #endregion
@@ -77,11 +86,35 @@ public class SettingsMenu : PPUIElement
         sfxStatus.SetText(isMuted ? OFF : ON);
     }
 
+    void handleToggleNavPanel(float navPanelStatusf)
+    {
+        int status = (int) navPanelStatusf;
+        if(status != SettingsUtil.NavDropDownType)
+        {
+            SettingsUtil.ToggleNavDropdownType();
+        }
+        navPanelStatus.SetText(status == k.STANDARD_DROPDOWN ? k.STANDARD : k.ALTERNATE);
+    }
+
     void toggleSFX()
     {
         bool isMuted = checkSFXMuted(sfxToggle.value);
         isMuted = !isMuted;
         sfxToggle.value = Global.BoolToInt(!isMuted);
+    }
+
+    void toggleNavPanel()
+    {
+        int newStatus;
+        if(SettingsUtil.NavDropDownType == k.STANDARD_DROPDOWN)
+        {
+            newStatus = k.ALT_SINGLE_DROPDOWN;
+        }
+        else
+        {
+            newStatus = k.STANDARD_DROPDOWN;
+        }
+        navPanelToggle.value = newStatus;
     }
 
     bool checkSFXMuted(float sfxMuteState)

@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1058888202960930
 GameObject:
   m_ObjectHideFlags: 1
@@ -951,6 +951,7 @@ MonoBehaviour:
   dynamicNavButton: {fileID: 114348475589549654}
   dogsButton: {fileID: 114629159465102482}
   settingsButton: {fileID: 114815344141112656}
+  altNavPanel: {fileID: 1056560896800446}
   dynamicNavButtonBackground: {fileID: 114790891813158110}
   singleDropdown: {fileID: 1089245361116040}
   singledDropdownArrow: {fileID: 1359406466632518}
@@ -961,7 +962,10 @@ MonoBehaviour:
   allDogsIcon: {fileID: 21300000, guid: 4a4a201beb8b649f7811ce8984829881, type: 3}
   roundButtonBackground: {fileID: 21300000, guid: 80fdf9ec0eca8441b9daed62e2bda4e9,
     type: 3}
+  rectButtonBackground: {fileID: 21300002, guid: 6ac1e31e3dbcf3e4eb702af64b47f347,
+    type: 3}
   buttonColor: {r: 0.14509805, g: 0.54901963, b: 0.65882355, a: 1}
+  navButtonRotation: {x: 180, y: 0, z: 0}
   setAltSingleDropdownOn: 0
 --- !u!114 &114046738516298734
 MonoBehaviour:

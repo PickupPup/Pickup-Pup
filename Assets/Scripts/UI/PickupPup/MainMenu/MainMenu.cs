@@ -11,6 +11,7 @@ using k = PPGlobal;
 
 public class MainMenu : PPUIElement
 {
+    const int STANDARD_DROPDOWN = k.STANDARD_DROPDOWN;
     const int ALT_SINGLE_DROPDOWN = k.ALT_SINGLE_DROPDOWN;
 
 	[Header("External References")]
@@ -53,6 +54,8 @@ public class MainMenu : PPUIElement
     Sprite allDogsIcon;
     [SerializeField]
     Sprite roundButtonBackground;
+    [SerializeField]
+    Sprite rectButtonBackground;
 
     [Header("Color Palette")]
     [SerializeField]
@@ -66,12 +69,16 @@ public class MainMenu : PPUIElement
     [SerializeField]
     bool setAltSingleDropdownOn;
 
+    int currentNavPanelType = STANDARD_DROPDOWN;
+        
     #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
     {
         base.setReferences();
+        showCorrectNavPanel();
         setupDynamicButtons();
+        SettingsUtil.SubscribeToNavPanelChange(showCorrectNavPanel);
     }
 
     protected override void fetchReferences()
@@ -84,6 +91,12 @@ public class MainMenu : PPUIElement
     {
         base.handleSceneLoaded(scene);
         updateDynamicNavButton(scene);
+    }
+
+    protected override void cleanupReferences()
+    {
+        base.cleanupReferences();
+        SettingsUtil.UnsubscribeFromNavPanelChange(showCorrectNavPanel);
     }
 
     #endregion
@@ -134,6 +147,7 @@ public class MainMenu : PPUIElement
         }
         ToggleDogDropdown();
         dogsButton.SetImage(allDogsIcon);
+        ToggleSingleNavDropdown();
     }
 
     public void OnHomeClick()
@@ -149,6 +163,7 @@ public class MainMenu : PPUIElement
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         }
         ToggleSettingsDropdown();
+        ToggleSingleNavDropdown();
     }
 
     public void OnShelterClick()
@@ -190,17 +205,38 @@ public class MainMenu : PPUIElement
         {
             switchToSingleDropdown();
         }
+        else
+        {
+            switchToStandardNav();
+        }
     }
 
     void switchToSingleDropdown()
     {
-        dynamicNavButtonBackground.sprite = roundButtonBackground;
-        dynamicNavButtonBackground.color = buttonColor;
-        dogsButton.Hide();
-        settingsButton.Hide();
-        altNavPanel.SetActive(true);
+        if(currentNavPanelType != ALT_SINGLE_DROPDOWN)
+        {
+            dynamicNavButtonBackground.sprite = roundButtonBackground;
+            dynamicNavButtonBackground.color = buttonColor;
+            dogsButton.Hide();
+            settingsButton.Hide();
+            altNavPanel.SetActive(true);
+            currentNavPanelType = ALT_SINGLE_DROPDOWN;
+        }
     }
-        
+     
+    void switchToStandardNav()
+    {
+        if(currentNavPanelType != STANDARD_DROPDOWN)
+        {
+            dynamicNavButtonBackground.sprite = rectButtonBackground;
+            dynamicNavButtonBackground.color = Color.white;
+            dogsButton.Show();
+            settingsButton.Show();
+            altNavPanel.SetActive(false);
+            currentNavPanelType = STANDARD_DROPDOWN;
+        }
+    }
+
     void setupDynamicButtons()            
     {
         dynamicNavButton.SetImageToChild();

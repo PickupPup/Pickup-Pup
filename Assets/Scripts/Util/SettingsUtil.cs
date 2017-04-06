@@ -4,7 +4,9 @@
 */
 using UnityEngine;
 using System.Collections;
+
 using k = PPGlobal;
+using me = MonoBehaviourExtended;
 
 public static class SettingsUtil 
 {	
@@ -16,6 +18,8 @@ public static class SettingsUtil
     const string NAV_DROPDOWN_TYPE = k.NAV_DROPDOWN;
 
 	const int DEFAULT_VOLUME = k.FULL_VOLUME;
+
+    static me.MonoAction onNavPanelChanged;
 
 	#region Static Accessors
 
@@ -51,7 +55,12 @@ public static class SettingsUtil
         }
         private set
         {
+            int previousValue = NavDropDownType;
             PlayerPrefs.SetInt(NAV_DROPDOWN_TYPE, value);
+            if(value != previousValue)
+            {
+                callOnNavPanelChanged();
+            }
         }
     }
 
@@ -123,7 +132,17 @@ public static class SettingsUtil
 	{
 		ToggleVOMuted(!VOMuted);
 	}
-        
+     
+    public static void SubscribeToNavPanelChange(me.MonoAction handler)
+    {
+        onNavPanelChanged += handler;
+    }
+
+    public static void UnsubscribeFromNavPanelChange(me.MonoAction handler)
+    {
+        onNavPanelChanged -= handler;
+    }
+
 	static void ToggleMute(string key, bool value) 
 	{
 		PlayerPrefsUtil.SetBool(key, value);
@@ -133,5 +152,13 @@ public static class SettingsUtil
 	{
 		return PlayerPrefsUtil.GetBool(key);
 	}
+
+    static void callOnNavPanelChanged()
+    {
+        if(onNavPanelChanged != null)
+        {
+            onNavPanelChanged();
+        }
+    }
 
 }
