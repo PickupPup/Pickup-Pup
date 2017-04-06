@@ -69,7 +69,7 @@ public class CurrencyData : ResourceLoader
 
     public virtual bool CanAfford(int cost)
     {
-        return amount >= cost;
+        return amount != 0 && amount >= cost;
     }
 
     void setup(int initialAmount)
