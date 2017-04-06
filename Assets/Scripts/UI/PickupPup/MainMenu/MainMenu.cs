@@ -5,21 +5,98 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
+
 using k = PPGlobal;
 
 public class MainMenu : PPUIElement
 {
+    const int STANDARD_DROPDOWN = k.STANDARD_DROPDOWN;
+    const int ALT_SINGLE_DROPDOWN = k.ALT_SINGLE_DROPDOWN;
+
+	[Header("External References")]
     [SerializeField]
     DogBrowser dogBrowser;
     [SerializeField]
     SettingsMenu settingsMenu;
 
+	[Header("Internal References")]
+	[SerializeField]
+	GameObject dogDropdown;
+	[SerializeField]
+	GameObject settingsDropdown;
+    [SerializeField]
+    PPUIButton dynamicNavButton;
+    [SerializeField]
+    PPUIButton dogsButton;
+    [SerializeField]
+    PPUIButton settingsButton;
+
+    [SerializeField]
+    GameObject altNavPanel;
+    [SerializeField]
+    Image dynamicNavButtonBackground;
+    [SerializeField]
+    GameObject singleDropdown;
+    [SerializeField]
+    GameObject singledDropdownArrow;
+
+    [Header("Serialized Sprites")]
+    [SerializeField]
+    Sprite homeIcon;
+    [SerializeField]
+    Sprite shelterIcon;
+    [SerializeField]
+    Sprite shopIcon;
+    [SerializeField]
+    Sprite dogsIcon;
+    [SerializeField]
+    Sprite allDogsIcon;
+    [SerializeField]
+    Sprite roundButtonBackground;
+    [SerializeField]
+    Sprite rectButtonBackground;
+
+    [Header("Color Palette")]
+    [SerializeField]
+    Color buttonColor;
+
+    [Header("Tuning Values")]
+    [SerializeField]
+    Vector3 navButtonRotation = new Vector3(180, 0);
+
+    [Header("Debugging")]
+    [SerializeField]
+    bool setAltSingleDropdownOn;
+
+    int currentNavPanelType = STANDARD_DROPDOWN;
+        
     #region MonoBehaviourExtended Overrides
+
+    protected override void setReferences()
+    {
+        base.setReferences();
+        showCorrectNavPanel();
+        setupDynamicButtons();
+        SettingsUtil.SubscribeToNavPanelChange(showCorrectNavPanel);
+    }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
         sceneController = PPSceneController.Instance;
+    }
+
+    protected override void handleSceneLoaded (PPScene scene)
+    {
+        base.handleSceneLoaded(scene);
+        updateDynamicNavButton(scene);
+    }
+
+    protected override void cleanupReferences()
+    {
+        base.cleanupReferences();
+        SettingsUtil.UnsubscribeFromNavPanelChange(showCorrectNavPanel);
     }
 
     #endregion
@@ -68,6 +145,9 @@ public class MainMenu : PPUIElement
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             dogBrowser.Open(inScoutingSelectMode:false);
         }
+        ToggleDogDropdown();
+        dogsButton.SetImage(allDogsIcon);
+        ToggleSingleNavDropdown();
     }
 
     public void OnHomeClick()
@@ -75,20 +155,15 @@ public class MainMenu : PPUIElement
         sceneController.LoadHome();
     }
 
-    public void OnLivingRoomClick()
-    {
-        OnHomeClick();
-    }
-
-    public void OnYardClick()
-    {
-        OnHomeClick();
-    }
-
     public void OnSettingsClick()
     {
-        EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-        settingsMenu.Show();
+        settingsMenu.Toggle();
+        if(settingsMenu.IsVisible)
+        {
+            EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
+        }
+        ToggleSettingsDropdown();
+        ToggleSingleNavDropdown();
     }
 
     public void OnShelterClick()
@@ -106,6 +181,85 @@ public class MainMenu : PPUIElement
     {
         // Disabled
         EventController.Event(k.GetPlayEvent(k.EMPTY));
+    }
+
+	public void ToggleDogDropdown()
+	{
+		dogDropdown.SetActive(!dogDropdown.activeSelf);
+	}
+
+	public void ToggleSettingsDropdown()
+	{
+		settingsDropdown.SetActive(!settingsDropdown.activeSelf);
+	}
+
+    public void ToggleSingleNavDropdown()
+    {
+        singleDropdown.SetActive(!singleDropdown.activeSelf);
+        singledDropdownArrow.transform.Rotate(navButtonRotation);
+    }
+
+    void showCorrectNavPanel()
+    {
+        if(SettingsUtil.NavDropDownType == ALT_SINGLE_DROPDOWN || setAltSingleDropdownOn)
+        {
+            switchToSingleDropdown();
+        }
+        else
+        {
+            switchToStandardNav();
+        }
+    }
+
+    void switchToSingleDropdown()
+    {
+        if(currentNavPanelType != ALT_SINGLE_DROPDOWN)
+        {
+            dynamicNavButtonBackground.sprite = roundButtonBackground;
+            dynamicNavButtonBackground.color = buttonColor;
+            dogsButton.Hide();
+            settingsButton.Hide();
+            altNavPanel.SetActive(true);
+            currentNavPanelType = ALT_SINGLE_DROPDOWN;
+        }
+    }
+     
+    void switchToStandardNav()
+    {
+        if(currentNavPanelType != STANDARD_DROPDOWN)
+        {
+            dynamicNavButtonBackground.sprite = rectButtonBackground;
+            dynamicNavButtonBackground.color = Color.white;
+            dogsButton.Show();
+            settingsButton.Show();
+            altNavPanel.SetActive(false);
+            currentNavPanelType = STANDARD_DROPDOWN;
+        }
+    }
+
+    void setupDynamicButtons()            
+    {
+        dynamicNavButton.SetImageToChild();
+        dogsButton.SetImageToChild();
+    }
+
+    void updateDynamicNavButton(PPScene currentScene)
+    {
+        dynamicNavButton.TryUnsubscribeAll();
+        if(currentScene == PPScene.Home)
+        {
+            dynamicNavButton.SubscribeToClick(OnShelterClick);
+            dynamicNavButton.SetImage(shelterIcon);
+        }
+        else
+        {
+            dynamicNavButton.SubscribeToClick(OnHomeClick);
+            dynamicNavButton.SetImage(homeIcon);
+            if(currentScene == PPScene.Shop)
+            {
+                dogsButton.SetImage(shopIcon);
+            }
+        }
     }
 
 }

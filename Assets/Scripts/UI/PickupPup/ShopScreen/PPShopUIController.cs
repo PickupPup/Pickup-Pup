@@ -1,10 +1,18 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Controls the shop screen
  */
 
+using UnityEngine;
+
 public class PPShopUIController : PPUIController
 {
+    [Header("Internal References")]
+    [SerializeField]
+    GameObject shopBrowser;
+    [SerializeField]
+    GameObject purchasePage;
+
     ShopItem[] items;
     ShopItemSlot[] itemSlots;
     ShopDatabase shop;
