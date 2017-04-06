@@ -66,6 +66,12 @@ public class UIElement : MonoBehaviourExtended
         private set;
     }
 
+    public bool IsVisible
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	[SerializeField]
@@ -93,11 +99,13 @@ public class UIElement : MonoBehaviourExtended
 	public virtual void Show() 
 	{
 		gameObject.SetActive(true);
+        IsVisible = true;
 	}
 
 	public virtual void Hide() 
 	{
 		gameObject.SetActive(false);
+        IsVisible = false;
 	}
 
     public virtual void Toggle()
@@ -120,6 +128,14 @@ public class UIElement : MonoBehaviourExtended
 			this.text.text = text;
 		}
 	}
+
+    public virtual void SetImage(Sprite sprite)
+    {
+        if(hasImage)
+        {
+            this.image.sprite = sprite;
+        }
+    }
 
 	public void StartOpacityLerp(float startOpacity, float endOpacity, float time, bool loop) 
 	{

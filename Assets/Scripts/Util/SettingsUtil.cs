@@ -4,7 +4,7 @@
 */
 using UnityEngine;
 using System.Collections;
-using k = Global;
+using k = PPGlobal;
 
 public static class SettingsUtil 
 {	
@@ -13,6 +13,7 @@ public static class SettingsUtil
 	const string FX_MUTE = k.FX_MUTE;
 	const string VO_MUTE = k.VO_MUTE;
 	const string MUSIC_VOLUME = k.MUSIC_VOLUME;
+    const string NAV_DROPDOWN_TYPE = k.NAV_DROPDOWN;
 
 	const int DEFAULT_VOLUME = k.FULL_VOLUME;
 
@@ -42,7 +43,31 @@ public static class SettingsUtil
 		}
 	}
 
+    public static int NavDropDownType
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(NAV_DROPDOWN_TYPE);
+        }
+        private set
+        {
+            PlayerPrefs.SetInt(NAV_DROPDOWN_TYPE, value);
+        }
+    }
+
 	#endregion
+
+    public static void ToggleNavDropdownType()
+    {
+        if(NavDropDownType == k.STANDARD_DROPDOWN)
+        {
+            NavDropDownType = k.ALT_SINGLE_DROPDOWN;
+        }
+        else
+        {
+            NavDropDownType = k.STANDARD_DROPDOWN;
+        }
+    }
 
 	public static int GetMusicVolume()
 	{
@@ -98,8 +123,7 @@ public static class SettingsUtil
 	{
 		ToggleVOMuted(!VOMuted);
 	}
-
-
+        
 	static void ToggleMute(string key, bool value) 
 	{
 		PlayerPrefsUtil.SetBool(key, value);
