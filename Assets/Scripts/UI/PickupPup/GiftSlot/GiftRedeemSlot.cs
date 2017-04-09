@@ -11,12 +11,12 @@ public class GiftRedeemSlot : GiftSlot
     [SerializeField]
     Image itemImage;
 
-    PPLivingRoomUIController room;
+    PPHomeUIController room;
     GiftItem gift;
 
     #region GiftSlot Overrides
 
-    public void Init(PPLivingRoomUIController room, GiftItem gift)
+    public void Init(PPHomeUIController room, GiftItem gift)
     {
         this.room = room;
         this.gift = gift;
@@ -29,7 +29,7 @@ public class GiftRedeemSlot : GiftSlot
     {
         if(room)
         {
-            room.RedeemGift(this.gift);
+            //room.RedeemGift(this.gift);
             gameObject.SetActive(false);
         }
     }

@@ -39,6 +39,22 @@ public class PPUIButton : PPUIElement
 		this.onClickAction -= clickAction;
 	}
 
+    public void SetImageToChild()
+    {
+        Image tempValue = this.image;
+        try
+        {
+            this.image = GetComponentsInChildren<Image>()[1];
+        }
+        finally
+        {
+            if(!this.image)
+            {
+                this.image = tempValue;
+            }
+        }
+    }
+
 	protected virtual void onClick()
 	{
 		callOnClickAction();

@@ -34,6 +34,8 @@ public interface IGameTimer : ISubscribable
 	float Pause();
 	float Stop(bool resetOnStop);
 
+    void SubscribeToTimeBegin(PPData.DataAction action);
+    void UnsubscribeFromTimeBegin(PPData.DataAction action);
 	void SubscribeToTimeChange(PPData.DataActionf action);
 	void UnsubscribeFromTimeChange(PPData.DataActionf action);
 	void SubscribeToTimeUp(PPData.DataAction action);

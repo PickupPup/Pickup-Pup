@@ -5,6 +5,7 @@
  */
 
 using UnityEngine.UI;
+using UnityEngine;
 
 public class DogWorldSlot : DogSlot
 {	
@@ -16,6 +17,7 @@ public class DogWorldSlot : DogSlot
         dogImage = GetComponent<Image>();
         UISFXHandler sfxScript = GetComponent<UISFXHandler>();
         sfxScript.DisableSounds();
+        GetComponent<Button>().transition = Selectable.Transition.None;
     }
 
     protected override void cleanupReferences()
@@ -52,4 +54,5 @@ public class DogWorldSlot : DogSlot
     {
         this.Show();
     }
+
 }

@@ -52,8 +52,6 @@ public class DogBrowserButtonController : PPUIButtonController
 	UIButton pageBackwardButton;
 	[SerializeField]
 	UIButton pageForwardButton;
-	[SerializeField]
-	UIButton rehomeButton;
 
 	PPData.DogAction onDogClick;
 
@@ -128,7 +126,6 @@ public class DogBrowserButtonController : PPUIButtonController
 
 	void setupButtons()
 	{
-	    rehomeButton.SubscribeToClick(parentWindow.OpenRehomeScreen);
         refreshPageButtonReferences();
         setupPageNavigation();
 		IsInitialized = true;

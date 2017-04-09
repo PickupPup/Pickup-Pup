@@ -1,9 +1,10 @@
 ﻿/*
- * Author: Timothy Ng
+ * Authors: Timothy Ng, Isaiah Mann
  * Description: Handles the feeding dog code through calling FeedDogs
  */
 
 using UnityEngine.UI;
+using UnityEngine;
 
 using k = PPGlobal;
 
@@ -59,6 +60,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             feedingTimer = new PPTimer(GetFeedingTime, 1f);
             feedingTimer.SetTimeRemaining(0, false);
         }
+        feedingTimer.SubscribeToTimeBegin(handleFeedingTimeBegin);
         feedingTimer.SubscribeToTimeUp(handleFeedingTimeUp);
         buttonReference = GetComponent<Button>();
         buttonReference.interactable = !IsCurrentlyFeeding;
@@ -67,6 +69,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     protected override void cleanupReferences()
     {
         base.cleanupReferences();
+        feedingTimer.UnsubscribeFromTimeBegin(handleFeedingTimeBegin);
         feedingTimer.UnsubscribeFromTimeUp(handleFeedingTimeUp);
     }
 
@@ -79,7 +82,13 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     public void FeedDogs()
     {
-        if(dataController.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
+		int foodNeeded = calculateDogFoodNeeded();
+		if(foodNeeded <= 0)
+		{
+			return;
+		}
+
+		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
         {
             dataController.ChangeFood(-calculateDogFoodNeeded());
             feedingTimer.Reset();
@@ -91,6 +100,11 @@ public class DogFoodBowl : MonoBehaviourExtended
         {
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
+    }
+
+    void handleFeedingTimeBegin()
+    {
+        buttonReference.interactable = !IsCurrentlyFeeding;
     }
 
     void handleFeedingTimeUp()

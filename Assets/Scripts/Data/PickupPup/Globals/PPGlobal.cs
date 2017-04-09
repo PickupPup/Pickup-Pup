@@ -29,6 +29,7 @@ public class PPGlobal : Global
     public const string REDEEM_GIFT = REDEEM + GIFT;
     public const string TAP_TO_REDEEM = "TapToRedeem";
     public const string DOG_FOOD_ICON = "dogfood_icon";
+    public const string NAV_DROPDOWN = "NavDropdown";
     public const string WORLD = "World";
 
     public const float FULL_PERCENT = 100f;
@@ -39,6 +40,8 @@ public class PPGlobal : Global
     public const int DEFAULT_DOG_FOOD = 0;
     public const int DEFAULT_HOME_SLOTS = 10;
     public const int DEFAULT_CURRENCY_AMOUNT = 0;
+    public const int STANDARD_DROPDOWN = 0;
+    public const int ALT_SINGLE_DROPDOWN = 1;
 
     #region Audio System
 

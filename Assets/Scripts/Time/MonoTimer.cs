@@ -42,6 +42,7 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 		}
 	}
 
+    PPData.DataAction onTimeBegin;
 	PPData.DataActionf onTimeChange;
 	PPData.DataAction onTimeUp;
 	IEnumerator timerCoroutine;
@@ -55,6 +56,7 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 	public override bool TryUnsubscribeAll()
 	{
 		base.TryUnsubscribeAll();
+        onTimeBegin = null;
 		onTimeChange = null;
 		onTimeUp = null;
 		return true;
@@ -90,7 +92,8 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 		{
 			Reset();
 		}
-		startCoroutine();
+        handleTimeBegin();
+        startCoroutine();
 	}
 		
 	public void Resume() 
@@ -121,7 +124,17 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 		return timeRemaining;
 	}
 
-	public void SubscribeToTimeChange(PPData.DataActionf action) 
+    public void SubscribeToTimeBegin(PPData.DataAction action)
+    {
+        onTimeBegin += action;
+    }
+
+    public void UnsubscribeFromTimeBegin(PPData.DataAction action)
+    {
+        onTimeBegin -= action;
+    }
+
+    public void SubscribeToTimeChange(PPData.DataActionf action) 
 	{
 		onTimeChange += action;
 	}
@@ -143,6 +156,7 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 
 	public void ClearEventsOnTimeUp() 
 	{
+        onTimeBegin = null;
 		onTimeChange = null;
 		onTimeUp = null;
 	}
@@ -174,7 +188,6 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 		}
 	}
 
-
 	void startCoroutine() 
 	{
 		stopCoroutine();
@@ -202,6 +215,14 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 		}
 	}
 
+    protected void callOnTimeBegin()
+    {
+        if(onTimeBegin != null)
+        {
+            onTimeBegin();
+        }
+    }
+
 	protected void callOnTimeUp() 
 	{
 		if(onTimeUp != null) 
@@ -218,6 +239,11 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 			timeAtLastChangeEvent = newTime;
 		}
 	}
+
+    protected void handleTimeBegin()
+    {
+        callOnTimeBegin();
+    }
 
 	protected void handleTimeChange(float newTime) 
 	{
