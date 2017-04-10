@@ -176,11 +176,11 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
-    public string Souvenir
+    public SouvenirData Souvenir
     {
         get
         {
-            return this.souvenir;
+            return database.GetDogSouvenir(souvenir);
         }
     }
 

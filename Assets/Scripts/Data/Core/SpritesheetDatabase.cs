@@ -12,21 +12,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SpritesheetDatabase : Database<SpritesheetDatabase>
 {
-	#region Static Accessors
-
-	public static SpritesheetDatabase GetInstance
-	{
-		get
-		{
-			SpritesheetDatabase database = Instance;
-			// Initializes the database if it's not already setup
-			database.TryInit();
-			return database;
-		}
-	}
-
-	#endregion
-
 	static string jsonPath 
 	{
 		get

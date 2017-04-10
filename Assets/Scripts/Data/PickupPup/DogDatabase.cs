@@ -14,17 +14,6 @@ public class DogDatabase : Database<DogDatabase>
 {
 	#region Static Accessors
 
-	public static DogDatabase GetInstance
-	{
-		get
-		{
-			DogDatabase database = Instance;
-			// Initializes the database if it's not already setup
-			database.TryInit();
-			return database;
-		}
-	}
-
 	public static Sprite DefaultSprite
 	{
 		get 
@@ -96,6 +85,7 @@ public class DogDatabase : Database<DogDatabase>
 	Dictionary<string, DogBreed> breedsByName;
 
 	SpritesheetDatabase spriteDatabase;
+    SouvenirDatabase souvenirDatabase;
 
     [System.NonSerialized]
     PPDataController dataController;
@@ -113,12 +103,13 @@ public class DogDatabase : Database<DogDatabase>
 	{
 		base.Initialize();
 		this.spriteDatabase = SpritesheetDatabase.GetInstance;
+        this.souvenirDatabase = SouvenirDatabase.GetInstance;
 		AssignInstance(this);
 		populateDogBreedLookup();
 		setDogDataReferences();
 		randomizer = new RandomBuffer<DogDescriptor>(dogs);
         dailyRandomizer = new RandomDailyBuffer<DogDescriptor>(dogs);
-    }	
+    }
 
 	public DogBreed GetBreed(string breedName) 
 	{
@@ -278,6 +269,11 @@ public class DogDatabase : Database<DogDatabase>
         {
             return sprite;
         }
+    }
+
+    public SouvenirData GetDogSouvenir(string souvenirName)
+    {
+        return souvenirDatabase.Get(souvenirName);
     }
 
 	string getSpriteName(DogDescriptor dog)

@@ -177,7 +177,6 @@ public class PPGameController : GameController, ICurrencySystem
 	DogDatabase dogDatabase;
     ShopDatabase shop;
 	GiftDatabase gifts;
-    SouvenirDatabase souvenirs;
 	LanguageDatabase languages;
 	PPGiftController giftController;
 	DogSlot targetSlot;
@@ -195,7 +194,6 @@ public class PPGameController : GameController, ICurrencySystem
     		gifts = parseGiftDatabase();
     		tuning = parseTuning();
             languages = initLanguages();
-            souvenirs = initSouvenirs();
             shop.Initialize();
     		gifts.Initialize();
         }
@@ -538,13 +536,6 @@ public class PPGameController : GameController, ICurrencySystem
         LanguageDatabase languages = LanguageDatabase.Instance;
         languages.Initialize();
         return languages;
-    }
-        
-    SouvenirDatabase initSouvenirs()
-    {
-        SouvenirDatabase souvenirs = SouvenirDatabase.Instance;
-        souvenirs.Initialize();
-        return souvenirs;
     }
 
 }
