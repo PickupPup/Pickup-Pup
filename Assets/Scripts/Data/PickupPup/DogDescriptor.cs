@@ -176,6 +176,14 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public string Souvenir
+    {
+        get
+        {
+            return this.souvenir;
+        }
+    }
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -198,6 +206,8 @@ public class DogDescriptor : PPDescriptor
 	int age;
     [SerializeField]
     string[] description;
+    [SerializeField]
+    string souvenir;
 
 	float _timeRemainingScouting;
 	int _scoutingSlotIndex;

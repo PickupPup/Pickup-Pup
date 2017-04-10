@@ -27,6 +27,14 @@ public class SouvenirData
         }
     }
 
+    public DogDescriptor Owner
+    {
+        get
+        {
+            return this.dog;
+        }
+    }
+
     #endregion
 
     [SerializeField]
@@ -35,5 +43,14 @@ public class SouvenirData
     string description;
 
     DogDescriptor dog;
+
+    public static SouvenirData Default()
+    {
+        SouvenirData defaultSouvenir = new SouvenirData();
+        defaultSouvenir.name = string.Empty;
+        defaultSouvenir.description = string.Empty;
+        defaultSouvenir.dog = null;
+        return defaultSouvenir;
+    }
 
 }

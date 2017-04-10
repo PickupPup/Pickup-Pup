@@ -26,6 +26,7 @@ public class ResourceLoader
 	protected const string SUPPORTED = k.SUPPORTED;
 	protected const string LOOKUP = k.LOOKUP;
 	protected const string KEY = k.KEY;
+    protected const string SOUVENIRS = k.SOUVENIRS;
 
 	protected const char JOIN_CHAR = k.JOIN_CHAR;
 
@@ -54,6 +55,12 @@ public class ResourceLoader
 	{
 		return loadFromResources<TextAsset>(path).text;
 	}
+
+    protected void overwriteFromJSONInResources<T>(string fileName, T target)
+    {
+        string json = Resources.Load<TextAsset>(getJSONPathInResources(fileName)).text;
+        JsonUtility.FromJsonOverwrite(json, target);
+    }
 
 	protected JSONNode getJSONFromResources(string fileName)
 	{

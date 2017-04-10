@@ -177,6 +177,7 @@ public class PPGameController : GameController, ICurrencySystem
 	DogDatabase dogDatabase;
     ShopDatabase shop;
 	GiftDatabase gifts;
+    SouvenirDatabase souvenirs;
 	LanguageDatabase languages;
 	PPGiftController giftController;
 	DogSlot targetSlot;
@@ -187,25 +188,31 @@ public class PPGameController : GameController, ICurrencySystem
 	protected override void setReferences() 
 	{
 		base.setReferences();
-		dogDatabase = parseDogDatabase();
-        shop = parseShopDatabase();
-		gifts = parseGiftDatabase();
-		tuning = parseTuning();
-		languages = LanguageDatabase.Instance;
-		languages.Initialize();
-        shop.Initialize();
-		gifts.Initialize();
+        if(isSingleton)
+        {
+    		dogDatabase = parseDogDatabase();
+            shop = parseShopDatabase();
+    		gifts = parseGiftDatabase();
+    		tuning = parseTuning();
+            languages = initLanguages();
+            souvenirs = initSouvenirs();
+            shop.Initialize();
+    		gifts.Initialize();
+        }
 	}
 
 	protected override void fetchReferences() 
 	{
-		base.fetchReferences();
-        dogDatabase.Initialize(dataController);
-        dataController.SetFilePath(SAVE_FILE_PATH);
-		dataController.LoadGame();
-		giftController = PPGiftController.Instance;
-		giftController.Init(tuning);
-		handleLoadGame(dataController);
+        base.fetchReferences();
+        if(isSingleton)
+        {
+            dogDatabase.Initialize(dataController);
+            dataController.SetFilePath(SAVE_FILE_PATH);
+    		dataController.LoadGame();
+    		giftController = PPGiftController.Instance;
+    		giftController.Init(tuning);
+    		handleLoadGame(dataController);
+        }
 	}
 
     protected override void handleSceneLoaded(int sceneIndex)
@@ -525,5 +532,19 @@ public class PPGameController : GameController, ICurrencySystem
 	{
         return parseFromJSONInResources<PPTuning>(TUNING_FILE_PATH);
 	}
+
+    LanguageDatabase initLanguages()
+    {
+        LanguageDatabase languages = LanguageDatabase.Instance;
+        languages.Initialize();
+        return languages;
+    }
+        
+    SouvenirDatabase initSouvenirs()
+    {
+        SouvenirDatabase souvenirs = SouvenirDatabase.Instance;
+        souvenirs.Initialize();
+        return souvenirs;
+    }
 
 }
