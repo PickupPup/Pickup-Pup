@@ -38,8 +38,6 @@ public class DogProfile : PPUIElement
     [SerializeField]
     protected GameObject iconsObject;
     [SerializeField]
-    protected Button rehomeButton;
-    [SerializeField]
     protected Button collarSlot;
 
     protected DogDescriptor dogInfo;

@@ -4,7 +4,7 @@
  * Usage: [no notes]
  */
 
-public class AdoptedDogProfile : DogShelterProfile 
+public class AdoptedDogProfile : DogProfile 
 {
 
 }
