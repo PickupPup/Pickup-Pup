@@ -12,7 +12,6 @@ public class CoinsData : CurrencyData
     public CoinsData(int initialAmount) : base(initialAmount)
     {
         type = CurrencyType.Coins;
-        amount = initialAmount;
     }
 
     #region CurrencyData Overrides

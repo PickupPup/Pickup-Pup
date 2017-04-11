@@ -471,7 +471,6 @@ GameObject:
   - component: {fileID: 114641595301203040}
   - component: {fileID: 114752183760271514}
   - component: {fileID: 114695682269405162}
-  - component: {fileID: 114880016242336886}
   m_Layer: 5
   m_Name: AdoptedDogProfile
   m_TagString: Untagged
@@ -888,7 +887,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 114374458585053794}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -1653,6 +1652,9 @@ MonoBehaviour:
   - {fileID: 114887773477957654}
   iconsObject: {fileID: 1388039298375222}
   collarSlot: {fileID: 114213218655212642}
+  displaySouvenirPrefab: {fileID: 114658854269328098, guid: 4c2fb0005583f4cb09f6fff8fb683d69,
+    type: 2}
+  souvenirButton: {fileID: 114565378471961314}
 --- !u!114 &114695682269405162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1950,25 +1952,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &114880016242336886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1591753207718850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf15b725d93c460fb57b1d3f91cd514, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveOnSceneChange: 0
-  alternateSprites: []
-  shouldCollectInSpawnPool: 1
-  iconImage: {fileID: 114185389463565320}
-  nameDisplay: {fileID: 0}
-  descriptionDisplay: {fileID: 0}
-  displayButton: {fileID: 0}
-  hideButton: {fileID: 0}
 --- !u!114 &114887773477957654
 MonoBehaviour:
   m_ObjectHideFlags: 1

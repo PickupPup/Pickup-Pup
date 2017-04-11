@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 224162307951585958}
   - component: {fileID: 222541577887533318}
   - component: {fileID: 114894687658271144}
+  - component: {fileID: 114539774521481764}
   m_Layer: 5
   m_Name: NameBackground
   m_TagString: Untagged
@@ -162,6 +163,7 @@ GameObject:
   - component: {fileID: 224670850107200540}
   - component: {fileID: 222905431295996016}
   - component: {fileID: 114225989309044590}
+  - component: {fileID: 114145945336807540}
   m_Layer: 5
   m_Name: DescriptionBackground
   m_TagString: Untagged
@@ -283,6 +285,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114145945336807540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788716107828780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f9f33c8f5454d6e96bd8d049f3d98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114163833224713832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -462,6 +478,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114539774521481764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1277480469093150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36f9f33c8f5454d6e96bd8d049f3d98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 0
+  alternateSprites: []
+  shouldCollectInSpawnPool: 1
 --- !u!114 &114623557527983780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,9 +534,8 @@ MonoBehaviour:
   alternateSprites: []
   shouldCollectInSpawnPool: 1
   iconImage: {fileID: 114140172082196022}
-  nameDisplay: {fileID: 0}
-  descriptionDisplay: {fileID: 0}
-  displayButton: {fileID: 0}
+  nameDisplay: {fileID: 114539774521481764}
+  descriptionDisplay: {fileID: 114145945336807540}
   hideButton: {fileID: 114183430423813712}
 --- !u!114 &114894687658271144
 MonoBehaviour:
@@ -708,8 +737,8 @@ RectTransform:
   m_Children:
   - {fileID: 224727434178321840}
   - {fileID: 224162307951585958}
-  - {fileID: 224667858354860914}
   - {fileID: 224670850107200540}
+  - {fileID: 224667858354860914}
   m_Father: {fileID: 224511532074326644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -749,7 +778,7 @@ RectTransform:
   m_Children:
   - {fileID: 224450919929660284}
   m_Father: {fileID: 224452578080761470}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -768,7 +797,7 @@ RectTransform:
   m_Children:
   - {fileID: 224004325100278598}
   m_Father: {fileID: 224452578080761470}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}

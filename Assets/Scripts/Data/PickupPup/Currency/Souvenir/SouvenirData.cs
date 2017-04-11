@@ -7,7 +7,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class SouvenirData 
+public class SouvenirData : CurrencyData
 {
     #region Instance Accessors
 
@@ -27,6 +27,22 @@ public class SouvenirData
         }
     }
 
+    public string DisplayName
+    {
+        get
+        {
+            return this.displayName;
+        }
+    }
+
+    public override Sprite Icon 
+    {
+        get 
+        {
+            return database.GetSprite(this);
+        }
+    }
+
     public DogDescriptor Owner
     {
         get
@@ -35,14 +51,27 @@ public class SouvenirData
         }
     }
 
+
+    SouvenirDatabase database
+    {
+        get
+        {
+            return SouvenirDatabase.GetInstance;
+        }
+    }
+
     #endregion
 
     [SerializeField]
     string name;
     [SerializeField]
+    string displayName;
+    [SerializeField]
     string description;
 
     DogDescriptor dog;
+
+    public SouvenirData(int amount = 1) : base(CurrencyType.Souvenir, amount){}
 
     public static SouvenirData Default()
     {

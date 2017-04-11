@@ -7,10 +7,36 @@
 using UnityEngine;
 
 using System;
+using System.IO;
 using System.Collections.Generic;
+
+using k = PPGlobal;
 
 public class SouvenirDatabase : Database<SouvenirDatabase>
 {
+    #region Static Accessors
+
+    public static Sprite DefaultSprite
+    {
+        get 
+        {
+            if(_defaultSprite)
+            {
+                return _defaultSprite;
+            } 
+            else 
+            {
+                // Memoization for efficiency
+                _defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, k.BONE_ICON_SPRITENAME));
+                return _defaultSprite;
+            }
+        }
+    }
+
+    #endregion
+
+    static Sprite _defaultSprite;
+
     #region Instance Acessors 
 
     public SouvenirData[] Souvenirs
@@ -26,12 +52,14 @@ public class SouvenirDatabase : Database<SouvenirDatabase>
     [SerializeField]
     SouvenirData[] souvenirs;
     Dictionary<string, SouvenirData> souvenirLookup;
+    SpritesheetDatabase sprites;
 
     public override void Initialize()
     {
         base.Initialize();
         overwriteFromJSONInResources(SOUVENIRS, this);
         this.souvenirLookup = generateSouvenirLookup(souvenirs);
+        this.sprites = SpritesheetDatabase.GetInstance;
     }
 
     public SouvenirData Get(string souvenirName)
@@ -63,6 +91,24 @@ public class SouvenirDatabase : Database<SouvenirDatabase>
             }
         }
         return lookup;
+    }
+
+    public Sprite GetSprite(SouvenirData souvenir)
+    {
+        Sprite souvenirSprite;
+        if(sprites.TryGetSprite(getSpriteName(souvenir), out souvenirSprite))
+        {
+            return souvenirSprite;
+        }
+        else 
+        {
+            return DefaultSprite;
+        }
+    }
+
+    string getSpriteName(SouvenirData souvenir)
+    {
+        return string.Format("{0}{1}{2}", k.SOUVENIRS, k.JOIN_CHAR, souvenir.Name);
     }
 
 }
