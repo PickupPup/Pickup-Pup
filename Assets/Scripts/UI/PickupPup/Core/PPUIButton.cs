@@ -55,6 +55,11 @@ public class PPUIButton : PPUIElement
         }
     }
 
+    public void ToggleEnabled(bool isEnabled)
+    {
+        this.button.interactable = isEnabled;
+    }
+
 	protected virtual void onClick()
 	{
 		callOnClickAction();

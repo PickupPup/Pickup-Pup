@@ -23,6 +23,16 @@ public class AdoptedDogProfile : DogProfile
         base.setReferences();
         souvenirButton.SubscribeToClick(showSouvenir);
     }
+   
+    #endregion
+
+    #region DogProfile Overrides
+
+    public override void SetProfile(Dog dog)
+    {
+        base.SetProfile(dog);
+        souvenirButton.ToggleEnabled(dog.Info.SouvenirCollected);
+    }
 
     #endregion
 
