@@ -14,6 +14,8 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	[SerializeField]
 	Text foodText;
     [SerializeField]
+    Text foodTextS;
+    [SerializeField]
     Text homeSlotsText;
 
 	protected override void fetchReferences() 
@@ -23,12 +25,14 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
 		dataController.SubscribeToCurrencyChange(CurrencyType.Coins, updateCoinsText);
 		dataController.SubscribeToCurrencyChange(CurrencyType.DogFood, updateFoodText);
-		dataController.SubscribeToCurrencyChange(CurrencyType.HomeSlots, updateHomeSlotsText);
+        dataController.SubscribeToCurrencyChange(CurrencyType.DogFoodS, updateFoodTextS);
+        dataController.SubscribeToCurrencyChange(CurrencyType.HomeSlots, updateHomeSlotsText);
 		dataController.LoadGame();
 
         // Display at start
         updateCoinsText(dataController.Coins.Amount);
         updateFoodText(dataController.DogFood.Amount);
+        updateFoodTextS(dataController.DogFoodS.Amount);
         updateHomeSlotsText(dataController.HomeSlots.Amount);
 	}
 
@@ -41,6 +45,11 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	{
 		dataController.ChangeFood(deltaFood);
 	}
+
+    public void ChangeFoodS(int deltaFood)
+    {
+        dataController.ChangeFoodS(deltaFood);
+    }
 
     public void ChangeHomeSlots(int deltaHomeSlots)
     {
@@ -61,6 +70,11 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	{
 		foodText.text = string.Format("{0}: {1}", "Food", food);
 	}
+
+    void updateFoodTextS(int food)
+    {
+        foodTextS.text = string.Format("{0}: {1}", "Food", food);
+    }
 
     void updateHomeSlotsText(int homeSlots)
     {

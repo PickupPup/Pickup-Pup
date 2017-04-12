@@ -131,7 +131,15 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-	public bool HasTargetSlot
+    public DogFoodDataS DogFoodS
+    {
+        get
+        {
+            return dataController.DogFoodS;
+        }
+    }
+
+    public bool HasTargetSlot
 	{
 		get
 		{
@@ -293,6 +301,11 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		dataController.ChangeFood(deltaFood);
 	}
+
+    public void ChangeFoodS(int deltaFood)
+    {
+        dataController.ChangeFoodS(deltaFood);
+    }
 
     public void ChangeHomeSlots(int deltaHomeSlots)
     {

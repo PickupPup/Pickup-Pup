@@ -133,6 +133,14 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
+    public DogFoodDataS DogFoodS
+    {
+        get
+        {
+            return currencies.DogFoodS;
+        }
+    }
+
     public HomeSlotsData HomeSlots
     {
         get
@@ -292,9 +300,16 @@ public class PPDataController : DataController, ICurrencySystem
 
 	public void ChangeFood(int deltaFood) 
 	{
+        Debug.Log(deltaFood);
         currencies.ChangeFood(deltaFood);
 		SaveGame();
 	}
+
+    public void ChangeFoodS(int deltaFood)
+    {
+        currencies.ChangeFoodS(deltaFood);
+        SaveGame();
+    }
 
     public void ChangeHomeSlots(int deltaHomeSlots)
     {

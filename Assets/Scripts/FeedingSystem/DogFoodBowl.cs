@@ -49,6 +49,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     static PPTimer feedingTimer = null;
     Button buttonReference;
+    GameObject foodOptions;
 
     #region MonoBehaviourExtended Overrides 
 
@@ -64,6 +65,7 @@ public class DogFoodBowl : MonoBehaviourExtended
         feedingTimer.SubscribeToTimeUp(handleFeedingTimeUp);
         buttonReference = GetComponent<Button>();
         buttonReference.interactable = !IsCurrentlyFeeding;
+        foodOptions = transform.GetChild(0).gameObject;
     }
 
     protected override void cleanupReferences()
@@ -90,6 +92,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 
 		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
         {
+            Debug.Log(-calculateDogFoodNeeded());
             dataController.ChangeFood(-calculateDogFoodNeeded());
             feedingTimer.Reset();
             feedingTimer.Begin();
@@ -100,6 +103,27 @@ public class DogFoodBowl : MonoBehaviourExtended
         {
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
+    }
+
+    public void FeedDogsS()
+    {
+        if (dataController.CanAfford(CurrencyType.DogFoodS, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
+        {
+            dataController.ChangeFoodS(-calculateDogFoodNeeded());
+            feedingTimer.Reset();
+            feedingTimer.Begin();
+            buttonReference.interactable = false;
+            EventController.Event(k.GetPlayEvent(k.ADD_FOOD));
+        }
+        else
+        {
+            EventController.Event(k.GetPlayEvent(k.EMPTY));
+        }
+    }
+
+    public void ToggleFoodOptions()
+    {
+        foodOptions.SetActive(!foodOptions.activeSelf);
     }
 
     void handleFeedingTimeBegin()

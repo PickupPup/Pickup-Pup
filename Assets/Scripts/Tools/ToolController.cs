@@ -44,6 +44,11 @@ public class ToolController : SingletonController<ToolController>
 	{
 		gameController.ChangeFood(amount);
 	}
+
+    void increaseFoodS(int amount)
+    {
+        gameController.ChangeFoodS(amount);
+    }
 }
 
 #endif

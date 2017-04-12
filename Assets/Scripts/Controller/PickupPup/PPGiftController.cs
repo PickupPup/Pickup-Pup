@@ -25,7 +25,8 @@ public class PPGiftController : SingletonController<PPGiftController>
 			new CurrencyType[]
 			{
 				CurrencyType.Coins, 
-				CurrencyType.DogFood
+				CurrencyType.DogFood,
+                CurrencyType.DogFoodS
 			},
 			new float[]
 			{
