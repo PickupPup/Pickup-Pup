@@ -176,11 +176,23 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public bool SouvenirCollected
+    {
+        get
+        {
+            return this.Souvenir.IsCollected;
+        }
+    }
+
     public SouvenirData Souvenir
     {
         get
         {
-            return database.GetDogSouvenir(souvenir);
+            if(_souvenir == null)
+            {
+                _souvenir = database.GetDogSouvenir(souvenir);
+            }
+            return _souvenir;
         }
     }
 
@@ -209,6 +221,7 @@ public class DogDescriptor : PPDescriptor
     [SerializeField]
     string souvenir;
 
+    SouvenirData _souvenir;
 	float _timeRemainingScouting;
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
@@ -359,6 +372,11 @@ public class DogDescriptor : PPDescriptor
 	{
 		this.linkedDog = null;
 	}
+
+    public void CollectSouvenir()
+    {
+        this.Souvenir.Collect();
+    }
 
     #region Object Overrides 
 

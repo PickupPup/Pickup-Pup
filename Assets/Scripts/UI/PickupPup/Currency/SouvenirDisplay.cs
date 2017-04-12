@@ -23,6 +23,8 @@ public class SouvenirDisplay : CurrencyDisplay
     [SerializeField]
     PPUIElement nameDisplay;
     [SerializeField]
+    PPUIElement dateCollectedDisplay;
+    [SerializeField]
     PPUIElement descriptionDisplay;
 
     [SerializeField]
@@ -54,6 +56,7 @@ public class SouvenirDisplay : CurrencyDisplay
     void display(SouvenirData souvenir)
     {
         nameDisplay.SetText(souvenir.DisplayName);
+        dateCollectedDisplay.SetText(souvenir.DateCollected.ToShortDateString());
         descriptionDisplay.SetText(souvenir.Description);
         setIcon(souvenir);
     }

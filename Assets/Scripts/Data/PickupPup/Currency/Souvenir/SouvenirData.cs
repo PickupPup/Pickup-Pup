@@ -6,6 +6,8 @@
 
 using UnityEngine;
 
+using System;
+
 [System.Serializable]
 public class SouvenirData : CurrencyData
 {
@@ -60,6 +62,20 @@ public class SouvenirData : CurrencyData
         }
     }
 
+    public bool IsCollected
+    {
+        get
+        {
+            return this.isCollected;
+        }
+    }
+     
+    public DateTime DateCollected 
+    {
+        get;
+        private set;
+    }
+
     #endregion
 
     [SerializeField]
@@ -70,6 +86,7 @@ public class SouvenirData : CurrencyData
     string description;
 
     DogDescriptor dog;
+    bool isCollected = false;
 
     public SouvenirData(int amount = 1) : base(CurrencyType.Souvenir, amount){}
 
@@ -79,7 +96,31 @@ public class SouvenirData : CurrencyData
         defaultSouvenir.name = string.Empty;
         defaultSouvenir.description = string.Empty;
         defaultSouvenir.dog = null;
+        defaultSouvenir.isCollected = false;
+        defaultSouvenir.DateCollected = default(DateTime);
         return defaultSouvenir;
+    }
+
+    public void SetOwner(DogDescriptor dog)
+    {
+        this.dog = dog;
+    }
+
+    public void Collect()
+    {
+        this.toggleUnlocked(true);
+        this.DateCollected = DateTime.Now;
+    }
+
+    public void Lock()
+    {
+        this.toggleUnlocked(false);
+        this.DateCollected = default(DateTime);
+    }
+
+    void toggleUnlocked(bool isUnlocked)
+    {
+        this.isCollected = isUnlocked;
     }
 
 }
