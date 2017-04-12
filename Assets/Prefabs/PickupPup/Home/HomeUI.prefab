@@ -447,6 +447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224851916732998202}
   - component: {fileID: 114755624020696056}
+  - component: {fileID: 114854976477195910}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1414,6 +1415,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114854976477195910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950383704888432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 2
+  m_AspectRatio: 2.1192
 --- !u!114 &114859781465681444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2103,7 +2117,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -700, y: 0}
-  m_SizeDelta: {x: 3022, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224860767444965872
 RectTransform:
