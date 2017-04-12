@@ -26,7 +26,7 @@ public class SouvenirDisplay : CurrencyDisplay
     PPUIElement descriptionDisplay;
 
     [SerializeField]
-    PPUIButton hideButton;
+    PPUIButton[] hideButtons;
 
     SouvenirData souvenir;
 
@@ -34,8 +34,16 @@ public class SouvenirDisplay : CurrencyDisplay
     {
         this.souvenir = souvenir;
         display(souvenir);
-        this.hideButton.TryUnsubscribeAll();
-        this.hideButton.SubscribeToClick(Hide);
+        initHideButtons();
+    }
+
+    void initHideButtons()
+    {
+        foreach(PPUIButton button in this.hideButtons)
+        {
+            button.TryUnsubscribeAll();
+            button.SubscribeToClick(Hide);
+        }
     }
 
     public override void Hide ()
