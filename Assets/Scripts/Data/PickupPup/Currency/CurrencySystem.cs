@@ -2,7 +2,7 @@
  * Authors: Grace Barrett-Snyder, Isaiah Mann 
  * Description: Controls all forms of currency
  */
-
+using UnityEngine;
 using System.Collections.Generic;
 using m = MonoBehaviourExtended;
 
@@ -19,7 +19,8 @@ public class CurrencySystem : PPData, ICurrencySystem
             return new CurrencySystem(
 				new CoinsData(startingCoins),
 				new DogFoodData(startingDogFood),
-				new HomeSlotsData(startingHomeSlots)
+                new DogFoodDataS(startingDogFoodS),
+                new HomeSlotsData(startingHomeSlots)
             );
         }
     }
@@ -28,7 +29,8 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	static int startingCoins;
 	static int startingDogFood;
-	static int startingHomeSlots;
+    static int startingDogFoodS;
+    static int startingHomeSlots;
 	static bool startingValuesInitialized;
 
     #region ICurrencySystem Accessors
@@ -45,7 +47,19 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
+            foreach (CurrencyType type in currencies.Keys)
+            {
+                Debug.Log(type);
+            }
             return currencies[CurrencyType.DogFood] as DogFoodData;
+        }
+    }
+
+    public DogFoodDataS DogFoodS
+    {
+        get
+        {
+            return currencies[CurrencyType.DogFoodS] as DogFoodDataS;
         }
     }
 
@@ -95,9 +109,15 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ChangeFood(int deltaFood)
     {
+        Debug.Log(deltaFood);
         ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
     }
-    
+
+    public void ChangeFoodS(int deltaFood)
+    {
+        ChangeCurrencyAmount(CurrencyType.DogFoodS, deltaFood);
+    }
+
     public void ChangeHomeSlots(int deltaHomeSlots)
     {
         ChangeCurrencyAmount(CurrencyType.HomeSlots, deltaHomeSlots);
@@ -105,6 +125,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
+        Debug.Log(type + " " + deltaAmount);
 		CurrencyData existingCurrency = getCurrency(type);
 		existingCurrency.ChangeBy(deltaAmount);
 		tryCallCurrencyChangeEvent(type);
