@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Timothy Ng
+ * Authors: Timothy Ng, Isaiah Mann
  * Description: Handles the feeding dog code through calling FeedDogs
  */
 
@@ -84,7 +84,13 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     public void FeedDogs()
     {
-        if(dataController.CanAfford(CurrencyType.DogFood, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
+		int foodNeeded = calculateDogFoodNeeded();
+		if(foodNeeded <= 0)
+		{
+			return;
+		}
+
+		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
         {
             Debug.Log(-calculateDogFoodNeeded());
             dataController.ChangeFood(-calculateDogFoodNeeded());

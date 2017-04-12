@@ -12,20 +12,35 @@ using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
 {
+    protected const int NONE_VALUE = k.NONE_VALUE;
+    protected const int INVALID_VALUE = k.INVALID_VALUE; 
+    protected const int SINGLE_VALUE = k.SINGLE_VALUE;
+
+    public delegate void MonoAction();
+    public delegate void MonoActionf(float monoFloat);
+    public delegate void MonoActionInt(int monoInt);
+
+    protected PPScene currentScene
+    {
+        get
+        {
+            try
+            {
+                return (PPScene) SceneManager.GetActiveScene().buildIndex;
+            }
+            catch
+            {
+                return default(PPScene);
+            }
+        }
+    }
+
     protected PPDataController dataController;
     protected PPGameController gameController;
 	protected AnalyticsController analytics;
 
 	protected bool referencesSet = false;
 	protected bool referencesFetched = false;
-
-	protected const int NONE_VALUE = k.NONE_VALUE;
-	protected const int INVALID_VALUE = k.INVALID_VALUE; 
-	protected const int SINGLE_VALUE = k.SINGLE_VALUE;
-
-	public delegate void MonoAction();
-	public delegate void MonoActionf(float monoFloat);
-	public delegate void MonoActionInt(int monoInt);
 
     [SerializeField]
     bool preserveOnSceneChange = false;
@@ -161,7 +176,10 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
     // Adapted from: http://answers.unity3d.com/questions/1174255/since-onlevelwasloaded-is-deprecated-in-540b15-wha.html
     protected virtual void handleSceneLoaded(Scene scene, LoadSceneMode loadingMode)
     {
-        handleSceneLoaded(scene.buildIndex);   
+        int sceneIndex = scene.buildIndex;
+        handleSceneLoaded(sceneIndex);   
+        // PPScene enum should correspond to the scene indexes in the build settings
+        handleSceneLoaded((PPScene) sceneIndex);
     }
         
 	protected virtual void subscribeEvents() 
@@ -237,6 +255,11 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 			Destroy(gameObject);
 		}
 	}
+
+    protected virtual void handleSceneLoaded(PPScene scene) 
+    {
+
+    }
 
 	protected virtual void handleGameTogglePause(bool isPaused)
 	{
