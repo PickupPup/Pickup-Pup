@@ -123,4 +123,13 @@ public class SouvenirData : SpecialGiftData
         this.isCollected = isUnlocked;
     }
 
+    #region Object Overrides
+
+    public override string ToString ()
+    {
+        return this.DisplayName;
+    }
+
+    #endregion
+
 }
