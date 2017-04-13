@@ -11,15 +11,7 @@ using k = PPGlobal;
 
 public class DogAI : MonoBehaviour {
 
-    enum State
-    {
-        Idle,
-        Wandering,
-        Eating,
-        Pooping
-    }
-
-    State currentState = State.Wandering;
+    DogState currentState = DogState.Wandering;
     Vector2 wanderCenter;
     float wanderRadius = 500;
 
@@ -36,25 +28,25 @@ public class DogAI : MonoBehaviour {
 	
 	void Update () {
 
-        currentState = DecideState();
+        currentState = decideState();
 
         switch (currentState)
         {
-            case State.Idle:
+            case DogState.Idle:
                 break;
-            case State.Wandering:
-                Wander();
+            case DogState.Wandering:
+                wander();
                 break;
-            case State.Eating:
+            case DogState.Eating:
                 break;
-            case State.Pooping:
+            case DogState.Pooping:
                 break;
             default:
                 break;
         }
 	}
 
-    State DecideState()
+    DogState decideState()
     {
         if(frameCounter < 120)
         {
@@ -67,33 +59,33 @@ public class DogAI : MonoBehaviour {
             switch(Random.Range(0, 2))
             {
                 case 0:
-                    return State.Idle;
+                    return DogState.Idle;
                 case 1:
-                    return State.Wandering;
+                    return DogState.Wandering;
             }
-            return State.Idle;
+            return DogState.Idle;
         }
 
     }
 
-    void Wander()
+    void wander()
     {
-        if ((target - GetComponent<RectTransform>().anchoredPosition).sqrMagnitude < 0.5f)
+        if (target == GetComponent<RectTransform>().anchoredPosition)
         {
-            float ct = Random.Range(0, 2 * Mathf.PI);
-            float cr = wanderRadius * Mathf.Sqrt(Random.Range(0f, 1f));
-            float x = cr * Mathf.Cos(ct);
-            float y = cr * Mathf.Sin(ct);
+            float ctheta = Random.Range(0, 2 * Mathf.PI);
+            float cradius = wanderRadius * Mathf.Sqrt(Random.Range(0f, 1f));
+            float x = cradius * Mathf.Cos(ctheta);
+            float y = cradius * Mathf.Sin(ctheta);
             target = new Vector2(x, y) + wanderCenter;
         }
         else
         {
-            MoveTo(target);
+            moveTo(target);
         }
 
     }
 
-    void MoveTo(Vector3 target)
+    void moveTo(Vector3 target)
     {
         Vector2 moveVec = Vector3.MoveTowards(GetComponent<RectTransform>().anchoredPosition, target, Time.deltaTime * 40);
         GetComponent<RectTransform>().anchoredPosition = moveVec;
