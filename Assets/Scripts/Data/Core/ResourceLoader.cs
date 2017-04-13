@@ -7,6 +7,7 @@ using k = PPGlobal;
 using UnityEngine;
 using SimpleJSON;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 [System.Serializable]
 public class ResourceLoader 
@@ -35,6 +36,19 @@ public class ResourceLoader
     protected const int ZERO_INDEX_OFFSET = k.ZERO_INDEX_OFFSET;
 
 	const float FULL_PERCENT = k.FULL_PERCENT_F;
+
+    // Adapted from: http://stackoverflow.com/questions/1031023/copy-a-class-c-sharp
+    // Returns null if cast is invalid
+    public T Copy<T>() where T : class
+    { 
+        using(MemoryStream memoryStream = new MemoryStream())
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(memoryStream, this);
+            memoryStream.Position = 0;
+            return formatter.Deserialize(memoryStream) as T;
+        }
+    }
 
     protected static float perecentToDecimal(int percentOf100)
     {

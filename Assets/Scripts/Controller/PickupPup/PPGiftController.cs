@@ -19,6 +19,14 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     CurrencyFactory giftFactory;
 
+    #if UNITY_EDITOR
+
+    [Header("Cheats")]
+    [SerializeField]
+    bool alwaysReturnSouvenirFirst = false;
+
+    #endif
+
 	public void Init(PPTuning tuning)
 	{
 		this.tuning = tuning;
@@ -94,6 +102,15 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     CurrencyData generateGift(DogDescriptor dog)
     {
+    #if UNITY_EDITOR
+        
+        if(alwaysReturnSouvenirFirst && !dog.SouvenirCollected)
+        {
+            // TODO: This function should eventually return all types of special gifts, not just souvenirs, will need to be modified here:
+            return getSpecialGift(dog);
+        }
+
+    #endif
         CurrencyType specialization = dog.Breed.ISpecialization;
         int amount = randomAmount();
         CurrencyType type;

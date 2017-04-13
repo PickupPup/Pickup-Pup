@@ -118,6 +118,11 @@ public class SouvenirData : SpecialGiftData
         this.DateCollected = default(DateTime);
     }
 
+    public SouvenirData Copy()
+    {
+        return this.Copy<SouvenirData>();
+    }
+
     void toggleUnlocked(bool isUnlocked)
     {
         this.isCollected = isUnlocked;

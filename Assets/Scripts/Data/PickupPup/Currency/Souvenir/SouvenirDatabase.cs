@@ -27,7 +27,7 @@ public class SouvenirDatabase : Database<SouvenirDatabase>
             else 
             {
                 // Memoization for efficiency
-                _defaultSprite = Resources.Load<Sprite>(Path.Combine(SPRITES_DIR, k.BONE_ICON_SPRITENAME));
+                _defaultSprite = Resources.LoadAll<Sprite>(Path.Combine(SPRITES_DIR, k.UI_SPRITESHEET))[0];
                 return _defaultSprite;
             }
         }

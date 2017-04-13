@@ -273,7 +273,8 @@ public class DogDatabase : Database<DogDatabase>
 
     public SouvenirData GetDogSouvenir(string souvenirName)
     {
-        return souvenirDatabase.Get(souvenirName);
+        // Always return a copy so we're not modifiying the template object:
+        return souvenirDatabase.Get(souvenirName).Copy();
     }
 
 	string getSpriteName(DogDescriptor dog)
