@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Timothy Ng
+ * Author(s): Timothy Ng, Isaiah Mann
  * Description: Brains behind the dogs actions on the world
  * Usage: [no notes]
  */
@@ -9,80 +9,100 @@ using System.Collections.Generic;
 using UnityEngine;
 using k = PPGlobal;
 
-public class DogAI : MonoBehaviour {
-
-    DogState currentState = DogState.Wandering;
+public class DogAI : MonoBehaviourExtended 
+{
+    static DogState[] implementedStates = new DogState[]{DogState.Idle, DogState.Wandering};
+        
+    DogState currentState = DogState.Idle;
     Vector2 wanderCenter;
     float wanderRadius = 500;
 
     Vector2 target;
-    int frameCounter = 0;
 
     int tapCount = 0;
 
+    IEnumerator decisionRoutine;
+    IEnumerator currentStateRoutine;
+
+    bool isActive = true;
+
+    float timePerState = 4f;
+
 	// Use this for initialization
-	void Start () {
+	protected override void setReferences()
+    {
+        base.setReferences();
         wanderCenter = GetComponent<RectTransform>().anchoredPosition;
         target = GetComponent<RectTransform>().anchoredPosition;
+        setupDecisionRoutine();
     }
 	
-	void Update () {
-
-        currentState = decideState();
-
-        switch (currentState)
-        {
-            case DogState.Idle:
-                break;
-            case DogState.Wandering:
-                wander();
-                break;
-            case DogState.Eating:
-                break;
-            case DogState.Pooping:
-                break;
-            default:
-                break;
-        }
-	}
-
-    DogState decideState()
+    void setupDecisionRoutine()
     {
-        if(frameCounter < 120)
-        {
-            frameCounter++;
-            return currentState;
-        }
-        else
-        {
-            frameCounter = 0;
-            switch(Random.Range(0, 2))
-            {
-                case 0:
-                    return DogState.Idle;
-                case 1:
-                    return DogState.Wandering;
-            }
-            return DogState.Idle;
-        }
-
+        decisionRoutine = decideState();
+        StartCoroutine(decisionRoutine);
     }
 
-    void wander()
+    DogState chooseRandomState()
     {
-        if (target == GetComponent<RectTransform>().anchoredPosition)
-        {
-            float ctheta = Random.Range(0, 2 * Mathf.PI);
-            float cradius = wanderRadius * Mathf.Sqrt(Random.Range(0f, 1f));
-            float x = cradius * Mathf.Cos(ctheta);
-            float y = cradius * Mathf.Sin(ctheta);
-            target = new Vector2(x, y) + wanderCenter;
-        }
-        else
-        {
-            moveTo(target);
-        }
+        return implementedStates[Random.Range(0, implementedStates.Length)];
+    }
 
+    IEnumerator decideState()
+    {
+        while(isActive)
+        {
+            switchToState(chooseRandomState());
+            yield return new WaitForSeconds(timePerState);
+        }
+    }
+
+    void switchToState(DogState state)
+    {
+        if(state != this.currentState)
+        {
+            if(currentStateRoutine != null)
+            {
+                StopCoroutine(currentStateRoutine);
+            }
+            currentStateRoutine = getCoroutineForState(state);
+            if(currentStateRoutine != null)
+            {
+                StartCoroutine(currentStateRoutine);
+            }
+            this.currentState = state;
+        }
+    }
+
+    IEnumerator getCoroutineForState(DogState state)
+    {
+        switch(state)
+        {
+            case DogState.Wandering:
+                return wander();
+            default:
+                return null;
+        }
+    }
+
+    IEnumerator wander()
+    {
+        while(isActive)
+        {
+            if (target == GetComponent<RectTransform>().anchoredPosition)
+            {
+                float ctheta = Random.Range(0, 2 * Mathf.PI);
+                float cradius = wanderRadius * Mathf.Sqrt(Random.Range(0f, 1f));
+                float x = cradius * Mathf.Cos(ctheta);
+                float y = cradius * Mathf.Sin(ctheta);
+                target = new Vector2(x, y) + wanderCenter;
+            }
+            else
+            {
+                moveTo(target);
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     void moveTo(Vector3 target)
@@ -103,6 +123,5 @@ public class DogAI : MonoBehaviour {
 
         EventController.Event(k.GetPlayEvent(k.BARK));
     }
-
-
+        
 }
