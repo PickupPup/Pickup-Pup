@@ -25,8 +25,8 @@ public class DogAI : MonoBehaviourExtended
     //TODO: Replace with q system
     float timePerState = 4f;
 
-    int tapToHeart = PPGameController.GetInstance.Tuning.TapToHeart;
-    float dogSpeed = PPGameController.GetInstance.Tuning.DogSpeed;
+    int tapToHeart;
+    float dogSpeed;
 
 	// Use this for initialization
 	protected override void setReferences()
@@ -36,6 +36,8 @@ public class DogAI : MonoBehaviourExtended
         target = GetComponent<RectTransform>().anchoredPosition;
         setupDecisionRoutine();
         GetComponent<UIButton>().SubscribeToClick(Pet);
+        tapToHeart = PPGameController.GetInstance.Tuning.TapToHeart;
+        dogSpeed = PPGameController.GetInstance.Tuning.DogSpeed;
     }
 	
     void setupDecisionRoutine()
@@ -107,9 +109,9 @@ public class DogAI : MonoBehaviourExtended
         }
     }
 
-    void moveTo(Vector3 target)
+    void moveTo(Vector2 target)
     {
-        Vector2 moveVec = Vector3.MoveTowards(GetComponent<RectTransform>().anchoredPosition, target, Time.deltaTime * dogSpeed);
+        Vector2 moveVec = Vector2.MoveTowards(GetComponent<RectTransform>().anchoredPosition, target, Time.deltaTime * dogSpeed);
         GetComponent<RectTransform>().anchoredPosition = moveVec;
     }
 

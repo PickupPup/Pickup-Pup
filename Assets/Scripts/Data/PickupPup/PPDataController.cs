@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Timothy Ng, Isaiah Mann, Grace Barrett-Snyder
  * Description: Handles save for Pickup Pup
  */
 
