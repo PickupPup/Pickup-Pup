@@ -9,7 +9,7 @@ using UnityEngine;
 using System;
 
 [System.Serializable]
-public class SouvenirData : CurrencyData
+public class SouvenirData : SpecialGiftData
 {
     #region Instance Accessors
 

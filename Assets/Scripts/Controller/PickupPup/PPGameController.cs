@@ -112,7 +112,7 @@ public class PPGameController : GameController, ICurrencySystem
             return languages;
         }
     }
-		
+	
     #region ICurrencySystem Interface
 
     public CoinsData Coins
@@ -157,6 +157,18 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+    public float TimeScale
+    {
+        get
+        {
+            return this._timeScale;
+        }
+        set
+        {
+            this._timeScale = value;
+        }
+    }
+
     #endregion
 
     #region Controller Overrides
@@ -181,6 +193,7 @@ public class PPGameController : GameController, ICurrencySystem
 	PPGiftController giftController;
 	DogSlot targetSlot;
     bool mainMenuIsOpen = false;
+    float _timeScale = k.DEFAULT_TIME_SCALE;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -288,6 +301,14 @@ public class PPGameController : GameController, ICurrencySystem
 	}
 
     #region ICurrencySystem Interface
+
+    public void ChangeTimeScale(object source, float newTimeScale)
+    {
+        if(source is Controller)
+        {
+            this.TimeScale = newTimeScale;
+        }
+    }
 
     public void ChangeCoins(int deltaCoins) 
 	{

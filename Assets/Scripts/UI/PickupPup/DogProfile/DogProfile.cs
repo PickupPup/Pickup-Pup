@@ -12,8 +12,10 @@ using k = PPGlobal;
 public class DogProfile : PPUIElement
 {
 	DogProfileButtonController _buttonController;
-	public DogProfileButtonController buttonController {
-		get {
+	public DogProfileButtonController buttonController
+    {
+		get 
+        {
 			if (!_buttonController)
 			{
 				_buttonController = transform.GetComponent<DogProfileButtonController>();

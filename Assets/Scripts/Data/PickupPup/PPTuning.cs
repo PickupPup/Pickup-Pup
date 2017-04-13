@@ -26,6 +26,22 @@ public class PPTuning : PPData
         }
     }
 
+    public float AffectionIncrease
+    {
+        get
+        {
+            return affectionIncrease;
+        }
+    }
+
+    public float ChanceForNoSpecial
+    {
+        get
+        {
+            return chanceForNoSpecial;
+        }
+    }
+
     public float ChanceOfDogsEatingPoop
     {
         get
@@ -223,6 +239,14 @@ public class PPTuning : PPData
         get
         {
             return inWorldKey;
+        }
+    }
+
+    public float MaxAffection
+    {
+        get
+        {
+            return maxAffection;
         }
     }
 
@@ -457,7 +481,7 @@ public class PPTuning : PPData
             return waitTimeSecsForDailyGift;
         }
     }
-        
+            
     #endregion
 
     #region JSON Fields
@@ -466,6 +490,10 @@ public class PPTuning : PPData
     string adoptedText;
     [SerializeField]
     string adoptText;
+    [SerializeField]
+    float affectionIncrease;
+    [SerializeField]
+    float chanceForNoSpecial;
     [SerializeField]
     float chanceOfDogsEatingPoop;
     [SerializeField]
@@ -516,6 +544,8 @@ public class PPTuning : PPData
     float dogFoodFeedTimeSec;
     [SerializeField]
     string inWorldKey;
+    [SerializeField]
+    float maxAffection;
     [SerializeField]
     int maxAmountPerTypeFromScouting;
     [SerializeField]

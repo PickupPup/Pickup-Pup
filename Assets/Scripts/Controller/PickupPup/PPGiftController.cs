@@ -14,6 +14,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 	PPTuning tuning;
 
 	WeightedRandomBuffer<CurrencyType> defaultReturnChances;
+    WeightedRandomBuffer<CurrencyType> defaultReturnChancesWithGifts;
 	WeightedRandomBuffer<CurrencyData> giftChances;
 
     CurrencyFactory giftFactory;
@@ -25,14 +26,28 @@ public class PPGiftController : SingletonController<PPGiftController>
 			new CurrencyType[]
 			{
 				CurrencyType.Coins, 
-				CurrencyType.DogFood
+				CurrencyType.DogFood,
 			},
 			new float[]
 			{
 				tuning.DefaultChanceOfCollectingMoney,
-				tuning.DefaultChanceOfCollectingDogFood
+				tuning.DefaultChanceOfCollectingDogFood,
 			}
 		);
+        defaultReturnChancesWithGifts = new WeightedRandomBuffer<CurrencyType>(
+            new CurrencyType[]
+            {
+                CurrencyType.Coins, 
+                CurrencyType.DogFood,
+                CurrencyType.SpecialGift
+            },
+            new float[]
+            {
+                tuning.DefaultChanceOfCollectingMoney,
+                tuning.DefaultChanceOfCollectingDogFood,
+                tuning.ChanceOfSpecialGift
+            }
+        );
 		giftChances = populateGifts(
 			tuning.DailyGiftOptions,
 			tuning.DailyGiftAmounts,
@@ -84,13 +99,31 @@ public class PPGiftController : SingletonController<PPGiftController>
         CurrencyType type;
         if(specialization == CurrencyType.None)
         {
-            type = defaultRandomType();
+            type = defaultRandomType(dog);
         }
         else
         {
-            type = getRandomizerBySpecialization(specialization).GetRandom();
+            type = getRandomizerBySpecialization(dog, specialization).GetRandom();
         }
-        return giftFactory.Create(type, amount);
+        if(type == CurrencyType.SpecialGift)
+        {
+            return getSpecialGift(dog);
+        }
+        else
+        {
+            return giftFactory.Create(type, amount);
+        }
+    }
+
+    bool eligibleForSouvenir(DogDescriptor dog)
+    {
+        return !(dog.SouvenirCollected || dog.FirstTimeScouting);
+    }
+
+    CurrencyData getSpecialGift(DogDescriptor dog)
+    {
+        // TODO: Should be able to return other types of special gifts including other dogs, and Tub-Tub the Cat
+        return dog.Souvenir;
     }
 
 	public CurrencyData GetDailyGift()
@@ -98,20 +131,39 @@ public class PPGiftController : SingletonController<PPGiftController>
 		return giftChances.GetRandom();
 	}
 
-	WeightedRandomBuffer<CurrencyType> getRandomizerBySpecialization(CurrencyType specialization)
+	WeightedRandomBuffer<CurrencyType> getRandomizerBySpecialization(DogDescriptor dog, CurrencyType specialization)
 	{
-		CurrencyType[] currencies = new CurrencyType[]
-		{
-			specialization,
-			getSecondary(specialization),
-			CurrencyType.SpecialGift,
-		};
-		float[] weights = new float[]
-		{
-			tuning.ChanceOfSpecialization,
-			tuning.ChanceOfSecondary,
-            tuning.ChanceOfSpecialGift,
-		};
+        CurrencyType[] currencies;
+        float[] weights;
+        // TODO: This check needs to be moved inside of special gift logic when we implement other special gifts:
+        if(eligibleForSouvenir(dog))
+        {
+            currencies = new CurrencyType[]
+            {
+                specialization,
+                getSecondary(specialization),
+                CurrencyType.SpecialGift,
+            };
+            weights = new float[]
+            {
+                tuning.ChanceOfSpecialization,
+                tuning.ChanceOfSecondary,
+                tuning.ChanceOfSpecialGift,
+            };
+        }
+        else
+        {
+            currencies = new CurrencyType[]
+            {
+                specialization,
+                getSecondary(specialization),
+            };
+            weights = new float[]
+            {
+                tuning.ChanceOfSpecialization,
+                tuning.ChanceOfSecondary,
+            };
+        }
 		return new WeightedRandomBuffer<CurrencyType>(currencies, weights);
 	}
 
@@ -127,9 +179,17 @@ public class PPGiftController : SingletonController<PPGiftController>
 		return new WeightedRandomBuffer<CurrencyData>(gifts, giftChances);
 	}
 
-	CurrencyType defaultRandomType()
+    CurrencyType defaultRandomType(DogDescriptor dog)
 	{
-		return defaultReturnChances.GetRandom();
+        // TODO: This check needs to be moved inside of special gift logic when we implement other special gifts:
+        if(eligibleForSouvenir(dog))
+        {
+            return defaultReturnChancesWithGifts.GetRandom();
+        }
+        else
+        {
+		    return defaultReturnChances.GetRandom();
+        }
 	}
 
 	int randomAmount()

@@ -6,6 +6,7 @@
 using UnityEngine;
 
 using m = MonoBehaviourExtended;
+using k = PPGlobal;
 
 [System.Serializable]
 public class DogDescriptor : PPDescriptor 
@@ -176,6 +177,20 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public bool FirstTimeScouting
+    {
+        get
+        {
+            return TimesScouted <= k.SINGLE_VALUE;
+        }
+    }
+
+    public int TimesScouted
+    {
+        get;
+        private set;
+    }
+        
     public bool SouvenirCollected
     {
         get
@@ -243,6 +258,7 @@ public class DogDescriptor : PPDescriptor
                 string.Empty, string.Empty
             };
         descriptor.EmptyDescriptor = true;
+        descriptor.TimesScouted = 0;
 		return descriptor;
 	}
 		
@@ -291,6 +307,7 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
+        this.TimesScouted++;
         this.IsScouting = false;
         callDoneScouting();
 		if(this.IsLinkedToDog)
@@ -298,7 +315,7 @@ public class DogDescriptor : PPDescriptor
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
 		}
 	}
-
+        
     public void FindGift(CurrencyData gift)
     {
         this.RedeemableGift = gift;
