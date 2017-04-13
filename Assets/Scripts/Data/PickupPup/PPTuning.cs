@@ -34,6 +34,14 @@ public class PPTuning : PPData
         }
     }
 
+    public float ChanceForNoSpecial
+    {
+        get
+        {
+            return chanceForNoSpecial;
+        }
+    }
+
     public float ChanceOfDogsEatingPoop
     {
         get
@@ -484,6 +492,8 @@ public class PPTuning : PPData
     string adoptText;
     [SerializeField]
     float affectionIncrease;
+    [SerializeField]
+    float chanceForNoSpecial;
     [SerializeField]
     float chanceOfDogsEatingPoop;
     [SerializeField]

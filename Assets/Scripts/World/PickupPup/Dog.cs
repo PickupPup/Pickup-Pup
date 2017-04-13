@@ -361,6 +361,10 @@ public class Dog : MobileObjectBehaviour
         CurrencyData gift = Info.RedeemGift();
         callGiftEvent(k.REDEEM_GIFT, gift);
         gameController.GiveCurrency(gift);
+        if(gift is SouvenirData)
+        {
+            Info.CollectSouvenir();
+        }
         trySaveGame();
         return gift;
     }

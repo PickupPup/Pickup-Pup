@@ -6,6 +6,7 @@
 using UnityEngine;
 
 using m = MonoBehaviourExtended;
+using k = PPGlobal;
 
 [System.Serializable]
 public class DogDescriptor : PPDescriptor 
@@ -175,11 +176,45 @@ public class DogDescriptor : PPDescriptor
         get;
         private set;
     }
+        
+    public bool FirstTimeScouting
+    {
+        get
+        {
+            return TimesScouted <= k.SINGLE_VALUE;
+        }
+    }
+
+    public int TimesScouted
+    {
+        get;
+        private set;
+    }
 
     public float Affection
     {
         get;
         private set;
+    }
+        
+    public bool SouvenirCollected
+    {
+        get
+        {
+            return this.Souvenir.IsCollected;
+        }
+    }
+
+    public SouvenirData Souvenir
+    {
+        get
+        {
+            if(_souvenir == null)
+            {
+                _souvenir = database.GetDogSouvenir(souvenir);
+            }
+            return _souvenir;
+        }
     }
 
 	#endregion
@@ -212,7 +247,10 @@ public class DogDescriptor : PPDescriptor
 	int age;
     [SerializeField]
     string[] description;
+    [SerializeField]
+    string souvenir;
 
+    SouvenirData _souvenir;
 	float _timeRemainingScouting;
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
@@ -234,6 +272,7 @@ public class DogDescriptor : PPDescriptor
                 string.Empty, string.Empty
             };
         descriptor.EmptyDescriptor = true;
+        descriptor.TimesScouted = 0;
 		return descriptor;
 	}
 		
@@ -282,6 +321,7 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
+        this.TimesScouted++;
         this.IsScouting = false;
         callDoneScouting();
 		if(this.IsLinkedToDog)
@@ -289,7 +329,7 @@ public class DogDescriptor : PPDescriptor
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
 		}
 	}
-
+        
     public void FindGift(CurrencyData gift)
     {
         this.RedeemableGift = gift;
@@ -374,6 +414,11 @@ public class DogDescriptor : PPDescriptor
 	{
 		this.linkedDog = null;
 	}
+
+    public void CollectSouvenir()
+    {
+        this.Souvenir.Collect();
+    }
 
     #region Object Overrides 
 

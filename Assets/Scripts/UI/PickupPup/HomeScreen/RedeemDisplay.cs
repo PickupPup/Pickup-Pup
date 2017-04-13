@@ -10,18 +10,6 @@ using k = PPGlobal;
 
 public class RedeemDisplay : PPUIElement 
 {
-    #region Instance Accessors
-
-    public GiftItem GetGift
-    {
-        get
-        {
-            return gift;
-        }
-    }
-
-    #endregion
-
     [SerializeField]
     Image dogPortrait;
     [SerializeField]
@@ -30,7 +18,6 @@ public class RedeemDisplay : PPUIElement
 	Text giftDescription;
     [SerializeField]
     Image giftPortrait;
-	GiftItem gift;
 	Image background;
 
 	// Need Eventually For Polish

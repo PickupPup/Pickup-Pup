@@ -6,6 +6,8 @@
 using System.Collections;
 using UnityEngine;
 
+using k = PPGlobal;
+
 public class MonoTimer : MonoBehaviourExtended, IGameTimer 
 {
 	#region Instance Accessors
@@ -41,6 +43,21 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 			return timeAtLastChangeEvent != TimeRemaining;
 		}
 	}
+
+    float scaledTimeStep
+    {
+        get
+        {
+            if(gameController)
+            {
+                return this.timeStep * gameController.TimeScale;
+            }
+            else
+            {
+                return this.timeStep * k.DEFAULT_TIME_SCALE;
+            }
+        }
+    }
 
     PPData.DataAction onTimeBegin;
 	PPData.DataActionf onTimeChange;
@@ -209,8 +226,8 @@ public class MonoTimer : MonoBehaviourExtended, IGameTimer
 	{
 		while(timerIsRunning) 
 		{
-			yield return new WaitForSecondsRealtime(timeStep);
-			TimeRemaining -= timeStep;
+            yield return new WaitForSecondsRealtime(timeStep);
+            TimeRemaining -= scaledTimeStep;
 			checkForTimeEvents();
 		}
 	}

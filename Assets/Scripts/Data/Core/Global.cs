@@ -52,6 +52,7 @@ public class Global
 
     public const float FULL_PERCENT_F = 100f;
     public const float MIN_SWIPE_THRESHOLD = 1f;
+    public const float DEFAULT_TIME_SCALE = 1.0f;
 
 	public static bool IntToBool(int value)
 	{

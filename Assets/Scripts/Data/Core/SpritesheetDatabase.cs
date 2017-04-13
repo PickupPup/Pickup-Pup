@@ -12,21 +12,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class SpritesheetDatabase : Database<SpritesheetDatabase>
 {
-	#region Static Accessors
-
-	public static SpritesheetDatabase GetInstance
-	{
-		get
-		{
-			SpritesheetDatabase database = Instance;
-			// Initializes the database if it's not already setup
-			database.TryInit();
-			return database;
-		}
-	}
-
-	#endregion
-
 	static string jsonPath 
 	{
 		get
@@ -62,7 +47,14 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 			int index = 0;
 			foreach(JSONNode sprite in sheet[SPRITES_DIR].AsArray)
 			{
-				lookup.Add(sprite, spriteSheet[index++]);
+                if(index < spriteSheet.Length)
+                {
+				    lookup.Add(sprite, spriteSheet[index++]);
+                }
+                else
+                {
+                    break;
+                }
 			}
 		}
 		return lookup;

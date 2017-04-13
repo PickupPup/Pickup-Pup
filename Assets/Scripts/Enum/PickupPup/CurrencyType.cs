@@ -11,6 +11,7 @@ public enum CurrencyType
     Time,
 	SpecialGift,
     DogDiscount,
+    Souvenir,
     None,
 
 }

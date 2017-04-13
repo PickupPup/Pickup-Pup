@@ -13,6 +13,12 @@ public class SpecialGiftData : CurrencyData
         // NOTHING
     }
 
+    public SpecialGiftData(CurrencyType type, int initialAmount):
+    base(type, initialAmount)
+    {
+        // NOTHING
+    }
+
     // TODO: Implement special behaviour for currency type
 
 }
