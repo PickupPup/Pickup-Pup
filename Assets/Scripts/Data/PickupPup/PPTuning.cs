@@ -481,7 +481,7 @@ public class PPTuning : PPData
             return waitTimeSecsForDailyGift;
         }
     }
-            
+        
     #endregion
 
     #region JSON Fields

@@ -326,6 +326,12 @@ public class Dog : MobileObjectBehaviour
         scoutingTimer.Stop();
     }
 
+    public void IncreaseAffection()
+    {
+        Info.IncreaseAffection();
+        trySaveGame();
+    }
+
     // Typically dog should find a random gift, but method can be overloaded to cause it to find a specific gift
     public void FindGift(bool shouldSave, CurrencyData giftOverride = null)
     {
