@@ -156,10 +156,6 @@ public class ScoutingDisplay : PPUIElement
         {
             DogDescriptor dogInfo = dog.Info;
             CurrencyData reward = gameController.GetGift(dogInfo);
-            if(reward is SouvenirData)
-            {
-                dogInfo.CollectSouvenir();
-            }
             GiftReport report = new GiftReport(dogInfo, reward);
             createGiftReportUI(report);
         }
