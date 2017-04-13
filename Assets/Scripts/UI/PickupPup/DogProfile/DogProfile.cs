@@ -70,6 +70,19 @@ public class DogProfile : PPUIElement
 
     #endregion
 
+    #if UNITY_EDITOR
+
+    // Debugging cheat for increasing the affection of a selected dog
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && dogInfo != null)
+        {
+            dogInfo.IncreaseAffection();
+        }
+    }
+
+    #endif
+
     public virtual void SetProfile(Dog dog)
     {
         dogInfo = dog.Info;

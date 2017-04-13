@@ -176,6 +176,12 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
+    public float Affection
+    {
+        get;
+        private set;
+    }
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -185,6 +191,14 @@ public class DogDescriptor : PPDescriptor
 			return modCost != 0;
 		}
 	}
+
+    PPTuning tuning
+    {
+        get
+        {
+            return PPGameController.GetInstance.Tuning;
+        }
+    }
 
 	[SerializeField]
 	string name;
@@ -317,6 +331,17 @@ public class DogDescriptor : PPDescriptor
     public void UnsubscribeFromDoneScouting(m.MonoAction del)
     {
         this.onDoneScouting -= del;
+    }
+
+    public void ChangeAffection(float deltaAffection)
+    {
+        float newAffection = this.Affection + deltaAffection;
+        this.Affection = Mathf.Clamp(newAffection, 0, tuning.MaxAffection);
+    }
+
+    public void IncreaseAffection()
+    {
+        ChangeAffection(tuning.AffectionIncrease);
     }
 
     void callBeginScouting()
