@@ -131,11 +131,11 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-    public DogFoodDataS DogFoodS
+    public DogFoodData DogFoodSpecial
     {
         get
         {
-            return dataController.DogFoodS;
+            return dataController.DogFoodSpecial;
         }
     }
 
@@ -297,14 +297,16 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController.ChangeCoins(deltaCoins);
 	}
 
-	public void ChangeFood(int deltaFood) 
+	public void ChangeFood(int deltaFood, bool isSpecial) 
 	{
-		dataController.ChangeFood(deltaFood);
-	}
-
-    public void ChangeFoodS(int deltaFood)
-    {
-        dataController.ChangeFoodS(deltaFood);
+        if (!isSpecial)
+        {
+            dataController.ChangeFood(deltaFood, false);
+        }
+        else
+        {
+            dataController.ChangeFood(deltaFood, true);
+        }
     }
 
     public void ChangeHomeSlots(int deltaHomeSlots)

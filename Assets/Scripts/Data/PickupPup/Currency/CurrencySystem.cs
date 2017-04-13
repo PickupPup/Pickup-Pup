@@ -18,8 +18,8 @@ public class CurrencySystem : PPData, ICurrencySystem
 			checkStartingValues();
             return new CurrencySystem(
 				new CoinsData(startingCoins),
-				new DogFoodData(startingDogFood),
-                new DogFoodDataS(startingDogFoodS),
+				new DogFoodData(startingDogFood, false),
+                new DogFoodData(startingDogFood, true),
                 new HomeSlotsData(startingHomeSlots)
             );
         }
@@ -47,19 +47,15 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
-            foreach (CurrencyType type in currencies.Keys)
-            {
-                Debug.Log(type);
-            }
             return currencies[CurrencyType.DogFood] as DogFoodData;
         }
     }
 
-    public DogFoodDataS DogFoodS
+    public DogFoodData DogFoodSpecial
     {
         get
         {
-            return currencies[CurrencyType.DogFoodS] as DogFoodDataS;
+            return currencies[CurrencyType.DogFoodSpecial] as DogFoodData;
         }
     }
 
@@ -107,15 +103,16 @@ public class CurrencySystem : PPData, ICurrencySystem
         ChangeCurrencyAmount(CurrencyType.Coins, deltaCoins);
     }
 
-    public void ChangeFood(int deltaFood)
+    public void ChangeFood(int deltaFood, bool isSpecial)
     {
-        Debug.Log(deltaFood);
-        ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
-    }
-
-    public void ChangeFoodS(int deltaFood)
-    {
-        ChangeCurrencyAmount(CurrencyType.DogFoodS, deltaFood);
+        if (!isSpecial)
+        {
+            ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
+        }
+        else
+        {
+            ChangeCurrencyAmount(CurrencyType.DogFoodSpecial, deltaFood);
+        }
     }
 
     public void ChangeHomeSlots(int deltaHomeSlots)
@@ -125,7 +122,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
-        Debug.Log(type + " " + deltaAmount);
 		CurrencyData existingCurrency = getCurrency(type);
 		existingCurrency.ChangeBy(deltaAmount);
 		tryCallCurrencyChangeEvent(type);

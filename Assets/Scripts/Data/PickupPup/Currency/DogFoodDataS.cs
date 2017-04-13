@@ -2,7 +2,7 @@
  * Author: Grace Barrett-Snyder 
  * Description: Stores data for the Player's dog food currency.
  */
-
+ /*
 using System.IO;
 using UnityEngine;
 using k = PPGlobal;
@@ -10,7 +10,7 @@ using k = PPGlobal;
 [System.Serializable]
 public class DogFoodDataS : CurrencyData
 {
-    public DogFoodDataS(int initialAmount) : base(initialAmount)
+    public DogFoodDataS(int initialAmount, bool isSpecial) : base(initialAmount)
     {
         type = CurrencyType.DogFoodS;
         amount = initialAmount;
@@ -30,3 +30,4 @@ public class DogFoodDataS : CurrencyData
     #endregion
 
 }
+*/

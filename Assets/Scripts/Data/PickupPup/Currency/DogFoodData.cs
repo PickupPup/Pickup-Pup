@@ -10,9 +10,16 @@ using k = PPGlobal;
 [System.Serializable]
 public class DogFoodData : CurrencyData
 {
-    public DogFoodData(int initialAmount) : base(initialAmount)
+    public DogFoodData(int initialAmount, bool isSpecial) : base(initialAmount)
     {
-        type = CurrencyType.DogFood;
+        if (!isSpecial)
+        {
+            type = CurrencyType.DogFood;
+        }
+        else
+        {
+            type = CurrencyType.DogFoodSpecial;
+        }
         amount = initialAmount;
     }
 

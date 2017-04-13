@@ -50,6 +50,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     static PPTimer feedingTimer = null;
     Button buttonReference;
     GameObject foodOptions;
+    Sprite dogFoodBowlImage;
 
     #region MonoBehaviourExtended Overrides 
 
@@ -66,6 +67,7 @@ public class DogFoodBowl : MonoBehaviourExtended
         buttonReference = GetComponent<Button>();
         buttonReference.interactable = !IsCurrentlyFeeding;
         foodOptions = transform.GetChild(0).gameObject;
+        dogFoodBowlImage = gameObject.GetComponent<Button>().spriteState.disabledSprite;
     }
 
     protected override void cleanupReferences()
@@ -82,7 +84,7 @@ public class DogFoodBowl : MonoBehaviourExtended
         return dataController.DogCount - dataController.ScoutingDogs.Count;
     }
 
-    public void FeedDogs()
+    public void FeedDogs(bool isSpecial)
     {
 		int foodNeeded = calculateDogFoodNeeded();
 		if(foodNeeded <= 0)
@@ -92,8 +94,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 
 		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
         {
-            Debug.Log(-calculateDogFoodNeeded());
-            dataController.ChangeFood(-calculateDogFoodNeeded());
+            dataController.ChangeFood(-calculateDogFoodNeeded(), isSpecial);
             feedingTimer.Reset();
             feedingTimer.Begin();
             buttonReference.interactable = false;
@@ -104,25 +105,25 @@ public class DogFoodBowl : MonoBehaviourExtended
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
     }
-
-    public void FeedDogsS()
+    
+    public void ToggleFoodOptions(bool isSpecial)
     {
-        if (dataController.CanAfford(CurrencyType.DogFoodS, calculateDogFoodNeeded()) && !IsCurrentlyFeeding)
+        Debug.Log("Toggle");
+        // if we are selecting a food option
+        if (!foodOptions.activeSelf == false)
         {
-            dataController.ChangeFoodS(-calculateDogFoodNeeded());
-            feedingTimer.Reset();
-            feedingTimer.Begin();
-            buttonReference.interactable = false;
-            EventController.Event(k.GetPlayEvent(k.ADD_FOOD));
+            Debug.Log("Turning off, selected food");
+            if (!isSpecial)
+            {
+                Debug.Log("Selected Regular");
+                //dogFoodBowlImage = redFilledBowlSprite
+            }
+            else
+            {
+                Debug.Log("Selected Special");
+                //dogFoodBowlImage = blueFilledBowlSprite
+            }
         }
-        else
-        {
-            EventController.Event(k.GetPlayEvent(k.EMPTY));
-        }
-    }
-
-    public void ToggleFoodOptions()
-    {
         foodOptions.SetActive(!foodOptions.activeSelf);
     }
 

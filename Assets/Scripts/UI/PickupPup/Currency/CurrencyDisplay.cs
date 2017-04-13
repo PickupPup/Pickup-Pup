@@ -15,7 +15,6 @@ public class CurrencyDisplay : PPUIElement
 
     public void Init(CurrencyData currency, PPDataController dataController)
 	{
-        Debug.Log(currency);
         this.dataController = dataController;
 		unsubscribeEvents();
 		type = currency.Type;

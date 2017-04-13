@@ -59,7 +59,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
         // Display Updated Currency
         dogFoodDisplay.Init(dataController.DogFood, dataController);
-        dogFoodDisplayS.Init(dataController.DogFoodS, dataController);
+        dogFoodDisplayS.Init(dataController.DogFoodSpecial, dataController);
         coinsDisplay.Init(dataController.Coins, dataController);
         initDailyGiftCountdown(gameController.Tuning, dataController);
     }
