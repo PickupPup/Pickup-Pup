@@ -226,6 +226,14 @@ public class PPTuning : PPData
         }
     }
 
+    public float DogSpeed
+    {
+        get
+        {
+            return dogSpeed;
+        }
+    }
+
     public string InWorldKey
     {
         get
@@ -442,6 +450,14 @@ public class PPTuning : PPData
         }
     }
 
+    public int TapToHeart
+    {
+        get
+        {
+            return tapToHeart;
+        }
+    }
+
     public float TimeScoutingToTimeRestingRatio
     {
         get
@@ -533,6 +549,8 @@ public class PPTuning : PPData
     [SerializeField]
     float dogFoodFeedTimeSec;
     [SerializeField]
+    float dogSpeed;
+    [SerializeField]
     string inWorldKey;
     [SerializeField]
     float maxAffection;
@@ -586,6 +604,8 @@ public class PPTuning : PPData
     int startingDogFood;
     [SerializeField]
     int startingHomeSlots;
+    [SerializeField]
+    int tapToHeart;
     [SerializeField]
     float timeScoutingToTimeRestingRatio;
     [SerializeField]

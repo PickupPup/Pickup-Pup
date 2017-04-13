@@ -5,28 +5,28 @@
  */
 
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using k = PPGlobal;
 
 public class DogAI : MonoBehaviourExtended 
 {
-    static DogState[] implementedStates = new DogState[]{DogState.Idle, DogState.Wandering};
-        
     DogState currentState = DogState.Idle;
     Vector2 wanderCenter;
-    float wanderRadius = 500;
 
     Vector2 target;
 
     int tapCount = 0;
 
-    IEnumerator decisionRoutine;
     IEnumerator currentStateRoutine;
 
     bool isActive = true;
 
+    //TODO: Replace with q system
     float timePerState = 4f;
+
+    int tapToHeart = PPGameController.GetInstance.Tuning.TapToHeart;
+    float dogSpeed = PPGameController.GetInstance.Tuning.DogSpeed;
 
 	// Use this for initialization
 	protected override void setReferences()
@@ -35,17 +35,17 @@ public class DogAI : MonoBehaviourExtended
         wanderCenter = GetComponent<RectTransform>().anchoredPosition;
         target = GetComponent<RectTransform>().anchoredPosition;
         setupDecisionRoutine();
+        GetComponent<UIButton>().SubscribeToClick(Pet);
     }
 	
     void setupDecisionRoutine()
     {
-        decisionRoutine = decideState();
-        StartCoroutine(decisionRoutine);
+        StartCoroutine(decideState());
     }
 
     DogState chooseRandomState()
     {
-        return implementedStates[Random.Range(0, implementedStates.Length)];
+        return (DogState)(UnityEngine.Random.Range(0, Enum.GetNames(typeof(DogState)).Length));
     }
 
     IEnumerator decideState()
@@ -80,6 +80,8 @@ public class DogAI : MonoBehaviourExtended
         {
             case DogState.Wandering:
                 return wander();
+            case DogState.Idle:
+                return null;
             default:
                 return null;
         }
@@ -91,8 +93,8 @@ public class DogAI : MonoBehaviourExtended
         {
             if (target == GetComponent<RectTransform>().anchoredPosition)
             {
-                float ctheta = Random.Range(0, 2 * Mathf.PI);
-                float cradius = wanderRadius * Mathf.Sqrt(Random.Range(0f, 1f));
+                float ctheta = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+                float cradius = Screen.width * Mathf.Sqrt(UnityEngine.Random.Range(0f, 1f));
                 float x = cradius * Mathf.Cos(ctheta);
                 float y = cradius * Mathf.Sin(ctheta);
                 target = new Vector2(x, y) + wanderCenter;
@@ -107,14 +109,14 @@ public class DogAI : MonoBehaviourExtended
 
     void moveTo(Vector3 target)
     {
-        Vector2 moveVec = Vector3.MoveTowards(GetComponent<RectTransform>().anchoredPosition, target, Time.deltaTime * 40);
+        Vector2 moveVec = Vector3.MoveTowards(GetComponent<RectTransform>().anchoredPosition, target, Time.deltaTime * dogSpeed);
         GetComponent<RectTransform>().anchoredPosition = moveVec;
     }
 
     public void Pet()
     {
         tapCount++;
-        if(tapCount >= 5)
+        if(tapCount >= tapToHeart)
         {
             tapCount = 0;
             GetComponent<DogWorldSlot>().PeekDog.IncreaseAffection();

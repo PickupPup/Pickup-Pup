@@ -1,7 +1,5 @@
-﻿public enum DogState
+﻿public enum DogState : int
 {
     Idle,
     Wandering,
-    Eating,
-    Pooping
 }
