@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann, Grace Barrett-Snyder
+ * Author: Isaiah Mann, Grace Barrett-Snyder, Ben Page
  * Description: Testing data serialization
  */
 

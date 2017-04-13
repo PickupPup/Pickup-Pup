@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page
  * Description: Game controller for Pickup Pup
  */
 

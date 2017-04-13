@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Author: Grace Barrett-Snyder, Ben Page
  * Description: Controls the display of multiple currencies on the Currency Panel
  */
 
@@ -12,7 +12,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     [SerializeField]
     CurrencyDisplay dogFoodDisplay;
     [SerializeField]
-    CurrencyDisplay dogFoodDisplayS;
+    CurrencyDisplay dogFoodDisplaySpecial;
     [SerializeField]
 	UIElement giftTimerDisplay;
 	[SerializeField]
@@ -59,7 +59,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
         // Display Updated Currency
         dogFoodDisplay.Init(dataController.DogFood, dataController);
-        dogFoodDisplayS.Init(dataController.DogFoodSpecial, dataController);
+        dogFoodDisplaySpecial.Init(dataController.DogFoodSpecial, dataController);
         coinsDisplay.Init(dataController.Coins, dataController);
         initDailyGiftCountdown(gameController.Tuning, dataController);
     }
@@ -127,7 +127,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 
     void updateDogFoodDisplayS(int newAmount)
     {
-        dogFoodDisplayS.updateAmount(newAmount);
+        dogFoodDisplaySpecial.updateAmount(newAmount);
     }
 
     void makeDailyGiftAvailableToRedeem()

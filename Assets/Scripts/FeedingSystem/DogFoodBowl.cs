@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Timothy Ng, Isaiah Mann
+ * Authors: Timothy Ng, Isaiah Mann, Ben Page
  * Description: Handles the feeding dog code through calling FeedDogs
  */
 
@@ -50,8 +50,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     static PPTimer feedingTimer = null;
     Button buttonReference;
     GameObject foodOptions;
-    Sprite dogFoodBowlImage;
-
+    
     #region MonoBehaviourExtended Overrides 
 
     protected override void fetchReferences() 
@@ -67,7 +66,6 @@ public class DogFoodBowl : MonoBehaviourExtended
         buttonReference = GetComponent<Button>();
         buttonReference.interactable = !IsCurrentlyFeeding;
         foodOptions = transform.GetChild(0).gameObject;
-        dogFoodBowlImage = gameObject.GetComponent<Button>().spriteState.disabledSprite;
     }
 
     protected override void cleanupReferences()
@@ -86,13 +84,14 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     public void FeedDogs(bool isSpecial)
     {
-		int foodNeeded = calculateDogFoodNeeded();
+        int isSpecialIncrement = System.Convert.ToInt32(isSpecial);
+        int foodNeeded = calculateDogFoodNeeded();
 		if(foodNeeded <= 0)
 		{
 			return;
 		}
 
-		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
+		if(dataController.CanAfford(CurrencyType.DogFood + isSpecialIncrement, foodNeeded) && !IsCurrentlyFeeding)
         {
             dataController.ChangeFood(-calculateDogFoodNeeded(), isSpecial);
             feedingTimer.Reset();
@@ -105,23 +104,23 @@ public class DogFoodBowl : MonoBehaviourExtended
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
     }
-    
+
+    /* BP: It might be needed to access different colored bowls to illustrate
+     * which food is currently being eaten (swap the sprite of the dogfoodbutton).
+     * I imagine it would be done here.
+     */
     public void ToggleFoodOptions(bool isSpecial)
     {
-        Debug.Log("Toggle");
         // if we are selecting a food option
         if (!foodOptions.activeSelf == false)
         {
-            Debug.Log("Turning off, selected food");
             if (!isSpecial)
             {
-                Debug.Log("Selected Regular");
-                //dogFoodBowlImage = redFilledBowlSprite
+                //disabledDogFoodBowlImage = redFilledBowlSprite
             }
             else
             {
-                Debug.Log("Selected Special");
-                //dogFoodBowlImage = blueFilledBowlSprite
+                //disabledDogFoodBowlImage = blueFilledBowlSprite
             }
         }
         foodOptions.SetActive(!foodOptions.activeSelf);

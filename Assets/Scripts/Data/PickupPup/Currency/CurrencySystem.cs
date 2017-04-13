@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Grace Barrett-Snyder, Isaiah Mann 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann, Ben Page
  * Description: Controls all forms of currency
  */
 using UnityEngine;

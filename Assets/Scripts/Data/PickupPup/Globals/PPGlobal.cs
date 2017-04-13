@@ -29,6 +29,8 @@ public class PPGlobal : Global
     public const string REDEEM_GIFT = REDEEM + GIFT;
     public const string TAP_TO_REDEEM = "TapToRedeem";
     public const string DOG_FOOD_ICON = "dogfood_icon";
+    //BP If a seperate dogfood icon is loaded for the special food icon in the currency panel, put here.
+    public const string DOG_FOOD_SPECIAL_ICON = ""; 
     public const string NAV_DROPDOWN = "NavDropdown";
     public const string WORLD = "World";
 

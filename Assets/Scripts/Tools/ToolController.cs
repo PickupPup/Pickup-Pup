@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author(s): Isaiah Mann, Ben Page
  * Description: Used for debugging and editing tools
  * Usage: [no notes]
  */

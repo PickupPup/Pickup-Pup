@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Grace Barrett-Snyder 
+ * Author: Grace Barrett-Snyder, Ben Page
  * Description: An interface to facilitate data flow of currency changes
  */
 
