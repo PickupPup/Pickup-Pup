@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Timothy Ng, Isaiah Mann, Grace Barrett-Snyder
  * Description: Used to store tuning variables
  */
 
@@ -9,7 +9,6 @@ using UnityEngine;
 public class PPTuning : PPData 
 {
 	#region Instance Acessors
-
     public string AdoptedText
     {
         get
@@ -234,6 +233,10 @@ public class PPTuning : PPData
         }
     }
 
+    public float DogSpeed
+    {get{ return dogSpeed;}
+    }
+
     public string InWorldKey
     {
         get
@@ -282,6 +285,14 @@ public class PPTuning : PPData
         }
     }
 
+    public float MaxDogStateTime
+    {
+        get
+        {
+            return maxDogStateTime;
+        }
+    }
+
     public int MaxNumberAdsPerDay
     {
         get
@@ -311,6 +322,14 @@ public class PPTuning : PPData
         get
         {
             return minDogFoodToUnlockCollar;
+        }
+    }
+
+    public float MinDogStateTime
+    {
+        get
+        {
+            return minDogStateTime;
         }
     }
 
@@ -437,7 +456,7 @@ public class PPTuning : PPData
     public int StartingDogFood
     {
         get
-        {
+        { 
             return startingDogFood;
         }
     }
@@ -447,6 +466,14 @@ public class PPTuning : PPData
         get
         {
             return startingHomeSlots;
+        }
+    }
+
+    public int TapToHeart
+    {
+        get
+        {
+            return tapToHeart;
         }
     }
 
@@ -481,6 +508,7 @@ public class PPTuning : PPData
             return waitTimeSecsForDailyGift;
         }
     }
+
         
     #endregion
 
@@ -543,6 +571,8 @@ public class PPTuning : PPData
     [SerializeField]
     float dogFoodFeedTimeSec;
     [SerializeField]
+    float dogSpeed;
+    [SerializeField]
     string inWorldKey;
     [SerializeField]
     float maxAffection;
@@ -555,6 +585,8 @@ public class PPTuning : PPData
     [SerializeField]
     int maxDogsScouting;
     [SerializeField]
+    float maxDogStateTime;
+    [SerializeField]
     int maxNumberAdsPerDay;
     [SerializeField]
     int maxPuppyAge;
@@ -562,6 +594,8 @@ public class PPTuning : PPData
     float minCouponDiscount;
     [SerializeField]
     int minDogFoodToUnlockCollar;
+    [SerializeField]
+    float minDogStateTime;
     [SerializeField]
     int minDogsToUnlockCollar;
     [SerializeField]
@@ -596,6 +630,8 @@ public class PPTuning : PPData
     int startingDogFood;
     [SerializeField]
     int startingHomeSlots;
+    [SerializeField]
+    int tapToHeart;
     [SerializeField]
     float timeScoutingToTimeRestingRatio;
     [SerializeField]

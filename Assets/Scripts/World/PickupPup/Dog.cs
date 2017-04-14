@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Author: Timothy Ng, Isaiah Mann
  * Description: Controls a dog in the game world
  */
 
