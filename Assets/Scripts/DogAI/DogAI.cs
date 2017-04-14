@@ -23,10 +23,13 @@ public class DogAI : MonoBehaviourExtended
     bool isActive = true;
 
     //TODO: Replace with q system
-    float timePerState = 4f;
+    float minTimePerState;
+    float maxTimePerState;
 
     int tapToHeart;
     float dogSpeed;
+
+    #region MonoBehaviourExtended Overrides 
 
 	// Use this for initialization
 	protected override void setReferences()
@@ -36,9 +39,14 @@ public class DogAI : MonoBehaviourExtended
         target = GetComponent<RectTransform>().anchoredPosition;
         setupDecisionRoutine();
         GetComponent<UIButton>().SubscribeToClick(Pet);
-        tapToHeart = PPGameController.GetInstance.Tuning.TapToHeart;
-        dogSpeed = PPGameController.GetInstance.Tuning.DogSpeed;
+        PPTuning tuning = PPGameController.GetInstance.Tuning;
+        tapToHeart = tuning.TapToHeart;
+        dogSpeed = tuning.DogSpeed;
+        minTimePerState = tuning.MinDogStateTime;
+        maxTimePerState = tuning.MaxDogStateTime;
     }
+
+    #endregion
 	
     void setupDecisionRoutine()
     {
@@ -55,7 +63,7 @@ public class DogAI : MonoBehaviourExtended
         while(isActive)
         {
             switchToState(chooseRandomState());
-            yield return new WaitForSeconds(timePerState);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minTimePerState, maxTimePerState));
         }
     }
 
@@ -95,10 +103,10 @@ public class DogAI : MonoBehaviourExtended
         {
             if (target == GetComponent<RectTransform>().anchoredPosition)
             {
-                float ctheta = UnityEngine.Random.Range(0, 2 * Mathf.PI);
-                float cradius = Screen.width * Mathf.Sqrt(UnityEngine.Random.Range(0f, 1f));
-                float x = cradius * Mathf.Cos(ctheta);
-                float y = cradius * Mathf.Sin(ctheta);
+                float cTheta = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+                float cRadius = Screen.width * Mathf.Sqrt(UnityEngine.Random.Range(0f, 1f));
+                float x = cRadius * Mathf.Cos(cTheta);
+                float y = cRadius * Mathf.Sin(cTheta);
                 target = new Vector2(x, y) + wanderCenter;
             }
             else

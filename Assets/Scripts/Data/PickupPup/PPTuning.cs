@@ -9,7 +9,6 @@ using UnityEngine;
 public class PPTuning : PPData 
 {
 	#region Instance Acessors
-
     public string AdoptedText
     {
         get
@@ -31,6 +30,14 @@ public class PPTuning : PPData
         get
         {
             return affectionIncrease;
+        }
+    }
+
+    public float ChanceForNoSpecial
+    {
+        get
+        {
+            return chanceForNoSpecial;
         }
     }
 
@@ -227,11 +234,7 @@ public class PPTuning : PPData
     }
 
     public float DogSpeed
-    {
-        get
-        {
-            return dogSpeed;
-        }
+    {get{ return dogSpeed;}
     }
 
     public string InWorldKey
@@ -282,6 +285,14 @@ public class PPTuning : PPData
         }
     }
 
+    public float MaxDogStateTime
+    {
+        get
+        {
+            return maxDogStateTime;
+        }
+    }
+
     public int MaxNumberAdsPerDay
     {
         get
@@ -311,6 +322,14 @@ public class PPTuning : PPData
         get
         {
             return minDogFoodToUnlockCollar;
+        }
+    }
+
+    public float MinDogStateTime
+    {
+        get
+        {
+            return minDogStateTime;
         }
     }
 
@@ -437,7 +456,7 @@ public class PPTuning : PPData
     public int StartingDogFood
     {
         get
-        {
+        { 
             return startingDogFood;
         }
     }
@@ -489,6 +508,7 @@ public class PPTuning : PPData
             return waitTimeSecsForDailyGift;
         }
     }
+
         
     #endregion
 
@@ -500,6 +520,8 @@ public class PPTuning : PPData
     string adoptText;
     [SerializeField]
     float affectionIncrease;
+    [SerializeField]
+    float chanceForNoSpecial;
     [SerializeField]
     float chanceOfDogsEatingPoop;
     [SerializeField]
@@ -563,6 +585,8 @@ public class PPTuning : PPData
     [SerializeField]
     int maxDogsScouting;
     [SerializeField]
+    float maxDogStateTime;
+    [SerializeField]
     int maxNumberAdsPerDay;
     [SerializeField]
     int maxPuppyAge;
@@ -570,6 +594,8 @@ public class PPTuning : PPData
     float minCouponDiscount;
     [SerializeField]
     int minDogFoodToUnlockCollar;
+    [SerializeField]
+    float minDogStateTime;
     [SerializeField]
     int minDogsToUnlockCollar;
     [SerializeField]
