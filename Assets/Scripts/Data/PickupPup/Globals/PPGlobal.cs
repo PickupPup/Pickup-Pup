@@ -31,6 +31,8 @@ public class PPGlobal : Global
     public const string DOG_FOOD_ICON = "dogfood_icon";
     public const string NAV_DROPDOWN = "NavDropdown";
     public const string WORLD = "World";
+    public const string SOUVENIRS = "Souvenirs";
+    public const string UI_SPRITESHEET = "ui_spritesheet";
 
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;

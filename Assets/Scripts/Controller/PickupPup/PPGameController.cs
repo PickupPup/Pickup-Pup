@@ -112,7 +112,7 @@ public class PPGameController : GameController, ICurrencySystem
             return languages;
         }
     }
-		
+	
     #region ICurrencySystem Interface
 
     public CoinsData Coins
@@ -157,6 +157,18 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+    public float TimeScale
+    {
+        get
+        {
+            return this._timeScale;
+        }
+        set
+        {
+            this._timeScale = value;
+        }
+    }
+
     #endregion
 
     #region Controller Overrides
@@ -181,31 +193,37 @@ public class PPGameController : GameController, ICurrencySystem
 	PPGiftController giftController;
 	DogSlot targetSlot;
     bool mainMenuIsOpen = false;
+    float _timeScale = k.DEFAULT_TIME_SCALE;
 
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences() 
 	{
 		base.setReferences();
-		dogDatabase = parseDogDatabase();
-        shop = parseShopDatabase();
-		gifts = parseGiftDatabase();
-		tuning = parseTuning();
-		languages = LanguageDatabase.Instance;
-		languages.Initialize();
-        shop.Initialize();
-		gifts.Initialize();
+        if(isSingleton)
+        {
+    		dogDatabase = parseDogDatabase();
+            shop = parseShopDatabase();
+    		gifts = parseGiftDatabase();
+    		tuning = parseTuning();
+            languages = initLanguages();
+            shop.Initialize();
+    		gifts.Initialize();
+        }
 	}
 
 	protected override void fetchReferences() 
 	{
-		base.fetchReferences();
-        dogDatabase.Initialize(dataController);
-        dataController.SetFilePath(SAVE_FILE_PATH);
-		dataController.LoadGame();
-		giftController = PPGiftController.Instance;
-		giftController.Init(tuning);
-		handleLoadGame(dataController);
+        base.fetchReferences();
+        if(isSingleton)
+        {
+            dogDatabase.Initialize(dataController);
+            dataController.SetFilePath(SAVE_FILE_PATH);
+    		dataController.LoadGame();
+    		giftController = PPGiftController.Instance;
+    		giftController.Init(tuning);
+    		handleLoadGame(dataController);
+        }
 	}
 
     protected override void handleSceneLoaded(int sceneIndex)
@@ -283,6 +301,14 @@ public class PPGameController : GameController, ICurrencySystem
 	}
 
     #region ICurrencySystem Interface
+
+    public void ChangeTimeScale(object source, float newTimeScale)
+    {
+        if(source is Controller)
+        {
+            this.TimeScale = newTimeScale;
+        }
+    }
 
     public void ChangeCoins(int deltaCoins) 
 	{
@@ -525,5 +551,12 @@ public class PPGameController : GameController, ICurrencySystem
 	{
         return parseFromJSONInResources<PPTuning>(TUNING_FILE_PATH);
 	}
+
+    LanguageDatabase initLanguages()
+    {
+        LanguageDatabase languages = LanguageDatabase.Instance;
+        languages.Initialize();
+        return languages;
+    }
 
 }

@@ -4,9 +4,19 @@
  */
 
 [System.Serializable]
-public abstract class Database<T> : ResourceLoader where T : class, new()
+public abstract class Database<T> : ResourceLoader where T : Database<T>, new()
 {
 	#region Static Accessors
+
+    public static T GetInstance
+    {
+        get
+        {
+            T database = Instance;
+            database.TryInit();
+            return database;
+        }
+    }
 
 	public static T Instance 
 	{	

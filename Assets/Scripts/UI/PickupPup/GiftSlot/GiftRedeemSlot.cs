@@ -12,14 +12,12 @@ public class GiftRedeemSlot : GiftSlot
     Image itemImage;
 
     PPHomeUIController room;
-    GiftItem gift;
 
     #region GiftSlot Overrides
 
     public void Init(PPHomeUIController room, GiftItem gift)
     {
         this.room = room;
-        this.gift = gift;
     }
 
     #endregion
