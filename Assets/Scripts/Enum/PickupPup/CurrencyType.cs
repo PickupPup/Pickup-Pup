@@ -11,7 +11,9 @@ public enum CurrencyType
     Time,
 	SpecialGift,
     DogDiscount,
+    DogVoucher, // Gives the player a dog
     Souvenir,
+    GiftEvent,
     None,
 
 }
