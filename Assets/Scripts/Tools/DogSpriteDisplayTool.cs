@@ -1,6 +1,6 @@
 ﻿/*
  * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Description: Displays a single dog's portrait and world sprites
  * Usage: [no notes]
  */
 

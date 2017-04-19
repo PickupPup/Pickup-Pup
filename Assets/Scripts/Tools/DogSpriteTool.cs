@@ -1,6 +1,6 @@
 ﻿/*
  * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Description: A tool for displaying all of the dogs sprites (portraits and in world)
  * Usage: [no notes]
  */
 
