@@ -4,15 +4,28 @@
  * Usage: [no notes]
  */
 
+using UnityEngine;
+
 public class GiftEventsTest : MonoBehaviourExtended 
 {	
     GiftDatabase gifts;
 
-	protected override void setReferences() 
+    [SerializeField]
+    int  numberTimesTestSpawnCurrency = 5;
+
+	protected override void fetchReferences() 
 	{
-		base.setReferences();
+        base.fetchReferences();
         gifts = GiftDatabase.GetInstance;
-        UnityEngine.Debug.Log(gifts.GiftEvents[0].EventDescription);
+        GiftEventData testEvent = gifts.GiftEvents[0];
+        Debug.Log(testEvent.EventDescription);
+        for(int i = 0; i < numberTimesTestSpawnCurrency; i++)
+        {
+            Debug.Log(testEvent.GetCurrencies().Length);
+            Debug.LogFormat("Coins: {0}, Food: {1}", dataController.Coins, dataController.DogFood);
+            testEvent.Call();
+            Debug.LogFormat("Coins: {0}, Food: {1}", dataController.Coins, dataController.DogFood);
+        }
 	}
 
 }

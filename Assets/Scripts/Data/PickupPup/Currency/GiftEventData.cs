@@ -5,8 +5,11 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 using UnityEngine;
+
+using k = PPGlobal;
 
 [System.Serializable]
 public class GiftEventData : SpecialGiftData
@@ -29,6 +32,14 @@ public class GiftEventData : SpecialGiftData
         }
     }
 
+    public string EventSprite
+    {
+        get
+        {
+            return eventSprite;
+        }
+    }
+
     public string[] BonusTypes
     {
         get
@@ -45,11 +56,11 @@ public class GiftEventData : SpecialGiftData
         }
     }
 
-    public float[] BonusChanges
+    public float[] BonusChances
     {
         get
         {
-            return bonusChanges;
+            return bonusChances;
         }
     }
 
@@ -60,11 +71,13 @@ public class GiftEventData : SpecialGiftData
     [SerializeField]
     string eventDescription;
     [SerializeField]
+    string eventSprite;
+    [SerializeField]
     string[] bonusTypes;
     [SerializeField]
     int[] bonusAmounts;
     [SerializeField]
-    float[] bonusChanges;
+    float[] bonusChances;
 
     public GiftEventData(int amount = 1) : base(CurrencyType.GiftEvent, amount){}
 
@@ -72,21 +85,26 @@ public class GiftEventData : SpecialGiftData
     {
         int numCurrencies = bonusTypes.Length;
         CurrencyFactory factory = new CurrencyFactory();
-        CurrencyData[] currencies = new CurrencyData[numCurrencies];
+        List<CurrencyData> currencies = new List<CurrencyData>();
         for(int i = 0; i < numCurrencies; i++)
         {
-            try 
+            // Random roll to determine whether this percent is included:
+            if(UnityEngine.Random.Range(k.NONE_VALUE, k.FULL_PERCENT_DECIMAL) <= bonusChances[i])
             {
-                CurrencyType type = (CurrencyType) Enum.Parse(typeof(CurrencyType), bonusTypes[i]);
-            }
-            catch
-            {
-                Debug.LogErrorFormat("Unable to parse currency {0}", bonusTypes[i]);
-                // Skip this gift type:
-                continue;
+                currencies.Add(factory.Create(bonusTypes[i], bonusAmounts[i]));
             }
         }
-        return currencies;
+        return currencies.ToArray();
+    }
+
+    public void Call()
+    {
+        CurrencyData[] data = GetCurrencies();
+        PPDataController controller = PPDataController.GetInstance;
+        foreach(CurrencyData currency in data)
+        {
+            controller.ChangeCurrencyAmount(currency.Type, currency.Amount);
+        }
     }
 
 }
