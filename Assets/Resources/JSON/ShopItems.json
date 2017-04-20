@@ -1,36 +1,102 @@
 {
   "items" : [
     {
-      "itemName" : "One Dog Food Can",
+      "itemName" : "One Regular Dog Food Can",
       "value" : 1,
       "valueCurrencyType" : 1,
       "cost" : 10,
       "costCurrencyType" : 0,
-      "icon" : "1_DogFood"
+      "icon" : "RedBowl_Full",
+      "valueCurrencySubtype" : "Regular"
     },
     {
-      "itemName" : "Five Dog Food Cans",
+      "itemName" : "Five Regular Dog Food Cans",
       "value" : 5,
       "valueCurrencyType" : 1,
       "cost" : 40,
       "costCurrencyType" : 0,
-      "icon" : "5_DogFood"
+      "icon" : "RedBowl_Full",
+      "valueCurrencySubtype" : "Regular"
     },
     {
-      "itemName" : "Ten Dog Food Cans",
+      "itemName" : "Ten Regular Dog Food Cans",
       "value" : 10,
       "valueCurrencyType" : 1,
       "cost" : 70,
       "costCurrencyType" : 0,
-      "icon" : "10_DogFood"
+      "icon" : "RedBowl_Full",
+      "valueCurrencySubtype" : "Regular"
     },
     {
-      "itemName" : "Twenty Dog Food Cans",
+      "itemName" : "Twenty Regular Dog Food Cans",
       "value" : 20,
       "valueCurrencyType" : 1,
       "cost" : 100,
       "costCurrencyType" : 0,
-      "icon" : "20_DogFood"
+      "icon" : "RedBowl_Full",
+      "valueCurrencySubtype" : "Regular"
+    },
+    {
+      "itemName" : "One Super Dog Food Can",
+      "value" : 1,
+      "valueCurrencyType" : 1,
+      "cost" : 20,
+      "costCurrencyType" : 0,
+      "icon" : "BlueBowl_Full",
+      "valueCurrencySubtype" : "Super"
+    },
+    {
+      "itemName" : "Five Super Dog Food Cans",
+      "value" : 5,
+      "valueCurrencyType" : 1,
+      "cost" : 80,
+      "costCurrencyType" : 0,
+      "icon" : "BlueBowl_Full",
+      "valueCurrencySubtype" : "Super"
+    },
+    {
+      "itemName" : "Ten Super Dog Food Cans",
+      "value" : 10,
+      "valueCurrencyType" : 1,
+      "cost" : 140,
+      "costCurrencyType" : 0,
+      "icon" : "BlueBowl_Full",
+      "valueCurrencySubtype" : "Super"
+    },
+    {
+      "itemName" : "Twenty Super Dog Food Cans",
+      "value" : 20,
+      "valueCurrencyType" : 1,
+      "cost" : 200,
+      "costCurrencyType" : 0,
+      "icon" : "BlueBowl_Full",
+      "valueCurrencySubtype" : "Super"
+    }
+  ],
+  "food" : [
+    {
+      "type" : "Regular",
+      "specialGiftMod" : 0,
+      "amountMod" : 0,
+      "color" : "Red"
+    },
+    {
+      "type" : "Super",
+      "specialGiftMod" : 0.25,
+      "amountMod" : 0,
+      "color" : "Yellow"
+    },
+    {
+      "type" : "Mega",
+      "specialGiftMod" : 0,
+      "amountMod" : 2,
+      "color" : "Blue"
+    },
+    {
+      "type" : "Ultra",
+      "specialGiftMod" : 0.5,
+      "amountMod" : 0,
+      "color" : "Purple"
     }
   ]
 }
