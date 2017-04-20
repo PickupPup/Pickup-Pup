@@ -9,37 +9,26 @@ public class AffectionMeter : PPUIElement
     Image[] hearts;
 
     [SerializeField]
-    Sprite emptyHeart;
-    [SerializeField]
-    Sprite halfHeart;
-    [SerializeField]
-    Sprite fullHeart;
+    Sprite[] heartIncrements;
 
     public void setAffection(float newAffection)
     {
-        int halfHeartIntervals = (int)(newAffection * 2);
-        
+        float affectionIncrease = PPGameController.GetInstance.Tuning.AffectionIncrease;
+
+        int heartIntervals = (int)(newAffection / affectionIncrease);
+        Debug.Log(heartIntervals);
+
         foreach(Image heart in hearts)
         {
-            if(halfHeartIntervals >= 2)
-            {
-                heart.sprite = fullHeart;
-                halfHeartIntervals -= 2;
-            }
-            else if(halfHeartIntervals == 1)
-            {
-                heart.sprite = halfHeart;
-                halfHeartIntervals -= 1;
-            }
-            else
-            {
-                heart.sprite = emptyHeart;
-            }
+            int currentHeartToUse = Mathf.Min(heartIntervals, heartIncrements.Length-1);
+
+            heart.sprite = heartIncrements[currentHeartToUse];
+            heartIntervals -= currentHeartToUse;
         }
 
-        if(halfHeartIntervals < 0)
+        if(heartIntervals < 0)
         {
-            Debug.LogError("Something went wrong affection meter counter (" + halfHeartIntervals + ") should not be less that 0");
+            Debug.LogError("Something went wrong affection meter counter (" + heartIntervals + ") should not be less that 0");
         }
     }
 }

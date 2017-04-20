@@ -14,6 +14,9 @@ public class AdoptedDogProfile : DogProfile
     [SerializeField]
     PPUIButton souvenirButton;
 
+    [SerializeField]
+    AffectionMeter affectionMeter;
+
     SouvenirDisplay activeSouvenirDisplay = null;
 
     #region MonoBehaviourExtended Overrides
@@ -31,6 +34,7 @@ public class AdoptedDogProfile : DogProfile
     public override void SetProfile(Dog dog)
     {
         base.SetProfile(dog);
+        affectionMeter.setAffection(dog.Info.Affection);
         souvenirButton.ToggleEnabled(dog.Info.SouvenirCollected);
     }
 

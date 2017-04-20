@@ -36,8 +36,6 @@ public class DogProfile : PPUIElement
     Image collarImage;
 	[SerializeField]
     UIElement[] descriptionFields; // Normal description must come first (not special)
-    [SerializeField]
-    AffectionMeter affectionMeter;
 
     [SerializeField]
     protected GameObject iconsObject;
@@ -104,7 +102,6 @@ public class DogProfile : PPUIElement
 		}
 
         dogThumbnail.sprite = dog.Portrait;
-        affectionMeter.setAffection(dogInfo.Affection);
         // TODO: Get collar icon
     }
 
