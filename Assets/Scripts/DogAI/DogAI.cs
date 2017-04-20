@@ -39,13 +39,18 @@ public class DogAI : MonoBehaviourExtended
         wanderCenter = GetComponent<RectTransform>().anchoredPosition;
         target = GetComponent<RectTransform>().anchoredPosition;
         setupDecisionRoutine();
-        GetComponent<UIButton>().SubscribeToClick(Pet);
         PPTuning tuning = PPGameController.GetInstance.Tuning;
         tapToHeart = tuning.TapToHeart;
         dogSpeed = tuning.DogSpeed;
         minTimePerState = tuning.MinDogStateTime;
         maxTimePerState = tuning.MaxDogStateTime;
         dog = GetComponent<DogWorldSlot>().PeekDog;
+    }
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        GetComponent<UIButton>().SubscribeToClick(Pet);
     }
 
     #endregion
