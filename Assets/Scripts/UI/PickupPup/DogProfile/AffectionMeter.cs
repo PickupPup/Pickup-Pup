@@ -16,7 +16,6 @@ public class AffectionMeter : PPUIElement
         float affectionIncrease = PPGameController.GetInstance.Tuning.AffectionIncrease;
 
         int heartIntervals = (int)(newAffection / affectionIncrease);
-        Debug.Log(heartIntervals);
 
         foreach(Image heart in hearts)
         {
