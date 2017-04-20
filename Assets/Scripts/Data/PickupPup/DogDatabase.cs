@@ -284,7 +284,7 @@ public class DogDatabase : Database<DogDatabase>
 
     string getWorldSpriteName(DogDescriptor dog)
     {
-        return string.Format("{0}{1}{2}{3}{4}", dog.BreedName, JOIN_CHAR, dog.Color, JOIN_CHAR, tuning.InWorldKey);
+        return string.Format("{0}{1}{2}{1}{3}", dog.BreedName, JOIN_CHAR, dog.Color, tuning.InWorldKey);
     }
 
 	public override bool TryInit()
