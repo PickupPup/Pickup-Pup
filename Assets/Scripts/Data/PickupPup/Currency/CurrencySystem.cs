@@ -18,8 +18,9 @@ public class CurrencySystem : PPData, ICurrencySystem
 			checkStartingValues();
             return new CurrencySystem(
 				new CoinsData(startingCoins),
-				new DogFoodData(startingDogFood, false),
-                new DogFoodData(startingDogFood, true),
+				new DogFoodData(startingDogFood, 0),
+                //new DogFoodData(startingDogFood, 1),
+                //new DogFoodData(startingDogFood, 2),
                 new HomeSlotsData(startingHomeSlots)
             );
         }
@@ -29,7 +30,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	static int startingCoins;
 	static int startingDogFood;
-    static int startingDogFoodS;
     static int startingHomeSlots;
 	static bool startingValuesInitialized;
 
@@ -48,14 +48,6 @@ public class CurrencySystem : PPData, ICurrencySystem
         get
         {
             return currencies[CurrencyType.DogFood] as DogFoodData;
-        }
-    }
-
-    public DogFoodData DogFoodSpecial
-    {
-        get
-        {
-            return currencies[CurrencyType.DogFoodSpecial] as DogFoodData;
         }
     }
 
@@ -103,16 +95,9 @@ public class CurrencySystem : PPData, ICurrencySystem
         ChangeCurrencyAmount(CurrencyType.Coins, deltaCoins);
     }
 
-    public void ChangeFood(int deltaFood, bool isSpecial)
+    public void ChangeFood(int deltaFood, DogFoodType foodType)
     {
-        if (!isSpecial)
-        {
-            ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
-        }
-        else
-        {
-            ChangeCurrencyAmount(CurrencyType.DogFoodSpecial, deltaFood);
-        }
+        ChangeCurrencyAmount(CurrencyType.DogFood, foodType, deltaFood);
     }
 
     public void ChangeHomeSlots(int deltaHomeSlots)

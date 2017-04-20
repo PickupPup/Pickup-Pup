@@ -25,14 +25,12 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
 		dataController.SubscribeToCurrencyChange(CurrencyType.Coins, updateCoinsText);
 		dataController.SubscribeToCurrencyChange(CurrencyType.DogFood, updateFoodText);
-        dataController.SubscribeToCurrencyChange(CurrencyType.DogFoodSpecial, updateFoodTextS);
         dataController.SubscribeToCurrencyChange(CurrencyType.HomeSlots, updateHomeSlotsText);
 		dataController.LoadGame();
 
         // Display at start
         updateCoinsText(dataController.Coins.Amount);
         updateFoodText(dataController.DogFood.Amount);
-        updateFoodTextS(dataController.DogFoodSpecial.Amount);
         updateHomeSlotsText(dataController.HomeSlots.Amount);
 	}
 
@@ -41,16 +39,9 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.ChangeCoins(deltaCoins);
 	}
 		
-	public void ChangeFood(int deltaFood, bool isSpecial) 
+	public void ChangeFood(int deltaFood, int foodType) 
 	{
-        if (!isSpecial)
-        {
-            dataController.ChangeFood(deltaFood, false);
-        }
-        else
-        {
-            dataController.ChangeFood(deltaFood, true);
-        }
+        dataController.ChangeFood(deltaFood, foodType);
     }
 
     public void ChangeHomeSlots(int deltaHomeSlots)

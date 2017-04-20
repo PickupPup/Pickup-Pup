@@ -25,7 +25,7 @@ public interface ICurrencySystem : ISubscribable
     #endregion
 
     void ChangeCoins(int deltaCoins);
-    void ChangeFood(int deltaFood, bool isSpecial);
+    void ChangeFood(int deltaFood, int foodType);
     void ChangeHomeSlots(int deltaHomeSlots);
     void ChangeCurrencyAmount(CurrencyType type, int deltaAmount);
 	void SubscribeToCurrencyChange(CurrencyType type, MonoBehaviourExtended.MonoActionInt callback);

@@ -10,15 +10,22 @@ using k = PPGlobal;
 [System.Serializable]
 public class DogFoodData : CurrencyData
 {
-    public DogFoodData(int initialAmount, bool isSpecial) : base(initialAmount)
+    public DogFoodData(int initialAmount, DogFoodType dogFoodType) : base(initialAmount)
     {
-        if (!isSpecial)
+        //Read in amount from JSON for int corresponding to dogFoodType (0,1,2)
+        float specialGiftRate;
+        int amountGiftRate;
+        DogFoodType foodType = dogFoodType;
+        switch ((int)foodType)
         {
-            type = CurrencyType.DogFood;
-        }
-        else
-        {
-            type = CurrencyType.DogFoodSpecial;
+            case 0:
+                specialGiftRate = .1f;
+                amountGiftRate = 1;
+                break;
+            case 1:
+                specialGiftRate = .1f;
+                amountGiftRate = 2;
+                break;
         }
         amount = initialAmount;
     }

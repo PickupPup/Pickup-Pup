@@ -62,6 +62,11 @@ public class CurrencyData : ResourceLoader
         setup(initialAmount);
     }
 
+    public virtual void ChangeBy(int deltaAmount, DogFoodType dogfoodType)
+    {
+        amount += deltaAmount;
+    }
+
     public virtual void ChangeBy(int deltaAmount)
     {
         amount += deltaAmount;

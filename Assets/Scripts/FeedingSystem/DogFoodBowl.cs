@@ -82,7 +82,7 @@ public class DogFoodBowl : MonoBehaviourExtended
         return dataController.DogCount - dataController.ScoutingDogs.Count;
     }
 
-    public void FeedDogs(bool isSpecial)
+    public void FeedDogs(int foodType)
     {
         int isSpecialIncrement = System.Convert.ToInt32(isSpecial);
         int foodNeeded = calculateDogFoodNeeded();
@@ -93,7 +93,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 
 		if(dataController.CanAfford(CurrencyType.DogFood + isSpecialIncrement, foodNeeded) && !IsCurrentlyFeeding)
         {
-            dataController.ChangeFood(-calculateDogFoodNeeded(), isSpecial);
+            dataController.ChangeFood(-calculateDogFoodNeeded(), foodType);
             feedingTimer.Reset();
             feedingTimer.Begin();
             buttonReference.interactable = false;
