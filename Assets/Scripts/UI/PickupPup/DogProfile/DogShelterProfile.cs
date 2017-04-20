@@ -17,6 +17,19 @@ public class DogShelterProfile : DogProfile
     UIButton adoptButton;
 
     PPTuning tuning;
+    Dog dog;
+
+    #region Instance Accessors
+
+    public Dog DisplayedDog
+    {
+        get
+        {
+            return dog;
+        }
+    }
+
+    #endregion
 
     #region MonoBehaviourExtended Overrides
 
@@ -61,6 +74,7 @@ public class DogShelterProfile : DogProfile
 
     void handleAdoptEvent(string eventName, Dog dog)
     {
+        this.dog = dog;
         if (eventName == k.ADOPT && dog != null && dog.Info.Equals(dogInfo))
         {
             showAdopted();

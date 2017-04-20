@@ -125,15 +125,14 @@ public class DogAI : MonoBehaviourExtended
 
     public void Pet()
     {
+        Dog dog = GetComponent<DogWorldSlot>().PeekDog;
         tapCount++;
         if(tapCount >= tapToHeart)
         {
             tapCount = 0;
-            GetComponent<DogWorldSlot>().PeekDog.IncreaseAffection();
+            dog.IncreaseAffection();
         }
-
-
-        EventController.Event(k.GetPlayEvent(k.BARK));
+        dog.Bark();
     }
         
 }

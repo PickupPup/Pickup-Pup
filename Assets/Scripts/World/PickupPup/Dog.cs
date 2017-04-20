@@ -442,6 +442,11 @@ public class Dog : MobileObjectBehaviour
 		setupTimer(timer);
 	}
 
+    public void Bark()
+    {
+        EventController.Event(k.GetPlayEvent(k.BARK), Info.Breed.Size);
+    }
+
     public void SubscribeToGiftEvents(PPData.NamedCurrencyAction currencyAction)
     {
         onGiftAction += currencyAction;

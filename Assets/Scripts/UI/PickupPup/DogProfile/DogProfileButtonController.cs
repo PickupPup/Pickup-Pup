@@ -16,14 +16,26 @@ public class DogProfileButtonController : PPUIButtonController
         private set;
     }
 
-	public DogDescriptor SelectedDogInfo {
-		get {
-			return dogsList [currentProfileIndex].Info;
+	public DogDescriptor SelectedDogInfo
+    {
+		get
+        {
+			return SelectedDog.Info;
 		}
 	}
 
-	public int SelectedIndex {
-		get {
+    public Dog SelectedDog
+    {
+        get
+        {
+            return dogsList[currentProfileIndex];
+        }
+    }
+
+	public int SelectedIndex
+    {
+		get
+        {
 			return currentProfileIndex;
 		}
 	}
