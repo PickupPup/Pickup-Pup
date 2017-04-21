@@ -208,7 +208,9 @@ public class PPGameController : GameController, ICurrencySystem
         shop = parseShopDatabase();
 		gifts = parseGiftDatabase();
         foods = parseFoodDatabase();
-        
+        Debug.Log(shop.Items.Length);
+        Debug.Log(foods.Food.Length);
+
 		tuning = parseTuning();
 		languages = LanguageDatabase.Instance;
 		languages.Initialize();
@@ -538,12 +540,18 @@ public class PPGameController : GameController, ICurrencySystem
 	GiftDatabase parseGiftDatabase()
     {
         TextAsset json = loadTextAssetInResources(GIFT_FILE_PATH);
+        Debug.Log("test " + json.text);
+        Debug.Log("test " + JsonUtility.FromJson<GiftDatabase>(json.text));
+        Debug.Log("test " + JsonUtility.FromJson<GiftDatabase>(json.text).Gifts);
         return JsonUtility.FromJson<GiftDatabase>(json.text);
     }
 
     FoodDatabase parseFoodDatabase()
     {
         TextAsset json = loadTextAssetInResources(FOOD_FILE_PATH);
+        Debug.Log(json.text);
+        Debug.Log(JsonUtility.FromJson<FoodDatabase>(json.text));
+        Debug.Log(JsonUtility.FromJson<FoodDatabase>(json.text).Food);
         return JsonUtility.FromJson<FoodDatabase>(json.text);
     }
 

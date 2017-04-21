@@ -23,7 +23,18 @@ public class CurrencyDisplay : PPUIElement
 		this.dataController.SubscribeToCurrencyChange(type, updateAmount);
 	}
 
-	protected override void cleanupReferences()
+    public void Init(CurrencyData currency, PPDataController dataController, DogFoodType dogFoodType)
+    {
+        this.dataController = dataController;
+        unsubscribeEvents();
+        type = currency.Type;
+        // TODO: Have to add sprite to FoodItem JSON (or just use color somehow?)
+        // iconImage.sprite = FoodDatabase.Instance.Items[(int)dogFoodType].sprite;
+        updateAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
+        this.dataController.SubscribeToCurrencyChange(type, updateAmount);
+    }
+
+    protected override void cleanupReferences()
 	{
 		base.cleanupReferences();
 		if(dataController)

@@ -56,9 +56,11 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
         subscribeEvents();
 
         // Display Updated Currency
+        int eachFoodType = 0;
         foreach (CurrencyDisplay dogFoodDisplay in dogFoodDisplays)
         {
-            dogFoodDisplay.Init(dataController.DogFood, dataController);
+            dogFoodDisplay.Init(dataController.DogFood, dataController, (DogFoodType)eachFoodType);
+            eachFoodType++;
         }
         coinsDisplay.Init(dataController.Coins, dataController);
         initDailyGiftCountdown(gameController.Tuning, dataController);

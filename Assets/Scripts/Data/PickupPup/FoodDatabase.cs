@@ -30,18 +30,18 @@ public class FoodDatabase : Database<FoodDatabase>
 
     #region Instance Accessors
 
-    public FoodItem[] Items
+    public FoodItem[] Food
     {
         get
         {
-            return items;
+            return food;
         }
     }
 
     #endregion
 
     [SerializeField]
-    FoodItem[] items;
+    FoodItem[] food;
 
     #region Database Overrides
 
