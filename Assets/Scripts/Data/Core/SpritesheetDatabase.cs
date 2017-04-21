@@ -41,9 +41,9 @@ public class SpritesheetDatabase : Database<SpritesheetDatabase>
 	public override void Initialize()
 	{
 		base.Initialize();
-		TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
-		JSONNode json = JSON.Parse(jsonFile.text);
-		spriteLookup = initSpriteLookup(json[EXPORT]);
+		//TextAsset jsonFile = Resources.Load<TextAsset>(jsonPath);
+		//JSONNode json = JSON.Parse(jsonFile.text);
+		//spriteLookup = initSpriteLookup(json[EXPORT]);
 	}
 
 	public bool TryGetSprite(string spriteName, out Sprite sprite)

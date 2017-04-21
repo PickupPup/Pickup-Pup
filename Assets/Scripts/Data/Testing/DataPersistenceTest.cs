@@ -39,7 +39,7 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.ChangeCoins(deltaCoins);
 	}
 		
-	public void ChangeFood(int deltaFood, int foodType) 
+	public void ChangeFood(int deltaFood, DogFoodType foodType) 
 	{
         dataController.ChangeFood(deltaFood, foodType);
     }

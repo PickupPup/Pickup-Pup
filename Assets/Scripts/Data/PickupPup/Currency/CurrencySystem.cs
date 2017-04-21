@@ -18,9 +18,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 			checkStartingValues();
             return new CurrencySystem(
 				new CoinsData(startingCoins),
-				new DogFoodData(startingDogFood, 0),
-                //new DogFoodData(startingDogFood, 1),
-                //new DogFoodData(startingDogFood, 2),
+				new DogFoodData(),
                 new HomeSlotsData(startingHomeSlots)
             );
         }
@@ -110,6 +108,14 @@ public class CurrencySystem : PPData, ICurrencySystem
 		CurrencyData existingCurrency = getCurrency(type);
 		existingCurrency.ChangeBy(deltaAmount);
 		tryCallCurrencyChangeEvent(type);
+    }
+    
+    // Accounts for dog food types
+    public void ChangeCurrencyAmount(CurrencyType type, DogFoodType dogFoodType, int deltaAmount)
+    {
+        CurrencyData existingCurrency = getCurrency(type);
+        existingCurrency.ChangeBy(deltaAmount, dogFoodType);
+        tryCallCurrencyChangeEvent(type);
     }
 
     public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)
@@ -267,6 +273,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies, bool generateCallbacks = true)
     {
+        Debug.Log(currencies[0]);
         Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
         foreach (CurrencyData currency in currencies)
         {

@@ -55,6 +55,14 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+    static string FOOD_FILE_PATH
+    {
+        get
+        {
+            return Path.Combine(k.JSON_DIR, k.FOOD_ITEMS);
+        }
+    }
+
     static string SAVE_FILE_PATH 
 	{
 		get 
@@ -102,6 +110,14 @@ public class PPGameController : GameController, ICurrencySystem
         get
         {
             return gifts;
+        }
+    }
+
+    public FoodDatabase Foods
+    {
+        get
+        {
+            return foods;
         }
     }
 
@@ -177,6 +193,7 @@ public class PPGameController : GameController, ICurrencySystem
 	DogDatabase dogDatabase;
     ShopDatabase shop;
 	GiftDatabase gifts;
+    FoodDatabase foods;
 	LanguageDatabase languages;
 	PPGiftController giftController;
 	DogSlot targetSlot;
@@ -190,12 +207,15 @@ public class PPGameController : GameController, ICurrencySystem
 		dogDatabase = parseDogDatabase();
         shop = parseShopDatabase();
 		gifts = parseGiftDatabase();
+        foods = parseFoodDatabase();
+        
 		tuning = parseTuning();
 		languages = LanguageDatabase.Instance;
 		languages.Initialize();
         shop.Initialize();
 		gifts.Initialize();
-	}
+        foods.Initialize();
+    }
 
 	protected override void fetchReferences() 
 	{
@@ -289,7 +309,7 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController.ChangeCoins(deltaCoins);
 	}
 
-	public void ChangeFood(int deltaFood, int foodType) 
+	public void ChangeFood(int deltaFood, DogFoodType foodType) 
 	{
         dataController.ChangeFood(deltaFood, foodType);
     }
@@ -521,7 +541,13 @@ public class PPGameController : GameController, ICurrencySystem
         return JsonUtility.FromJson<GiftDatabase>(json.text);
     }
 
-	PPTuning parseTuning() 
+    FoodDatabase parseFoodDatabase()
+    {
+        TextAsset json = loadTextAssetInResources(FOOD_FILE_PATH);
+        return JsonUtility.FromJson<FoodDatabase>(json.text);
+    }
+
+    PPTuning parseTuning() 
 	{
         return parseFromJSONInResources<PPTuning>(TUNING_FILE_PATH);
 	}

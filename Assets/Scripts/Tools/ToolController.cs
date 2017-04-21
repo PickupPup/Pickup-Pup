@@ -31,8 +31,7 @@ public class ToolController : SingletonController<ToolController>
 		// Unrelated if statement so the developer can choose set both keys to the same (overloaded functionality)
 		if(Input.GetKeyDown(foodKey))
 		{
-			increaseFood(defaultFoodIncrease, false);
-            increaseFood(defaultFoodIncrease, true);
+			increaseFood(defaultFoodIncrease);
         }
 	}
 
@@ -41,16 +40,9 @@ public class ToolController : SingletonController<ToolController>
 		gameController.ChangeCoins(amount);
 	}
 
-	void increaseFood(int amount, bool isSpecial)
+	void increaseFood(int amount)
 	{
-        if (!isSpecial)
-        {
-            gameController.ChangeFood(amount, false);
-        }
-        else
-        {
-            gameController.ChangeFood(amount, true);
-        }
+        gameController.ChangeFood(amount, DogFoodType.Regular);
     }
 }
 

@@ -84,16 +84,15 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     public void FeedDogs(int foodType)
     {
-        int isSpecialIncrement = System.Convert.ToInt32(isSpecial);
         int foodNeeded = calculateDogFoodNeeded();
 		if(foodNeeded <= 0)
 		{
 			return;
 		}
 
-		if(dataController.CanAfford(CurrencyType.DogFood + isSpecialIncrement, foodNeeded) && !IsCurrentlyFeeding)
+		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
         {
-            dataController.ChangeFood(-calculateDogFoodNeeded(), foodType);
+            dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType) foodType);
             feedingTimer.Reset();
             feedingTimer.Begin();
             buttonReference.interactable = false;

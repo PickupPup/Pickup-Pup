@@ -8,7 +8,8 @@ using System.Text.RegularExpressions;
 public class PPGlobal : Global
 {
 	public const string SHOP_ITEMS = "ShopItems";
-	public const string GIFT_ITEMS = "GiftItems";
+    public const string GIFT_ITEMS = "GiftItems";
+    public const string FOOD_ITEMS = "FoodItems";
 	public const string SAVE_FILE = "PickupPupSave.dat";
 	public const string CURRENCY = "Currency";
 	public const string ADOPTED = "Adopted";

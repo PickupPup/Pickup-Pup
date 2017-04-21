@@ -62,9 +62,15 @@ public class CurrencyData : ResourceLoader
         setup(initialAmount);
     }
 
+    // Used for Food setup, as FoodData holds all types of food so there is no central "Amount"
+    protected CurrencyData()
+    {
+        setup();
+    }
+
     public virtual void ChangeBy(int deltaAmount, DogFoodType dogfoodType)
     {
-        amount += deltaAmount;
+        FoodDatabase.Instance.Items[(int)dogfoodType].CurrentAmount += deltaAmount;
     }
 
     public virtual void ChangeBy(int deltaAmount)
@@ -83,7 +89,12 @@ public class CurrencyData : ResourceLoader
         checkDatabaseReferences();
     }
 
-	void checkDatabaseReferences()
+    void setup()
+    {
+        checkDatabaseReferences();
+    }
+
+    void checkDatabaseReferences()
 	{
 		if(spriteDatabase == null)
 		{

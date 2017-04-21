@@ -7,4 +7,6 @@ public enum DogFoodType
 {
     Regular,
     Mega,
+    Super,
+    Ultra
 }

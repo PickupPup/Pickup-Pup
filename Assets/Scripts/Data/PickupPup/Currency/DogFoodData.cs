@@ -10,24 +10,31 @@ using k = PPGlobal;
 [System.Serializable]
 public class DogFoodData : CurrencyData
 {
-    public DogFoodData(int initialAmount, DogFoodType dogFoodType) : base(initialAmount)
+    
+    public FoodDatabase Foods
     {
-        //Read in amount from JSON for int corresponding to dogFoodType (0,1,2)
-        float specialGiftRate;
-        int amountGiftRate;
-        DogFoodType foodType = dogFoodType;
-        switch ((int)foodType)
+        get
         {
-            case 0:
-                specialGiftRate = .1f;
-                amountGiftRate = 1;
-                break;
-            case 1:
-                specialGiftRate = .1f;
-                amountGiftRate = 2;
-                break;
+            return foods;
         }
-        amount = initialAmount;
+    }
+
+    public FoodItem[] FoodItems
+    {
+        get
+        {
+            return foodItems;
+        }
+    }
+    
+    FoodDatabase foods;
+    FoodItem[] foodItems;
+
+    public DogFoodData() : base()
+    {
+        //Grab all current food types and respective effects & starting amounts.
+        foods = FoodDatabase.Instance;
+        foodItems = foods.Items;
     }
 
     #region CurrencyData Overrides

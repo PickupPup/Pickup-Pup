@@ -290,7 +290,7 @@ public class PPDataController : DataController, ICurrencySystem
 		SaveGame();
 	}
 
-	public void ChangeFood(int deltaFood, int foodType) 
+	public void ChangeFood(int deltaFood, DogFoodType foodType) 
 	{
         currencies.ChangeFood(deltaFood, foodType);
 		SaveGame();
