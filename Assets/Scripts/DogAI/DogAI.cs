@@ -44,13 +44,13 @@ public class DogAI : MonoBehaviourExtended
         dogSpeed = tuning.DogSpeed;
         minTimePerState = tuning.MinDogStateTime;
         maxTimePerState = tuning.MaxDogStateTime;
-        dog = GetComponent<DogWorldSlot>().PeekDog;
     }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
         GetComponent<UIButton>().SubscribeToClick(Pet);
+        dog = GetComponent<DogWorldSlot>().PeekDog;
     }
 
     #endregion
