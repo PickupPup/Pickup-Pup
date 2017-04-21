@@ -34,7 +34,7 @@ public class DogFoodData : CurrencyData
     {
         //Grab all current food types and respective effects & starting amounts.
         foods = FoodDatabase.Instance;
-        foodItems = foods.Items;
+        foodItems = foods.Food;
     }
 
     #region CurrencyData Overrides
