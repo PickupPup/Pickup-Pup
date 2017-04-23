@@ -11,7 +11,15 @@ using k = PPGlobal;
 
 public class DogAI : MonoBehaviourExtended 
 {
-    Dog dog;
+	Dog dog
+	{
+		get
+		{
+			return dogSlot.PeekDog;
+		}
+	}
+
+    DogSlot dogSlot;
     DogState currentState = DogState.Idle;
     Vector2 wanderCenter;
 
@@ -50,7 +58,7 @@ public class DogAI : MonoBehaviourExtended
     {
         base.fetchReferences();
         GetComponent<UIButton>().SubscribeToClick(Pet);
-        dog = GetComponent<DogWorldSlot>().PeekDog;
+		dogSlot = GetComponent<DogWorldSlot>();
     }
 
     #endregion
@@ -132,13 +140,16 @@ public class DogAI : MonoBehaviourExtended
 
     public void Pet()
     {
-        tapCount++;
-        if(tapCount >= tapToHeart)
-        {
-            tapCount = 0;
-            dog.IncreaseAffection();
-        }
-        dog.Bark();
+		if(dog)
+		{
+	        tapCount++;
+	        if(tapCount >= tapToHeart)
+	        {
+	            tapCount = 0;
+	            dog.IncreaseAffection();
+	        }
+	        dog.Bark();
+		}
     }
         
 }
