@@ -12,6 +12,8 @@ public class CurrencyDisplay : PPUIElement
     Image iconImage;
 
 	CurrencyType type;
+    DogFoodType dogFoodType;
+    CurrencyDisplay[] dogFoodDisplays;
 
     public void Init(CurrencyData currency, PPDataController dataController)
 	{
@@ -23,15 +25,17 @@ public class CurrencyDisplay : PPUIElement
 		this.dataController.SubscribeToCurrencyChange(type, updateAmount);
 	}
 
-    public void Init(CurrencyData currency, PPDataController dataController, DogFoodType dogFoodType)
+    public void Init(CurrencyData currency, PPDataController dataController, DogFoodType _dogFoodType, CurrencyDisplay[] _dogFoodDisplays)
     {
         this.dataController = dataController;
         unsubscribeEvents();
         type = currency.Type;
+        dogFoodType = _dogFoodType;
+        dogFoodDisplays = _dogFoodDisplays;
         // TODO: Have to add sprite to FoodItem JSON (or just use color somehow?)
         // iconImage.sprite = FoodDatabase.Instance.Items[(int)dogFoodType].sprite;
-        updateAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
-        this.dataController.SubscribeToCurrencyChange(type, updateAmount);
+        updateFoodAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
+        this.dataController.SubscribeToCurrencyChange(type, updateFoodAmount);
     }
 
     protected override void cleanupReferences()
@@ -58,4 +62,11 @@ public class CurrencyDisplay : PPUIElement
 		text.text = newAmount.ToString();
 	}
 
+    public void updateFoodAmount(int newAmount)
+    {
+        Debug.Log(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
+        Debug.Log(dogFoodType + "!!! :)");
+        // for each dog food there is, o
+        text.text = newAmount.ToString();
+    }
 }

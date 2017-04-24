@@ -59,7 +59,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
         int eachFoodType = 0;
         foreach (CurrencyDisplay dogFoodDisplay in dogFoodDisplays)
         {
-            dogFoodDisplay.Init(dataController.DogFood, dataController, (DogFoodType)eachFoodType);
+            dogFoodDisplay.Init(dataController.DogFood, dataController, (DogFoodType)eachFoodType, dogFoodDisplays);
             eachFoodType++;
         }
         coinsDisplay.Init(dataController.Coins, dataController);
