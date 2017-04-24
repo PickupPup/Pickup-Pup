@@ -23,7 +23,7 @@ public class GiftEventsTest : MonoBehaviourExtended
         {
             Debug.Log(testEvent.GetCurrencies().Length);
             Debug.LogFormat("Coins: {0}, Food: {1}", dataController.Coins, dataController.DogFood);
-            testEvent.Call();
+			testEvent.Give();
             Debug.LogFormat("Coins: {0}, Food: {1}", dataController.Coins, dataController.DogFood);
         }
 	}

@@ -128,6 +128,15 @@ public class SouvenirData : SpecialGiftData
         this.isCollected = isUnlocked;
     }
 
+	#region CurrencyData Overrides
+
+	public override void Give()
+	{
+		Collect();
+	}
+
+	#endregion
+
     #region Object Overrides
 
     public override string ToString ()

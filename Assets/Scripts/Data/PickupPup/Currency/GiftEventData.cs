@@ -97,14 +97,17 @@ public class GiftEventData : SpecialGiftData
         return currencies.ToArray();
     }
 
-    public void Call()
-    {
+	#region CurrencyData Overrides
+
+    public override void Give()
+	{
         CurrencyData[] data = GetCurrencies();
-        PPDataController controller = PPDataController.GetInstance;
         foreach(CurrencyData currency in data)
         {
-            controller.ChangeCurrencyAmount(currency.Type, currency.Amount);
+			dataController.ChangeCurrencyAmount(currency.Type, currency.Amount);
         }
     }
+
+	#endregion
 
 }

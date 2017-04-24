@@ -10,7 +10,6 @@ public enum CurrencyType
     HomeSlots,
     Time,
 	SpecialGift,
-    DogDiscount,
     DogVoucher, // Gives the player a dog
     Souvenir,
     GiftEvent,

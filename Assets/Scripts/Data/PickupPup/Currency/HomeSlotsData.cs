@@ -65,6 +65,11 @@ public class HomeSlotsData : CurrencyData
         vacantSlots += deltaAmount;
     }
 
+	public override void Give()
+	{
+		throw new System.NotImplementedException();
+	}
+
     #endregion
 
 }

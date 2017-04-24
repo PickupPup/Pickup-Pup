@@ -4,9 +4,17 @@
  * Usage: [no notes]
  */
 
+using k = PPGlobal;
+
 [System.Serializable]
-public class SpecialGiftData : CurrencyData
+public abstract class SpecialGiftData : CurrencyData
 {
+	public SpecialGiftData(CurrencyType type) :
+	base(type, k.SINGLE_VALUE)
+	{
+		// NOTHING
+	}
+
     public SpecialGiftData(int initialAmount):
     base(CurrencyType.SpecialGift, initialAmount)
     {
