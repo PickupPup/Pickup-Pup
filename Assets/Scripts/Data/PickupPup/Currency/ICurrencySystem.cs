@@ -17,16 +17,10 @@ public interface ICurrencySystem : ISubscribable
         get;
     }
 
-    HomeSlotsData HomeSlots
-    {
-        get;
-    }
-
     #endregion
 
     void ChangeCoins(int deltaCoins);
     void ChangeFood(int deltaFood);
-    void ChangeHomeSlots(int deltaHomeSlots);
     void ChangeCurrencyAmount(CurrencyType type, int deltaAmount);
 	void SubscribeToCurrencyChange(CurrencyType type, MonoBehaviourExtended.MonoActionInt callback);
 	void UnsubscribeFromCurrencyChange(CurrencyType type, MonoBehaviourExtended.MonoActionInt callback);

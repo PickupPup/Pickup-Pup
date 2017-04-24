@@ -11,6 +11,7 @@ using k = PPGlobal;
 
 public class DogAI : MonoBehaviourExtended 
 {
+    Dog dog;
     DogState currentState = DogState.Idle;
     Vector2 wanderCenter;
 
@@ -38,12 +39,18 @@ public class DogAI : MonoBehaviourExtended
         wanderCenter = GetComponent<RectTransform>().anchoredPosition;
         target = GetComponent<RectTransform>().anchoredPosition;
         setupDecisionRoutine();
-        GetComponent<UIButton>().SubscribeToClick(Pet);
         PPTuning tuning = PPGameController.GetInstance.Tuning;
         tapToHeart = tuning.TapToHeart;
         dogSpeed = tuning.DogSpeed;
         minTimePerState = tuning.MinDogStateTime;
         maxTimePerState = tuning.MaxDogStateTime;
+        dog = GetComponent<DogWorldSlot>().PeekDog;
+    }
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
+        GetComponent<UIButton>().SubscribeToClick(Pet);
     }
 
     #endregion
@@ -129,11 +136,9 @@ public class DogAI : MonoBehaviourExtended
         if(tapCount >= tapToHeart)
         {
             tapCount = 0;
-            GetComponent<DogWorldSlot>().PeekDog.IncreaseAffection();
+            dog.IncreaseAffection();
         }
-
-
-        EventController.Event(k.GetPlayEvent(k.BARK));
+        dog.Bark();
     }
         
 }

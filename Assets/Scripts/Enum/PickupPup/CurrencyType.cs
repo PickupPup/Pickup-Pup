@@ -7,7 +7,6 @@ public enum CurrencyType
 {
     Coins,
     DogFood,
-    HomeSlots,
     Time,
 	SpecialGift,
     DogVoucher, // Gives the player a dog

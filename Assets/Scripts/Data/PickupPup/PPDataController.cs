@@ -133,14 +133,6 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
-    public HomeSlotsData HomeSlots
-    {
-        get
-        {
-            return currencies.HomeSlots;
-        }
-    }
-
     #endregion
 
 	#endregion
@@ -295,12 +287,6 @@ public class PPDataController : DataController, ICurrencySystem
         currencies.ChangeFood(deltaFood);
 		SaveGame();
 	}
-
-    public void ChangeHomeSlots(int deltaHomeSlots)
-    {
-        currencies.ChangeHomeSlots(deltaHomeSlots);
-        SaveGame();
-    }
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
