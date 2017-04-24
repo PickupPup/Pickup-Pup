@@ -64,9 +64,9 @@ public class CurrencyDisplay : PPUIElement
 
     public void updateFoodAmount(int newAmount)
     {
-        Debug.Log(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
-        Debug.Log(dogFoodType + "!!! :)");
-        // for each dog food there is, o
+        Debug.Log("new amount: " + newAmount);
+        FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount = newAmount;
+        Debug.Log(dogFoodType + "!!! :) " + FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
         text.text = newAmount.ToString();
     }
 }

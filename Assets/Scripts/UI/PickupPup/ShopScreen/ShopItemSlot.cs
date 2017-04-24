@@ -59,9 +59,9 @@ public class ShopItemSlot : PPUIElement
     {
         subscribeEvents();
         this.item = item;
-        Debug.Log(this.item.ValueCurrencyType);
+        Debug.Log("dft: " + this.item.DogFoodType);
         //Debug.Log((DogFoodType)this.item.ValueCurrencyType);
-        Debug.Log(this.item.CostCurrencyType);
+        //Debug.Log(this.item.CostCurrencyType);
         if (nameText)
         {
             nameText.text = item.ItemName;

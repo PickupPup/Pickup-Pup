@@ -81,6 +81,14 @@ public class ShopItem : PPData
         }
     }
 
+    public DogFoodType DogFoodType
+    {
+        get
+        {
+            return dogFoodType;
+        }
+    }
+
     public Sprite Icon
     {
         get
@@ -120,6 +128,8 @@ public class ShopItem : PPData
     CurrencyType costCurrencyType;
     [SerializeField]
     CurrencyType valueCurrencyType;
+    [SerializeField]
+    DogFoodType dogFoodType;
     [SerializeField]
     string icon;
     Sprite _icon;
