@@ -33,6 +33,7 @@ public class PPGlobal : Global
     public const string WORLD = "World";
     public const string SOUVENIRS = "Souvenirs";
     public const string UI_SPRITESHEET = "ui_spritesheet";
+	public const string DOG_VOUCHER_MESSAGE = "DogVoucherMessage";
 
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;

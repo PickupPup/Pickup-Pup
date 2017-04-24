@@ -4,9 +4,32 @@
  * Usage: [no notes]
  */
 
+using k = PPGlobal;
+
 [System.Serializable]
 public class DogVoucherData : SpecialGiftData
 {
+	#region Instance Accessors
+
+	#region CurrencyData Overrides
+
+	public override UnityEngine.Sprite Icon {
+		get 
+		{
+			if(hasDogToRedeem)
+			{
+				return dogToRedeem.Portrait;
+			}
+			else
+			{
+				return base.Icon;
+			}
+		}
+	}
+
+	#endregion
+
+	#endregion
 	bool hasDogToRedeem
 	{
 		get
@@ -20,6 +43,14 @@ public class DogVoucherData : SpecialGiftData
 		get
 		{
 			return DogDatabase.GetInstance;
+		}
+	}
+
+	LanguageDatabase languages
+	{
+		get
+		{
+			return LanguageDatabase.GetInstance;
 		}
 	}
 
@@ -55,6 +86,26 @@ public class DogVoucherData : SpecialGiftData
 		{
 			dataController.Adopt(dogToRedeem);
 			dogToRedeem = null;
+		}
+	}
+
+	#endregion
+
+	#region Object Overrides
+
+	public override string ToString ()
+	{
+		if(hasDogToRedeem)
+		{
+			return string.Format(
+				languages.GetTerm(k.DOG_VOUCHER_MESSAGE),
+				this.finderDog.Name,	
+				this.dogToRedeem.Name
+			);
+		}
+		else
+		{
+			return string.Empty;
 		}
 	}
 

@@ -14,6 +14,30 @@ using k = PPGlobal;
 [System.Serializable]
 public class GiftEventData : SpecialGiftData
 {
+	#region Instance Accessors
+
+	#region CurrencyData Overrides
+
+	public override Sprite Icon 
+	{
+		get
+		{
+			Sprite eventIcon;
+			if(SpritesheetDatabase.GetInstance.TryGetSprite(eventSprite, out eventIcon))
+			{
+				return eventIcon;
+			}
+			else
+			{
+				return base.Icon;
+			}
+		}
+	}
+
+	#endregion
+
+	#endregion
+
 	CurrencyData[] result
 	{
 		get

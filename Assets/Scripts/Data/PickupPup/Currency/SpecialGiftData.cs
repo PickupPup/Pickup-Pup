@@ -9,6 +9,9 @@ using k = PPGlobal;
 [System.Serializable]
 public abstract class SpecialGiftData : CurrencyData
 {
+	[System.NonSerialized]
+	protected DogDescriptor finderDog = DogDescriptor.Default();
+
 	public SpecialGiftData(CurrencyType type) :
 	base(type, k.SINGLE_VALUE)
 	{
@@ -27,6 +30,9 @@ public abstract class SpecialGiftData : CurrencyData
         // NOTHING
     }
 
-    // TODO: Implement special behaviour for currency type
+	public void SetFinder(DogDescriptor dog)
+	{
+		this.finderDog = dog;
+	}
 
 }

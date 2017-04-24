@@ -34,6 +34,14 @@ public class ToolController : SingletonController<ToolController>
 	[SerializeField]
 	int defaultFoodIncrease = 10;
 
+	[Header("Adopt All Cheat")]
+	[SerializeField]
+	KeyCode adoptAllKey = KeyCode.V;
+
+	[Header("Max Affection Cheat")]
+	[SerializeField]
+	KeyCode maxAffectionKey = KeyCode.B;
+
 	void Update()
 	{
 		if(Input.GetKeyDown(coinKey))		
@@ -49,6 +57,14 @@ public class ToolController : SingletonController<ToolController>
         {
             toggleFastSpeed();
         }
+		if(Input.GetKeyDown(adoptAllKey))
+		{
+			adoptAll();
+		}
+		if(Input.GetKeyDown(maxAffectionKey))
+		{
+			maxAffection();
+		}
 	}
 
 	void increaseCoins(int amount)
@@ -66,6 +82,26 @@ public class ToolController : SingletonController<ToolController>
         fastSpeed = !fastSpeed;
         gameController.ChangeTimeScale(this, fastSpeed ? increaseTimeScale : k.DEFAULT_TIME_SCALE);
     }
+
+	void adoptAll()
+	{
+		DogDescriptor[] allDogs = DogDatabase.GetInstance.Dogs;
+		for(int i = 0; i < allDogs.Length; i++)
+		{
+			if(!dataController.CheckIsAdopted(allDogs[i]))
+			{
+				dataController.Adopt(allDogs[i]);
+			}
+		}
+	}
+
+	void maxAffection()
+	{
+		foreach(DogDescriptor dog in dataController.AdoptedDogs)
+		{
+			dog.MaxAffection();
+		}
+	}
 
 }
 

@@ -155,6 +155,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 		}
 		else
 		{
+			(specialGift as SpecialGiftData).SetFinder(dog);
 			return specialGift;
 		}
 	}
@@ -217,9 +218,12 @@ public class PPGiftController : SingletonController<PPGiftController>
 				tuning.SpecialGiftMinAffectionChances[i],
 				tuning.SpecialGiftMaxAffectionChances[i],
 				affectionFraction);
+			// Check to prevent a DogVoucher from being given out if all dogs have already been adopted:
+			if(specialGiftOptions[i] is DogVoucherData && dataController.AllDogsAdopted(DogDatabase.GetInstance))
+			{
+				specialGiftOdds[i] = k.NONE_VALUE;
+			}
 		}
-		Debug.Log(dog.Affection);
-		Debug.Log(ArrayUtil.ToString(specialGiftOdds));
 		return new WeightedRandomBuffer<CurrencyData>(specialGiftOptions, specialGiftOdds);
 	}
 
