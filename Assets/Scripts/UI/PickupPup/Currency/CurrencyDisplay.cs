@@ -43,6 +43,7 @@ public class CurrencyDisplay : PPUIElement
 		base.cleanupReferences();
 		if(dataController)
 		{
+            Debug.Log(type);
 			dataController.UnsubscribeFromCurrencyChange(type, updateAmount);
 		}
 	}
@@ -59,14 +60,15 @@ public class CurrencyDisplay : PPUIElement
 
 	public void updateAmount(int newAmount)
 	{
+        Debug.Log("!!");
 		text.text = newAmount.ToString();
 	}
 
     public void updateFoodAmount(int newAmount)
     {
-        Debug.Log("new amount: " + newAmount);
-        FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount = newAmount;
-        Debug.Log(dogFoodType + "!!! :) " + FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
+        Debug.Log("!");
+        newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
+        //Debug.Log(dogFoodType + " " + newAmount);
         text.text = newAmount.ToString();
     }
 }

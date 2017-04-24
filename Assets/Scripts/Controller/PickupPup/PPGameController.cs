@@ -208,8 +208,8 @@ public class PPGameController : GameController, ICurrencySystem
         shop = parseShopDatabase();
 		gifts = parseGiftDatabase();
         foods = parseFoodDatabase();
-        Debug.Log(shop.Items.Length);
-        Debug.Log(foods.Food.Length);
+        //Debug.Log(shop.Items.Length);
+        //Debug.Log(foods.Food.Length);
 
 		tuning = parseTuning();
 		languages = LanguageDatabase.Instance;
@@ -331,7 +331,13 @@ public class PPGameController : GameController, ICurrencySystem
         dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
-	public void SetTargetSlot(DogSlot slot)
+    public void ConvertDogFood(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
+    {
+        //Debug.Log("6");
+        dataController.ConvertDogFood(value, valueCurrencyType, cost, costCurrencyType, dogFoodType);
+    }
+
+    public void SetTargetSlot(DogSlot slot)
 	{
 		this.targetSlot = slot;
 	}
@@ -400,9 +406,32 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+    public bool TryBuyFood(int value, CurrencyType valueCurrencyType,
+        int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
+    {
+        //Debug.Log("3");
+        if (CanAfford(costCurrencyType, cost))
+        {
+            //Debug.Log("4");
+            buyFood(value, valueCurrencyType, cost, costCurrencyType, dogFoodType);
+            return true;
+        }
+        else
+        {
+            EventController.Event(k.GetPlayEvent(k.EMPTY));
+            return false;
+        }
+    }
+
     public bool TryBuyItem(ShopItem item)
     {
 		return TryBuyItem(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
+    }
+
+    public bool TryBuyFood(ShopItem item)
+    {
+        //Debug.Log("2");
+        return TryBuyFood(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType, item.DogFoodType);
     }
 
     void buyItem(int value, CurrencyType valueCurrencyType,
@@ -410,6 +439,14 @@ public class PPGameController : GameController, ICurrencySystem
     {
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
         ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+    }
+
+    void buyFood(int value, CurrencyType valueCurrencyType,
+        int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
+    {
+        //Debug.Log("5");
+        EventController.Event(k.GetPlayEvent(k.PURCHASE));
+        ConvertDogFood(value, valueCurrencyType, cost, costCurrencyType, dogFoodType);
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
@@ -540,18 +577,18 @@ public class PPGameController : GameController, ICurrencySystem
 	GiftDatabase parseGiftDatabase()
     {
         TextAsset json = loadTextAssetInResources(GIFT_FILE_PATH);
-        Debug.Log("test " + json.text);
-        Debug.Log("test " + JsonUtility.FromJson<GiftDatabase>(json.text));
-        Debug.Log("test " + JsonUtility.FromJson<GiftDatabase>(json.text).Gifts);
+        //Debug.Log("test " + json.text);
+        //Debug.Log("test " + JsonUtility.FromJson<GiftDatabase>(json.text));
+        //Debug.Log("test " + JsonUtility.FromJson<GiftDatabase>(json.text).Gifts);
         return JsonUtility.FromJson<GiftDatabase>(json.text);
     }
 
     FoodDatabase parseFoodDatabase()
     {
         TextAsset json = loadTextAssetInResources(FOOD_FILE_PATH);
-        Debug.Log(json.text);
-        Debug.Log(JsonUtility.FromJson<FoodDatabase>(json.text));
-        Debug.Log(JsonUtility.FromJson<FoodDatabase>(json.text).Food);
+        //Debug.Log(json.text);
+        //Debug.Log(JsonUtility.FromJson<FoodDatabase>(json.text));
+        //Debug.Log(JsonUtility.FromJson<FoodDatabase>(json.text).Food);
         return JsonUtility.FromJson<FoodDatabase>(json.text);
     }
 

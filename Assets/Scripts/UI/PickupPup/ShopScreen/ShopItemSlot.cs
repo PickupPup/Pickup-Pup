@@ -59,7 +59,6 @@ public class ShopItemSlot : PPUIElement
     {
         subscribeEvents();
         this.item = item;
-        Debug.Log("dft: " + this.item.DogFoodType);
         //Debug.Log((DogFoodType)this.item.ValueCurrencyType);
         //Debug.Log(this.item.CostCurrencyType);
         if (nameText)
@@ -78,8 +77,18 @@ public class ShopItemSlot : PPUIElement
     public void Buy()
     {
         gameController.TryBuyItem(item);
+        if ((int)item.ValueCurrencyType == 1)
+        {
+            gameController.TryBuyFood(item);
+        }
     }
-
+    /*
+    public void BuyFood()
+    {
+        //Debug.Log("1");
+        gameController.TryBuyFood(item);
+    }
+    */
     void tryToggle(int amount)
     {
         if(button)

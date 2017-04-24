@@ -317,10 +317,17 @@ public class PPDataController : DataController, ICurrencySystem
         currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
 
+    public void ConvertDogFood(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
+    {
+        //Debug.Log("7");
+        currencies.ConvertDogFood(value, valueCurrencyType, cost, costCurrencyType, dogFoodType);
+    }
+
 	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)
 	{
         if(hasCurrencySystem)
         {
+            Debug.Log(type);
 		    currencies.SubscribeToCurrencyChange(type, callback);
         }
         else
@@ -329,7 +336,19 @@ public class PPDataController : DataController, ICurrencySystem
         }
 	}
 
-	public void UnsubscribeFromCurrencyChange(CurrencyType type, MonoActionInt callback)
+    public void SubscribeToDogFoodChange(CurrencyType type, MonoActionInt callback, DogFoodType dogFoodType)
+    {
+        if (hasCurrencySystem)
+        {
+            currencies.SubscribeToDogFoodChange(type, callback, dogFoodType);
+        }
+        else
+        {
+            bufferChangeCurrencyDelegate(type, callback);
+        }
+    }
+
+    public void UnsubscribeFromCurrencyChange(CurrencyType type, MonoActionInt callback)
 	{
         if(hasCurrencySystem)
         {

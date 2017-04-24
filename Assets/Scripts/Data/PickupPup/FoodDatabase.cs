@@ -42,7 +42,6 @@ public class FoodDatabase : Database<FoodDatabase>
 
     [SerializeField]
     FoodItem[] food;
-
     #region Database Overrides
 
     public override void Initialize()

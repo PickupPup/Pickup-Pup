@@ -25,6 +25,14 @@ public class FoodItem : PPData
 
     #region Instance Accessors
 
+    public DogFoodType FoodType
+    {
+        get
+        {
+            return type;
+        }
+    }
+
     public string FoodName
     {
         get
@@ -76,9 +84,10 @@ public class FoodItem : PPData
             currentAmount = value;
         }
     }
-    
+
     #endregion
 
+    DogFoodType type;
     string foodName;
     float specialGiftMod;
     int amountMod;
@@ -87,6 +96,7 @@ public class FoodItem : PPData
     int currentAmount;
 
     public FoodItem(
+        DogFoodType type,
         string foodName,
         float specialGiftMod,
         int amountMod,

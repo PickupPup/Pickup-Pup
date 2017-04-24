@@ -126,7 +126,7 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     {
         foreach(CurrencyDisplay display in dogFoodDisplays)
         {
-            display.updateAmount(newAmount);
+            display.updateFoodAmount(newAmount);
         }
     }
 

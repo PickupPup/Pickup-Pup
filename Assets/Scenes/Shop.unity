@@ -206,7 +206,7 @@ Prefab:
     - target: {fileID: 224537566414020800, guid: e14b9533b7158456fb6d73fcdae5d80d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224405978397950568, guid: e14b9533b7158456fb6d73fcdae5d80d,
         type: 2}
@@ -226,7 +226,7 @@ Prefab:
     - target: {fileID: 224405978397950568, guid: e14b9533b7158456fb6d73fcdae5d80d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224812120160538436, guid: e14b9533b7158456fb6d73fcdae5d80d,
         type: 2}
@@ -356,7 +356,7 @@ Prefab:
     - target: {fileID: 224320031693380610, guid: e14b9533b7158456fb6d73fcdae5d80d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114315558285839014, guid: e14b9533b7158456fb6d73fcdae5d80d,
         type: 2}
@@ -1468,6 +1468,11 @@ Prefab:
         type: 2}
       propertyPath: m_Horizontal
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114248054898555450, guid: 5b01ec2794e7495499d00b80f270b6ae,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuyFood
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b01ec2794e7495499d00b80f270b6ae, type: 2}

@@ -72,13 +72,28 @@ public class CurrencySystem : PPData, ICurrencySystem
 			return _currencyChangeCallbacks;
 		}
 	}
-		
-	CurrencyFactory factory;
+
+    Dictionary<DogFoodType, m.MonoActionInt> dogFoodChangeCallbacks
+    {
+        get
+        {
+            // Lazy reference (meaning not initialized until requested):
+            if (_dogFoodChangeCallbacks == null)
+            {
+                _dogFoodChangeCallbacks = new Dictionary<DogFoodType, m.MonoActionInt>();
+            }
+            return _dogFoodChangeCallbacks;
+        }
+    }
+
+    CurrencyFactory factory;
 	Dictionary<CurrencyType, CurrencyData> currencies;
 
 	// Includes refs to MonoBehaviours so it can not be serialized
 	[System.NonSerialized]
 	Dictionary<CurrencyType, m.MonoActionInt> _currencyChangeCallbacks;
+    [System.NonSerialized]
+    Dictionary<DogFoodType, m.MonoActionInt> _dogFoodChangeCallbacks;
 
     public CurrencySystem(params CurrencyData[] currencies)
     {
@@ -95,7 +110,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ChangeFood(int deltaFood, DogFoodType foodType)
     {
-        ChangeCurrencyAmount(CurrencyType.DogFood, foodType, deltaFood);
+        ChangeDogFoodAmount(CurrencyType.DogFood, deltaFood, foodType);
     }
 
     public void ChangeHomeSlots(int deltaHomeSlots)
@@ -111,11 +126,13 @@ public class CurrencySystem : PPData, ICurrencySystem
     }
     
     // Accounts for dog food types
-    public void ChangeCurrencyAmount(CurrencyType type, DogFoodType dogFoodType, int deltaAmount)
+    public void ChangeDogFoodAmount(CurrencyType type, int deltaAmount, DogFoodType dogFoodType)
     {
+        Debug.Log(type + " " + dogFoodType);
         CurrencyData existingCurrency = getCurrency(type);
         existingCurrency.ChangeBy(deltaAmount, dogFoodType);
-        tryCallCurrencyChangeEvent(type);
+        //tryCallCurrencyChangeEvent(type);
+        //UPDATE UI
     }
 
     public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)
@@ -130,11 +147,26 @@ public class CurrencySystem : PPData, ICurrencySystem
 	public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback)
 	{
 		m.MonoActionInt handler = getCurrencyChangeEventDelegate(type);
-		handler += callback;
-		updateCurrencyChangeHandler(type, handler);
+        handler += callback;
+        //Debug.Log(handler.Method);
+        //Debug.Log(handler.Target);
+        //Debug.Log(callback.Method);
+        //Debug.Log(callback.Target);
+        updateCurrencyChangeHandler(type, handler);
 	}
 
-	public void UnsubscribeFromCurrencyChange(CurrencyType type, m.MonoActionInt callback)
+    public void SubscribeToDogFoodChange(CurrencyType type, m.MonoActionInt callback, DogFoodType dogFoodType)
+    {
+        m.MonoActionInt handler = getDogFoodChangeEventDelegate(type, dogFoodType);
+        handler += callback;
+        //Debug.Log(handler.Method);
+        // Debug.Log(handler.Target);
+        //Debug.Log(callback.Method);
+        // Debug.Log(callback.Target);
+        updateDogFoodChangeHandler(type, handler, dogFoodType);
+    }
+
+    public void UnsubscribeFromCurrencyChange(CurrencyType type, m.MonoActionInt callback)
 	{
 		m.MonoActionInt handler = getCurrencyChangeEventDelegate(type);
 		if(handler != null)
@@ -159,7 +191,19 @@ public class CurrencySystem : PPData, ICurrencySystem
         // Otherwise do nothing
     }
 
-	public bool TryTakeCurrency(CurrencyData currencyToTake)
+    public void ConvertDogFood(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
+    {
+        //Debug.Log("8");
+        if (CanAfford(costCurrencyType, cost))
+        {
+            //Debug.Log("9");
+            ChangeDogFoodAmount(valueCurrencyType, value, dogFoodType);
+            ChangeCurrencyAmount(costCurrencyType, -cost);
+        }
+        // Otherwise do nothing
+    }
+
+    public bool TryTakeCurrency(CurrencyData currencyToTake)
 	{
 		CurrencyData existingCurrency;
 		if(TryGetCurrency(currencyToTake.Type, out existingCurrency))
@@ -194,7 +238,8 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	public bool TryUnsubscribeAll()
 	{
-		currencyChangeCallbacks.Clear();
+        currencyChangeCallbacks.Clear();
+        dogFoodChangeCallbacks.Clear();
 		return true;
 	}
 		
@@ -211,15 +256,26 @@ public class CurrencySystem : PPData, ICurrencySystem
 		}
 		return currency;
 	}
-		
-	bool tryCallCurrencyChangeEvent(CurrencyType type)
+
+    FoodItem getFoodItem(DogFoodType dogFoodType)
+    {
+        return FoodDatabase.Instance.Food[(int)dogFoodType];
+    }
+
+    bool tryCallCurrencyChangeEvent(CurrencyType type)
 	{
 		CurrencyData currency = getCurrency(type);
 		return tryCallCurrencyChangeEvent(currency.Type, currency.Amount);
 	}
 
-	// Overloaded version if you want to override the currency amount:
-	bool tryCallCurrencyChangeEvent(CurrencyType type, int amount)
+    bool tryCallDogFoodChangeEvent(DogFoodType dogFoodType)
+    {
+        FoodItem foodItem = getFoodItem(dogFoodType);
+        return tryCallDogFoodChangeEvent(foodItem.FoodType, foodItem.CurrentAmount);
+    }
+
+    // Overloaded version if you want to override the currency amount:
+    bool tryCallCurrencyChangeEvent(CurrencyType type, int amount)
 	{
 		m.MonoActionInt currencyChangeCallback = getCurrencyChangeEventDelegate(type);
 		if(currencyChangeCallback != null)
@@ -233,7 +289,22 @@ public class CurrencySystem : PPData, ICurrencySystem
 		}
 	}
 
-	void updateCurrencyChangeHandler(CurrencyType type, m.MonoActionInt handler)
+    // Overloaded version if you want to override the currency amount:
+    bool tryCallDogFoodChangeEvent(DogFoodType Foodtype, int amount)
+    {
+        m.MonoActionInt dogFoodChangeCallback = getDogFoodChangeEventDelegate(CurrencyType.DogFood, Foodtype);
+        if (dogFoodChangeCallback != null)
+        {
+            dogFoodChangeCallback(amount);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void updateCurrencyChangeHandler(CurrencyType type, m.MonoActionInt handler)
 	{
 		if(currencyChangeCallbacks.ContainsKey(type))
 		{
@@ -245,7 +316,19 @@ public class CurrencySystem : PPData, ICurrencySystem
 		}
 	}
 
-	public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
+    void updateDogFoodChangeHandler(CurrencyType type, m.MonoActionInt handler, DogFoodType dogFoodType)
+    {
+        if (dogFoodChangeCallbacks.ContainsKey(dogFoodType))
+        {
+            dogFoodChangeCallbacks[dogFoodType] = handler;
+        }
+        else
+        {
+            dogFoodChangeCallbacks.Add(dogFoodType, handler);
+        }
+    }
+
+    public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
 	{
 		return currencies.TryGetValue(type, out data);
 	}
@@ -260,7 +343,17 @@ public class CurrencySystem : PPData, ICurrencySystem
 		return eventDelegate;
 	}
 
-	void addNewCurrency(CurrencyData currency)
+    m.MonoActionInt getDogFoodChangeEventDelegate(CurrencyType type, DogFoodType dogFoodType)
+    {
+        m.MonoActionInt eventDelegate;
+        if (!dogFoodChangeCallbacks.TryGetValue(dogFoodType, out eventDelegate))
+        {
+            dogFoodChangeCallbacks.Add(dogFoodType, eventDelegate);
+        }
+        return eventDelegate;
+    }
+
+    void addNewCurrency(CurrencyData currency)
 	{
 		currencies.Add(currency.Type, currency);
 		addNewCurrencyToCallback(currency);
@@ -271,7 +364,12 @@ public class CurrencySystem : PPData, ICurrencySystem
 		currencyChangeCallbacks.Add(currency.Type, null);
 	}
 
-	Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies, bool generateCallbacks = true)
+    void addNewDogFoodToCallback(DogFoodType foodType)
+    {
+        dogFoodChangeCallbacks.Add(foodType, null);
+    }
+
+    Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies, bool generateCallbacks = true)
     {
         Debug.Log(currencies[0]);
         Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
