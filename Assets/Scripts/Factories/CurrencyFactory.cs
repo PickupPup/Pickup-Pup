@@ -7,17 +7,38 @@
 using System;
 using System.Reflection;
 
+using k = PPGlobal;
+
 [System.Serializable]
 public class CurrencyFactory : ObjectFactory<CurrencyData>
 {
 	const string CLASS_NAME_FORMAT = "{0}Data";
+
+	GiftDatabase gifts
+	{
+		get
+		{
+			return GiftDatabase.GetInstance;
+		}
+	}
 
     // Expects: (string type, int amount, float percent (if discout))
     public override CurrencyData Create (params object[] args)
     {
 		string typeStr = args[0].ToString();
 		CurrencyType type = (CurrencyType) Enum.Parse(typeof(CurrencyType), typeStr);
-        int amount = (int) args[1];
+		bool hasAmount;
+		int amount;
+		try
+		{
+			amount = (int) args[1];
+			hasAmount = true;
+		}
+		catch
+		{
+			amount = k.INVALID_VALUE;
+			hasAmount = false;
+		}
 		if(type == CurrencyType.DogVoucher)
 		{
 			return new DogVoucherData();
@@ -29,10 +50,25 @@ public class CurrencyFactory : ObjectFactory<CurrencyData>
 				{
 					typeof(int)
 				});
-			return currencyConstructor.Invoke(new object[]
-				{
-					amount
-				}) as CurrencyData;
+			if(hasAmount)
+			{
+
+				return currencyConstructor.Invoke(new object[]
+					{
+						amount
+					}) as CurrencyData;
+			}
+			else if(type == CurrencyType.GiftEvent)
+			{
+				return this.gifts.GetRandomGiftEvent();
+			}
+			else
+			{
+				return currencyConstructor.Invoke(new object[]
+					{
+						k.SINGLE_VALUE
+					}) as CurrencyData;
+			}
         }
     }
 		
@@ -42,7 +78,7 @@ public class CurrencyFactory : ObjectFactory<CurrencyData>
 	}
 		
 	// Expects: (ParallelArray<string, int>, float percent (if the list includes discounts))
-    public override CurrencyData[] CreateGroup (params object[] args)
+    public override CurrencyData[] CreateGroup(params object[] args)
     {
 		ParallelArray<string, int> currencyData = args[0] as ParallelArray<string, int>;
 		float discountPercent;
@@ -61,5 +97,15 @@ public class CurrencyFactory : ObjectFactory<CurrencyData>
 		}
 		return currencies;
     }
+
+	public CurrencyData[] CreateGroup(string[] currencyTypes)
+	{
+		CurrencyData[] currencies = new CurrencyData[currencyTypes.Length];
+		for(int i = 0; i < currencies.Length; i++)
+		{
+			currencies[i] = Create(currencyTypes[i]);
+		}
+		return currencies;
+	}
 
 }

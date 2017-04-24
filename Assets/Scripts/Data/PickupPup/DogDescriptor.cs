@@ -197,6 +197,14 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
         
+	public float AffectionFraction
+	{
+		get
+		{
+			return this.Affection / tuning.MaxAffection; 
+		}
+	}
+
     public bool SouvenirCollected
     {
         get

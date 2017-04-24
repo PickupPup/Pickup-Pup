@@ -18,10 +18,10 @@ public class GiftEventsTest : MonoBehaviourExtended
         base.fetchReferences();
         gifts = GiftDatabase.GetInstance;
         GiftEventData testEvent = gifts.GiftEvents[0];
-        Debug.Log(testEvent.EventDescription);
+		Debug.Log(testEvent);
         for(int i = 0; i < numberTimesTestSpawnCurrency; i++)
         {
-            Debug.Log(testEvent.GetCurrencies().Length);
+			Debug.Log(testEvent.GetResult().Length);
             Debug.LogFormat("Coins: {0}, Food: {1}", dataController.Coins, dataController.DogFood);
 			testEvent.Give();
             Debug.LogFormat("Coins: {0}, Food: {1}", dataController.Coins, dataController.DogFood);

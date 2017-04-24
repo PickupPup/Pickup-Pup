@@ -53,4 +53,9 @@ public class GiftDatabase : Database<GiftDatabase>
 
     #endregion
 
+	public GiftEventData GetRandomGiftEvent()
+	{
+		return ArrayUtil.GetRandom(this.GiftEvents);
+	}
+
 }

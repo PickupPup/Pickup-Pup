@@ -14,74 +14,42 @@ using k = PPGlobal;
 [System.Serializable]
 public class GiftEventData : SpecialGiftData
 {
-    #region Instance Accessors
+	CurrencyData[] result
+	{
+		get
+		{
+			if(_result == null)
+			{
+				_result = calculateResult();
+			}
+			return _result;
+		}
+	}
+	CurrencyData[] _result;
 
-    public string EventName
-    {
-        get
-        {
-            return eventName;
-        }
-    }
-
-    public string EventDescription
-    {
-        get
-        {
-            return eventDescription;
-        }
-    }
-
-    public string EventSprite
-    {
-        get
-        {
-            return eventSprite;
-        }
-    }
-
-    public string[] BonusTypes
-    {
-        get
-        {
-            return bonusTypes;
-        }
-    }
-
-    public int[] BonusAmounts
-    {
-        get
-        {
-            return bonusAmounts;
-        }
-    }
-
-    public float[] BonusChances
-    {
-        get
-        {
-            return bonusChances;
-        }
-    }
-
-    #endregion
-
-    [SerializeField]
-    string eventName;
-    [SerializeField]
-    string eventDescription;
-    [SerializeField]
-    string eventSprite;
-    [SerializeField]
-    string[] bonusTypes;
-    [SerializeField]
-    int[] bonusAmounts;
-    [SerializeField]
-    float[] bonusChances;
+	[SerializeField]
+	string eventName;
+	[SerializeField]
+	string eventDescription;
+	[SerializeField]
+	string eventFailDescription;
+	[SerializeField]
+	string eventSprite;
+	[SerializeField]
+	string[] bonusTypes;
+	[SerializeField]
+	int[] bonusAmounts;
+	[SerializeField]
+	float[] bonusChances;
 
     public GiftEventData(int amount = 1) : base(CurrencyType.GiftEvent, amount){}
 
-    public CurrencyData[] GetCurrencies()
+	public CurrencyData[] GetResult()
+	{
+		return this.result;
+	}
+
+    CurrencyData[] calculateResult()
     {
         int numCurrencies = bonusTypes.Length;
         CurrencyFactory factory = new CurrencyFactory();
@@ -101,13 +69,41 @@ public class GiftEventData : SpecialGiftData
 
     public override void Give()
 	{
-        CurrencyData[] data = GetCurrencies();
-        foreach(CurrencyData currency in data)
-        {
-			dataController.ChangeCurrencyAmount(currency.Type, currency.Amount);
-        }
+		if(checkEventSuccess(this.result))
+		{
+			foreach(CurrencyData currency in this.result)
+	        {
+				dataController.ChangeCurrencyAmount(currency.Type, currency.Amount);
+	        }
+		}
     }
 
 	#endregion
+
+	bool checkEventSuccess(CurrencyData[] currencyChanges)
+	{
+		foreach(CurrencyData currency in currencyChanges)
+		{
+			// If this currency constitutes a deduction:
+			if(currency.Amount < k.NONE_VALUE && !dataController.CanAfford(currency.Type, Mathf.Abs(currency.Amount)))
+			{
+				return false;
+			}
+		}
+		// Fall through case (can afford all deductions):
+		return true;
+	}
+
+	public override string ToString ()
+	{
+		if(checkEventSuccess(this.result))
+		{
+			return this.eventDescription;
+		}
+		else
+		{
+			return this.eventFailDescription;
+		}
+	}
 
 }
