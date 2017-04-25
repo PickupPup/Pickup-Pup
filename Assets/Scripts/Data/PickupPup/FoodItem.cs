@@ -77,10 +77,12 @@ public class FoodItem : PPData
     {
         get
         {
+            //currentAmount = PlayerPrefs.GetInt(type.ToString() + ".currentAmount");
             return currentAmount;
         }
         set
         {
+            //PlayerPrefs.SetInt(type.ToString() + ".currentAmount", value);
             currentAmount = value;
         }
     }
@@ -105,6 +107,7 @@ public class FoodItem : PPData
         int currentAmount
         )
     {
+        this.type = type;
         this.foodName = foodName;
         this.specialGiftMod = specialGiftMod;
         this.amountMod = amountMod;

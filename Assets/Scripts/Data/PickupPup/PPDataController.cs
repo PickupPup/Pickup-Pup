@@ -327,7 +327,6 @@ public class PPDataController : DataController, ICurrencySystem
 	{
         if(hasCurrencySystem)
         {
-            Debug.Log(type);
 		    currencies.SubscribeToCurrencyChange(type, callback);
         }
         else

@@ -77,18 +77,14 @@ public class ShopItemSlot : PPUIElement
     public void Buy()
     {
         gameController.TryBuyItem(item);
+
+        // If buying dogfood then update the amount of the appropriate DogFoodType
         if ((int)item.ValueCurrencyType == 1)
         {
             gameController.TryBuyFood(item);
         }
     }
-    /*
-    public void BuyFood()
-    {
-        //Debug.Log("1");
-        gameController.TryBuyFood(item);
-    }
-    */
+    
     void tryToggle(int amount)
     {
         if(button)
