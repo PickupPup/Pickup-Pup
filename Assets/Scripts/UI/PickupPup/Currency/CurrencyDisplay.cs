@@ -34,7 +34,6 @@ public class CurrencyDisplay : PPUIElement
         dogFoodDisplays = _dogFoodDisplays;
         // TODO: Have to add sprite to FoodItem JSON (or just use color somehow?)
         // iconImage.sprite = FoodDatabase.Instance.Items[(int)dogFoodType].sprite;
-        Debug.Log(dogFoodType);
         updateFoodAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
         this.dataController.SubscribeToCurrencyChange(type, updateFoodAmount);
     }
@@ -66,7 +65,10 @@ public class CurrencyDisplay : PPUIElement
 
     public void updateFoodAmount(int newAmount)
     {
+        //PlayerPrefs.GetInt(type.ToString() + ".currentAmount")
         newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
+        PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
+        Debug.Log(dogFoodType.ToString() + ".currentAmount");
         text.text = newAmount.ToString();
     }
 }

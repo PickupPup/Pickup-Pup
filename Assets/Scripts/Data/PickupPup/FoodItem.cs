@@ -77,7 +77,6 @@ public class FoodItem : PPData
     {
         get
         {
-            //currentAmount = PlayerPrefs.GetInt(type.ToString() + ".currentAmount");
             return currentAmount;
         }
         set

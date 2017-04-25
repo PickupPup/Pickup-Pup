@@ -70,8 +70,6 @@ public class CurrencyData : ResourceLoader
 
     public virtual void ChangeBy(int deltaAmount, DogFoodType dogfoodType)
     {
-        Debug.Log("dA: " + deltaAmount);
-        Debug.Log(FoodDatabase.Instance.Food[(int)dogfoodType].CurrentAmount);
         FoodDatabase.Instance.Food[(int)dogfoodType].CurrentAmount += deltaAmount;
     }
 
