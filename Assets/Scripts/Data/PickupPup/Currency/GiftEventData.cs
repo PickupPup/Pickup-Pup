@@ -6,9 +6,7 @@
 
 using System;
 using System.Collections.Generic;
-
 using UnityEngine;
-
 using k = PPGlobal;
 
 [System.Serializable]
@@ -49,6 +47,7 @@ public class GiftEventData : SpecialGiftData
 			return _result;
 		}
 	}
+
 	CurrencyData[] _result;
 
 	[SerializeField]
@@ -66,7 +65,11 @@ public class GiftEventData : SpecialGiftData
 	[SerializeField]
 	float[] bonusChances;
 
-    public GiftEventData(int amount = 1) : base(CurrencyType.GiftEvent, amount){}
+	// Default constructor which can be called w/out arguments
+    public GiftEventData(int amount = 1) : base(CurrencyType.GiftEvent, amount)
+	{
+		// NOTHING
+	}
 
 	public CurrencyData[] GetResult()
 	{

@@ -204,7 +204,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 		 */
 		if(eligibleForSouvenir(dog))
 		{
-			affectionFraction = dog.AffectionFraction;
+			affectionFraction = dog.FractionOfMaxAffection;
 		}
 		else
 		{

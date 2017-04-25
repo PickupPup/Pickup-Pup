@@ -1,6 +1,6 @@
 ﻿/*
  * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Description: Unit test for verifying gift event
  * Usage: [no notes]
  */
 

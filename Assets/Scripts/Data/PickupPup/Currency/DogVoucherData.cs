@@ -1,6 +1,6 @@
 ﻿/*
  * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Description: Currency used to redeem a free dog if any exists
  * Usage: [no notes]
  */
 
@@ -30,6 +30,7 @@ public class DogVoucherData : SpecialGiftData
 	#endregion
 
 	#endregion
+
 	bool hasDogToRedeem
 	{
 		get

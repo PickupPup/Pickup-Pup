@@ -197,7 +197,7 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
         
-	public float AffectionFraction
+	public float FractionOfMaxAffection
 	{
 		get
 		{
