@@ -141,14 +141,6 @@ public class PPGameController : GameController, ICurrencySystem
 
 	#endregion
 
-	public HomeSlotsData HomeSlots
-    {
-        get
-        {
-            return dataController.HomeSlots;
-        }
-    }
-
     public bool MainMenuIsOpen
     {
         get
@@ -320,11 +312,6 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController.ChangeFood(deltaFood);
 	}
 
-    public void ChangeHomeSlots(int deltaHomeSlots)
-    {
-        dataController.ChangeHomeSlots(deltaHomeSlots);
-    }
-
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
         dataController.ChangeCurrencyAmount(type, deltaAmount);
@@ -425,7 +412,7 @@ public class PPGameController : GameController, ICurrencySystem
 		}
 		else
 		{
-	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
+	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt))
 	        {
 	            AdoptDog(dog);
 	            return true;
@@ -437,7 +424,6 @@ public class PPGameController : GameController, ICurrencySystem
     void AdoptDog(DogDescriptor dog)
     {
         dataController.ChangeCoins(-dog.CostToAdopt);
-        dataController.ChangeHomeSlots(-1);
         dataController.Adopt(dog);
     }
 

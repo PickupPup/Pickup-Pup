@@ -167,4 +167,10 @@ public static class ArrayUtil
 			return new T[0];
 		}
 	}
+
+	public static T GetRandom<T>(T[] source)
+	{
+		return source[UnityEngine.Random.Range(0, source.Length)];
+	}
+
 }

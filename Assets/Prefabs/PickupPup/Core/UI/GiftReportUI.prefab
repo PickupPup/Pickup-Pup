@@ -230,6 +230,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
+  suppressStandardSFX: 0
 --- !u!114 &114333400866646894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,8 +342,7 @@ MonoBehaviour:
   preserveOnSceneChange: 0
   alternateSprites: []
   shouldCollectInSpawnPool: 1
-  overrideAutoSort: 0
-  isTopLayerCanvas: 0
+  sortRule: 0
 --- !u!114 &114563298728639698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,7 +417,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: aabc1469cc2f3451d8f6ac19ed8cd72a, type: 3}
+    m_Font: {fileID: 12800000, guid: 1825b75f8486443458ad6ee9b91bf34f, type: 3}
     m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0

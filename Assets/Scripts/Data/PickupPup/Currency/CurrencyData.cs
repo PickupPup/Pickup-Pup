@@ -7,7 +7,7 @@ using System.IO;
 using UnityEngine;
 
 [System.Serializable]
-public class CurrencyData : ResourceLoader
+public abstract class CurrencyData : ResourceLoader
 {
     #region Instance Accessors
 
@@ -45,6 +45,14 @@ public class CurrencyData : ResourceLoader
 
     #endregion
 
+	protected PPDataController dataController
+	{
+		get
+		{
+			return PPDataController.GetInstance;
+		}
+	}
+
     [System.NonSerialized]
     protected SpritesheetDatabase spriteDatabase;
 
@@ -71,6 +79,8 @@ public class CurrencyData : ResourceLoader
     {
         return amount > 0 && amount >= cost;
     }
+		
+	public abstract void Give();
 
     void setup(int initialAmount)
     {

@@ -31,6 +31,10 @@ public class RedeemDisplay : PPUIElement
             dogNameDisplay.text = formatRedeemMessage(dog);
             dogPortrait.sprite = dog.Portrait;
             CurrencyData gift = dog.PeekAtGift;
+			if(gift is SpecialGiftData)
+			{
+				(gift as SpecialGiftData).SetFinder(dog.Info);
+			}
             giftDescription.text = gift.ToString();
             giftPortrait.sprite = gift.Icon;
             RedeemButton.onClick.AddListener(

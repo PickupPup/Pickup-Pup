@@ -33,7 +33,7 @@ public class PPGlobal : Global
     public const string WORLD = "World";
     public const string SOUVENIRS = "Souvenirs";
     public const string UI_SPRITESHEET = "ui_spritesheet";
-    public const string NAME = "Name";
+	public const string DOG_VOUCHER_MESSAGE = "DogVoucherMessage";
     public const string BREED = "Breed";
     public const string Color = "Color";
 
@@ -43,7 +43,6 @@ public class PPGlobal : Global
 
     public const int DEFAULT_COINS = 2000;
     public const int DEFAULT_DOG_FOOD = 0;
-    public const int DEFAULT_HOME_SLOTS = 10;
     public const int DEFAULT_CURRENCY_AMOUNT = 0;
     public const int STANDARD_DROPDOWN = 0;
     public const int ALT_SINGLE_DROPDOWN = 1;
