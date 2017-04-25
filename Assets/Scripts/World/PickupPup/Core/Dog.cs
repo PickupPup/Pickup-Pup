@@ -3,6 +3,7 @@
  * Description: Controls a dog in the game world
  */
 
+using System;
 using UnityEngine;
 using k = PPGlobal;
 
@@ -216,6 +217,15 @@ public class Dog : MobileObjectBehaviour
         onScoutingTimerEnd = null;
         return true;
     }
+
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		base.handleGameTogglePause(isPaused);
+		if(!isPaused && IsScouting && HasScoutingTimer)
+		{
+			SetTimer(Info.TimeRemainingScouting);
+		}
+	}
 
     #endregion
 

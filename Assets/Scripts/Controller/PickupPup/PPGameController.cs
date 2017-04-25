@@ -230,6 +230,15 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		base.handleGameTogglePause(isPaused);
+		if(!isPaused && dataController)
+		{
+			dataController.LoadGame();
+		}
+	}
+
     #endregion
 
 	void handleLoadGame(PPDataController dataController)
