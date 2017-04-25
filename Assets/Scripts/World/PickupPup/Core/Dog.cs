@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Isaiah Mann
+ * Author: Timothy Ng, Isaiah Mann
  * Description: Controls a dog in the game world
  */
 
@@ -361,6 +361,10 @@ public class Dog : MobileObjectBehaviour
         CurrencyData gift = Info.RedeemGift();
         callGiftEvent(k.REDEEM_GIFT, gift);
         gameController.GiveCurrency(gift);
+		if(gift is SpecialGiftData)
+        {
+			gift.Give();
+        }
         trySaveGame();
         return gift;
     }
@@ -437,6 +441,11 @@ public class Dog : MobileObjectBehaviour
 		this.scoutingTimer = timer;
 		setupTimer(timer);
 	}
+
+    public void Bark()
+    {
+        EventController.Event(k.GetPlayEvent(k.BARK), Info.Breed.Size);
+    }
 
     public void SubscribeToGiftEvents(PPData.NamedCurrencyAction currencyAction)
     {

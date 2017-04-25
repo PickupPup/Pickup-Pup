@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Timothy Ng, Isaiah Mann, Grace Barrett-Snyder
  * Description: Handles save for Pickup Pup
  */
 
@@ -130,14 +130,6 @@ public class PPDataController : DataController, ICurrencySystem
         get
         {
             return currencies.DogFood;
-        }
-    }
-
-    public HomeSlotsData HomeSlots
-    {
-        get
-        {
-            return currencies.HomeSlots;
         }
     }
 
@@ -295,12 +287,6 @@ public class PPDataController : DataController, ICurrencySystem
         currencies.ChangeFood(deltaFood);
 		SaveGame();
 	}
-
-    public void ChangeHomeSlots(int deltaHomeSlots)
-    {
-        currencies.ChangeHomeSlots(deltaHomeSlots);
-        SaveGame();
-    }
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {

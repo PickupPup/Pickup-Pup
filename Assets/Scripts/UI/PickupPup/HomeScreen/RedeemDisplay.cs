@@ -10,18 +10,6 @@ using k = PPGlobal;
 
 public class RedeemDisplay : PPUIElement 
 {
-    #region Instance Accessors
-
-    public GiftItem GetGift
-    {
-        get
-        {
-            return gift;
-        }
-    }
-
-    #endregion
-
     [SerializeField]
     Image dogPortrait;
     [SerializeField]
@@ -30,7 +18,6 @@ public class RedeemDisplay : PPUIElement
 	Text giftDescription;
     [SerializeField]
     Image giftPortrait;
-	GiftItem gift;
 	Image background;
 
 	// Need Eventually For Polish
@@ -44,6 +31,10 @@ public class RedeemDisplay : PPUIElement
             dogNameDisplay.text = formatRedeemMessage(dog);
             dogPortrait.sprite = dog.Portrait;
             CurrencyData gift = dog.PeekAtGift;
+			if(gift is SpecialGiftData)
+			{
+				(gift as SpecialGiftData).SetFinder(dog.Info);
+			}
             giftDescription.text = gift.ToString();
             giftPortrait.sprite = gift.Icon;
             RedeemButton.onClick.AddListener(

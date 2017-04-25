@@ -23,13 +23,11 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.SetFilePath(Path.Combine(Application.persistentDataPath, "TestSave.dat"));
 		dataController.SubscribeToCurrencyChange(CurrencyType.Coins, updateCoinsText);
 		dataController.SubscribeToCurrencyChange(CurrencyType.DogFood, updateFoodText);
-		dataController.SubscribeToCurrencyChange(CurrencyType.HomeSlots, updateHomeSlotsText);
 		dataController.LoadGame();
 
         // Display at start
         updateCoinsText(dataController.Coins.Amount);
         updateFoodText(dataController.DogFood.Amount);
-        updateHomeSlotsText(dataController.HomeSlots.Amount);
 	}
 
 	public void ChangeCoins(int deltaCoins) 
@@ -42,11 +40,6 @@ public class DataPersistenceTest : MonoBehaviourExtended
 		dataController.ChangeFood(deltaFood);
 	}
 
-    public void ChangeHomeSlots(int deltaHomeSlots)
-    {
-        dataController.ChangeHomeSlots(deltaHomeSlots);
-    }
-		
 	public void ResetData() 
 	{
 		dataController.Reset();
@@ -61,12 +54,5 @@ public class DataPersistenceTest : MonoBehaviourExtended
 	{
 		foodText.text = string.Format("{0}: {1}", "Food", food);
 	}
-
-    void updateHomeSlotsText(int homeSlots)
-    {
-        HomeSlotsData homeSlotsData = dataController.HomeSlots;
-        homeSlotsText.text = "HomeSlots (O/V): " + 
-            homeSlotsData.OccupiedSlots + "/" + homeSlotsData.VacantSlots;
-    }
 		
 }

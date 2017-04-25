@@ -12,7 +12,6 @@ public class CoinsData : CurrencyData
     public CoinsData(int initialAmount) : base(initialAmount)
     {
         type = CurrencyType.Coins;
-        amount = initialAmount;
     }
 
     #region CurrencyData Overrides
@@ -25,6 +24,11 @@ public class CoinsData : CurrencyData
 			return fetchSprite(k.COIN_ICON);
         }
     }
+
+	public override void Give()
+	{
+		dataController.ChangeCoins(this.Amount);
+	}
 
     #endregion
 

@@ -67,7 +67,7 @@ public class DogWorld : MonoBehaviourExtended
             }
             else
             {
-                this.dogsSlots[i].Init(dogs[i], inScoutingSelectMode:false);
+                this.dogsSlots[i].Init(dogs[i], inScoutingSelectMode:true);
                 if(dogs[i].IsScouting)
                 {
                     this.dogsSlots[i].Hide();
