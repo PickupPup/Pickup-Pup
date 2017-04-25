@@ -206,6 +206,7 @@ public class Dog : MobileObjectBehaviour
 	PPData.DogActionf onScoutingTimerChange;
     PPData.NamedCurrencyAction onGiftAction;
 	DogSlot slot;
+	DateTime timePaused = default(DateTime);
 
     #region MonoBehaviourExtended Overrides
 
@@ -221,9 +222,22 @@ public class Dog : MobileObjectBehaviour
 	protected override void handleGameTogglePause(bool isPaused)
 	{
 		base.handleGameTogglePause(isPaused);
-		if(!isPaused && IsScouting && HasScoutingTimer)
+		if(IsScouting)
 		{
-			SetTimer(Info.TimeRemainingScouting);
+			if(isPaused)
+			{
+				this.timePaused = DateTime.Now;
+			}
+			else
+			{
+				if(hasTimePaused())
+				{
+					double secondsPassed = (DateTime.Now - timePaused).TotalSeconds;
+					Info.UpdateTimePassed((float) secondsPassed);
+					scoutingTimer.SetTimeRemaining(Info.TimeRemainingScouting, checkForEvents:false);
+					timePaused = default(DateTime);
+				}
+			}
 		}
 	}
 
@@ -320,6 +334,11 @@ public class Dog : MobileObjectBehaviour
 	}
 
 	#endregion
+
+	bool hasTimePaused()
+	{
+		return this.timePaused != default(DateTime);
+	}
 
     public void SetTimer(float newTime)
     {
