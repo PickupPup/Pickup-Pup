@@ -24,6 +24,8 @@ public class PPGiftController : SingletonController<PPGiftController>
     [Header("Cheats")]
     [SerializeField]
     bool alwaysReturnSouvenirFirst = false;
+	[SerializeField]
+	bool alwaysReturnSpecialGift = false;
 
     #endif
 
@@ -102,15 +104,21 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     CurrencyData generateGift(DogDescriptor dog)
     {
+		
     #if UNITY_EDITOR
         
+		// CHEAT: Returns the souvenir first for testing purposes:
         if(alwaysReturnSouvenirFirst && !dog.SouvenirCollected)
         {
-            // TODO: This function should eventually return all types of special gifts, not just souvenirs, will need to be modified here:
-            return getSpecialGift(dog);
+			return dog.Souvenir;
         }
+		else if(alwaysReturnSpecialGift)
+		{
+			return getSpecialGift(dog);
+		}
 
     #endif
+
         CurrencyType specialization = dog.Breed.ISpecialization;
         int amount = randomAmount();
         CurrencyType type;
@@ -139,9 +147,18 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     CurrencyData getSpecialGift(DogDescriptor dog)
     {
-        // TODO: Should be able to return other types of special gifts including other dogs, and Tub-Tub the Cat
-        return dog.Souvenir;
-    }
+		CurrencyData specialGift = getDogSpecialGiftChances(dog).GetRandom(); 
+		if(specialGift is SouvenirData)
+		{
+			// Need to return the specific souvenir the dog owns
+			return dog.Souvenir;
+		}
+		else
+		{
+			(specialGift as SpecialGiftData).SetFinder(dog);
+			return specialGift;
+		}
+	}
 
 	public CurrencyData GetDailyGift()
 	{
@@ -150,37 +167,18 @@ public class PPGiftController : SingletonController<PPGiftController>
 
 	WeightedRandomBuffer<CurrencyType> getRandomizerBySpecialization(DogDescriptor dog, CurrencyType specialization)
 	{
-        CurrencyType[] currencies;
-        float[] weights;
-        // TODO: This check needs to be moved inside of special gift logic when we implement other special gifts:
-        if(eligibleForSouvenir(dog))
+		CurrencyType[] currencies = new CurrencyType[]
         {
-            currencies = new CurrencyType[]
-            {
-                specialization,
-                getSecondary(specialization),
-                CurrencyType.SpecialGift,
-            };
-            weights = new float[]
-            {
-                tuning.ChanceOfSpecialization,
-                tuning.ChanceOfSecondary,
-                tuning.ChanceOfSpecialGift,
-            };
-        }
-        else
+            specialization,
+            getSecondary(specialization),
+            CurrencyType.SpecialGift,
+        };
+		float[] weights = new float[]
         {
-            currencies = new CurrencyType[]
-            {
-                specialization,
-                getSecondary(specialization),
-            };
-            weights = new float[]
-            {
-                tuning.ChanceOfSpecialization,
-                tuning.ChanceOfSecondary,
-            };
-        }
+            tuning.ChanceOfSpecialization,
+            tuning.ChanceOfSecondary,
+            tuning.ChanceOfSpecialGift,
+        };
 		return new WeightedRandomBuffer<CurrencyType>(currencies, weights);
 	}
 
@@ -194,6 +192,39 @@ public class PPGiftController : SingletonController<PPGiftController>
 		CurrencyFactory giftFactory = new CurrencyFactory();
 		CurrencyData[] gifts = giftFactory.CreateGroup(giftData, discountPercent);
 		return new WeightedRandomBuffer<CurrencyData>(gifts, giftChances);
+	}
+
+	WeightedRandomBuffer<CurrencyData> getDogSpecialGiftChances(DogDescriptor dog)
+	{
+		float affectionFraction;
+		/*
+		 * Affection determines whether dog can return souvenir
+		 * IF dog already hsa souvenir, assume affection is 0 
+		 * (no chance of returning souvenir)
+		 */
+		if(eligibleForSouvenir(dog))
+		{
+			affectionFraction = dog.FractionOfMaxAffection;
+		}
+		else
+		{
+			affectionFraction = k.NONE_VALUE;
+		}
+		CurrencyData[] specialGiftOptions = giftFactory.CreateGroup(tuning.SpecialGiftTypes);
+		float[] specialGiftOdds = new float[specialGiftOptions.Length];
+		for(int i = 0; i < specialGiftOdds.Length; i++)
+		{
+			specialGiftOdds[i] = Mathf.Lerp(
+				tuning.SpecialGiftMinAffectionChances[i],
+				tuning.SpecialGiftMaxAffectionChances[i],
+				affectionFraction);
+			// Check to prevent a DogVoucher from being given out if all dogs have already been adopted:
+			if(specialGiftOptions[i] is DogVoucherData && dataController.AllDogsAdopted(DogDatabase.GetInstance))
+			{
+				specialGiftOdds[i] = k.NONE_VALUE;
+			}
+		}
+		return new WeightedRandomBuffer<CurrencyData>(specialGiftOptions, specialGiftOdds);
 	}
 
     CurrencyType defaultRandomType(DogDescriptor dog)

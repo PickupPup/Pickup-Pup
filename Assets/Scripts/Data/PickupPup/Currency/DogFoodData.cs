@@ -27,6 +27,11 @@ public class DogFoodData : CurrencyData
         }
     }
 
+	public override void Give()
+	{
+		dataController.ChangeFood(this.Amount);
+	}
+
     #endregion
 
 }

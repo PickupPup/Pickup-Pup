@@ -45,15 +45,6 @@ public class SouvenirData : SpecialGiftData
         }
     }
 
-    public DogDescriptor Owner
-    {
-        get
-        {
-            return this.dog;
-        }
-    }
-
-
     SouvenirDatabase database
     {
         get
@@ -84,8 +75,6 @@ public class SouvenirData : SpecialGiftData
     string displayName;
     [SerializeField]
     string description;
-
-    DogDescriptor dog;
     bool isCollected = false;
 
     public SouvenirData(int amount = 1) : base(CurrencyType.Souvenir, amount){}
@@ -95,17 +84,11 @@ public class SouvenirData : SpecialGiftData
         SouvenirData defaultSouvenir = new SouvenirData();
         defaultSouvenir.name = string.Empty;
         defaultSouvenir.description = string.Empty;
-        defaultSouvenir.dog = null;
         defaultSouvenir.isCollected = false;
         defaultSouvenir.DateCollected = default(DateTime);
         return defaultSouvenir;
     }
-
-    public void SetOwner(DogDescriptor dog)
-    {
-        this.dog = dog;
-    }
-
+		
     public void Collect()
     {
         this.toggleUnlocked(true);
@@ -127,6 +110,15 @@ public class SouvenirData : SpecialGiftData
     {
         this.isCollected = isUnlocked;
     }
+
+	#region CurrencyData Overrides
+
+	public override void Give()
+	{
+		Collect();
+	}
+
+	#endregion
 
     #region Object Overrides
 

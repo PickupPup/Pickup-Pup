@@ -51,6 +51,7 @@ public class Global
     public const int ZERO_INDEX_OFFSET = 1;
 
     public const float FULL_PERCENT_F = 100f;
+    public const float FULL_PERCENT_DECIMAL = 1.0f;
     public const float MIN_SWIPE_THRESHOLD = 1f;
     public const float DEFAULT_TIME_SCALE = 1.0f;
 

@@ -197,6 +197,14 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
         
+	public float FractionOfMaxAffection
+	{
+		get
+		{
+			return this.Affection / tuning.MaxAffection; 
+		}
+	}
+
     public bool SouvenirCollected
     {
         get
@@ -212,6 +220,7 @@ public class DogDescriptor : PPDescriptor
             if(_souvenir == null)
             {
                 _souvenir = database.GetDogSouvenir(souvenir);
+				_souvenir.SetFinder(this);
             }
             return _souvenir;
         }
@@ -383,6 +392,11 @@ public class DogDescriptor : PPDescriptor
     {
         ChangeAffection(tuning.AffectionIncrease);
     }
+
+	public void MaxAffection()
+	{
+		this.Affection = tuning.MaxAffection;
+	}
 
     void callBeginScouting()
     {

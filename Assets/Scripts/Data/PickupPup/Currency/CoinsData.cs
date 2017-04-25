@@ -25,6 +25,11 @@ public class CoinsData : CurrencyData
         }
     }
 
+	public override void Give()
+	{
+		dataController.ChangeCoins(this.Amount);
+	}
+
     #endregion
 
 }
