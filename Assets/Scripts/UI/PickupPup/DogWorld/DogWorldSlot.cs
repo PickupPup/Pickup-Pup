@@ -17,11 +17,25 @@ public class DogWorldSlot : DogSlot
     {
         base.setReferences();
         dogImage = GetComponent<Image>();
+        nameTag = GetComponentInChildren<NameTag>();
+        Image[] images = GetComponentsInChildren<Image>();
+        if(images.Length == 1)
+        {
+            dogImage = images[0];
+        }
+        else
+        {
+            dogImage = images[1];
+        }
+        
+    }
+
+    protected override void fetchReferences()
+    {
+        base.fetchReferences();
         UISFXHandler sfxScript = GetComponent<UISFXHandler>();
         sfxScript.DisableSounds();
         GetComponent<Button>().transition = Selectable.Transition.None;
-        nameTag = GetComponentInChildren<NameTag>();
-        dogImage = GetComponentsInChildren<Image>()[1];
     }
 
     protected override void cleanupReferences()

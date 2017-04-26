@@ -59,11 +59,7 @@ public class NameTag : PPUIElement
 
     public void TryDeselect()
     {
-        if (!EventSystem.current.currentSelectedGameObject.Equals(transform.parent.gameObject))
-        {
-            Debug.Log("hiding");
-            Hide();
-        }
+        Hide();
     }
 
     void show(Dog dog)

@@ -49,7 +49,6 @@ public class DogWorldTest : MonoTest
         for(int i = 0; i < dogWorldSlots.Length; i++)
         {
             dataController.Adopt(data.Dogs[i]);
-            dogWorldSlots[i].Init(dataController.AdoptedDogs[i]);
         }
         feedback = "Good job, Joel";
         return true;
@@ -68,6 +67,7 @@ public class DogWorldTest : MonoTest
         }
         if(dogProfile)
         {
+            // Shows default dog
             dogProfile.Show();
         }
     }
