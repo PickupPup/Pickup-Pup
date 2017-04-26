@@ -458,7 +458,7 @@ public class PPGameController : GameController, ICurrencySystem
 		}
 		else
 		{
-	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
+	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt))
 	        {
 	            AdoptDog(dog);
 	            return true;
