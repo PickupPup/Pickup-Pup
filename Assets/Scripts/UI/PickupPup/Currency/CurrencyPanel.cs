@@ -3,6 +3,7 @@
  * Description: Controls the display of multiple currencies on the Currency Panel
  */
 
+using System;
 using UnityEngine;
 
 public class CurrencyPanel : SingletonController<CurrencyPanel>
@@ -29,6 +30,8 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 	PPTimer dailyGiftTimer;
 	PPGiftController giftController;
 
+	DateTime timePaused = default(DateTime);
+
     #region MonoBehaviourExtended Overrides
 
     protected override void subscribeEvents()
@@ -45,6 +48,25 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 			dailyGiftTimer.UnsubscribeFromTimeUp(makeDailyGiftAvailableToRedeem);
 		}
     }
+
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		base.handleGameTogglePause(isPaused);
+		if(isPaused)
+		{
+			this.timePaused = DateTime.Now;
+		}
+		else
+		{
+			if(dailyGiftTimer != null && dailyGiftTimer.IsRunning && hasTimePaused())
+			{
+				double secondsPassed = (DateTime.Now - this.timePaused).TotalSeconds;
+				float updatedTimeRemaining = dailyGiftTimer.TimeRemaining - (float) secondsPassed;
+				dailyGiftTimer.SetTimeRemaining(updatedTimeRemaining, checkForEvents:false);
+				this.timePaused = default(DateTime);
+			}
+		}
+	}
 
     #endregion
 
@@ -154,6 +176,11 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
         }
 		(giftReport as GiftReportUI).Init(gift);
 		toggleBetweenTimerAndGiftReceived(giftReceived:false);
+	}
+
+	bool hasTimePaused()
+	{
+		return this.timePaused != default(DateTime);
 	}
 
 }

@@ -292,7 +292,12 @@ public class DogDescriptor : PPDescriptor
 
 	public void UpdateFromSave(PPGameSave save)
 	{
-		_timeRemainingScouting -= save.TimeInSecSinceLastSave;
+		UpdateTimePassed(save.TimeInSecSinceLastSave);
+	}
+
+	public void UpdateTimePassed(float timePassed)
+	{
+		_timeRemainingScouting -= timePassed;
 		if(_timeRemainingScouting < NONE_INT)
 		{
 			_timeRemainingScouting = NONE_INT;

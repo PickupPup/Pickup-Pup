@@ -3,6 +3,7 @@
  * Description: Controls a dog in the game world
  */
 
+using System;
 using UnityEngine;
 using k = PPGlobal;
 
@@ -205,6 +206,7 @@ public class Dog : MobileObjectBehaviour
 	PPData.DogActionf onScoutingTimerChange;
     PPData.NamedCurrencyAction onGiftAction;
 	DogSlot slot;
+	DateTime timePaused = default(DateTime);
 
     #region MonoBehaviourExtended Overrides
 
@@ -216,6 +218,28 @@ public class Dog : MobileObjectBehaviour
         onScoutingTimerEnd = null;
         return true;
     }
+
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		base.handleGameTogglePause(isPaused);
+		if(IsScouting)
+		{
+			if(isPaused)
+			{
+				this.timePaused = DateTime.Now;
+			}
+			else
+			{
+				if(hasTimePaused())
+				{
+					double secondsPassed = (DateTime.Now - timePaused).TotalSeconds;
+					Info.UpdateTimePassed((float) secondsPassed);
+					scoutingTimer.SetTimeRemaining(Info.TimeRemainingScouting, checkForEvents:false);
+					timePaused = default(DateTime);
+				}
+			}
+		}
+	}
 
     #endregion
 
@@ -310,6 +334,11 @@ public class Dog : MobileObjectBehaviour
 	}
 
 	#endregion
+
+	bool hasTimePaused()
+	{
+		return this.timePaused != default(DateTime);
+	}
 
     public void SetTimer(float newTime)
     {
