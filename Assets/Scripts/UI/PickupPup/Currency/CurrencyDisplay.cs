@@ -35,9 +35,8 @@ public class CurrencyDisplay : PPUIElement
         // TODO: Have to add sprite to FoodItem JSON (or just use color somehow?)
         // iconImage.sprite = FoodDatabase.Instance.Items[(int)dogFoodType].sprite;
         initFoodAmount();
-        //updateFoodAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
+        updateFoodAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
         this.dataController.SubscribeToCurrencyChange(type, updateFoodAmount);
-        //Debug.Log("INIT " + gameObject.name);
     }
 
     protected override void cleanupReferences()
@@ -66,19 +65,9 @@ public class CurrencyDisplay : PPUIElement
 
     public void updateFoodAmount(int newAmount)
     {
-        Debug.Log(gameObject.name);
-        //Debug.Log("Update!");
-        //Debug.Log(GetComponentInChildren<Text>().gameObject.name);
-        ////PlayerPrefs.GetInt(type.ToString() + ".currentAmount")
-        //newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
-        //PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
-        //text.text = newAmount.ToString();
-
-    }
-
-    private void Update()
-    {
-        Debug.Log(dogFoodType);
+        newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
+        PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
+        text.text = newAmount.ToString();
     }
 
     public void initFoodAmount()

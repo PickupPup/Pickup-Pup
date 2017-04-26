@@ -86,7 +86,6 @@ public class DogFoodBowl : MonoBehaviourExtended
     {
         DogFoodType dogFoodType = (DogFoodType)foodType;
         int foodNeeded = calculateDogFoodNeeded();
-        Debug.Log("Feed the puppers " + foodNeeded + " " + dogFoodType + " food, please.");
         if (foodNeeded <= 0)
 		{
 			return;
@@ -94,7 +93,6 @@ public class DogFoodBowl : MonoBehaviourExtended
 
 		if(dataController.CanAffordFood(dogFoodType, foodNeeded) && !IsCurrentlyFeeding)
         {
-            Debug.Log("Feed em!");
             dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType)foodType);
             feedingTimer.Reset();
             feedingTimer.Begin();
@@ -103,7 +101,6 @@ public class DogFoodBowl : MonoBehaviourExtended
         }
         else
         {
-            Debug.Log("Either you don't have enough food or they are already eating!");
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
     }

@@ -73,19 +73,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 		}
 	}
 
-    Dictionary<DogFoodType, m.MonoActionInt> dogFoodChangeCallbacks
-    {
-        get
-        {
-            // Lazy reference (meaning not initialized until requested):
-            if (_dogFoodChangeCallbacks == null)
-            {
-                _dogFoodChangeCallbacks = new Dictionary<DogFoodType, m.MonoActionInt>();
-            }
-            return _dogFoodChangeCallbacks;
-        }
-    }
-
     CurrencyFactory factory;
 	Dictionary<CurrencyType, CurrencyData> currencies;
 
@@ -151,13 +138,6 @@ public class CurrencySystem : PPData, ICurrencySystem
         updateCurrencyChangeHandler(type, handler);
 	}
 
-    public void SubscribeToDogFoodChange(CurrencyType type, m.MonoActionInt callback, DogFoodType dogFoodType)
-    {
-        m.MonoActionInt handler = getDogFoodChangeEventDelegate(type, dogFoodType);
-        handler += callback;
-        updateDogFoodChangeHandler(type, handler, dogFoodType);
-    }
-
     public void UnsubscribeFromCurrencyChange(CurrencyType type, m.MonoActionInt callback)
 	{
 		m.MonoActionInt handler = getCurrencyChangeEventDelegate(type);
@@ -185,10 +165,8 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ConvertDogFood(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
     {
-        //Debug.Log("8");
         if (CanAfford(costCurrencyType, cost))
         {
-            //Debug.Log("9");
             ChangeDogFoodAmount(valueCurrencyType, value, dogFoodType);
             ChangeCurrencyAmount(costCurrencyType, -cost);
         }
@@ -236,7 +214,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 	public bool TryUnsubscribeAll()
 	{
         currencyChangeCallbacks.Clear();
-        dogFoodChangeCallbacks.Clear();
 		return true;
 	}
 		
@@ -265,12 +242,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 		return tryCallCurrencyChangeEvent(currency.Type, currency.Amount);
 	}
 
-    bool tryCallDogFoodChangeEvent(DogFoodType dogFoodType)
-    {
-        FoodItem foodItem = getFoodItem(dogFoodType);
-        return tryCallDogFoodChangeEvent(foodItem.FoodType, foodItem.CurrentAmount);
-    }
-
     // Overloaded version if you want to override the currency amount:
     bool tryCallCurrencyChangeEvent(CurrencyType type, int amount)
 	{
@@ -286,21 +257,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 		}
 	}
 
-    // Overloaded version if you want to override the currency amount:
-    bool tryCallDogFoodChangeEvent(DogFoodType Foodtype, int amount)
-    {
-        m.MonoActionInt dogFoodChangeCallback = getDogFoodChangeEventDelegate(CurrencyType.DogFood, Foodtype);
-        if (dogFoodChangeCallback != null)
-        {
-            dogFoodChangeCallback(amount);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     void updateCurrencyChangeHandler(CurrencyType type, m.MonoActionInt handler)
 	{
 		if(currencyChangeCallbacks.ContainsKey(type))
@@ -312,18 +268,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 			currencyChangeCallbacks.Add(type, handler);
 		}
 	}
-
-    void updateDogFoodChangeHandler(CurrencyType type, m.MonoActionInt handler, DogFoodType dogFoodType)
-    {
-        if (dogFoodChangeCallbacks.ContainsKey(dogFoodType))
-        {
-            dogFoodChangeCallbacks[dogFoodType] = handler;
-        }
-        else
-        {
-            dogFoodChangeCallbacks.Add(dogFoodType, handler);
-        }
-    }
 
     public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
 	{
@@ -340,16 +284,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 		return eventDelegate;
 	}
 
-    m.MonoActionInt getDogFoodChangeEventDelegate(CurrencyType type, DogFoodType dogFoodType)
-    {
-        m.MonoActionInt eventDelegate;
-        if (!dogFoodChangeCallbacks.TryGetValue(dogFoodType, out eventDelegate))
-        {
-            dogFoodChangeCallbacks.Add(dogFoodType, eventDelegate);
-        }
-        return eventDelegate;
-    }
-
     void addNewCurrency(CurrencyData currency)
 	{
 		currencies.Add(currency.Type, currency);
@@ -360,11 +294,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 	{
 		currencyChangeCallbacks.Add(currency.Type, null);
 	}
-
-    void addNewDogFoodToCallback(DogFoodType foodType)
-    {
-        dogFoodChangeCallbacks.Add(foodType, null);
-    }
 
     Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies, bool generateCallbacks = true)
     {

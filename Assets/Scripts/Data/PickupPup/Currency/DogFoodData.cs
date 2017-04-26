@@ -32,7 +32,6 @@ public class DogFoodData : CurrencyData
 
     public DogFoodData() : base()
     {
-        Debug.Log("!");
         //Grab all current food types and respective effects & starting amounts.
         foods = FoodDatabase.Instance;
         foodItems = foods.Food;
@@ -40,8 +39,6 @@ public class DogFoodData : CurrencyData
 
     public bool CanAffordFood(int cost, DogFoodType dogFoodType)
     {
-        Debug.Log(cost);
-        Debug.Log(dogFoodType);
         return (FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount > cost);
     }
 
