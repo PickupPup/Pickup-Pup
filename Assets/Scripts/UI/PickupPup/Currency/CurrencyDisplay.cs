@@ -37,6 +37,7 @@ public class CurrencyDisplay : PPUIElement
         initFoodAmount();
         //updateFoodAmount(FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount);
         this.dataController.SubscribeToCurrencyChange(type, updateFoodAmount);
+        //Debug.Log("INIT " + gameObject.name);
     }
 
     protected override void cleanupReferences()
@@ -44,7 +45,6 @@ public class CurrencyDisplay : PPUIElement
         base.cleanupReferences();
         if (dataController)
         {
-            Debug.Log(type);
             dataController.UnsubscribeFromCurrencyChange(type, updateAmount);
         }
     }
@@ -66,10 +66,19 @@ public class CurrencyDisplay : PPUIElement
 
     public void updateFoodAmount(int newAmount)
     {
-        //PlayerPrefs.GetInt(type.ToString() + ".currentAmount")
-        newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
-        PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
-        text.text = newAmount.ToString();
+        Debug.Log(gameObject.name);
+        //Debug.Log("Update!");
+        //Debug.Log(GetComponentInChildren<Text>().gameObject.name);
+        ////PlayerPrefs.GetInt(type.ToString() + ".currentAmount")
+        //newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
+        //PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
+        //text.text = newAmount.ToString();
+
+    }
+
+    private void Update()
+    {
+        Debug.Log(dogFoodType);
     }
 
     public void initFoodAmount()

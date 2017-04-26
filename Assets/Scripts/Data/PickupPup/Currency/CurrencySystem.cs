@@ -131,7 +131,7 @@ public class CurrencySystem : PPData, ICurrencySystem
         Debug.Log(type + " " + dogFoodType);
         CurrencyData existingCurrency = getCurrency(type);
         existingCurrency.ChangeBy(deltaAmount, dogFoodType);
-        //tryCallCurrencyChangeEvent(type);
+        //tryCallDogFoodChangeEvent(dogFoodType);
         //UPDATE UI
     }
 
@@ -148,10 +148,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 	{
 		m.MonoActionInt handler = getCurrencyChangeEventDelegate(type);
         handler += callback;
-        //Debug.Log(handler.Method);
-        //Debug.Log(handler.Target);
-        //Debug.Log(callback.Method);
-        //Debug.Log(callback.Target);
         updateCurrencyChangeHandler(type, handler);
 	}
 
@@ -159,10 +155,6 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         m.MonoActionInt handler = getDogFoodChangeEventDelegate(type, dogFoodType);
         handler += callback;
-        //Debug.Log(handler.Method);
-        // Debug.Log(handler.Target);
-        //Debug.Log(callback.Method);
-        // Debug.Log(callback.Target);
         updateDogFoodChangeHandler(type, handler, dogFoodType);
     }
 
@@ -227,6 +219,11 @@ public class CurrencySystem : PPData, ICurrencySystem
     public bool CanAfford(CurrencyType type, int cost)
     {
         return currencies[type].CanAfford(cost);
+    }
+
+    public bool CanAffordFood(DogFoodType dogFoodType, int cost)
+    {
+        return DogFood.CanAffordFood(cost, dogFoodType);
     }
 
     public bool HasCurrency(CurrencyType type)

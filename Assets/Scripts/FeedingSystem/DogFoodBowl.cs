@@ -84,15 +84,18 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     public void FeedDogs(int foodType)
     {
+        DogFoodType dogFoodType = (DogFoodType)foodType;
         int foodNeeded = calculateDogFoodNeeded();
-		if(foodNeeded <= 0)
+        Debug.Log("Feed the puppers " + foodNeeded + " " + dogFoodType + " food, please.");
+        if (foodNeeded <= 0)
 		{
 			return;
 		}
 
-		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
+		if(dataController.CanAffordFood(dogFoodType, foodNeeded) && !IsCurrentlyFeeding)
         {
-            dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType) foodType);
+            Debug.Log("Feed em!");
+            dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType)foodType);
             feedingTimer.Reset();
             feedingTimer.Begin();
             buttonReference.interactable = false;
@@ -100,28 +103,14 @@ public class DogFoodBowl : MonoBehaviourExtended
         }
         else
         {
+            Debug.Log("Either you don't have enough food or they are already eating!");
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
     }
 
-    /* BP: It might be needed to access different colored bowls to illustrate
-     * which food is currently being eaten (swap the sprite of the dogfoodbutton).
-     * I imagine it would be done here.
-     */
-    public void ToggleFoodOptions(bool isSpecial)
+    // BP This is an appropriate place to figure out which disabled sprite we are using for the bowl.
+    public void ToggleFoodOptions()
     {
-        // if we are selecting a food option
-        if (!foodOptions.activeSelf == false)
-        {
-            if (!isSpecial)
-            {
-                //disabledDogFoodBowlImage = redFilledBowlSprite
-            }
-            else
-            {
-                //disabledDogFoodBowlImage = blueFilledBowlSprite
-            }
-        }
         foodOptions.SetActive(!foodOptions.activeSelf);
     }
 

@@ -365,6 +365,11 @@ public class PPDataController : DataController, ICurrencySystem
         return currencies.CanAfford(type, amount);
     }
 
+    public bool CanAffordFood(DogFoodType dogFoodType, int amount)
+    {
+        return currencies.CanAffordFood(dogFoodType, amount);
+    }
+
     public bool HasCurrency(CurrencyType type)
     {
         return HasCurrency(type);
