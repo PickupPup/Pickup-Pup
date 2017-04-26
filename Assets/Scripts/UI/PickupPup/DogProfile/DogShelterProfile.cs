@@ -17,7 +17,6 @@ public class DogShelterProfile : DogProfile
     UIButton adoptButton;
 
     PPTuning tuning;
-    Dog dog;
 
     #region Instance Accessors
 
