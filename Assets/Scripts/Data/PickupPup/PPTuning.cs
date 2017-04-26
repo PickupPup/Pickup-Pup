@@ -577,24 +577,4 @@ public class PPTuning : PPData
 
     #endregion
 
-    Color getColor(int[] rgba)
-    {
-        return getColor(convertColorValues(rgba));
-    }
-
-    Color getColor(float[] rgba)
-    {
-        return new Color(rgba[0], rgba[1], rgba[2], rgba[3]);
-    }
-
-    float[] convertColorValues(int[] rgba)
-    {
-        float[] convertedValues = new float[rgba.Length];
-        for(int i = 0; i < rgba.Length; i++)
-        {
-            convertedValues[i] = rgba[i] / 255f;
-        }
-        return convertedValues;
-    }
-
 }

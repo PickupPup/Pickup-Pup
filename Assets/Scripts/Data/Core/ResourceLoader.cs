@@ -9,7 +9,7 @@ using SimpleJSON;
 using System.IO;
 
 [System.Serializable]
-public class ResourceLoader 
+public class ResourceLoader : PPData
 {
 	protected const string AUDIO_DIR = k.AUDIO_DIR;
 	protected const string JSON_DIR = k.JSON_DIR;
@@ -28,8 +28,6 @@ public class ResourceLoader
 	protected const string KEY = k.KEY;
 
 	protected const char JOIN_CHAR = k.JOIN_CHAR;
-
-	protected const float DEFAULT_DISCOUNT = k.DEFAULT_DISCOUNT_DECIMAL;
 
     protected const int ZERO_INDEX_OFFSET = k.ZERO_INDEX_OFFSET;
 

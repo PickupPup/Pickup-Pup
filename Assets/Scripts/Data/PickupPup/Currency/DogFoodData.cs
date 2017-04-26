@@ -10,32 +10,77 @@ using k = PPGlobal;
 [System.Serializable]
 public class DogFoodData : CurrencyData
 {
-    
-    public FoodDatabase Foods
+    #region Instance Accessors
+
+    public string FoodType
     {
         get
         {
-            return foods;
+            return foodType;
         }
     }
 
-    public FoodItem[] FoodItems
+    public float SpecialGiftMod
     {
         get
         {
-            return foodItems;
+            return specialGiftMod;
         }
     }
-    
-    FoodDatabase foods;
-    FoodItem[] foodItems;
 
-    public DogFoodData() : base()
+    public float AmountMod
     {
-        //Grab all current food types and respective effects & starting amounts.
-        foods = FoodDatabase.Instance;
-        foodItems = foods.Food;
+        get
+        {
+            return amountMod;
+        }
     }
+
+    public string Color
+    {
+        get
+        {
+            return color;
+        }
+    }
+
+    public string ColorHex
+    {
+        get
+        {
+            return colorHex;
+        }
+    }
+
+    // Translates Hexadecimal color into Unity Color:
+    public Color GameColor
+    {
+        get
+        {
+            return parseHexColor(this.ColorHex);
+        }
+    }
+
+    #endregion
+
+    FoodDatabase foods
+    {
+        get
+        {
+            return FoodDatabase.Instance;
+        }
+    }
+
+    [SerializeField]
+    string foodType;
+    [SerializeField]
+    float specialGiftMod;
+    [SerializeField]
+    float amountMod;
+    [SerializeField]
+    string color;
+    [SerializeField]
+    string colorHex;
 
     #region CurrencyData Overrides
 
