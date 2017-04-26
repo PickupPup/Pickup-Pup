@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class NameTag : PPUIElement
@@ -19,6 +20,8 @@ public class NameTag : PPUIElement
         base.setReferences();
         uiButton = gameObject.AddComponent<UIButton>();
         uiButton.SubscribeToClick(ExecuteClick);
+        UISFXHandler sfxScript = GetComponent<UISFXHandler>();
+        sfxScript.DisableSounds();
         nameText = GetComponentInChildren<Text>();
     }
 
@@ -51,6 +54,15 @@ public class NameTag : PPUIElement
         if (onNameTagClick != null)
         {
             onNameTagClick(dog);
+        }
+    }
+
+    public void TryDeselect()
+    {
+        if (!EventSystem.current.currentSelectedGameObject.Equals(transform.parent.gameObject))
+        {
+            Debug.Log("hiding");
+            Hide();
         }
     }
 

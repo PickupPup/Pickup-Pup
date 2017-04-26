@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Tests showing dogs w/ the dog world feature
  * Usage: [no notes]
  */
@@ -46,7 +46,7 @@ public class DogWorldTest : MonoTest
     public override bool RunTest(out string feedback)
     {
         DogDatabase data = DogDatabase.GetInstance;
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < dogWorldSlots.Length; i++)
         {
             dataController.Adopt(data.Dogs[i]);
             dogWorldSlots[i].Init(dataController.AdoptedDogs[i]);

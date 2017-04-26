@@ -21,7 +21,7 @@ public class DogWorldSlot : DogSlot
         sfxScript.DisableSounds();
         GetComponent<Button>().transition = Selectable.Transition.None;
         nameTag = GetComponentInChildren<NameTag>();
-        dogImage = GetComponentsInChildren<Image>()[0];
+        dogImage = GetComponentsInChildren<Image>()[1];
     }
 
     protected override void cleanupReferences()
@@ -46,6 +46,7 @@ public class DogWorldSlot : DogSlot
             nameTag.Init(this, this.dog);
             nameTag.Hide();
         }
+        checkReferences();
     }
 
     protected override void setSprite (DogDescriptor dog)
@@ -71,6 +72,14 @@ public class DogWorldSlot : DogSlot
         if(nameTag)
         {
             nameTag.UnsubscribeFromClick(clickAction);
+        }
+    }
+
+    public void Deselect()
+    {
+        if(nameTag)
+        {
+            nameTag.TryDeselect();
         }
     }
 
