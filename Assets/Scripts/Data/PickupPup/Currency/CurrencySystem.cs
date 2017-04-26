@@ -115,11 +115,9 @@ public class CurrencySystem : PPData, ICurrencySystem
     // Accounts for dog food types
     public void ChangeDogFoodAmount(CurrencyType type, int deltaAmount, DogFoodType dogFoodType)
     {
-        Debug.Log(type + " " + dogFoodType);
+        //Debug.Log(type + " " + dogFoodType);
         CurrencyData existingCurrency = getCurrency(type);
         existingCurrency.ChangeBy(deltaAmount, dogFoodType);
-        //tryCallDogFoodChangeEvent(dogFoodType);
-        //UPDATE UI
     }
 
     public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)
@@ -155,6 +153,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 		
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
+        Debug.Log("ConvertCurrency");
         if (CanAfford(costCurrencyType, cost))
         {
             ChangeCurrencyAmount(valueCurrencyType, value);
@@ -165,6 +164,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ConvertDogFood(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
     {
+        Debug.Log("ConvertDogFood");
         if (CanAfford(costCurrencyType, cost))
         {
             ChangeDogFoodAmount(valueCurrencyType, value, dogFoodType);

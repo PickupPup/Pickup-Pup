@@ -420,17 +420,20 @@ public class PPGameController : GameController, ICurrencySystem
 
     public bool TryBuyItem(ShopItem item)
     {
+        Debug.Log("TryBuyItem");
 		return TryBuyItem(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
     }
 
     public bool TryBuyFood(ShopItem item)
     {
+        Debug.Log("TryBuyFood");
         return TryBuyFood(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType, item.DogFoodType);
     }
 
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
+        Debug.Log("buyItem");
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
         ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
@@ -438,6 +441,7 @@ public class PPGameController : GameController, ICurrencySystem
     void buyFood(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
     {
+        Debug.Log("buyFood");
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
         ConvertDogFood(value, valueCurrencyType, cost, costCurrencyType, dogFoodType);
     }

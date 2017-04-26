@@ -65,6 +65,7 @@ public class CurrencyDisplay : PPUIElement
 
     public void updateFoodAmount(int newAmount)
     {
+        //Debug.Log("updateFoodAmount");
         newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
         PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
         text.text = newAmount.ToString();
