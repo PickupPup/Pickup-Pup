@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Displays a Dog's Profile from its DogDescriptor
  */
 
@@ -92,17 +92,22 @@ public class DogProfile : PPUIElement
     public virtual void SetProfile(Dog dog)
     {
         this.dog = dog;
-		buttonController.CalibrateIndex (dog);
+		buttonController.CalibrateIndex(dog);
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-		if(descriptionText != null) {
-			for(int i = 0; i < descriptionText.Length; i++) {
-				if(i < dogInfo.Descriptions.Length) {
-					descriptionFields [i].Show ();
-					descriptionText [i].text = dogInfo.Descriptions [i];
-				} else {
-					descriptionFields [i].Hide ();
+		if(descriptionText != null)
+        {
+			for(int i = 0; i < descriptionText.Length; i++)
+            {
+				if(i < dogInfo.Descriptions.Length)
+                {
+					descriptionFields[i].Show();
+					descriptionText[i].text = dogInfo.Descriptions[i];
+				}
+                else
+                {
+					descriptionFields[i].Hide();
 				}
 			}
 		}
