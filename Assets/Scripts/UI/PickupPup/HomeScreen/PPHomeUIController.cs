@@ -3,8 +3,12 @@
  * Description: Controls the Home UI (Living Room and Yard).
  */
 
+using UnityEngine;
+
 public class PPHomeUIController : PPUIController
 {
+    DogWorldSlot[] dogWorldSlots;
+
     #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
@@ -17,6 +21,7 @@ public class PPHomeUIController : PPUIController
 		{
 			promptID = PromptID.FirstHomePrompt;
 		}
+        dogWorldSlots = GetComponentsInChildren<DogWorldSlot>();
         base.setReferences();
     }
 
@@ -24,6 +29,24 @@ public class PPHomeUIController : PPUIController
     {
         base.fetchReferences();
         EventController.Event(PPEvent.LoadHome);
+    }
+
+    protected override void subscribeEvents()
+    {
+        base.subscribeEvents();
+        foreach(DogWorldSlot dogSlot in dogWorldSlots)
+        {
+            dogSlot.SubscribeToNameTagClick(handleDogSlotClicked);
+        }
+    }
+
+    protected override void unsubscribeEvents()
+    {
+        base.unsubscribeEvents();
+        foreach(DogWorldSlot dogSlot in dogWorldSlots)
+        {
+            dogSlot.UnsubscribeFromNameTagClick(handleDogSlotClicked);
+        }
     }
 
     #endregion
