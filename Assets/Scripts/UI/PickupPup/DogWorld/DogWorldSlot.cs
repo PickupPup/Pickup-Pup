@@ -4,10 +4,11 @@
  * Usage: [no notes]
  */
 
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class DogWorldSlot : DogSlot
+public class DogWorldSlot : DogSlot, IPointerExitHandler
 {
     [SerializeField]
     NameTag nameTag;
@@ -53,6 +54,15 @@ public class DogWorldSlot : DogSlot
         dogImage.sprite = dog.WorldSprite;
         dog.SubscribeToBeginScouting(handleScoutingBegun);
         dog.SubscribeToDoneScouting(handleScoutingDone);
+    }
+
+    #endregion
+
+    #region IPointerExitHandler Interface
+
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+    {
+        Deselect();
     }
 
     #endregion

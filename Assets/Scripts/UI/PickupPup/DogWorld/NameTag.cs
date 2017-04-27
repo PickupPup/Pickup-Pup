@@ -3,6 +3,7 @@
  * Description: Controls a dog's name tag above its dog world slot.
  */
 
+using UnityEngine;
 using UnityEngine.UI;
 
 public class NameTag : PPUIElement
