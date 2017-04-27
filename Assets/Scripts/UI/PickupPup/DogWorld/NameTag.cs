@@ -2,6 +2,7 @@
  * Author(s): Grace Barrett-Snyder
  * Description: Controls a dog's name tag above its dog world slot.
  */
+
 using UnityEngine.UI;
 
 public class NameTag : PPUIElement

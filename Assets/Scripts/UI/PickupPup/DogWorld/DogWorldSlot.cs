@@ -73,6 +73,12 @@ public class DogWorldSlot : DogSlot
         }
     }
 
+    public override void ExecuteClick()
+    {
+        base.ExecuteClick();
+        moveToFront();
+    }
+
     public void Deselect()
     {
         if(nameTag)
@@ -90,6 +96,11 @@ public class DogWorldSlot : DogSlot
     void handleScoutingDone()
     {
         this.Show();
+    }
+
+    void moveToFront()
+    {
+        transform.SetAsLastSibling();
     }
 
 }
