@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class DogWorldSlot : DogSlot
 {
+    [SerializeField]
     NameTag nameTag;
 
     #region MonoBehaviourExtended Overrides 
@@ -16,26 +17,9 @@ public class DogWorldSlot : DogSlot
     protected override void setReferences()
     {
         base.setReferences();
-        dogImage = GetComponent<Image>();
-        nameTag = GetComponentInChildren<NameTag>();
-        Image[] images = GetComponentsInChildren<Image>();
-        if(images.Length == 1)
-        {
-            dogImage = images[0];
-        }
-        else
-        {
-            dogImage = images[1];
-        }
-        
-    }
-
-    protected override void fetchReferences()
-    {
-        base.fetchReferences();
         UISFXHandler sfxScript = GetComponent<UISFXHandler>();
         sfxScript.DisableSounds();
-        GetComponent<Button>().transition = Selectable.Transition.None;
+        GetComponent<Button>().transition = Selectable.Transition.None;       
     }
 
     protected override void cleanupReferences()
