@@ -1,10 +1,8 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Displays a Dog's Profile from its DogDescriptor
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using k = PPGlobal;
@@ -24,6 +22,14 @@ public class DogProfile : PPUIElement
 		}
 	}
 
+    protected DogDescriptor dogInfo
+    {
+        get
+        {
+            return dog.Info;
+        }
+    }
+
     [SerializeField]
     Text nameText;
     [SerializeField]
@@ -42,7 +48,7 @@ public class DogProfile : PPUIElement
     [SerializeField]
     protected Button collarSlot;
 
-    protected DogDescriptor dogInfo;
+    protected Dog dog;
 
     #region MonoBehaviourExtended Overrides
 
@@ -85,18 +91,23 @@ public class DogProfile : PPUIElement
 
     public virtual void SetProfile(Dog dog)
     {
-        dogInfo = dog.Info;
-		buttonController.CalibrateIndex (dog);
+        this.dog = dog;
+		buttonController.CalibrateIndex(dog);
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-		if (descriptionText != null) {
-			for (int i = 0; i < descriptionText.Length; i++) {
-				if (i < dogInfo.Descriptions.Length) {
-					descriptionFields [i].Show ();
-					descriptionText [i].text = dogInfo.Descriptions [i];
-				} else {
-					descriptionFields [i].Hide ();
+		if(descriptionText != null)
+        {
+			for(int i = 0; i < descriptionText.Length; i++)
+            {
+				if(i < dogInfo.Descriptions.Length)
+                {
+					descriptionFields[i].Show();
+					descriptionText[i].text = dogInfo.Descriptions[i];
+				}
+                else
+                {
+					descriptionFields[i].Hide();
 				}
 			}
 		}
@@ -110,4 +121,5 @@ public class DogProfile : PPUIElement
         // TODO: Make DogDescriptor name editable
         nameText.text = dogInfo.Name;
     }
+
 }
