@@ -6,6 +6,7 @@
 using UnityEngine;
 
 using m = MonoBehaviourExtended;
+using k = PPGlobal;
 
 [System.Serializable]
 public class DogDescriptor : PPDescriptor 
@@ -175,6 +176,55 @@ public class DogDescriptor : PPDescriptor
         get;
         private set;
     }
+        
+    public bool FirstTimeScouting
+    {
+        get
+        {
+            return TimesScouted <= k.SINGLE_VALUE;
+        }
+    }
+
+    public int TimesScouted
+    {
+        get;
+        private set;
+    }
+
+    public float Affection
+    {
+        get;
+        private set;
+    }
+        
+	public float FractionOfMaxAffection
+	{
+		get
+		{
+			return this.Affection / tuning.MaxAffection; 
+		}
+	}
+
+    public bool SouvenirCollected
+    {
+        get
+        {
+            return this.Souvenir.IsCollected;
+        }
+    }
+
+    public SouvenirData Souvenir
+    {
+        get
+        {
+            if(_souvenir == null)
+            {
+                _souvenir = database.GetDogSouvenir(souvenir);
+				_souvenir.SetFinder(this);
+            }
+            return _souvenir;
+        }
+    }
 
 	#endregion
 
@@ -185,6 +235,14 @@ public class DogDescriptor : PPDescriptor
 			return modCost != 0;
 		}
 	}
+
+    PPTuning tuning
+    {
+        get
+        {
+            return PPGameController.GetInstance.Tuning;
+        }
+    }
 
 	[SerializeField]
 	string name;
@@ -198,7 +256,10 @@ public class DogDescriptor : PPDescriptor
 	int age;
     [SerializeField]
     string[] description;
+    [SerializeField]
+    string souvenir;
 
+    SouvenirData _souvenir;
 	float _timeRemainingScouting;
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
@@ -220,6 +281,7 @@ public class DogDescriptor : PPDescriptor
                 string.Empty, string.Empty
             };
         descriptor.EmptyDescriptor = true;
+        descriptor.TimesScouted = 0;
 		return descriptor;
 	}
 		
@@ -230,7 +292,12 @@ public class DogDescriptor : PPDescriptor
 
 	public void UpdateFromSave(PPGameSave save)
 	{
-		_timeRemainingScouting -= save.TimeInSecSinceLastSave;
+		UpdateTimePassed(save.TimeInSecSinceLastSave);
+	}
+
+	public void UpdateTimePassed(float timePassed)
+	{
+		_timeRemainingScouting -= timePassed;
 		if(_timeRemainingScouting < NONE_INT)
 		{
 			_timeRemainingScouting = NONE_INT;
@@ -268,6 +335,7 @@ public class DogDescriptor : PPDescriptor
 
 	public void HandleScoutingEnded()
 	{
+        this.TimesScouted++;
         this.IsScouting = false;
         callDoneScouting();
 		if(this.IsLinkedToDog)
@@ -275,7 +343,7 @@ public class DogDescriptor : PPDescriptor
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
 		}
 	}
-
+        
     public void FindGift(CurrencyData gift)
     {
         this.RedeemableGift = gift;
@@ -319,6 +387,22 @@ public class DogDescriptor : PPDescriptor
         this.onDoneScouting -= del;
     }
 
+    public void ChangeAffection(float deltaAffection)
+    {
+        float newAffection = this.Affection + deltaAffection;
+        this.Affection = Mathf.Clamp(newAffection, 0, tuning.MaxAffection);
+    }
+
+    public void IncreaseAffection()
+    {
+        ChangeAffection(tuning.AffectionIncrease);
+    }
+
+	public void MaxAffection()
+	{
+		this.Affection = tuning.MaxAffection;
+	}
+
     void callBeginScouting()
     {
         if(this.onBeginScouting != null)
@@ -349,6 +433,11 @@ public class DogDescriptor : PPDescriptor
 	{
 		this.linkedDog = null;
 	}
+
+    public void CollectSouvenir()
+    {
+        this.Souvenir.Collect();
+    }
 
     #region Object Overrides 
 

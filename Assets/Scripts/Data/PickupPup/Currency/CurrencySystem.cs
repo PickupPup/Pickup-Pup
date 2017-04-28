@@ -18,8 +18,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 			checkStartingValues();
             return new CurrencySystem(
 				new CoinsData(startingCoins),
-				new DogFoodData(startingDogFood),
-				new HomeSlotsData(startingHomeSlots)
+				new DogFoodData(startingDogFood)
             );
         }
     }
@@ -28,7 +27,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	static int startingCoins;
 	static int startingDogFood;
-	static int startingHomeSlots;
 	static bool startingValuesInitialized;
 
     #region ICurrencySystem Accessors
@@ -46,14 +44,6 @@ public class CurrencySystem : PPData, ICurrencySystem
         get
         {
             return currencies[CurrencyType.DogFood] as DogFoodData;
-        }
-    }
-
-    public HomeSlotsData HomeSlots
-    {
-        get
-        {
-            return currencies[CurrencyType.HomeSlots] as HomeSlotsData;
         }
     }
 
@@ -97,12 +87,7 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
     }
-    
-    public void ChangeHomeSlots(int deltaHomeSlots)
-    {
-        ChangeCurrencyAmount(CurrencyType.HomeSlots, deltaHomeSlots);
-    }
-
+   
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
 		CurrencyData existingCurrency = getCurrency(type);
@@ -290,7 +275,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 				{
 					startingCoins = tuning.StartingCoins;
 					startingDogFood = tuning.StartingDogFood;
-					startingHomeSlots = tuning.StartingHomeSlots;
 					initFromTuning = true;
 				}
 			}
@@ -299,7 +283,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 			{
 				startingCoins = DEFAULT_COINS;
 				startingDogFood = DEFAULT_DOG_FOOD;
-				startingHomeSlots = DEFAULT_HOME_SLOTS;
 			}
 			startingValuesInitialized = true;
 		}

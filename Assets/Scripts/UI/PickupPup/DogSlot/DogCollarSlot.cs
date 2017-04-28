@@ -259,7 +259,7 @@ public class DogCollarSlot : DogSlot
     void handleGiftRedeemed(CurrencyData gift)
     {
         EventController.Event(k.GetPlayEvent(k.GIFT_REDEEM));
-        EventController.Event(k.GetPlayEvent(k.BARK), dogInfo.Breed.Size);
+        dog.Bark();
     }
 
     void handleDogTimerChange(Dog dog, float timeRemaining)

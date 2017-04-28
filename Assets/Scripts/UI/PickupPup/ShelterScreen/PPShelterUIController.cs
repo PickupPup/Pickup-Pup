@@ -115,12 +115,13 @@ public class PPShelterUIController : PPUIController
 
     public bool TryAdopt()
     {
-		if(gameController.TryAdoptDog(dogShelterProfile.buttonController.SelectedDogInfo))
+        Dog selectedDog = dogShelterProfile.DisplayedDog;
+		if(gameController.TryAdoptDog(selectedDog.Info))
         {
-			DogShelterSlot slot = (DogShelterSlot)availableDogPortraits [dogShelterProfile.buttonController.SelectedIndex];
+			DogShelterSlot slot = (DogShelterSlot) availableDogPortraits[dogShelterProfile.buttonController.SelectedIndex];
 			slot.ShowAdopt();
             EventController.Event(k.GetPlayEvent(k.ADOPT));
-			EventController.Event(k.GetPlayEvent(k.BARK), dogShelterProfile.buttonController.SelectedDogInfo.Breed.Size);
+            selectedDog.Bark();
             return true;
         }
         return false;

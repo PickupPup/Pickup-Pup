@@ -18,6 +18,18 @@ public class DogShelterProfile : DogProfile
 
     PPTuning tuning;
 
+    #region Instance Accessors
+
+    public Dog DisplayedDog
+    {
+        get
+        {
+            return dog;
+        }
+    }
+
+    #endregion
+
     #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
@@ -61,6 +73,7 @@ public class DogShelterProfile : DogProfile
 
     void handleAdoptEvent(string eventName, Dog dog)
     {
+        this.dog = dog;
         if (eventName == k.ADOPT && dog != null && dog.Info.Equals(dogInfo))
         {
             showAdopted();

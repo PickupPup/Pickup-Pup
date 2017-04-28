@@ -1,10 +1,8 @@
 ﻿/*
- * Author(s): Grace Barrett-Snyder 
+ * Authors: Grace Barrett-Snyder, Isaiah Mann
  * Description: Displays a Dog's Profile from its DogDescriptor
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using k = PPGlobal;
@@ -12,8 +10,10 @@ using k = PPGlobal;
 public class DogProfile : PPUIElement
 {
 	DogProfileButtonController _buttonController;
-	public DogProfileButtonController buttonController {
-		get {
+	public DogProfileButtonController buttonController
+    {
+		get 
+        {
 			if (!_buttonController)
 			{
 				_buttonController = transform.GetComponent<DogProfileButtonController>();
@@ -21,6 +21,14 @@ public class DogProfile : PPUIElement
 			return _buttonController;
 		}
 	}
+
+    protected DogDescriptor dogInfo
+    {
+        get
+        {
+            return dog.Info;
+        }
+    }
 
     [SerializeField]
     Text nameText;
@@ -38,11 +46,9 @@ public class DogProfile : PPUIElement
     [SerializeField]
     protected GameObject iconsObject;
     [SerializeField]
-    protected Button rehomeButton;
-    [SerializeField]
     protected Button collarSlot;
 
-    protected DogDescriptor dogInfo;
+    protected Dog dog;
 
     #region MonoBehaviourExtended Overrides
 
@@ -70,20 +76,38 @@ public class DogProfile : PPUIElement
 
     #endregion
 
+    #if UNITY_EDITOR
+
+    // Debugging cheat for increasing the affection of a selected dog
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && dogInfo != null)
+        {
+            dogInfo.IncreaseAffection();
+        }
+    }
+
+    #endif
+
     public virtual void SetProfile(Dog dog)
     {
-        dogInfo = dog.Info;
-		buttonController.CalibrateIndex (dog);
+        this.dog = dog;
+		buttonController.CalibrateIndex(dog);
 
         nameText.text = dogInfo.Name;
         breedText.text = dogInfo.Breed.Breed;
-		if (descriptionText != null) {
-			for (int i = 0; i < descriptionText.Length; i++) {
-				if (i < dogInfo.Descriptions.Length) {
-					descriptionFields [i].Show ();
-					descriptionText [i].text = dogInfo.Descriptions [i];
-				} else {
-					descriptionFields [i].Hide ();
+		if(descriptionText != null)
+        {
+			for(int i = 0; i < descriptionText.Length; i++)
+            {
+				if(i < dogInfo.Descriptions.Length)
+                {
+					descriptionFields[i].Show();
+					descriptionText[i].text = dogInfo.Descriptions[i];
+				}
+                else
+                {
+					descriptionFields[i].Hide();
 				}
 			}
 		}
@@ -97,4 +121,5 @@ public class DogProfile : PPUIElement
         // TODO: Make DogDescriptor name editable
         nameText.text = dogInfo.Name;
     }
+
 }

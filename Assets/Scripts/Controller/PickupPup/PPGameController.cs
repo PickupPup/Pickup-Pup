@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Authors: Timothy Ng, Isaiah Mann, Grace Barrett-Snyder
  * Description: Game controller for Pickup Pup
  */
 
@@ -112,7 +112,7 @@ public class PPGameController : GameController, ICurrencySystem
             return languages;
         }
     }
-		
+	
     #region ICurrencySystem Interface
 
     public CoinsData Coins
@@ -141,19 +141,23 @@ public class PPGameController : GameController, ICurrencySystem
 
 	#endregion
 
-	public HomeSlotsData HomeSlots
-    {
-        get
-        {
-            return dataController.HomeSlots;
-        }
-    }
-
     public bool MainMenuIsOpen
     {
         get
         {
             return mainMenuIsOpen;
+        }
+    }
+
+    public float TimeScale
+    {
+        get
+        {
+            return this._timeScale;
+        }
+        set
+        {
+            this._timeScale = value;
         }
     }
 
@@ -181,31 +185,37 @@ public class PPGameController : GameController, ICurrencySystem
 	PPGiftController giftController;
 	DogSlot targetSlot;
     bool mainMenuIsOpen = false;
+    float _timeScale = k.DEFAULT_TIME_SCALE;
 
 	#region MonoBehaviourExtended Overrides
 
 	protected override void setReferences() 
 	{
 		base.setReferences();
-		dogDatabase = parseDogDatabase();
-        shop = parseShopDatabase();
-		gifts = parseGiftDatabase();
-		tuning = parseTuning();
-		languages = LanguageDatabase.Instance;
-		languages.Initialize();
-        shop.Initialize();
-		gifts.Initialize();
+        if(isSingleton)
+        {
+    		dogDatabase = parseDogDatabase();
+            shop = parseShopDatabase();
+    		gifts = parseGiftDatabase();
+    		tuning = parseTuning();
+            languages = initLanguages();
+            shop.Initialize();
+    		gifts.Initialize();
+        }
 	}
 
 	protected override void fetchReferences() 
 	{
-		base.fetchReferences();
-        dogDatabase.Initialize(dataController);
-        dataController.SetFilePath(SAVE_FILE_PATH);
-		dataController.LoadGame();
-		giftController = PPGiftController.Instance;
-		giftController.Init(tuning);
-		handleLoadGame(dataController);
+        base.fetchReferences();
+        if(isSingleton)
+        {
+            dogDatabase.Initialize(dataController);
+            dataController.SetFilePath(SAVE_FILE_PATH);
+    		dataController.LoadGame();
+    		giftController = PPGiftController.Instance;
+    		giftController.Init(tuning);
+    		handleLoadGame(dataController);
+        }
 	}
 
     protected override void handleSceneLoaded(int sceneIndex)
@@ -219,6 +229,15 @@ public class PPGameController : GameController, ICurrencySystem
             }
         }
     }
+
+	protected override void handleGameTogglePause(bool isPaused)
+	{
+		base.handleGameTogglePause(isPaused);
+		if(!isPaused && dataController)
+		{
+			dataController.LoadGame();
+		}
+	}
 
     #endregion
 
@@ -284,6 +303,14 @@ public class PPGameController : GameController, ICurrencySystem
 
     #region ICurrencySystem Interface
 
+    public void ChangeTimeScale(object source, float newTimeScale)
+    {
+        if(source is Controller)
+        {
+            this.TimeScale = newTimeScale;
+        }
+    }
+
     public void ChangeCoins(int deltaCoins) 
 	{
 		dataController.ChangeCoins(deltaCoins);
@@ -293,11 +320,6 @@ public class PPGameController : GameController, ICurrencySystem
 	{
 		dataController.ChangeFood(deltaFood);
 	}
-
-    public void ChangeHomeSlots(int deltaHomeSlots)
-    {
-        dataController.ChangeHomeSlots(deltaHomeSlots);
-    }
 
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
@@ -399,7 +421,7 @@ public class PPGameController : GameController, ICurrencySystem
 		}
 		else
 		{
-	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt) && CanAfford(CurrencyType.HomeSlots, 1))
+	        if(CanAfford(CurrencyType.Coins, dog.CostToAdopt))
 	        {
 	            AdoptDog(dog);
 	            return true;
@@ -411,7 +433,6 @@ public class PPGameController : GameController, ICurrencySystem
     void AdoptDog(DogDescriptor dog)
     {
         dataController.ChangeCoins(-dog.CostToAdopt);
-        dataController.ChangeHomeSlots(-1);
         dataController.Adopt(dog);
     }
 
@@ -525,5 +546,12 @@ public class PPGameController : GameController, ICurrencySystem
 	{
         return parseFromJSONInResources<PPTuning>(TUNING_FILE_PATH);
 	}
+
+    LanguageDatabase initLanguages()
+    {
+        LanguageDatabase languages = LanguageDatabase.Instance;
+        languages.Initialize();
+        return languages;
+    }
 
 }

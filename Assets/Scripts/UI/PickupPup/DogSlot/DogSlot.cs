@@ -157,7 +157,7 @@ public class DogSlot : PPUIElement
 		Init(dog.Info);
 	}
 
-	public void ExecuteClick()
+	public virtual void ExecuteClick()
 	{
 		if(hasDogInfo && !HasDog)
 		{

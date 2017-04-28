@@ -30,26 +30,32 @@ public class GiftDatabase : Database<GiftDatabase>
 
     #region Instance Accessors
 
-    public GiftItem[] Gifts
+    public GiftEventData[] GiftEvents
     {
         get
         {
-            return gifts;
+            return giftEvents;
         }
     }
 
     #endregion
 
     [SerializeField]
-    GiftItem[] gifts;
+    GiftEventData[] giftEvents;
 
     #region Database Overrides
 
     public override void Initialize()
     {
         AssignInstance(this);
+        overwriteFromJSONInResources(GIFTS_DIR, this);
     }
 
     #endregion
+
+	public GiftEventData GetRandomGiftEvent()
+	{
+		return ArrayUtil.GetRandom(this.GiftEvents);
+	}
 
 }

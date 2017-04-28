@@ -70,6 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 1
+  toggleFastSpeedKey: 99
+  increaseTimeScale: 100
   coinKey: 122
   defaultCoinIncrease: 1000
   foodKey: 120
@@ -87,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 1
   resetDataKey: 113
-  saveOnApplicationPause: 0
+  saveOnApplicationPause: 1
   saveOnApplicationQuit: 1
 --- !u!114 &114426272054950630
 MonoBehaviour:
@@ -128,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 1
+  alwaysReturnSouvenirFirst: 0
 --- !u!114 &114966013612004634
 MonoBehaviour:
   m_ObjectHideFlags: 1
