@@ -108,16 +108,16 @@ public class CurrencySystem : PPData, ICurrencySystem
     public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
     {
 		CurrencyData existingCurrency = getCurrency(type);
-		existingCurrency.ChangeBy(deltaAmount);
+        existingCurrency.ChangeBy(deltaAmount);
 		tryCallCurrencyChangeEvent(type);
     }
     
     // Accounts for dog food types
     public void ChangeDogFoodAmount(CurrencyType type, int deltaAmount, DogFoodType dogFoodType)
     {
-        //Debug.Log(type + " " + dogFoodType);
         CurrencyData existingCurrency = getCurrency(type);
         existingCurrency.ChangeBy(deltaAmount, dogFoodType);
+        //tryCallCurrencyChangeEvent(type);
     }
 
     public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)
@@ -153,7 +153,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 		
     public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
     {
-        Debug.Log("ConvertCurrency");
+        // Currently redundant CanAfford check, but I suppose it doesn't hurt. 
         if (CanAfford(costCurrencyType, cost))
         {
             ChangeCurrencyAmount(valueCurrencyType, value);
@@ -164,11 +164,9 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public void ConvertDogFood(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
     {
-        Debug.Log("ConvertDogFood");
         if (CanAfford(costCurrencyType, cost))
         {
             ChangeDogFoodAmount(valueCurrencyType, value, dogFoodType);
-            ChangeCurrencyAmount(costCurrencyType, -cost);
         }
         // Otherwise do nothing
     }
@@ -297,7 +295,6 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     Dictionary<CurrencyType, CurrencyData> generateCurrencyLookup(CurrencyData[] currencies, bool generateCallbacks = true)
     {
-        Debug.Log(currencies[0]);
         Dictionary<CurrencyType, CurrencyData> lookup = new Dictionary<CurrencyType, CurrencyData>();
         foreach (CurrencyData currency in currencies)
         {

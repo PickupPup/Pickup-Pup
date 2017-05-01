@@ -13,7 +13,6 @@ public class CurrencyDisplay : PPUIElement
 
     CurrencyType type;
     DogFoodType dogFoodType;
-    CurrencyDisplay[] dogFoodDisplays;
 
     public void Init(CurrencyData currency, PPDataController dataController)
     {
@@ -31,7 +30,6 @@ public class CurrencyDisplay : PPUIElement
         unsubscribeEvents();
         type = currency.Type;
         dogFoodType = _dogFoodType;
-        dogFoodDisplays = _dogFoodDisplays;
         // TODO: Have to add sprite to FoodItem JSON (or just use color somehow?)
         // iconImage.sprite = FoodDatabase.Instance.Items[(int)dogFoodType].sprite;
         initFoodAmount();
@@ -60,15 +58,21 @@ public class CurrencyDisplay : PPUIElement
 
     public void updateAmount(int newAmount)
     {
-        text.text = newAmount.ToString();
+        if (text != null)
+        {
+            text.text = newAmount.ToString();
+        }
     }
 
+    // Not sure what the best way to go about using this method as a MonoAction() rather than a MonoActionInt(int newAmount) is...
     public void updateFoodAmount(int newAmount)
     {
-        //Debug.Log("updateFoodAmount");
         newAmount = FoodDatabase.Instance.Food[(int)dogFoodType].CurrentAmount;
         PlayerPrefs.SetInt(dogFoodType.ToString() + ".currentAmount", newAmount);
-        text.text = newAmount.ToString();
+        if (text != null)
+        {
+            text.text = newAmount.ToString();
+        }
     }
 
     public void initFoodAmount()

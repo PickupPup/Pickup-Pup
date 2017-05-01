@@ -365,6 +365,11 @@ public class PPGameController : GameController, ICurrencySystem
         return dataController.CanAfford(type, amount);
     }
 
+    public bool CanAffordFood(DogFoodType dogFoodType, int amount)
+    {
+        return dataController.CanAffordFood(dogFoodType, amount);
+    }
+
     public bool HasCurrency(CurrencyType type)
     {
         return dataController.HasCurrency(type);
@@ -392,7 +397,8 @@ public class PPGameController : GameController, ICurrencySystem
         int cost, CurrencyType costCurrencyType)
     {
         if(CanAfford(costCurrencyType, cost))
-        {   
+        {
+            // Increase item amount
             buyItem(value, valueCurrencyType, cost, costCurrencyType);
             return true;
         }
@@ -420,20 +426,17 @@ public class PPGameController : GameController, ICurrencySystem
 
     public bool TryBuyItem(ShopItem item)
     {
-        Debug.Log("TryBuyItem");
 		return TryBuyItem(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
     }
 
     public bool TryBuyFood(ShopItem item)
     {
-        Debug.Log("TryBuyFood");
         return TryBuyFood(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType, item.DogFoodType);
     }
 
     void buyItem(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        Debug.Log("buyItem");
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
         ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
     }
@@ -441,7 +444,6 @@ public class PPGameController : GameController, ICurrencySystem
     void buyFood(int value, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType, DogFoodType dogFoodType)
     {
-        Debug.Log("buyFood");
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
         ConvertDogFood(value, valueCurrencyType, cost, costCurrencyType, dogFoodType);
     }

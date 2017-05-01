@@ -74,10 +74,11 @@ public class ShopItemSlot : PPUIElement
 
     public void Buy()
     {
+        // If can afford to, reduce coins by cost.
         gameController.TryBuyItem(item);
-
+             
         // If buying dogfood then update the amount of the appropriate DogFoodType
-        if ((int)item.ValueCurrencyType == 1)
+        if (item.ValueCurrencyType == CurrencyType.DogFood)
         {
             gameController.TryBuyFood(item);
         }
