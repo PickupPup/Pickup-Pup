@@ -1,6 +1,6 @@
 ﻿/*
- * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Description: Controls placement and selection of dogs in the world.
  * Usage: [no notes]
  */
 
@@ -10,7 +10,10 @@ public class DogWorld : MonoBehaviourExtended
 {	
     [SerializeField]
     PPScene room;
+    [SerializeField]
+    UIButton deselectArea;
 
+    DogWorldSlot selectedDogSlot = null;
     DogWorldSlot[] dogsSlots;
 
     #region MonoBehaviourExtended Overrides
@@ -24,6 +27,7 @@ public class DogWorld : MonoBehaviourExtended
     protected override void fetchReferences()
     {
         base.fetchReferences();
+        deselectArea.SubscribeToClick(deselectDogSlot);
         Dog[] dogs = chooseDogs(this.dogsSlots);
         placeDogs(dogs);
     }
@@ -61,19 +65,38 @@ public class DogWorld : MonoBehaviourExtended
     {
         for(int i = 0; i < this.dogsSlots.Length && i < dogs.Length; i++)
         {
-            if(dogs[i].Info.EmptyDescriptor)
+            Dog currentDog = dogs[i];
+            DogWorldSlot currentSlot = dogsSlots[i];
+
+            if(currentDog.Info.EmptyDescriptor)
             {
-                this.dogsSlots[i].Hide();
+                currentSlot.Hide();
             }
             else
             {
-                this.dogsSlots[i].Init(dogs[i], inScoutingSelectMode:true);
-                if(dogs[i].IsScouting)
+                currentSlot.Init(currentDog, inScoutingSelectMode:true);
+                currentSlot.SubscribeToClickWhenOccupied(selectDogSlot);
+                if(currentDog.IsScouting)
                 {
-                    this.dogsSlots[i].Hide();
+                    currentSlot.Hide();
                 }
             }
         }
+    }
+
+    void selectDogSlot(Dog dog)
+    {
+        if(selectedDogSlot)
+        {
+            deselectDogSlot();
+        }
+        selectedDogSlot = (DogWorldSlot) dog.OccupiedSlot;
+    }
+
+    void deselectDogSlot()
+    {
+        selectedDogSlot.Deselect();
+        selectedDogSlot = null;
     }
 
 }

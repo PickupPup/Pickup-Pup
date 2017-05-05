@@ -6,9 +6,8 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class DogWorldSlot : DogSlot, IPointerExitHandler
+public class DogWorldSlot : DogSlot
 {
     [SerializeField]
     NameTag nameTag;
@@ -43,7 +42,6 @@ public class DogWorldSlot : DogSlot, IPointerExitHandler
         if(nameTag)
         {
             nameTag.Init(this, this.dog);
-            nameTag.Hide();
         }
         checkReferences();
     }
@@ -54,15 +52,6 @@ public class DogWorldSlot : DogSlot, IPointerExitHandler
         dogImage.sprite = dog.WorldSprite;
         dog.SubscribeToBeginScouting(handleScoutingBegun);
         dog.SubscribeToDoneScouting(handleScoutingDone);
-    }
-
-    #endregion
-
-    #region IPointerExitHandler Interface
-
-    void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-    {
-        Deselect();
     }
 
     #endregion

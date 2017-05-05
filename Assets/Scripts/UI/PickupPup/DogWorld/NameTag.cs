@@ -33,7 +33,8 @@ public class NameTag : PPUIElement
     {
         this.dog = dog;
         nameText.text = dog.Info.Name;
-        dogSlot.SubscribeToClickWhenOccupied(show);       
+        dogSlot.SubscribeToClickWhenOccupied(show);
+        Hide();   
     }
 
     public void ExecuteClick()
