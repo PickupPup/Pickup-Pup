@@ -36,6 +36,9 @@ public class PPGlobal : Global
 	public const string DOG_VOUCHER_MESSAGE = "DogVoucherMessage";
     public const string BREED = "Breed";
     public const string Color = "Color";
+    public const string DOG_TIMER_LENGTH = "Dog Timer Length";
+    public const string PLAY_TIME = "Play Time";
+    public const string FEED_COUNT = "Feed Count";
 
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;

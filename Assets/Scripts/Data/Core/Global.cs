@@ -38,6 +38,9 @@ public class Global
 	public const string MUSIC_VOLUME = MUSIC + VOLUME;
     public const string STANDARD = "Standard";
     public const string ALTERNATE = "Alternate";
+    public const string SECONDS = "Seconds";
+    public const string TYPE = "Type";
+    public const string AMOUNT = "Amount";
 
 	public const char JOIN_CHAR = '_';
 

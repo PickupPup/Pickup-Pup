@@ -95,6 +95,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             feedingTimer.Begin();
             buttonReference.interactable = false;
             EventController.Event(k.GetPlayEvent(k.ADD_FOOD));
+            dataController.RefillDogFood();
         }
         else
         {

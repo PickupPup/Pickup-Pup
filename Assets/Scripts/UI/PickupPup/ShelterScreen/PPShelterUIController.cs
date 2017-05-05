@@ -122,6 +122,10 @@ public class PPShelterUIController : PPUIController
 			slot.ShowAdopt();
             EventController.Event(k.GetPlayEvent(k.ADOPT));
             selectedDog.Bark();
+            analytics.SendEvent(
+                new DogAnalyticsEvent(
+                    DogAnalyticsEvent.DOG_ADOPTED,
+                    selectedDog.Info));
             return true;
         }
         return false;
