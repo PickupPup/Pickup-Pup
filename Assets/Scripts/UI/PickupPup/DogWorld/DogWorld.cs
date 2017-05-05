@@ -13,23 +13,17 @@ public class DogWorld : MonoBehaviourExtended
     [SerializeField]
     UIButton deselectArea;
 
-    DogWorldSlot selectedDogSlot = null;
-    DogWorldSlot[] dogsSlots;
+    static DogWorldSlot selectedDogSlot = null;
 
     #region MonoBehaviourExtended Overrides
-
-    protected override void setReferences()
-    {
-        base.setReferences();
-        dogsSlots = GetComponentsInChildren<DogWorldSlot>();
-    }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
         deselectArea.SubscribeToClick(deselectDogSlot);
-        Dog[] dogs = chooseDogs(this.dogsSlots);
-        placeDogs(dogs);
+        DogWorldSlot[] dogSlots = GetComponentsInChildren<DogWorldSlot>();
+        Dog[] dogs = chooseDogs(dogSlots);
+        placeDogs(dogs, dogSlots);
     }
 
     #endregion
@@ -61,12 +55,12 @@ public class DogWorld : MonoBehaviourExtended
         return dogs;
     }
 
-    void placeDogs(Dog[] dogs)
+    void placeDogs(Dog[] dogs, DogSlot[] dogSlots)
     {
-        for(int i = 0; i < this.dogsSlots.Length && i < dogs.Length; i++)
+        for(int i = 0; i < dogSlots.Length && i < dogs.Length; i++)
         {
             Dog currentDog = dogs[i];
-            DogWorldSlot currentSlot = dogsSlots[i];
+            DogSlot currentSlot = dogSlots[i];
 
             if(currentDog.Info.EmptyDescriptor)
             {
