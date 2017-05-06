@@ -25,7 +25,7 @@ public static class Mixpanel
 
 	private const string API_URL_FORMAT = "https://api.mixpanel.com/track/?data={0}";
 	private static MonoBehaviour _coroutineObject;
-    private static bool sendInEditor = true;
+    private static bool sendInEditor = false;
 
 	public static void ToggleSendInEditor(bool isEnabled)
 	{

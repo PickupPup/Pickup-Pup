@@ -41,6 +41,8 @@ public class Global
     public const string SECONDS = "Seconds";
     public const string TYPE = "Type";
     public const string AMOUNT = "Amount";
+    public const string SESSION_COUNT = "Game Session Count";
+    public const string TIME_PLAYED = "Total Time Played";
 
 	public const char JOIN_CHAR = '_';
 

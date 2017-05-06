@@ -387,6 +387,11 @@ public class PPDataController : DataController, ICurrencySystem
         currentGame.NotifyHasGiftToRedeem();
     }
 
+    public void UpdateAnalyticsProperties(IAnalyticsInterchange analytics)
+    {
+        analytics.UpdateProperties(this.currentGame);
+    }
+
     void bufferChangeCurrencyDelegate(CurrencyType type, MonoActionInt callback)
     {
         Queue<MonoActionInt> bufferedCallbacks;

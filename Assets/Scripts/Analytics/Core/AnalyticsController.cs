@@ -11,6 +11,7 @@ public abstract class AnalyticsController : SingletonController<AnalyticsControl
 
 	public virtual void SendEvent(AnalyticsEvent targetEvent)
 	{
+        dataController.UpdateAnalyticsProperties(interchange);
 		interchange.SendEvent(targetEvent);
 	}
 
