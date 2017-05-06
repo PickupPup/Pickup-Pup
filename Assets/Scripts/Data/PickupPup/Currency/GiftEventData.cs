@@ -34,6 +34,14 @@ public class GiftEventData : SpecialGiftData
 
 	#endregion
 
+	public int MaxConcurrentInstances
+	{
+		get
+		{
+			return maxConcurrentInstances;
+		}
+	}
+
 	#endregion
 
 	CurrencyData[] result
@@ -58,6 +66,8 @@ public class GiftEventData : SpecialGiftData
 	string eventFailDescription;
 	[SerializeField]
 	string eventSprite;
+	[SerializeField]
+	int maxConcurrentInstances;
 	[SerializeField]
 	string[] bonusTypes;
 	[SerializeField]

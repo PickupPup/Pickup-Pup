@@ -133,7 +133,7 @@ public class PPGiftController : SingletonController<PPGiftController>
         if(type == CurrencyType.SpecialGift)
         {
             return getSpecialGift(dog);
-        }
+		}
         else
         {
             return giftFactory.Create(type, amount);
@@ -155,8 +155,16 @@ public class PPGiftController : SingletonController<PPGiftController>
 		}
 		else
 		{
-			(specialGift as SpecialGiftData).SetFinder(dog);
-			return specialGift;
+			try
+			{
+				(specialGift as SpecialGiftData).SetFinder(dog);
+				return specialGift;
+			}
+			catch
+			{
+				// Returns a random normal currency instead:
+				return giftFactory.Create(defaultReturnChances.GetRandom(), randomAmount());
+			}
 		}
 	}
 
@@ -229,15 +237,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     CurrencyType defaultRandomType(DogDescriptor dog)
 	{
-        // TODO: This check needs to be moved inside of special gift logic when we implement other special gifts:
-        if(eligibleForSouvenir(dog))
-        {
-            return defaultReturnChancesWithGifts.GetRandom();
-        }
-        else
-        {
-		    return defaultReturnChances.GetRandom();
-        }
+        return defaultReturnChancesWithGifts.GetRandom();
 	}
 
 	int randomAmount()

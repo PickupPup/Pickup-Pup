@@ -27,6 +27,7 @@ public class DogAI : MonoBehaviourExtended
 
     int tapCount = 0;
 
+	IEnumerator currentDecisionRoutine;
     IEnumerator currentStateRoutine;
 
     bool isActive = true;
@@ -62,10 +63,20 @@ public class DogAI : MonoBehaviourExtended
     }
 
     #endregion
-	
+
+	public void RestartDecisionRoutine()
+	{
+		setupDecisionRoutine();
+	}
+
     void setupDecisionRoutine()
     {
-        StartCoroutine(decideState());
+		if(currentDecisionRoutine != null)
+		{
+			StopCoroutine(currentDecisionRoutine);
+		}
+		currentDecisionRoutine = decideState();
+		StartCoroutine(currentDecisionRoutine);
     }
 
     DogState chooseRandomState()

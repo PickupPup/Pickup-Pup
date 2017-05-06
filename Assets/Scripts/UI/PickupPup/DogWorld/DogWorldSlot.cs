@@ -45,6 +45,11 @@ public class DogWorldSlot : DogSlot
             nameTag.Hide();
         }
         checkReferences();
+		DogAI behaviour = GetComponent<DogAI>();
+		if(behaviour)
+		{
+			behaviour.RestartDecisionRoutine();
+		}
     }
 
     protected override void setSprite (DogDescriptor dog)

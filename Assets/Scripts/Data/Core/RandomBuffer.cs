@@ -67,6 +67,11 @@ public class RandomBuffer<T>
 		return index;
 	}
 
+	public bool HasNext()
+	{
+		return !needsRefresh();
+	}
+
 	public T GetRandom() 
 	{
 		return source[nextRandomIndex()];
