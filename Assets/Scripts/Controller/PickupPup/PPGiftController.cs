@@ -155,17 +155,21 @@ public class PPGiftController : SingletonController<PPGiftController>
 		}
 		else
 		{
-			try
+			SpecialGiftData gift = specialGift as SpecialGiftData;
+			(gift as SpecialGiftData).SetFinder(dog);
+			if(!checkSpecialGiftCanBeUsed(gift))
 			{
-				(specialGift as SpecialGiftData).SetFinder(dog);
-				return specialGift;
+				// Set to a default currency if the SpecialGift cannot be used
+			 	specialGift = giftFactory.Create(defaultReturnChances.GetRandom(), randomAmount());
 			}
-			catch
-			{
-				// Returns a random normal currency instead:
-				return giftFactory.Create(defaultReturnChances.GetRandom(), randomAmount());
-			}
+			return specialGift;
 		}
+	}
+
+	bool checkSpecialGiftCanBeUsed(SpecialGiftData specialGift)
+	{
+		bool invalidUse = specialGift is GiftEventData && !GiftDatabase.GetInstance.TryUseEvent(specialGift as GiftEventData);
+		return !invalidUse;
 	}
 
 	public CurrencyData GetDailyGift()

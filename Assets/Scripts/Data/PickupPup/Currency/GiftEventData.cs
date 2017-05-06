@@ -113,6 +113,7 @@ public class GiftEventData : SpecialGiftData
 				dataController.ChangeCurrencyAmount(currency.Type, currency.Amount);
 	        }
 		}
+		GiftDatabase.GetInstance.RetireEvent(this);
     }
 
 	#endregion

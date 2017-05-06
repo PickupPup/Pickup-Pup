@@ -70,7 +70,20 @@ public class GiftDatabase : Database<GiftDatabase>
 				return targetGiftEvent;
 			}
 		}
-		throw new GiftEventNotAvailableException();
+		return ArrayUtil.GetRandom(this.giftEvents);
+	}
+
+	public bool TryUseEvent(GiftEventData activeEvent)
+	{
+		return canUseEvent(activeEvent);
+	}
+
+	public void RetireEvent(GiftEventData activeEvent)
+	{
+		checkActiveEventInstances(activeEvent);
+		int activeInstanceCount = activeGiftEventInstances[activeEvent];
+		activeInstanceCount = Mathf.Clamp(activeInstanceCount - 1, 0, int.MaxValue);
+		activeGiftEventInstances[activeEvent] = activeInstanceCount;
 	}
 
 	void checkActiveEventInstances(GiftEventData giftEvent)
