@@ -36,6 +36,9 @@ public class DogSpriteDisplayTool : MonoBehaviourExtended
     [SerializeField]
     Image dogWorldSprite;
 
+    [SerializeField]
+    Image souvenirDisplay;
+
     public void Display(DogDescriptor dog)
     {
         this.Dog = dog;
@@ -44,6 +47,7 @@ public class DogSpriteDisplayTool : MonoBehaviourExtended
         this.colorDisplay.text = string.Format("{0}: {1}", k.Color, dog.Color);
         this.dogProfilePortrait.sprite = dog.Portrait;
         this.dogWorldSprite.sprite = dog.WorldSprite;
+        this.souvenirDisplay.sprite = dog.Souvenir.Icon;
     }
 
     public bool CheckPortrait()
