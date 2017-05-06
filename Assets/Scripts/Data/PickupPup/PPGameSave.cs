@@ -59,6 +59,18 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
+	public DateTime TimePlayed
+	{
+		get;
+		private set;
+	}
+
+	public int GameSessionCount
+	{
+		get;
+		private set;
+	}
+		
 	#endregion
 
 	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies, bool hasGiftToRedeem = true)
