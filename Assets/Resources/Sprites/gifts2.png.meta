@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: fb14c9d02d4406946848988f53ee60f2
-timeCreated: 1485561138
+guid: 2d1d3c4b1c6e7e143a5b5df4080256ac
+timeCreated: 1493995531
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ui_spritesheet_0
-    21300002: ui_spritesheet_1
-    21300004: ui_spritesheet_2
-    21300006: ui_spritesheet_3
-    21300008: ui_spritesheet_8
-    21300010: ui_spritesheet_10
-    21300012: ui_spritesheet_11
-    21300014: ui_spritesheet_12
-    21300016: ui_spritesheet_4
-    21300018: ui_spritesheet_5
-    21300020: ui_spritesheet_6
-    21300022: ui_spritesheet_7
+    21300000: gifts2_0
+    21300002: gifts2_1
+    21300004: gifts2_2
+    21300006: gifts2_3
+    21300008: gifts2_4
+    21300010: gifts2_5
+    21300012: gifts2_6
+    21300014: gifts2_7
+    21300016: gifts2_8
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -63,7 +60,7 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -71,23 +68,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 1024
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: iPhone
-    maxTextureSize: 1024
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -98,119 +79,119 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_spritesheet_0
+      name: gifts2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1386
-        width: 693
-        height: 693
+        y: 1365.3333
+        width: 682.6667
+        height: 682.6667
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ui_spritesheet_1
+      name: gifts2_1
       rect:
         serializedVersion: 2
-        x: 693
-        y: 1386
-        width: 693
-        height: 693
+        x: 682
+        y: 1365.3333
+        width: 682.6667
+        height: 682.6667
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ui_spritesheet_2
+      name: gifts2_2
       rect:
         serializedVersion: 2
-        x: 1386
-        y: 1386
-        width: 693
-        height: 693
+        x: 1364
+        y: 1365.3333
+        width: 682.6667
+        height: 682.6667
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ui_spritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 693
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_4
-      rect:
-        serializedVersion: 2
-        x: 693
-        y: 693
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_5
-      rect:
-        serializedVersion: 2
-        x: 1386
-        y: 693
-        width: 693
-        height: 693
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: ui_spritesheet_6
+      name: gifts2_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 693
-        height: 693
+        y: 683.3333
+        width: 682.6667
+        height: 682.6667
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ui_spritesheet_7
+      name: gifts2_4
       rect:
         serializedVersion: 2
-        x: 693
-        y: 0
-        width: 693
-        height: 693
+        x: 682
+        y: 683.3333
+        width: 682.6667
+        height: 682.6667
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ui_spritesheet_8
+      name: gifts2_5
       rect:
         serializedVersion: 2
-        x: 1386
-        y: 0
-        width: 693
-        height: 693
+        x: 1364
+        y: 683.3333
+        width: 682.6667
+        height: 682.6667
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: gifts2_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.333313
+        width: 682.6667
+        height: 682.6667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: gifts2_7
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 1.333313
+        width: 682.6667
+        height: 682.6667
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: gifts2_8
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 1.333313
+        width: 682.6667
+        height: 682.6667
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
