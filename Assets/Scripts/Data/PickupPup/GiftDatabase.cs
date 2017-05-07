@@ -4,7 +4,9 @@
  */
 
 using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
+using k = PPGlobal;
 
 [System.Serializable]
 public class GiftDatabase : Database<GiftDatabase>
@@ -43,6 +45,8 @@ public class GiftDatabase : Database<GiftDatabase>
     [SerializeField]
     GiftEventData[] giftEvents;
 
+	Dictionary<GiftEventData, int> activeGiftEventInstances = new Dictionary<GiftEventData, int>();
+
     #region Database Overrides
 
     public override void Initialize()
@@ -55,7 +59,51 @@ public class GiftDatabase : Database<GiftDatabase>
 
 	public GiftEventData GetRandomGiftEvent()
 	{
-		return ArrayUtil.GetRandom(this.GiftEvents);
+		RandomBuffer<GiftEventData> randomGiftEventBuffer = new RandomBuffer<GiftEventData>(giftEvents);
+		while(randomGiftEventBuffer.HasNext())
+		{
+			GiftEventData targetGiftEvent = randomGiftEventBuffer.GetRandom();
+			if(canUseEvent(targetGiftEvent))
+			{
+				return targetGiftEvent;
+			}
+		}
+		return ArrayUtil.GetRandom(this.giftEvents);
+	}
+
+	public bool TryUseEvent(GiftEventData activeEvent)
+	{
+		if(canUseEvent(activeEvent))
+		{
+			activeGiftEventInstances[activeEvent]++;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public void RetireEvent(GiftEventData activeEvent)
+	{
+		checkActiveEventInstances(activeEvent);
+		int activeInstanceCount = activeGiftEventInstances[activeEvent];
+		activeInstanceCount = Mathf.Clamp(activeInstanceCount - 1, 0, int.MaxValue);
+		activeGiftEventInstances[activeEvent] = activeInstanceCount;
+	}
+
+	void checkActiveEventInstances(GiftEventData giftEvent)
+	{
+		if(!activeGiftEventInstances.ContainsKey(giftEvent))
+		{
+			activeGiftEventInstances[giftEvent] = k.NONE_VALUE;
+		}
+	}
+
+	bool canUseEvent(GiftEventData giftEvent)
+	{
+		checkActiveEventInstances(giftEvent);
+		return activeGiftEventInstances[giftEvent] < giftEvent.MaxConcurrentInstances;
 	}
 
 }

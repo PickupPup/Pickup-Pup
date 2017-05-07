@@ -133,7 +133,7 @@ public class PPGiftController : SingletonController<PPGiftController>
         if(type == CurrencyType.SpecialGift)
         {
             return getSpecialGift(dog);
-        }
+		}
         else
         {
             return giftFactory.Create(type, amount);
@@ -155,9 +155,21 @@ public class PPGiftController : SingletonController<PPGiftController>
 		}
 		else
 		{
-			(specialGift as SpecialGiftData).SetFinder(dog);
+			SpecialGiftData gift = specialGift as SpecialGiftData;
+			(gift as SpecialGiftData).SetFinder(dog);
+			if(!checkSpecialGiftCanBeUsed(gift))
+			{
+				// Set to a default currency if the SpecialGift cannot be used
+			 	specialGift = giftFactory.Create(defaultReturnChances.GetRandom(), randomAmount());
+			}
 			return specialGift;
 		}
+	}
+
+	bool checkSpecialGiftCanBeUsed(SpecialGiftData specialGift)
+	{
+		bool invalidUse = specialGift is GiftEventData && !GiftDatabase.GetInstance.TryUseEvent(specialGift as GiftEventData);
+		return !invalidUse;
 	}
 
 	public CurrencyData GetDailyGift()
@@ -229,15 +241,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     CurrencyType defaultRandomType(DogDescriptor dog)
 	{
-        // TODO: This check needs to be moved inside of special gift logic when we implement other special gifts:
-        if(eligibleForSouvenir(dog))
-        {
-            return defaultReturnChancesWithGifts.GetRandom();
-        }
-        else
-        {
-		    return defaultReturnChances.GetRandom();
-        }
+        return defaultReturnChancesWithGifts.GetRandom();
 	}
 
 	int randomAmount()

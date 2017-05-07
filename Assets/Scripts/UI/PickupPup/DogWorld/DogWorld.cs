@@ -26,7 +26,44 @@ public class DogWorld : MonoBehaviourExtended
         placeDogs(dogs, dogSlots);
     }
 
+	protected override void subscribeEvents()
+	{
+		base.subscribeEvents();
+		EventController.Subscribe(handlePPDogEvent);
+	}
+
+	protected override void unsubscribeEvents()
+	{
+		base.unsubscribeEvents();
+		EventController.Unsubscribe(handlePPDogEvent);
+	}
+
     #endregion
+
+	void handlePPDogEvent(PPEvent eventType, Dog dog)
+	{
+		switch(eventType)
+		{
+			case PPEvent.DogRedeemedFromScouting:
+				addDogToRoom(dog);
+				break;
+		}
+	}
+
+	bool addDogToRoom(Dog dog)
+	{
+		foreach(DogWorldSlot slot in this.dogsSlots)			
+		{
+			if(!slot.HasDog)
+			{
+				slot.Show();
+				slot.Init(dog, inScoutingSelectMode:true);
+				dataController.EnterRoom(dog.Info, room);
+				return true;
+			}
+		}
+		return false;
+	}
 
     Dog[] chooseDogs(DogWorldSlot[] openSpots)
     {

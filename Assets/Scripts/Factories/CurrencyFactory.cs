@@ -60,7 +60,14 @@ public class CurrencyFactory : ObjectFactory<CurrencyData>
 			}
 			else if(type == CurrencyType.GiftEvent)
 			{
-				return this.gifts.GetRandomGiftEvent();
+				try
+				{
+					return this.gifts.GetRandomGiftEvent();
+				}
+				catch(GiftEventNotAvailableException exception)
+				{
+					throw exception;
+				}
 			}
 			else
 			{

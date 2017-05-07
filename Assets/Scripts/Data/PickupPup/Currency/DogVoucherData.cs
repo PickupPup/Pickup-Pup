@@ -86,6 +86,9 @@ public class DogVoucherData : SpecialGiftData
 		if(hasDogToRedeem)
 		{
 			dataController.Adopt(dogToRedeem);
+			EventController.Event(
+				PPEvent.DogRedeemedFromScouting,
+				new DogFactory(hideGameObjects:true).Create(dogToRedeem));
 			dogToRedeem = null;
 		}
 	}
