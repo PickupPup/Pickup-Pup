@@ -19,8 +19,6 @@ public static class SettingsUtil
 
 	const int DEFAULT_VOLUME = k.FULL_VOLUME;
 
-    static me.MonoAction onNavPanelChanged;
-
 	#region Static Accessors
 
 	public static bool MusicMuted 
@@ -57,10 +55,6 @@ public static class SettingsUtil
         {
             int previousValue = NavDropDownType;
             PlayerPrefs.SetInt(NAV_DROPDOWN_TYPE, value);
-            if(value != previousValue)
-            {
-                callOnNavPanelChanged();
-            }
         }
     }
 
@@ -68,14 +62,7 @@ public static class SettingsUtil
 
     public static void ToggleNavDropdownType()
     {
-        if(NavDropDownType == k.STANDARD_DROPDOWN)
-        {
-            NavDropDownType = k.ALT_SINGLE_DROPDOWN;
-        }
-        else
-        {
-            NavDropDownType = k.STANDARD_DROPDOWN;
-        }
+        NavDropDownType = k.ALT_SINGLE_DROPDOWN;
     }
 
 	public static int GetMusicVolume()
@@ -132,16 +119,6 @@ public static class SettingsUtil
 	{
 		ToggleVOMuted(!VOMuted);
 	}
-     
-    public static void SubscribeToNavPanelChange(me.MonoAction handler)
-    {
-        onNavPanelChanged += handler;
-    }
-
-    public static void UnsubscribeFromNavPanelChange(me.MonoAction handler)
-    {
-        onNavPanelChanged -= handler;
-    }
 
 	static void ToggleMute(string key, bool value) 
 	{
@@ -152,13 +129,5 @@ public static class SettingsUtil
 	{
 		return PlayerPrefsUtil.GetBool(key);
 	}
-
-    static void callOnNavPanelChanged()
-    {
-        if(onNavPanelChanged != null)
-        {
-            onNavPanelChanged();
-        }
-    }
 
 }
