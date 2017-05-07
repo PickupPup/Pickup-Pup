@@ -65,8 +65,6 @@ public class GiftDatabase : Database<GiftDatabase>
 			GiftEventData targetGiftEvent = randomGiftEventBuffer.GetRandom();
 			if(canUseEvent(targetGiftEvent))
 			{
-				checkActiveEventInstances(targetGiftEvent);
-				activeGiftEventInstances[targetGiftEvent]++;
 				return targetGiftEvent;
 			}
 		}
@@ -75,7 +73,15 @@ public class GiftDatabase : Database<GiftDatabase>
 
 	public bool TryUseEvent(GiftEventData activeEvent)
 	{
-		return canUseEvent(activeEvent);
+		if(canUseEvent(activeEvent))
+		{
+			activeGiftEventInstances[activeEvent]++;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public void RetireEvent(GiftEventData activeEvent)
@@ -97,7 +103,7 @@ public class GiftDatabase : Database<GiftDatabase>
 	bool canUseEvent(GiftEventData giftEvent)
 	{
 		checkActiveEventInstances(giftEvent);
-		return giftEvent.MaxConcurrentInstances < activeGiftEventInstances[giftEvent];
+		return activeGiftEventInstances[giftEvent] < giftEvent.MaxConcurrentInstances;
 	}
 
 }
