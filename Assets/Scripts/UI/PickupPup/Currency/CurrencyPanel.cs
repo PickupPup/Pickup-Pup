@@ -5,6 +5,7 @@
 
 using System;
 using UnityEngine;
+using k = PPGlobal;
 
 public class CurrencyPanel : SingletonController<CurrencyPanel>
 {
@@ -62,7 +63,15 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 			{
 				double secondsPassed = (DateTime.Now - this.timePaused).TotalSeconds;
 				float updatedTimeRemaining = dailyGiftTimer.TimeRemaining - (float) secondsPassed;
-				dailyGiftTimer.SetTimeRemaining(updatedTimeRemaining, checkForEvents:false);
+				updatedTimeRemaining = Mathf.Clamp(updatedTimeRemaining, k.NONE_VALUE, float.MaxValue);
+				if(updatedTimeRemaining > k.NONE_VALUE)
+				{
+					dailyGiftTimer.SetTimeRemaining(updatedTimeRemaining, checkForEvents:false);
+				}
+				else 
+				{
+					dailyGiftTimer.ZeroOutTimeRemaining(shouldCallTimeUpEvent:true);
+				}
 				this.timePaused = default(DateTime);
 			}
 		}
