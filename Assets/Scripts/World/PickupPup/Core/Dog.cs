@@ -234,7 +234,14 @@ public class Dog : MobileObjectBehaviour
 				{
 					double secondsPassed = (DateTime.Now - timePaused).TotalSeconds;
 					Info.UpdateTimePassed((float) secondsPassed);
-					scoutingTimer.SetTimeRemaining(Info.TimeRemainingScouting, checkForEvents:false);
+					if(Info.TimeRemainingScouting > k.NONE_VALUE)
+					{
+						scoutingTimer.SetTimeRemaining(Info.TimeRemainingScouting, checkForEvents:false);
+					}
+					else
+					{
+						scoutingTimer.ZeroOutTimeRemaining(shouldCallTimeUpEvent:true);
+					}
 					timePaused = default(DateTime);
 				}
 			}
