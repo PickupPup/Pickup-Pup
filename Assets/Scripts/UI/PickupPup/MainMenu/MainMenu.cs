@@ -15,6 +15,7 @@ public class MainMenu : PPUIElement
     [SerializeField]
     DogBrowser dogBrowser;
     [SerializeField]
+    GameObject settingsMenuPrefab;
     SettingsMenu settingsMenu;
 
 	[Header("Internal References")]
@@ -22,13 +23,11 @@ public class MainMenu : PPUIElement
     PPUIButton dynamicNavButton;
 
     [SerializeField]
-    GameObject altNavPanel;
-    [SerializeField]
     Image dynamicNavButtonBackground;
     [SerializeField]
     GameObject singleDropdown;
     [SerializeField]
-    GameObject singledDropdownArrow;
+    GameObject singleDropdownArrow;
 
     [Header("Serialized Sprites")]
     [SerializeField]
@@ -43,8 +42,6 @@ public class MainMenu : PPUIElement
     Sprite allDogsIcon;
     [SerializeField]
     Sprite roundButtonBackground;
-    [SerializeField]
-    Sprite rectButtonBackground;
 
     [Header("Color Palette")]
     [SerializeField]
@@ -59,8 +56,10 @@ public class MainMenu : PPUIElement
     protected override void setReferences()
     {
         base.setReferences();
-        switchToSingleDropdown();
+        dynamicNavButtonBackground.sprite = roundButtonBackground;
+        dynamicNavButtonBackground.color = buttonColor;
         setupDynamicButtons();
+        setupSettingsMenu();
     }
 
     protected override void fetchReferences()
@@ -159,14 +158,13 @@ public class MainMenu : PPUIElement
     public void ToggleSingleNavDropdown()
     {
         singleDropdown.SetActive(!singleDropdown.activeSelf);
-        singledDropdownArrow.transform.Rotate(navButtonRotation);
+        singleDropdownArrow.transform.Rotate(navButtonRotation);
     }
 
-    void switchToSingleDropdown()
+    void setupSettingsMenu()
     {
-        dynamicNavButtonBackground.sprite = roundButtonBackground;
-        dynamicNavButtonBackground.color = buttonColor;
-        altNavPanel.SetActive(true);
+        GameObject settingsMenuObject = (GameObject) Instantiate(settingsMenuPrefab);
+        settingsMenu = settingsMenuObject.GetComponent<SettingsMenu>();
     }
 
     void setupDynamicButtons()            
