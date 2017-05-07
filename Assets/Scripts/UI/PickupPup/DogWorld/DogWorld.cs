@@ -8,16 +8,6 @@ using UnityEngine;
 
 public class DogWorld : MonoBehaviourExtended 
 {	
-	#region Instance Accessors
-
-	public bool WanderingIsEnabled
-	{
-		get;
-		private set;
-	}
-
-	#endregion
-
     [SerializeField]
     PPScene room;
 
@@ -27,7 +17,6 @@ public class DogWorld : MonoBehaviourExtended
 
     protected override void setReferences()
     {
-		this.WanderingIsEnabled = true;
         base.setReferences();
         dogsSlots = GetComponentsInChildren<DogWorldSlot>();
     }
@@ -40,15 +29,6 @@ public class DogWorld : MonoBehaviourExtended
     }
 
     #endregion
-
-	public void ToggleWanderingEnabled(bool isEnabled)
-	{
-		this.WanderingIsEnabled = isEnabled;
-		foreach(DogWorldSlot dog in this.dogsSlots)
-		{
-			dog.ToggleWanderingEnabled(isEnabled);
-		}
-	}
 
     Dog[] chooseDogs(DogWorldSlot[] openSpots)
     {
