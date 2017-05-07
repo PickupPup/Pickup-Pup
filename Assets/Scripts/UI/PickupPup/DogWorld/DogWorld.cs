@@ -13,6 +13,7 @@ public class DogWorld : MonoBehaviourExtended
     [SerializeField]
     UIButton deselectArea;
 
+    DogWorldSlot[] dogSlots;
     DogWorldSlot selectedDogSlot = null;
 
     #region MonoBehaviourExtended Overrides
@@ -21,9 +22,9 @@ public class DogWorld : MonoBehaviourExtended
     {
         base.fetchReferences();
         deselectArea.SubscribeToClick(deselectDogSlot);
-        DogWorldSlot[] dogSlots = GetComponentsInChildren<DogWorldSlot>();
-        Dog[] dogs = chooseDogs(dogSlots);
-        placeDogs(dogs, dogSlots);
+        dogSlots = GetComponentsInChildren<DogWorldSlot>();
+        Dog[] dogs = chooseDogs(dogSlots.Length);
+        placeDogs(dogs);
     }
 
 	protected override void subscribeEvents()
@@ -52,7 +53,7 @@ public class DogWorld : MonoBehaviourExtended
 
 	bool addDogToRoom(Dog dog)
 	{
-		foreach(DogWorldSlot slot in this.dogsSlots)			
+		foreach(DogWorldSlot slot in this.dogSlots)			
 		{
 			if(!slot.HasDog)
 			{
@@ -65,13 +66,13 @@ public class DogWorld : MonoBehaviourExtended
 		return false;
 	}
 
-    Dog[] chooseDogs(DogWorldSlot[] openSpots)
+    Dog[] chooseDogs(int numOfOpenSpots)
     {
         DogFactory factory = new DogFactory(hideGameObjects:true);
-        Dog[] dogs = new Dog[openSpots.Length];
+        Dog[] dogs = new Dog[numOfOpenSpots];
         DogDescriptor[] inRoom = dataController.DogsInRoom(this.room);
         DogDescriptor[] available = dataController.AvailableDogs;   
-        for(int i = 0; i < openSpots.Length; i++)
+        for(int i = 0; i < numOfOpenSpots; i++)
         {
             int indexInAvailable = i - inRoom.Length;
             if(ArrayUtil.InRange(inRoom, i))
@@ -92,7 +93,7 @@ public class DogWorld : MonoBehaviourExtended
         return dogs;
     }
 
-    void placeDogs(Dog[] dogs, DogSlot[] dogSlots)
+    void placeDogs(Dog[] dogs)
     {
         for(int i = 0; i < dogSlots.Length && i < dogs.Length; i++)
         {
@@ -117,7 +118,7 @@ public class DogWorld : MonoBehaviourExtended
 
     void selectDogSlot(Dog dog)
     {
-        if(selectedDogSlot)
+        if(selectedDogSlot && !selectedDogSlot.Equals(dog.OccupiedSlot))
         {
             deselectDogSlot();
         }
