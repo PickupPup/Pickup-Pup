@@ -136,6 +136,11 @@ public class ScoutingDisplay : PPUIElement
                     	setupRedeemDisplay(slot.PeekDog);
                     	slot.SetText(string.Empty);
                         slot.ToggleRedeemDisplayOpen(isOpen:true);
+                        analytics.SendEvent(
+                            new DogAnalyticsEvent(
+                                DogAnalyticsEvent.GIFT_REDEEMED,
+                                slot.PeekDog.Info,
+                                includeScoutingInfo:true));
 					}
                 }
             );

@@ -453,10 +453,17 @@ public class Dog : MobileObjectBehaviour
 			scoutingTimer.Begin();
 			int slotIndex;
 			bool wasSuccess = gameController.TrySendDogToScout(this, out slotIndex);
-			if(!wasSuccess)
+			if(wasSuccess)
 			{
-				descriptor.HandleScoutingEnded();
+                analytics.SendEvent(
+                    new DogAnalyticsEvent(
+                        DogAnalyticsEvent.DOG_SEND_TO_SCOUT, 
+                        this.descriptor));
 			}
+            else
+            {
+                descriptor.HandleScoutingEnded();
+            }
 			return wasSuccess;
 		} 
 		else 

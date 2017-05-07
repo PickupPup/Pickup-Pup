@@ -4,7 +4,7 @@
  * Usage: [no notes]
  */
 
-public class AnaylticsTest : MonoTest 
+public class AnalyticsTest : MonoTest 
 {	
 	#region MonoTest Overrides 
 

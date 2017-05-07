@@ -59,7 +59,24 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
+    public TimeSpan TimePlayed
+	{
+        get
+        {
+            return this.cumulativeTimePlayed + getTimePlayedInSession();
+        }
+	}
+
+	public int GameSessionCount
+	{
+		get;
+		private set;
+	}
+		
 	#endregion
+
+    TimeSpan cumulativeTimePlayed = TimeSpan.Zero;
+    DateTime lastTimeLoaded = default(DateTime);
 
 	public PPGameSave(DogDescriptor[] adoptedDogs, DogDescriptor[] scoutingDogs, CurrencySystem currencies, bool hasGiftToRedeem = true)
 	{
@@ -68,6 +85,7 @@ public class PPGameSave : GameSave, ISerializable
         this.WorldDogs = new Dictionary<PPScene, List<DogDescriptor>>();
         this.Currencies = currencies;
         this.HasGiftToRedeem = hasGiftToRedeem;
+        this.lastTimeLoaded = DateTime.Now;
 	}
 
 	#region ISerializable Interface 
@@ -91,6 +109,9 @@ public class PPGameSave : GameSave, ISerializable
 			this.DailyGiftCountdown = 0;
 		}
 		this.HasGiftToRedeem = (bool) info.GetValue(HAS_GIFT_TO_REDEEM, typeof(bool));
+        this.GameSessionCount = ((int) info.GetValue(SESSION_COUNT, typeof(int))) + SINGLE_VALUE;
+        this.cumulativeTimePlayed = (TimeSpan) info.GetValue(TIME_PLAYED, typeof(TimeSpan));
+        this.lastTimeLoaded = DateTime.Now;
 	}
 		
 	// Implement this method to serialize data. The method is called on serialization.
@@ -103,6 +124,9 @@ public class PPGameSave : GameSave, ISerializable
 		info.AddValue(DAILY_GIFT_COUNTDOWN, this.DailyGiftCountdown);
 		info.AddValue(HAS_GIFT_TO_REDEEM, this.HasGiftToRedeem);
         info.AddValue(WORLD, this.WorldDogs);
+        info.AddValue(SESSION_COUNT, this.GameSessionCount);
+        cumulativeTimePlayed += getTimePlayedInSession();
+        info.AddValue(TIME_PLAYED, this.cumulativeTimePlayed);
 	}
 
 	#endregion
@@ -207,6 +231,18 @@ public class PPGameSave : GameSave, ISerializable
             }
         }
         return available.ToArray();
+    }
+
+    TimeSpan getTimePlayedInSession()
+    {
+        if(this.lastTimeLoaded == default(DateTime))
+        {
+            return TimeSpan.Zero;
+        }
+        else
+        {
+            return DateTime.Now - this.lastTimeLoaded;
+        }
     }
 
 }
