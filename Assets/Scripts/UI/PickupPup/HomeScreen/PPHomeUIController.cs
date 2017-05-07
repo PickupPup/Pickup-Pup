@@ -3,8 +3,6 @@
  * Description: Controls the Home UI (Living Room and Yard).
  */
 
-using UnityEngine;
-
 public class PPHomeUIController : PPUIController
 {
     DogWorldSlot[] dogWorldSlots;
