@@ -54,14 +54,6 @@ public class DogWorldSlot : DogSlot
         dog.SubscribeToDoneScouting(handleScoutingDone);
     }
 
-    protected override bool showProfileOnClick
-    {
-        get
-        {
-            return false;
-        }
-    }
-
     #endregion
 
     public void SubscribeToNameTagClick(PPData.DogAction clickAction)
