@@ -57,6 +57,15 @@ public class DogWorldSlot : DogSlot
 
     #endregion
 
+	public void ToggleWanderingEnabled(bool wanderingIsEnabled)
+	{
+		DogAI ai = GetComponent<DogAI>();
+		if(ai)
+		{
+			ai.ToggleWanderingEnabled(wanderingIsEnabled);
+		}
+	}
+
     public void SubscribeToNameTagClick(PPData.DogAction clickAction)
     {
         SubscribeToClickWhenOccupied(clickAction);

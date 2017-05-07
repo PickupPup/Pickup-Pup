@@ -30,6 +30,7 @@ public class DogAI : MonoBehaviourExtended
     IEnumerator currentStateRoutine;
 
     bool isActive = true;
+	bool wanderingIsEnabled = true;
 
     //TODO: Replace with q system
     float minTimePerState;
@@ -62,7 +63,18 @@ public class DogAI : MonoBehaviourExtended
     }
 
     #endregion
-	
+
+	public void ToggleWanderingEnabled(bool wanderingIsEnabled)
+	{
+		this.wanderingIsEnabled = wanderingIsEnabled;
+		// Instantly stops any dogs which are wandering:
+		if(gameObject.activeInHierarchy && !this.wanderingIsEnabled)
+		{
+			StopAllCoroutines();
+			setupDecisionRoutine();
+		}
+	}
+
     void setupDecisionRoutine()
     {
         StartCoroutine(decideState());
@@ -70,7 +82,12 @@ public class DogAI : MonoBehaviourExtended
 
     DogState chooseRandomState()
     {
-        return (DogState)(UnityEngine.Random.Range(0, Enum.GetNames(typeof(DogState)).Length));
+		DogState state = (DogState)(UnityEngine.Random.Range(0, Enum.GetNames(typeof(DogState)).Length));
+		if(state == DogState.Wandering && !wanderingIsEnabled)
+		{
+			state = DogState.Idle;
+		}
+		return state;
     }
 
     IEnumerator decideState()
