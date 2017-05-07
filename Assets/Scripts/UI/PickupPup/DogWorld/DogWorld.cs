@@ -13,7 +13,7 @@ public class DogWorld : MonoBehaviourExtended
     [SerializeField]
     UIButton deselectArea;
 
-    static DogWorldSlot selectedDogSlot = null;
+    DogWorldSlot selectedDogSlot = null;
 
     #region MonoBehaviourExtended Overrides
 
