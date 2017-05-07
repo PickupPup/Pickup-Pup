@@ -11,6 +11,23 @@ using UnityEngine;
 
 public static class Mixpanel
 {
+	#region Static Accessors
+
+	// Whether to send events in the Unity Editor
+	public static bool SendInEditor 
+	{
+		get
+		{
+			return _sendInEditor;
+		}
+		private set
+		{
+			_sendInEditor = value;
+		}
+	}
+		
+	#endregion
+
 	// Set this to your Mixpanel token.
 	public static string Token = "10986428162356b3e270a5d7180d75da";
 
@@ -25,11 +42,11 @@ public static class Mixpanel
 
 	private const string API_URL_FORMAT = "https://api.mixpanel.com/track/?data={0}";
 	private static MonoBehaviour _coroutineObject;
-    private static bool sendInEditor = false;
+	static bool _sendInEditor = false;
 
 	public static void ToggleSendInEditor(bool isEnabled)
 	{
-		sendInEditor = isEnabled;
+		SendInEditor = isEnabled;
 	}
 
 	// Call this to send an event to Mixpanel.
@@ -46,7 +63,7 @@ public static class Mixpanel
 	{
 		// Prevents unintended event calls in editor:
 		#if UNITY_EDITOR
-		if(!sendInEditor)
+		if(!SendInEditor)
 		{
 			Debug.LogWarning("Mixpanel events are currently disabled in editor");
 			return;
