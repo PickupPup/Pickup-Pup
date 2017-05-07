@@ -1,6 +1,6 @@
 ﻿/*
- * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Description: Controls placement and selection of dogs in the world.
  * Usage: [no notes]
  */
 
@@ -10,22 +10,20 @@ public class DogWorld : MonoBehaviourExtended
 {	
     [SerializeField]
     PPScene room;
+    [SerializeField]
+    UIButton deselectArea;
 
-    DogWorldSlot[] dogsSlots;
+    DogWorldSlot selectedDogSlot = null;
 
     #region MonoBehaviourExtended Overrides
-
-    protected override void setReferences()
-    {
-        base.setReferences();
-        dogsSlots = GetComponentsInChildren<DogWorldSlot>();
-    }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        Dog[] dogs = chooseDogs(this.dogsSlots);
-        placeDogs(dogs);
+        deselectArea.SubscribeToClick(deselectDogSlot);
+        DogWorldSlot[] dogSlots = GetComponentsInChildren<DogWorldSlot>();
+        Dog[] dogs = chooseDogs(dogSlots);
+        placeDogs(dogs, dogSlots);
     }
 
     #endregion
@@ -57,23 +55,42 @@ public class DogWorld : MonoBehaviourExtended
         return dogs;
     }
 
-    void placeDogs(Dog[] dogs)
+    void placeDogs(Dog[] dogs, DogSlot[] dogSlots)
     {
-        for(int i = 0; i < this.dogsSlots.Length && i < dogs.Length; i++)
+        for(int i = 0; i < dogSlots.Length && i < dogs.Length; i++)
         {
-            if(dogs[i].Info.EmptyDescriptor)
+            Dog currentDog = dogs[i];
+            DogSlot currentSlot = dogSlots[i];
+
+            if(currentDog.Info.EmptyDescriptor)
             {
-                this.dogsSlots[i].Hide();
+                currentSlot.Hide();
             }
             else
             {
-                this.dogsSlots[i].Init(dogs[i], inScoutingSelectMode:true);
-                if(dogs[i].IsScouting)
+                currentSlot.Init(currentDog, inScoutingSelectMode:true);
+                currentSlot.SubscribeToClickWhenOccupied(selectDogSlot);
+                if(currentDog.IsScouting)
                 {
-                    this.dogsSlots[i].Hide();
+                    currentSlot.Hide();
                 }
             }
         }
+    }
+
+    void selectDogSlot(Dog dog)
+    {
+        if(selectedDogSlot)
+        {
+            deselectDogSlot();
+        }
+        selectedDogSlot = (DogWorldSlot) dog.OccupiedSlot;
+    }
+
+    void deselectDogSlot()
+    {
+        selectedDogSlot.Deselect();
+        selectedDogSlot = null;
     }
 
 }

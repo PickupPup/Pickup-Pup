@@ -4,8 +4,8 @@
  * Usage: [no notes]
  */
 
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DogWorldSlot : DogSlot
 {
@@ -42,7 +42,6 @@ public class DogWorldSlot : DogSlot
         if(nameTag)
         {
             nameTag.Init(this, this.dog);
-            nameTag.Hide();
         }
         checkReferences();
     }
@@ -59,7 +58,6 @@ public class DogWorldSlot : DogSlot
 
     public void SubscribeToNameTagClick(PPData.DogAction clickAction)
     {
-        SubscribeToClickWhenOccupied(clickAction);
         if(nameTag)
         {
             nameTag.SubscribeToClick(clickAction);
@@ -68,7 +66,6 @@ public class DogWorldSlot : DogSlot
 
     public void UnsubscribeFromNameTagClick(PPData.DogAction clickAction)
     {
-        UnsubscribeFromClickWhenOccupied(clickAction);
         if(nameTag)
         {
             nameTag.UnsubscribeFromClick(clickAction);
