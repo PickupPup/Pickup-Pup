@@ -30,11 +30,20 @@ public class DogSpriteDisplayTool : MonoBehaviourExtended
     [SerializeField]
     Text colorDisplay;
 
+	[SerializeField]
+	Text souvenirNameDisplay;
+
+	[SerializeField]
+	Text souvenirDescDisplay;
+
     [SerializeField]
     Image dogProfilePortrait;
 
     [SerializeField]
     Image dogWorldSprite;
+
+    [SerializeField]
+    Image souvenirDisplay;
 
     public void Display(DogDescriptor dog)
     {
@@ -44,6 +53,11 @@ public class DogSpriteDisplayTool : MonoBehaviourExtended
         this.colorDisplay.text = string.Format("{0}: {1}", k.Color, dog.Color);
         this.dogProfilePortrait.sprite = dog.Portrait;
         this.dogWorldSprite.sprite = dog.WorldSprite;
+
+		SouvenirData souvenir = dog.Souvenir;
+		this.souvenirDisplay.sprite = souvenir.Icon;
+		this.souvenirNameDisplay.text = souvenir.DisplayName;
+		this.souvenirDescDisplay.text = souvenir.Description;
     }
 
     public bool CheckPortrait()
