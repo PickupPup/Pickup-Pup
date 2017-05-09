@@ -117,7 +117,7 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         CurrencyData existingCurrency = getCurrency(type);
         existingCurrency.ChangeBy(deltaAmount, dogFoodType);
-        //tryCallCurrencyChangeEvent(type);
+        tryCallCurrencyChangeEvent(type);
     }
 
     public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)

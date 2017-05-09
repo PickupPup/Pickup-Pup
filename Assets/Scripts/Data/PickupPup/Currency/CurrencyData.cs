@@ -71,6 +71,8 @@ public class CurrencyData : ResourceLoader
     public virtual void ChangeBy(int deltaAmount, DogFoodType dogfoodType)
     {
         FoodDatabase.Instance.Food[(int)dogfoodType].CurrentAmount += deltaAmount;
+        PlayerPrefs.SetInt(dogfoodType.ToString() + ".currentAmount", FoodDatabase.Instance.Food[(int)dogfoodType].CurrentAmount);
+        Debug.Log(FoodDatabase.Instance.Food[(int)dogfoodType].CurrentAmount);
     }
 
     public virtual void ChangeBy(int deltaAmount)

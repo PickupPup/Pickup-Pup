@@ -85,6 +85,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     public void FeedDogs(int foodType)
     {
         DogFoodType dogFoodType = (DogFoodType)foodType;
+        Debug.Log("Feeding with " + (DogFoodType)foodType);
         int foodNeeded = calculateDogFoodNeeded();
         if (foodNeeded <= 0)
 		{
@@ -94,6 +95,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 		if(dataController.CanAffordFood(dogFoodType, foodNeeded) && !IsCurrentlyFeeding)
         {
             dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType)foodType);
+            //Find current dogs and give them benefits?
             feedingTimer.Reset();
             feedingTimer.Begin();
             buttonReference.interactable = false;
