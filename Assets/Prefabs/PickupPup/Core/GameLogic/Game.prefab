@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114949839597236378}
   - component: {fileID: 114275943044028512}
   - component: {fileID: 114296599387200532}
+  - component: {fileID: 114768239470947136}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -76,6 +77,8 @@ MonoBehaviour:
   defaultCoinIncrease: 1000
   foodKey: 120
   defaultFoodIncrease: 10
+  adoptAllKey: 118
+  maxAffectionKey: 98
 --- !u!114 &114373966886654488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +121,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 1
   shouldZeroOutSceneLoadingBlockersOnLoadScene: 1
+--- !u!114 &114768239470947136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613778948780182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9e432a87d0a4352b86d093e4cddc46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 1
 --- !u!114 &114949839597236378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preserveOnSceneChange: 1
   alwaysReturnSouvenirFirst: 0
+  alwaysReturnSpecialGift: 0
 --- !u!114 &114966013612004634
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,9 +8,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdsManager : SingletonController<AdsManager>
+public class AdController : SingletonController<AdController>
 {
-
     const string ANDROID_ID = "1347448";
     const string IOS_ID = "1347449";
 
@@ -19,17 +18,15 @@ public class AdsManager : SingletonController<AdsManager>
     #region Static Accessors
 
     // Returns the Instance cast to the sublcass
-    public static AdsManager GetInstance
+    public static AdController GetInstance
     {
         get
         {
-            return Instance as AdsManager;
+            return Instance as AdController;
         }
     }
 
     #endregion
-
-
 
     public void WatchAd()
     {
@@ -67,4 +64,5 @@ public class AdsManager : SingletonController<AdsManager>
 
         });
     }
+
 }

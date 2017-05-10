@@ -6,10 +6,8 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-
-
-using k = PPGlobal;
 using System.Collections;
+using k = PPGlobal;
 
 public class MainMenu : PPUIElement
 {
@@ -153,7 +151,7 @@ public class MainMenu : PPUIElement
 
     public void OnWatchAdClick()
     {
-        AdsManager.GetInstance.WatchAd();
+        AdController.GetInstance.WatchAd();
     }
 
     public void ToggleSingleNavDropdown()
