@@ -11,7 +11,7 @@ public class DogHomeSlot : DogSlot
     bool untrue;
     public override void Init(DogDescriptor dog)
     {
-        Debug.Log(dataController.FedDogs);
+        Debug.Log(dataController.FedDogs.Count);
         if (untrue)
         {
             Debug.Log("Assign New Dog " + dog + " on gb: " + gameObject);

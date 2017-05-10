@@ -88,32 +88,28 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     
     DogFoodType foodToFeed;
-    public void FeedDogs(int foodType)
+    public void FillBowl(int foodType)
     {
         foodToFeed = (DogFoodType)foodType;
         Debug.Log("Feeding with " + (DogFoodType)foodType);
         int foodNeeded = calculateDogFoodNeeded();
-        if (foodNeeded <= 0)
+        if(foodNeeded <= 0)
 		{
 			return;
 		}
 
 		if(dataController.CanAffordFood(foodToFeed, foodNeeded) && !IsCurrentlyFeeding)
         {
-            Debug.Log("!");
             dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType)foodType);
-
-            //Debug.Log("ScoutingDogs Dogs: " + dataController.ScoutingDogs.Count);
-            //Debug.Log("AdoptedDogs Dogs: " + dataController.AdoptedDogs.Count);
 
             // 1. Get all of our dogs
             List<DogDescriptor> scoutingDogs = dataController.ScoutingDogs;
 
             // 2. Remove any scouting dogs (we cannot feed those)
-            for (int i = 0; i < scoutingDogs.Count; i++)
+            for(int i = 0; i < scoutingDogs.Count; i++)
             {
                 DogDescriptor currentDog = scoutingDogs[i];
-                if (dogsToFeed.Contains(currentDog))
+                if(dogsToFeed.Contains(currentDog))
                 {
                     dogsToFeed.Remove(currentDog);
                 }
@@ -131,9 +127,8 @@ public class DogFoodBowl : MonoBehaviourExtended
         }
     }
 
-    public void FeedDogs2()
+    public void DogsEat()
     {
-        Debug.Log(foodToFeed);
         bool  tempFed = true;
         float tempSpGift = 0.1f;
         float tempGiftRate = 1.0f;
@@ -168,7 +163,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             Debug.Log(dogsToFeed[i].Name + " is now fed with " + foodToFeed);
         }
         dataController.FedDogs = dogsToFeed;
-        Debug.Log(dataController.FedDogs);
+        Debug.Log(dataController.FedDogs.Count);
     }
 
 
@@ -185,7 +180,7 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     void handleFeedingTimeUp()
     {
-        FeedDogs2();
+        DogsEat();
         buttonReference.interactable = true;
     }
 
