@@ -183,9 +183,4 @@ public class DogFoodBowl : MonoBehaviourExtended
         DogsEat();
         buttonReference.interactable = true;
     }
-
-    private void Update()
-    {
-        Debug.Log(dataController.FedDogs);
-    }
 }
