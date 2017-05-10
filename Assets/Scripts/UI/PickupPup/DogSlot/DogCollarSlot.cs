@@ -89,12 +89,18 @@ public class DogCollarSlot : DogSlot
 
     public override void Init(DogDescriptor dog)
     {
-        base.Init(dog);
-        nameText.text = dog.Name;
-        if(this.dog)
-        {
-            initDogScouting(this.dog, onResume:false);
-        }
+        Debug.Log("click?");
+        //if (dataController.FedDogs.Contains(dog))
+        //{
+            base.Init(dog);
+            nameText.text = dog.Name;
+            if (this.dog)
+            {
+                initDogScouting(this.dog, onResume: false);
+            }
+
+            //dataController.FedDogs.Remove(dog);
+        //}
     }
 
     public override void Init(Dog dog, bool inScoutingSelectMode)
@@ -105,12 +111,14 @@ public class DogCollarSlot : DogSlot
 
     protected override void handleChangeDog(Dog previousDog)
     {
+        Debug.Log("click?");
         base.handleChangeDog(previousDog);
         unsubscribeFromDogEvents(previousDog);
     }
 
     protected override void callOnOccupiedSlotClick(Dog dog)
     {
+        Debug.Log("click?");
         // Safeguard against opening up tons of copies of the panel
         if(!redeemDisplayIsOpen)
         {
@@ -137,6 +145,7 @@ public class DogCollarSlot : DogSlot
 
     public void ResumeScouting(Dog dog)
     {
+        Debug.Log("click?");
         checkReferences();
         this.dog = dog;
         this.dogInfo = dog.Info;
@@ -197,6 +206,7 @@ public class DogCollarSlot : DogSlot
 
     void initDogScouting(Dog dog, bool onResume)
     {
+        Debug.Log("click?");
         unsubscribeFromDogEvents(dog);
         dog.TrySendToScout();
         subscribeTimerEvents(dog);

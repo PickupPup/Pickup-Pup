@@ -176,9 +176,29 @@ public class DogDescriptor : PPDescriptor
         private set;
     }
 
-	#endregion
+    public bool IsFed
+    {
+        get { return isFed; }
+        set { isFed = value; }
+    }
 
-	bool hasSpecialCost 
+    public float SpGiftChance
+    {
+        get { return spGiftChance; }
+        set { spGiftChance = value; }
+    }
+
+    public float DogGiftRate
+    {
+        get { return dogGiftRate; }
+        set { dogGiftRate = value; }
+    }
+
+
+
+    #endregion
+
+    bool hasSpecialCost 
 	{
 		get 
 		{
@@ -198,8 +218,14 @@ public class DogDescriptor : PPDescriptor
 	int age;
     [SerializeField]
     string[] description;
+    [SerializeField]
+    bool isFed;
+    [SerializeField]
+    float spGiftChance;
+    [SerializeField]
+    float dogGiftRate;
 
-	float _timeRemainingScouting;
+    float _timeRemainingScouting;
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
 	Dog linkedDog;
@@ -215,10 +241,13 @@ public class DogDescriptor : PPDescriptor
 		descriptor.age = 0;
 		descriptor.breed = string.Empty;
 		descriptor.color = BLACK_HEX;
-        descriptor.description = new string[] 
+        descriptor.description = new string[]
             {
                 string.Empty, string.Empty
             };
+        descriptor.isFed = false;
+        descriptor.spGiftChance = .1f;
+        descriptor.dogGiftRate = 1;
         descriptor.EmptyDescriptor = true;
 		return descriptor;
 	}

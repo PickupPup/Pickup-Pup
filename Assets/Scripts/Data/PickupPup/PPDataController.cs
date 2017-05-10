@@ -59,6 +59,14 @@ public class PPDataController : DataController, ICurrencySystem
 		}
 	}
 
+    public List<DogDescriptor> FedDogs
+    {
+        get
+        {
+            return currentGame.FedDogs;
+        }
+    }
+
     public DogDescriptor[] AvailableDogs
     {
         get
