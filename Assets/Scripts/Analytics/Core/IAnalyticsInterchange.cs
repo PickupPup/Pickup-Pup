@@ -7,5 +7,6 @@
 public interface IAnalyticsInterchange 
 {
 	void SendEvent(AnalyticsEvent targetEvent);
+    void UpdateProperties(PPGameSave gameSave);
 
 }

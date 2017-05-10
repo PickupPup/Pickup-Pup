@@ -13,35 +13,23 @@ using System.Collections;
 
 public class MainMenu : PPUIElement
 {
-    const int STANDARD_DROPDOWN = k.STANDARD_DROPDOWN;
-    const int ALT_SINGLE_DROPDOWN = k.ALT_SINGLE_DROPDOWN;
-
-    [Header("External References")]
+	[Header("External References")]
     [SerializeField]
     DogBrowser dogBrowser;
     [SerializeField]
+    GameObject settingsMenuPrefab;
     SettingsMenu settingsMenu;
 
-    [Header("Internal References")]
-	[SerializeField]
-	GameObject dogDropdown;
-	[SerializeField]
-	GameObject settingsDropdown;
+	[Header("Internal References")]
     [SerializeField]
     PPUIButton dynamicNavButton;
-    [SerializeField]
-    PPUIButton dogsButton;
-    [SerializeField]
-    PPUIButton settingsButton;
 
-    [SerializeField]
-    GameObject altNavPanel;
     [SerializeField]
     Image dynamicNavButtonBackground;
     [SerializeField]
     GameObject singleDropdown;
     [SerializeField]
-    GameObject singledDropdownArrow;
+    GameObject singleDropdownArrow;
 
     [Header("Serialized Sprites")]
     [SerializeField]
@@ -56,8 +44,6 @@ public class MainMenu : PPUIElement
     Sprite allDogsIcon;
     [SerializeField]
     Sprite roundButtonBackground;
-    [SerializeField]
-    Sprite rectButtonBackground;
 
     [Header("Color Palette")]
     [SerializeField]
@@ -66,21 +52,16 @@ public class MainMenu : PPUIElement
     [Header("Tuning Values")]
     [SerializeField]
     Vector3 navButtonRotation = new Vector3(180, 0);
-
-    [Header("Debugging")]
-    [SerializeField]
-    bool setAltSingleDropdownOn;
-
-    int currentNavPanelType = STANDARD_DROPDOWN;
         
     #region MonoBehaviourExtended Overrides
 
     protected override void setReferences()
     {
         base.setReferences();
-        showCorrectNavPanel();
+        dynamicNavButtonBackground.sprite = roundButtonBackground;
+        dynamicNavButtonBackground.color = buttonColor;
         setupDynamicButtons();
-        SettingsUtil.SubscribeToNavPanelChange(showCorrectNavPanel);
+        setupSettingsMenu();
     }
 
     protected override void fetchReferences()
@@ -93,12 +74,6 @@ public class MainMenu : PPUIElement
     {
         base.handleSceneLoaded(scene);
         updateDynamicNavButton(scene);
-    }
-
-    protected override void cleanupReferences()
-    {
-        base.cleanupReferences();
-        SettingsUtil.UnsubscribeFromNavPanelChange(showCorrectNavPanel);
     }
 
     #endregion
@@ -147,8 +122,6 @@ public class MainMenu : PPUIElement
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
             dogBrowser.Open(inScoutingSelectMode:false);
         }
-        ToggleDogDropdown();
-        dogsButton.SetImage(allDogsIcon);
         ToggleSingleNavDropdown();
     }
 
@@ -164,7 +137,6 @@ public class MainMenu : PPUIElement
         {
             EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
         }
-        ToggleSettingsDropdown();
         ToggleSingleNavDropdown();
     }
 
@@ -184,64 +156,21 @@ public class MainMenu : PPUIElement
         AdsManager.GetInstance.WatchAd();
     }
 
-    public void ToggleDogDropdown()
-	{
-		dogDropdown.SetActive(!dogDropdown.activeSelf);
-	}
-
-	public void ToggleSettingsDropdown()
-	{
-		settingsDropdown.SetActive(!settingsDropdown.activeSelf);
-	}
-
     public void ToggleSingleNavDropdown()
     {
         singleDropdown.SetActive(!singleDropdown.activeSelf);
-        singledDropdownArrow.transform.Rotate(navButtonRotation);
+        singleDropdownArrow.transform.Rotate(navButtonRotation);
     }
 
-    void showCorrectNavPanel()
+    void setupSettingsMenu()
     {
-        if(SettingsUtil.NavDropDownType == ALT_SINGLE_DROPDOWN || setAltSingleDropdownOn)
-        {
-            switchToSingleDropdown();
-        }
-        else
-        {
-            switchToStandardNav();
-        }
-    }
-
-    void switchToSingleDropdown()
-    {
-        if(currentNavPanelType != ALT_SINGLE_DROPDOWN)
-        {
-            dynamicNavButtonBackground.sprite = roundButtonBackground;
-            dynamicNavButtonBackground.color = buttonColor;
-            dogsButton.Hide();
-            settingsButton.Hide();
-            altNavPanel.SetActive(true);
-            currentNavPanelType = ALT_SINGLE_DROPDOWN;
-        }
-    }
-     
-    void switchToStandardNav()
-    {
-        if(currentNavPanelType != STANDARD_DROPDOWN)
-        {
-            dynamicNavButtonBackground.sprite = rectButtonBackground;
-            dynamicNavButtonBackground.color = Color.white;
-            dogsButton.Show();
-            settingsButton.Show();
-            altNavPanel.SetActive(false);
-            currentNavPanelType = STANDARD_DROPDOWN;
-        }
+        GameObject settingsMenuObject = (GameObject) Instantiate(settingsMenuPrefab);
+        settingsMenu = settingsMenuObject.GetComponent<SettingsMenu>();
     }
 
     void setupDynamicButtons()            
     {
         dynamicNavButton.SetImageToChild();
-        dogsButton.SetImageToChild();
     }
 
     void updateDynamicNavButton(PPScene currentScene)
@@ -256,10 +185,6 @@ public class MainMenu : PPUIElement
         {
             dynamicNavButton.SubscribeToClick(OnHomeClick);
             dynamicNavButton.SetImage(homeIcon);
-            if(currentScene == PPScene.Shop)
-            {
-                dogsButton.SetImage(shopIcon);
-            }
         }
     }
 

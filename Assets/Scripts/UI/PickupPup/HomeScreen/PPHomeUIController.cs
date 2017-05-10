@@ -3,8 +3,6 @@
  * Description: Controls the Home UI (Living Room and Yard).
  */
 
-using UnityEngine;
-
 public class PPHomeUIController : PPUIController
 {
     DogWorldSlot[] dogWorldSlots;
@@ -36,7 +34,7 @@ public class PPHomeUIController : PPUIController
         base.subscribeEvents();
         foreach(DogWorldSlot dogSlot in dogWorldSlots)
         {
-            dogSlot.SubscribeToNameTagClick(handleDogSlotClicked);
+            dogSlot.SubscribeToNameTagClick(showDogProfile);
         }
     }
 
@@ -45,7 +43,7 @@ public class PPHomeUIController : PPUIController
         base.unsubscribeEvents();
         foreach(DogWorldSlot dogSlot in dogWorldSlots)
         {
-            dogSlot.UnsubscribeFromNameTagClick(handleDogSlotClicked);
+            dogSlot.UnsubscribeFromNameTagClick(showDogProfile);
         }
     }
 

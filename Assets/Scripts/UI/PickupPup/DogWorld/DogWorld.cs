@@ -1,6 +1,6 @@
 ﻿/*
- * Author(s): Isaiah Mann
- * Description: [to be added]
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
+ * Description: Controls placement and selection of dogs in the world.
  * Usage: [no notes]
  */
 
@@ -10,33 +10,69 @@ public class DogWorld : MonoBehaviourExtended
 {	
     [SerializeField]
     PPScene room;
+    [SerializeField]
+    UIButton deselectArea;
 
-    DogWorldSlot[] dogsSlots;
+    DogWorldSlot[] dogSlots;
+    DogWorldSlot selectedDogSlot = null;
 
     #region MonoBehaviourExtended Overrides
-
-    protected override void setReferences()
-    {
-        base.setReferences();
-        dogsSlots = GetComponentsInChildren<DogWorldSlot>();
-    }
 
     protected override void fetchReferences()
     {
         base.fetchReferences();
-        Dog[] dogs = chooseDogs(this.dogsSlots);
+        deselectArea.SubscribeToClick(deselectDogSlot);
+        dogSlots = GetComponentsInChildren<DogWorldSlot>();
+        Dog[] dogs = chooseDogs(dogSlots.Length);
         placeDogs(dogs);
     }
 
+	protected override void subscribeEvents()
+	{
+		base.subscribeEvents();
+		EventController.Subscribe(handlePPDogEvent);
+	}
+
+	protected override void unsubscribeEvents()
+	{
+		base.unsubscribeEvents();
+		EventController.Unsubscribe(handlePPDogEvent);
+	}
+
     #endregion
 
-    Dog[] chooseDogs(DogWorldSlot[] openSpots)
+	void handlePPDogEvent(PPEvent eventType, Dog dog)
+	{
+		switch(eventType)
+		{
+			case PPEvent.DogRedeemedFromScouting:
+				addDogToRoom(dog);
+				break;
+		}
+	}
+
+	bool addDogToRoom(Dog dog)
+	{
+		foreach(DogWorldSlot slot in this.dogSlots)			
+		{
+			if(!slot.HasDog)
+			{
+				slot.Show();
+				slot.Init(dog, inScoutingSelectMode:true);
+				dataController.EnterRoom(dog.Info, room);
+				return true;
+			}
+		}
+		return false;
+	}
+
+    Dog[] chooseDogs(int numOfOpenSpots)
     {
         DogFactory factory = new DogFactory(hideGameObjects:true);
-        Dog[] dogs = new Dog[openSpots.Length];
+        Dog[] dogs = new Dog[numOfOpenSpots];
         DogDescriptor[] inRoom = dataController.DogsInRoom(this.room);
         DogDescriptor[] available = dataController.AvailableDogs;   
-        for(int i = 0; i < openSpots.Length; i++)
+        for(int i = 0; i < numOfOpenSpots; i++)
         {
             int indexInAvailable = i - inRoom.Length;
             if(ArrayUtil.InRange(inRoom, i))
@@ -59,21 +95,40 @@ public class DogWorld : MonoBehaviourExtended
 
     void placeDogs(Dog[] dogs)
     {
-        for(int i = 0; i < this.dogsSlots.Length && i < dogs.Length; i++)
+        for(int i = 0; i < dogSlots.Length && i < dogs.Length; i++)
         {
-            if(dogs[i].Info.EmptyDescriptor)
+            Dog currentDog = dogs[i];
+            DogSlot currentSlot = dogSlots[i];
+
+            if(currentDog.Info.EmptyDescriptor)
             {
-                this.dogsSlots[i].Hide();
+                currentSlot.Hide();
             }
             else
             {
-                this.dogsSlots[i].Init(dogs[i], inScoutingSelectMode:true);
-                if(dogs[i].IsScouting)
+                currentSlot.Init(currentDog, inScoutingSelectMode:true);
+                currentSlot.SubscribeToClickWhenOccupied(selectDogSlot);
+                if(currentDog.IsScouting)
                 {
-                    this.dogsSlots[i].Hide();
+                    currentSlot.Hide();
                 }
             }
         }
+    }
+
+    void selectDogSlot(Dog dog)
+    {
+        if(selectedDogSlot && !selectedDogSlot.Equals(dog.OccupiedSlot))
+        {
+            deselectDogSlot();
+        }
+        selectedDogSlot = (DogWorldSlot) dog.OccupiedSlot;
+    }
+
+    void deselectDogSlot()
+    {
+        selectedDogSlot.Deselect();
+        selectedDogSlot = null;
     }
 
 }

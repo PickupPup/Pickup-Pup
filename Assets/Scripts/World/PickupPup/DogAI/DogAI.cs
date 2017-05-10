@@ -27,6 +27,7 @@ public class DogAI : MonoBehaviourExtended
 
     int tapCount = 0;
 
+	IEnumerator currentDecisionRoutine;
     IEnumerator currentStateRoutine;
 
     bool isActive = true;
@@ -62,10 +63,20 @@ public class DogAI : MonoBehaviourExtended
     }
 
     #endregion
-	
+
+	public void RestartDecisionRoutine()
+	{
+		setupDecisionRoutine();
+	}
+
     void setupDecisionRoutine()
     {
-        StartCoroutine(decideState());
+		if(currentDecisionRoutine != null)
+		{
+			StopCoroutine(currentDecisionRoutine);
+		}
+		currentDecisionRoutine = decideState();
+		StartCoroutine(currentDecisionRoutine);
     }
 
     DogState chooseRandomState()
@@ -119,7 +130,7 @@ public class DogAI : MonoBehaviourExtended
             if (target == GetComponent<RectTransform>().anchoredPosition)
             {
                 float cTheta = UnityEngine.Random.Range(0, 2 * Mathf.PI);
-                float cRadius = Screen.width / 2 * Mathf.Sqrt(UnityEngine.Random.Range(0f, 1f));
+                float cRadius = Screen.width / 4 * Mathf.Sqrt(UnityEngine.Random.Range(0f, 1f));
                 float x = cRadius * Mathf.Cos(cTheta);
                 float y = cRadius * Mathf.Sin(cTheta);
                 target = new Vector2(x, y) + wanderCenter;

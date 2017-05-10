@@ -15,8 +15,11 @@ public abstract class SerializableData
 	protected const string DAILY_GIFT_COUNTDOWN = k.DAILY_GIFT_COUNTDOWN;
 	protected const string HAS_GIFT_TO_REDEEM = k.HAS_GIFT_TO_REDEEM;
     protected const string WORLD = k.WORLD;
+    protected const string TIME_PLAYED = k.TIME_PLAYED;
+    protected const string SESSION_COUNT = k.SESSION_COUNT;
 
     protected const int NONE_VALUE = k.NONE_VALUE;
+    protected const int SINGLE_VALUE = k.SINGLE_VALUE;
 
 	const float FULL_PERCENT = k.FULL_PERCENT;
 

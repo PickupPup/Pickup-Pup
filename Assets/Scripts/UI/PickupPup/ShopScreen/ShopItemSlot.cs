@@ -74,7 +74,15 @@ public class ShopItemSlot : PPUIElement
 
     public void Buy()
     {
-        gameController.TryBuyItem(item);
+        if(gameController.TryBuyItem(item))
+        {
+            analytics.SendEvent(
+                new CurrencyAnalyticsEvent(
+                    CurrencyAnalyticsEvent.SHOP_PURCHASE,
+                    new CurrencyFactory().Create(
+                        item.ValueCurrencyType,
+                        item.Value)));
+        }
     }
 
     void tryToggle(int amount)

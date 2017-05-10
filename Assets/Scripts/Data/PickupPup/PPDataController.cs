@@ -133,6 +133,12 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
+    public int TimesDogFoodRefilled
+    {
+        get;
+        private set;
+    }
+        
     #endregion
 
 	#endregion
@@ -159,7 +165,7 @@ public class PPDataController : DataController, ICurrencySystem
 	bool saveOnApplicationQuit;
 
     PPGameSave currentGame;
-	
+
     // For use for event subscriptions which occur before load is complete
     Dictionary<CurrencyType, Queue<MonoActionInt>> currencyChangeDelegateBuffers = new Dictionary<CurrencyType, Queue<MonoActionInt>>();
 
@@ -200,6 +206,10 @@ public class PPDataController : DataController, ICurrencySystem
 
 	protected override void handleGameTogglePause(bool isPaused)
 	{
+        if(isPaused)
+        {
+            analytics.SendEvent(new PlaySessionEvent(this));
+        }
 		// Avoids saving twice in the same call on iOS: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnApplicationPause.html
 		#if UNITY_IOS
 		if(saveOnApplicationPause && !saveOnApplicationQuit)
@@ -337,6 +347,11 @@ public class PPDataController : DataController, ICurrencySystem
     {
         return HasCurrency(type);
     }
+     
+    public void RefillDogFood()
+    {
+        TimesDogFoodRefilled++;
+    }
 
     #endregion
 
@@ -370,6 +385,11 @@ public class PPDataController : DataController, ICurrencySystem
     public void NotifyHasGiftToRedeem()
     {
         currentGame.NotifyHasGiftToRedeem();
+    }
+
+    public void UpdateAnalyticsProperties(IAnalyticsInterchange analytics)
+    {
+        analytics.UpdateProperties(this.currentGame);
     }
 
     void bufferChangeCurrencyDelegate(CurrencyType type, MonoActionInt callback)
