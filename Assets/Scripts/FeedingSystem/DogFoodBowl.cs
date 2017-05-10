@@ -168,6 +168,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             Debug.Log(dogsToFeed[i].Name + " is now fed with " + foodToFeed);
         }
         dataController.FedDogs = dogsToFeed;
+        Debug.Log(dataController.FedDogs);
     }
 
 
@@ -186,5 +187,10 @@ public class DogFoodBowl : MonoBehaviourExtended
     {
         FeedDogs2();
         buttonReference.interactable = true;
+    }
+
+    private void Update()
+    {
+        Debug.Log(dataController.FedDogs);
     }
 }

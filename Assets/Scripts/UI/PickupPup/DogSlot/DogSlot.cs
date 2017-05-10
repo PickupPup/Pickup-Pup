@@ -52,6 +52,7 @@ public class DogSlot : PPUIElement
 		}
 		set
 		{
+
             // A chance to handle any cleanup
             if(_dog != null)
             {
@@ -127,6 +128,7 @@ public class DogSlot : PPUIElement
     // Initializes this Dog Slot by setting component references and displaying its sprites.
     public virtual void Init(DogDescriptor dog)
     {
+        Debug.Log("Assign New Dog " + dog + " on gb: " + gameObject);
         this.dogInfo = dog;
 		setSlot(this.dogInfo);
         if(this.dogInfo.IsLinkedToDog)
@@ -189,6 +191,7 @@ public class DogSlot : PPUIElement
 
 	public void SubscribeToClickWhenFree(MonoAction clickAction)
 	{
+        Debug.Log("subscribeToClickWhenFree");
 		onFreeSlotClick += clickAction;
 	}
 
@@ -274,7 +277,7 @@ public class DogSlot : PPUIElement
     }
 
     // Sets the dog and background sprites of this Dog Slot.
-	void setSlot(DogDescriptor dog, Sprite backgroundSprite = null)
+	public void setSlot(DogDescriptor dog, Sprite backgroundSprite = null)
     {      
         setSprite(dog);
         enable(true);

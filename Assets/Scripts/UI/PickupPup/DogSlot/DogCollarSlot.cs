@@ -89,7 +89,6 @@ public class DogCollarSlot : DogSlot
 
     public override void Init(DogDescriptor dog)
     {
-        Debug.Log("click?");
         //if (dataController.FedDogs.Contains(dog))
         //{
             base.Init(dog);
@@ -111,7 +110,6 @@ public class DogCollarSlot : DogSlot
 
     protected override void handleChangeDog(Dog previousDog)
     {
-        Debug.Log("click?");
         base.handleChangeDog(previousDog);
         unsubscribeFromDogEvents(previousDog);
     }
@@ -145,7 +143,6 @@ public class DogCollarSlot : DogSlot
 
     public void ResumeScouting(Dog dog)
     {
-        Debug.Log("click?");
         checkReferences();
         this.dog = dog;
         this.dogInfo = dog.Info;
@@ -206,7 +203,6 @@ public class DogCollarSlot : DogSlot
 
     void initDogScouting(Dog dog, bool onResume)
     {
-        Debug.Log("click?");
         unsubscribeFromDogEvents(dog);
         dog.TrySendToScout();
         subscribeTimerEvents(dog);

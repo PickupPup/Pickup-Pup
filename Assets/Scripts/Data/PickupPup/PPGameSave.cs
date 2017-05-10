@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class PPGameSave : GameSave, ISerializable
@@ -74,6 +75,8 @@ public class PPGameSave : GameSave, ISerializable
         this.WorldDogs = new Dictionary<PPScene, List<DogDescriptor>>();
         this.Currencies = currencies;
         this.HasGiftToRedeem = hasGiftToRedeem;
+        this.FedDogs = new List<DogDescriptor>();
+        Debug.Log("new fedDogs!");
 	}
 
 	#region ISerializable Interface 
