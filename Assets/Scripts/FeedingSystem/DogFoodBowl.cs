@@ -127,6 +127,8 @@ public class DogFoodBowl : MonoBehaviourExtended
         }
     }
 
+    // This is pretty hard coded, but changing the DogFoodType to a different data type as Isaiah
+    // suggested could help take care of this. Otherwise, a json could be used to load values.
     public void DogsEat()
     {
         bool  tempFed = true;
