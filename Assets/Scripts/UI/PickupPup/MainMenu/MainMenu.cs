@@ -6,7 +6,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+
 
 using k = PPGlobal;
 using System.Collections;
@@ -16,16 +16,13 @@ public class MainMenu : PPUIElement
     const int STANDARD_DROPDOWN = k.STANDARD_DROPDOWN;
     const int ALT_SINGLE_DROPDOWN = k.ALT_SINGLE_DROPDOWN;
 
-    const string ANDROID_ID = "1347448";
-    const string IOS_ID = "1347449";
-
     [Header("External References")]
     [SerializeField]
     DogBrowser dogBrowser;
     [SerializeField]
     SettingsMenu settingsMenu;
 
-	[Header("Internal References")]
+    [Header("Internal References")]
 	[SerializeField]
 	GameObject dogDropdown;
 	[SerializeField]
@@ -184,44 +181,7 @@ public class MainMenu : PPUIElement
 
     public void OnWatchAdClick()
     {
-
-        #if UNITY_IOS
-                Advertisement.Initialize(IOS_ID, true);
-        #endif
-
-        #if UNITY_ANDROID
-                Advertisement.Initialize(ANDROID_ID, true);
-        #endif
-
-        StartCoroutine(ShowAdWhenReady());
-    }
-
-    IEnumerator ShowAdWhenReady()
-    {
-        while (!Advertisement.IsReady("rewardedVideo"))
-            yield return null;
-
-        Advertisement.Show("rewardedVideo", new ShowOptions()
-        {
-            resultCallback = result =>
-            {
-                switch (result)
-                {
-                    case ShowResult.Finished:
-                        Debug.Log("Advertisement Finish");
-                        break;
-                    case ShowResult.Failed:
-                        Debug.Log("Advertisement Failed");
-                        break;
-                    case ShowResult.Skipped:
-                        Debug.Log("Advertisement Skipped");
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-        });
+        AdsManager.GetInstance.WatchAd();
     }
 
     public void ToggleDogDropdown()
