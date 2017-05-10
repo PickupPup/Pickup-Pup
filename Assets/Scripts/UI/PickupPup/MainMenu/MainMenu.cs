@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page
+ * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page, Timothy Ng
  * Description: Controls the behaviour of the main menu in Pickup Pup
  * Usage: [no notes]
  */

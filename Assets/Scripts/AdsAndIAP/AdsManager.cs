@@ -1,9 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+ * Authors: Timothy Ng
+ * Description: Controls the logic behind ads
+ * Usage: [no notes]
+ */
+
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdsManager : SingletonController<AdsManager> {
+public class AdsManager : SingletonController<AdsManager>
+{
+
+    const string ANDROID_ID = "1347448";
+    const string IOS_ID = "1347449";
+
+    const string AD_TYPE = "rewardedVideo";
 
     #region Static Accessors
 
@@ -18,10 +29,7 @@ public class AdsManager : SingletonController<AdsManager> {
 
     #endregion
 
-    const string ANDROID_ID = "1347448";
-    const string IOS_ID = "1347449";
 
-    const string adType = "rewardedVideo";
 
     public void WatchAd()
     {
@@ -42,25 +50,17 @@ public class AdsManager : SingletonController<AdsManager> {
 
     IEnumerator ShowAdWhenReady()
     {
-        while (!Advertisement.IsReady(adType))
+        while (!Advertisement.IsReady(AD_TYPE))
             yield return null;
 
-        Advertisement.Show(adType, new ShowOptions()
+        Advertisement.Show(AD_TYPE, new ShowOptions()
         {
             resultCallback = result =>
             {
                 switch (result)
                 {
-                    case ShowResult.Finished:
-                        Debug.Log("Advertisement Finish, reward player");
-                        break;
                     case ShowResult.Failed:
                         Debug.LogError("Advertisement Failed");
-                        break;
-                    case ShowResult.Skipped:
-                        Debug.Log("Advertisement Skipped, Do not reward player");
-                        break;
-                    default:
                         break;
                 }
             }
