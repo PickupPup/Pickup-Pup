@@ -65,6 +65,10 @@ public class PPDataController : DataController, ICurrencySystem
         {
             return currentGame.FedDogs;
         }
+        set
+        {
+            currentGame.FedDogs = value;
+        }
     }
 
     public DogDescriptor[] AvailableDogs

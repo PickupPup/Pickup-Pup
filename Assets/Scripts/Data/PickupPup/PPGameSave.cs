@@ -27,7 +27,7 @@ public class PPGameSave : GameSave, ISerializable
     public List<DogDescriptor> FedDogs
     {
         get;
-        private set;
+        set;
     }
 
     // Dogs that are neither already in the world or scouting

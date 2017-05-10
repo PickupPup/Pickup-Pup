@@ -167,6 +167,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             dogsToFeed[i].DogGiftRate = tempGiftRate;
             Debug.Log(dogsToFeed[i].Name + " is now fed with " + foodToFeed);
         }
+        dataController.FedDogs = dogsToFeed;
     }
 
 
