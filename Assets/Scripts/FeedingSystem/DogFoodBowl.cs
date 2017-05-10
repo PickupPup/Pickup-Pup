@@ -102,10 +102,11 @@ public class DogFoodBowl : MonoBehaviourExtended
         {
             dataController.ChangeFood(-calculateDogFoodNeeded(), (DogFoodType)foodType);
 
-            // 1. Get all of our dogs
-            List<DogDescriptor> scoutingDogs = dataController.ScoutingDogs;
+            // Instead of removing dataController.ScoutingDogs from  dogsToFeed, 
+            // we could probably just utilize dataController.DogsInRoom(PPScene.Home)
 
-            // 2. Remove any scouting dogs (we cannot feed those)
+            List<DogDescriptor> scoutingDogs = dataController.ScoutingDogs;
+            // Remove any scouting dogs (we cannot feed those)
             for(int i = 0; i < scoutingDogs.Count; i++)
             {
                 DogDescriptor currentDog = scoutingDogs[i];
@@ -114,7 +115,10 @@ public class DogFoodBowl : MonoBehaviourExtended
                     dogsToFeed.Remove(currentDog);
                 }
             }
-            Debug.Log(dogsToFeed + " " + foodToFeed);
+
+            // At this point, dogsToFeed should have all the dogs we are currently feeding.
+            // After the timer runs out and the bowl empties, DogsEat() gets called below.
+
 
             feedingTimer.Reset();
             feedingTimer.Begin();
@@ -128,7 +132,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     }
 
     // This is pretty hard coded, but changing the DogFoodType to a different data type as Isaiah
-    // suggested could help take care of this. Otherwise, a json could be used to load values.
+    // suggested could help take care of this. Otherwise, a json could be used to load the values.
     public void DogsEat()
     {
         bool  tempFed = true;
@@ -164,6 +168,8 @@ public class DogFoodBowl : MonoBehaviourExtended
             dogsToFeed[i].DogGiftRate = tempGiftRate;
             Debug.Log(dogsToFeed[i].Name + " is now fed with " + foodToFeed);
         }
+        
+        // At this point, dataController.FedDogs is set to the dogs we are feeding with their appropriate modded values.
         dataController.FedDogs = dogsToFeed;
         Debug.Log("dataController.FedDogs is not null here:  " + dataController.FedDogs);
     }
