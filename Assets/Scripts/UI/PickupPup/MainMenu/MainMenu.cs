@@ -1,12 +1,12 @@
 ﻿/*
- * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page
+ * Authors: Isaiah Mann, Grace Barrett-Snyder, Ben Page, Timothy Ng
  * Description: Controls the behaviour of the main menu in Pickup Pup
  * Usage: [no notes]
  */
 
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Collections;
 using k = PPGlobal;
 
 public class MainMenu : PPUIElement
@@ -151,8 +151,7 @@ public class MainMenu : PPUIElement
 
     public void OnWatchAdClick()
     {
-        // Disabled
-        EventController.Event(k.GetPlayEvent(k.EMPTY));
+        AdController.GetInstance.WatchAd();
     }
 
     public void ToggleSingleNavDropdown()
