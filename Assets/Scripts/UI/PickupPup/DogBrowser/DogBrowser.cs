@@ -183,7 +183,6 @@ public class DogBrowser : PPUIElement, IPageable
 		
 	public void SubscribeToDogClick(PPData.DogAction dogClickAction)
 	{
-        Debug.Log("subscribetodogclick");
 		buttonController.SubscribeToDogClick(dogClickAction);
 	}
 

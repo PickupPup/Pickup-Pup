@@ -163,7 +163,7 @@ public class DogFoodBowl : MonoBehaviourExtended
             Debug.Log(dogsToFeed[i].Name + " is now fed with " + foodToFeed);
         }
         dataController.FedDogs = dogsToFeed;
-        Debug.Log(dataController.FedDogs.Count);
+        Debug.Log("dataController.FedDogs is not null here:  " + dataController.FedDogs);
     }
 
 
