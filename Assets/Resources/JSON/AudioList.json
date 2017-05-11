@@ -222,6 +222,36 @@
       "type" : "SFX",
       "channel" : 1,
       "volume" : 100
+    },
+    {
+      "name" : "Eating",
+      "groups" : [
+      ],
+      "events" : [
+        "PlayEating"
+      ],
+      "stopEvents" : [
+        "StopEating"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 3,
+      "volume" : 100
+    },
+    {
+      "name" : "Pet",
+      "groups" : [
+      ],
+      "events" : [
+        "PlayPet"
+      ],
+      "stopEvents" : [
+        "StopPet"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 3,
+      "volume" : 100
     }
   ],
   "groups" : [
