@@ -111,6 +111,7 @@ public class DogFoodBowl : MonoBehaviourExtended
     void handleFeedingTimeUp()
     {
         buttonReference.interactable = true;
+        EventController.Event(k.GetPlayEvent(k.EAT_FOOD));
     }
 
 }

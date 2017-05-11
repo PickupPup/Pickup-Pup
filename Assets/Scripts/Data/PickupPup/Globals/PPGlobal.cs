@@ -69,6 +69,8 @@ public class PPGlobal : Global
     public const string MAIN_MUSIC = "MainMusic";
     public const string CHANGE_SCENE = "ChangeScene";
     public const string ADD_FOOD = "AddFood";
+    public const string EAT_FOOD = "Eating";
+    public const string PET = "Pet";
 
     public static string GetPlayEvent(string id)
     {

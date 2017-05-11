@@ -154,13 +154,17 @@ public class DogAI : MonoBehaviourExtended
 		if(dog)
 		{
 	        tapCount++;
-	        if(tapCount >= tapToHeart)
-	        {
-	            tapCount = 0;
-	            dog.IncreaseAffection();
-	        }
-	        dog.Bark();
-		}
+            if(tapCount >= tapToHeart)
+            {
+                tapCount = 0;
+                dog.IncreaseAffection();
+                dog.Bark();
+            }
+            else
+            {
+                EventController.Event(k.GetPlayEvent(k.PET));
+            }
+        }
     }
         
 }
