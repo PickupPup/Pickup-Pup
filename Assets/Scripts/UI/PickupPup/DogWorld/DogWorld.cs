@@ -129,8 +129,8 @@ public class DogWorld : MonoBehaviourExtended
     {
 		if(selectedDogSlot)
 		{
-	        selectedDogSlot.Deselect();
-	        selectedDogSlot = null;
+			selectedDogSlot.Deselect();
+			selectedDogSlot = null;
 		}
     }
 
