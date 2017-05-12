@@ -41,7 +41,8 @@ public class PPGlobal : Global
     public const string PLAY_TIME = "Session Play Time";
     public const string FEED_COUNT = "Feed Count";
     public const string ADOPTED_DOGS_COUNT = "Adopted Dogs Count";
-
+	public const string DEFAULT_FOOD_TYPE = "Regular";
+	public const string DEFAULT_FOOD_SPRITE = "WhiteBowl_Empty";
     public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;
     public const float DEFAULT_DISCOUNT_DECIMAL = 0.25f;

@@ -64,6 +64,18 @@ public class DogFoodData : CurrencyData
 		}
 	}
 
+	#region CurrencyData Overrides
+
+	public override Sprite Icon
+	{
+		get
+		{
+			return FoodDatabase.DefaultSprite;
+		}
+	}
+
+	#endregion
+
 	#endregion
 
 	[SerializeField]
@@ -86,16 +98,18 @@ public class DogFoodData : CurrencyData
         amount = initialAmount;
     }
 
-    #region CurrencyData Overrides
+	public static DogFoodData Default()
+	{
+		DogFoodData defaultFood = new DogFoodData(k.NONE_VALUE);
+		defaultFood.foodType = k.DEFAULT_FOOD_TYPE;
+		defaultFood.amountMod = k.NONE_VALUE;
+		defaultFood.specialGiftMod = k.NONE_VALUE;
+		defaultFood.colorHex = string.Format("#{0}", ColorUtility.ToHtmlStringRGB(Color.white));
+		defaultFood.color = Color.white.ToString();
+		return defaultFood;
+	}
 
-    // TODO: Finish this when the currency icons are imported
-    public override Sprite Icon
-    {
-        get
-        {
-			return Resources.Load<Sprite>(Path.Combine(k.SPRITES_DIR, k.DOG_FOOD_ICON));
-        }
-    }
+	#region CurrencyData Overrides
 
 	public override void Give()
 	{

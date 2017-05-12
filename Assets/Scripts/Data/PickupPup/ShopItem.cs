@@ -80,7 +80,7 @@ public class ShopItem : PPData
             return valueCurrencyType;
         }
     }
-
+		
     public Sprite Icon
     {
         get
@@ -109,6 +109,8 @@ public class ShopItem : PPData
             return _spritesheetDatabase;
         }
     }
+
+	CurrencyData currency;
 
     [SerializeField]
     int cost;
