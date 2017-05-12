@@ -32,6 +32,7 @@ public class PPGlobal : Global
     public const string NAV_DROPDOWN = "NavDropdown";
     public const string WORLD = "World";
     public const string SOUVENIRS = "Souvenirs";
+	public const string FOOD = "Food";
     public const string UI_SPRITESHEET = "ui_spritesheet";
 	public const string DOG_VOUCHER_MESSAGE = "DogVoucherMessage";
     public const string BREED = "Breed";

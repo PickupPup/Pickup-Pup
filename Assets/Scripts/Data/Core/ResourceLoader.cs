@@ -29,6 +29,7 @@ public class ResourceLoader
 	protected const string KEY = k.KEY;
     protected const string SOUVENIRS = k.SOUVENIRS;
     protected const string GIFTS = k.GIFTS_DIR;
+	protected const string FOOD = k.FOOD;
 
 	protected const char JOIN_CHAR = k.JOIN_CHAR;
 
