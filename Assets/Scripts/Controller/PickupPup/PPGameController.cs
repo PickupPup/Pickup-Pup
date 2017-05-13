@@ -385,12 +385,13 @@ public class PPGameController : GameController, ICurrencySystem
 		return data;
 	}
 
-    public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
+    public bool TryBuyItem(int amount, CurrencyType valueCurrencyType,
         int cost, CurrencyType costCurrencyType)
     {
-        if(CanAfford(costCurrencyType, cost))
+		int total = cost * amount;
+		if(CanAfford(costCurrencyType, total))
         {   
-            buyItem(value, valueCurrencyType, cost, costCurrencyType);
+			buyItem(amount, valueCurrencyType, total, costCurrencyType);
             return true;
         }
         else 
@@ -400,9 +401,9 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-    public bool TryBuyItem(ShopItem item)
+	public bool TryBuyItem(ShopItem item, int amount)
     {
-		return TryBuyItem(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
+		return TryBuyItem(amount, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
     }
 
     void buyItem(int value, CurrencyType valueCurrencyType,

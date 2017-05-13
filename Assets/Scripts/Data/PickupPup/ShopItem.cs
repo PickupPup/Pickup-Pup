@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System;
+using k = PPGlobal;
 
 [Serializable]
 public class ShopItem : PPData
@@ -38,22 +39,6 @@ public class ShopItem : PPData
         get
         {
             return PPData.FormatCost(cost);
-        }
-    }
-
-    public int Value
-    {
-        get
-        {
-            return value;
-        }
-    }
-
-    public string ValueStr
-    {
-        get
-        {
-            return PPData.FormatCost(value);
         }
     }
 
@@ -144,8 +129,6 @@ public class ShopItem : PPData
     [SerializeField]
     int cost;
     [SerializeField]
-    int value;
-    [SerializeField]
     string itemName;
     [SerializeField]
 	string costCurrencyType;
@@ -161,14 +144,12 @@ public class ShopItem : PPData
 
     public ShopItem(
         string itemName,
-        int value,
 		string valueCurrencyType,
         int cost, 
 		string costCurrencyType
         )
     {
         this.itemName = itemName;
-        this.value = value;
         this.valueCurrencyType = valueCurrencyType;
         this.cost = cost;
         this.costCurrencyType = costCurrencyType;       
@@ -184,13 +165,18 @@ public class ShopItem : PPData
 		if(ValueCurrencyType == CurrencyType.DogFood)
 		{
 			currency = FoodDatabase.GetInstance.Get(valueCurrencySubtype).Copy();
-			int difference = this.value - currency.Amount;
+			int difference = k.SINGLE_VALUE - currency.Amount;
 			currency.ChangeBy(difference);
 		}
 		else
 		{
 			throw new System.NotImplementedException();
 		}
+	}
+
+	public int GetTotalCost(int amount)
+	{
+		return this.Cost * amount;
 	}
 
 }

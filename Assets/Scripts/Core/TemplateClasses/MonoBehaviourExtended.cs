@@ -3,11 +3,9 @@
  * Description: Wrapper class to extend the default behaviour of MonoBehaviours
  */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-using System.Collections;
-
 using k = Global;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable , ISubscribable
