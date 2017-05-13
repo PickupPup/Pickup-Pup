@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using m = MonoBehaviourExtended;
+using k = PPGlobal;
 
 [System.Serializable]
 public class CurrencySystem : PPData, ICurrencySystem
@@ -17,8 +18,7 @@ public class CurrencySystem : PPData, ICurrencySystem
         {
 			checkStartingValues();
             return new CurrencySystem(
-				new CoinsData(startingCoins),
-				new DogFoodData(startingDogFood)
+				new CoinsData(startingCoins)
             );
         }
     }
@@ -43,7 +43,7 @@ public class CurrencySystem : PPData, ICurrencySystem
     {
         get
         {
-            return currencies[CurrencyType.DogFood] as DogFoodData;
+			return food.GetFood();
         }
     }
 
@@ -65,6 +65,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 		
 	CurrencyFactory factory;
 	Dictionary<CurrencyType, CurrencyData> currencies;
+	FoodSystem food;
 
 	// Includes refs to MonoBehaviours so it can not be serialized
 	[System.NonSerialized]
@@ -73,26 +74,40 @@ public class CurrencySystem : PPData, ICurrencySystem
     public CurrencySystem(params CurrencyData[] currencies)
     {
         this.currencies = generateCurrencyLookup(currencies);
-		factory = new CurrencyFactory();
+		this.factory = new CurrencyFactory();
+		this.food = new FoodSystem();
+		this.food.SetAmount(startingDogFood);
     }
 
     #region ICurrencySystem Methods
 
     public void ChangeCoins(int deltaCoins)
     {
-        ChangeCurrencyAmount(CurrencyType.Coins, deltaCoins);
+		ChangeCurrencyAmount(new CoinsData(deltaCoins));
     }
 
-    public void ChangeFood(int deltaFood)
+	public void ChangeFood(int deltaFood)
+	{
+		ChangeFood(deltaFood, k.DEFAULT_FOOD_TYPE);
+	}
+
+	public void ChangeFood(int deltaFood, string type)
     {
-        ChangeCurrencyAmount(CurrencyType.DogFood, deltaFood);
+		food.ChangeBy(deltaFood, type);
     }
-   
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+
+	public void ChangeCurrencyAmount(CurrencyData currency)
     {
-		CurrencyData existingCurrency = getCurrency(type);
-		existingCurrency.ChangeBy(deltaAmount);
-		tryCallCurrencyChangeEvent(type);
+		if(isDogFood(currency))
+		{
+			ChangeFood(currency.Amount, (currency as DogFoodData).FoodType);
+		}
+		else
+		{
+			CurrencyData existingCurrency = getCurrency(currency.Type);
+			existingCurrency.ChangeBy(currency.Amount);
+		}
+		tryCallCurrencyChangeEvent(currency.Type);
     }
 
     public void SubscribeToCurrencyChange(CurrencyType type, m.MonoActionInt callback, bool invokeOnSubscribe)
@@ -123,33 +138,26 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	public void GiveCurrency(CurrencyData newCurrency)
 	{
-		ChangeCurrencyAmount(newCurrency.Type, newCurrency.Amount);
+		ChangeCurrencyAmount(newCurrency);
 	}
 		
-    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+	public void ConvertCurrency(CurrencyData taken, CurrencyData given)
     {
-        if (CanAfford(costCurrencyType, cost))
+		if (CanAfford(taken.Type, taken.Amount))
         {
-            ChangeCurrencyAmount(valueCurrencyType, value);
-            ChangeCurrencyAmount(costCurrencyType, -cost);
+			ChangeCurrencyAmount(taken.GetTakeAmount());
+			ChangeCurrencyAmount(given);
         }
         // Otherwise do nothing
     }
 
 	public bool TryTakeCurrency(CurrencyData currencyToTake)
 	{
-		CurrencyData existingCurrency;
-		if(TryGetCurrency(currencyToTake.Type, out existingCurrency))
+		CurrencyData existingCurrency = getCurrency(currencyToTake.Type);
+		if(CanAfford(existingCurrency.Type, currencyToTake.Amount))
 		{
-			if(CanAfford(existingCurrency.Type, currencyToTake.Amount))
-			{
-				ChangeCurrencyAmount(existingCurrency.Type, currencyToTake.Amount);
-				return true;
-			}
-			else 
-			{
-				return false;
-			}
+			ChangeCurrencyAmount(currencyToTake.GetTakeAmount());
+			return true;
 		}
 		else 
 		{
@@ -159,12 +167,26 @@ public class CurrencySystem : PPData, ICurrencySystem
 
     public bool CanAfford(CurrencyType type, int cost)
     {
-        return currencies[type].CanAfford(cost);
+		if(isDogFood(type))
+		{
+			return food.CanAfford(cost);
+		}
+		else
+		{
+        	return currencies[type].CanAfford(cost);
+		}
     }
 
     public bool HasCurrency(CurrencyType type)
     {
-        return currencies.ContainsKey(type);
+		if(isDogFood(type))
+		{
+			return food != null;
+		}
+		else
+		{
+        	return currencies.ContainsKey(type);
+		}
     }
 
 	#region ISubscribeable Interface // This method is also in the ICurrencySystem method (for polymorphism's sake)
@@ -181,14 +203,31 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	CurrencyData getCurrency(CurrencyType type)
 	{
-		CurrencyData currency;
-		if(!currencies.TryGetValue(type, out currency))
+		if(isDogFood(type))
 		{
-			currency = factory.Create(type.ToString(), DEFAULT_CURRENCY_AMOUNT, DEFAULT_DISCOUNT);
+			return DogFood;
 		}
-		return currency;
+		else
+		{
+			CurrencyData currency;
+			if(!currencies.TryGetValue(type, out currency))
+			{
+				currency = factory.Create(type.ToString(), DEFAULT_CURRENCY_AMOUNT, DEFAULT_DISCOUNT);
+			}
+			return currency;
+		}
 	}
-		
+
+	bool isDogFood(CurrencyData currency)
+	{
+		return currency is DogFoodData;
+	}
+
+	bool isDogFood(CurrencyType type)
+	{
+		return type == CurrencyType.DogFood;
+	}
+
 	bool tryCallCurrencyChangeEvent(CurrencyType type)
 	{
 		CurrencyData currency = getCurrency(type);
@@ -212,19 +251,7 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	void updateCurrencyChangeHandler(CurrencyType type, m.MonoActionInt handler)
 	{
-		if(currencyChangeCallbacks.ContainsKey(type))
-		{
-			currencyChangeCallbacks[type] = handler;
-		}
-		else 
-		{
-			currencyChangeCallbacks.Add(type, handler);
-		}
-	}
-
-	public bool TryGetCurrency(CurrencyType type, out CurrencyData data)
-	{
-		return currencies.TryGetValue(type, out data);
+		currencyChangeCallbacks[type] = handler;
 	}
 
 	m.MonoActionInt getCurrencyChangeEventDelegate(CurrencyType type)
@@ -239,7 +266,14 @@ public class CurrencySystem : PPData, ICurrencySystem
 
 	void addNewCurrency(CurrencyData currency)
 	{
-		currencies.Add(currency.Type, currency);
+		if(isDogFood(currency))
+		{	
+			food.AddFood(currency as DogFoodData);
+		}
+		else
+		{
+			currencies.Add(currency.Type, currency);
+		}
 		addNewCurrencyToCallback(currency);
 	}
 

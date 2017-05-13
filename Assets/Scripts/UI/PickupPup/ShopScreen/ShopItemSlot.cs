@@ -64,7 +64,7 @@ public class ShopItemSlot : PPUIElement
         {
             nameText.text = item.ItemName;
         }
-        priceTag.Set(item.Cost);
+        priceTag.Set(item.CostAmount);
         priceTag.ShowPurchasable();
         itemImage.sprite = item.Icon;
 		itemImage.color = item.IconColor;

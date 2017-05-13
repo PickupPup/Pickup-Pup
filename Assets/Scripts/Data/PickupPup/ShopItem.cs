@@ -26,7 +26,23 @@ public class ShopItem : PPData
 
     #region Instance Accessors
 
-    public int Cost
+	public CurrencyData Cost
+	{
+		get
+		{
+			return new CurrencyFactory().Create(CostCurrencyType, CostAmount);
+		}
+	}
+
+	public CurrencyData Value
+	{
+		get
+		{
+			return currency;
+		}
+	}
+
+    public int CostAmount
     {
         get
         {
@@ -176,7 +192,7 @@ public class ShopItem : PPData
 
 	public int GetTotalCost(int amount)
 	{
-		return this.Cost * amount;
+		return this.CostAmount * amount;
 	}
 
 }

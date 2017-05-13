@@ -298,9 +298,9 @@ public class PPDataController : DataController, ICurrencySystem
 		SaveGame();
 	}
 
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+	public void ChangeCurrencyAmount(CurrencyData currency)
     {
-        currencies.ChangeCurrencyAmount(type, deltaAmount);
+		currencies.ChangeCurrencyAmount(currency);
     }
 
 	public void GiveCurrency(CurrencyData currency)
@@ -308,9 +308,9 @@ public class PPDataController : DataController, ICurrencySystem
 		currencies.GiveCurrency(currency);
 	}
 
-    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+	public void ConvertCurrency(CurrencyData taken, CurrencyData given)
     {
-        currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+		currencies.ConvertCurrency(taken, given);
     }
 
 	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)

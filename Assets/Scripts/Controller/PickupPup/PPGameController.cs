@@ -321,14 +321,14 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController.ChangeFood(deltaFood);
 	}
 
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+	public void ChangeCurrencyAmount(CurrencyData currency)
     {
-        dataController.ChangeCurrencyAmount(type, deltaAmount);
+		dataController.ChangeCurrencyAmount(currency);
     }
 
-    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+	public void ConvertCurrency(CurrencyData taken, CurrencyData given)
     {
-        dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+		dataController.ConvertCurrency(taken, given);
     }
 
 	public void SetTargetSlot(DogSlot slot)
@@ -385,13 +385,11 @@ public class PPGameController : GameController, ICurrencySystem
 		return data;
 	}
 
-    public bool TryBuyItem(int amount, CurrencyType valueCurrencyType,
-        int cost, CurrencyType costCurrencyType)
+	public bool TryBuyItem(ShopItem item, int amount)
     {
-		int total = cost * amount;
-		if(CanAfford(costCurrencyType, total))
+		if(CanAfford(item.CostCurrencyType, item.GetTotalCost(amount)))
         {   
-			buyItem(amount, valueCurrencyType, total, costCurrencyType);
+			buyItem(item, amount);
             return true;
         }
         else 
@@ -401,16 +399,10 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-	public bool TryBuyItem(ShopItem item, int amount)
-    {
-		return TryBuyItem(amount, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
-    }
-
-    void buyItem(int value, CurrencyType valueCurrencyType,
-        int cost, CurrencyType costCurrencyType)
+	void buyItem(ShopItem item, int amount)
     {
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
-        ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+		ConvertCurrency(item.Cost, item.Value);
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
@@ -524,7 +516,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	public void RedeemGift(int value, CurrencyType valueCurrencyType)
     {
-		dataController.ChangeCurrencyAmount(valueCurrencyType, value);
+		dataController.ChangeCurrencyAmount(new CurrencyFactory().Create(valueCurrencyType, value));
     }
 
 	DogDatabase parseDogDatabase() 

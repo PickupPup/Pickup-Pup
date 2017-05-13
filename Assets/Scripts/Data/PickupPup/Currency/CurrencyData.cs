@@ -5,6 +5,7 @@
 
 using System.IO;
 using UnityEngine;
+using k = PPGlobal;
 
 [System.Serializable]
 public abstract class CurrencyData : ResourceLoader
@@ -81,6 +82,13 @@ public abstract class CurrencyData : ResourceLoader
     }
 		
 	public abstract void Give();
+
+	public CurrencyData GetTakeAmount()
+	{
+		CurrencyData currency = Copy<CurrencyData>();
+		currency.amount *= k.INVERT_VALUE;
+		return currency;
+	}
 
     void setup(int initialAmount)
     {
