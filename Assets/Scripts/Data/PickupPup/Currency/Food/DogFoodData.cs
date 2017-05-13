@@ -79,15 +79,15 @@ public class DogFoodData : CurrencyData
 	#endregion
 
 	[SerializeField]
-	string foodType;
+	string foodType = k.DEFAULT_FOOD_TYPE;
 	[SerializeField]
-	float specialGiftMod;
+	float specialGiftMod = k.NONE_VALUE;
 	[SerializeField]
-	float amountMod;
+	float amountMod = k.NONE_VALUE;
 	[SerializeField]
-	string color;
+	string color = k.DEFAULT_FOOD_COLOR;
 	[SerializeField]
-	string colorHex;
+	string colorHex = k.DEFAULT_FOOD_COLOR_HEX;
 
 	[System.NonSerialized]
 	Color _color = Color.white;
@@ -105,8 +105,8 @@ public class DogFoodData : CurrencyData
 		defaultFood.foodType = k.DEFAULT_FOOD_TYPE;
 		defaultFood.amountMod = k.NONE_VALUE;
 		defaultFood.specialGiftMod = k.NONE_VALUE;
-		defaultFood.colorHex = string.Format("#{0}", ColorUtility.ToHtmlStringRGB(Color.white));
-		defaultFood.color = Color.white.ToString();
+		defaultFood.colorHex = k.DEFAULT_FOOD_COLOR_HEX;
+		defaultFood.color = k.DEFAULT_FOOD_COLOR;
 		return defaultFood;
 	}
 
