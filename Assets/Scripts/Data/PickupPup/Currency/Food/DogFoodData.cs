@@ -89,6 +89,7 @@ public class DogFoodData : CurrencyData
 	[SerializeField]
 	string colorHex;
 
+	[System.NonSerialized]
 	Color _color = Color.white;
 	bool colorIsSet = false;
 

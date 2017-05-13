@@ -69,7 +69,7 @@ public class ShopItem : PPData
     {
         get
         {
-            return costCurrencyType;
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), costCurrencyType);
         }
     }
 
@@ -77,7 +77,7 @@ public class ShopItem : PPData
     {
         get
         {
-            return valueCurrencyType;
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), valueCurrencyType);
         }
     }
 		
@@ -85,16 +85,45 @@ public class ShopItem : PPData
     {
         get
         {
-            if(_icon == null)
-            {
-                if(!spritesheetDatabase.TryGetSprite(icon, out _icon))
-                {
-                    _icon = DogDatabase.DefaultSprite;
-                }
-            }
-            return _icon;
+			if(currency == null)
+			{
+	            if(_icon == null)
+	            {
+	                if(!spritesheetDatabase.TryGetSprite(icon, out _icon))
+	                {
+	                    _icon = DogDatabase.DefaultSprite;
+	                }
+	            }
+	            return _icon;
+			}
+			else
+			{
+				return currency.Icon;
+			}
         }
     }
+
+	public Color IconColor
+	{
+		get
+		{
+			if(currency == null)
+			{
+				return Color.white;
+			}
+			else
+			{
+				if(ValueCurrencyType == CurrencyType.DogFood)
+				{
+					return (currency as DogFoodData).Color;
+				}
+				else
+				{
+					return Color.white;
+				}
+			}
+		}
+	}
 
     #endregion
 
@@ -119,20 +148,23 @@ public class ShopItem : PPData
     [SerializeField]
     string itemName;
     [SerializeField]
-    CurrencyType costCurrencyType;
+	string costCurrencyType;
     [SerializeField]
-    CurrencyType valueCurrencyType;
+	string valueCurrencyType;
     [SerializeField]
     string icon;
+	[SerializeField]
+	string valueCurrencySubtype;
+
     Sprite _icon;
     SpritesheetDatabase _spritesheetDatabase;
 
     public ShopItem(
         string itemName,
         int value,
-        CurrencyType valueCurrencyType,
+		string valueCurrencyType,
         int cost, 
-        CurrencyType costCurrencyType
+		string costCurrencyType
         )
     {
         this.itemName = itemName;
@@ -146,5 +178,19 @@ public class ShopItem : PPData
     {
         // NOTHING
     }
+
+	public void SetCurrency()
+	{
+		if(ValueCurrencyType == CurrencyType.DogFood)
+		{
+			currency = FoodDatabase.GetInstance.Get(valueCurrencySubtype).Copy();
+			int difference = this.value - currency.Amount;
+			currency.ChangeBy(difference);
+		}
+		else
+		{
+			throw new System.NotImplementedException();
+		}
+	}
 
 }

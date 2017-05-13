@@ -70,6 +70,7 @@ public class ShopItemSlot : PPUIElement
         priceTag.Set(item.Cost);
         priceTag.ShowPurchasable();
         itemImage.sprite = item.Icon;
+		itemImage.color = item.IconColor;
     }
 
     public void Buy()

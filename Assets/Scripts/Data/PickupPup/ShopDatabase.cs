@@ -43,16 +43,23 @@ public class ShopDatabase : Database<ShopDatabase>
 
     [SerializeField]
     ShopItem[] items;
-	FoodDatabase food;
 
     #region Database Overrides
 
     public override void Initialize()
     {
         AssignInstance(this);
-		food = FoodDatabase.GetInstance;
+		setupShopItems();
     }
 
     #endregion
+
+	void setupShopItems()
+	{
+		foreach(ShopItem item in this.items)
+		{
+			item.SetCurrency();
+		}
+	}
 
 }
