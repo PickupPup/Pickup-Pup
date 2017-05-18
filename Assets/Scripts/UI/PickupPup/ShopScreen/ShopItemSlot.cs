@@ -18,6 +18,7 @@ public class ShopItemSlot : PPUIElement
     PriceTag priceTag;
     Button button;
 
+	ShopAmountSelector amountSelector;
     ShopItem item;
 
 	int amountToBuy = k.SINGLE_VALUE;
@@ -56,10 +57,11 @@ public class ShopItemSlot : PPUIElement
 
     #endregion
 
-    public void Init(ShopItem item)
+	public void Init(ShopItem item, ShopAmountSelector amountSelector)
     {
         subscribeEvents();
         this.item = item;
+		this.amountSelector = amountSelector;
         if (nameText)
         {
             nameText.text = item.ItemName;
@@ -72,15 +74,8 @@ public class ShopItemSlot : PPUIElement
 
     public void Buy()
     {
-		if(gameController.TryBuyItem(item, amountToBuy))
-        {
-            analytics.SendEvent(
-                new CurrencyAnalyticsEvent(
-                    CurrencyAnalyticsEvent.SHOP_PURCHASE,
-                    new CurrencyFactory().Create(
-                        item.ValueCurrencyType,
-						amountToBuy)));
-        }
+		amountSelector.SetItem(item);
+		amountSelector.Show();
     }
 
 	void resetAfterPurchase()

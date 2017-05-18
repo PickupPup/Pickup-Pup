@@ -195,4 +195,17 @@ public class ShopItem : PPData
 		return this.CostAmount * amount;
 	}
 
+	public string GetTotalCostStr(int amount)
+	{
+		return string.Format("${0}", GetTotalCost(amount));
+	}
+
+	public CurrencyData GetPurchase(int amount)
+	{
+		CurrencyData purchase = Value.Copy<CurrencyData>();
+		int difference = amount - purchase.Amount;
+		purchase.ChangeBy(difference);
+		return purchase;
+	}
+
 }

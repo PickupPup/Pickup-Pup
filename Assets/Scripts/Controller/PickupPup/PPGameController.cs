@@ -402,7 +402,7 @@ public class PPGameController : GameController, ICurrencySystem
 	void buyItem(ShopItem item, int amount)
     {
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
-		ConvertCurrency(item.Cost, item.Value);
+		ConvertCurrency(item.Cost, item.GetPurchase(amount));
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
