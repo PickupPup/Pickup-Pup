@@ -25,7 +25,7 @@ public class ShopAmountSelector : PPUIElement
 	[SerializeField]
 	PPUIButton buyButton;
 	[SerializeField]
-	PPUIButton closeButton;
+	PPUIButton[] closeButtons;
 
 	ShopItem item;
 	int amountToPurchase = k.SINGLE_VALUE;
@@ -40,10 +40,7 @@ public class ShopAmountSelector : PPUIElement
 	protected override void fetchReferences()
 	{
 		base.fetchReferences();
-		increaseAmountButton.SubscribeToClick(increasePurchaseAmount);
-		decreaseAmountButton.SubscribeToClick(decreasePurchaseAmount);
-		buyButton.SubscribeToClick(purchaseItem);
-		closeButton.SubscribeToClick(Hide);
+		setupButtons();
 	}
 
 	#endregion
@@ -111,6 +108,17 @@ public class ShopAmountSelector : PPUIElement
 						amountToPurchase)));
 		}
 		Hide();
+	}
+
+	void setupButtons()
+	{
+		increaseAmountButton.SubscribeToClick(increasePurchaseAmount);
+		decreaseAmountButton.SubscribeToClick(decreasePurchaseAmount);
+		buyButton.SubscribeToClick(purchaseItem);
+		foreach(PPUIButton closeButton in closeButtons)
+		{
+			closeButton.SubscribeToClick(Hide);
+		}
 	}
 
 }
