@@ -44,9 +44,7 @@ public class DogCollarSlot : DogSlot
         base.setReferences();
         Text[] text = GetComponentsInChildren<Text>();
         nameText = text[0];
-        timerText = text[1];
         nameText.text = string.Empty;
-        timerText.text = string.Empty;
         scoutingDisplay = GetComponentInParent<ScoutingDisplay>();
     }
 
@@ -112,15 +110,6 @@ public class DogCollarSlot : DogSlot
         {
             base.callOnOccupiedSlotClick(dog);
         }
-    }
-
-    #endregion
-
-    #region UIElement Overrides 
-
-    public override void SetText(string text)
-    {
-        timerText.text = text;
     }
 
     #endregion
