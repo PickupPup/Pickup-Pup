@@ -62,10 +62,6 @@ public class DogCollarSlot : DogSlot
     protected override void handleSceneLoaded(int sceneIndex)
     {
         base.handleSceneLoaded(sceneIndex);
-        //if(!timerText)
-        //{
-        //    timerText = gameObject.AddComponent<Text>();
-        //}
     }
 
     protected override void cleanupReferences()
@@ -151,7 +147,6 @@ public class DogCollarSlot : DogSlot
         }
         else
         {
-            //timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
         dataController.SendDogToScout(dog);
@@ -163,7 +158,6 @@ public class DogCollarSlot : DogSlot
         dog.StopTimer();
         unsubscribeGiftEvents(dog);
         nameText.text = string.Empty;
-        //timerText.text = string.Empty;
         redeemableGiftDisplay.SetActive(false);
         base.ClearSlot();
         dogImage.sprite = collarSprite;
@@ -250,10 +244,6 @@ public class DogCollarSlot : DogSlot
         {
             redeemableGiftIcon.sprite = gift.Icon;
         }
-        //if(timerText)
-        //{
-            //timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
-        //}
     }
 
     void handleGiftRedeemed(CurrencyData gift)
@@ -264,10 +254,8 @@ public class DogCollarSlot : DogSlot
 
     void handleDogTimerChange(Dog dog, float timeRemaining)
     {
-        if(/*timerText &&*/ !dog.HasRedeemableGift)
+        if(!dog.HasRedeemableGift)
         {
-            //timerText.text = dog.RemainingTimeScoutingStr;
-
             //BP Start a lerp every second that lerps the radial fill down a second
             float totalTime = dog.Info.TotalTimeToReturn;
             StartCoroutine(lerpRadial(timeRemaining, totalTime));
