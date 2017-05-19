@@ -65,18 +65,20 @@ public class DogProfileButtonController : PPUIButtonController
 
     #endregion
 
-	public void Init(DogProfile profile, DogDescriptor[] dogs)
+    public void Init(DogProfile profile, DogDescriptor[] dogs)
     {
         this.parentWindow = profile;
         IsInitialized = true;
 
-		updateDogList (dogs);
+        updateDogList(dogs);
 
-		pageBackwardButton.SubscribeToClick(previousProfile);
-		pageForwardButton.SubscribeToClick(nextProfile);
+        pageBackwardButton.SubscribeToClick(previousProfile);
+        pageForwardButton.SubscribeToClick(nextProfile);
+
+        
     }
 
-	void updateDogList(DogDescriptor[] dogInfos) {
+    void updateDogList(DogDescriptor[] dogInfos) {
 		DogFactory dogFactory = new DogFactory(hideGameObjects: true);
 		dogsList = dogFactory.CreateGroupList(new List<DogDescriptor>(dogInfos));
 	}
