@@ -44,9 +44,7 @@ public class DogCollarSlot : DogSlot
         base.setReferences();
         Text[] text = GetComponentsInChildren<Text>();
         nameText = text[0];
-        timerText = text[1];
         nameText.text = string.Empty;
-        timerText.text = string.Empty;
         scoutingDisplay = GetComponentInParent<ScoutingDisplay>();
     }
 
@@ -117,12 +115,7 @@ public class DogCollarSlot : DogSlot
     #endregion
 
     #region UIElement Overrides 
-
-    public override void SetText(string text)
-    {
-        timerText.text = text;
-    }
-
+    //None at the moment...
     #endregion
 
     void unsubscribeFromDogEvents(Dog dog)
@@ -254,13 +247,11 @@ public class DogCollarSlot : DogSlot
 
     void handleDogTimerChange(Dog dog, float timeRemaining)
     {
-        if(!dog.HasRedeemableGift)
+        if(timerText && !dog.HasRedeemableGift)
         {
             //BP Start a lerp every second that lerps the radial fill down a second
             float totalTime = dog.Info.TotalTimeToReturn;
             StartCoroutine(lerpRadial(timeRemaining, totalTime));
-            
-
         }
     }
     
