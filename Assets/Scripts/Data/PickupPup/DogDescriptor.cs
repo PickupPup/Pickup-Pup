@@ -226,6 +226,14 @@ public class DogDescriptor : PPDescriptor
         }
     }
 
+	public bool HasEaten
+	{
+		get
+		{
+			return eatenFood != null;
+		}
+	}
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -260,6 +268,7 @@ public class DogDescriptor : PPDescriptor
     string souvenir;
 
     SouvenirData _souvenir;
+	DogFoodData eatenFood;
 	float _timeRemainingScouting;
 	int _scoutingSlotIndex;
 	[System.NonSerialized]
@@ -401,6 +410,18 @@ public class DogDescriptor : PPDescriptor
 	public void MaxAffection()
 	{
 		this.Affection = tuning.MaxAffection;
+	}
+
+	public void EatFood(DogFoodData food)
+	{
+		this.eatenFood = food;
+	}
+
+	public DogFoodData DigestFood()
+	{
+		DogFoodData food = this.eatenFood;
+		this.eatenFood = null;
+		return food;
 	}
 
     void callBeginScouting()

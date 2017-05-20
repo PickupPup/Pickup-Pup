@@ -131,6 +131,11 @@ public class PPGameSave : GameSave, ISerializable
 
 	#endregion
 
+	public DogFoodData[] GetAvailableFoods()
+	{
+		return Currencies.GetAvailableFoods();
+	}
+
     public void RedeemGift(CurrencyData gift)
     {
         HasGiftToRedeem = false;

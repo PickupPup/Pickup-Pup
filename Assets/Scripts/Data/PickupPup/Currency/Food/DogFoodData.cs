@@ -64,6 +64,14 @@ public class DogFoodData : CurrencyData
 		}
 	}
 
+	public string Description
+	{
+		get
+		{
+			return description;
+		}
+	}
+		
 	#region CurrencyData Overrides
 
 	public override Sprite Icon
@@ -88,6 +96,8 @@ public class DogFoodData : CurrencyData
 	string color = k.DEFAULT_FOOD_COLOR;
 	[SerializeField]
 	string colorHex = k.DEFAULT_FOOD_COLOR_HEX;
+	[SerializeField]
+	string description;
 
 	[System.NonSerialized]
 	Color _color = Color.white;
@@ -122,6 +132,13 @@ public class DogFoodData : CurrencyData
 	public DogFoodData Copy()
 	{
 		return Copy<DogFoodData>();
+	}
+
+	public DogFoodData GetPiece()
+	{
+		DogFoodData piece = Copy();
+		piece.amount = k.SINGLE_VALUE;
+		return piece;
 	}
 
 }

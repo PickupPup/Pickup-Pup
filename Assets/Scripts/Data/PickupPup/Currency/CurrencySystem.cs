@@ -189,6 +189,11 @@ public class CurrencySystem : PPData, ICurrencySystem
 		}
     }
 
+	public DogFoodData[] GetAvailableFoods()
+	{
+		return food.GetAvailableFoods();
+	}
+
 	#region ISubscribeable Interface // This method is also in the ICurrencySystem method (for polymorphism's sake)
 
 	public bool TryUnsubscribeAll()

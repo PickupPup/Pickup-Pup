@@ -4,6 +4,7 @@
  * Usage: [no notes]
  */
 
+using System.Linq;
 using System.Collections.Generic;
 using k = PPGlobal;
 
@@ -11,6 +12,12 @@ using k = PPGlobal;
 public class FoodSystem : PPData
 {
 	Dictionary<string, DogFoodData> foods = new Dictionary<string, DogFoodData>();
+	DogFoodData lastUsedFood;
+
+	public DogFoodData[] GetAvailableFoods()
+	{
+		return foods.Values.ToArray();
+	}
 
 	public void AddFood(DogFoodData newFood)
 	{
@@ -30,6 +37,15 @@ public class FoodSystem : PPData
 		return GetFood(type).Amount;
 	}
 
+	public DogFoodData GetLastUsedFood()
+	{
+		if(lastUsedFood == null)
+		{
+			lastUsedFood = GetFood();
+		}
+		return lastUsedFood;
+	}
+		
 	public DogFoodData GetFood(string type = k.DEFAULT_FOOD_TYPE)
 	{
 		DogFoodData match;
@@ -45,8 +61,12 @@ public class FoodSystem : PPData
 
 	public void ChangeBy(int delta, string type = k.DEFAULT_FOOD_TYPE)
 	{
-		GetFood(type).ChangeBy(delta);
-		UnityEngine.Debug.Log(this);
+		DogFoodData food = GetFood(type);
+		food.ChangeBy(delta);
+		if(delta < k.NONE_VALUE)
+		{
+			this.lastUsedFood = food;
+		}
 	}
 
 	public void SetAmount(int amount, string type = k.DEFAULT_FOOD_TYPE)

@@ -75,10 +75,10 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     #endregion
 
-    int calculateDogFoodNeeded()
-    {
-        return dataController.DogCount - dataController.ScoutingDogs.Count;
-    }
+	public void ChooseFood()
+	{
+
+	}
 
     public void FeedDogs()
     {
@@ -102,6 +102,20 @@ public class DogFoodBowl : MonoBehaviourExtended
             EventController.Event(k.GetPlayEvent(k.EMPTY));
         }
     }
+
+	int calculateDogFoodNeeded()
+	{
+		return dataController.DogCount - dataController.ScoutingDogs.Count;
+	}
+
+	void giveDogsFood(DogFoodData food)
+	{
+		foreach(DogDescriptor dog in dataController.AvailableDogs)
+		{
+			DogFoodData pieceOfFood = food.GetPiece();
+			dog.EatFood(pieceOfFood);
+		}
+	}
 
     void handleFeedingTimeBegin()
     {

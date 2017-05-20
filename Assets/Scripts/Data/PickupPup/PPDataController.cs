@@ -250,6 +250,11 @@ public class PPDataController : DataController, ICurrencySystem
 
     #endregion
 
+	public DogFoodData[] GetAvailableFoods()
+	{
+		return currentGame.GetAvailableFoods();
+	}
+
 	public void SendDogToScout(Dog dog)
 	{
 		currentGame.SendDogToScout(dog);
