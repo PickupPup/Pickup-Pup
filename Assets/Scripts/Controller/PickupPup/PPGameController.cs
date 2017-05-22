@@ -372,6 +372,11 @@ public class PPGameController : GameController, ICurrencySystem
 		return dataController.TryTakeCurrency(currency);
 	}
 
+	public bool HasFood(string foodType, int amount)
+	{
+		return dataController.HasFood(foodType, amount);
+	}
+
     #endregion
 
     public void ToggleMainMenuOpen(bool menuIsOpen)

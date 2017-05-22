@@ -4,7 +4,6 @@
  * Usage: [no notes]
  */
 
-using System.Linq;
 using System.Collections.Generic;
 using k = PPGlobal;
 
@@ -16,7 +15,15 @@ public class FoodSystem : PPData
 
 	public DogFoodData[] GetAvailableFoods()
 	{
-		return foods.Values.ToArray();
+		List<DogFoodData> availableFoods = new List<DogFoodData>();
+		foreach(DogFoodData food in foods.Values)
+		{
+			if(food.Amount > k.NONE_VALUE)
+			{
+				availableFoods.Add(food);
+			}
+		}
+		return availableFoods.ToArray();
 	}
 
 	public void AddFood(DogFoodData newFood)

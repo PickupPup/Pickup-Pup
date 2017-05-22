@@ -3,12 +3,13 @@
  * Description: Stores data for the Player's dog food currency.
  */
 
+using System;
 using System.IO;
 using UnityEngine;
 using k = PPGlobal;
 
 [System.Serializable]
-public class DogFoodData : CurrencyData
+public class DogFoodData : CurrencyData, IComparable
 {
 	#region Instance Accessors 
 
@@ -128,6 +129,22 @@ public class DogFoodData : CurrencyData
 	}
 
     #endregion
+
+	#region IComparable Interface
+
+	int IComparable.CompareTo(object food)
+	{
+		if(food is DogFoodData)
+		{
+			return FoodType.CompareTo((food as DogFoodData).FoodType);
+		}
+		else
+		{
+			return k.INVALID_VALUE;
+		}
+	}
+
+	#endregion
 
 	public DogFoodData Copy()
 	{

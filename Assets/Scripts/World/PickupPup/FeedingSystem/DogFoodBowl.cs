@@ -10,6 +10,9 @@ using k = PPGlobal;
 
 public class DogFoodBowl : MonoBehaviourExtended
 {
+	static PPTimer feedingTimer = null;
+	static DogFoodData currentFood;
+
     #region Instance Accessors
 
     public float FeedTimerLeft
@@ -47,10 +50,21 @@ public class DogFoodBowl : MonoBehaviourExtended
 
     #endregion
 
-    static PPTimer feedingTimer = null;
     Button buttonReference;
+	Image foodBowlImage;
+
+	[SerializeField]
+	FoodSelector foodSelector;
+	[SerializeField]
+	PPUIElement dogFoodImage;
 
     #region MonoBehaviourExtended Overrides 
+
+	protected override void setReferences()
+	{
+		base.setReferences();
+		foodBowlImage = GetComponent<Image>();
+	}
 
     protected override void fetchReferences() 
     {
@@ -64,6 +78,7 @@ public class DogFoodBowl : MonoBehaviourExtended
         feedingTimer.SubscribeToTimeUp(handleFeedingTimeUp);
         buttonReference = GetComponent<Button>();
         buttonReference.interactable = !IsCurrentlyFeeding;
+		foodSelector.Setup(dataController.AllFood, feedDogs);
     }
 
     protected override void cleanupReferences()
@@ -77,25 +92,29 @@ public class DogFoodBowl : MonoBehaviourExtended
 
 	public void ChooseFood()
 	{
-
+		foodSelector.Show();
 	}
 
-    public void FeedDogs()
+	void feedDogs(DogFoodData food)
     {
-		int foodNeeded = calculateDogFoodNeeded();
-		if(foodNeeded <= 0)
+		int amountFoodNeeded = calculateDogFoodNeeded();
+		if(amountFoodNeeded <= k.NONE_VALUE)
 		{
 			return;
 		}
-
-		if(dataController.CanAfford(CurrencyType.DogFood, foodNeeded) && !IsCurrentlyFeeding)
+		DogFoodData foodNeeded = food.Copy();
+		foodNeeded.SetAmount(-amountFoodNeeded);
+		if(dataController.HasFood(food.FoodType, amountFoodNeeded) && !IsCurrentlyFeeding)
         {
-            dataController.ChangeFood(-calculateDogFoodNeeded());
-            feedingTimer.Reset();
-            feedingTimer.Begin();
+			dataController.ChangeCurrencyAmount(foodNeeded);
             buttonReference.interactable = false;
             EventController.Event(k.GetPlayEvent(k.ADD_FOOD));
             dataController.RefillDogFood();
+			giveDogsFood(foodNeeded);
+			foodBowlImage.color = food.Color;
+			currentFood = foodNeeded;
+			feedingTimer.Reset();
+			feedingTimer.Begin();
         }
         else
         {
@@ -120,12 +139,15 @@ public class DogFoodBowl : MonoBehaviourExtended
     void handleFeedingTimeBegin()
     {
         buttonReference.interactable = !IsCurrentlyFeeding;
+		dogFoodImage.Show();
+		foodBowlImage.color = currentFood.Color;
     }
 
     void handleFeedingTimeUp()
     {
         buttonReference.interactable = true;
         EventController.Event(k.GetPlayEvent(k.EAT_FOOD));
+		dogFoodImage.Hide();
     }
 
 }

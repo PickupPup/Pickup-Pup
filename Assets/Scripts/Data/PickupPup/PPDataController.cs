@@ -133,6 +133,14 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
+	public FoodSystem AllFood
+	{
+		get
+		{
+			return currencies.AllFood;
+		}
+	}
+
     public int TimesDogFoodRefilled
     {
         get;
@@ -353,6 +361,11 @@ public class PPDataController : DataController, ICurrencySystem
         return HasCurrency(type);
     }
      
+	public bool HasFood(string foodType, int amount)
+	{
+		return currencies.HasFood(foodType, amount);
+	}
+
     public void RefillDogFood()
     {
         TimesDogFoodRefilled++;

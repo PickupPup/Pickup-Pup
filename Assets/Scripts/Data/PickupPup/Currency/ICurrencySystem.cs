@@ -29,7 +29,8 @@ public interface ICurrencySystem : ISubscribable
 	bool TryTakeCurrency(CurrencyData currency);
     bool CanAfford(CurrencyType type, int amount);
     bool HasCurrency(CurrencyType type);
-	
+	bool HasFood(string foodType, int amount);
+
     // Added new because this method exists in the parent interface (extends polymorphism)
     new bool TryUnsubscribeAll();
 

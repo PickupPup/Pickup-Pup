@@ -47,6 +47,14 @@ public class CurrencySystem : PPData, ICurrencySystem
         }
     }
 
+	public FoodSystem AllFood
+	{
+		get
+		{
+			return food;
+		}
+	}
+
     #endregion
 
 
@@ -188,6 +196,11 @@ public class CurrencySystem : PPData, ICurrencySystem
         	return currencies.ContainsKey(type);
 		}
     }
+
+	public bool HasFood(string foodType, int amount)
+	{
+		return food.CanAfford(amount, foodType);
+	}
 
 	public DogFoodData[] GetAvailableFoods()
 	{

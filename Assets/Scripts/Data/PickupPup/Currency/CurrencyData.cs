@@ -76,6 +76,11 @@ public abstract class CurrencyData : ResourceLoader
         amount += deltaAmount;
     }
 
+	public void SetAmount(int amount)
+	{
+		this.amount = amount;
+	}
+
     public virtual bool CanAfford(int cost)
     {
         return amount > 0 && amount >= cost;
