@@ -45,7 +45,9 @@ public class PPGlobal : Global
 	public const string DEFAULT_FOOD_SPRITE = "WhiteBowl_Empty";
 	public const string DEFAULT_FOOD_COLOR = "Red";
 	public const string DEFAULT_FOOD_COLOR_HEX = "#FF0000";
-    public const float FULL_PERCENT = 100f;
+	public const string BUY_MORE_FOOD = "BuyMoreFood";
+
+	public const float FULL_PERCENT = 100f;
     public const float DEFAULT_TIME_TO_COLLECT = 10f;
     public const float DEFAULT_DISCOUNT_DECIMAL = 0.25f;
 

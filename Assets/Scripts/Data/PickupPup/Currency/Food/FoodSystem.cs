@@ -23,6 +23,10 @@ public class FoodSystem : PPData
 				availableFoods.Add(food);
 			}
 		}
+		if(availableFoods.Count == k.NONE_VALUE)
+		{
+			availableFoods.Add(GetFood());
+		}
 		return availableFoods.ToArray();
 	}
 

@@ -20,7 +20,7 @@ public abstract class CurrencyData : ResourceLoader
         }
     }
 
-    public CurrencyType Type
+    public virtual CurrencyType Type
     {
         get
         {
@@ -75,6 +75,11 @@ public abstract class CurrencyData : ResourceLoader
     {
         amount += deltaAmount;
     }
+
+	public void MultiplyBy(float multiplier)
+	{
+		amount = (int) (amount * multiplier);
+	}
 
 	public void SetAmount(int amount)
 	{

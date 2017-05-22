@@ -83,6 +83,14 @@ public class DogFoodData : CurrencyData, IComparable
 		}
 	}
 
+	public override CurrencyType Type 
+	{
+		get 
+		{
+			return CurrencyType.DogFood;
+		}
+	}
+
 	#endregion
 
 	#endregion
@@ -157,5 +165,14 @@ public class DogFoodData : CurrencyData, IComparable
 		piece.amount = k.SINGLE_VALUE;
 		return piece;
 	}
+
+	#region Object Overrides
+
+	public override string ToString()
+	{
+		return string.Format("{0} {1} {2}", Amount, FoodType, Type);
+	}
+
+	#endregion
 
 }

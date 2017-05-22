@@ -179,6 +179,14 @@ public class Dog : MobileObjectBehaviour
         }
     }
 
+	public bool HasEaten
+	{
+		get
+		{
+			return Info.HasEaten;
+		}
+	}
+
 	#endregion
 
 	bool hasDescriptor 

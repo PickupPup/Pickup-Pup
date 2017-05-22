@@ -29,9 +29,17 @@ public class PPGameSave : GameSave, ISerializable
     {
         get
         {
-            return this.getAvailableDogs();
+            return getAvailableDogs();
         }
     }
+
+	public DogDescriptor[] HomeDogs
+	{
+		get
+		{
+			return getDogsHome();
+		}
+	}
 
     public Dictionary<PPScene, List<DogDescriptor>> WorldDogs
     {
@@ -127,6 +135,7 @@ public class PPGameSave : GameSave, ISerializable
         info.AddValue(SESSION_COUNT, this.GameSessionCount);
         cumulativeTimePlayed += getTimePlayedInSession();
         info.AddValue(TIME_PLAYED, this.cumulativeTimePlayed);
+		updateScoutingDogs();
 	}
 
 	#endregion
@@ -224,6 +233,30 @@ public class PPGameSave : GameSave, ISerializable
             inRoom.Remove(dog);
         }
     }
+
+	void updateScoutingDogs()
+	{
+		foreach(DogDescriptor dog in AdoptedDogs)
+		{
+			if(dog.IsScouting && !ScoutingDogs.Contains(dog))
+			{
+				dog.HandleScoutingEnded();
+			}
+		}
+	}
+
+	DogDescriptor[] getDogsHome()
+	{
+		List<DogDescriptor> home = new List<DogDescriptor>();
+		foreach(DogDescriptor dog in AdoptedDogs)
+		{
+			if(!dog.IsScouting)
+			{
+				home.Add(dog);
+			}
+		}
+		return home.ToArray();
+	}
 
     DogDescriptor[] getAvailableDogs()
     {

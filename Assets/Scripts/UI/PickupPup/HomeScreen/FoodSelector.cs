@@ -32,6 +32,7 @@ public class FoodSelector : PPUIElement
 	DogFoodData selectedFood;
 	int currentFoodIndex;
 	Action<DogFoodData> onClickYes;
+	Action<DogFoodData> defaultClickYes;
 
 	#region MonoBehaviourExtended Overrides
 
@@ -59,7 +60,18 @@ public class FoodSelector : PPUIElement
 		foodOptions = food.GetAvailableFoods();
 		setFood(food.GetLastUsedFood());
 		checkToHideButtons();
+		SetDelegate(onClickYes);
+		this.defaultClickYes = onClickYes;
+	}
+
+	public void SetDelegate(Action<DogFoodData> onClickYes)
+	{
 		this.onClickYes = onClickYes;
+	}
+
+	public void SetDescription(string description)
+	{
+		descriptionDisplay.SetText(description);
 	}
 
 	void setupButtons()
@@ -77,7 +89,6 @@ public class FoodSelector : PPUIElement
 		{
 			onClickYes(selectedFood);
 		}
-		Hide();
 	}
 		
 	void checkToHideButtons()
@@ -129,6 +140,7 @@ public class FoodSelector : PPUIElement
 		foodBowlIcon.SetImageColor(food.Color);
 		foodAmount.SetText(food.Amount.ToString());
 		descriptionDisplay.SetText(food.Description);
+		SetDelegate(defaultClickYes);
 	}
 
 }

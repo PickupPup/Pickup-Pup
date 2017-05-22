@@ -115,10 +115,13 @@ public class DogFoodBowl : MonoBehaviourExtended
 			currentFood = foodNeeded;
 			feedingTimer.Reset();
 			feedingTimer.Begin();
+			foodSelector.Hide();
         }
         else
         {
             EventController.Event(k.GetPlayEvent(k.EMPTY));
+			foodSelector.SetDescription(LanguageDatabase.GetInstance.GetTerm(k.BUY_MORE_FOOD));
+			foodSelector.SetDelegate(loadFoodShop);
         }
     }
 
@@ -127,9 +130,14 @@ public class DogFoodBowl : MonoBehaviourExtended
 		return dataController.DogCount - dataController.ScoutingDogs.Count;
 	}
 
+	void loadFoodShop(DogFoodData selectedFood)
+	{
+		PPSceneController.Instance.LoadShop();
+	}
+
 	void giveDogsFood(DogFoodData food)
 	{
-		foreach(DogDescriptor dog in dataController.AvailableDogs)
+		foreach(DogDescriptor dog in dataController.HomeDogs)
 		{
 			DogFoodData pieceOfFood = food.GetPiece();
 			dog.EatFood(pieceOfFood);
