@@ -72,14 +72,14 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     #endregion
 
-    bool IsInitialized()
+    bool isInitialized()
     {
         return m_StoreController != null && m_StoreExtensionProvider != null;
     }
 
     public void InitializePurchasing()
     {
-        if (IsInitialized())
+        if (isInitialized())
         {
             return;
         }
@@ -92,7 +92,7 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     void buyProductID(string productId)
     {
-        if (IsInitialized())
+        if (isInitialized())
         {
             Product product = m_StoreController.products.WithID(productId);
 
