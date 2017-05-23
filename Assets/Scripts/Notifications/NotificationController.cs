@@ -20,13 +20,13 @@ public class NotificationController : SingletonController<NotificationController
 
 	#region MonoBehaviourExtended Overrides
 
-	protected override void setReferences()
+	protected override void fetchReferences()
 	{
-		base.setReferences();
+		base.fetchReferences();
 
 		#if UNITY_IOS
 
-		notifications = new iOSNotificationInterchange();
+		notifications = new iOSNotificationInterchange(dataController.SavePath);
 
 		#endif
 

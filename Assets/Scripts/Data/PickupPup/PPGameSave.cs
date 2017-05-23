@@ -73,20 +73,6 @@ public class PPGameSave : GameSave, ISerializable
 		private set;
 	}
 
-	public INotificationInterchange Notifications
-	{
-		get;
-		private set;
-	}
-
-	public bool HasNotifications
-	{
-		get
-		{
-			return Notifications != null;
-		}
-	}
-
 	#endregion
 
     TimeSpan cumulativeTimePlayed = TimeSpan.Zero;

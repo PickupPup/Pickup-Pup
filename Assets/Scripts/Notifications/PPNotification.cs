@@ -38,4 +38,13 @@ public class PPNotification : PPData
 		this.FireDate = fireDate;
 	}
 		
+	#region Object Overrides 
+
+	public override int GetHashCode()
+	{
+		return Title.GetHashCode() + Body.GetHashCode() + FireDate.GetHashCode();
+	}
+
+	#endregion
+
 }

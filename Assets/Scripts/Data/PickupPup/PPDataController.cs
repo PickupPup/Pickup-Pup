@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using k = PPGlobal;
 
@@ -26,6 +27,22 @@ public class PPDataController : DataController, ICurrencySystem
 	#endregion
 
 	#region Instance Accessors
+
+	public string SavePath
+	{
+		get
+		{
+			return Path.Combine(Application.persistentDataPath, SaveID);
+		}
+	}
+
+	public string SaveID
+	{
+		get
+		{
+			return currentGame.SaveID;
+		}
+	}
 
 	public DateTime LastSaveTime 
 	{
