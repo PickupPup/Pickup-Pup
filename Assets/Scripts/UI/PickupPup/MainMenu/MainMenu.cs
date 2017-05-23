@@ -154,6 +154,11 @@ public class MainMenu : PPUIElement
         AdController.GetInstance.WatchAd();
     }
 
+    public void OnIAPClick()
+    {
+        sceneController.LoadIAP();
+    }
+
     public void ToggleSingleNavDropdown()
     {
         singleDropdown.SetActive(!singleDropdown.activeSelf);

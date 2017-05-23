@@ -67,6 +67,11 @@ public class PPSceneController : SingletonController<PPSceneController>
         LoadScene(PPScene.Home);
     }
 
+    public void LoadIAP()
+    {
+        LoadScene(PPScene.IAP);
+    }
+
     public void LoadScene(PPScene scene, bool refreshSystems = false) 
 	{
 		dataController.SaveGame();
@@ -147,5 +152,5 @@ public enum PPScene
     Home,
     Shelter,
     Shop,
-
+    IAP
 }
