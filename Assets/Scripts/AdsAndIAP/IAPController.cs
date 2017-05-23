@@ -5,13 +5,12 @@
  */
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
 public class IAPController : SingletonController<IAPController>, IStoreListener
 {
-    const string PRODUCT_1000_GOLD = "gold1000";
+    const string PRODUCT_1000_COINS = "coins1000";
 
     IStoreController m_StoreController;
     IExtensionProvider m_StoreExtensionProvider;
@@ -30,14 +29,17 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
     #endregion
 
     #region MonoBehaviourExtended Overrides
+
     protected override void fetchReferences()
     {
         base.fetchReferences();
         InitializePurchasing();
     }
+
     #endregion
 
-    #region IStoreListener Overrides
+    #region IStoreListener Interface
+
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         m_StoreController = controller;
@@ -51,7 +53,7 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_1000_GOLD, StringComparison.Ordinal))
+        if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_1000_COINS, StringComparison.Ordinal))
         {
             PPGameController.GetInstance.ChangeCoins(1000);
         }
@@ -67,9 +69,10 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
     {
         Debug.LogError(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
+
     #endregion
 
-    private bool IsInitialized()
+    bool IsInitialized()
     {
         return m_StoreController != null && m_StoreExtensionProvider != null;
     }
@@ -82,12 +85,12 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
         }
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        builder.AddProduct(PRODUCT_1000_GOLD, ProductType.Consumable);
+        builder.AddProduct(PRODUCT_1000_COINS, ProductType.Consumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
 
-    void BuyProductID(string productId)
+    void buyProductID(string productId)
     {
         if (IsInitialized())
         {
@@ -108,9 +111,9 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
         }
     }
 
-    public void PurchaseGold1000()
+    public void PurchaseCoins1000()
     {
-        BuyProductID(PRODUCT_1000_GOLD);
+        buyProductID(PRODUCT_1000_COINS);
     }
 
 }
