@@ -72,7 +72,21 @@ public class PPGameSave : GameSave, ISerializable
 		get;
 		private set;
 	}
-		
+
+	public INotificationInterchange Notifications
+	{
+		get;
+		private set;
+	}
+
+	public bool HasNotifications
+	{
+		get
+		{
+			return Notifications != null;
+		}
+	}
+
 	#endregion
 
     TimeSpan cumulativeTimePlayed = TimeSpan.Zero;
@@ -199,6 +213,11 @@ public class PPGameSave : GameSave, ISerializable
             return new DogDescriptor[NONE_VALUE];
         }
     }
+
+	public void SetNotifications(INotificationInterchange notifications)
+	{
+		
+	}
 
     void addDogToRoom(DogDescriptor dog, PPScene room)
     {
