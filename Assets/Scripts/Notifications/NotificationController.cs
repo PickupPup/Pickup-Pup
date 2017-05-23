@@ -42,4 +42,12 @@ public class NotificationController : SingletonController<NotificationController
 		}
 	}
 
+	public void CancelNotification(string title, string body, DateTime fireDate)
+	{
+		if(supportsNotifications)
+		{
+			notifications.CancelNotification(new PPNotification(title, body, fireDate));
+		}
+	}
+
 }

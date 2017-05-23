@@ -21,6 +21,10 @@ public class iOSNotificationInterchange : INotificationInterchange
 
 	public iOSNotificationInterchange(string registerPath)
 	{
+		NotificationServices.RegisterForNotifications(
+			NotificationType.Alert | 
+			NotificationType.Badge | 
+			NotificationType.Sound);
 		this.registerPath = registerPath;
 		this.register = loadRegister();
 	}
@@ -40,11 +44,7 @@ public class iOSNotificationInterchange : INotificationInterchange
 
 	void INotificationInterchange.CancelNotification(PPNotification notification)
 	{
-		LocalNotification iOSNotification;
-		if(register.TryGetNotification(notification, out iOSNotification))
-		{
-			NotificationServices.CancelLocalNotification(iOSNotification);
-		}
+		register.DestroyNotification(notification);
 	}
 		
 	#endregion
@@ -90,35 +90,24 @@ public class iOSNotificationInterchange : INotificationInterchange
 [Serializable]
 internal class iOSNotificationRegister
 {
-	Dictionary<int, LocalNotification> notificationLookup = new Dictionary<int, LocalNotification>();
-
-	internal void CleanupOldNotifications()
-	{
-		Dictionary<int, LocalNotification> deepCopy = new Dictionary<int, LocalNotification>(notificationLookup);
-		foreach(int id in deepCopy.Keys)
-		{
-			if(deepCopy[id].fireDate.CompareTo(DateTime.Now) < k.NONE_VALUE)
-			{
-				notificationLookup.Remove(id);
-			}
-		}
-	}
 
 	internal LocalNotification RegisterNotification(PPNotification notification)
 	{
 		LocalNotification iosNotification = createNotification(notification);
-		notificationLookup[notification.GetHashCode()] = iosNotification;
 		return iosNotification;
 	}
 
 	internal bool DestroyNotification(PPNotification notification)
 	{
-		return notificationLookup.Remove(notification.GetHashCode());
-	}
-		
-	internal bool TryGetNotification(PPNotification notification, out LocalNotification iOSNotification)
-	{
-		return notificationLookup.TryGetValue(notification.GetHashCode(), out iOSNotification);
+		foreach(LocalNotification iOSNotification in NotificationServices.localNotifications)
+		{
+			if(notificationMatch(notification, iOSNotification))	
+			{
+				NotificationServices.CancelLocalNotification(iOSNotification);
+				return true;
+			}
+		}
+		return false;
 	}
 		
 	LocalNotification createNotification(PPNotification notification)
@@ -128,6 +117,13 @@ internal class iOSNotificationRegister
 		iOSNotification.alertBody = notification.Body;
 		iOSNotification.fireDate = notification.FireDate;
 		return iOSNotification;
+	}
+
+	bool notificationMatch(PPNotification notification, LocalNotification iOSNotification)
+	{
+		return notification.Title.Equals(iOSNotification.alertAction) &&
+			notification.Body.Equals(iOSNotification.alertBody) &&
+			notification.FireDate.Equals(iOSNotification.fireDate);
 	}
 
 }

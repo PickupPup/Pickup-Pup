@@ -221,6 +221,12 @@ public class PPDataController : DataController, ICurrencySystem
 
 	#region MonoBehaviourExtended Overrides
 
+	protected override void fetchReferences()
+	{
+		base.fetchReferences();
+		checkToCreateSavePath();
+	}
+
 	protected override void handleGameTogglePause(bool isPaused)
 	{
         if(isPaused)
@@ -432,5 +438,13 @@ public class PPDataController : DataController, ICurrencySystem
         }
         currencyChangeDelegateBuffers.Clear();
     }
+
+	void checkToCreateSavePath()
+	{
+		if(!Directory.Exists(SavePath))
+		{
+			Directory.CreateDirectory(SavePath);
+		}
+	}
 
 }
