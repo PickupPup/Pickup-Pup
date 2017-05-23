@@ -175,6 +175,22 @@
       "costToAdopt" : 1500,
       "size" : "Medium",
       "worldDisplayBreed" : "Poodle"
+    },
+    {
+      "breed" : "Dalmatian",
+      "specialization" : "Coins",
+      "timeToReturn" : 800,
+      "costToAdopt" : 2000,
+      "size" : "Medium",
+      "worldDisplayBreed" : "Poodle"
+    },
+    {
+      "breed" : "English Labrador",
+      "specialization" : "Food",
+      "timeToReturn" : 2000,
+      "costToAdopt" : 1800,
+      "size" : "Medium",
+      "worldDisplayBreed" : "Poodle"
     }
   ],
   "dogs" : [
@@ -187,7 +203,19 @@
       "description" : [
         "A savage."
       ],
-      "souvenir" : "rose"
+      "souvenir" : "rose",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0.25,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0.5,
+        0.25,
+        0.25
+      ]
     },
     {
       "name" : "Grace",
@@ -198,7 +226,9 @@
       "description" : [
         "Loves bears."
       ],
-      "souvenir" : "frisbee"
+      "souvenir" : "frisbee",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Mia",
@@ -209,7 +239,9 @@
       "description" : [
         "A kindhearted listener."
       ],
-      "souvenir" : "tennisball"
+      "souvenir" : "tennisball",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Max",
@@ -220,7 +252,9 @@
       "description" : [
         "Fearless and energetic."
       ],
-      "souvenir" : "toyboat"
+      "souvenir" : "toyboat",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Sam",
@@ -231,7 +265,9 @@
       "description" : [
         "Easily excitable."
       ],
-      "souvenir" : "locket"
+      "souvenir" : "locket",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Rocky",
@@ -242,7 +278,9 @@
       "description" : [
         "Has his own theme song."
       ],
-      "souvenir" : "airplane"
+      "souvenir" : "airplane",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Oliver",
@@ -253,7 +291,9 @@
       "description" : [
         "Shakes a lot even while sleeping."
       ],
-      "souvenir" : "bone"
+      "souvenir" : "bone",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Irving",
@@ -264,7 +304,9 @@
       "description" : [
         "A fancy friend."
       ],
-      "souvenir" : "branch"
+      "souvenir" : "branch",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Pebbles",
@@ -275,7 +317,9 @@
       "description" : [
         "Loves cereal."
       ],
-      "souvenir" : "spoon"
+      "souvenir" : "spoon",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Peekaboo",
@@ -286,7 +330,9 @@
       "description" : [
         "Mischievous but friendly."
       ],
-      "souvenir" : "pillow"
+      "souvenir" : "pillow",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Buster",
@@ -297,7 +343,9 @@
       "description" : [
         "Chases squirrels without fail."
       ],
-      "souvenir" : "underwear"
+      "souvenir" : "underwear",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Duke",
@@ -308,7 +356,9 @@
       "description" : [
         "Falls asleep while eating."
       ],
-      "souvenir" : "basket"
+      "souvenir" : "basket",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Riley",
@@ -319,7 +369,9 @@
       "description" : [
         "Loves people and the rain!"
       ],
-      "souvenir" : "hulahoop"
+      "souvenir" : "hulahoop",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Harley",
@@ -330,7 +382,9 @@
       "description" : [
         "Escaped the shelter twice."
       ],
-      "souvenir" : "sword"
+      "souvenir" : "sword",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Bear",
@@ -341,7 +395,9 @@
       "description" : [
         "Eats his own weight every day."
       ],
-      "souvenir" : "umbrella"
+      "souvenir" : "umbrella",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Tucker",
@@ -352,7 +408,9 @@
       "description" : [
         "Highly protective of children."
       ],
-      "souvenir" : "bottlenote"
+      "souvenir" : "bottlenote",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Murphy",
@@ -363,7 +421,9 @@
       "description" : [
         "Never remembers commands."
       ],
-      "souvenir" : "goggles"
+      "souvenir" : "goggles",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Jake",
@@ -374,7 +434,9 @@
       "description" : [
         "Extremely smart... too smart."
       ],
-      "souvenir" : "baseballcap"
+      "souvenir" : "baseballcap",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Buddy",
@@ -385,18 +447,22 @@
       "description" : [
         "Surprisingly the best kind of friend!"
       ],
-      "souvenir" : "hubcap"
+      "souvenir" : "hubcap",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
-      "name" : "Mookie",
+      "name" : "Lucky",
       "age" : 2,
       "color" : "White",
       "breed" : "Labrador Retriever",
       "modCost" : 0,
       "description" : [
-        "Could not be happier or fatter."
+        "Has returned from death twice."
       ],
-      "souvenir" : "ring"
+      "souvenir" : "ring",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Teddy",
@@ -407,7 +473,9 @@
       "description" : [
         "A huggable friend!"
       ],
-      "souvenir" : "towel"
+      "souvenir" : "earphones",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Winston",
@@ -418,7 +486,9 @@
       "description" : [
         "The biggest fan of belly rubs."
       ],
-      "souvenir" : "pingpong"
+      "souvenir" : "pingpong",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Molly",
@@ -429,7 +499,9 @@
       "description" : [
         "Always sleeps on her back."
       ],
-      "souvenir" : "narwhal"
+      "souvenir" : "narwhal",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Freckles",
@@ -440,7 +512,9 @@
       "description" : [
         "Sneezes funny."
       ],
-      "souvenir" : "UFO"
+      "souvenir" : "UFO",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Maggie",
@@ -451,7 +525,9 @@
       "description" : [
         "Twirls in front of the food bowl."
       ],
-      "souvenir" : "carrot"
+      "souvenir" : "carrot",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Sadie",
@@ -462,7 +538,9 @@
       "description" : [
         "Loves chew toys."
       ],
-      "souvenir" : "window"
+      "souvenir" : "window",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Chloe",
@@ -473,7 +551,9 @@
       "description" : [
         "Ate a bag of gummy worms which have yet to exit."
       ],
-      "souvenir" : "balloon"
+      "souvenir" : "balloon",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Bailey",
@@ -484,7 +564,9 @@
       "description" : [
         "Thinks he's also a human."
       ],
-      "souvenir" : "rose"
+      "souvenir" : "mask",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Lola",
@@ -495,7 +577,9 @@
       "description" : [
         "Afraid of other dogs but loves people."
       ],
-      "souvenir" : "frisbee"
+      "souvenir" : "wallet",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Zoe",
@@ -506,7 +590,9 @@
       "description" : [
         "Doesn't know her own name."
       ],
-      "souvenir" : "tennisball"
+      "souvenir" : "bowtie",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Magic",
@@ -517,7 +603,9 @@
       "description" : [
         "Appeared in this world one day."
       ],
-      "souvenir" : "toyboat"
+      "souvenir" : "teddybear",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Roxy",
@@ -528,7 +616,9 @@
       "description" : [
         "Howls at 2 am. Every night."
       ],
-      "souvenir" : "locket"
+      "souvenir" : "lollipop",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Suki",
@@ -539,7 +629,9 @@
       "description" : [
         "Dances at doors and gates."
       ],
-      "souvenir" : "airplane"
+      "souvenir" : "ribbon",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Tobi",
@@ -550,7 +642,9 @@
       "description" : [
         "Loves noodles."
       ],
-      "souvenir" : "bone"
+      "souvenir" : "hamburger",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Brandy",
@@ -561,7 +655,9 @@
       "description" : [
         "A loyal friend for all."
       ],
-      "souvenir" : "branch"
+      "souvenir" : "alien",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Manny",
@@ -572,7 +668,9 @@
       "description" : [
         "Has a huge ego."
       ],
-      "souvenir" : "spoon"
+      "souvenir" : "glasses",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Charlie",
@@ -583,7 +681,9 @@
       "description" : [
         "A movie star."
       ],
-      "souvenir" : "pillow"
+      "souvenir" : "star",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Jack",
@@ -594,7 +694,9 @@
       "description" : [
         "Runs around a lot and likes candles."
       ],
-      "souvenir" : "underwear"
+      "souvenir" : "charger",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Henry",
@@ -605,7 +707,9 @@
       "description" : [
         "A miraculously quiet young man."
       ],
-      "souvenir" : "basket"
+      "souvenir" : "huntinghat",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Arthur",
@@ -616,7 +720,9 @@
       "description" : [
         "Has the ultimate parkour skills."
       ],
-      "souvenir" : "hulahoop"
+      "souvenir" : "peanutbag",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
     },
     {
       "name" : "Colby",
@@ -627,7 +733,1038 @@
       "description" : [
         "Gets into fights over who sleeps on the bed."
       ],
-      "souvenir" : "sword"
+      "souvenir" : "tooth",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Mookie",
+      "age" : 2,
+      "color" : "White",
+      "breed" : "English Labrador",
+      "modCost" : 0,
+      "description" : [
+        "Could not be happier or fatter."
+      ],
+      "souvenir" : "corndog",
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0.25,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0.5,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "name" : "Delilah",
+      "age" : 4,
+      "color" : "White",
+      "breed" : "Catahoula Leopard",
+      "modCost" : 0,
+      "souvenir" : "squirrel",
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0.5,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0.25,
+        0.75,
+        0
+      ]
+    },
+    {
+      "name" : "Ghost",
+      "age" : 1,
+      "color" : "White",
+      "breed" : "Shiba Inu",
+      "modCost" : 0,
+      "description" : [
+        "Embodiment of destruction. Stubborn but playful."
+      ],
+      "souvenir" : "torncard",
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0.5,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0,
+        0.25,
+        0.75
+      ]
+    },
+    {
+      "name" : "Roland",
+      "age" : 13,
+      "color" : "Black",
+      "breed" : "Miniature Schnauzer",
+      "modCost" : 0,
+      "souvenir" : "towel",
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0.25,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0.75,
+        0.25,
+        0
+      ]
+    },
+    {
+      "name" : "Fury",
+      "age" : 4,
+      "color" : "White",
+      "breed" : "Kuvasz",
+      "modCost" : 0,
+      "description" : [
+        "Loves friends and will not hesitate to protect them."
+      ],
+      "souvenir" : "bell",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Axel",
+      "age" : 6,
+      "color" : "Black",
+      "breed" : "Rottweiler",
+      "modCost" : 0,
+      "description" : [
+        "Always smiling."
+      ],
+      "souvenir" : "spikedball",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Haru",
+      "age" : 5,
+      "color" : "Tan",
+      "breed" : "Shiba Inu",
+      "modCost" : 0,
+      "description" : [
+        "Appeared one day on a spring day."
+      ],
+      "souvenir" : "flowercrown",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Momo",
+      "age" : 9,
+      "color" : "Black",
+      "breed" : "Shiba Inu",
+      "modCost" : 0,
+      "description" : [
+        "Digs patterns of holes in the yard."
+      ],
+      "souvenir" : "peachpin",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Cian",
+      "age" : 1,
+      "color" : "Tan",
+      "breed" : "Corgi",
+      "modCost" : 0,
+      "description" : [
+        "Has an amazing sense of rhythm and soul."
+      ],
+      "souvenir" : "snapback",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Midnight",
+      "age" : 3,
+      "color" : "Black",
+      "breed" : "Corgi",
+      "modCost" : 0,
+      "description" : [
+        "A nighttime crusader."
+      ],
+      "souvenir" : "cape",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "name" : "Cooper",
+      "age" : 5,
+      "color" : "Brown",
+      "breed" : "Boxer Hound Mix",
+      "modCost" : 0,
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0.5,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0.25,
+        0.5,
+        0.25
+      ]
+    },
+    {
+      "name" : "Pongo",
+      "age" : 9,
+      "color" : "White",
+      "breed" : "Dalmatian",
+      "modCost" : 0,
+      "description" : [
+        "A proud father."
+      ],
+      "souvenir" : "pipe",
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "ChanceOfSpecialObject" : 0,
+    }
+  ],
+  "souvenirs" : [
+    {
+      "name" : "rose",
+      "displayName" : "Rose",
+      "description" : "A rose by any other name would not have come from your best friend "
+    },
+    {
+      "name" : "frisbee",
+      "displayName" : "Frisbee",
+      "description" : "Time for some Ultimate"
+    },
+    {
+      "name" : "tennisball",
+      "displayName" : "Tennis Ball",
+      "description" : "This one was a Tennis Pro in a previous life"
+    },
+    {
+      "name" : "toyboat",
+      "displayName" : "Toy Boat",
+      "description" : "Stolen straight from the bathtub"
+    },
+    {
+      "name" : "locket",
+      "displayName" : "Locket",
+      "description" : "Who is inside?"
+    },
+    {
+      "name" : "airplane",
+      "displayName" : "Paper Airplane",
+      "description" : "Someone's test from middle school"
+    },
+    {
+      "name" : "bone",
+      "displayName" : "Bone",
+      "description" : "Last night's dinner"
+    },
+    {
+      "name" : "branch",
+      "displayName" : "Tree Branch",
+      "description" : "Nature's finest stick"
+    },
+    {
+      "name" : "spoon",
+      "displayName" : "Plastic Spoon",
+      "description" : "Where's the plastic fork?"
+    },
+    {
+      "name" : "pillow",
+      "displayName" : "Pillow",
+      "description" : "The perfect place to nap"
+    },
+    {
+      "name" : "underwear",
+      "displayName" : "Underwear",
+      "description" : "Suspiciously familiar"
+    },
+    {
+      "name" : "basket",
+      "displayName" : "Basket",
+      "description" : "Hand-woven and stolen"
+    },
+    {
+      "name" : "hulahoop",
+      "displayName" : "Hula Hoop",
+      "description" : "A remnant of an ancient time"
+    },
+    {
+      "name" : "sword",
+      "displayName" : "Plastic Sword",
+      "description" : "Perfect for pirates"
+    },
+    {
+      "name" : "umbrella",
+      "displayName" : "Umbrella",
+      "description" : "A rain shield"
+    },
+    {
+      "name" : "bottlenote",
+      "displayName" : "Bottled Note",
+      "description" : "A discarded dream is written inside"
+    },
+    {
+      "name" : "goggles",
+      "displayName" : "Goggles",
+      "description" : "Fashionable and protective eyewear"
+    },
+    {
+      "name" : "baseballcap",
+      "displayName" : "Baseball Cap",
+      "description" : "You don't even like this team but it's a nice hat"
+    },
+    {
+      "name" : "hubcap",
+      "displayName" : "Tire Hubcap",
+      "description" : "Hopefully not from an accident"
+    },
+    {
+      "name" : "ring",
+      "displayName" : "Ring",
+      "description" : "A simple ring of friendship"
+    },
+    {
+      "name" : "towel",
+      "displayName" : "Towel",
+      "description" : "For when a doggy bed just isn't cozy enough."
+    },
+    {
+      "name" : "pingpong",
+      "displayName" : "Ping Pong Ball",
+      "description" : "It looks like an egg but it bounces"
+    },
+    {
+      "name" : "narwhal",
+      "displayName" : "Narwhal Toy",
+      "description" : "His name is Nelson"
+    },
+    {
+      "name" : "UFO",
+      "displayName" : "UFO",
+      "description" : "Is it a spaceship or a funky frisbee?"
+    },
+    {
+      "name" : "carrot",
+      "displayName" : "Carrot",
+      "description" : "A buried snack"
+    },
+    {
+      "name" : "window",
+      "displayName" : "Window Frame",
+      "description" : "Someone got stuck and just rolled with it"
+    },
+    {
+      "name" : "balloon",
+      "displayName" : "Balloon",
+      "description" : "Somehow perfectly preserved"
+    },
+    {
+      "name" : "bowtie",
+      "displayName" : "Bowtie",
+      "description" : "For a truly dapper dog"
+    },
+    {
+      "name" : "teddybear",
+      "displayName" : "Teddy Bear",
+      "description" : "A precious friend to sleep beside"
+    },
+    {
+      "name" : "lollipop",
+      "displayName" : "Lollipop",
+      "description" : "Good thing this wasn't swallowed"
+    },
+    {
+      "name" : "squirrel",
+      "displayName" : "Toy Squirrel",
+      "description" : "You can vaguely recall it used to be squirrel-shaped"
+    },
+    {
+      "name" : "torncard",
+      "displayName" : "Torn Trading Card",
+      "description" : "It USED to be a rare trading card and now it's trash"
+    },
+    {
+      "name" : "peanutbag",
+      "displayName" : "Bag of Peanuts",
+      "description" : "An unopened bag of peanuts"
+    },
+    {
+      "name" : "hamburger",
+      "displayName" : "Hamburger Toy",
+      "description" : "It's a bao"
+    },
+    {
+      "name" : "glasses",
+      "displayName" : "Glasses",
+      "description" : "A device used to help see things"
+    },
+    {
+      "name" : "alien",
+      "displayName" : "Alien Toy",
+      "description" : "A mysterious toy that is out of this world chewy"
+    },
+    {
+      "name" : "charger",
+      "displayName" : "Phone Charger",
+      "description" : "The lifeline for your phone is now broken"
+    },
+    {
+      "name" : "huntinghat",
+      "displayName" : "Hunting Hat",
+      "description" : "The classic attire for a good hunt"
+    },
+    {
+      "name" : "snapback",
+      "displayName" : "Snapback",
+      "description" : "It's been carried more than it's been worn"
+    },
+    {
+      "name" : "flowercrown",
+      "displayName" : "Flower Crown",
+      "description" : "Only the King of Spring can wear this"
+    },
+    {
+      "name" : "ribbon",
+      "displayName" : "Ribbon",
+      "description" : "Just like Dorothy's"
+    },
+    {
+      "name" : "star",
+      "displayName" : "Star Piece",
+      "description" : "A rock shaped just like a star"
+    },
+    {
+      "name" : "tooth",
+      "displayName" : "Tooth",
+      "description" : "Hopefully not his"
+    },
+    {
+      "name" : "corndog",
+      "displayName" : "Corndog",
+      "description" : "Too good not to share"
+    },
+    {
+      "name" : "peachpin",
+      "displayName" : "Peach Pin",
+      "description" : "An enamel pin of a fruit"
+    },
+    {
+      "name" : "cape",
+      "displayName" : "Cape",
+      "description" : "A tiny cape that can attach to a collar"
+    },
+    {
+      "name" : "spikedball",
+      "displayName" : "Spiked Ball",
+      "description" : "Chew toy with a spiked texture"
+    },
+    {
+      "name" : "earphones",
+      "displayName" : "Earphones",
+      "description" : "Broken but fun to carry around"
+    },
+    {
+      "name" : "mask",
+      "displayName" : "Mask",
+      "description" : "Who is behind it - a dog or a human?"
+    },
+    {
+      "name" : "bell",
+      "displayName" : "Bell",
+      "description" : "A small bell with a gentle chime"
+    },
+    {
+      "name" : "wallet",
+      "displayName" : "Wallet",
+      "description" : "It's not yours... "
+    },
+    {
+      "name" : "pipe",
+      "displayName" : "Pipe",
+      "description" : "C'est une pipe"
+    }
+  ],
+  "MixedBreeds" : [
+    {
+      "name" : "Cooper",
+      "age" : 6,
+      "color" : "#8e5309",
+      "breed" : "Boxer/Hound ",
+      "modcost" : 0
+    },
+    {
+      "name" : "Delilah",
+      "age" : 4,
+      "color" : "#8e5309",
+      "breed" : "Catahoula Leopard",
+      "modcost" : 0
+    },
+    {
+      "name" : "Nugget",
+      "age" : 6,
+      "color" : "#8e5309",
+      "breed" : "Golden Retriever/Angel",
+    }
+  ],
+  "DogsWithSpecial" : [
+    {
+      "Name" : "Nugget",
+      "Age" : 6,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0.25,
+      "SpecialObjectTypes" : [
+        "Food",
+        "Special",
+        "Money"
+      ],
+      "SpecialObjectChances" : [
+        0.5,
+        0.25,
+        0.25
+      ]
+    },
+    {
+      "Name" : "Spot",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Labrador Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Bailey",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Max",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Charlie",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Buddy",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Rocky",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Jake",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Jack",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Pebbles",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Peekaboo",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Buster",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Duke",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Cooper",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Riley",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Harley",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Bear",
+      "Age" : 11,
+      "Color" : "#8e5309",
+      "Breed" : "Labrador Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Tucker",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Murphy",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Dachsund",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Lucky",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Oliver",
+      "Age" : 9,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Sam",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Mookie",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Labrador Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Teddy",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Winston",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Cooper",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Bella",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Lucy",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Molly",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Daisy",
+      "Age" : 6,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Maggie",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Chihuahua",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Sophie",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Sadie",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Chloe",
+      "Age" : 1,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Bailey",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Lola",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Beagle",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Zoe",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Abby",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Ginger",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Roxy",
+      "Age" : 6,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Delilah",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Coco",
+      "Age" : 10,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Suki",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Tobi",
+      "Age" : 9,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Angel",
+      "Age" : 6,
+      "Color" : "#8e5309",
+      "Breed" : "Golden Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Princess",
+      "Age" : 2,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Emma",
+      "Age" : 4,
+      "Color" : "#8e5309",
+      "Breed" : "Yorkshire Terrier",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Annie",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Rosie",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Ruby",
+      "Age" : 7,
+      "Color" : "#8e5309",
+      "Breed" : "Shih Tzu",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Grace",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Sharpei",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Manny",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Maltese",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Charlie",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Poodle",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Sunny",
+      "Age" : 3,
+      "Color" : "#8e5309",
+      "Breed" : "Poodle",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Henry",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Beagle",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Arthur",
+      "Age" : 8,
+      "Color" : "#8e5309",
+      "Breed" : "Labrador Retriever",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Colby",
+      "Age" : 5,
+      "Color" : "#8e5309",
+      "Breed" : "Mutt",
+      "ModCost" : 0,
+      "IsSpecial" : false,
+      "ChanceOfSpecialObject" : 0,
+    },
+    {
+      "Name" : "Roland",
+      "Age" : 13,
+      "Color" : "#8e5309",
+      "Breed" : "Miniature Schnauzer",
+      "ModCost" : 0,
+      "IsSpecial" : true,
+      "ChanceOfSpecialObject" : 0,
     }
   ]
 }
