@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114275943044028512}
   - component: {fileID: 114296599387200532}
   - component: {fileID: 114768239470947136}
+  - component: {fileID: 114386905179801030}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -94,6 +95,18 @@ MonoBehaviour:
   resetDataKey: 113
   saveOnApplicationPause: 1
   saveOnApplicationQuit: 1
+--- !u!114 &114386905179801030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1613778948780182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195aa45f3dd5c4aceb680272661f5e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preserveOnSceneChange: 1
 --- !u!114 &114426272054950630
 MonoBehaviour:
   m_ObjectHideFlags: 1
