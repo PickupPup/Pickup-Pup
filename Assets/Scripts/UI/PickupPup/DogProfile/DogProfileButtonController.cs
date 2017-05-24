@@ -74,8 +74,11 @@ public class DogProfileButtonController : PPUIButtonController
 
         pageBackwardButton.SubscribeToClick(previousProfile);
         pageForwardButton.SubscribeToClick(nextProfile);
-
-        
+        if (dogsList.Count == 1)
+        {
+            pageBackwardButton.Hide();
+            pageForwardButton.Hide();
+        }
     }
 
     void updateDogList(DogDescriptor[] dogInfos) {
