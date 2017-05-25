@@ -5,6 +5,6 @@
 
 public abstract class AdReward {
 
-    public abstract void offerReward();
+    public abstract void OfferReward();
 
 }

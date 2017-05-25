@@ -12,6 +12,8 @@ public class AdoptedDogProfile : DogProfile
     SouvenirDisplay displaySouvenirPrefab;
 
     [SerializeField]
+    ScoutingButton scoutingButton;
+    [SerializeField]
     PPUIButton souvenirButton;
 
     [SerializeField]
@@ -36,6 +38,7 @@ public class AdoptedDogProfile : DogProfile
         base.SetProfile(dog);
         affectionMeter.setAffection(dog.Info.Affection);
         souvenirButton.ToggleEnabled(dog.Info.SouvenirCollected);
+        scoutingButton.SetIcon(dog);
     }
 
     #endregion

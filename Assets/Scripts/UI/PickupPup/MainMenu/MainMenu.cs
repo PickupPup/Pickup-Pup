@@ -151,8 +151,7 @@ public class MainMenu : PPUIElement
 
     public void OnWatchAdClick()
     {
-        Dog dog = PPDataController.GetInstance.ScoutingDogs[0].PeekDogLink;
-        AdController.GetInstance.WatchAd(new DogReturnAdReward(dog));
+        AdController.GetInstance.WatchAd(new CoinsAdReward());
     }
 
     public void ToggleSingleNavDropdown()

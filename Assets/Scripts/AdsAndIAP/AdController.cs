@@ -73,7 +73,7 @@ public class AdController : SingletonController<AdController>
         if(reward != null)
         {
             Debug.Log("Offer a reward to the player");
-            reward.offerReward();
+            reward.OfferReward();
         }
     }
 

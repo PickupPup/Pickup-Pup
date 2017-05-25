@@ -12,7 +12,7 @@ public class DogReturnAdReward : AdReward {
         this.dog = dog;
     }
 
-    public override void offerReward()
+    public override void OfferReward()
     {
         if(dog)
         {

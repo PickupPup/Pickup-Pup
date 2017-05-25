@@ -3,18 +3,19 @@
  * Description: An in-game reward for watching an ad that gives the player coins. 
  */
 
-public class CoinsAdReward : AdReward {
-
-    int amount = 100; // Set this in tuning
+public class CoinsAdReward : AdReward
+{
     PPGameController gameController;
+    int amount;
 
     public CoinsAdReward(int amount = 100)
     {
-        this.amount = amount;
         gameController = PPGameController.GetInstance;
+        PPTuning tuning = gameController.Tuning;
+        this.amount = tuning.VideoAdCoinBonus;
     }
 
-    public override void offerReward()
+    public override void OfferReward()
     {
         gameController.ChangeCoins(amount);
     }
