@@ -395,7 +395,7 @@ public class Dog : MobileObjectBehaviour
         trySaveGame();
     }
 
-    public void ReturnFromScout(bool force)
+    public void ReturnFromScout()
     {
         scoutingTimer.ZeroOutTimeRemaining(true);
     }
@@ -538,7 +538,7 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
-    public override int GetHashCode ()
+    public override int GetHashCode()
     {
         return Info.GetHashCode();
     }

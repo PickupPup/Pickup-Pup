@@ -16,7 +16,7 @@ public class DogReturnAdReward : AdReward {
     {
         if(dog)
         {
-            dog.ReturnFromScout(true);
+            dog.ReturnFromScout();
         }
     }
 }
