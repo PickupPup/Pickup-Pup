@@ -1,259 +1,274 @@
 {
-  "files": [
+  "files" : [
     {
-      "name": "MainMusic",
-      "groups": [
+      "name" : "MainMusic",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayMainMusic"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopMainMusic"
       ],
-      "loop": true,
-      "type": "Music",
-      "channel": 0,
-      "volume": 100
+      "loop" : true,
+      "type" : "Music",
+      "channel" : 0,
+      "volume" : 100
     },
     {
-      "name": "MenuPopup",
-      "groups": [
+      "name" : "MenuPopup",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayMenuPopup"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopMenuPopup"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "MenuClick",
-      "groups": [
+      "name" : "MenuClick",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayMenuClick"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopMenuClick"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "DogSendOut",
-      "groups": [
+      "name" : "DogSendOut",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayDogSendOut"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopDogSendOut"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "DogReturn",
-      "groups": [
+      "name" : "DogReturn",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayDogReturn"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopDogReturn"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Adopt",
-      "groups": [
+      "name" : "Adopt",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayAdopt"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopAdopt"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Barks_Small",
-      "groups": [
+      "name" : "Barks_Small",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayBark"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopBark"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 2,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 2,
+      "volume" : 100
     },
     {
-      "name": "Barks_Medium",
-      "groups": [
+      "name" : "Barks_Medium",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayBark"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopBark"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 2,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 2,
+      "volume" : 100
     },
     {
-      "name": "Barks_Large",
-      "groups": [
+      "name" : "Barks_Large",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayBark"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopBark"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 2,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 2,
+      "volume" : 100
     },
     {
-      "name": "Purchase",
-      "groups": [
+      "name" : "Purchase",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayPurchase"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopPurchase"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "GiftRedeem",
-      "groups": [
+      "name" : "GiftRedeem",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayGiftRedeem"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopGiftRedeem"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Back",
-      "groups": [
+      "name" : "Back",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayBack"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopBack"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Empty",
-      "groups": [
+      "name" : "Empty",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayEmpty"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopEmpty"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Move",
-      "groups": [
+      "name" : "Move",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayChangeScene"
       ],
-      "stopEvents": [
+      "stopEvents" : [
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Food",
-      "groups": [
+      "name" : "Food",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayAddFood"
       ],
-      "stopEvents": [
+      "stopEvents" : [
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 1,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 1,
+      "volume" : 100
     },
     {
-      "name": "Eating",
-      "groups": [
+      "name" : "Eating",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayEating"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopEating"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 3,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 3,
+      "volume" : 100
     },
     {
-      "name": "Pet",
-      "groups": [
+      "name" : "Pet",
+      "groups" : [
       ],
-      "events": [
+      "events" : [
         "PlayPet"
       ],
-      "stopEvents": [
+      "stopEvents" : [
         "StopPet"
       ],
-      "loop": false,
-      "type": "SFX",
-      "channel": 3,
-      "volume": 100
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 3,
+      "volume" : 100
+    },
+    {
+      "name" : "Whistle",
+      "groups" : [
+      ],
+      "events" : [
+        "PlayWhistle"
+      ],
+      "stopEvents" : [
+        "StopWhistle"
+      ],
+      "loop" : false,
+      "type" : "SFX",
+      "channel" : 4,
+      "volume" : 100
     }
   ],
-  "groups": [
+  "groups" : [
   ]
 }

@@ -1,10 +1,9 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Authors: Isaiah Mann, Grace Barrett-Snyder
  * Description: Pickup Pup Specific globals
  * Usage: [no notes]
  */
 
-using System.Text.RegularExpressions;
 public class PPGlobal : Global
 {
 	public const string SHOP_ITEMS = "ShopItems";
@@ -79,6 +78,7 @@ public class PPGlobal : Global
 	public const string ADD_FOOD = "AddFood";
 	public const string EAT_FOOD = "Eating";
 	public const string PET = "Pet";
+    public const string WHISTLE = "Whistle";
 
 	public static string GetPlayEvent(string id)
 	{
