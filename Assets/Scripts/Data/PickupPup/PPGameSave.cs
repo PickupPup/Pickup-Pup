@@ -80,7 +80,7 @@ public class PPGameSave : GameSave, ISerializable
 		get;
 		private set;
 	}
-		
+
 	#endregion
 
     TimeSpan cumulativeTimePlayed = TimeSpan.Zero;
@@ -213,6 +213,11 @@ public class PPGameSave : GameSave, ISerializable
             return new DogDescriptor[NONE_VALUE];
         }
     }
+
+	public void SetNotifications(INotificationInterchange notifications)
+	{
+		
+	}
 
     void addDogToRoom(DogDescriptor dog, PPScene room)
     {

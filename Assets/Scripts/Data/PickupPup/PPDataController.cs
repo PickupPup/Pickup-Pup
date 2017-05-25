@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using k = PPGlobal;
 
@@ -26,6 +27,22 @@ public class PPDataController : DataController, ICurrencySystem
 	#endregion
 
 	#region Instance Accessors
+
+	public string SavePath
+	{
+		get
+		{
+			return Path.Combine(Application.persistentDataPath, SaveID);
+		}
+	}
+
+	public string SaveID
+	{
+		get
+		{
+			return currentGame.SaveID;
+		}
+	}
 
 	public DateTime LastSaveTime 
 	{
@@ -219,6 +236,12 @@ public class PPDataController : DataController, ICurrencySystem
     }
 
 	#region MonoBehaviourExtended Overrides
+
+	protected override void fetchReferences()
+	{
+		base.fetchReferences();
+		checkToCreateSavePath();
+	}
 
 	protected override void handleGameTogglePause(bool isPaused)
 	{
@@ -441,5 +464,13 @@ public class PPDataController : DataController, ICurrencySystem
         }
         currencyChangeDelegateBuffers.Clear();
     }
+
+	void checkToCreateSavePath()
+	{
+		if(!Directory.Exists(SavePath))
+		{
+			Directory.CreateDirectory(SavePath);
+		}
+	}
 
 }

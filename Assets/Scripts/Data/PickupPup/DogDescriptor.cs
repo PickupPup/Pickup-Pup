@@ -3,6 +3,7 @@
  * Description: Stores the data about a dog
  */
 
+using System;
 using UnityEngine;
 
 using m = MonoBehaviourExtended;
@@ -271,6 +272,7 @@ public class DogDescriptor : PPDescriptor
 	DogFoodData eatenFood;
 	float _timeRemainingScouting;
 	int _scoutingSlotIndex;
+	DateTime scoutingNotificationTimeUp;
 	[System.NonSerialized]
 	Dog linkedDog;
     [System.NonSerialized]
@@ -340,6 +342,11 @@ public class DogDescriptor : PPDescriptor
 			linkedDog.SubscribeToScoutingTimerChange(updateTimeRemainingScouting);
 		}
 		this._scoutingSlotIndex = slotIndex;
+		scoutingNotificationTimeUp = DateTime.Now.AddSeconds(TotalTimeToReturn);
+		NotificationController.Instance.SendNotification(
+			string.Format(k.DOG_SCOUTING_TITLE, Name),
+			string.Format(k.DOG_SCOUTING_MESSAGE, Name),
+			scoutingNotificationTimeUp);
 	}
 
 	public void HandleScoutingEnded()
@@ -351,6 +358,10 @@ public class DogDescriptor : PPDescriptor
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
 		}
+		NotificationController.Instance.CancelNotification(
+			string.Format(k.DOG_SCOUTING_TITLE, Name),
+			string.Format(k.DOG_SCOUTING_MESSAGE, Name),
+			scoutingNotificationTimeUp);
 	}
         
     public void FindGift(CurrencyData gift)
