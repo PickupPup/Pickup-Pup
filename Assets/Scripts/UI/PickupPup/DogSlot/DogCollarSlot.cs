@@ -44,9 +44,7 @@ public class DogCollarSlot : DogSlot
         base.setReferences();
         Text[] text = GetComponentsInChildren<Text>();
         nameText = text[0];
-        timerText = text[1];
         nameText.text = string.Empty;
-        timerText.text = string.Empty;
         scoutingDisplay = GetComponentInParent<ScoutingDisplay>();
     }
 
@@ -62,10 +60,6 @@ public class DogCollarSlot : DogSlot
     protected override void handleSceneLoaded(int sceneIndex)
     {
         base.handleSceneLoaded(sceneIndex);
-        if(!timerText)
-        {
-            timerText = gameObject.AddComponent<Text>();
-        }
     }
 
     protected override void cleanupReferences()
@@ -97,12 +91,6 @@ public class DogCollarSlot : DogSlot
         }
     }
 
-    public override void Init(Dog dog, bool inScoutingSelectMode)
-    {
-        base.Init(dog, inScoutingSelectMode);
-        initDogScouting(dog, onResume: false);
-    }
-
     protected override void handleChangeDog(Dog previousDog)
     {
         base.handleChangeDog(previousDog);
@@ -116,15 +104,6 @@ public class DogCollarSlot : DogSlot
         {
             base.callOnOccupiedSlotClick(dog);
         }
-    }
-
-    #endregion
-
-    #region UIElement Overrides 
-
-    public override void SetText(string text)
-    {
-        timerText.text = text;
     }
 
     #endregion
@@ -144,14 +123,13 @@ public class DogCollarSlot : DogSlot
         dogImage.sprite = dog.Portrait;
         subscribeTimerEvents(dog);
         dog.SetTimer(dogInfo.TimeRemainingScouting);
-		initDogScouting(dog, onResume: true);
+		initDogScouting(dog, onResume:true);
         if(dog.HasRedeemableGift)
         {
             handleGiftFound(dog.PeekAtGift);
         }
         else
         {
-            timerText.text = dog.TimeRemainingStr;
             dog.ResumeTimer();
         }
         dataController.SendDogToScout(dog);
@@ -163,7 +141,6 @@ public class DogCollarSlot : DogSlot
         dog.StopTimer();
         unsubscribeGiftEvents(dog);
         nameText.text = string.Empty;
-        timerText.text = string.Empty;
         redeemableGiftDisplay.SetActive(false);
         base.ClearSlot();
         dogImage.sprite = collarSprite;
@@ -199,6 +176,10 @@ public class DogCollarSlot : DogSlot
     {
         unsubscribeFromDogEvents(dog);
         dog.TrySendToScout();
+		if(!onResume)
+		{
+			dog.ScheduleScoutingNotification();
+		}
         subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
         toggleButtonActive(false);
@@ -249,10 +230,10 @@ public class DogCollarSlot : DogSlot
         if(redeemableGiftIcon)
         {
             redeemableGiftIcon.sprite = gift.Icon;
-        }
-        if(timerText)
-        {
-            timerText.text = languageDatabase.GetTerm(TAP_TO_REDEEM);
+			if(gift is DogFoodData)
+			{
+				redeemableGiftIcon.color = (gift as DogFoodData).Color;
+			}
         }
     }
 
@@ -264,15 +245,14 @@ public class DogCollarSlot : DogSlot
 
     void handleDogTimerChange(Dog dog, float timeRemaining)
     {
-        if(timerText && !dog.HasRedeemableGift)
+        if(!dog.HasRedeemableGift)
         {
-            timerText.text = dog.RemainingTimeScoutingStr;
-
             //BP Start a lerp every second that lerps the radial fill down a second
             float totalTime = dog.Info.TotalTimeToReturn;
-            StartCoroutine(lerpRadial(timeRemaining, totalTime));
-            
-
+			if(this)
+			{
+            	StartCoroutine(lerpRadial(timeRemaining, totalTime));
+			}
         }
     }
     

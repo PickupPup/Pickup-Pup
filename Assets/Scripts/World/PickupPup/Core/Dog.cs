@@ -179,6 +179,14 @@ public class Dog : MobileObjectBehaviour
         }
     }
 
+	public bool HasEaten
+	{
+		get
+		{
+			return Info.HasEaten;
+		}
+	}
+
 	#endregion
 
 	bool hasDescriptor 
@@ -470,6 +478,11 @@ public class Dog : MobileObjectBehaviour
 		{
 			return false;
 		}
+	}
+
+	public void ScheduleScoutingNotification()
+	{
+		descriptor.ScheduleScoutingNotification();
 	}
 
 	public void GiveTimer(PPTimer timer)

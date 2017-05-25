@@ -43,6 +43,7 @@ public class Global
     public const string AMOUNT = "Amount";
     public const string SESSION_COUNT = "Game Session Count";
     public const string TIME_PLAYED = "Total Time Played";
+	public const string SAVE_ID = "SaveID";
 
 	public const char JOIN_CHAR = '_';
 
@@ -54,6 +55,7 @@ public class Global
 	public const int TRUE_VALUE_INT = 1;
 	public const int FALSE_VALUE_INT = NONE_VALUE;
     public const int ZERO_INDEX_OFFSET = 1;
+	public const int INVERT_VALUE = -1;
 
     public const float FULL_PERCENT_F = 100f;
     public const float FULL_PERCENT_DECIMAL = 1.0f;

@@ -17,6 +17,7 @@ public abstract class SerializableData
     protected const string WORLD = k.WORLD;
     protected const string TIME_PLAYED = k.TIME_PLAYED;
     protected const string SESSION_COUNT = k.SESSION_COUNT;
+	protected const string SAVE_ID = k.SAVE_ID;
 
     protected const int NONE_VALUE = k.NONE_VALUE;
     protected const int SINGLE_VALUE = k.SINGLE_VALUE;
