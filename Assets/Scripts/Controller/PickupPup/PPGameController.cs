@@ -176,7 +176,6 @@ public class PPGameController : GameController, ICurrencySystem
     #endregion
 
     // The dog the player currently has selected
-    Dog selectedDog;
 	PPTuning tuning;
 	DogDatabase dogDatabase;
     ShopDatabase shop;
@@ -467,11 +466,6 @@ public class PPGameController : GameController, ICurrencySystem
 		}
 	}
         
-	public void SelectDog(Dog dog)
-	{
-		this.selectedDog = dog;
-	}
-
 	public void SendToTargetSlot(Dog dog)
 	{
 		if(HasTargetSlot)
@@ -484,16 +478,6 @@ public class PPGameController : GameController, ICurrencySystem
 	public void ClearTargetSlot()
 	{
 		this.targetSlot = null;
-	}
-
-	public void SendSelectedDogToSlot(DogSlot slot)
-	{
-		sendDogToSlot(this.selectedDog, slot);
-	}
-
-	void sendDogToSlot(Dog dog, DogSlot slot)
-	{
-        slot.Init(dog, inScoutingSelectMode:false);
 	}
 
 	void sendDogToScout(Dog dog) 
