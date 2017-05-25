@@ -232,6 +232,10 @@ public class DogCollarSlot : DogSlot
         if(redeemableGiftIcon)
         {
             redeemableGiftIcon.sprite = gift.Icon;
+			if(gift is DogFoodData)
+			{
+				redeemableGiftIcon.color = (gift as DogFoodData).Color;
+			}
         }
     }
 

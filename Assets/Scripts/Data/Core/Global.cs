@@ -55,6 +55,7 @@ public class Global
 	public const int TRUE_VALUE_INT = 1;
 	public const int FALSE_VALUE_INT = NONE_VALUE;
     public const int ZERO_INDEX_OFFSET = 1;
+	public const int INVERT_VALUE = -1;
 
     public const float FULL_PERCENT_F = 100f;
     public const float FULL_PERCENT_DECIMAL = 1.0f;

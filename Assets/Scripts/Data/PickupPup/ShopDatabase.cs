@@ -49,8 +49,17 @@ public class ShopDatabase : Database<ShopDatabase>
     public override void Initialize()
     {
         AssignInstance(this);
+		setupShopItems();
     }
 
     #endregion
+
+	void setupShopItems()
+	{
+		foreach(ShopItem item in this.items)
+		{
+			item.SetCurrency();
+		}
+	}
 
 }

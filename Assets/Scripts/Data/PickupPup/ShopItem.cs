@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System;
+using k = PPGlobal;
 
 [Serializable]
 public class ShopItem : PPData
@@ -25,7 +26,23 @@ public class ShopItem : PPData
 
     #region Instance Accessors
 
-    public int Cost
+	public CurrencyData Cost
+	{
+		get
+		{
+			return new CurrencyFactory().Create(CostCurrencyType, CostAmount);
+		}
+	}
+
+	public CurrencyData Value
+	{
+		get
+		{
+			return currency;
+		}
+	}
+
+    public int CostAmount
     {
         get
         {
@@ -41,22 +58,6 @@ public class ShopItem : PPData
         }
     }
 
-    public int Value
-    {
-        get
-        {
-            return value;
-        }
-    }
-
-    public string ValueStr
-    {
-        get
-        {
-            return PPData.FormatCost(value);
-        }
-    }
-
     public string ItemName
     {
         get
@@ -69,7 +70,7 @@ public class ShopItem : PPData
     {
         get
         {
-            return costCurrencyType;
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), costCurrencyType);
         }
     }
 
@@ -77,24 +78,53 @@ public class ShopItem : PPData
     {
         get
         {
-            return valueCurrencyType;
+			return (CurrencyType) Enum.Parse(typeof(CurrencyType), valueCurrencyType);
         }
     }
-
+		
     public Sprite Icon
     {
         get
         {
-            if(_icon == null)
-            {
-                if(!spritesheetDatabase.TryGetSprite(icon, out _icon))
-                {
-                    _icon = DogDatabase.DefaultSprite;
-                }
-            }
-            return _icon;
+			if(currency == null)
+			{
+	            if(_icon == null)
+	            {
+	                if(!spritesheetDatabase.TryGetSprite(icon, out _icon))
+	                {
+	                    _icon = DogDatabase.DefaultSprite;
+	                }
+	            }
+	            return _icon;
+			}
+			else
+			{
+				return currency.Icon;
+			}
         }
     }
+
+	public Color IconColor
+	{
+		get
+		{
+			if(currency == null)
+			{
+				return Color.white;
+			}
+			else
+			{
+				if(ValueCurrencyType == CurrencyType.DogFood)
+				{
+					return (currency as DogFoodData).Color;
+				}
+				else
+				{
+					return Color.white;
+				}
+			}
+		}
+	}
 
     #endregion
 
@@ -110,31 +140,32 @@ public class ShopItem : PPData
         }
     }
 
+	CurrencyData currency;
+
     [SerializeField]
     int cost;
     [SerializeField]
-    int value;
-    [SerializeField]
     string itemName;
     [SerializeField]
-    CurrencyType costCurrencyType;
+	string costCurrencyType;
     [SerializeField]
-    CurrencyType valueCurrencyType;
+	string valueCurrencyType;
     [SerializeField]
     string icon;
+	[SerializeField]
+	string valueCurrencySubtype;
+
     Sprite _icon;
     SpritesheetDatabase _spritesheetDatabase;
 
     public ShopItem(
         string itemName,
-        int value,
-        CurrencyType valueCurrencyType,
+		string valueCurrencyType,
         int cost, 
-        CurrencyType costCurrencyType
+		string costCurrencyType
         )
     {
         this.itemName = itemName;
-        this.value = value;
         this.valueCurrencyType = valueCurrencyType;
         this.cost = cost;
         this.costCurrencyType = costCurrencyType;       
@@ -144,5 +175,37 @@ public class ShopItem : PPData
     {
         // NOTHING
     }
+
+	public void SetCurrency()
+	{
+		if(ValueCurrencyType == CurrencyType.DogFood)
+		{
+			currency = FoodDatabase.GetInstance.Get(valueCurrencySubtype).Copy();
+			int difference = k.SINGLE_VALUE - currency.Amount;
+			currency.ChangeBy(difference);
+		}
+		else
+		{
+			throw new System.NotImplementedException();
+		}
+	}
+
+	public int GetTotalCost(int amount)
+	{
+		return this.CostAmount * amount;
+	}
+
+	public string GetTotalCostStr(int amount)
+	{
+		return string.Format("${0}", GetTotalCost(amount));
+	}
+
+	public CurrencyData GetPurchase(int amount)
+	{
+		CurrencyData purchase = Value.Copy<CurrencyData>();
+		int difference = amount - purchase.Amount;
+		purchase.ChangeBy(difference);
+		return purchase;
+	}
 
 }

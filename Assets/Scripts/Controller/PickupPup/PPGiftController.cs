@@ -14,7 +14,6 @@ public class PPGiftController : SingletonController<PPGiftController>
 	PPTuning tuning;
 
 	WeightedRandomBuffer<CurrencyType> defaultReturnChances;
-    WeightedRandomBuffer<CurrencyType> defaultReturnChancesWithGifts;
 	WeightedRandomBuffer<CurrencyData> giftChances;
 
     CurrencyFactory giftFactory;
@@ -43,20 +42,6 @@ public class PPGiftController : SingletonController<PPGiftController>
 				tuning.DefaultChanceOfCollectingMoney,
 				tuning.DefaultChanceOfCollectingDogFood,
 			}
-		);
-        defaultReturnChancesWithGifts = new WeightedRandomBuffer<CurrencyType>(
-            new CurrencyType[]
-            {
-                CurrencyType.Coins, 
-                CurrencyType.DogFood,
-                CurrencyType.SpecialGift
-            },
-            new float[]
-            {
-                tuning.DefaultChanceOfCollectingMoney,
-                tuning.DefaultChanceOfCollectingDogFood,
-                tuning.ChanceOfSpecialGift
-            }
         );
 		giftChances = populateGifts(
 			tuning.DailyGiftOptions,
@@ -119,16 +104,21 @@ public class PPGiftController : SingletonController<PPGiftController>
 
     #endif
 
+		DogFoodData food = dog.DigestFood();
+		if(food == null)
+		{
+			food = dataController.DogFood;
+		}
         CurrencyType specialization = dog.Breed.ISpecialization;
         int amount = randomAmount();
         CurrencyType type;
         if(specialization == CurrencyType.None)
         {
-            type = defaultRandomType(dog);
+			type = defaultRandomType(dog, food);
         }
         else
         {
-            type = getRandomizerBySpecialization(dog, specialization).GetRandom();
+            type = getRandomizerBySpecialization(dog, food, specialization).GetRandom();
         }
         if(type == CurrencyType.SpecialGift)
         {
@@ -136,7 +126,12 @@ public class PPGiftController : SingletonController<PPGiftController>
 		}
         else
         {
-            return giftFactory.Create(type, amount);
+			CurrencyData gift = giftFactory.Create(type, amount);
+			if(food.AmountMod != k.NONE_VALUE)
+			{
+				gift.MultiplyBy(food.AmountMod);
+			}
+			return gift;
         }
     }
 
@@ -177,7 +172,7 @@ public class PPGiftController : SingletonController<PPGiftController>
 		return giftChances.GetRandom();
 	}
 
-	WeightedRandomBuffer<CurrencyType> getRandomizerBySpecialization(DogDescriptor dog, CurrencyType specialization)
+	WeightedRandomBuffer<CurrencyType> getRandomizerBySpecialization(DogDescriptor dog, DogFoodData food, CurrencyType specialization)
 	{
 		CurrencyType[] currencies = new CurrencyType[]
         {
@@ -185,13 +180,46 @@ public class PPGiftController : SingletonController<PPGiftController>
             getSecondary(specialization),
             CurrencyType.SpecialGift,
         };
-		float[] weights = new float[]
-        {
-            tuning.ChanceOfSpecialization,
-            tuning.ChanceOfSecondary,
-            tuning.ChanceOfSpecialGift,
-        };
+		float[] weights = getWeights(food, hasSpecialization:true);
 		return new WeightedRandomBuffer<CurrencyType>(currencies, weights);
+	}
+
+	float[] getWeights(DogFoodData dogFood, bool hasSpecialization)
+	{
+		float difference;
+		float halfDifference;
+		float specialGiftChance;
+		if(dogFood.SpecialGiftMod != k.NONE_VALUE)
+		{
+			difference = dogFood.SpecialGiftMod - tuning.ChanceOfSpecialGift;
+			specialGiftChance = dogFood.SpecialGiftMod;
+		}
+		else
+		{
+			difference = k.NONE_VALUE;
+			specialGiftChance = tuning.ChanceOfSpecialGift;
+		}
+		halfDifference = difference / 2f;
+		float[] weights;
+		if(hasSpecialization)
+		{
+			weights = new float[]
+			{
+				tuning.ChanceOfSpecialization - halfDifference,
+				tuning.ChanceOfSecondary - halfDifference,
+				specialGiftChance,
+			};
+		}
+		else
+		{
+			weights = new float[]
+			{
+				tuning.DefaultChanceOfCollectingDogFood - halfDifference,
+				tuning.DefaultChanceOfCollectingMoney - halfDifference,
+				specialGiftChance,
+			};
+		}
+		return weights;
 	}
 
 	WeightedRandomBuffer<CurrencyData> populateGifts(
@@ -239,9 +267,16 @@ public class PPGiftController : SingletonController<PPGiftController>
 		return new WeightedRandomBuffer<CurrencyData>(specialGiftOptions, specialGiftOdds);
 	}
 
-    CurrencyType defaultRandomType(DogDescriptor dog)
+	CurrencyType defaultRandomType(DogDescriptor dog, DogFoodData food)
 	{
-        return defaultReturnChancesWithGifts.GetRandom();
+		return new WeightedRandomBuffer<CurrencyType>(
+			new CurrencyType[]
+			{
+				CurrencyType.Coins, 
+				CurrencyType.DogFood,
+				CurrencyType.SpecialGift
+			},
+			getWeights(food, hasSpecialization:false)).GetRandom();
 	}
 
 	int randomAmount()
