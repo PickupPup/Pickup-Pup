@@ -480,6 +480,11 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
+	public void ScheduleScoutingNotification()
+	{
+		descriptor.ScheduleScoutingNotification();
+	}
+
 	public void GiveTimer(PPTimer timer)
 	{
 		this.scoutingTimer = timer;

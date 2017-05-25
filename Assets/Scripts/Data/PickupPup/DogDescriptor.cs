@@ -342,6 +342,12 @@ public class DogDescriptor : PPDescriptor
 			linkedDog.SubscribeToScoutingTimerChange(updateTimeRemainingScouting);
 		}
 		this._scoutingSlotIndex = slotIndex;
+	}
+
+	public void ScheduleScoutingNotification()
+	{
+		// Cleanup in case there was already a notification scheduled
+		cancelScoutingNotification();
 		scoutingNotificationTimeUp = DateTime.Now.AddSeconds(TotalTimeToReturn);
 		NotificationController.Instance.SendNotification(
 			string.Format(k.DOG_SCOUTING_TITLE, Name),
@@ -358,12 +364,9 @@ public class DogDescriptor : PPDescriptor
 		{
 			linkedDog.UnsubscribeFromScoutingTimerChange(updateTimeRemainingScouting);
 		}
-		NotificationController.Instance.CancelNotification(
-			string.Format(k.DOG_SCOUTING_TITLE, Name),
-			string.Format(k.DOG_SCOUTING_MESSAGE, Name),
-			scoutingNotificationTimeUp);
+		cancelScoutingNotification();
 	}
-        
+		        
     public void FindGift(CurrencyData gift)
     {
         this.RedeemableGift = gift;
@@ -433,6 +436,14 @@ public class DogDescriptor : PPDescriptor
 		DogFoodData food = this.eatenFood;
 		this.eatenFood = null;
 		return food;
+	}
+
+	void cancelScoutingNotification()
+	{
+		NotificationController.Instance.CancelNotification(
+			string.Format(k.DOG_SCOUTING_TITLE, Name),
+			string.Format(k.DOG_SCOUTING_MESSAGE, Name),
+			scoutingNotificationTimeUp);
 	}
 
     void callBeginScouting()
