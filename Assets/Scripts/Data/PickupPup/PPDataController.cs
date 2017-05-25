@@ -84,6 +84,14 @@ public class PPDataController : DataController, ICurrencySystem
         }
     }
 
+	public DogDescriptor[] HomeDogs
+	{
+		get
+		{
+			return currentGame.HomeDogs;
+		}
+	}
+		
 	public int DogCount 
 	{
 		get 
@@ -149,6 +157,14 @@ public class PPDataController : DataController, ICurrencySystem
             return currencies.DogFood;
         }
     }
+
+	public FoodSystem AllFood
+	{
+		get
+		{
+			return currencies.AllFood;
+		}
+	}
 
     public int TimesDogFoodRefilled
     {
@@ -273,6 +289,11 @@ public class PPDataController : DataController, ICurrencySystem
 
     #endregion
 
+	public DogFoodData[] GetAvailableFoods()
+	{
+		return currentGame.GetAvailableFoods();
+	}
+
 	public void SendDogToScout(Dog dog)
 	{
 		currentGame.SendDogToScout(dog);
@@ -321,9 +342,9 @@ public class PPDataController : DataController, ICurrencySystem
 		SaveGame();
 	}
 
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+	public void ChangeCurrencyAmount(CurrencyData currency)
     {
-        currencies.ChangeCurrencyAmount(type, deltaAmount);
+		currencies.ChangeCurrencyAmount(currency);
     }
 
 	public void GiveCurrency(CurrencyData currency)
@@ -331,9 +352,9 @@ public class PPDataController : DataController, ICurrencySystem
 		currencies.GiveCurrency(currency);
 	}
 
-    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+	public void ConvertCurrency(CurrencyData taken, CurrencyData given)
     {
-        currencies.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+		currencies.ConvertCurrency(taken, given);
     }
 
 	public void SubscribeToCurrencyChange(CurrencyType type, MonoActionInt callback)
@@ -371,6 +392,11 @@ public class PPDataController : DataController, ICurrencySystem
         return HasCurrency(type);
     }
      
+	public bool HasFood(string foodType, int amount)
+	{
+		return currencies.HasFood(foodType, amount);
+	}
+
     public void RefillDogFood()
     {
         TimesDogFoodRefilled++;

@@ -137,6 +137,14 @@ public class UIElement : MonoBehaviourExtended
         }
     }
 
+	public virtual void SetImageColor(Color color)
+	{
+		if(hasImage)
+		{
+			this.image.color = color;
+		}
+	}
+
 	public void StartOpacityLerp(float startOpacity, float endOpacity, float time, bool loop) 
 	{
 		if(hasCanvasGroup) 

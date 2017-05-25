@@ -60,6 +60,10 @@ public class GiftReportUI : UIElement
 			this.dogPortrait.sprite = report.Dog.Portrait;
 		}
 		this.rewardIcon.sprite = report.Currency.Icon;
+		if(report.Currency is DogFoodData)
+		{
+			this.rewardIcon.color = (report.Currency as DogFoodData).Color;
+		}
 		this.reportText.text = report.ToString();
 		Show();
         EventController.Event(k.GetPlayEvent(k.GIFT_REDEEM));

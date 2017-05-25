@@ -91,12 +91,6 @@ public class DogCollarSlot : DogSlot
         }
     }
 
-    public override void Init(Dog dog, bool inScoutingSelectMode)
-    {
-        base.Init(dog, inScoutingSelectMode);
-        initDogScouting(dog, onResume: false);
-    }
-
     protected override void handleChangeDog(Dog previousDog)
     {
         base.handleChangeDog(previousDog);
@@ -129,7 +123,7 @@ public class DogCollarSlot : DogSlot
         dogImage.sprite = dog.Portrait;
         subscribeTimerEvents(dog);
         dog.SetTimer(dogInfo.TimeRemainingScouting);
-		initDogScouting(dog, onResume: true);
+		initDogScouting(dog, onResume:true);
         if(dog.HasRedeemableGift)
         {
             handleGiftFound(dog.PeekAtGift);
@@ -182,6 +176,10 @@ public class DogCollarSlot : DogSlot
     {
         unsubscribeFromDogEvents(dog);
         dog.TrySendToScout();
+		if(!onResume)
+		{
+			dog.ScheduleScoutingNotification();
+		}
         subscribeTimerEvents(dog);
         subscribeGiftEvents(dog);
         toggleButtonActive(false);
@@ -232,6 +230,10 @@ public class DogCollarSlot : DogSlot
         if(redeemableGiftIcon)
         {
             redeemableGiftIcon.sprite = gift.Icon;
+			if(gift is DogFoodData)
+			{
+				redeemableGiftIcon.color = (gift as DogFoodData).Color;
+			}
         }
     }
 
@@ -247,9 +249,10 @@ public class DogCollarSlot : DogSlot
         {
             //BP Start a lerp every second that lerps the radial fill down a second
             float totalTime = dog.Info.TotalTimeToReturn;
-            StartCoroutine(lerpRadial(timeRemaining, totalTime));
-            
-
+			if(this)
+			{
+            	StartCoroutine(lerpRadial(timeRemaining, totalTime));
+			}
         }
     }
     

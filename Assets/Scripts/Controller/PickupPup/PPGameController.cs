@@ -176,7 +176,6 @@ public class PPGameController : GameController, ICurrencySystem
     #endregion
 
     // The dog the player currently has selected
-    Dog selectedDog;
 	PPTuning tuning;
 	DogDatabase dogDatabase;
     ShopDatabase shop;
@@ -321,14 +320,14 @@ public class PPGameController : GameController, ICurrencySystem
 		dataController.ChangeFood(deltaFood);
 	}
 
-    public void ChangeCurrencyAmount(CurrencyType type, int deltaAmount)
+	public void ChangeCurrencyAmount(CurrencyData currency)
     {
-        dataController.ChangeCurrencyAmount(type, deltaAmount);
+		dataController.ChangeCurrencyAmount(currency);
     }
 
-    public void ConvertCurrency(int value, CurrencyType valueCurrencyType, int cost, CurrencyType costCurrencyType)
+	public void ConvertCurrency(CurrencyData taken, CurrencyData given)
     {
-        dataController.ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+		dataController.ConvertCurrency(taken, given);
     }
 
 	public void SetTargetSlot(DogSlot slot)
@@ -372,6 +371,11 @@ public class PPGameController : GameController, ICurrencySystem
 		return dataController.TryTakeCurrency(currency);
 	}
 
+	public bool HasFood(string foodType, int amount)
+	{
+		return dataController.HasFood(foodType, amount);
+	}
+
     #endregion
 
     public void ToggleMainMenuOpen(bool menuIsOpen)
@@ -385,12 +389,11 @@ public class PPGameController : GameController, ICurrencySystem
 		return data;
 	}
 
-    public bool TryBuyItem(int value, CurrencyType valueCurrencyType,
-        int cost, CurrencyType costCurrencyType)
+	public bool TryBuyItem(ShopItem item, int amount)
     {
-        if(CanAfford(costCurrencyType, cost))
+		if(CanAfford(item.CostCurrencyType, item.GetTotalCost(amount)))
         {   
-            buyItem(value, valueCurrencyType, cost, costCurrencyType);
+			buyItem(item, amount);
             return true;
         }
         else 
@@ -400,16 +403,10 @@ public class PPGameController : GameController, ICurrencySystem
         }
     }
 
-    public bool TryBuyItem(ShopItem item)
-    {
-		return TryBuyItem(item.Value, item.ValueCurrencyType, item.Cost, item.CostCurrencyType);
-    }
-
-    void buyItem(int value, CurrencyType valueCurrencyType,
-        int cost, CurrencyType costCurrencyType)
+	void buyItem(ShopItem item, int amount)
     {
         EventController.Event(k.GetPlayEvent(k.PURCHASE));
-        ConvertCurrency(value, valueCurrencyType, cost, costCurrencyType);
+		ConvertCurrency(item.Cost, item.GetPurchase(amount));
     }
 
     public bool TryAdoptDog(DogDescriptor dog)
@@ -469,11 +466,6 @@ public class PPGameController : GameController, ICurrencySystem
 		}
 	}
         
-	public void SelectDog(Dog dog)
-	{
-		this.selectedDog = dog;
-	}
-
 	public void SendToTargetSlot(Dog dog)
 	{
 		if(HasTargetSlot)
@@ -486,16 +478,6 @@ public class PPGameController : GameController, ICurrencySystem
 	public void ClearTargetSlot()
 	{
 		this.targetSlot = null;
-	}
-
-	public void SendSelectedDogToSlot(DogSlot slot)
-	{
-		sendDogToSlot(this.selectedDog, slot);
-	}
-
-	void sendDogToSlot(Dog dog, DogSlot slot)
-	{
-        slot.Init(dog, inScoutingSelectMode:false);
 	}
 
 	void sendDogToScout(Dog dog) 
@@ -523,7 +505,7 @@ public class PPGameController : GameController, ICurrencySystem
 
 	public void RedeemGift(int value, CurrencyType valueCurrencyType)
     {
-		dataController.ChangeCurrencyAmount(valueCurrencyType, value);
+		dataController.ChangeCurrencyAmount(new CurrencyFactory().Create(valueCurrencyType, value));
     }
 
 	DogDatabase parseDogDatabase() 

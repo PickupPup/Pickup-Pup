@@ -57,6 +57,7 @@ public class PPUIButton : PPUIElement
 
     public void ToggleEnabled(bool isEnabled)
     {
+		checkReferences();
         this.button.interactable = isEnabled;
     }
 

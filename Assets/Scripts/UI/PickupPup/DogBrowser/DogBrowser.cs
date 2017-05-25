@@ -159,7 +159,7 @@ public class DogBrowser : PPUIElement, IPageable
             // Filter out scoting dogs:
             if(inScoutingSelectMode)
             {
-                while(currentDogIndex < dogs.Length && dogs[currentDogIndex].IsScouting)
+				while(currentDogIndex < dogs.Length && (dogs[currentDogIndex].IsScouting || !dogs[currentDogIndex].HasEaten))
                 {
                     currentDogIndex++;
                 }
