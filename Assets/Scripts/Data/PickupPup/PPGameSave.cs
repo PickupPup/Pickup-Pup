@@ -200,11 +200,6 @@ public class PPGameSave : GameSave, ISerializable
         }
     }
 
-	public void SetNotifications(INotificationInterchange notifications)
-	{
-		
-	}
-
     void addDogToRoom(DogDescriptor dog, PPScene room)
     {
         List<DogDescriptor> inRoom;

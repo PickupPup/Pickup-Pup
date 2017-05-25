@@ -4,6 +4,8 @@
  * Usage: [no notes]
  */
 
+#if UNITY_IOS
+
 using System;
 using System.IO;
 using System.Linq;
@@ -127,3 +129,5 @@ internal class iOSNotificationRegister
 	}
 
 }
+
+#endif
