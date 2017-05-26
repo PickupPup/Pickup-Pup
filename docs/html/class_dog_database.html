@@ -101,6 +101,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad1f0dfa60bc3cdb5c075a41c15840055"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fbcf6f6185dec4c51f92bb234e77e13"><td class="memItemLeft" align="right" valign="top">Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#a3fbcf6f6185dec4c51f92bb234e77e13">GetDogWorldSprite</a> (<a class="el" href="class_dog_descriptor.html">DogDescriptor</a> dog)</td></tr>
 <tr class="separator:a3fbcf6f6185dec4c51f92bb234e77e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2099d55035dcc9b3f96ad3b1cfb6cd6e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_souvenir_data.html">SouvenirData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#a2099d55035dcc9b3f96ad3b1cfb6cd6e">GetDogSouvenir</a> (string souvenirName)</td></tr>
+<tr class="separator:a2099d55035dcc9b3f96ad3b1cfb6cd6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59aa3dcd45797791d155bce1d5cafb25"><td class="memItemLeft" align="right" valign="top">override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#a59aa3dcd45797791d155bce1d5cafb25">TryInit</a> ()</td></tr>
 <tr class="separator:a59aa3dcd45797791d155bce1d5cafb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a177a628b2425d7a904548960a01e61fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dog_descriptor.html">DogDescriptor</a> []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#a177a628b2425d7a904548960a01e61fc">GetDogRange</a> (int start, int length)</td></tr>
@@ -118,13 +120,13 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a6a5bc571c75703c502e9349e8ae45ca6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_dog_database.html">DogDatabase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#a6a5bc571c75703c502e9349e8ae45ca6">GetInstance</a><code> [get]</code></td></tr>
-<tr class="separator:a6a5bc571c75703c502e9349e8ae45ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03c3b63f1739bb010e7860bf6d9e8994"><td class="memItemLeft" align="right" valign="top">static Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#a03c3b63f1739bb010e7860bf6d9e8994">DefaultSprite</a><code> [get]</code></td></tr>
 <tr class="separator:a03c3b63f1739bb010e7860bf6d9e8994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af92dd84f654e7dada9ba3fc41d112cd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dog_descriptor.html">DogDescriptor</a> []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dog_database.html#af92dd84f654e7dada9ba3fc41d112cd0">Dogs</a><code> [get]</code></td></tr>
 <tr class="separator:af92dd84f654e7dada9ba3fc41d112cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_class_database"><td colspan="2" onclick="javascript:toggleInherit('properties_class_database')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_database.html">Database&lt; DogDatabase &gt;</a></td></tr>
+<tr class="memitem:a466d687cca92a8ec767c467d454f1f0c inherit properties_class_database"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#a466d687cca92a8ec767c467d454f1f0c">GetInstance</a><code> [get]</code></td></tr>
+<tr class="separator:a466d687cca92a8ec767c467d454f1f0c inherit properties_class_database"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2e62275c90351a0247166cc6f61bfda inherit properties_class_database"><td class="memItemLeft" align="right" valign="top">static T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#ae2e62275c90351a0247166cc6f61bfda">Instance</a><code> [get]</code></td></tr>
 <tr class="separator:ae2e62275c90351a0247166cc6f61bfda inherit properties_class_database"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab230a8469a9bc4384e315a9438e4f2d6 inherit properties_class_database"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_database.html#ab230a8469a9bc4384e315a9438e4f2d6">IsInitialized</a><code> [get]</code></td></tr>
@@ -309,6 +311,24 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2099d55035dcc9b3f96ad3b1cfb6cd6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2099d55035dcc9b3f96ad3b1cfb6cd6e">&#9670;&nbsp;</a></span>GetDogSouvenir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_souvenir_data.html">SouvenirData</a> DogDatabase.GetDogSouvenir </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>souvenirName</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -544,35 +564,13 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a6a5bc571c75703c502e9349e8ae45ca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5bc571c75703c502e9349e8ae45ca6">&#9670;&nbsp;</a></span>GetInstance</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_dog_database.html">DogDatabase</a> DogDatabase.GetInstance</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/imann24/Documents/Current_Projects/PickupPup/Assets/Scripts/Data/PickupPup/<a class="el" href="_dog_database_8cs.html">DogDatabase.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 22 2017 19:20:48 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 26 2017 13:18:49 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

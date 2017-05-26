@@ -1,14 +1,18 @@
 var searchData=
 [
   ['mainmenuisopen',['MainMenuIsOpen',['../class_p_p_game_controller.html#a6f6d0d14fc927dbe72f7609672f93145',1,'PPGameController']]],
+  ['maxaffection',['MaxAffection',['../class_p_p_tuning.html#a04107aa99ed647a0deb2885492ab3444',1,'PPTuning']]],
   ['maxamountpertypefromscouting',['MaxAmountPerTypeFromScouting',['../class_p_p_tuning.html#a6b8af7a68ff8d15fab9ea343d063b0d2',1,'PPTuning']]],
+  ['maxconcurrentinstances',['MaxConcurrentInstances',['../class_gift_event_data.html#ae538b527e6dff1c185ed8db7a173b405',1,'GiftEventData']]],
   ['maxcoupondiscount',['MaxCouponDiscount',['../class_p_p_tuning.html#a2608f12fe9f0094a398d5819b3b1f2aa',1,'PPTuning']]],
   ['maxdogsinhouse',['MaxDogsInHouse',['../class_p_p_tuning.html#a6e1173d45de0445bd69f148496431253',1,'PPTuning']]],
   ['maxdogsscouting',['MaxDogsScouting',['../class_p_p_tuning.html#ab38f169c78fade5902315064f3785a87',1,'PPTuning']]],
+  ['maxdogstatetime',['MaxDogStateTime',['../class_p_p_tuning.html#a0b8c1513afe2653c164a54d063fa5672',1,'PPTuning']]],
   ['maxnumberadsperday',['MaxNumberAdsPerDay',['../class_p_p_tuning.html#a1eb99281890cb659436ccbd22bf13e95',1,'PPTuning']]],
   ['maxpuppyage',['MaxPuppyAge',['../class_p_p_tuning.html#ae0fccbd1e7db3bd3b94ec154ef422637',1,'PPTuning']]],
   ['mincoupondiscount',['MinCouponDiscount',['../class_p_p_tuning.html#a4c9950ef6b458562f1bdde2372c987ac',1,'PPTuning']]],
   ['mindogfoodtounlockcollar',['MinDogFoodToUnlockCollar',['../class_p_p_tuning.html#a38535a10000773669a22227ea02ec9fd',1,'PPTuning']]],
+  ['mindogstatetime',['MinDogStateTime',['../class_p_p_tuning.html#a05f43fb0ac2b668c17eaf98681d69f14',1,'PPTuning']]],
   ['mindogstounlockcollar',['MinDogsToUnlockCollar',['../class_p_p_tuning.html#aa3885950fdc5bb150fe497cbf43f8dcc',1,'PPTuning']]],
   ['minseniordogage',['MinSeniorDogAge',['../class_p_p_tuning.html#af6a5407af62e6502401be9a46fbf94e5',1,'PPTuning']]],
   ['missedfeedingsbeforeseizure',['MissedFeedingsBeforeSeizure',['../class_p_p_tuning.html#a7a3963104e44aca4586e0efdcd45a62d',1,'PPTuning']]],

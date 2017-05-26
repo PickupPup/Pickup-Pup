@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zero_5findex_5foffset',['ZERO_INDEX_OFFSET',['../class_global.html#a89261adb8c7da67cdc91b2f45f465710',1,'Global.ZERO_INDEX_OFFSET()'],['../class_resource_loader.html#acce986c263340a4b7f4ff72d56d8e351',1,'ResourceLoader.ZERO_INDEX_OFFSET()']]]
+  ['whistle',['WHISTLE',['../class_p_p_global.html#a00e7f48927d41c0fac5814464c230e7c',1,'PPGlobal']]],
+  ['world',['WORLD',['../class_serializable_data.html#a7d84bccf314da8ae7da683dc44653bfc',1,'SerializableData.WORLD()'],['../class_p_p_global.html#aa8c537a532d7d07a1cd447eb94d64e1c',1,'PPGlobal.WORLD()']]]
 ];

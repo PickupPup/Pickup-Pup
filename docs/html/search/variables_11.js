@@ -6,6 +6,6 @@ var searchData=
   ['redeem_5fgift',['REDEEM_GIFT',['../class_p_p_global.html#a2648b4640e2ecb12ef8559fc236e9d21',1,'PPGlobal.REDEEM_GIFT()'],['../class_p_p_u_i_element.html#aca33545a22e44bc32ae92e056d130595',1,'PPUIElement.REDEEM_GIFT()']]],
   ['referencesfetched',['referencesFetched',['../class_mono_behaviour_extended.html#a7ff3860f3bed1d7f61b93a85dded1f16',1,'MonoBehaviourExtended']]],
   ['referencesset',['referencesSet',['../class_mono_behaviour_extended.html#a3b202818db6c58b20937232906527127',1,'MonoBehaviourExtended']]],
-  ['rehomebutton',['rehomeButton',['../class_dog_profile.html#ad8c9067e23763890de2b85c628f032dc',1,'DogProfile']]],
-  ['renderers',['renderers',['../class_world_object_behaviour.html#a8685ad463b74747fdae1fdece811ec2d',1,'WorldObjectBehaviour']]]
+  ['renderers',['renderers',['../class_world_object_behaviour.html#a8685ad463b74747fdae1fdece811ec2d',1,'WorldObjectBehaviour']]],
+  ['rewardsfxevent',['rewardSFXEvent',['../class_ad_reward.html#af1cdb130681089664e2adde953b69ec3',1,'AdReward']]]
 ];

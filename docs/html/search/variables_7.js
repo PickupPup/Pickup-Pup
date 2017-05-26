@@ -6,7 +6,9 @@ var searchData=
   ['gift',['GIFT',['../class_p_p_global.html#a013b99fcb381aa2d75de3f5de72c656e',1,'PPGlobal']]],
   ['gift_5fitems',['GIFT_ITEMS',['../class_p_p_global.html#a5b40a450908fd7539802aeb42be242c4',1,'PPGlobal']]],
   ['gift_5fredeem',['GIFT_REDEEM',['../class_p_p_global.html#a330fb0feb91666d810d864fc4a56e385',1,'PPGlobal']]],
+  ['gift_5fredeemed',['GIFT_REDEEMED',['../class_dog_analytics_event.html#a2fa859db2431d5e9c0b3e61299fbbf3e',1,'DogAnalyticsEvent']]],
   ['giftcontroller',['giftController',['../class_p_p_u_i_controller.html#aa73c4dc181236c0bfaa59f8b2df0f86a',1,'PPUIController']]],
   ['giftinfo',['giftInfo',['../class_gift_slot.html#aa61e5e0d66903177804a141d5effc5c9',1,'GiftSlot']]],
+  ['gifts',['GIFTS',['../class_resource_loader.html#a0490241eaf1b44006908bd495707bf13',1,'ResourceLoader']]],
   ['gifts_5fdir',['GIFTS_DIR',['../class_global.html#a69258b1ad2d28fc83479cc851a8885f8',1,'Global.GIFTS_DIR()'],['../class_resource_loader.html#a0a21fdc30021a638cf6eadc3f39d5c3a',1,'ResourceLoader.GIFTS_DIR()']]]
 ];

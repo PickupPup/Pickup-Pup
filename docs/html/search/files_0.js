@@ -1,10 +1,14 @@
 var searchData=
 [
+  ['adcontroller_2ecs',['AdController.cs',['../_ad_controller_8cs.html',1,'']]],
+  ['adopteddogprofile_2ecs',['AdoptedDogProfile.cs',['../_adopted_dog_profile_8cs.html',1,'']]],
+  ['adreward_2ecs',['AdReward.cs',['../_ad_reward_8cs.html',1,'']]],
+  ['affectionmeter_2ecs',['AffectionMeter.cs',['../_affection_meter_8cs.html',1,'']]],
   ['agent_2ecs',['Agent.cs',['../_agent_8cs.html',1,'']]],
   ['aiagent_2ecs',['AIAgent.cs',['../_a_i_agent_8cs.html',1,'']]],
   ['analyticscontroller_2ecs',['AnalyticsController.cs',['../_analytics_controller_8cs.html',1,'']]],
   ['analyticsevent_2ecs',['AnalyticsEvent.cs',['../_analytics_event_8cs.html',1,'']]],
-  ['anaylticstest_2ecs',['AnaylticsTest.cs',['../_anayltics_test_8cs.html',1,'']]],
+  ['analyticstest_2ecs',['AnalyticsTest.cs',['../_analytics_test_8cs.html',1,'']]],
   ['animparam_2ecs',['AnimParam.cs',['../_anim_param_8cs.html',1,'']]],
   ['arrayutil_2ecs',['ArrayUtil.cs',['../_array_util_8cs.html',1,'']]],
   ['audioactiontype_2ecs',['AudioActionType.cs',['../_audio_action_type_8cs.html',1,'']]],

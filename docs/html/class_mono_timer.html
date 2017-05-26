@@ -100,6 +100,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a77cd053a1c6a82d4f669ec41f85ce4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58edd3dc3cfd9ca5c71542dd71f59372"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a58edd3dc3cfd9ca5c71542dd71f59372">Stop</a> (bool resetOnStop)</td></tr>
 <tr class="separator:a58edd3dc3cfd9ca5c71542dd71f59372"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3346606bff695d2cbef0ed2b883f043"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#ab3346606bff695d2cbef0ed2b883f043">SubscribeToTimeBegin</a> (<a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a> action)</td></tr>
+<tr class="separator:ab3346606bff695d2cbef0ed2b883f043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac256b9c30ae7908c9ac50fd5ec20e802"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#ac256b9c30ae7908c9ac50fd5ec20e802">UnsubscribeFromTimeBegin</a> (<a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a> action)</td></tr>
+<tr class="separator:ac256b9c30ae7908c9ac50fd5ec20e802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a5a436d367a3de60fdb11e259cd0995"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a5a5a436d367a3de60fdb11e259cd0995">SubscribeToTimeChange</a> (<a class="el" href="class_p_p_data.html#ae7362514e4fbcd8c0fdbe12b54ed3a3c">PPData.DataActionf</a> action)</td></tr>
 <tr class="separator:a5a5a436d367a3de60fdb11e259cd0995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada86b6894eca382d8a431d939a2b7a76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#ada86b6894eca382d8a431d939a2b7a76">UnsubscribeFromTimeChange</a> (<a class="el" href="class_p_p_data.html#ae7362514e4fbcd8c0fdbe12b54ed3a3c">PPData.DataActionf</a> action)</td></tr>
@@ -134,10 +138,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:acc3be007a246051adf7d97f986b7f9e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#acc3be007a246051adf7d97f986b7f9e3">callOnTimeBegin</a> ()</td></tr>
+<tr class="separator:acc3be007a246051adf7d97f986b7f9e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e3f1d3e2b45310e01f0cb07daf174f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a6e3f1d3e2b45310e01f0cb07daf174f7">callOnTimeUp</a> ()</td></tr>
 <tr class="separator:a6e3f1d3e2b45310e01f0cb07daf174f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f038d22396d8ba19f27b5f15383bc52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a1f038d22396d8ba19f27b5f15383bc52">callOnTimeChange</a> (float newTime)</td></tr>
 <tr class="separator:a1f038d22396d8ba19f27b5f15383bc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a695dcde82cf767671d651821189db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a55a695dcde82cf767671d651821189db">handleTimeBegin</a> ()</td></tr>
+<tr class="separator:a55a695dcde82cf767671d651821189db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e88cfb47e238206b5a577a782063f33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a4e88cfb47e238206b5a577a782063f33">handleTimeChange</a> (float newTime)</td></tr>
 <tr class="separator:a4e88cfb47e238206b5a577a782063f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a423cb995123b8c3f919a51b55d4f51db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#a423cb995123b8c3f919a51b55d4f51db">handleTimeUp</a> ()</td></tr>
@@ -169,6 +177,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a16f149e1c468346b8bf76d0682fbdd89 inherit pro_methods_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdad0cf937d8b09704eed03d07af2550 inherit pro_methods_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#acdad0cf937d8b09704eed03d07af2550">handleSceneLoaded</a> (int sceneIndex)</td></tr>
 <tr class="separator:acdad0cf937d8b09704eed03d07af2550 inherit pro_methods_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10689ec2c953875fa1e444ba96fd3898 inherit pro_methods_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a10689ec2c953875fa1e444ba96fd3898">handleSceneLoaded</a> (<a class="el" href="_p_p_scene_controller_8cs.html#af60225cffde591928c29590327dd3991">PPScene</a> scene)</td></tr>
+<tr class="separator:a10689ec2c953875fa1e444ba96fd3898 inherit pro_methods_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a123a2bbd4f97e8b93ff03544fc7f1367 inherit pro_methods_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a123a2bbd4f97e8b93ff03544fc7f1367">handleGameTogglePause</a> (bool isPaused)</td></tr>
 <tr class="separator:a123a2bbd4f97e8b93ff03544fc7f1367 inherit pro_methods_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9e058ef01938789930c64b238e35bf7 inherit pro_methods_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#ad9e058ef01938789930c64b238e35bf7">handleGameQuit</a> ()</td></tr>
@@ -206,6 +216,9 @@ Properties</h2></td></tr>
 <tr class="separator:a4455c395a77220fed258e55b4f18186a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad73c3b51778853854334ebeb1fdc02fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_timer.html#ad73c3b51778853854334ebeb1fdc02fd">IsRunning</a><code> [get]</code></td></tr>
 <tr class="separator:ad73c3b51778853854334ebeb1fdc02fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header properties_class_mono_behaviour_extended"><td colspan="2" onclick="javascript:toggleInherit('properties_class_mono_behaviour_extended')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_mono_behaviour_extended.html">MonoBehaviourExtended</a></td></tr>
+<tr class="memitem:ac6fb7b692aa640604bbff517f838d2b1 inherit properties_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_p_p_scene_controller_8cs.html#af60225cffde591928c29590327dd3991">PPScene</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#ac6fb7b692aa640604bbff517f838d2b1">currentScene</a><code> [get]</code></td></tr>
+<tr class="separator:ac6fb7b692aa640604bbff517f838d2b1 inherit properties_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_interface_i_game_timer"><td colspan="2" onclick="javascript:toggleInherit('properties_interface_i_game_timer')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="interface_i_game_timer.html">IGameTimer</a></td></tr>
 <tr class="memitem:ad042fa8b2cfe69030dac0038866f055b inherit properties_interface_i_game_timer"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_game_timer.html#ad042fa8b2cfe69030dac0038866f055b">TimeIsUp</a><code> [get]</code></td></tr>
 <tr class="separator:ad042fa8b2cfe69030dac0038866f055b inherit properties_interface_i_game_timer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,6 +230,12 @@ Properties</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_class_mono_behaviour_extended"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_mono_behaviour_extended')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_mono_behaviour_extended.html">MonoBehaviourExtended</a></td></tr>
+<tr class="memitem:a6eae97f1ae4a02c0410fe6f0e7d67518 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a6eae97f1ae4a02c0410fe6f0e7d67518">NONE_VALUE</a> = k.NONE_VALUE</td></tr>
+<tr class="separator:a6eae97f1ae4a02c0410fe6f0e7d67518 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f6af8cb6b908f72e5afff440a21a08 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a77f6af8cb6b908f72e5afff440a21a08">INVALID_VALUE</a> = k.INVALID_VALUE</td></tr>
+<tr class="separator:a77f6af8cb6b908f72e5afff440a21a08 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6b6d24c1ecfd0449bac8adcc83b904e inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#ab6b6d24c1ecfd0449bac8adcc83b904e">SINGLE_VALUE</a> = k.SINGLE_VALUE</td></tr>
+<tr class="separator:ab6b6d24c1ecfd0449bac8adcc83b904e inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac71888197c8772907992ff08bf121251 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_p_data_controller.html">PPDataController</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#ac71888197c8772907992ff08bf121251">dataController</a></td></tr>
 <tr class="separator:ac71888197c8772907992ff08bf121251 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f8a01ffc0f9494b26c1362166a59222 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_p_p_game_controller.html">PPGameController</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a6f8a01ffc0f9494b26c1362166a59222">gameController</a></td></tr>
@@ -227,12 +246,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3b202818db6c58b20937232906527127 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ff3860f3bed1d7f61b93a85dded1f16 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a7ff3860f3bed1d7f61b93a85dded1f16">referencesFetched</a> = false</td></tr>
 <tr class="separator:a7ff3860f3bed1d7f61b93a85dded1f16 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eae97f1ae4a02c0410fe6f0e7d67518 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a6eae97f1ae4a02c0410fe6f0e7d67518">NONE_VALUE</a> = k.NONE_VALUE</td></tr>
-<tr class="separator:a6eae97f1ae4a02c0410fe6f0e7d67518 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77f6af8cb6b908f72e5afff440a21a08 inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#a77f6af8cb6b908f72e5afff440a21a08">INVALID_VALUE</a> = k.INVALID_VALUE</td></tr>
-<tr class="separator:a77f6af8cb6b908f72e5afff440a21a08 inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6b6d24c1ecfd0449bac8adcc83b904e inherit pro_attribs_class_mono_behaviour_extended"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_mono_behaviour_extended.html#ab6b6d24c1ecfd0449bac8adcc83b904e">SINGLE_VALUE</a> = k.SINGLE_VALUE</td></tr>
-<tr class="separator:ab6b6d24c1ecfd0449bac8adcc83b904e inherit pro_attribs_class_mono_behaviour_extended"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="acca08e6780063259d8c39ba9f272e04c"></a>
@@ -252,6 +265,31 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="interface_i_game_timer.html#aab69e318c3d65eb4c99cd7d142cec0f4">IGameTimer</a>.</p>
+
+</div>
+</div>
+<a id="acc3be007a246051adf7d97f986b7f9e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3be007a246051adf7d97f986b7f9e3">&#9670;&nbsp;</a></span>callOnTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MonoTimer.callOnTimeBegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -347,6 +385,31 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="interface_i_game_timer.html#af56c25876bef921098060dbeb2fb494e">IGameTimer</a>.</p>
+
+</div>
+</div>
+<a id="a55a695dcde82cf767671d651821189db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a695dcde82cf767671d651821189db">&#9670;&nbsp;</a></span>handleTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MonoTimer.handleTimeBegin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -568,6 +631,26 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="ab3346606bff695d2cbef0ed2b883f043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3346606bff695d2cbef0ed2b883f043">&#9670;&nbsp;</a></span>SubscribeToTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MonoTimer.SubscribeToTimeBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_i_game_timer.html#ad1f1a460a5ed67f7f6e3eb43b4883628">IGameTimer</a>.</p>
+
+</div>
+</div>
 <a id="a5a5a436d367a3de60fdb11e259cd0995"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a5a436d367a3de60fdb11e259cd0995">&#9670;&nbsp;</a></span>SubscribeToTimeChange()</h2>
 
@@ -651,6 +734,26 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="class_mono_behaviour_extended.html#a40177af2041c0944ca958d251ede4b5b">MonoBehaviourExtended</a>.</p>
+
+</div>
+</div>
+<a id="ac256b9c30ae7908c9ac50fd5ec20e802"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac256b9c30ae7908c9ac50fd5ec20e802">&#9670;&nbsp;</a></span>UnsubscribeFromTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MonoTimer.UnsubscribeFromTimeBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_i_game_timer.html#a0d697a90d687d4fe9cd8ccc823f0dc9a">IGameTimer</a>.</p>
 
 </div>
 </div>
@@ -787,7 +890,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 22 2017 19:20:48 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 26 2017 13:18:50 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

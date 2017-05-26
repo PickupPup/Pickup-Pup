@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['icon',['Icon',['../class_coins_data.html#a6f89a6dcc511aa51cbc5101d54496137',1,'CoinsData.Icon()'],['../class_currency_data.html#a084bffb0663bc89c5061462f0c8b5a19',1,'CurrencyData.Icon()'],['../class_dog_food_data.html#ace47f30a244efe35fafe0d407368df38',1,'DogFoodData.Icon()'],['../class_shop_item.html#ab195b9e9eab4d032996a690a2dc9a1af',1,'ShopItem.Icon()']]],
+  ['icon',['Icon',['../class_coins_data.html#a6f89a6dcc511aa51cbc5101d54496137',1,'CoinsData.Icon()'],['../class_currency_data.html#a084bffb0663bc89c5061462f0c8b5a19',1,'CurrencyData.Icon()'],['../class_dog_voucher_data.html#a835d3189f18e0a407af8fd5056cda125',1,'DogVoucherData.Icon()'],['../class_dog_food_data.html#ace47f30a244efe35fafe0d407368df38',1,'DogFoodData.Icon()'],['../class_gift_event_data.html#ab779bc06b2b0035cf5392aaf9b3dfb30',1,'GiftEventData.Icon()'],['../class_souvenir_data.html#a86a3dde7c135f121c89736343710c564',1,'SouvenirData.Icon()'],['../class_shop_item.html#ab195b9e9eab4d032996a690a2dc9a1af',1,'ShopItem.Icon()']]],
+  ['iconcolor',['IconColor',['../class_shop_item.html#aa017ca3547ae03e42db7545a90477ad3',1,'ShopItem']]],
   ['id',['ID',['../class_data_event.html#a4fdd8764939935e64c3e47e9b8f27224',1,'DataEvent']]],
   ['info',['Info',['../class_dog.html#a68363106198643f897386117070e5bf7',1,'Dog']]],
   ['instance',['Instance',['../class_i_a_p_manager.html#a57099258f1102392e956fea3bbdf47ae',1,'IAPManager.Instance()'],['../class_audio_controller.html#a81e017cd55384031d3688e01cc7bd4de',1,'AudioController.Instance()'],['../class_singleton_controller.html#a22cd49037d55829471de369efb04f334',1,'SingletonController.Instance()'],['../class_database.html#ae2e62275c90351a0247166cc6f61bfda',1,'Database.Instance()']]],
   ['interactable',['Interactable',['../class_u_i_button.html#a9a1662a6a4c75ddeffbd5c59502d8dd6',1,'UIButton']]],
   ['inworldkey',['InWorldKey',['../class_p_p_tuning.html#a3ffa2ce89d59732a4851311bb1ba2f61',1,'PPTuning']]],
+  ['iscollected',['IsCollected',['../class_souvenir_data.html#ac891f859eb0b7a57036133bc33daa5bd',1,'SouvenirData']]],
   ['iscurrentlyfeeding',['IsCurrentlyFeeding',['../class_dog_food_bowl.html#ab5cc5bf429ade03b5b44a9b65a6d0593',1,'DogFoodBowl']]],
   ['isdefault',['IsDefault',['../class_language.html#a675843052e090bfd9c6d391f7b4cb53b',1,'Language']]],
   ['isinitialized',['IsInitialized',['../class_database.html#ab230a8469a9bc4384e315a9438e4f2d6',1,'Database.IsInitialized()'],['../class_dog_browser_button_controller.html#a093a49f7624d1d2d28c28d2aca654977',1,'DogBrowserButtonController.IsInitialized()'],['../class_dog_profile_button_controller.html#a06fc00f62eb5fd0887d6d0c61df60749',1,'DogProfileButtonController.IsInitialized()']]],
@@ -19,6 +21,7 @@ var searchData=
   ['issupported',['IsSupported',['../class_language.html#ad696b97fe6bbde207beb0dd27eb2d0ff',1,'Language']]],
   ['istimersetup',['IsTimerSetup',['../class_p_p_timer.html#afc980facee912b6fd25b432fa14b3638',1,'PPTimer']]],
   ['istoggled',['IsToggled',['../class_toggleable_u_i_button.html#a599e4e3b340e1c6d1500b1a1b16e429a',1,'ToggleableUIButton']]],
+  ['isvisible',['IsVisible',['../class_u_i_element.html#aec7a1fdfad836346d28a26c427d611eb',1,'UIElement']]],
   ['itemname',['ItemName',['../class_shop_item.html#a9130c7a957d2cbf1aec576f7200d2155',1,'ShopItem']]],
   ['items',['Items',['../class_shop_database.html#a64327e9d266a1bc3068629183e0ae231',1,'ShopDatabase']]]
 ];

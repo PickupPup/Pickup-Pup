@@ -66,12 +66,14 @@ $(function() {
 <li>OccupiedSlot
 : <a class="el" href="class_dog.html#aa4eb2e18e7db144ef4c48d338da64602">Dog</a>
 </li>
-<li>OccupiedSlots
-: <a class="el" href="class_home_slots_data.html#a5981712f09ff47535240ead78f795d80">HomeSlotsData</a>
-</li>
 <li>OFF
 : <a class="el" href="class_global.html#a289001c43b63c3b32aff4ffaec6b5793">Global</a>
 , <a class="el" href="class_u_i_element.html#a17ea3f24313f603cfd2cf10cdfb97b9a">UIElement</a>
+</li>
+<li>OfferReward()
+: <a class="el" href="class_ad_reward.html#accdc7a42614355defcf5ba824dc51421">AdReward</a>
+, <a class="el" href="class_coins_ad_reward.html#a7f8a855284baee8efeacc55ccd7ae3ed">CoinsAdReward</a>
+, <a class="el" href="class_dog_return_ad_reward.html#a01412b08c84c3f58f4954e924946ef16">DogReturnAdReward</a>
 </li>
 <li>ON
 : <a class="el" href="class_global.html#a2b655dd8a1a3fa5d8aaffb1f25da581e">Global</a>
@@ -79,7 +81,6 @@ $(function() {
 </li>
 <li>OnAdoptClick()
 : <a class="el" href="class_navigation_panel.html#ad17bbd0a91287aa8ee17260ab4f29685">NavigationPanel</a>
-, <a class="el" href="class_p_p_living_room_u_i_controller.html#a650b51b3642bdbe52cf237954eb78742">PPLivingRoomUIController</a>
 </li>
 <li>OnAllDogsClick()
 : <a class="el" href="class_main_menu.html#aad8d60833fbc03c6e48b40781582a405">MainMenu</a>
@@ -96,16 +97,17 @@ $(function() {
 <li>OnDisable()
 : <a class="el" href="class_mono_behaviour_extended.html#afc2bd13529b6c6119ee3edfe821df600">MonoBehaviourExtended</a>
 </li>
-<li>OnDoorTap()
-: <a class="el" href="class_p_p_yard_u_i_controller.html#a2fbfebe9ab78034468d755565647f507">PPYardUIController</a>
-</li>
 <li>OnEnable()
 : <a class="el" href="class_dog_browser.html#a26144ed77cf36fbe7d140e0b9969f2fe">DogBrowser</a>
+, <a class="el" href="class_dog_browser_button_controller.html#a175c0d95ebe6798abad2ba7c9524668d">DogBrowserButtonController</a>
 , <a class="el" href="class_mono_behaviour_extended.html#add7465317c8955331de3b92727c647e0">MonoBehaviourExtended</a>
 , <a class="el" href="class_redeem_display.html#aaab6c793663c83909cdff6b94aad72ec">RedeemDisplay</a>
 </li>
 <li>OnGiftsClick()
 : <a class="el" href="class_main_menu.html#aaa5b49b7cc2dc6d3222ad753e5dab960">MainMenu</a>
+</li>
+<li>OnHomeClick()
+: <a class="el" href="class_main_menu.html#ad0e0a387d3fb83b8d207bf1668889030">MainMenu</a>
 </li>
 <li>OnInitialized()
 : <a class="el" href="class_i_a_p_manager.html#a50f063dc99f077f400cdc203f69e323e">IAPManager</a>
@@ -113,8 +115,8 @@ $(function() {
 <li>OnInitializeFailed()
 : <a class="el" href="class_i_a_p_manager.html#a455d47c7a84180aac50ebeda77943e82">IAPManager</a>
 </li>
-<li>OnLivingRoomClick()
-: <a class="el" href="class_main_menu.html#a78f913ee0a6b384976f05f0b21ee0283">MainMenu</a>
+<li>OnInspectorGUI()
+: <a class="el" href="class_p_p_analytics_controller_editor.html#ab2a95984fcaf3b7e042ccc10c8dd03a8">PPAnalyticsControllerEditor</a>
 </li>
 <li>OnMenuClick()
 : <a class="el" href="class_navigation_panel.html#ad40e7b183952de9077a84fd9a5e97981">NavigationPanel</a>
@@ -137,6 +139,9 @@ $(function() {
 <li>OnPPEvent
 : <a class="el" href="class_event_controller.html#af7ce99ef6fbc65168b6ece8761b863a6">EventController</a>
 </li>
+<li>OnPress()
+: <a class="el" href="class_scouting_button.html#a5be86e9aeaa2ead1c259c0b5cc3639cc">ScoutingButton</a>
+</li>
 <li>OnPurchaseFailed()
 : <a class="el" href="class_i_a_p_manager.html#ae51fa5233c055c8ab0d1a95ec2cf357f">IAPManager</a>
 </li>
@@ -148,13 +153,9 @@ $(function() {
 </li>
 <li>OnShopClick()
 : <a class="el" href="class_main_menu.html#a1c496ef0f28ca78bbbf5d6124cc44605">MainMenu</a>
-, <a class="el" href="class_p_p_living_room_u_i_controller.html#ab9ccc3a52dea50bb47c506b3ae90f8a6">PPLivingRoomUIController</a>
 </li>
 <li>OnWatchAdClick()
 : <a class="el" href="class_main_menu.html#ad985a8e25819e036969d3ee5e96f6673">MainMenu</a>
-</li>
-<li>OnYardClick()
-: <a class="el" href="class_main_menu.html#a9d16d6ccc2f6dd13290e4bfc8a487031">MainMenu</a>
 </li>
 <li>opacityCoroutine
 : <a class="el" href="class_u_i_element.html#a53ab35d9a9cef7cb5e75ceb4a01a7591">UIElement</a>
@@ -171,11 +172,14 @@ $(function() {
 <li>OrEquals()
 : <a class="el" href="class_string_util.html#aa6f2cc20aa6b118f1bca3fbf7856428c">StringUtil</a>
 </li>
+<li>overwriteFromJSONInResources&lt; T &gt;()
+: <a class="el" href="class_resource_loader.html#a457741308688fe88319ecf6e71236ca4">ResourceLoader</a>
+</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 22 2017 19:20:49 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 26 2017 13:18:51 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

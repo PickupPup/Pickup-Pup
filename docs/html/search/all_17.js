@@ -1,11 +1,14 @@
 var searchData=
 [
   ['waittimesecsfordailygift',['WaitTimeSecsForDailyGift',['../class_p_p_tuning.html#aed58e85996b686787128f1d9e31e3196',1,'PPTuning']]],
+  ['wandering',['Wandering',['../_dog_state_8cs.html#aaeef6834fd35a8557281e6238c1b77e3ab4067a049170b186439a5fc1a0d971f3',1,'DogState.cs']]],
+  ['watchad',['WatchAd',['../class_ad_controller.html#ab02fb94e81f7301cb72bcc4f1da258df',1,'AdController']]],
   ['weightedrandombuffer',['WeightedRandomBuffer',['../class_weighted_random_buffer.html',1,'WeightedRandomBuffer&lt; T &gt;'],['../class_weighted_random_buffer.html#a4cc8bb943a6e8875bd3a9736a461aace',1,'WeightedRandomBuffer.WeightedRandomBuffer()']]],
   ['weightedrandombuffer_2ecs',['WeightedRandomBuffer.cs',['../_weighted_random_buffer_8cs.html',1,'']]],
   ['weightedrandombuffer_3c_20currencydata_20_3e',['WeightedRandomBuffer&lt; CurrencyData &gt;',['../class_weighted_random_buffer.html',1,'']]],
   ['weightedrandombuffer_3c_20currencytype_20_3e',['WeightedRandomBuffer&lt; CurrencyType &gt;',['../class_weighted_random_buffer.html',1,'']]],
   ['west',['West',['../_direction_8cs.html#a224b9163917ac32fc95a60d8c1eec3aaabf495fc048d8d44b7f32536df5cf3930',1,'Direction.cs']]],
+  ['whistle',['WHISTLE',['../class_p_p_global.html#a00e7f48927d41c0fac5814464c230e7c',1,'PPGlobal']]],
   ['world',['WORLD',['../class_serializable_data.html#a7d84bccf314da8ae7da683dc44653bfc',1,'SerializableData.WORLD()'],['../class_p_p_global.html#aa8c537a532d7d07a1cd447eb94d64e1c',1,'PPGlobal.WORLD()']]],
   ['worlddogs',['WorldDogs',['../class_p_p_game_save.html#a822442c6eaef5f636944db73310e3016',1,'PPGameSave']]],
   ['worldobjectbehaviour',['WorldObjectBehaviour',['../class_world_object_behaviour.html',1,'']]],
