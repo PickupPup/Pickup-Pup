@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['name',['Name',['../class_audio_data.html#adf66c9e61af1a2eafc4f1f324f90e52f',1,'AudioData.Name()'],['../class_language.html#ac84460b0718a7a47d6f6139ec0ab55fe',1,'Language.Name()'],['../class_dog_descriptor.html#a7f5eb41bb8cb31a72a6e46a337584bfc',1,'DogDescriptor.Name()'],['../class_dog.html#a276ca3fbd1fbbd4202480cb84925aa2f',1,'Dog.Name()'],['../class_global.html#a50d0eff27e2f6e7172acf879ebe25451',1,'Global.NAME()']]],
+  ['name',['NAME',['../class_global.html#a50d0eff27e2f6e7172acf879ebe25451',1,'Global.NAME()'],['../class_audio_data.html#adf66c9e61af1a2eafc4f1f324f90e52f',1,'AudioData.Name()'],['../class_language.html#ac84460b0718a7a47d6f6139ec0ab55fe',1,'Language.Name()'],['../class_souvenir_data.html#a0469171a599920fc9b7b2a27c6b73ecf',1,'SouvenirData.Name()'],['../class_dog_descriptor.html#a7f5eb41bb8cb31a72a6e46a337584bfc',1,'DogDescriptor.Name()'],['../class_dog.html#a276ca3fbd1fbbd4202480cb84925aa2f',1,'Dog.Name()']]],
   ['namedcurrencyaction',['NamedCurrencyAction',['../class_p_p_data.html#a7346230a531d963eea7b11dd1e0db417',1,'PPData']]],
   ['namedeventaction',['NamedEventAction',['../class_event_controller.html#a176905ecf73954cf1435fe76c9f4d0e0',1,'EventController']]],
   ['namedeventactionwithid',['NamedEventActionWithID',['../class_event_controller.html#a7ec5b0d5f5d208ff428ebd6f2da206f8',1,'EventController']]],
   ['namedfloataction',['NamedFloatAction',['../class_event_controller.html#a0c672d19690e154ab74a224dcb8328f4',1,'EventController']]],
+  ['nametag',['NameTag',['../class_name_tag.html',1,'']]],
+  ['nametag_2ecs',['NameTag.cs',['../_name_tag_8cs.html',1,'']]],
+  ['nav_5fdropdown',['NAV_DROPDOWN',['../class_p_p_global.html#af8da21e23f29263626c3e9ea34043e4a',1,'PPGlobal']]],
+  ['navdropdowntype',['NavDropDownType',['../class_settings_util.html#a2eaf6ad0b36c5b7fcec612ba4ecf201d',1,'SettingsUtil']]],
   ['navigationpanel',['NavigationPanel',['../class_navigation_panel.html',1,'']]],
   ['navigationpanel_2ecs',['NavigationPanel.cs',['../_navigation_panel_8cs.html',1,'']]],
   ['nextrandomindex',['nextRandomIndex',['../class_random_buffer.html#a8c312617cc269702b15106e0390a48be',1,'RandomBuffer.nextRandomIndex()'],['../class_weighted_random_buffer.html#a5013189b0a1101f729c8113a05c60b27',1,'WeightedRandomBuffer.nextRandomIndex()']]],
@@ -15,5 +19,7 @@ var searchData=
   ['nonpurchasabletextcolor',['NonPurchasableTextColor',['../class_p_p_tuning.html#a7dd968944d3cd16d2ec12e48e7a92455',1,'PPTuning']]],
   ['north',['North',['../_direction_8cs.html#a224b9163917ac32fc95a60d8c1eec3aaa601560b94fbb188919dd1d36c8ab70a4',1,'Direction.cs']]],
   ['not_5ffound_5fint',['NOT_FOUND_INT',['../class_p_p_data.html#a30f8d2c69248f86606eb2aaec6e5adf7',1,'PPData']]],
+  ['notificationcontroller',['NotificationController',['../class_notification_controller.html',1,'']]],
+  ['notificationcontroller_2ecs',['NotificationController.cs',['../_notification_controller_8cs.html',1,'']]],
   ['notifyhasgifttoredeem',['NotifyHasGiftToRedeem',['../class_p_p_data_controller.html#abd3a3c867bd87a991626ad244484909a',1,'PPDataController.NotifyHasGiftToRedeem()'],['../class_p_p_game_save.html#a1f7f88d91e94b306311fed809f08525c',1,'PPGameSave.NotifyHasGiftToRedeem()']]]
 ];

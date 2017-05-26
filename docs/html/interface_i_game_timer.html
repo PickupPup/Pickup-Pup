@@ -95,6 +95,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1299e047e3eb0d6971c77fc5dc73512e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89a66bc953334889cb5d5a8c0c945eb2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_game_timer.html#a89a66bc953334889cb5d5a8c0c945eb2">Stop</a> (bool resetOnStop)</td></tr>
 <tr class="separator:a89a66bc953334889cb5d5a8c0c945eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1f1a460a5ed67f7f6e3eb43b4883628"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_game_timer.html#ad1f1a460a5ed67f7f6e3eb43b4883628">SubscribeToTimeBegin</a> (<a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a> action)</td></tr>
+<tr class="separator:ad1f1a460a5ed67f7f6e3eb43b4883628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d697a90d687d4fe9cd8ccc823f0dc9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_game_timer.html#a0d697a90d687d4fe9cd8ccc823f0dc9a">UnsubscribeFromTimeBegin</a> (<a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a> action)</td></tr>
+<tr class="separator:a0d697a90d687d4fe9cd8ccc823f0dc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a012a33e6f3ab5b4eb207feb4b3b02bc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_game_timer.html#a012a33e6f3ab5b4eb207feb4b3b02bc1">SubscribeToTimeChange</a> (<a class="el" href="class_p_p_data.html#ae7362514e4fbcd8c0fdbe12b54ed3a3c">PPData.DataActionf</a> action)</td></tr>
 <tr class="separator:a012a33e6f3ab5b4eb207feb4b3b02bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2d0e723ddb3bc3b2320dd38e644fa27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_game_timer.html#aa2d0e723ddb3bc3b2320dd38e644fa27">UnsubscribeFromTimeChange</a> (<a class="el" href="class_p_p_data.html#ae7362514e4fbcd8c0fdbe12b54ed3a3c">PPData.DataActionf</a> action)</td></tr>
@@ -331,6 +335,26 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="ad1f1a460a5ed67f7f6e3eb43b4883628"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1f1a460a5ed67f7f6e3eb43b4883628">&#9670;&nbsp;</a></span>SubscribeToTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IGameTimer.SubscribeToTimeBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_mono_timer.html#ab3346606bff695d2cbef0ed2b883f043">MonoTimer</a>.</p>
+
+</div>
+</div>
 <a id="a012a33e6f3ab5b4eb207feb4b3b02bc1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a012a33e6f3ab5b4eb207feb4b3b02bc1">&#9670;&nbsp;</a></span>SubscribeToTimeChange()</h2>
 
@@ -387,6 +411,26 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="class_mono_timer.html#ad2eb9b0d18cca783eb191dba837359c4">MonoTimer</a>.</p>
+
+</div>
+</div>
+<a id="a0d697a90d687d4fe9cd8ccc823f0dc9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d697a90d687d4fe9cd8ccc823f0dc9a">&#9670;&nbsp;</a></span>UnsubscribeFromTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IGameTimer.UnsubscribeFromTimeBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">PPData.DataAction</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_mono_timer.html#ac256b9c30ae7908c9ac50fd5ec20e802">MonoTimer</a>.</p>
 
 </div>
 </div>
@@ -523,7 +567,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 22 2017 19:20:48 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 26 2017 13:18:50 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

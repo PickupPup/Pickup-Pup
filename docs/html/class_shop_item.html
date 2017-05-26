@@ -81,8 +81,16 @@ Inheritance diagram for ShopItem:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a153db3144c62a00f6c139f2b54525d8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a153db3144c62a00f6c139f2b54525d8a">ShopItem</a> (string itemName, int value, <a class="el" href="_currency_type_8cs.html#ae0bc22f8030e9a947eaf6b905e7b730e">CurrencyType</a> valueCurrencyType, int cost, <a class="el" href="_currency_type_8cs.html#ae0bc22f8030e9a947eaf6b905e7b730e">CurrencyType</a> costCurrencyType)</td></tr>
-<tr class="separator:a153db3144c62a00f6c139f2b54525d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed29570f2c7d783ef3bdf890d9616f6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#aed29570f2c7d783ef3bdf890d9616f6b">ShopItem</a> (string itemName, string valueCurrencyType, int cost, string costCurrencyType)</td></tr>
+<tr class="separator:aed29570f2c7d783ef3bdf890d9616f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c0065166129ca7d472b0859ba37cb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a72c0065166129ca7d472b0859ba37cb2">SetCurrency</a> ()</td></tr>
+<tr class="separator:a72c0065166129ca7d472b0859ba37cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0199fa0519e51a827145b2a8fd2e0baf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a0199fa0519e51a827145b2a8fd2e0baf">GetTotalCost</a> (int amount)</td></tr>
+<tr class="separator:a0199fa0519e51a827145b2a8fd2e0baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d124c305caf958035fc4a9fa0f476dd"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a0d124c305caf958035fc4a9fa0f476dd">GetTotalCostStr</a> (int amount)</td></tr>
+<tr class="separator:a0d124c305caf958035fc4a9fa0f476dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27b8db9958f3c520a5cdc759aeddeb71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_currency_data.html">CurrencyData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a27b8db9958f3c520a5cdc759aeddeb71">GetPurchase</a> (int amount)</td></tr>
+<tr class="separator:a27b8db9958f3c520a5cdc759aeddeb71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_p_p_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_p_p_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_p_p_data.html">PPData</a></td></tr>
 <tr class="memitem:a96c8b0cb4c8662fc3d4398940f06ae56 inherit pub_methods_class_p_p_data"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">DataAction</a> ()</td></tr>
 <tr class="separator:a96c8b0cb4c8662fc3d4398940f06ae56 inherit pub_methods_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,14 +131,14 @@ Protected Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr class="memitem:a54607c6d5041cd9257f2be6adc26745d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_shop_item.html">ShopItem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a54607c6d5041cd9257f2be6adc26745d">Default</a><code> [get]</code></td></tr>
 <tr class="separator:a54607c6d5041cd9257f2be6adc26745d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a437899b7cdf3d9872e3b7efd7a873c85"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a437899b7cdf3d9872e3b7efd7a873c85">Cost</a><code> [get]</code></td></tr>
-<tr class="separator:a437899b7cdf3d9872e3b7efd7a873c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14289e7537494de691a9f52e3572729a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_currency_data.html">CurrencyData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a14289e7537494de691a9f52e3572729a">Cost</a><code> [get]</code></td></tr>
+<tr class="separator:a14289e7537494de691a9f52e3572729a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6a717b2a298e46e44ee2a610bfdc54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_currency_data.html">CurrencyData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#aaa6a717b2a298e46e44ee2a610bfdc54">Value</a><code> [get]</code></td></tr>
+<tr class="separator:aaa6a717b2a298e46e44ee2a610bfdc54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e6dd55846f551d932fed486313e8cf5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a3e6dd55846f551d932fed486313e8cf5">CostAmount</a><code> [get]</code></td></tr>
+<tr class="separator:a3e6dd55846f551d932fed486313e8cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53f92528241e5b50d74c23bbfd324417"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a53f92528241e5b50d74c23bbfd324417">CostStr</a><code> [get]</code></td></tr>
 <tr class="separator:a53f92528241e5b50d74c23bbfd324417"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada4e78795af9370822837f8c1bf7c293"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#ada4e78795af9370822837f8c1bf7c293">Value</a><code> [get]</code></td></tr>
-<tr class="separator:ada4e78795af9370822837f8c1bf7c293"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a725ac07b99d4604b700c50576a0cb19e"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a725ac07b99d4604b700c50576a0cb19e">ValueStr</a><code> [get]</code></td></tr>
-<tr class="separator:a725ac07b99d4604b700c50576a0cb19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9130c7a957d2cbf1aec576f7200d2155"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a9130c7a957d2cbf1aec576f7200d2155">ItemName</a><code> [get]</code></td></tr>
 <tr class="separator:a9130c7a957d2cbf1aec576f7200d2155"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1db8c872f3b8a8b1d34fc1efa03ff808"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_currency_type_8cs.html#ae0bc22f8030e9a947eaf6b905e7b730e">CurrencyType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#a1db8c872f3b8a8b1d34fc1efa03ff808">CostCurrencyType</a><code> [get]</code></td></tr>
@@ -139,6 +147,8 @@ Properties</h2></td></tr>
 <tr class="separator:a8704f3792dac600b8fca1661ad548d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab195b9e9eab4d032996a690a2dc9a1af"><td class="memItemLeft" align="right" valign="top">Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#ab195b9e9eab4d032996a690a2dc9a1af">Icon</a><code> [get]</code></td></tr>
 <tr class="separator:ab195b9e9eab4d032996a690a2dc9a1af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa017ca3547ae03e42db7545a90477ad3"><td class="memItemLeft" align="right" valign="top">Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shop_item.html#aa017ca3547ae03e42db7545a90477ad3">IconColor</a><code> [get]</code></td></tr>
+<tr class="separator:aa017ca3547ae03e42db7545a90477ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_class_p_p_data"><td colspan="2" onclick="javascript:toggleInherit('properties_class_p_p_data')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_p_p_data.html">PPData</a></td></tr>
 <tr class="memitem:a21c6216d45fdadae3ed5c9989d7fcf55 inherit properties_class_p_p_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_dog_database.html">DogDatabase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a21c6216d45fdadae3ed5c9989d7fcf55">database</a><code> [get, set]</code></td></tr>
 <tr class="separator:a21c6216d45fdadae3ed5c9989d7fcf55 inherit properties_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,8 +173,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3a19c9e58cf229cf86c35fc3c20772b7 inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f57165c6cc85d425770e7004c9377f inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#af8f57165c6cc85d425770e7004c9377f">DEFAULT_DOG_FOOD</a> = k.DEFAULT_DOG_FOOD</td></tr>
 <tr class="separator:af8f57165c6cc85d425770e7004c9377f inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32bcc32b22b8abe6ccfc7ef13d547008 inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a32bcc32b22b8abe6ccfc7ef13d547008">DEFAULT_HOME_SLOTS</a> = k.DEFAULT_HOME_SLOTS</td></tr>
-<tr class="separator:a32bcc32b22b8abe6ccfc7ef13d547008 inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71f923a3149dce862d2ad749947df048 inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a71f923a3149dce862d2ad749947df048">DEFAULT_CURRENCY_AMOUNT</a> = k.DEFAULT_CURRENCY_AMOUNT</td></tr>
 <tr class="separator:a71f923a3149dce862d2ad749947df048 inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a398e00d729d36b01167b7b4e2fb16eab inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a398e00d729d36b01167b7b4e2fb16eab">DEFAULT_TIME_TO_COLLECT</a> = k.DEFAULT_TIME_TO_COLLECT</td></tr>
@@ -173,8 +181,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9aaf344381f63a0f4b9ade5018037f9b inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a153db3144c62a00f6c139f2b54525d8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a153db3144c62a00f6c139f2b54525d8a">&#9670;&nbsp;</a></span>ShopItem() <span class="overload">[1/2]</span></h2>
+<a id="aed29570f2c7d783ef3bdf890d9616f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed29570f2c7d783ef3bdf890d9616f6b">&#9670;&nbsp;</a></span>ShopItem() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,13 +196,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="_currency_type_8cs.html#ae0bc22f8030e9a947eaf6b905e7b730e">CurrencyType</a>&#160;</td>
+          <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>valueCurrencyType</em>, </td>
         </tr>
         <tr>
@@ -206,7 +208,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_currency_type_8cs.html#ae0bc22f8030e9a947eaf6b905e7b730e">CurrencyType</a>&#160;</td>
+          <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>costCurrencyType</em>&#160;</td>
         </tr>
         <tr>
@@ -244,9 +246,81 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a27b8db9958f3c520a5cdc759aeddeb71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27b8db9958f3c520a5cdc759aeddeb71">&#9670;&nbsp;</a></span>GetPurchase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_currency_data.html">CurrencyData</a> ShopItem.GetPurchase </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0199fa0519e51a827145b2a8fd2e0baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0199fa0519e51a827145b2a8fd2e0baf">&#9670;&nbsp;</a></span>GetTotalCost()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShopItem.GetTotalCost </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d124c305caf958035fc4a9fa0f476dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d124c305caf958035fc4a9fa0f476dd">&#9670;&nbsp;</a></span>GetTotalCostStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string ShopItem.GetTotalCostStr </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>amount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72c0065166129ca7d472b0859ba37cb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72c0065166129ca7d472b0859ba37cb2">&#9670;&nbsp;</a></span>SetCurrency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShopItem.SetCurrency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Property Documentation</h2>
-<a id="a437899b7cdf3d9872e3b7efd7a873c85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a437899b7cdf3d9872e3b7efd7a873c85">&#9670;&nbsp;</a></span>Cost</h2>
+<a id="a14289e7537494de691a9f52e3572729a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14289e7537494de691a9f52e3572729a">&#9670;&nbsp;</a></span>Cost</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +329,29 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ShopItem.Cost</td>
+          <td class="memname"><a class="el" href="class_currency_data.html">CurrencyData</a> ShopItem.Cost</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e6dd55846f551d932fed486313e8cf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e6dd55846f551d932fed486313e8cf5">&#9670;&nbsp;</a></span>CostAmount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShopItem.CostAmount</td>
         </tr>
       </table>
   </td>
@@ -355,6 +451,28 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="aa017ca3547ae03e42db7545a90477ad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa017ca3547ae03e42db7545a90477ad3">&#9670;&nbsp;</a></span>IconColor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Color ShopItem.IconColor</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9130c7a957d2cbf1aec576f7200d2155"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9130c7a957d2cbf1aec576f7200d2155">&#9670;&nbsp;</a></span>ItemName</h2>
 
@@ -377,8 +495,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="ada4e78795af9370822837f8c1bf7c293"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada4e78795af9370822837f8c1bf7c293">&#9670;&nbsp;</a></span>Value</h2>
+<a id="aaa6a717b2a298e46e44ee2a610bfdc54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6a717b2a298e46e44ee2a610bfdc54">&#9670;&nbsp;</a></span>Value</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,7 +505,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int ShopItem.Value</td>
+          <td class="memname"><a class="el" href="class_currency_data.html">CurrencyData</a> ShopItem.Value</td>
         </tr>
       </table>
   </td>
@@ -421,35 +539,13 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a725ac07b99d4604b700c50576a0cb19e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a725ac07b99d4604b700c50576a0cb19e">&#9670;&nbsp;</a></span>ValueStr</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">string ShopItem.ValueStr</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/Users/imann24/Documents/Current_Projects/PickupPup/Assets/Scripts/Data/PickupPup/<a class="el" href="_shop_item_8cs.html">ShopItem.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 22 2017 19:20:49 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 26 2017 13:18:50 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

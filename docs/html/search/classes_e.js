@@ -1,25 +1,8 @@
 var searchData=
 [
-  ['scoutingdisplay',['ScoutingDisplay',['../class_scouting_display.html',1,'']]],
-  ['serializabledata',['SerializableData',['../class_serializable_data.html',1,'']]],
-  ['serializabledatacollection',['SerializableDataCollection',['../class_serializable_data_collection.html',1,'']]],
-  ['settingsmenu',['SettingsMenu',['../class_settings_menu.html',1,'']]],
-  ['settingsutil',['SettingsUtil',['../class_settings_util.html',1,'']]],
-  ['shopdatabase',['ShopDatabase',['../class_shop_database.html',1,'']]],
-  ['shopitem',['ShopItem',['../class_shop_item.html',1,'']]],
-  ['shopitemslot',['ShopItemSlot',['../class_shop_item_slot.html',1,'']]],
-  ['singletoncontroller',['SingletonController',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20analyticscontroller_20_3e',['SingletonController&lt; AnalyticsController &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20currencypanel_20_3e',['SingletonController&lt; CurrencyPanel &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20datacontroller_20_3e',['SingletonController&lt; DataController &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20eventcontroller_20_3e',['SingletonController&lt; EventController &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20gamecontroller_20_3e',['SingletonController&lt; GameController &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20navigationpanel_20_3e',['SingletonController&lt; NavigationPanel &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20ppgiftcontroller_20_3e',['SingletonController&lt; PPGiftController &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletoncontroller_3c_20ppscenecontroller_20_3e',['SingletonController&lt; PPSceneController &gt;',['../class_singleton_controller.html',1,'']]],
-  ['singletonutil',['SingletonUtil',['../class_singleton_util.html',1,'']]],
-  ['specialgiftdata',['SpecialGiftData',['../class_special_gift_data.html',1,'']]],
-  ['spritesheetdatabase',['SpritesheetDatabase',['../class_spritesheet_database.html',1,'']]],
-  ['staticobjectbehaviour',['StaticObjectBehaviour',['../class_static_object_behaviour.html',1,'']]],
-  ['stringutil',['StringUtil',['../class_string_util.html',1,'']]]
+  ['textassetutil',['TextAssetUtil',['../class_text_asset_util.html',1,'']]],
+  ['timertest',['TimerTest',['../class_timer_test.html',1,'']]],
+  ['timespanextensions',['TimeSpanExtensions',['../class_time_span_extensions.html',1,'']]],
+  ['toggleablecoloruibutton',['ToggleableColorUIButton',['../class_toggleable_color_u_i_button.html',1,'']]],
+  ['toggleableuibutton',['ToggleableUIButton',['../class_toggleable_u_i_button.html',1,'']]]
 ];

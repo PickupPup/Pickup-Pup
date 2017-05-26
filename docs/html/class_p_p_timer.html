@@ -85,6 +85,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a91c2b46e8a85110aacab643b7933639a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61525958aecf2813d59b8c7e2ab91067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_timer.html#a61525958aecf2813d59b8c7e2ab91067">Init</a> ()</td></tr>
 <tr class="separator:a61525958aecf2813d59b8c7e2ab91067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b6e999b0d868f75846f2c5ed888f71c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_timer.html#a9b6e999b0d868f75846f2c5ed888f71c">SubscribeToTimeBegin</a> (<a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">DataAction</a> action)</td></tr>
+<tr class="separator:a9b6e999b0d868f75846f2c5ed888f71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c409958efe856e54af828b0ef73e04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_timer.html#ad4c409958efe856e54af828b0ef73e04">UnsubscribeFromTimeBegin</a> (<a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">DataAction</a> action)</td></tr>
+<tr class="separator:ad4c409958efe856e54af828b0ef73e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa59431b03d4825f5304edd408a8cd12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_timer.html#afa59431b03d4825f5304edd408a8cd12">SubscribeToTimeChange</a> (<a class="el" href="class_p_p_data.html#ae7362514e4fbcd8c0fdbe12b54ed3a3c">PPData.DataActionf</a> action)</td></tr>
 <tr class="separator:afa59431b03d4825f5304edd408a8cd12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb5ef7aa1c1c248693a47d943909815"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_timer.html#aecb5ef7aa1c1c248693a47d943909815">UnsubscribeFromTimeChange</a> (<a class="el" href="class_p_p_data.html#ae7362514e4fbcd8c0fdbe12b54ed3a3c">PPData.DataActionf</a> action)</td></tr>
@@ -188,8 +192,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a3a19c9e58cf229cf86c35fc3c20772b7 inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f57165c6cc85d425770e7004c9377f inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#af8f57165c6cc85d425770e7004c9377f">DEFAULT_DOG_FOOD</a> = k.DEFAULT_DOG_FOOD</td></tr>
 <tr class="separator:af8f57165c6cc85d425770e7004c9377f inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32bcc32b22b8abe6ccfc7ef13d547008 inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a32bcc32b22b8abe6ccfc7ef13d547008">DEFAULT_HOME_SLOTS</a> = k.DEFAULT_HOME_SLOTS</td></tr>
-<tr class="separator:a32bcc32b22b8abe6ccfc7ef13d547008 inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71f923a3149dce862d2ad749947df048 inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a71f923a3149dce862d2ad749947df048">DEFAULT_CURRENCY_AMOUNT</a> = k.DEFAULT_CURRENCY_AMOUNT</td></tr>
 <tr class="separator:a71f923a3149dce862d2ad749947df048 inherit pro_attribs_class_p_p_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a398e00d729d36b01167b7b4e2fb16eab inherit pro_attribs_class_p_p_data"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_p_data.html#a398e00d729d36b01167b7b4e2fb16eab">DEFAULT_TIME_TO_COLLECT</a> = k.DEFAULT_TIME_TO_COLLECT</td></tr>
@@ -444,6 +446,24 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a9b6e999b0d868f75846f2c5ed888f71c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b6e999b0d868f75846f2c5ed888f71c">&#9670;&nbsp;</a></span>SubscribeToTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PPTimer.SubscribeToTimeBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">DataAction</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afa59431b03d4825f5304edd408a8cd12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa59431b03d4825f5304edd408a8cd12">&#9670;&nbsp;</a></span>SubscribeToTimeChange()</h2>
 
@@ -490,6 +510,24 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">override string PPTimer.ToString </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4c409958efe856e54af828b0ef73e04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4c409958efe856e54af828b0ef73e04">&#9670;&nbsp;</a></span>UnsubscribeFromTimeBegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PPTimer.UnsubscribeFromTimeBegin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_p_p_data.html#a96c8b0cb4c8662fc3d4398940f06ae56">DataAction</a>&#160;</td>
+          <td class="paramname"><em>action</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -712,7 +750,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 22 2017 19:20:49 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 26 2017 13:18:50 for Pickup Pup by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>
