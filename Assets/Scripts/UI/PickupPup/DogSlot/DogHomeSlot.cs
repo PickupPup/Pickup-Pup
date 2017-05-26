@@ -22,4 +22,5 @@ public class DogHomeSlot : DogSlot
             _dog = value;
         }
     }
+
 }

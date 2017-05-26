@@ -23,4 +23,5 @@ public class DogReturnAdReward : AdReward
             dog.ReturnFromScout();
         }
     }
+
 }
