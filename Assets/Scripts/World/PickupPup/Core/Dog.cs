@@ -228,13 +228,6 @@ public class Dog : MobileObjectBehaviour
         }
     }
 
-    protected override void fetchReferences()
-    {
-        base.fetchReferences();
-        gameController = PPGameController.GetInstance;
-        dataController = PPDataController.GetInstance;
-    }
-
     protected override void cleanupReferences()
     {
         base.cleanupReferences();

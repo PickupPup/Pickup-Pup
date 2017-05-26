@@ -56,11 +56,9 @@ public class AdController : SingletonController<AdController>
                 switch (result)
                 {
                     case ShowResult.Finished:
-                        Debug.Log("Advertisement Finished");
                         offerReward(reward);
                         break;
                     case ShowResult.Failed:
-                        Debug.LogError("Advertisement Failed");
                         offerReward(reward);
                         break;
                 }
@@ -72,7 +70,6 @@ public class AdController : SingletonController<AdController>
     {
         if(reward != null)
         {
-            Debug.Log("Offer a reward to the player");
             reward.OfferReward();
         }
     }

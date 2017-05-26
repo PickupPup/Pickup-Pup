@@ -1,6 +1,6 @@
 ﻿/*
  * Author(s): Grace Barrett-Snyder
- * Description: An in-game reward for watching an ad that gives the player coins. 
+ * Description: Controls the button for scouting on the adopted dog profile.
  */
 
 using UnityEngine;
@@ -48,9 +48,7 @@ public class ScoutingButton : PPUIButton
         {
             AdController.GetInstance.WatchAd(new DogReturnAdReward(dog));
         }
-        else
-        {
-            //TODO
-        }
+        //TODO: if not scouting, send to open collar slot
     }
+
 }

@@ -10,7 +10,7 @@ public class CoinsAdReward : AdReward
     PPGameController gameController;
     int amount;
 
-    public CoinsAdReward(int amount = 100)
+    public CoinsAdReward()
     {
         gameController = PPGameController.GetInstance;
         PPTuning tuning = gameController.Tuning;

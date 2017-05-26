@@ -5,8 +5,8 @@
 
 using k = PPGlobal;
 
-public class DogReturnAdReward : AdReward {
-
+public class DogReturnAdReward : AdReward
+{
     Dog dog;
 
     public DogReturnAdReward(Dog dog)

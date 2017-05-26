@@ -5,8 +5,8 @@
 
 using k = PPGlobal;
 
-public abstract class AdReward {
-
+public abstract class AdReward
+{
     protected string rewardSFXEvent;
 
     public abstract void OfferReward();
