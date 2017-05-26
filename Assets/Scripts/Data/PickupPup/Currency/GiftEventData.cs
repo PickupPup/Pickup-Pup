@@ -112,6 +112,7 @@ public class GiftEventData : SpecialGiftData
 	        {
 				dataController.ChangeCurrencyAmount(currency);
 	        }
+			EventController.Event(eventName);
 		}
 		GiftDatabase.GetInstance.RetireEvent(this);
     }
