@@ -99,12 +99,20 @@ public class UIElement : MonoBehaviourExtended
 	public virtual void Show() 
 	{
 		gameObject.SetActive(true);
+		if(hasImage)
+		{
+			image.enabled = true;
+		}
         IsVisible = true;
 	}
 
 	public virtual void Hide() 
 	{
 		gameObject.SetActive(false);
+		if(hasImage)
+		{
+			image.enabled = false;
+		}
         IsVisible = false;
 	}
 
