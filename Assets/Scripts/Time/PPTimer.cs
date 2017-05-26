@@ -4,7 +4,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
 
 [System.Serializable]
 public class PPTimer : PPData, ISubscribable
@@ -217,7 +216,7 @@ public class PPTimer : PPData, ISubscribable
 		timer.ZeroOutTimeRemaining(shouldCallTimeUpEvent);
 	}
 
-	#region System.Objrect Overrides
+	#region System.Object Overrides
 
 	// Returns time in HH:MM:SS format
 	public override string ToString() 

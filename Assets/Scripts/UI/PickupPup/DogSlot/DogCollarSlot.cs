@@ -31,7 +31,8 @@ public class DogCollarSlot : DogSlot
     GameObject redeemableGiftDisplay;
     [SerializeField]
     Sprite collarSprite;
-    //BP radialFill holds the image that covers the button when dog is 'scouting'
+
+    // radialFill holds the image that covers the button when dog is 'scouting'
     [SerializeField]
     Image radialFill;
 
@@ -154,7 +155,6 @@ public class DogCollarSlot : DogSlot
         return returningDog;
     }
 
-
     public void ToggleRedeemDisplayOpen(bool isOpen)
     {
         this.redeemDisplayIsOpen = isOpen;
@@ -184,7 +184,7 @@ public class DogCollarSlot : DogSlot
         subscribeGiftEvents(dog);
         toggleButtonActive(false);
 
-        //BP Activate radial fill image and start lerp coroutine
+        // Activate radial fill image and start lerp coroutine
         radialFill.gameObject.SetActive(true);
         float timeTotal = dog.Info.TotalTimeToReturn;
         float timeRemaining = dog.Info.TimeRemainingScouting;
@@ -203,7 +203,7 @@ public class DogCollarSlot : DogSlot
 
     void handleDogGiftEvents(string eventName, CurrencyData gift)
     {
-        switch (eventName)
+        switch(eventName)
         {
             case FIND_GIFT:
                 handleGiftFound(gift);
@@ -217,7 +217,7 @@ public class DogCollarSlot : DogSlot
     void handleGiftFound(CurrencyData gift)
     {
         EventController.Event(k.GetPlayEvent(k.DOG_RETURN));
-        // BP gift has been found, so deactivate the radial fill image
+        // Gift has been found, so deactivate the radial fill image
         if(radialFill != null)
         {
             radialFill.gameObject.SetActive(false);
@@ -247,7 +247,7 @@ public class DogCollarSlot : DogSlot
     {
         if(!dog.HasRedeemableGift)
         {
-            //BP Start a lerp every second that lerps the radial fill down a second
+            // Start a lerp every second that lerps the radial fill down a second
             float totalTime = dog.Info.TotalTimeToReturn;
 			if(this)
 			{
@@ -256,7 +256,7 @@ public class DogCollarSlot : DogSlot
         }
     }
     
-    //BP Makes transition smooth from second to second
+    // Makes transition smooth from second to second
     IEnumerator lerpRadial(float timeRemaining, float totalTime)
     {
         float startPoint = timeRemaining / totalTime;
@@ -270,4 +270,5 @@ public class DogCollarSlot : DogSlot
             yield return new WaitForEndOfFrame();
         }
     }
+
 }

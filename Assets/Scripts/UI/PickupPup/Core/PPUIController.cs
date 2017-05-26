@@ -108,8 +108,8 @@ public class PPUIController : MonoBehaviourExtended
     protected virtual void showDogProfile(Dog dog)
     {
         EventController.Event(k.GetPlayEvent(k.MENU_POPUP));
-        
-        if(dog.OccupiedSlot.GetComponent<DogShelterSlot>())
+        DogSlot dogSlot = dog.OccupiedSlot;
+        if(dogSlot && dogSlot.GetType() == typeof(DogShelterSlot))
         {
             dogProfile = dogProfileShelterObject.GetComponent<DogProfile>();
         }

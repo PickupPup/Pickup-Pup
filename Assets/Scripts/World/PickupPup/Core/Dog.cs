@@ -218,6 +218,25 @@ public class Dog : MobileObjectBehaviour
 
     #region MonoBehaviourExtended Overrides
 
+    protected override void setReferences()
+    {
+        base.setReferences();
+        if (HasScoutingTimer)
+        {
+            scoutingTimer.Init();
+            setupTimer(scoutingTimer);
+        }
+    }
+
+    protected override void cleanupReferences()
+    {
+        base.cleanupReferences();
+        if (hasDescriptor)
+        {
+            this.descriptor.UnlinkFromDog();
+        }
+    }
+
     public override bool TryUnsubscribeAll()
     {
         base.TryUnsubscribeAll();
@@ -369,6 +388,11 @@ public class Dog : MobileObjectBehaviour
         trySaveGame();
     }
 
+    public void ReturnFromScout()
+    {
+        scoutingTimer.ZeroOutTimeRemaining(true);
+    }
+
     // Typically dog should find a random gift, but method can be overloaded to cause it to find a specific gift
     public void FindGift(bool shouldSave, CurrencyData giftOverride = null)
     {
@@ -421,32 +445,6 @@ public class Dog : MobileObjectBehaviour
     {
         this.descriptor.LeaveRoom();
     }
-
-	protected override void setReferences()
-	{
-		base.setReferences();
-		if(HasScoutingTimer)
-		{
-			scoutingTimer.Init();
-			setupTimer(scoutingTimer);
-		}
-	}
-
-	protected override void fetchReferences() 
-	{
-		base.fetchReferences();
-		gameController = PPGameController.GetInstance;
-        dataController = PPDataController.GetInstance;
-	}
-
-	protected override void cleanupReferences()
-	{
-		base.cleanupReferences();
-		if(hasDescriptor) 
-		{
-			this.descriptor.UnlinkFromDog();
-		}
-	}
 
 	public void SetGame(PPGameController game)
 	{
@@ -533,7 +531,7 @@ public class Dog : MobileObjectBehaviour
 		}
 	}
 
-    public override int GetHashCode ()
+    public override int GetHashCode()
     {
         return Info.GetHashCode();
     }

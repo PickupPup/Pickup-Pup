@@ -44,7 +44,7 @@ public class DogSlot : PPUIElement
 	}
 
 
-	protected Dog dog
+	protected virtual Dog dog
 	{
 		get
 		{
@@ -94,7 +94,7 @@ public class DogSlot : PPUIElement
 
     protected Image[] images;
 
-	Dog _dog;
+	protected Dog _dog;
 	UIButton button;
 	MonoAction onFreeSlotClick;
 	PPData.DogAction onOccupiedSlotClick;

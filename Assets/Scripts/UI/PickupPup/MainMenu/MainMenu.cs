@@ -151,7 +151,7 @@ public class MainMenu : PPUIElement
 
     public void OnWatchAdClick()
     {
-        AdController.GetInstance.WatchAd();
+        AdController.GetInstance.WatchAd(new CoinsAdReward());
     }
 
     public void ToggleSingleNavDropdown()
