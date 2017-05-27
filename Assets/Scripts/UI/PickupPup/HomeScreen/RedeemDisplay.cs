@@ -37,10 +37,7 @@ public class RedeemDisplay : PPUIElement
 			}
             giftDescription.text = gift.ToString();
             giftPortrait.sprite = gift.Icon;
-			if(gift is DogFoodData)
-			{
-				giftPortrait.color = (gift as DogFoodData).Color;
-			}
+			giftPortrait.color = gift.Color;
             RedeemButton.onClick.AddListener(
                 delegate 
                 {
