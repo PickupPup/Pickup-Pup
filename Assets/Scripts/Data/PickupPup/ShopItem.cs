@@ -110,18 +110,11 @@ public class ShopItem : PPData
 		{
 			if(currency == null)
 			{
-				return Color.white;
+				return k.DEFAULT_ICON_COLOR;
 			}
 			else
 			{
-				if(ValueCurrencyType == CurrencyType.DogFood)
-				{
-					return (currency as DogFoodData).Color;
-				}
-				else
-				{
-					return Color.white;
-				}
+				return currency.Color;
 			}
 		}
 	}

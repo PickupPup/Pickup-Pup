@@ -37,7 +37,9 @@ public class DogFoodData : CurrencyData, IComparable
 		}
 	}
 
-	public Color Color
+	#region CurrencyData Overrides
+
+	public override Color Color
 	{
 		get
 		{
@@ -48,6 +50,8 @@ public class DogFoodData : CurrencyData, IComparable
 			return _color;
 		}
 	}
+
+	#endregion
 
 	public string ColorStr
 	{

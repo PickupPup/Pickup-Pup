@@ -36,6 +36,14 @@ public abstract class CurrencyData : ResourceLoader
         }
     }
 
+	public virtual Color Color
+	{
+		get
+		{
+			return k.DEFAULT_ICON_COLOR;	
+		}
+	}
+
     public Sprite DefaultSprite
     {
         get

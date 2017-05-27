@@ -4,6 +4,8 @@
  * Usage: [no notes]
  */
 
+using UnityEngine;
+
 public class PPGlobal : Global
 {
 	public const string SHOP_ITEMS = "ShopItems";
@@ -57,6 +59,8 @@ public class PPGlobal : Global
 	public const int DEFAULT_CURRENCY_AMOUNT = 0;
 	public const int STANDARD_DROPDOWN = 0;
 	public const int ALT_SINGLE_DROPDOWN = 1;
+
+	public static readonly Color DEFAULT_ICON_COLOR = UnityEngine.Color.white;
 
 	#region Audio System
 
