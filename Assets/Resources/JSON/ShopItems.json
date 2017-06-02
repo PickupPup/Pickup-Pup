@@ -1,36 +1,36 @@
 {
   "items" : [
     {
-      "itemName" : "One Dog Food Can",
-      "value" : 1,
-      "valueCurrencyType" : 1,
+      "itemName" : "Regular Food",
+      "valueCurrencyType" : "DogFood",
+      "cost" : 1,
+      "costCurrencyType" : "Coins",
+      "icon" : "WhiteBowl_Empty",
+      "valueCurrencySubtype" : "Regular"
+    },
+    {
+      "itemName" : "Super Food",
+      "valueCurrencyType" : "DogFood",
+      "cost" : 5,
+      "costCurrencyType" : "Coins",
+      "icon" : "WhiteBowl_Empty",
+      "valueCurrencySubtype" : "Super"
+    },
+    {
+      "itemName" : "Mega Food",
+      "valueCurrencyType" : "DogFood",
       "cost" : 10,
-      "costCurrencyType" : 0,
-      "icon" : "1_DogFood"
+      "costCurrencyType" : "Coins",
+      "icon" : "WhiteBowl_Empty",
+      "valueCurrencySubtype" : "Mega"
     },
     {
-      "itemName" : "Five Dog Food Cans",
-      "value" : 5,
-      "valueCurrencyType" : 1,
-      "cost" : 40,
-      "costCurrencyType" : 0,
-      "icon" : "5_DogFood"
-    },
-    {
-      "itemName" : "Ten Dog Food Cans",
-      "value" : 10,
-      "valueCurrencyType" : 1,
-      "cost" : 70,
-      "costCurrencyType" : 0,
-      "icon" : "10_DogFood"
-    },
-    {
-      "itemName" : "Twenty Dog Food Cans",
-      "value" : 20,
-      "valueCurrencyType" : 1,
-      "cost" : 100,
-      "costCurrencyType" : 0,
-      "icon" : "20_DogFood"
+      "itemName" : "Ultra Food",
+      "valueCurrencyType" : "DogFood",
+      "cost" : 25,
+      "costCurrencyType" : "Coins",
+      "icon" : "WhiteBowl_Empty",
+      "valueCurrencySubtype" : "Ultra"
     }
   ]
 }

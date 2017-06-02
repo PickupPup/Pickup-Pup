@@ -29,9 +29,17 @@ public class PPGameSave : GameSave, ISerializable
     {
         get
         {
-            return this.getAvailableDogs();
+            return getAvailableDogs();
         }
     }
+
+	public DogDescriptor[] HomeDogs
+	{
+		get
+		{
+			return getDogsHome();
+		}
+	}
 
     public Dictionary<PPScene, List<DogDescriptor>> WorldDogs
     {
@@ -72,7 +80,7 @@ public class PPGameSave : GameSave, ISerializable
 		get;
 		private set;
 	}
-		
+
 	#endregion
 
     TimeSpan cumulativeTimePlayed = TimeSpan.Zero;
@@ -127,9 +135,15 @@ public class PPGameSave : GameSave, ISerializable
         info.AddValue(SESSION_COUNT, this.GameSessionCount);
         cumulativeTimePlayed += getTimePlayedInSession();
         info.AddValue(TIME_PLAYED, this.cumulativeTimePlayed);
+		updateScoutingDogs();
 	}
 
 	#endregion
+
+	public DogFoodData[] GetAvailableFoods()
+	{
+		return Currencies.GetAvailableFoods();
+	}
 
     public void RedeemGift(CurrencyData gift)
     {
@@ -219,6 +233,30 @@ public class PPGameSave : GameSave, ISerializable
             inRoom.Remove(dog);
         }
     }
+
+	void updateScoutingDogs()
+	{
+		foreach(DogDescriptor dog in AdoptedDogs)
+		{
+			if(dog.IsScouting && !ScoutingDogs.Contains(dog))
+			{
+				dog.HandleScoutingEnded();
+			}
+		}
+	}
+
+	DogDescriptor[] getDogsHome()
+	{
+		List<DogDescriptor> home = new List<DogDescriptor>();
+		foreach(DogDescriptor dog in AdoptedDogs)
+		{
+			if(!dog.IsScouting)
+			{
+				home.Add(dog);
+			}
+		}
+		return home.ToArray();
+	}
 
     DogDescriptor[] getAvailableDogs()
     {

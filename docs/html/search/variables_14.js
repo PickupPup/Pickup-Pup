@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['vo_5fmute',['VO_MUTE',['../class_global.html#adca369da1ddb018f5043c417920bf464',1,'Global']]],
-  ['volume',['VOLUME',['../class_global.html#a408418230a3fa4e227d9b819b60c1326',1,'Global']]]
+  ['ui_5fspritesheet',['UI_SPRITESHEET',['../class_p_p_global.html#a04dfd70f4ea1de663993dc89582cd077',1,'PPGlobal']]]
 ];

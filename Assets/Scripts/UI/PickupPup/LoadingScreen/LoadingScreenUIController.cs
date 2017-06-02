@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class LoadingScreenUIController : PPUIController
 {
-	const PPScene STARTING_SCENE = PPScene.Shelter;
+	const PPScene STARTING_SCENE = PPScene.Home;
 
 	[SerializeField]
 	bool loadNextSceneOnInit;

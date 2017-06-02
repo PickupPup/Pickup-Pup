@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using k = PPGlobal;
 
 public class ShopItemSlot : PPUIElement
 {
@@ -12,14 +13,15 @@ public class ShopItemSlot : PPUIElement
     Text nameText;
     [SerializeField]
     Image itemImage;
-	[SerializeField]
-	Text amountText;
 
     [SerializeField]
     PriceTag priceTag;
     Button button;
 
+	ShopAmountSelector amountSelector;
     ShopItem item;
+
+	int amountToBuy = k.SINGLE_VALUE;
 
     #region MonoBehaviourExtended Overrides
 
@@ -55,41 +57,39 @@ public class ShopItemSlot : PPUIElement
 
     #endregion
 
-    public void Init(ShopItem item)
+	public void Init(ShopItem item, ShopAmountSelector amountSelector)
     {
         subscribeEvents();
         this.item = item;
+		this.amountSelector = amountSelector;
         if (nameText)
         {
             nameText.text = item.ItemName;
         }
-		if(amountText)
-		{
-			amountText.text = item.Value.ToString();
-		}
-        priceTag.Set(item.Cost);
+        priceTag.Set(item.CostAmount);
         priceTag.ShowPurchasable();
         itemImage.sprite = item.Icon;
+		itemImage.color = item.IconColor;
     }
 
     public void Buy()
     {
-        if(gameController.TryBuyItem(item))
-        {
-            analytics.SendEvent(
-                new CurrencyAnalyticsEvent(
-                    CurrencyAnalyticsEvent.SHOP_PURCHASE,
-                    new CurrencyFactory().Create(
-                        item.ValueCurrencyType,
-                        item.Value)));
-        }
+		amountSelector.SetItem(item);
+		amountSelector.Show();
     }
+
+	void resetAfterPurchase()
+	{
+		amountToBuy = k.SINGLE_VALUE;
+	}
 
     void tryToggle(int amount)
     {
         if(button)
         {
-            button.interactable = gameController.CanAfford(item.CostCurrencyType, item.Cost);
+			button.interactable = gameController.CanAfford(
+				item.CostCurrencyType, 
+				item.GetTotalCost(amountToBuy));
         }
     }
 

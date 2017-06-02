@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['vacantslots',['VacantSlots',['../class_home_slots_data.html#ad8c15229829e715e05e9997ffd9cdaf3',1,'HomeSlotsData']]],
-  ['value',['Value',['../class_gift_item.html#a7f04588aafd9224e89ac91ac423f929c',1,'GiftItem.Value()'],['../class_shop_item.html#ada4e78795af9370822837f8c1bf7c293',1,'ShopItem.Value()']]],
+  ['value',['Value',['../class_gift_item.html#a7f04588aafd9224e89ac91ac423f929c',1,'GiftItem.Value()'],['../class_shop_item.html#aaa6a717b2a298e46e44ee2a610bfdc54',1,'ShopItem.Value()']]],
   ['valuecurrencytype',['ValueCurrencyType',['../class_shop_item.html#a8704f3792dac600b8fca1661ad548d38',1,'ShopItem']]],
-  ['valuestr',['ValueStr',['../class_gift_item.html#a6d6ddd8673553109257b87ba1be8586a',1,'GiftItem.ValueStr()'],['../class_shop_item.html#a725ac07b99d4604b700c50576a0cb19e',1,'ShopItem.ValueStr()']]],
+  ['valuestr',['ValueStr',['../class_gift_item.html#a6d6ddd8673553109257b87ba1be8586a',1,'GiftItem']]],
   ['valuetype',['ValueType',['../class_gift_item.html#a17dc5b0c7d8534dee259639d0e2cdca8',1,'GiftItem']]],
   ['vectorfromdirection',['VectorFromDirection',['../class_direction_util.html#a7d947a48126be4089b1a98e8cd2149f6',1,'DirectionUtil']]],
   ['vertical',['Vertical',['../_u_i_layout_type_8cs.html#af49932d38b3988b9a9066bec541bde77a06ce2a25e5d12c166a36f654dbea6012',1,'UILayoutType.cs']]],

@@ -1,5 +1,5 @@
 ﻿/*
- * Authors: Timothy Ng
+ * Authors: Timothy Ng, Grace Barrett-Snyder
  * Description: Controls the logic behind ads
  * Usage: [no notes]
  */
@@ -28,7 +28,7 @@ public class AdController : SingletonController<AdController>
 
     #endregion
 
-    public void WatchAd()
+    public void WatchAd(AdReward reward = null)
     {
         if (!Advertisement.isInitialized)
         {
@@ -41,11 +41,10 @@ public class AdController : SingletonController<AdController>
 #endif
         }
 
-
-        StartCoroutine(ShowAdWhenReady());
+        StartCoroutine(showAdWhenReady(reward));
     }
 
-    IEnumerator ShowAdWhenReady()
+    IEnumerator showAdWhenReady(AdReward reward = null)
     {
         while (!Advertisement.IsReady(AD_TYPE))
             yield return null;
@@ -56,13 +55,23 @@ public class AdController : SingletonController<AdController>
             {
                 switch (result)
                 {
+                    case ShowResult.Finished:
+                        offerReward(reward);
+                        break;
                     case ShowResult.Failed:
-                        Debug.LogError("Advertisement Failed");
+                        offerReward(reward);
                         break;
                 }
             }
-
         });
+    }
+
+    void offerReward(AdReward reward)
+    {
+        if(reward != null)
+        {
+            reward.OfferReward();
+        }
     }
 
 }

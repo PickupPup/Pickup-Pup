@@ -99,12 +99,20 @@ public class UIElement : MonoBehaviourExtended
 	public virtual void Show() 
 	{
 		gameObject.SetActive(true);
+		if(hasImage)
+		{
+			image.enabled = true;
+		}
         IsVisible = true;
 	}
 
 	public virtual void Hide() 
 	{
 		gameObject.SetActive(false);
+		if(hasImage)
+		{
+			image.enabled = false;
+		}
         IsVisible = false;
 	}
 
@@ -136,6 +144,14 @@ public class UIElement : MonoBehaviourExtended
             this.image.sprite = sprite;
         }
     }
+
+	public virtual void SetImageColor(Color color)
+	{
+		if(hasImage)
+		{
+			this.image.color = color;
+		}
+	}
 
 	public void StartOpacityLerp(float startOpacity, float endOpacity, float time, bool loop) 
 	{

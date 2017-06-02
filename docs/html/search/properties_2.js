@@ -2,6 +2,7 @@ var searchData=
 [
   ['canpagebackward',['CanPageBackward',['../interface_i_pageable.html#a5137b2de5bb13ce831c8ca63ab6232c8',1,'IPageable']]],
   ['canpageforward',['CanPageForward',['../interface_i_pageable.html#a193613ccbadd0aef252214b1306bf554',1,'IPageable']]],
+  ['chancefornospecial',['ChanceForNoSpecial',['../class_p_p_tuning.html#ad44a8f345f0cf075aac47525b892d7d0',1,'PPTuning']]],
   ['chanceofdogseatingpoop',['ChanceOfDogsEatingPoop',['../class_p_p_tuning.html#a777a3903c9b87612489feaf602b9a68f',1,'PPTuning']]],
   ['chanceofrareobject',['ChanceOfRareObject',['../class_p_p_tuning.html#a28a8bef8510a57eeba248756a5baee95',1,'PPTuning']]],
   ['chanceofsecondary',['ChanceOfSecondary',['../class_p_p_tuning.html#af82995f01023d956a243bb16cd1188af',1,'PPTuning']]],
@@ -14,10 +15,13 @@ var searchData=
   ['clip',['Clip',['../class_audio_file.html#a8f0c768202eaeb102ea47dda8b616207',1,'AudioFile.Clip()'],['../interface_i_audio_file.html#a931ad6075d4fb8770fc0d5e95047d9a1',1,'IAudioFile.Clip()']]],
   ['cliplength',['ClipLength',['../class_audio_file.html#a1c9138ae5f20dbe8ca3642c054c46fc1',1,'AudioFile.ClipLength()'],['../interface_i_audio_file.html#a2f7a6d6dd63773bc01110b6bf87dc3fc',1,'IAudioFile.ClipLength()']]],
   ['coins',['Coins',['../class_p_p_game_controller.html#af9444fc28a9350c1ab3cac772ce13153',1,'PPGameController.Coins()'],['../class_currency_system.html#a9bcb641a0827e82e75c98ab12c039cad',1,'CurrencySystem.Coins()'],['../interface_i_currency_system.html#a72126322b32f3e6380fb105d6d2adef8',1,'ICurrencySystem.Coins()'],['../class_p_p_data_controller.html#a08df7369722d0e50bf2fbddbb820f62c',1,'PPDataController.Coins()']]],
-  ['color',['Color',['../class_dog_descriptor.html#a9819279d3537ec2914e6c3a6e4f50e49',1,'DogDescriptor']]],
+  ['color',['Color',['../class_dog_food_data.html#a17c85b9761872cf46452b803a720481c',1,'DogFoodData.Color()'],['../class_dog_descriptor.html#a9819279d3537ec2914e6c3a6e4f50e49',1,'DogDescriptor.Color()']]],
   ['colorchange',['ColorChange',['../class_ignore.html#a9187cea8a2f94bb38f8fecbc00364f90',1,'Ignore']]],
+  ['colorhex',['ColorHex',['../class_dog_food_data.html#a0c5eaec78287fab0b15a4ae1ebbd281e',1,'DogFoodData']]],
+  ['colorstr',['ColorStr',['../class_dog_food_data.html#a77528b237f165071be94250f2709f070',1,'DogFoodData']]],
   ['colour',['Colour',['../class_world_object_behaviour.html#aec78b8fd47b3d3f3b25bef632aafe28b',1,'WorldObjectBehaviour']]],
-  ['cost',['Cost',['../class_shop_item.html#a437899b7cdf3d9872e3b7efd7a873c85',1,'ShopItem']]],
+  ['cost',['Cost',['../class_shop_item.html#a14289e7537494de691a9f52e3572729a',1,'ShopItem']]],
+  ['costamount',['CostAmount',['../class_shop_item.html#a3e6dd55846f551d932fed486313e8cf5',1,'ShopItem']]],
   ['costcurrencytype',['CostCurrencyType',['../class_shop_item.html#a1db8c872f3b8a8b1d34fc1efa03ff808',1,'ShopItem']]],
   ['costoffivedogfoodcans',['CostOfFiveDogFoodCans',['../class_p_p_tuning.html#a5004306d2857758d67872a4fc6d4d4da',1,'PPTuning']]],
   ['costofonedogfoodcan',['CostOfOneDogFoodCan',['../class_p_p_tuning.html#ab821eb9bec90b69bd15324f7e8a7ad7a',1,'PPTuning']]],
@@ -30,5 +34,5 @@ var searchData=
   ['currencies',['Currencies',['../class_p_p_game_save.html#ae397eb0fb9021fbd9c3d3f86f7ad4fe4',1,'PPGameSave']]],
   ['currency',['Currency',['../class_gift_report.html#ab2dc5e12dab9230ce3ff14ac76650b3b',1,'GiftReport']]],
   ['currentpageindex',['CurrentPageIndex',['../class_dog_browser.html#aba8ff7834c26d1eb5069b64e2a2fc0b7',1,'DogBrowser']]],
-  ['currentscene',['CurrentScene',['../class_p_p_scene_controller.html#aabab0c440d01420eceed39d97c948146',1,'PPSceneController']]]
+  ['currentscene',['currentScene',['../class_mono_behaviour_extended.html#ac6fb7b692aa640604bbff517f838d2b1',1,'MonoBehaviourExtended.currentScene()'],['../class_p_p_scene_controller.html#aabab0c440d01420eceed39d97c948146',1,'PPSceneController.CurrentScene()']]]
 ];

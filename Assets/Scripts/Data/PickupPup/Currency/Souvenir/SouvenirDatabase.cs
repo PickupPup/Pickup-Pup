@@ -4,12 +4,10 @@
  * Usage: [no notes]
  */
 
-using UnityEngine;
-
 using System;
 using System.IO;
 using System.Collections.Generic;
-
+using UnityEngine;
 using k = PPGlobal;
 
 public class SouvenirDatabase : Database<SouvenirDatabase>
@@ -54,6 +52,8 @@ public class SouvenirDatabase : Database<SouvenirDatabase>
     Dictionary<string, SouvenirData> souvenirLookup;
     SpritesheetDatabase sprites;
 
+	#region Database Overrides
+
     public override void Initialize()
     {
         base.Initialize();
@@ -61,6 +61,8 @@ public class SouvenirDatabase : Database<SouvenirDatabase>
         this.souvenirLookup = generateSouvenirLookup(souvenirs);
         this.sprites = SpritesheetDatabase.GetInstance;
     }
+
+	#endregion
 
     public SouvenirData Get(string souvenirName)
     {

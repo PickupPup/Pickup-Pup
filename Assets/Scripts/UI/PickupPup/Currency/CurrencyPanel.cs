@@ -10,8 +10,6 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
 {
     [SerializeField]
     CurrencyDisplay coinsDisplay;
-    [SerializeField]
-    CurrencyDisplay dogFoodDisplay;
 	[SerializeField]
 	UIElement giftTimerDisplay;
 	[SerializeField]
@@ -78,7 +76,6 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
         subscribeEvents();
 
         // Display Updated Currency
-        dogFoodDisplay.Init(dataController.DogFood, dataController);
         coinsDisplay.Init(dataController.Coins, dataController);
         initDailyGiftCountdown(gameController.Tuning, dataController);
     }
@@ -137,11 +134,6 @@ public class CurrencyPanel : SingletonController<CurrencyPanel>
     void updateCoinsDisplay(int newAmount)
     {
         coinsDisplay.updateAmount(newAmount);
-    }
-
-    void updateDogFoodDisplay(int newAmount)
-    {
-        dogFoodDisplay.updateAmount(newAmount);
     }
 
 	void makeDailyGiftAvailableToRedeem()

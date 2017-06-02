@@ -5,6 +5,7 @@
 
 using System.IO;
 using UnityEngine;
+using k = PPGlobal;
 
 [System.Serializable]
 public abstract class CurrencyData : ResourceLoader
@@ -19,7 +20,7 @@ public abstract class CurrencyData : ResourceLoader
         }
     }
 
-    public CurrencyType Type
+    public virtual CurrencyType Type
     {
         get
         {
@@ -34,6 +35,14 @@ public abstract class CurrencyData : ResourceLoader
             return DefaultSprite;
         }
     }
+
+	public virtual Color Color
+	{
+		get
+		{
+			return k.DEFAULT_ICON_COLOR;	
+		}
+	}
 
     public Sprite DefaultSprite
     {
@@ -75,12 +84,29 @@ public abstract class CurrencyData : ResourceLoader
         amount += deltaAmount;
     }
 
+	public void MultiplyBy(float multiplier)
+	{
+		amount = (int) (amount * multiplier);
+	}
+
+	public void SetAmount(int amount)
+	{
+		this.amount = amount;
+	}
+
     public virtual bool CanAfford(int cost)
     {
         return amount > 0 && amount >= cost;
     }
 		
 	public abstract void Give();
+
+	public CurrencyData GetTakeAmount()
+	{
+		CurrencyData currency = Copy<CurrencyData>();
+		currency.amount *= k.INVERT_VALUE;
+		return currency;
+	}
 
     void setup(int initialAmount)
     {

@@ -37,6 +37,7 @@ public class RedeemDisplay : PPUIElement
 			}
             giftDescription.text = gift.ToString();
             giftPortrait.sprite = gift.Icon;
+			giftPortrait.color = gift.Color;
             RedeemButton.onClick.AddListener(
                 delegate 
                 {

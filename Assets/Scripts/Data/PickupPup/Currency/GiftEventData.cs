@@ -110,8 +110,9 @@ public class GiftEventData : SpecialGiftData
 		{
 			foreach(CurrencyData currency in this.result)
 	        {
-				dataController.ChangeCurrencyAmount(currency.Type, currency.Amount);
+				dataController.ChangeCurrencyAmount(currency);
 	        }
+			EventController.Event(eventName);
 		}
 		GiftDatabase.GetInstance.RetireEvent(this);
     }
