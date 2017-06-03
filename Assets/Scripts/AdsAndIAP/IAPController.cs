@@ -12,8 +12,8 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 {
     const string PRODUCT_1000_COINS = "coins1000";
 
-    IStoreController m_StoreController;
-    IExtensionProvider m_StoreExtensionProvider;
+	IStoreController storeController;
+	IExtensionProvider storeExtensionProvider;
 
     #region Static Accessors
 
@@ -42,8 +42,8 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        m_StoreController = controller;
-        m_StoreExtensionProvider = extensions;
+        storeController = controller;
+        storeExtensionProvider = extensions;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
@@ -53,7 +53,7 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
-        if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_1000_COINS, StringComparison.Ordinal))
+        if(String.Equals(args.purchasedProduct.definition.id, PRODUCT_1000_COINS, StringComparison.Ordinal))
         {
             PPGameController.GetInstance.ChangeCoins(1000);
         }
@@ -74,12 +74,12 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     bool isInitialized()
     {
-        return m_StoreController != null && m_StoreExtensionProvider != null;
+        return storeController != null && storeExtensionProvider != null;
     }
 
     public void InitializePurchasing()
     {
-        if (isInitialized())
+        if(isInitialized())
         {
             return;
         }
@@ -92,16 +92,16 @@ public class IAPController : SingletonController<IAPController>, IStoreListener
 
     void buyProductID(string productId)
     {
-        if (isInitialized())
+        if(isInitialized())
         {
-            Product product = m_StoreController.products.WithID(productId);
+            Product product = storeController.products.WithID(productId);
 
-            if (product != null && product.availableToPurchase)
+            if(product != null && product.availableToPurchase)
             {
-                m_StoreController.InitiatePurchase(product);
+                storeController.InitiatePurchase(product);
             }
             else
-            {
+            { 
                 Debug.LogError("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
             }
         }
