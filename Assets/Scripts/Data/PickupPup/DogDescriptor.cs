@@ -239,10 +239,6 @@ public class DogDescriptor : PPDescriptor
 	{
 		get
 		{
-			if(isSpecial)
-			{
-				Debug.Log(Name);
-			}
 			return this.isSpecial;
 		}
 	}

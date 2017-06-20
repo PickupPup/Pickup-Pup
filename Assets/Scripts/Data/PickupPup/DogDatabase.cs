@@ -162,21 +162,24 @@ public class DogDatabase : Database<DogDatabase>
         {
             if(ArrayUtil.InRange(this.dogs, indexInMasterDogArr))
             {
-                do
+				int currentIndex;
+				do
                 {
-                    if(indexInMasterDogArr < maxMasterIndex)
+					currentIndex = indexInMasterDogArr;
+					if(indexInMasterDogArr < maxMasterIndex)
                     {
-                        dogList[i] = this.dogs[indexInMasterDogArr];
+						dogList[i] = this.dogs[indexInMasterDogArr];
                     }
                     else
                     {
                         dogList[i] = DogDescriptor.Default();
                     }
+					indexInMasterDogArr++;
                 }
-				while((skipSpecial && this.dogs[indexInMasterDogArr].IsSpecial) ||
+				while((skipSpecial && dogList[i].IsSpecial) ||
 						(skipAdopted &&
-                    	ArrayUtil.InRange(this.dogs, indexInMasterDogArr) &&
-						dataController.CheckIsAdopted(this.dogs[indexInMasterDogArr++])));
+						ArrayUtil.InRange(this.dogs, currentIndex) &&
+						dataController.CheckIsAdopted(this.dogs[currentIndex])));
             }
             else
             {
