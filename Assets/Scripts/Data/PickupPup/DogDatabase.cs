@@ -150,7 +150,8 @@ public class DogDatabase : Database<DogDatabase>
 
     public DogDescriptor[] GetInOrderDogList(
         int count, 
-        bool skipAdopted, 
+        bool skipAdopted,
+		bool skipSpecial,
         int startIndex = 0, 
         int maxMasterIndex = int.MaxValue)
     {
@@ -172,9 +173,10 @@ public class DogDatabase : Database<DogDatabase>
                         dogList[i] = DogDescriptor.Default();
                     }
                 }
-                while(skipAdopted &&
-                    ArrayUtil.InRange(this.dogs, indexInMasterDogArr) &&
-                    dataController.CheckIsAdopted(this.dogs[indexInMasterDogArr++]));
+				while((skipSpecial && this.dogs[indexInMasterDogArr].IsSpecial) ||
+						(skipAdopted &&
+                    	ArrayUtil.InRange(this.dogs, indexInMasterDogArr) &&
+						dataController.CheckIsAdopted(this.dogs[indexInMasterDogArr++])));
             }
             else
             {

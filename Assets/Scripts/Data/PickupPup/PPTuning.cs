@@ -10,6 +10,14 @@ public class PPTuning : PPData
 {
 	#region Instance Acessors
 
+	public int AdoptedDogsPerSpecialDog
+	{
+		get
+		{
+			return adoptedDogsPerSpecialDog;
+		}
+	}
+
 	public string AdoptedText
 	{
 		get
@@ -17,7 +25,6 @@ public class PPTuning : PPData
 			return adoptedText;
 		}
 	}
-
 
 	public string AdoptText
 	{
@@ -27,7 +34,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float AffectionIncrease
 	{
 		get
@@ -35,7 +41,6 @@ public class PPTuning : PPData
 			return affectionIncrease;
 		}
 	}
-
 
 	public float ChanceForNoSpecial
 	{
@@ -45,7 +50,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float ChanceOfDogsEatingPoop
 	{
 		get
@@ -53,7 +57,6 @@ public class PPTuning : PPData
 			return chanceOfDogsEatingPoop;
 		}
 	}
-
 
 	public float ChanceOfRareObject
 	{
@@ -63,7 +66,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float ChanceOfSecondary
 	{
 		get
@@ -71,7 +73,6 @@ public class PPTuning : PPData
 			return chanceOfSecondary;
 		}
 	}
-
 
 	public float ChanceOfSpecialGift
 	{
@@ -81,7 +82,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float ChanceOfSpecialization
 	{
 		get
@@ -89,7 +89,6 @@ public class PPTuning : PPData
 			return chanceOfSpecialization;
 		}
 	}
-
 
 	public float ChanceSpecialItemIsDog
 	{
@@ -99,7 +98,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float ChanceSpecialItemIsPresent
 	{
 		get
@@ -107,7 +105,6 @@ public class PPTuning : PPData
 			return chanceSpecialItemIsPresent;
 		}
 	}
-
 
 	public float ChanceSpecialItemIsTubTub
 	{
@@ -117,7 +114,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int CostOfFiveDogFoodCans
 	{
 		get
@@ -125,7 +121,6 @@ public class PPTuning : PPData
 			return costOfFiveDogFoodCans;
 		}
 	}
-
 
 	public int CostOfOneDogFoodCan
 	{
@@ -135,7 +130,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int CostOfTenDogFoodCans
 	{
 		get
@@ -143,7 +137,6 @@ public class PPTuning : PPData
 			return costOfTenDogFoodCans;
 		}
 	}
-
 
 	public int CostOfTwentyDogFoodCans
 	{
@@ -153,7 +146,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int[] DailyGiftAmounts
 	{
 		get
@@ -161,7 +153,6 @@ public class PPTuning : PPData
 			return dailyGiftAmounts;
 		}
 	}
-
 
 	public float DailyGiftDiscountAmount
 	{
@@ -171,7 +162,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public string[] DailyGiftOptions
 	{
 		get
@@ -179,7 +169,6 @@ public class PPTuning : PPData
 			return dailyGiftOptions;
 		}
 	}
-
 
 	public float[] DailyGiftWeights
 	{
@@ -189,7 +178,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int DailyNumberOfNewDogsAtShelter
 	{
 		get
@@ -197,7 +185,6 @@ public class PPTuning : PPData
 			return dailyNumberOfNewDogsAtShelter;
 		}
 	}
-
 
 	public Color DefaultBackgroundColor
 	{
@@ -207,7 +194,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float DefaultChanceOfCollectingDogFood
 	{
 		get
@@ -215,7 +201,6 @@ public class PPTuning : PPData
 			return defaultChanceOfCollectingDogFood;
 		}
 	}
-
 
 	public float DefaultChanceOfCollectingMoney
 	{
@@ -225,7 +210,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public Color DefaultPriceColor
 	{
 		get
@@ -233,7 +217,6 @@ public class PPTuning : PPData
 			return getColor(defaultPriceColorRGBA);
 		}
 	}
-
 
 	public Color DefaultTextColor
 	{
@@ -243,7 +226,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float DefaultTimerTimeStepSec
 	{
 		get
@@ -252,20 +234,17 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float DogFoodFeedTimeSec
+	{get{ return dogFoodFeedTimeSec;}
+	}
+
+	public float DogSpeed
 	{
 		get
 		{
-			return dogFoodFeedTimeSec;
+			return dogSpeed;
 		}
 	}
-
-
-	public float DogSpeed
-	{get{	return dogSpeed;}
-	}
-
 
 	public string InWorldKey
 	{
@@ -275,7 +254,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float MaxAffection
 	{
 		get
@@ -283,7 +261,6 @@ public class PPTuning : PPData
 			return maxAffection;
 		}
 	}
-
 
 	public int MaxAmountPerTypeFromScouting
 	{
@@ -293,7 +270,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float MaxCouponDiscount
 	{
 		get
@@ -301,7 +277,6 @@ public class PPTuning : PPData
 			return maxCouponDiscount;
 		}
 	}
-
 
 	public int MaxDogsInHouse
 	{
@@ -311,7 +286,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int MaxDogsScouting
 	{
 		get
@@ -319,7 +293,6 @@ public class PPTuning : PPData
 			return maxDogsScouting;
 		}
 	}
-
 
 	public float MaxDogStateTime
 	{
@@ -329,7 +302,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int MaxNumberAdsPerDay
 	{
 		get
@@ -337,7 +309,6 @@ public class PPTuning : PPData
 			return maxNumberAdsPerDay;
 		}
 	}
-
 
 	public int MaxPuppyAge
 	{
@@ -347,7 +318,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float MinCouponDiscount
 	{
 		get
@@ -355,7 +325,6 @@ public class PPTuning : PPData
 			return minCouponDiscount;
 		}
 	}
-
 
 	public int MinDogFoodToUnlockCollar
 	{
@@ -365,7 +334,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float MinDogStateTime
 	{
 		get
@@ -373,7 +341,6 @@ public class PPTuning : PPData
 			return minDogStateTime;
 		}
 	}
-
 
 	public int MinDogsToUnlockCollar
 	{
@@ -383,7 +350,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int MinSeniorDogAge
 	{
 		get
@@ -391,7 +357,6 @@ public class PPTuning : PPData
 			return minSeniorDogAge;
 		}
 	}
-
 
 	public int MissedFeedingsBeforeSeizure
 	{
@@ -401,7 +366,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public Color NonPurchasableBackgroundColor
 	{
 		get
@@ -409,7 +373,6 @@ public class PPTuning : PPData
 			return getColor(nonPurchasableBackgroundColorRGBA);
 		}
 	}
-
 
 	public Color NonPurchasableTextColor
 	{
@@ -419,7 +382,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float PuppyChanceOfRunningAwayDuringScouting
 	{
 		get
@@ -427,7 +389,6 @@ public class PPTuning : PPData
 			return puppyChanceOfRunningAwayDuringScouting;
 		}
 	}
-
 
 	public float PuppyScoutingTimeModifier
 	{
@@ -437,7 +398,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public bool SampleShelterDogsInOrder
 	{
 		get
@@ -445,7 +405,6 @@ public class PPTuning : PPData
 			return sampleShelterDogsInOrder;
 		}
 	}
-
 
 	public float SeniorDogScoutingTimeModifier
 	{
@@ -455,7 +414,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int ShelterDogsLimit
 	{
 		get
@@ -463,7 +421,6 @@ public class PPTuning : PPData
 			return shelterDogsLimit;
 		}
 	}
-
 
 	public float ShelterResellCostScale
 	{
@@ -473,7 +430,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public bool ShouldLimitShelterDogs
 	{
 		get
@@ -481,7 +437,6 @@ public class PPTuning : PPData
 			return shouldLimitShelterDogs;
 		}
 	}
-
 
 	public int SpecialDogCount
 	{
@@ -491,7 +446,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float[] SpecialGiftMaxAffectionChances
 	{
 		get
@@ -500,20 +454,17 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float[] SpecialGiftMinAffectionChances
+	{get{ return specialGiftMinAffectionChances;}
+	}
+
+	public string[] SpecialGiftTypes
 	{
 		get
 		{
-			return specialGiftMinAffectionChances;
+			return specialGiftTypes;
 		}
 	}
-
-
-	public string[] SpecialGiftTypes
-	{get{	return specialGiftTypes;}
-	}
-
 
 	public int StartingCoins
 	{
@@ -523,7 +474,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int StartingDogCount
 	{
 		get
@@ -531,7 +481,6 @@ public class PPTuning : PPData
 			return startingDogCount;
 		}
 	}
-
 
 	public int StartingDogFood
 	{
@@ -541,7 +490,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int StartingHomeSlots
 	{
 		get
@@ -549,7 +497,6 @@ public class PPTuning : PPData
 			return startingHomeSlots;
 		}
 	}
-
 
 	public int TapToHeart
 	{
@@ -559,7 +506,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public float TimeScoutingToTimeRestingRatio
 	{
 		get
@@ -567,7 +513,6 @@ public class PPTuning : PPData
 			return timeScoutingToTimeRestingRatio;
 		}
 	}
-
 
 	public Color UnaffordableTextColor
 	{
@@ -577,7 +522,6 @@ public class PPTuning : PPData
 		}
 	}
 
-
 	public int VideoAdCoinBonus
 	{
 		get
@@ -585,7 +529,6 @@ public class PPTuning : PPData
 			return videoAdCoinBonus;
 		}
 	}
-
 
 	public float WaitTimeSecsForDailyGift
 	{
@@ -599,6 +542,8 @@ public class PPTuning : PPData
 
     #region JSON Fields
 
+	[SerializeField]
+	int adoptedDogsPerSpecialDog;
 	[SerializeField]
 	string adoptedText;
 	[SerializeField]

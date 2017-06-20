@@ -235,6 +235,18 @@ public class DogDescriptor : PPDescriptor
 		}
 	}
 
+	public bool IsSpecial
+	{
+		get
+		{
+			if(isSpecial)
+			{
+				Debug.Log(Name);
+			}
+			return this.isSpecial;
+		}
+	}
+
 	#endregion
 
 	bool hasSpecialCost 
@@ -267,6 +279,14 @@ public class DogDescriptor : PPDescriptor
     string[] description;
     [SerializeField]
     string souvenir;
+	[SerializeField]
+	bool isSpecial;
+	[SerializeField]
+	float chanceOfSpecialObject;
+	[SerializeField]
+	string[] specialObjectTypes;
+	[SerializeField]
+	float[] specialObjectChanges;
 
     SouvenirData _souvenir;
 	DogFoodData eatenFood;
