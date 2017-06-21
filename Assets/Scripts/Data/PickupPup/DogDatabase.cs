@@ -76,6 +76,9 @@ public class DogDatabase : Database<DogDatabase>
 	[SerializeField]
 	DogDescriptor[] dogs;
 
+	DogDescriptor[] regularDogs;
+	DogDescriptor[] specialDogs;
+
 	[System.NonSerialized]
 	RandomBuffer<DogDescriptor> randomizer;
 	// This buffer is used to generate same sequence of dogs based off day
@@ -323,6 +326,21 @@ public class DogDatabase : Database<DogDatabase>
         return GetDogRange(start, length).ToList();
     }
 
+	DogDescriptor[] getAvailableSpecialDogs()
+	{
+		int dogsAdopted = dataController.AdoptedDogs.Count;
+		int totalSpecialAvailable = dogsAdopted / dataController.Tuning.AdoptedDogsPerSpecialDog;
+		List<DogDescriptor> available = new List<DogDescriptor>();
+		for(int i = 0; i < specialDogs.Length && i < totalSpecialAvailable; i++) 
+		{
+			if(!dataController.CheckIsAdopted(specialDogs[i]))
+			{
+				available.Add(specialDogs[i]);
+			}
+		}
+		return available.ToArray();
+	}
+
 	bool inRangeOfDogsArr(int start, int length)
 	{
 		return ArrayUtil.InRange(this.dogs, start, length);	
@@ -351,11 +369,24 @@ public class DogDatabase : Database<DogDatabase>
 
 	void setDogDataReferences() 
 	{
+		List<DogDescriptor> regularDogs = new List<DogDescriptor>();
+		List<DogDescriptor> specialDogs = new List<DogDescriptor>();
 		foreach(DogDescriptor dog in dogs) 
 		{
 			dog.Initialize(this);
+			if(dog.IsSpecial)
+			{
+				specialDogs.Add(dog);
+			}
+			else
+			{
+				regularDogs.Add(dog);
+			}
 		}
+		this.regularDogs = regularDogs.ToArray();
+		this.specialDogs = specialDogs.ToArray();
 	}
+
 
 	// Returns false if data is already initialized
 	bool tryInitData()
