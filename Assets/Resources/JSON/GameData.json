@@ -186,7 +186,7 @@
     },
     {
       "breed" : "English Labrador",
-      "specialization" : "Food",
+      "specialization" : "DogFood",
       "timeToReturn" : 2000,
       "costToAdopt" : 1800,
       "size" : "Large",
@@ -194,7 +194,7 @@
     },
     {
       "breed" : "Catahoula Leopard",
-      "specialization" : "Food",
+      "specialization" : "DogFood",
       "timeToReturn" : 500,
       "costToAdopt" : 2250,
       "size" : "Medium",
@@ -202,7 +202,7 @@
     },
     {
       "breed" : "Miniature Schnauzer",
-      "specialization" : "Food",
+      "specialization" : "DogFood",
       "timeToReturn" : 1000,
       "costToAdopt" : 1500,
       "size" : "Small",
@@ -210,7 +210,7 @@
     },
     {
       "breed" : "Boxer Hound Mix",
-      "specialization" : "Food",
+      "specialization" : "DogFood",
       "timeToReturn" : 1500,
       "costToAdopt" : 2000,
       "size" : "Medium",
@@ -229,11 +229,10 @@
       ],
       "souvenir" : "rose",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0.25,
       "specialObjectTypes" : [
-        "Food",
-        "Special",
-        "Money"
+        "DogFood",
+        "SpecialGift",
+        "Coins"
       ],
       "specialObjectChances" : [
         0.5,
@@ -252,7 +251,6 @@
       ],
       "souvenir" : "frisbee",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -269,7 +267,6 @@
       ],
       "souvenir" : "tennisball",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -286,7 +283,6 @@
       ],
       "souvenir" : "toyboat",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -303,7 +299,6 @@
       ],
       "souvenir" : "locket",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -320,7 +315,6 @@
       ],
       "souvenir" : "airplane",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -337,7 +331,6 @@
       ],
       "souvenir" : "bone",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -354,7 +347,6 @@
       ],
       "souvenir" : "branch",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -371,7 +363,6 @@
       ],
       "souvenir" : "spoon",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -388,7 +379,6 @@
       ],
       "souvenir" : "pillow",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -405,7 +395,6 @@
       ],
       "souvenir" : "underwear",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -422,7 +411,6 @@
       ],
       "souvenir" : "basket",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -439,7 +427,6 @@
       ],
       "souvenir" : "hulahoop",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -456,7 +443,6 @@
       ],
       "souvenir" : "sword",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -473,7 +459,6 @@
       ],
       "souvenir" : "umbrella",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -490,7 +475,6 @@
       ],
       "souvenir" : "bottlenote",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -507,7 +491,6 @@
       ],
       "souvenir" : "goggles",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -524,7 +507,6 @@
       ],
       "souvenir" : "baseballcap",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -541,7 +523,6 @@
       ],
       "souvenir" : "hubcap",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -558,7 +539,6 @@
       ],
       "souvenir" : "ring",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -575,7 +555,6 @@
       ],
       "souvenir" : "earphones",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -592,7 +571,6 @@
       ],
       "souvenir" : "pingpong",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -609,7 +587,6 @@
       ],
       "souvenir" : "narwhal",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -626,7 +603,6 @@
       ],
       "souvenir" : "UFO",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -643,7 +619,6 @@
       ],
       "souvenir" : "carrot",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -660,7 +635,6 @@
       ],
       "souvenir" : "window",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -677,7 +651,6 @@
       ],
       "souvenir" : "balloon",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -694,7 +667,6 @@
       ],
       "souvenir" : "mask",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -711,7 +683,6 @@
       ],
       "souvenir" : "wallet",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -728,7 +699,6 @@
       ],
       "souvenir" : "bowtie",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -745,7 +715,6 @@
       ],
       "souvenir" : "teddybear",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -762,7 +731,6 @@
       ],
       "souvenir" : "lollipop",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -779,7 +747,6 @@
       ],
       "souvenir" : "ribbon",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -796,7 +763,6 @@
       ],
       "souvenir" : "hamburger",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -813,7 +779,6 @@
       ],
       "souvenir" : "alien",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -830,7 +795,6 @@
       ],
       "souvenir" : "glasses",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -847,7 +811,6 @@
       ],
       "souvenir" : "star",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -864,7 +827,6 @@
       ],
       "souvenir" : "charger",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -881,7 +843,6 @@
       ],
       "souvenir" : "huntinghat",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -898,7 +859,6 @@
       ],
       "souvenir" : "peanutbag",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -915,7 +875,6 @@
       ],
       "souvenir" : "tooth",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -932,11 +891,10 @@
       ],
       "souvenir" : "corndog",
       "isSpecial" : true,
-      "chanceOfSpecialObject" : 0.25,
       "specialObjectTypes" : [
-        "Food",
-        "Special",
-        "Money"
+        "DogFood",
+        "SpecialGift",
+        "Coins"
       ],
       "specialObjectChances" : [
         0.5,
@@ -956,11 +914,10 @@
       ],
       "souvenir" : "squirrel",
       "isSpecial" : true,
-      "chanceOfSpecialObject" : 0.5,
       "specialObjectTypes" : [
-        "Food",
-        "Special",
-        "Money"
+        "DogFood",
+        "SpecialGift",
+        "Coins"
       ],
       "specialObjectChances" : [
         0.25,
@@ -980,11 +937,10 @@
       ],
       "souvenir" : "torncard",
       "isSpecial" : true,
-      "chanceOfSpecialObject" : 0.5,
       "specialObjectTypes" : [
-        "Food",
-        "Special",
-        "Money"
+        "DogFood",
+        "SpecialGift",
+        "Coins"
       ],
       "specialObjectChances" : [
         0,
@@ -1004,11 +960,10 @@
       ],
       "souvenir" : "towel",
       "isSpecial" : true,
-      "chanceOfSpecialObject" : 0.25,
       "specialObjectTypes" : [
-        "Food",
-        "Special",
-        "Money"
+        "DogFood",
+        "SpecialGift",
+        "Coins"
       ],
       "specialObjectChances" : [
         0.75,
@@ -1027,7 +982,6 @@
       ],
       "souvenir" : "bell",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -1044,7 +998,6 @@
       ],
       "souvenir" : "spikedball",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -1061,7 +1014,6 @@
       ],
       "souvenir" : "flowercrown",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -1078,7 +1030,6 @@
       ],
       "souvenir" : "peachpin",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -1095,7 +1046,6 @@
       ],
       "souvenir" : "snapback",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -1112,7 +1062,6 @@
       ],
       "souvenir" : "cape",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [
@@ -1129,11 +1078,10 @@
       ],
       "souvenir" : "blackhat",
       "isSpecial" : true,
-      "chanceOfSpecialObject" : 0.5,
       "specialObjectTypes" : [
-        "Food",
-        "Special",
-        "Money"
+        "DogFood",
+        "SpecialGift",
+        "Coins"
       ],
       "specialObjectChances" : [
         0.25,
@@ -1152,7 +1100,6 @@
       ],
       "souvenir" : "pipe",
       "isSpecial" : false,
-      "chanceOfSpecialObject" : 0,
       "specialObjectTypes" : [
       ],
       "specialObjectChances" : [

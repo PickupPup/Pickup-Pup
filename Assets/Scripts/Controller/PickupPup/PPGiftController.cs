@@ -109,24 +109,14 @@ public class PPGiftController : SingletonController<PPGiftController>
 		{
 			food = dataController.DogFood;
 		}
-        CurrencyType specialization = dog.Breed.ISpecialization;
-        int amount = randomAmount();
-        CurrencyType type;
-        if(specialization == CurrencyType.None)
-        {
-			type = defaultRandomType(dog, food);
-        }
-        else
-        {
-            type = getRandomizerBySpecialization(dog, food, specialization).GetRandom();
-        }
+		CurrencyType type = getGiftType(dog, food);
         if(type == CurrencyType.SpecialGift)
         {
             return getSpecialGift(dog);
 		}
         else
         {
-			CurrencyData gift = giftFactory.Create(type, amount);
+			CurrencyData gift = giftFactory.Create(type, randomAmount());
 			if(food.AmountMod != k.NONE_VALUE)
 			{
 				gift.MultiplyBy(food.AmountMod);
@@ -134,6 +124,23 @@ public class PPGiftController : SingletonController<PPGiftController>
 			return gift;
         }
     }
+		
+	CurrencyType getGiftType(DogDescriptor dog, DogFoodData food)
+	{
+		CurrencyType specialization = dog.Breed.ISpecialization;
+		if(dog.IsSpecial)
+		{
+			return dog.GetSpecialDogGiftChances(food).GetRandom();
+		}
+		else if(specialization == CurrencyType.None)
+		{
+			return defaultRandomType(dog, food);
+		}
+		else
+		{
+			return getRandomizerBySpecialization(dog, food, specialization).GetRandom();
+		}
+	}
 
     bool eligibleForSouvenir(DogDescriptor dog)
     {

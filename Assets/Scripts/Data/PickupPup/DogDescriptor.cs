@@ -242,7 +242,7 @@ public class DogDescriptor : PPDescriptor
 			return this.isSpecial;
 		}
 	}
-
+		
 	#endregion
 
 	bool hasSpecialCost 
@@ -278,11 +278,9 @@ public class DogDescriptor : PPDescriptor
 	[SerializeField]
 	bool isSpecial;
 	[SerializeField]
-	float chanceOfSpecialObject;
-	[SerializeField]
 	string[] specialObjectTypes;
 	[SerializeField]
-	float[] specialObjectChanges;
+	float[] specialObjectChances;
 
     SouvenirData _souvenir;
 	DogFoodData eatenFood;
@@ -452,6 +450,51 @@ public class DogDescriptor : PPDescriptor
 		DogFoodData food = this.eatenFood;
 		this.eatenFood = null;
 		return food;
+	}
+
+	public WeightedRandomBuffer<CurrencyType> GetSpecialDogGiftChances(DogFoodData food)
+	{
+		if(IsSpecial)
+		{
+			try
+			{
+				int specialGiftIndex = k.INVALID_VALUE;
+				CurrencyType[] currencies = new CurrencyType[specialObjectTypes.Length];
+				for(int i = 0; i < currencies.Length; i++)
+				{
+					currencies[i] = (CurrencyType) Enum.Parse(typeof(CurrencyType), specialObjectTypes[i]);
+					if(currencies[i] == CurrencyType.SpecialGift)
+					{
+						specialGiftIndex = i;
+					}
+				}
+				if(specialGiftIndex == k.INVALID_VALUE)
+				{
+					return new WeightedRandomBuffer<CurrencyType>(currencies, specialObjectChances);
+				}
+				else
+				{
+					float specialGiftMod = food.SpecialGiftMod;
+					float nonSpecialMod = -specialGiftMod / (float) (currencies.Length - 1);
+					float[] weights = new float[specialObjectChances.Length];
+					for(int i = 0; i < weights.Length; i++)
+					{
+						float moddedWeight = specialObjectChances[i] + ((specialGiftIndex == i) ? specialGiftMod : nonSpecialMod);
+						weights[i] = Mathf.Clamp(moddedWeight, 0, float.MaxValue);
+					}
+					return new WeightedRandomBuffer<CurrencyType>(currencies, weights);
+				}
+			}
+			catch(Exception e)
+			{
+				Debug.LogError(e);
+				return WeightedRandomBuffer<CurrencyType>.Empty;
+			}
+		}
+		else
+		{
+			return WeightedRandomBuffer<CurrencyType>.Empty;
+		}
 	}
 
 	void cancelScoutingNotification()

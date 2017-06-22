@@ -6,6 +6,18 @@
 
 public class WeightedRandomBuffer<T> : RandomBuffer<T>
 {
+	#region Static Accessors
+
+	public static WeightedRandomBuffer<T> Empty
+	{
+		get
+		{
+			return new WeightedRandomBuffer<T>(new T[0], new float[0]);
+		}
+	}
+
+	#endregion
+
 	const int DEFAULT_PRECISION = 100;
 
 	float[] weights;
