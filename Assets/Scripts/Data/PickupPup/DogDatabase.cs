@@ -163,7 +163,7 @@ public class DogDatabase : Database<DogDatabase>
             {
                 do
                 {
-                    if(indexInMasterDogArr < maxMasterIndex)
+					if(indexInMasterDogArr < maxMasterIndex && indexInMasterDogArr < this.dogs.Length)
                     {
                         dogList[i] = this.dogs[indexInMasterDogArr];
                     }
