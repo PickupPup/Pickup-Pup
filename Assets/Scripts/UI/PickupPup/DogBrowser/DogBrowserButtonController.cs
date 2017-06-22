@@ -194,6 +194,7 @@ public class DogBrowserButtonController : PPUIButtonController
 		{
 			trimPageButtons(pages);
 		}
+		refreshPageButtonReferences();
         if(numPages > SINGLE_VALUE)
         {
             pageButtonParent.gameObject.SetActive(true);
@@ -202,7 +203,6 @@ public class DogBrowserButtonController : PPUIButtonController
                 pageButtons[i].Show();
             }
         }
-        refreshPageButtonReferences();
 	}
 
 	void trimPageButtons(int desiredLength)
