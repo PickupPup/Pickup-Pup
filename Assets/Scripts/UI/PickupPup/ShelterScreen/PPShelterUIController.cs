@@ -74,6 +74,7 @@ public class PPShelterUIController : PPUIController
             dogs = database.GetInOrderDogList(
                 availableDogPortraits.Length, 
                 skipAdopted:true, 
+				skipSpecial:true,
                 startIndex:0, 
                 maxMasterIndex:(tuning.ShouldLimitShelterDogs ? 
                     tuning.ShelterDogsLimit : int.MaxValue));

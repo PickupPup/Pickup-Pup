@@ -186,34 +186,34 @@
     },
     {
       "breed" : "English Labrador",
-      "specialization" : "Food",
+      "specialization" : "DogFood",
       "timeToReturn" : 2000,
       "costToAdopt" : 1800,
-      "size" : "Medium",
+      "size" : "Large",
       "worldDisplayBreed" : "Poodle"
     },
     {
       "breed" : "Catahoula Leopard",
-      "specialization" : "Food",
-      "timeToReturn" : 2000,
-      "costToAdopt" : 1800,
-      "size" : "Large",
+      "specialization" : "DogFood",
+      "timeToReturn" : 500,
+      "costToAdopt" : 2250,
+      "size" : "Medium",
       "worldDisplayBreed" : "Poodle"
     },
     {
       "breed" : "Miniature Schnauzer",
-      "specialization" : "Food",
-      "timeToReturn" : 2000,
-      "costToAdopt" : 1800,
-      "size" : "Large",
+      "specialization" : "DogFood",
+      "timeToReturn" : 1000,
+      "costToAdopt" : 1500,
+      "size" : "Small",
       "worldDisplayBreed" : "Poodle"
     },
     {
       "breed" : "Boxer Hound Mix",
-      "specialization" : "Food",
-      "timeToReturn" : 2000,
-      "costToAdopt" : 1800,
-      "size" : "Large",
+      "specialization" : "DogFood",
+      "timeToReturn" : 1500,
+      "costToAdopt" : 2000,
+      "size" : "Medium",
       "worldDisplayBreed" : "Poodle"
     }
   ],
@@ -228,10 +228,17 @@
         "A savage."
       ],
       "souvenir" : "rose",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0.25,
-      "SpecialObjectTypes" : "Food, Special, Money",
-      "SpecialObjectChances" : "0.5, .25, 0.25"
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+        "DogFood",
+        "SpecialGift",
+        "Coins"
+      ],
+      "specialObjectChances" : [
+        0.5,
+        0.25,
+        0.25
+      ]
     },
     {
       "name" : "Grace",
@@ -243,10 +250,11 @@
         "Loves bears."
       ],
       "souvenir" : "frisbee",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Mia",
@@ -258,10 +266,11 @@
         "A kindhearted listener."
       ],
       "souvenir" : "tennisball",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Max",
@@ -273,10 +282,11 @@
         "Fearless and energetic."
       ],
       "souvenir" : "toyboat",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Sam",
@@ -288,10 +298,11 @@
         "Easily excitable."
       ],
       "souvenir" : "locket",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Rocky",
@@ -303,10 +314,11 @@
         "Has his own theme song."
       ],
       "souvenir" : "airplane",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Oliver",
@@ -318,10 +330,11 @@
         "Shakes a lot even while sleeping."
       ],
       "souvenir" : "bone",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Irving",
@@ -333,10 +346,11 @@
         "A fancy friend."
       ],
       "souvenir" : "branch",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Pebbles",
@@ -348,10 +362,11 @@
         "Loves cereal."
       ],
       "souvenir" : "spoon",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Peekaboo",
@@ -363,10 +378,11 @@
         "Mischievous but friendly."
       ],
       "souvenir" : "pillow",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Buster",
@@ -378,10 +394,11 @@
         "Chases squirrels without fail."
       ],
       "souvenir" : "underwear",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Duke",
@@ -393,10 +410,11 @@
         "Falls asleep while eating."
       ],
       "souvenir" : "basket",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Riley",
@@ -408,10 +426,11 @@
         "Loves people and the rain!"
       ],
       "souvenir" : "hulahoop",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Harley",
@@ -423,10 +442,11 @@
         "Escaped the shelter twice."
       ],
       "souvenir" : "sword",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Bear",
@@ -438,10 +458,11 @@
         "Eats his own weight every day."
       ],
       "souvenir" : "umbrella",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Tucker",
@@ -453,10 +474,11 @@
         "Highly protective of children."
       ],
       "souvenir" : "bottlenote",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Murphy",
@@ -468,10 +490,11 @@
         "Never remembers commands."
       ],
       "souvenir" : "goggles",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Jake",
@@ -483,10 +506,11 @@
         "Extremely smart... too smart."
       ],
       "souvenir" : "baseballcap",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Buddy",
@@ -498,10 +522,11 @@
         "Surprisingly the best kind of friend!"
       ],
       "souvenir" : "hubcap",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Lucky",
@@ -513,10 +538,11 @@
         "Has returned from death twice."
       ],
       "souvenir" : "ring",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Teddy",
@@ -528,10 +554,11 @@
         "A huggable friend!"
       ],
       "souvenir" : "earphones",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Winston",
@@ -543,10 +570,11 @@
         "The biggest fan of belly rubs."
       ],
       "souvenir" : "pingpong",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Molly",
@@ -558,10 +586,11 @@
         "Always sleeps on her back."
       ],
       "souvenir" : "narwhal",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Freckles",
@@ -573,10 +602,11 @@
         "Sneezes funny."
       ],
       "souvenir" : "UFO",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Maggie",
@@ -588,10 +618,11 @@
         "Twirls in front of the food bowl."
       ],
       "souvenir" : "carrot",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Sadie",
@@ -603,10 +634,11 @@
         "Loves chew toys."
       ],
       "souvenir" : "window",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Chloe",
@@ -618,10 +650,11 @@
         "Ate a bag of gummy worms which have yet to exit."
       ],
       "souvenir" : "balloon",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Bailey",
@@ -633,10 +666,11 @@
         "Thinks he's also a human."
       ],
       "souvenir" : "mask",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Lola",
@@ -648,10 +682,11 @@
         "Afraid of other dogs but loves people."
       ],
       "souvenir" : "wallet",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Zoe",
@@ -663,10 +698,11 @@
         "Doesn't know her own name."
       ],
       "souvenir" : "bowtie",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Magic",
@@ -678,10 +714,11 @@
         "Appeared in this world one day."
       ],
       "souvenir" : "teddybear",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Roxy",
@@ -693,10 +730,11 @@
         "Howls at 2 am. Every night."
       ],
       "souvenir" : "lollipop",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Suki",
@@ -708,10 +746,11 @@
         "Dances at doors and gates."
       ],
       "souvenir" : "ribbon",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Tobi",
@@ -723,10 +762,11 @@
         "Loves noodles."
       ],
       "souvenir" : "hamburger",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Brandy",
@@ -738,10 +778,11 @@
         "A loyal friend for all."
       ],
       "souvenir" : "alien",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Manny",
@@ -753,10 +794,11 @@
         "Has a huge ego."
       ],
       "souvenir" : "glasses",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Charlie",
@@ -768,10 +810,11 @@
         "A movie star."
       ],
       "souvenir" : "star",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Jack",
@@ -783,10 +826,11 @@
         "Runs around a lot and likes candles."
       ],
       "souvenir" : "charger",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Henry",
@@ -798,10 +842,11 @@
         "A miraculously quiet young man."
       ],
       "souvenir" : "huntinghat",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Arthur",
@@ -813,10 +858,11 @@
         "Has the ultimate parkour skills."
       ],
       "souvenir" : "peanutbag",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Colby",
@@ -828,10 +874,11 @@
         "Gets into fights over who sleeps on the bed."
       ],
       "souvenir" : "tooth",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Mookie",
@@ -843,10 +890,17 @@
         "Could not be happier or fatter."
       ],
       "souvenir" : "corndog",
-      "IsSpecial" : true,
-      "ChanceOfSpecialObject" : 0.25,
-      "SpecialObjectTypes" : "Food, Special, Money",
-      "SpecialObjectChances" : "0.5, 0.25, 0.25"
+      "isSpecial" : true,
+      "specialObjectTypes" : [
+        "DogFood",
+        "SpecialGift",
+        "Coins"
+      ],
+      "specialObjectChances" : [
+        0.5,
+        0.25,
+        0.25
+      ]
     },
     {
       "name" : "Delilah",
@@ -855,12 +909,21 @@
       "breed" : "Catahoula Leopard",
       "modCost" : 0,
       "description" : [
+        "If you're not careful",
+        "she'll jump the fence."
       ],
       "souvenir" : "squirrel",
-      "IsSpecial" : true,
-      "ChanceOfSpecialObject" : 0.5,
-      "SpecialObjectTypes" : "Food, Special, Money",
-      "SpecialObjectChances" : "0.25, 0.75, 0.00"
+      "isSpecial" : true,
+      "specialObjectTypes" : [
+        "DogFood",
+        "SpecialGift",
+        "Coins"
+      ],
+      "specialObjectChances" : [
+        0.25,
+        0.75,
+        0
+      ]
     },
     {
       "name" : "Ghost",
@@ -869,13 +932,21 @@
       "breed" : "Shiba Inu",
       "modCost" : 0,
       "description" : [
-        "Embodiment of destruction. Stubborn but playful."
+        "Embodiment of destruction. Stubborn but playful.",
+        "you"
       ],
       "souvenir" : "torncard",
-      "IsSpecial" : true,
-      "ChanceOfSpecialObject" : 0.5,
-      "SpecialObjectTypes" : "Food, Special, Money",
-      "SpecialObjectChances" : "0.00, 0.25, 0.75"
+      "isSpecial" : true,
+      "specialObjectTypes" : [
+        "DogFood",
+        "SpecialGift",
+        "Coins"
+      ],
+      "specialObjectChances" : [
+        0,
+        0.25,
+        0.75
+      ]
     },
     {
       "name" : "Roland",
@@ -884,12 +955,21 @@
       "breed" : "Miniature Schnauzer",
       "modCost" : 0,
       "description" : [
+        "If he isn't barking",
+        "he's probably asleep."
       ],
       "souvenir" : "towel",
-      "IsSpecial" : true,
-      "ChanceOfSpecialObject" : 0.25,
-      "SpecialObjectTypes" : "Food, Special, Money",
-      "SpecialObjectChances" : "0.75, 0.25, 0.00"
+      "isSpecial" : true,
+      "specialObjectTypes" : [
+        "DogFood",
+        "SpecialGift",
+        "Coins"
+      ],
+      "specialObjectChances" : [
+        0.75,
+        0.25,
+        0
+      ]
     },
     {
       "name" : "Fury",
@@ -901,10 +981,11 @@
         "Loves friends and will not hesitate to protect them."
       ],
       "souvenir" : "bell",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Axel",
@@ -916,10 +997,11 @@
         "Always smiling."
       ],
       "souvenir" : "spikedball",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Haru",
@@ -931,10 +1013,11 @@
         "Appeared one day on a spring day."
       ],
       "souvenir" : "flowercrown",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Momo",
@@ -946,10 +1029,11 @@
         "Digs patterns of holes in the yard."
       ],
       "souvenir" : "peachpin",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Cian",
@@ -961,10 +1045,11 @@
         "Has an amazing sense of rhythm and soul."
       ],
       "souvenir" : "snapback",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Midnight",
@@ -976,10 +1061,11 @@
         "A nighttime crusader."
       ],
       "souvenir" : "cape",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     },
     {
       "name" : "Cooper",
@@ -988,12 +1074,20 @@
       "breed" : "Boxer Hound Mix",
       "modCost" : 0,
       "description" : [
+        "Knows everyone in the neighborhood better than you do."
       ],
       "souvenir" : "blackhat",
-      "IsSpecial" : true,
-      "ChanceOfSpecialObject" : 0.5,
-      "SpecialObjectTypes" : "Food, Special, Money",
-      "SpecialObjectChances" : "0.25, 0.50, 0.25"
+      "isSpecial" : true,
+      "specialObjectTypes" : [
+        "DogFood",
+        "SpecialGift",
+        "Coins"
+      ],
+      "specialObjectChances" : [
+        0.25,
+        0.5,
+        0.25
+      ]
     },
     {
       "name" : "Pongo",
@@ -1005,10 +1099,11 @@
         "A proud father."
       ],
       "souvenir" : "pipe",
-      "IsSpecial" : false,
-      "ChanceOfSpecialObject" : 0,
-      "SpecialObjectTypes" : "",
-      "SpecialObjectChances" : ""
+      "isSpecial" : false,
+      "specialObjectTypes" : [
+      ],
+      "specialObjectChances" : [
+      ]
     }
   ]
 }
