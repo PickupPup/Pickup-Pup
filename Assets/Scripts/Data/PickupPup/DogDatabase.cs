@@ -142,6 +142,8 @@ public class DogDatabase : Database<DogDatabase>
         }
         else
         {
+			DogDescriptor[] availableDogs = ArrayUtil.Concat(regularDogs, getAvailableSpecialDogs());
+			RandomBuffer<DogDescriptor> randomizer = new RandomBuffer<DogDescriptor>(availableDogs);
             do
             {
                 dog = randomizer.GetRandom();
